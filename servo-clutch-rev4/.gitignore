@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.npz
+*.npy
+*.pkl
+*.mp4
+stl_clutch/
