@@ -1,0 +1,193 @@
+{
+"sag_mm": {
+"straight out, fans off": {
+"vec": [
+0.0,
+0.0,
+-110.8
+],
+"mag": 110.8
+},
+"hover pose, hover thrust": {
+"vec": [
+-36.5,
+-9.9,
+17.6
+],
+"mag": 41.7
+},
+"hover pose, full thrust": {
+"vec": [
+-75.1,
+-14.6,
+36.6
+],
+"mag": 84.9
+},
+"leaning hover pose (20 deg), hover thrust": {
+"vec": [
+-3.8,
+-12.0,
+2.5
+],
+"mag": 12.8
+},
+"stance +x pod, foot load": {
+"vec": [
+-25.2,
+-14.1,
+16.0
+],
+"mag": 33.0
+},
+"stance +y pod, foot load": {
+"vec": [
+-34.0,
+21.9,
+16.2
+],
+"mag": 43.6
+},
+"stance -x pod, foot load": {
+"vec": [
+-26.9,
+-20.1,
+14.6
+],
+"mag": 36.6
+}
+},
+"tip_stiffness_N_per_mm_straight": {
+"up": 0.06,
+"sideways": 0.052,
+"along the arm": 1000000.0
+},
+"modes_Hz": {
+"straight out": [
+1.58,
+1.71,
+9.34,
+9.63
+],
+"hover pose, fan upright": [
+1.93,
+2.43,
+7.23,
+8.02
+],
+"hover pose, fan leaning 20 deg": [
+1.67,
+1.74,
+9.47,
+9.66
+]
+},
+"gear": {
+"cases": {
+"stall (9.8 N.m)": {
+"joint_torque_Nm": 9.8,
+"tooth_force_N": 500,
+"lewis_pinion_MPa": 155,
+"lewis_gear_MPa": 129,
+"hertz_MPa": 547
+},
+"hover": {
+"joint_torque_Nm": 4.57,
+"tooth_force_N": 233,
+"lewis_pinion_MPa": 72,
+"lewis_gear_MPa": 60,
+"hertz_MPa": 373
+},
+"full thrust": {
+"joint_torque_Nm": 10.13,
+"tooth_force_N": 517,
+"lewis_pinion_MPa": 160,
+"lewis_gear_MPa": 133,
+"hertz_MPa": 556
+},
+"worst solved pose": {
+"joint_torque_Nm": 10.13,
+"tooth_force_N": 517,
+"lewis_pinion_MPa": 160,
+"lewis_gear_MPa": 133,
+"hertz_MPa": 556
+}
+},
+"limits": {
+"lewis_bending_fatigue_MPa": 159.0,
+"yield_MPa": 503.0,
+"contact_fatigue_MPa_hard_anodized": "about 300 to 400 [A, aluminium gear data is thin]"
+},
+"note": "Lewis Y 0.322 (20T) and 0.389 (40T), 10 mm face, m1. Contact stress at stall is about 540 MPa: fine for short peaks, but hard-anodized 7075 pits under long running above roughly 350 MPa, so keep joint 0 under about 40 % of stall for sustained loads, or make the pinion steel."
+},
+"bearings": [
+{
+"joint": 0,
+"bearing": "61803 (gear)",
+"C_N": 2030,
+"C0_N": 1270,
+"worst_static_N": 174.8,
+"static_sf": 7.3,
+"stance_load_N": 24.5,
+"L10_oscillations_15deg": 3390000000000.0,
+"L10_oscillations_45deg": 1130000000000.0
+},
+{
+"joint": 1,
+"bearing": "6705 (horn side)",
+"C_N": 1079,
+"C0_N": 834,
+"worst_static_N": 178.9,
+"static_sf": 4.7,
+"stance_load_N": 26.6,
+"L10_oscillations_15deg": 402000000000.0,
+"L10_oscillations_45deg": 134000000000.0
+},
+{
+"joint": 2,
+"bearing": "6705 (horn side)",
+"C_N": 1079,
+"C0_N": 834,
+"worst_static_N": 139.6,
+"static_sf": 6.0,
+"stance_load_N": 24.9,
+"L10_oscillations_15deg": 486000000000.0,
+"L10_oscillations_45deg": 162000000000.0
+},
+{
+"joint": 3,
+"bearing": "6705 (horn side)",
+"C_N": 1079,
+"C0_N": 834,
+"worst_static_N": 145.0,
+"static_sf": 5.8,
+"stance_load_N": 29.2,
+"L10_oscillations_15deg": 304000000000.0,
+"L10_oscillations_45deg": 101000000000.0
+},
+{
+"joint": 4,
+"bearing": "6705 (horn side)",
+"C_N": 1079,
+"C0_N": 834,
+"worst_static_N": 122.8,
+"static_sf": 6.8,
+"stance_load_N": 27.9,
+"L10_oscillations_15deg": 347000000000.0,
+"L10_oscillations_45deg": 116000000000.0
+}
+]
+}
+0 2.14 5.45 idler_ear 10.0 11.7 6.7
+1 5.07 6.33 idler_bore 2.3 2.8 7.4
+2 7.01 13.58 idler_bore 2.2 2.0 5.3
+3 6.76 8.74 idler_bore 2.2 2.0 5.5
+4 3.21 5.04 idler_ear 5.8 7.8 5.1
+5 3.9 10.15 idler_ear 5.7 6.4 4.4
+6 3.0 7.07 horn_ear 8.3 7.5 4.2
+7 4.33 14.05 pin_shear 2.7 3.2 7.3
+8 2.31 6.04 horn_ear 10.8 10.6 6.9
+9 4.5 11.52 pin_shear 2.0 3.9 7.0
+10 2.88 16.85 horn_ear 8.7 7.5 4.9
+11 3.44 30.34 idler_ear 2.3 7.3 4.0
+12 4.66 14.5 horn_ear 5.4 3.6 2.2

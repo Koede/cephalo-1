@@ -1,0 +1,413 @@
+{
+"efficiency": {
+"fan_hover": {
+"thrust_N": 21.53,
+"electrical_W": 306.0,
+"g_per_W": 7.17,
+"ideal_power_W": 177.2,
+"figure_of_merit_incl_motor_esc": 0.58
+},
+"fan_rated": {
+"thrust_N": 25.1,
+"electrical_W": 383,
+"g_per_W": 6.68
+},
+"fan_full": {
+"thrust_N": 33.5,
+"electrical_W": 590,
+"g_per_W": 5.78
+},
+"gear_stage": {
+"mesh": 0.99,
+"bearings": 0.99,
+"total": 0.98,
+"note": "lubricated m1 spur pair, two ball bearings [A]"
+},
+"servos_hover": {
+"per_joint": [
+{
+"joint": 0,
+"torque_Nm": 2.33,
+"current_A": 2.0,
+"heat_W": 12.84
+},
+{
+"joint": 1,
+"torque_Nm": 0.18,
+"current_A": 0.16,
+"heat_W": 1.51
+},
+{
+"joint": 2,
+"torque_Nm": 3.29,
+"current_A": 2.82,
+"heat_W": 24.17
+},
+{
+"joint": 3,
+"torque_Nm": 0.39,
+"current_A": 0.33,
+"heat_W": 1.75
+},
+{
+"joint": 4,
+"torque_Nm": 1.39,
+"current_A": 1.19,
+"heat_W": 5.48
+},
+{
+"joint": 5,
+"torque_Nm": 1.4,
+"current_A": 1.29,
+"heat_W": 8.81
+},
+{
+"joint": 6,
+"torque_Nm": 0.55,
+"current_A": 0.5,
+"heat_W": 2.57
+},
+{
+"joint": 7,
+"torque_Nm": 1.2,
+"current_A": 1.1,
+"heat_W": 6.84
+},
+{
+"joint": 8,
+"torque_Nm": 0.23,
+"current_A": 0.21,
+"heat_W": 1.64
+},
+{
+"joint": 9,
+"torque_Nm": 0.6,
+"current_A": 0.55,
+"heat_W": 2.78
+},
+{
+"joint": 10,
+"torque_Nm": 0.17,
+"current_A": 0.16,
+"heat_W": 1.55
+},
+{
+"joint": 11,
+"torque_Nm": 0.01,
+"current_A": 0.01,
+"heat_W": 1.44
+},
+{
+"joint": 12,
+"torque_Nm": 0.02,
+"current_A": 0.01,
+"heat_W": 1.44
+}
+],
+"arm_W": 72.8,
+"robot_W": 583,
+"share_of_hover_power": 0.207,
+"note": "a position-holding servo turns all its input into heat; current from torque / (stall torque / stall current), copper loss I^2 R"
+},
+"fan_wiring_hover": {
+"current_A": 14.6,
+"loss_W": 7.3,
+"drop_V": 0.5,
+"share": 0.024
+},
+"fan_wiring_full": {
+"current_A": 28.1,
+"loss_W": 27.1,
+"drop_V": 0.96,
+"share": 0.046
+},
+"servos_hover_lean20": {
+"per_joint": [
+{
+"joint": 0,
+"torque_Nm": 0.09,
+"current_A": 0.08,
+"heat_W": 1.46
+},
+{
+"joint": 1,
+"torque_Nm": 0.3,
+"current_A": 0.26,
+"heat_W": 1.63
+},
+{
+"joint": 2,
+"torque_Nm": 0.08,
+"current_A": 0.07,
+"heat_W": 1.45
+},
+{
+"joint": 3,
+"torque_Nm": 0.5,
+"current_A": 0.42,
+"heat_W": 1.96
+},
+{
+"joint": 4,
+"torque_Nm": 0.05,
+"current_A": 0.04,
+"heat_W": 1.45
+},
+{
+"joint": 5,
+"torque_Nm": 0.51,
+"current_A": 0.47,
+"heat_W": 2.43
+},
+{
+"joint": 6,
+"torque_Nm": 0.12,
+"current_A": 0.11,
+"heat_W": 1.49
+},
+{
+"joint": 7,
+"torque_Nm": 0.54,
+"current_A": 0.49,
+"heat_W": 2.52
+},
+{
+"joint": 8,
+"torque_Nm": 0.37,
+"current_A": 0.34,
+"heat_W": 1.96
+},
+{
+"joint": 9,
+"torque_Nm": 0.24,
+"current_A": 0.22,
+"heat_W": 1.65
+},
+{
+"joint": 10,
+"torque_Nm": 0.52,
+"current_A": 0.48,
+"heat_W": 2.47
+},
+{
+"joint": 11,
+"torque_Nm": 0.01,
+"current_A": 0.0,
+"heat_W": 1.44
+},
+{
+"joint": 12,
+"torque_Nm": 0.11,
+"current_A": 0.1,
+"heat_W": 1.49
+}
+],
+"arm_W": 23.4,
+"robot_W": 187,
+"share_of_hover_power": 0.066,
+"extra_fan_power_W_per_arm": 29.4
+},
+"arm_power_chain_hover": {
+"fan_W": 306,
+"servo_W": 72.8,
+"wiring_W": 7.3,
+"thrust_per_W_whole_arm": 0.0558
+}
+},
+"thermal_servo_limits": [
+{
+"servo": "STS3250",
+"R_ohm": 2.86,
+"kt_Nm_per_A": 1.167,
+"continuous_torque_Nm": 0.86,
+"continuous_share_of_stall": 0.18,
+"thermal_time_constant_s": 1242
+},
+{
+"servo": "STS3215",
+"R_ohm": 4.44,
+"kt_Nm_per_A": 1.089,
+"continuous_torque_Nm": 0.65,
+"continuous_share_of_stall": 0.22,
+"thermal_time_constant_s": 917
+}
+],
+"thermal_hover": [
+{
+"joint": 0,
+"heat_W": 12.84,
+"steady_rise_K": 214,
+"minutes_to_50K": 5.5
+},
+{
+"joint": 1,
+"heat_W": 1.51,
+"steady_rise_K": 25,
+"minutes_to_50K": "never"
+},
+{
+"joint": 2,
+"heat_W": 24.17,
+"steady_rise_K": 403,
+"minutes_to_50K": 2.7
+},
+{
+"joint": 3,
+"heat_W": 1.75,
+"steady_rise_K": 29,
+"minutes_to_50K": "never"
+},
+{
+"joint": 4,
+"heat_W": 5.48,
+"steady_rise_K": 91,
+"minutes_to_50K": 16.4
+},
+{
+"joint": 5,
+"heat_W": 8.81,
+"steady_rise_K": 147,
+"minutes_to_50K": 6.4
+},
+{
+"joint": 6,
+"heat_W": 2.57,
+"steady_rise_K": 43,
+"minutes_to_50K": "never"
+},
+{
+"joint": 7,
+"heat_W": 6.84,
+"steady_rise_K": 114,
+"minutes_to_50K": 8.8
+},
+{
+"joint": 8,
+"heat_W": 1.64,
+"steady_rise_K": 27,
+"minutes_to_50K": "never"
+},
+{
+"joint": 9,
+"heat_W": 2.78,
+"steady_rise_K": 46,
+"minutes_to_50K": "never"
+},
+{
+"joint": 10,
+"heat_W": 1.55,
+"steady_rise_K": 26,
+"minutes_to_50K": "never"
+},
+{
+"joint": 11,
+"heat_W": 1.44,
+"steady_rise_K": 24,
+"minutes_to_50K": "never"
+},
+{
+"joint": 12,
+"heat_W": 1.44,
+"steady_rise_K": 24,
+"minutes_to_50K": "never"
+}
+],
+"thermal_hover_lean20": [
+{
+"joint": 0,
+"heat_W": 1.46,
+"steady_rise_K": 24,
+"minutes_to_50K": "never"
+},
+{
+"joint": 1,
+"heat_W": 1.63,
+"steady_rise_K": 27,
+"minutes_to_50K": "never"
+},
+{
+"joint": 2,
+"heat_W": 1.45,
+"steady_rise_K": 24,
+"minutes_to_50K": "never"
+},
+{
+"joint": 3,
+"heat_W": 1.96,
+"steady_rise_K": 33,
+"minutes_to_50K": "never"
+},
+{
+"joint": 4,
+"heat_W": 1.45,
+"steady_rise_K": 24,
+"minutes_to_50K": "never"
+},
+{
+"joint": 5,
+"heat_W": 2.43,
+"steady_rise_K": 41,
+"minutes_to_50K": "never"
+},
+{
+"joint": 6,
+"heat_W": 1.49,
+"steady_rise_K": 25,
+"minutes_to_50K": "never"
+},
+{
+"joint": 7,
+"heat_W": 2.52,
+"steady_rise_K": 42,
+"minutes_to_50K": "never"
+},
+{
+"joint": 8,
+"heat_W": 1.96,
+"steady_rise_K": 33,
+"minutes_to_50K": "never"
+},
+{
+"joint": 9,
+"heat_W": 1.65,
+"steady_rise_K": 28,
+"minutes_to_50K": "never"
+},
+{
+"joint": 10,
+"heat_W": 2.47,
+"steady_rise_K": 41,
+"minutes_to_50K": "never"
+},
+{
+"joint": 11,
+"heat_W": 1.44,
+"steady_rise_K": 24,
+"minutes_to_50K": "never"
+},
+{
+"joint": 12,
+"heat_W": 1.49,
+"steady_rise_K": 25,
+"minutes_to_50K": "never"
+}
+],
+"thermal_note": "About 3 W of steady heat per servo case in still air [A]; in the prop wash it is better. 50 K rise from 25 C ambient keeps the case near 75 C, under the 80 C the makers' overheat cut-outs typically sit at [A]. The flight is about 17 minutes.",
+"thermal_fan_motor": {
+"hover_heat_W": 55,
+"note": "MN5008 about 82 % efficient with its ESC at hover [A]; in its own prop wash the motor runs warm, not hot"
+},
+"resilience": {
+"drop": {
+"stance_pose": "alt90_stance_+y_mid",
+"foot_vertical_stiffness_N_per_mm": 1.31,
+"rows": [
+{
+"drop_m": 0.05,
+"impact_s": 0.1,
+"peak_foot_N": 86,
+"worst_need": 3.63
+},
+{
+"d
+done

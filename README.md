@@ -21,7 +21,9 @@ in [DESIGN.md](DESIGN.md).
   - `catalog/`: sources for each joint family and servo spec.
   - `results/`: ranked results, check outputs (JSON/CSV) and plots.
   - `writeup/`: the study write-up as an HTML page.
-- `spec-sheet/`: the spec-sheet helper and the 90° alternating-axis CAD variant (`cad_alt90/`).
+- `spec-sheet/`: the pin-hinge arm spec sheet, the living record for the arm (live page:
+  https://claude.ai/artifact/3t777NsUV2NmNSZxF3stNS), with its section scripts, results and the
+  90° alternating-axis CAD variant (`cad_alt90/`).
 - `servo-clutch-rev4/`: a separate design line from the Octopus Drone project. Its rev 4 has 8 servo-in-link
   joints per arm (478 mm), winch-tensioned detent clutches and 6 in claw-props. The folder holds design docs,
   MuJoCo full-robot sims, clutch part generators and renderers. See its own README.

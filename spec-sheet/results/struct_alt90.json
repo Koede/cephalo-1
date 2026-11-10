@@ -1,0 +1,981 @@
+{
+ "envelope": [
+  {
+   "joint": 0,
+   "servo": "STS3250",
+   "max_servo_torque_Nm": 10.13,
+   "cap_Nm": 9.8,
+   "horn_support_N": 174.8,
+   "horn_case": "tilt_in",
+   "idler_support_N": 161.5,
+   "idler_case": "tilt_in",
+   "axial_N": 12.4,
+   "bending_moment_Nm": 8.24,
+   "horn_support_N_holdable": 35.3,
+   "idler_support_N_holdable": 51.8
+  },
+  {
+   "joint": 1,
+   "servo": "STS3250",
+   "max_servo_torque_Nm": 7.15,
+   "cap_Nm": 4.9,
+   "horn_support_N": 178.9,
+   "horn_case": "flight_full",
+   "idler_support_N": 176.7,
+   "idler_case": "flight_full",
+   "axial_N": 30.1,
+   "bending_moment_Nm": 8.71,
+   "horn_support_N_holdable": 111.9,
+   "idler_support_N_holdable": 125.1
+  },
+  {
+   "joint": 2,
+   "servo": "STS3250",
+   "max_servo_torque_Nm": 7.21,
+   "cap_Nm": 4.9,
+   "horn_support_N": 139.6,
+   "horn_case": "tilt_in",
+   "idler_support_N": 127.9,
+   "idler_case": "tilt_in",
+   "axial_N": 15.8,
+   "bending_moment_Nm": 6.55,
+   "horn_support_N_holdable": 32.3,
+   "idler_support_N_holdable": 47.9
+  },
+  {
+   "joint": 3,
+   "servo": "STS3250",
+   "max_servo_torque_Nm": 5.94,
+   "cap_Nm": 4.9,
+   "horn_support_N": 145.0,
+   "horn_case": "tilt_in",
+   "idler_support_N": 132.5,
+   "idler_case": "tilt_in",
+   "axial_N": 23.6,
+   "bending_moment_Nm": 6.8,
+   "horn_support_N_holdable": 74.5,
+   "idler_support_N_holdable": 81.3
+  },
+  {
+   "joint": 4,
+   "servo": "STS3250",
+   "max_servo_torque_Nm": 5.42,
+   "cap_Nm": 4.9,
+   "horn_support_N": 122.8,
+   "horn_case": "tilt_in",
+   "idler_support_N": 120.9,
+   "idler_case": "tilt_in",
+   "axial_N": 22.9,
+   "bending_moment_Nm": 5.96,
+   "horn_support_N_holdable": 40.7,
+   "idler_support_N_holdable": 55.4
+  },
+  {
+   "joint": 5,
+   "servo": "STS3215",
+   "max_servo_torque_Nm": 4.89,
+   "cap_Nm": 2.94,
+   "horn_support_N": 114.2,
+   "horn_case": "stance_+y_mid x2",
+   "idler_support_N": 104.1,
+   "idler_case": "stance_+y_mid x2",
+   "axial_N": 43.0,
+   "bending_moment_Nm": 5.35,
+   "horn_support_N_holdable": 35.9,
+   "idler_support_N_holdable": 47.7
+  },
+  {
+   "joint": 6,
+   "servo": "STS3215",
+   "max_servo_torque_Nm": 5.91,
+   "cap_Nm": 2.94,
+   "horn_support_N": 132.3,
+   "horn_case": "stance_+y_in 34 x2",
+   "idler_support_N": 100.5,
+   "idler_case": "stance_+x_side +45 x2",
+   "axial_N": 26.3,
+   "bending_moment_Nm": 5.65,
+   "horn_support_N_holdable": 35.2,
+   "idler_support_N_holdable": 47.1
+  },
+  {
+   "joint": 7,
+   "servo": "STS3215",
+   "max_servo_torque_Nm": 7.29,
+   "cap_Nm": 2.94,
+   "horn_support_N": 142.0,
+   "horn_case": "stance_+y_in 34 x2",
+   "idler_support_N": 174.1,
+   "idler_case": "stance_+y_in 34 x2",
+   "axial_N": 32.6,
+   "bending_moment_Nm": 7.73,
+   "horn_support_N_holdable": 40.2,
+   "idler_support_N_holdable": 53.7
+  },
+  {
+   "joint": 8,
+   "servo": "STS3215",
+   "max_servo_torque_Nm": 7.4,
+   "cap_Nm": 2.94,
+   "horn_support_N": 201.0,
+   "horn_case": "stance_+y_in 34 x2",
+   "idler_support_N": 165.8,
+   "idler_case": "stance_-x_side +45 x2",
+   "axial_N": 14.7,
+   "bending_moment_Nm": 8.73,
+   "horn_support_N_holdable": 53.9,
+   "idler_support_N_holdable": 74.0
+  },
+  {
+   "joint": 9,
+   "servo": "STS3215",
+   "max_servo_torque_Nm": 8.07,
+   "cap_Nm": 2.94,
+   "horn_support_N": 120.2,
+   "horn_case": "stance_+y_side +45 x2",
+   "idler_support_N": 167.6,
+   "idler_case": "stance_+y_side +45 x2",
+   "axial_N": 15.2,
+   "bending_moment_Nm": 7.05,
+   "horn_support_N_holdable": 33.2,
+   "idler_support_N_holdable": 50.6
+  },
+  {
+   "joint": 10,
+   "servo": "STS3215",
+   "max_servo_torque_Nm": 5.55,
+   "cap_Nm": 2.94,
+   "horn_support_N": 141.7,
+   "horn_case": "stance_+y_mid x2",
+   "idler_support_N": 117.6,
+   "idler_case": "stance_+y_in 34 x2",
+   "axial_N": 38.8,
+   "bending_moment_Nm": 6.33,
+   "horn_support_N_holdable": 33.4,
+   "idler_support_N_holdable": 44.7
+  },
+  {
+   "joint": 11,
+   "servo": "STS3215",
+   "max_servo_torque_Nm": 3.64,
+   "cap_Nm": 2.94,
+   "horn_support_N": 58.0,
+   "horn_case": "stance_+y_side +45 x2",
+   "idler_support_N": 95.4,
+   "idler_case": "stance_-x_mid x2",
+   "axial_N": 31.1,
+   "bending_moment_Nm": 3.5,
+   "horn_support_N_holdable": 18.1,
+   "idler_support_N_holdable": 24.9
+  },
+  {
+   "joint": 12,
+   "servo": "STS3215",
+   "max_servo_torque_Nm": 2.55,
+   "cap_Nm": 2.94,
+   "horn_support_N": 98.8,
+   "horn_case": "stance_+y_side +45 x2",
+   "idler_support_N": 51.7,
+   "idler_case": "stance_+x_side +45 x2",
+   "axial_N": 8.7,
+   "bending_moment_Nm": 3.62,
+   "horn_support_N_holdable": 15.4,
+   "idler_support_N_holdable": 24.6
+  }
+ ],
+ "holdable_states": [
+  "flight_hover",
+  "flight_rated",
+  "tilt_out",
+  "stance_+x_side +45",
+  "lean10_hover",
+  "lean10_rated",
+  "lean10_full",
+  "lean20_hover",
+  "lean3_hover",
+  "lean3_rated",
+  "lean20_rated",
+  "lean20_full"
+ ],
+ "stress": [
+  {
+   "joint": 0,
+   "pin": "7075 pin",
+   "horn_ear_MPa": 10.0,
+   "idler_ear_MPa": 11.7,
+   "idler_bore_MPa": 6.3,
+   "pin_bend_MPa": 6.7,
+   "pin_shear_MPa": 3.2,
+   "tube_MPa": 1.79,
+   "sf": {
+    "horn_ear": 2.5,
+    "idler_ear": 2.1,
+    "idler_bore": 5.5,
+    "pin_bend": 74.5,
+    "pin_shear": 90.3,
+    "tube": 14.0
+   },
+   "min_sf": 2.14,
+   "weakest": "idler_ear",
+   "min_sf_holdable": 5.45,
+   "weakest_holdable": "idler_ear"
+  },
+  {
+   "joint": 1,
+   "pin": "7075 pin",
+   "horn_ear_MPa": 2.3,
+   "idler_ear_MPa": 2.8,
+   "idler_bore_MPa": 6.9,
+   "pin_bend_MPa": 7.4,
+   "pin_shear_MPa": 3.5,
+   "tube_MPa": 1.89,
+   "sf": {
+    "horn_ear": 10.8,
+    "idler_ear": 9.0,
+    "idler_bore": 5.1,
+    "pin_bend": 68.1,
+    "pin_shear": 82.5,
+    "tube": 13.2
+   },
+   "min_sf": 5.07,
+   "weakest": "idler_bore",
+   "min_sf_holdable": 6.33,
+   "weakest_holdable": "idler_ear"
+  },
+  {
+   "joint": 2,
+   "pin": "7075 pin",
+   "horn_ear_MPa": 2.2,
+   "idler_ear_MPa": 2.0,
+   "idler_bore_MPa": 5.0,
+   "pin_bend_MPa": 5.3,
+   "pin_shear_MPa": 2.5,
+   "tube_MPa": 1.42,
+   "sf": {
+    "horn_ear": 11.4,
+    "idler_ear": 12.2,
+    "idler_bore": 7.0,
+    "pin_bend": 94.2,
+    "pin_shear": 114.0,
+    "tube": 17.6
+   },
+   "min_sf": 7.01,
+   "weakest": "idler_bore",
+   "min_sf_holdable": 13.58,
+   "weakest_holdable": "idler_ear"
+  },
+  {
+   "joint": 3,
+   "pin": "7075 pin",
+   "horn_ear_MPa": 2.2,
+   "idler_ear_MPa": 2.0,
+   "idler_bore_MPa": 5.2,
+   "pin_bend_MPa": 5.5,
+   "pin_shear_MPa": 2.6,
+   "tube_MPa": 1.47,
+   "sf": {
+    "horn_ear": 11.1,
+    "idler_ear": 12.3,
+    "idler_bore": 6.8,
+    "pin_bend": 90.8,
+    "pin_shear": 110.0,
+    "tube": 17.0
+   },
+   "min_sf": 6.76,
+   "weakest": "idler_bore",
+   "min_sf_holdable": 8.74,
+   "weakest_holdable": "idler_ear"
+  },
+  {
+   "joint": 4,
+   "pin": "7075 pin",
+   "horn_ear_MPa": 5.8,
+   "idler_ear_MPa": 7.8,
+   "idler_bore_MPa": 4.7,
+   "pin_bend_MPa": 5.1,
+   "pin_shear_MPa": 2.4,
+   "tube_MPa": 1.29,
+   "sf": {
+    "horn_ear": 4.3,
+    "idler_ear": 3.2,
+    "idler_bore": 7.4,
+    "pin_bend": 99.6,
+    "pin_shear": 120.6,
+    "tube": 19.3
+   },
+   "min_sf": 3.21,
+   "weakest": "idler_ear",
+   "min_sf_holdable": 5.04,
+   "weakest_holdable": "idler_ear"
+  },
+  {
+   "joint": 5,
+   "pin": "printed PETG stub",
+   "horn_ear_MPa": 5.7,
+   "idler_ear_MPa": 6.4,
+   "idler_bore_MPa": 4.1,
+   "pin_bend_MPa": 4.4,
+   "pin_shear_MPa": 2.1,
+   "tube_MPa": 1.16,
+   "sf": {
+    "horn_ear": 4.4,
+    "idler_ear": 3.9,
+    "idler_bore": 8.6,
+    "pin_bend": 10.3,
+    "pin_shear": 7.2,
+    "tube": 21.5
+   },
+   "min_sf": 3.9,
+   "weakest": "idler_ear",
+   "min_sf_holdable": 10.15,
+   "weakest_holdable": "horn_ear"
+  },
+  {
+   "joint": 6,
+   "pin": "printed PETG stub",
+   "horn_ear_MPa": 8.3,
+   "idler_ear_MPa": 7.5,
+   "idler_bore_MPa": 3.9,
+   "pin_bend_MPa": 4.2,
+   "pin_shear_MPa": 2.0,
+   "tube_MPa": 1.23,
+   "sf": {
+    "horn_ear": 3.0,
+    "idler_ear": 3.3,
+    "idler_bore": 8.9,
+    "pin_bend": 10.7,
+    "pin_shear": 7.5,
+    "tube": 20.4
+   },
+   "min_sf": 3.0,
+   "weakest": "horn_ear",
+   "min_sf_holdable": 7.07,
+   "weakest_holdable": "idler_ear"
+  },
+  {
+   "joint": 7,
+   "pin": "printed PETG stub",
+   "horn_ear_MPa": 2.7,
+   "idler_ear_MPa": 3.2,
+   "idler_bore_MPa": 6.8,
+   "pin_bend_MPa": 7.3,
+   "pin_shear_MPa": 3.5,
+   "tube_MPa": 1.68,
+   "sf": {
+    "horn_ear": 9.1,
+    "idler_ear": 7.9,
+    "idler_bore": 5.1,
+    "pin_bend": 6.2,
+    "pin_shear": 4.3,
+    "tube": 14.9
+   },
+   "min_sf": 4.33,
+   "weakest": "pin_shear",
+   "min_sf_holdable": 14.05,
+   "weakest_holdable": "pin_shear"
+  },
+  {
+   "joint": 8,
+   "pin": "printed PETG stub",
+   "horn_ear_MPa": 10.8,
+   "idler_ear_MPa": 10.6,
+   "idler_bore_MPa": 6.5,
+   "pin_bend_MPa": 6.9,
+   "pin_shear_MPa": 3.3,
+   "tube_MPa": 1.89,
+   "sf": {
+    "horn_ear": 2.3,
+    "idler_ear": 2.4,
+    "idler_bore": 5.4,
+    "pin_bend": 6.5,
+    "pin_shear": 4.5,
+    "tube": 13.2
+   },
+   "min_sf": 2.31,
+   "weakest": "horn_ear",
+   "min_sf_holdable": 6.04,
+   "weakest_holdable": "idler_ear"
+  },
+  {
+   "joint": 9,
+   "pin": "printed PETG stub",
+   "horn_ear_MPa": 2.0,
+   "idler_ear_MPa": 3.9,
+   "idler_bore_MPa": 6.5,
+   "pin_bend_MPa": 7.0,
+   "pin_shear_MPa": 3.3,
+   "tube_MPa": 1.53,
+   "sf": {
+    "horn_ear": 12.7,
+    "idler_ear": 6.4,
+    "idler_bore": 5.3,
+    "pin_bend": 6.4,
+    "pin_shear": 4.5,
+    "tube": 16.3
+   },
+   "min_sf": 4.5,
+   "weakest": "pin_shear",
+   "min_sf_holdable": 11.52,
+   "weakest_holdable": "idler_ear"
+  },
+  {
+   "joint": 10,
+   "pin": "printed PETG stub",
+   "horn_ear_MPa": 8.7,
+   "idler_ear_MPa": 7.5,
+   "idler_bore_MPa": 4.6,
+   "pin_bend_MPa": 4.9,
+   "pin_shear_MPa": 2.3,
+   "tube_MPa": 1.37,
+   "sf": {
+    "horn_ear": 2.9,
+    "idler_ear": 3.3,
+    "idler_bore": 7.6,
+    "pin_bend": 9.2,
+    "pin_shear": 6.4,
+    "tube": 18.2
+   },
+   "min_sf": 2.88,
+   "weakest": "horn_ear",
+   "min_sf_holdable": 16.85,
+   "weakest_holdable": "pin_shear"
+  },
+  {
+   "joint": 11,
+   "pin": "printed PETG stub",
+   "horn_ear_MPa": 2.3,
+   "idler_ear_MPa": 7.3,
+   "idler_bore_MPa": 3.7,
+   "pin_bend_MPa": 4.0,
+   "pin_shear_MPa": 1.9,
+   "tube_MPa": 0.76,
+   "sf": {
+    "horn_ear": 11.1,
+    "idler_ear": 3.4,
+    "idler_bore": 9.4,
+    "pin_bend": 11.3,
+    "pin_shear": 7.9,
+    "tube": 32.9
+   },
+   "min_sf": 3.44,
+   "weakest": "idler_ear",
+   "min_sf_holdable": 30.34,
+   "weakest_holdable": "pin_shear"
+  },
+  {
+   "joint": 12,
+   "pin": "printed PETG stub",
+   "horn_ear_MPa": 5.4,
+   "idler_ear_MPa": 3.6,
+   "idler_bore_MPa": 2.0,
+   "pin_bend_MPa": 2.2,
+   "pin_shear_MPa": 1.0,
+   "tube_MPa": 0.79,
+   "sf": {
+    "horn_ear": 4.7,
+    "idler_ear": 6.9,
+    "idler_bore": 17.3,
+    "pin_bend": 20.8,
+    "pin_shear": 14.6,
+    "tube": 31.8
+   },
+   "min_sf": 4.66,
+   "weakest": "horn_ear",
+   "min_sf_holdable": 14.5,
+   "weakest_holdable": "idler_ear"
+  }
+ ],
+ "stress_note": "Envelope over every solved pose and load: straight out with fans off, hover, rated and full thrust, rated thrust tilted 30 deg, walking stance at 1x and 2x foot load. Ear: in-plane bending over the 20.8 mm ear plus direct pull, across the layers. Limits: PETG 25 MPa across layers, 45 along, 35 MPa bearing [A]; 7075-T6 yield 503, shear 290 MPa. Forest's rule is SF >= 2.",
+ "servo_side_load": [
+  {
+   "joint": 5,
+   "horn_side_N": 114.2,
+   "horn_side_N_holdable": 35.9,
+   "case_holdable": "flight_rated",
+   "XM430_reference_N": 40.0,
+   "ratio": 2.85
+  },
+  {
+   "joint": 6,
+   "horn_side_N": 132.3,
+   "horn_side_N_holdable": 35.2,
+   "case_holdable": "stance_+x_side +45",
+   "XM430_reference_N": 40.0,
+   "ratio": 3.31
+  },
+  {
+   "joint": 7,
+   "horn_side_N": 142.0,
+   "horn_side_N_holdable": 40.2,
+   "case_holdable": "stance_+x_side +45",
+   "XM430_reference_N": 40.0,
+   "ratio": 3.55
+  },
+  {
+   "joint": 8,
+   "horn_side_N": 201.0,
+   "horn_side_N_holdable": 53.9,
+   "case_holdable": "stance_+x_side +45",
+   "XM430_reference_N": 40.0,
+   "ratio": 5.02
+  },
+  {
+   "joint": 9,
+   "horn_side_N": 120.2,
+   "horn_side_N_holdable": 33.2,
+   "case_holdable": "stance_+x_side +45",
+   "XM430_reference_N": 40.0,
+   "ratio": 3.01
+  },
+  {
+   "joint": 10,
+   "horn_side_N": 141.7,
+   "horn_side_N_holdable": 33.4,
+   "case_holdable": "stance_+x_side +45",
+   "XM430_reference_N": 40.0,
+   "ratio": 3.54
+  },
+  {
+   "joint": 11,
+   "horn_side_N": 58.0,
+   "horn_side_N_holdable": 18.1,
+   "case_holdable": "lean10_full",
+   "XM430_reference_N": 40.0,
+   "ratio": 1.45
+  },
+  {
+   "joint": 12,
+   "horn_side_N": 98.8,
+   "horn_side_N_holdable": 15.4,
+   "case_holdable": "lean20_full",
+   "XM430_reference_N": 40.0,
+   "ratio": 2.47
+  }
+ ],
+ "lid_screws": {
+  "screws": "4 x M2 x 8 self-tapping into PETG [A]",
+  "pullout_each_N": 150,
+  "max_axial_N": 43.0,
+  "sf": 14.0
+ },
+ "root_flange": {
+  "screws": "8 x M3 class 8.8 on a 60 mm bolt circle [A]",
+  "max_root_moment_Nm": 18.37,
+  "worst_screw_tension_N": 153.1,
+  "M3_proof_N": 1811,
+  "sf_screw": 11.8,
+  "note": "screw sees the root moment over the bolt pattern; PETG under the heads (6 mm washer, 28 mm^2) limits first at about 35 MPa x 28 = 980 N"
+ },
+ "gear": {
+  "cases": {
+   "stall (9.8 N.m)": {
+    "joint_torque_Nm": 9.8,
+    "tooth_force_N": 500,
+    "lewis_pinion_MPa": 155,
+    "lewis_gear_MPa": 129,
+    "hertz_MPa": 547
+   },
+   "hover": {
+    "joint_torque_Nm": 4.57,
+    "tooth_force_N": 233,
+    "lewis_pinion_MPa": 72,
+    "lewis_gear_MPa": 60,
+    "hertz_MPa": 373
+   },
+   "full thrust": {
+    "joint_torque_Nm": 10.13,
+    "tooth_force_N": 517,
+    "lewis_pinion_MPa": 160,
+    "lewis_gear_MPa": 133,
+    "hertz_MPa": 556
+   },
+   "worst solved pose": {
+    "joint_torque_Nm": 10.13,
+    "tooth_force_N": 517,
+    "lewis_pinion_MPa": 160,
+    "lewis_gear_MPa": 133,
+    "hertz_MPa": 556
+   }
+  },
+  "limits": {
+   "lewis_bending_fatigue_MPa": 159.0,
+   "yield_MPa": 503.0,
+   "contact_fatigue_MPa_hard_anodized": "about 300 to 400 [A, aluminium gear data is thin]"
+  },
+  "note": "Lewis Y 0.322 (20T) and 0.389 (40T), 10 mm face, m1. Contact stress at stall is about 540 MPa: fine for short peaks, but hard-anodized 7075 pits under long running above roughly 350 MPa, so keep joint 0 under about 40 % of stall for sustained loads, or make the pinion steel."
+ },
+ "sag_mm": {
+  "straight out, fans off": {
+   "vec": [
+    0.0,
+    0.0,
+    -110.8
+   ],
+   "mag": 110.8
+  },
+  "hover pose, hover thrust": {
+   "vec": [
+    -36.5,
+    -9.9,
+    17.6
+   ],
+   "mag": 41.7
+  },
+  "hover pose, full thrust": {
+   "vec": [
+    -75.1,
+    -14.6,
+    36.6
+   ],
+   "mag": 84.9
+  },
+  "leaning hover pose (20 deg), hover thrust": {
+   "vec": [
+    -3.8,
+    -12.0,
+    2.5
+   ],
+   "mag": 12.8
+  },
+  "stance +x pod, foot load": {
+   "vec": [
+    -25.2,
+    -14.1,
+    16.0
+   ],
+   "mag": 33.0
+  },
+  "stance +y pod, foot load": {
+   "vec": [
+    -34.0,
+    21.9,
+    16.2
+   ],
+   "mag": 43.6
+  },
+  "stance -x pod, foot load": {
+   "vec": [
+    -26.9,
+    -20.1,
+    14.6
+   ],
+   "mag": 36.6
+  }
+ },
+ "tip_stiffness_N_per_mm_straight": {
+  "up": 0.06,
+  "sideways": 0.052,
+  "along the arm": 1000000.0
+ },
+ "stiffness_note": "Servo hold stiffness taken as stall torque per 2 deg of position error [A]: STS3250 140, STS3215 84 N.m/rad, joint 0 550 through the 2:1 stage. Hinge tilt from ear stretch about 4309 N.m/rad [A]. The ring tube (PETG, 2 mm wall) is about 100 times stiffer than the joints and is left rigid. Clearance tilt is play, not spring: see the stack-up.",
+ "modes_Hz": {
+  "straight out": [
+   1.58,
+   1.71,
+   9.34,
+   9.63
+  ],
+  "hover pose, fan upright": [
+   1.93,
+   2.43,
+   7.23,
+   8.02
+  ],
+  "hover pose, fan leaning 20 deg": [
+   1.67,
+   1.74,
+   9.47,
+   9.66
+  ]
+ },
+ "modes_note": "Joint-space modes with the servo hold stiffness above; real servo loops add damping and lag, so treat these as upper bounds. Keep the flight controller's attitude loop under about a third of the first mode, and the prop's once-per-rev (about 80 Hz at hover) is far above them.",
+ "speed": {
+  "fans off, straight": {
+   "joint_speed_rad_s": [
+    0.27,
+    4.4,
+    0.0,
+    4.4,
+    0.32,
+    4.7,
+    0.0,
+    4.7,
+    1.73,
+    4.7,
+    3.19,
+    4.7,
+    4.19
+   ],
+   "at_80pct_rule": [
+    0.22,
+    3.52,
+    0.0,
+    3.52,
+    0.26,
+    3.76,
+    0.0,
+    3.76,
+    1.39,
+    3.76,
+    2.55,
+    3.76,
+    3.35
+   ]
+  },
+  "hover, fan upright": {
+   "joint_speed_rad_s": [
+    1.17,
+    4.23,
+    1.45,
+    4.05,
+    3.15,
+    2.46,
+    3.82,
+    2.78,
+    4.33,
+    3.74,
+    4.42,
+    4.68,
+    4.67
+   ],
+   "at_80pct_rule": [
+    0.94,
+    3.39,
+    1.16,
+    3.24,
+    2.52,
+    1.97,
+    3.06,
+    2.22,
+    3.46,
+    2.99,
+    3.54,
+    3.75,
+    3.74
+   ]
+  },
+  "hover, fan leaning 20 deg": {
+   "joint_speed_rad_s": [
+    2.16,
+    4.13,
+    4.33,
+    3.96,
+    4.36,
+    3.88,
+    4.51,
+    3.84,
+    4.11,
+    4.32,
+    3.86,
+    4.69,
+    4.52
+   ],
+   "at_80pct_rule": [
+    1.73,
+    3.3,
+    3.46,
+    3.16,
+    3.48,
+    3.1,
+    3.61,
+    3.07,
+    3.29,
+    3.46,
+    3.09,
+    3.75,
+    3.62
+   ]
+  },
+  "tip_speed_straight_m_s": {
+   "joint0_alone": 2.2,
+   "all_pitch_joints_together": 14.75
+  },
+  "no_load_rad_s": [
+   2.2,
+   4.4,
+   4.4,
+   4.4,
+   4.4,
+   4.7,
+   4.7,
+   4.7,
+   4.7,
+   4.7,
+   4.7,
+   4.7,
+   4.7
+  ],
+  "bus": {
+   "baud": 1000000,
+   "servos_per_arm_bus": 13,
+   "cycle_ms": 2.89,
+   "max_loop_Hz": 346,
+   "note": "one bus per arm; a shared bus for all 104 servos would run near 25 Hz"
+  }
+ },
+ "fatigue_walking": [
+  {
+   "joint": 0,
+   "support_load_amplitude_N": 2.2,
+   "ear_stress_amp_MPa": 0.17,
+   "ear_cycles": 1000000000000.0,
+   "pin_stress_amp_MPa": 0.09,
+   "pin_cycles": 1000000000000.0
+  },
+  {
+   "joint": 1,
+   "support_load_amplitude_N": 12.4,
+   "ear_stress_amp_MPa": 0.95,
+   "ear_cycles": 1000000000000.0,
+   "pin_stress_amp_MPa": 0.52,
+   "pin_cycles": 1000000000000.0
+  },
+  {
+   "joint": 2,
+   "support_load_amplitude_N": 2.2,
+   "ear_stress_amp_MPa": 0.17,
+   "ear_cycles": 1000000000000.0,
+   "pin_stress_amp_MPa": 0.09,
+   "pin_cycles": 1000000000000.0
+  },
+  {
+   "joint": 3,
+   "support_load_amplitude_N": 0.3,
+   "ear_stress_amp_MPa": 0.02,
+   "ear_cycles": 1000000000000.0,
+   "pin_stress_amp_MPa": 0.01,
+   "pin_cycles": 1000000000000.0
+  },
+  {
+   "joint": 4,
+   "support_load_amplitude_N": 5.1,
+   "ear_stress_amp_MPa": 0.39,
+   "ear_cycles": 1000000000000.0,
+   "pin_stress_amp_MPa": 0.21,
+   "pin_cycles": 1000000000000.0
+  },
+  {
+   "joint": 5,
+   "support_load_amplitude_N": 23.2,
+   "ear_stress_amp_MPa": 1.78,
+   "ear_cycles": 1000000000000.0,
+   "pin_stress_amp_MPa": 0.97,
+   "pin_cycles": 1000000000000.0
+  },
+  {
+   "joint": 6,
+   "support_load_amplitude_N": 27.7,
+   "ear_stress_amp_MPa": 2.12,
+   "ear_cycles": 1000000000000.0,
+   "pin_stress_amp_MPa": 1.16,
+   "pin_cycles": 1000000000000.0
+  },
+  {
+   "joint": 7,
+   "support_load_amplitude_N": 33.6,
+   "ear_stress_amp_MPa": 2.58,
+   "ear_cycles": 201000000000.0,
+   "pin_stress_amp_MPa": 1.4,
+   "pin_cycles": 1000000000000.0
+  },
+  {
+   "joint": 8,
+   "support_load_amplitude_N": 38.6,
+   "ear_stress_amp_MPa": 2.96,
+   "ear_cycles": 39100000000.0,
+   "pin_stress_amp_MPa": 1.61,
+   "pin_cycles": 1000000000000.0
+  },
+  {
+   "joint": 9,
+   "support_load_amplitude_N": 32.0,
+   "ear_stress_amp_MPa": 2.45,
+   "ear_cycles": 361000000000.0,
+   "pin_stress_amp_MPa": 1.34,
+   "pin_cycles": 1000000000000.0
+  },
+  {
+   "joint": 10,
+   "support_load_amplitude_N": 29.5,
+   "ear_stress_amp_MPa": 2.27,
+   "ear_cycles": 921000000000.0,
+   "pin_stress_amp_MPa": 1.23,
+   "pin_cycles": 1000000000000.0
+  },
+  {
+   "joint": 11,
+   "support_load_amplitude_N": 20.4,
+   "ear_stress_amp_MPa": 1.56,
+   "ear_cycles": 1000000000000.0,
+   "pin_stress_amp_MPa": 0.85,
+   "pin_cycles": 1000000000000.0
+  },
+  {
+   "joint": 12,
+   "support_load_amplitude_N": 22.8,
+   "ear_stress_amp_MPa": 1.75,
+   "ear_cycles": 1000000000000.0,
+   "pin_stress_amp_MPa": 0.95,
+   "pin_cycles": 1000000000000.0
+  }
+ ],
+ "fatigue_note": "One walking step is one load cycle per joint: swing (arm unloaded) to stance (foot load). Basquin: 7075 sigma_f' 1466 MPa, b -0.143; printed PETG across layers sigma_f' 25 MPa, b -0.085 (about 30 % of strength at a million cycles) [A]. Mean stress ignored; printed parts scatter widely, so divide lives by 10 for design.",
+ "bearings": [
+  {
+   "joint": 0,
+   "bearing": "61803 (gear)",
+   "C_N": 2030,
+   "C0_N": 1270,
+   "worst_static_N": 174.8,
+   "static_sf": 7.3,
+   "stance_load_N": 24.5,
+   "L10_oscillations_15deg": 3390000000000.0,
+   "L10_oscillations_45deg": 1130000000000.0
+  },
+  {
+   "joint": 1,
+   "bearing": "6705 (horn side)",
+   "C_N": 1079,
+   "C0_N": 834,
+   "worst_static_N": 178.9,
+   "static_sf": 4.7,
+   "stance_load_N": 26.6,
+   "L10_oscillations_15deg": 402000000000.0,
+   "L10_oscillations_45deg": 134000000000.0
+  },
+  {
+   "joint": 2,
+   "bearing": "6705 (horn side)",
+   "C_N": 1079,
+   "C0_N": 834,
+   "worst_static_N": 139.6,
+   "static_sf": 6.0,
+   "stance_load_N": 24.9,
+   "L10_oscillations_15deg": 486000000000.0,
+   "L10_oscillations_45deg": 162000000000.0
+  },
+  {
+   "joint": 3,
+   "bearing": "6705 (horn side)",
+   "C_N": 1079,
+   "C0_N": 834,
+   "worst_static_N": 145.0,
+   "static_sf": 5.8,
+   "stance_load_N": 29.2,
+   "L10_oscillations_15deg": 304000000000.0,
+   "L10_oscillations_45deg": 101000000000.0
+  },
+  {
+   "joint": 4,
+   "bearing": "6705 (horn side)",
+   "C_N": 1079,
+   "C0_N": 834,
+   "worst_static_N": 122.8,
+   "static_sf": 6.8,
+   "stance_load_N": 27.9,
+   "L10_oscillations_15deg": 347000000000.0,
+   "L10_oscillations_45deg": 116000000000.0
+  }
+ ],
+ "bearing_note": "Oscillating L10 = (C/P)^3 x 1e6 x 360 / (4 psi). Small swings under 10 deg do not roll the balls far enough to spread grease: expect false brinelling marks at the hover hold angles; a sweep through the full range now and then (a 'grease cycle' at power-up) helps."
+}

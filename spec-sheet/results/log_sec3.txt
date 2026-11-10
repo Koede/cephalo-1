@@ -1,0 +1,45 @@
+{
+ "as designed (reamed bores, horn clamp holding, gear 0.05 mm)": {
+  "straight out": {
+   "worst_case_mm": 35.4,
+   "p95_mm": 9.2,
+   "rms_mm": 5.4,
+   "share_from_backlash": 0.84
+  },
+  "hover pose": {
+   "worst_case_mm": 30.4,
+   "p95_mm": 7.2,
+   "rms_mm": 4.2,
+   "share_from_backlash": 0.75
+  }
+ },
+ "as drawn (8.4 mm bores), horn clamp holding": {
+  "straight out": {
+   "worst_case_mm": 58.2,
+   "p95_mm": 12.7,
+   "rms_mm": 7.4,
+   "share_from_backlash": 0.51
+  },
+  "hover pose": {
+   "worst_case_mm": 60.3,
+   "p95_mm": 11.2,
+   "rms_mm": 6.6,
+   "share_from_backlash": 0.38
+  }
+ },
+ "as drawn, horn clamp relaxed (3.4 mm holes slip)": {
+  "straight out": {
+   "worst_case_mm": 258.2,
+   "p95_mm": 71.1,
+   "rms_mm": 42.1,
+   "share_from_backlash": 0.89
+  },
+  "hover pose": {
+   "worst_case_mm": 214.5,
+   "p95_mm": 54.9,
+   "rms_mm": 32.0,
+   "share_from_backlash": 0.83
+  }
+ }
+}
+{'preload_per_screw_N': 833, 'friction': 0.3, 'torque_by_friction_new_Nm': 7.0, 'torque_by_friction_relaxed_Nm': 3.5, 'STS3250_stall_Nm': 4.9, 'STS3215_stall_Nm': 2.94, 'slip_backlash_deg_as_drawn': 1.64, 'slip_backlash_deg_reamed_3p1': 0.41, 'note': "new, the clamp holds more than stall on every joint; once the PETG relaxes it holds less than an STS3250's stall, and then the 0.4 mm hole clearance adds up to 1.6 deg of play at that joint. Fix: ream the holes to 3.1 mm, add metal washers under the heads, or bond the ear to the horn."}
