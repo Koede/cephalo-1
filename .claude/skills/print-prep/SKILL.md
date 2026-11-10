@@ -4,8 +4,6 @@ description: Pre-print checklist for cephalo-1 - values to measure on the real p
 ---
 # print-prep
 
-1. `python3 tools/stl_integrity.py --counts`.
-2. Parts per arm (main design): root socket x1, vertebra x12, tip x1, servo lid x12 (joint 0 has none), root end cap, bearing cap, gear 40T and pinion 20T (7075 machined), idler pin; x8 arms. Subassemblies: horn bearing vertebra x4 and lid x4, fan pod x8, palm finger x8.
-3. Measure before printing (DESIGN.md `[A]`): spline centre to case end (11.0), horn seat height (4.0), horn thickness (3.0), horn radius (10.0) and bolt circle (14.0), insert hole (4.0 for 4.5 mm M3 insert). Run `/tolerance-stackup` with the measured deltas.
-4. Material/process: PETG, supports needed, heat-set inserts, 3-4 perimeters at 0.6 mm; wall 1.8 mm.
-5. Known: `vertebra_bearing_x4.stl` has 2 non-manifold edges; the slicer repairs them.
+`python3 tools/print_prep.py [DIR] [--arms 8] [--bed 250]`
+
+Lists every `[A]` parameter in `pin_cad.py` and `root_gear.py` with file:line (measure these first), the printable parts with quantity for the robot, bounding box and mass (about 4.25 kg PETG for 8 arms), flags parts bigger than the bed, and the STL integrity result. Machined 7075 parts (gear, pinion, idler pin) are reference models. Exit 1 if a part exceeds the bed or an STL fails.

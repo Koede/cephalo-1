@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Export an arm pose as an STL assembly and a PNG preview.
 
-  python3 tools/pose_render.py --pose curl --out /tmp/pose
+  python3 tools/pose_render.py --pose curl --out pose_out
   python3 tools/pose_render.py --angles 0:30,1:-20,5:45 --png pose.png
   python3 tools/pose_render.py --pose wave --no-stl            # PNG only (skeleton + tip)
 Named poses: straight, curl, wave, zigzag, coil. --angles joint:deg (others 0). The STL has the
@@ -11,14 +11,14 @@ axes and arm centreline from the side and the front.
 import argparse, math, os, sys
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import build_arm
+from common import build_arm, SCRATCH
 from kin import Kin, named_pose, axis_dir
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--pose", default="straight"); ap.add_argument("--angles", default=None)
-    ap.add_argument("--out", default="/tmp/cephalo_pose"); ap.add_argument("--png", default=None); ap.add_argument("--no-stl", action="store_true")
+    ap.add_argument("--out", default=os.path.join(SCRATCH, "pose")); ap.add_argument("--png", default=None); ap.add_argument("--no-stl", action="store_true")
     ap.add_argument("--length", type=float); ap.add_argument("--joints", type=int); ap.add_argument("--twist", type=float)
     a = ap.parse_args()
     arm = build_arm(a.length, a.joints, a.twist); k = Kin.from_arm(arm)

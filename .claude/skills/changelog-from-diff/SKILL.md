@@ -4,4 +4,4 @@ description: Summarise a cephalo-1 CAD or code change in plain English for a PR 
 ---
 # changelog-from-diff
 
-`git diff --stat main...HEAD`, `git diff main...HEAD -- '*.json' '*.md'`, and `python3 tools/golden_diff.py <regen dir>` if CAD changed. Output: Summary (2-3 lines), Parts that change geometry (reprint list: file, volume change), Numbers moved (before -> after, from JSON diffs), Gates (all PASS / which WARN changed), Not verified. Use the PR template if present (`.github/pull_request_template.md`).
+`python3 tools/changelog_from_diff.py [--base main]` prints markdown: changed files grouped (generators, tools/tests/skills, CAD outputs, docs), every number that moved in changed JSON reports, STL files to reprint, and a verification stub. It diffs committed changes against the base (`origin/main` or `main`); commit first. Paste into the PR description and fill in the check table from `python3 tools/check_all.py`.

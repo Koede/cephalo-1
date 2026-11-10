@@ -4,10 +4,6 @@ description: Check cephalo-1 fastener and insert geometry (M3 horn bolt circle, 
 ---
 # fastener-check
 
-Read the constants at the top of `arm-pin-hinge/pin_cad.py` (`HORN_PCD`, `HORN_R`, `INSERT_R`, `LID_BOSS_R`, `BOSS_R`, `WALL`, `HEAD_H`) and apply:
+`python3 tools/fastener_check.py [--min-wall 1.6] [--min-edge 1.5] [--insert-len 5.7] [--bolt-hole-r 1.7]`
 
-- Horn bolt circle 14 mm with 4 x M3: bolt-hole edge to horn rim = `HORN_R - HORN_PCD/2 - 1.5 >= 1.5 mm`.
-- Heat-set insert hole r = 2.0 (4.0 mm for a 4.5 mm M3 insert): wall around it >= 1.6 mm (use `LID_BOSS_R - INSERT_R`).
-- Insert depth vs part thickness (`IDLER_EAR_T`, `LID_T`): insert length 5.7 mm must not exceed thickness minus 1 mm; flag otherwise.
-- Screw head clearance vs arm OD (`HEAD_H` + ear stack within `R`).
-Compare with the `[A]` assumptions in DESIGN.md "values to measure before printing" and print PASS/WARN lines. State which values are assumed, not measured.
+Checks from the pin_cad.py constants: horn bolt hole edge to horn rim (1.30 mm, WARN against 1.5), bolt circle inside the ear boss, insert hole 4.0 mm, wall round the idler-stub insert (2.0 mm) and the lid-screw insert (1.5 mm, WARN against 1.6), insert depth, head stack inside the arm OD, horn-ear counterbore. Every line says which inputs are `[A]` assumptions. These are design-intent checks, not FEA.

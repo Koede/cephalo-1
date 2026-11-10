@@ -4,8 +4,6 @@ description: Compare cephalo-1 joint torques with servo ratings (STS3250 4.9 N m
 ---
 # joint-torque-check
 
-1. From `joint-study/sim` run `python3 joint_loads.py` (and `bearing_loads.py --a1 --a2 --tag X` for bearings); outputs are JSON in `joint-study/results/` (committed: check `git status`).
-2. Library route: `metrics.element_moments` and `var_torques` with `chain.build_chain(cfg)` for custom poses.
-3. Table: joint, load N m, servo, rating N m, safety factor (flag < 1.5); highlight joint 0 (geared 2:1 root) and joints 0-4 (STS3250).
-4. State assumptions: static loads only unless `dynamics.py` is used; fan-pod thrust 16 N rated.
-Needs scipy/numba (see `/setup-env`).
+`python3 tools/study_report.py joints` judges the committed `joint-study/results/joint_loads.json` (joints 1-4: fork-ear, stub and bore stresses vs PETG 45/25 MPa along/across layers at SF 2).
+
+To recompute the loads: `cd joint-study/sim && python3 joint_loads.py` (needs numba/scipy; overwrites `joint-study/results/joint_loads.json`, so check `git status`). Servo-torque margins by pose are in the study results (`/study-smoke`).

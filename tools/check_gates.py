@@ -2,7 +2,7 @@
 """Assert the DESIGN.md gates against a design directory's JSON reports.
 
   python3 tools/check_gates.py                       # committed main design arm-pin-hinge/out_1m_13
-  python3 tools/check_gates.py /tmp/regen_1m13       # a regenerated directory
+  python3 tools/check_gates.py DIR       # a regenerated directory
   python3 tools/check_gates.py DIR --range 90 --tw 1.15
 
 Gates: static interference ~0; joints swept are collision-free over +-range/2; joint pairs clear

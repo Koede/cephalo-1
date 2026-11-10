@@ -4,4 +4,4 @@ description: Thrust-to-weight of cephalo-1 including central prop, claw fans, ba
 ---
 # thrust-weight
 
-`root_gear.json`: `robot_kg` 15.084, `thrust_to_weight` 1.150 (gate 1.15), `budget_g` per arm. DESIGN.md sections "Central prop", "Battery", "Claw fans" give the later totals (horn bearing: robot 17.18 kg, rated T/W 1.061 -> 1.045). Scripts: `joint-study/sim/central_prop.py`, `claw_fans.py`, `battery.py` (write JSON into `joint-study/results/`). Present: robot mass build-up, rated T/W, full-throttle T/W, hover draw, and d(T/W)/d(mass): `T/W = T/(m g)` so +100 g costs about 0.7%. Flag clearly that T/W < 1.15 after the additions is an open item recorded in DESIGN.md.
+`python3 tools/study_report.py thrust` gives T/W against added mass from `battery.json` (each +100 g costs 0.0076; headroom to 1.15 is only 13 g on that basis) and the main design's T/W from `root_gear.json` (1.150 at 15.08 kg). `python3 tools/mass_budget.py --add-g N` shows the per-arm effect. Later states (central prop, horn bearing 17.18 kg, T/W 1.045) are in DESIGN.md and `horn_bearing.json`; `/cad-fit-check` flags that as a WARN.

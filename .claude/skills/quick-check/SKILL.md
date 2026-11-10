@@ -4,8 +4,6 @@ description: Fast (under 10 s) pre-commit check for cephalo-1 that does not rege
 ---
 # quick-check
 
-```bash
-python3 -m pytest -q tests && python3 tools/check_gates.py && python3 tools/collision.py --level static,pairs
-```
+`python3 tools/check_all.py --quick` (about 8 s).
 
-Report failures with the failing line. If `arm-pin-hinge/*.py` changed, recommend `/check-all` because these checks read the committed outputs, not a fresh build.
+It does not regenerate CAD, so after editing `arm-pin-hinge/*.py` run `/check-all` instead.

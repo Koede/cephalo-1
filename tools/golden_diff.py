@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Compare a regenerated design directory with the committed one (golden regression check).
 
-  python3 tools/golden_diff.py /tmp/cephalo_regen/main            # vs arm-pin-hinge/out_1m_13
+  python3 tools/golden_diff.py <scratch>/regen/main            # vs arm-pin-hinge/out_1m_13
   python3 tools/golden_diff.py NEW --golden OLD --rtol 1e-6
 
 STL: same file set; per file volume and bbox equal within --rtol (byte equality reported too).

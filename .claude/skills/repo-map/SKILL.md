@@ -4,8 +4,4 @@ description: Produce or refresh a table of every script in cephalo-1 with what i
 ---
 # repo-map
 
-1. List scripts: `git ls-files '*.py' | sort`.
-2. For each, read the module docstring and `argparse` flags (`grep -n "add_argument\|^\"\"\"" file`) and what files it writes (`grep -n "open(\|export(\|json.dump"`).
-3. Output a markdown table: path, purpose, command, writes, run-from directory.
-4. Flag: scripts without a docstring, hard-coded absolute paths (`/mnt/`), cwd-relative outputs, scripts that nothing imports or documents, committed outputs with no generator.
-5. Offer to write the table into README.md under "Scripts"; do not edit without being asked.
+`python3 tools/repo_map.py [--write SCRIPTS.md]` builds a markdown table (script, purpose, argparse flags, files it writes, problems) from the AST, so it is safe on any machine and never runs the scripts. Problems flagged: no docstring, hard-coded `/mnt/` paths, cwd-relative output dirs. Offer to save it as `SCRIPTS.md` or into the README; do not edit docs without being asked.

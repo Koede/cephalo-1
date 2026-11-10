@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Regenerate a design variant into a scratch directory, in the right order.
 
-  python3 tools/regen.py                              # main design -> /tmp/cephalo_regen/main
+  python3 tools/regen.py                              # main design -> <tempdir>/cephalo/regen/main
   python3 tools/regen.py --out DIR --length 900 --joints 13
   python3 tools/regen.py --variant 585                # 585 mm, 9 joints, plain socket (arm-pin-hinge/out)
   python3 tools/regen.py --subassemblies              # + horn_bearing.py, fan_pod.py, mantle_notch.py
@@ -13,7 +13,7 @@ the committed out_* folders unless you pass one explicitly with --force.
 """
 import argparse, os, shutil, subprocess, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import PIN_DIR, ROOT
+from common import PIN_DIR, ROOT, SCRATCH
 
 VARIANTS = {
     "main":    dict(args=["--length", "1000", "--joints", "13", "--root-servos", "5"], geared=True),
@@ -48,9 +48,9 @@ def main():
             k = "--" + flag.replace("_", "-")
             if k in args: args[args.index(k) + 1] = val
             else: args += [k, val]
-    out = os.path.abspath(a.out or f"/tmp/cephalo_regen/{a.variant}")
+    out = os.path.abspath(a.out or os.path.join(SCRATCH, "regen", a.variant))
     if os.path.exists(out):
-        if os.path.relpath(out, ROOT).startswith("arm-pin-hinge/out") and not a.force:
+        if os.path.relpath(out, ROOT).replace(os.sep, "/").startswith("arm-pin-hinge/out") and not a.force:
             sys.exit(f"refusing to overwrite committed {out}; use a scratch --out or --force")
         shutil.rmtree(out)
     args += ["--out", out] + (["--no-sweep"] if a.no_sweep else [])

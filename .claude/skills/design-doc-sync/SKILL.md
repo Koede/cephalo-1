@@ -4,7 +4,6 @@ description: Compare numbers quoted in DESIGN.md and README.md with the committe
 ---
 # design-doc-sync
 
-1. Pull the numbers: `fit.json`, `root_gear.json`, `horn_bearing.json`, `fan_pod.json`, `mantle_ports.json`, `fit_report.md` in `arm-pin-hinge/out_1m_13`.
-2. Grep DESIGN.md for each (`grep -n "1\.150\|46\.2\|46\.4\|55\b\|1,242\|15\.08\|124\.5\|408" DESIGN.md`), also pitch 76.9, OD 57.1, arm masses, T/W values.
-3. List mismatches as: DESIGN.md line, quoted value, current value, source file. Never edit without asking; propose the replacement lines.
-4. Also check the README folder list against `git ls-files | cut -d/ -f1-2 | sort -u`.
+`python3 tools/design_doc_sync.py [--dir DIR]`
+
+Looks for ten quoted figures (pitch 76.9, OD 57.1, arm 1,243 g, added 46.2 g, budget 46.4 g, robot 15.08 kg, T/W 1.150, hub radius 124.5, horn-bearing T/W 1.045, joint 0 +-55) from the reports in DESIGN.md and README.md. MATCH if the true number appears in the docs, WARN if not (with a nearby line). It never edits: propose the replacement lines. DESIGN.md keeps earlier-stage numbers on purpose, so check each WARN by hand.

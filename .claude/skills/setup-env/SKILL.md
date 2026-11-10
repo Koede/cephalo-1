@@ -4,9 +4,10 @@ description: Install and verify the Python dependencies for cephalo-1 (CAD: mani
 ---
 # setup-env
 
-1. Install: `pip install -r requirements.txt` from the repo root (CAD + tests). For the simulation study also `pip install -r joint-study/sim/requirements.txt`.
-2. Verify: `python3 -c "import numpy, manifold3d, trimesh, scipy, matplotlib, pytest; print('ok')"`; add `numba, mujoco, pandas` when the study will run.
-3. Smoke test: `python3 -m pytest -q tests` (about 2 s).
-4. If pip cannot reach PyPI (403 / proxy errors), say so and read `/root/.ccr/README.md`; do not disable TLS verification.
+Run from the repo root.
 
-The CAD scripts need `manifold3d` and `trimesh`, which `joint-study/sim/requirements.txt` does not list. Report anything still missing.
+1. `python3 -m pip install -r requirements.txt` (CAD, tools, tests). For the simulation study also `python3 -m pip install -r joint-study/sim/requirements.txt` (numba, mujoco, pandas).
+2. `python3 tools/doctor.py` verifies every import, the committed outputs, the unit tests and the gates, and prints the next action.
+3. If pip cannot reach PyPI (proxy/403), say so; never disable TLS verification.
+
+On Windows use `python` or `py -3` instead of `python3`. All tools in `tools/` run from any directory.

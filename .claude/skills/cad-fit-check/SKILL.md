@@ -4,7 +4,7 @@ description: Assert every DESIGN.md gate for a cephalo-1 design from its JSON re
 ---
 # cad-fit-check
 
-`python3 tools/regen.py --out /tmp/cephalo_regen/main && python3 tools/check_gates.py /tmp/cephalo_regen/main`
+`python3 tools/regen.py && python3 tools/check_gates.py <tempdir>/cephalo/regen/main`
 (or `python3 tools/check_gates.py` for the committed `arm-pin-hinge/out_1m_13`).
 
 Gates (DESIGN.md "Fit and collision check"): static interference ~0 mm^3; each swept joint covers +-45 deg (joint 0 is +-55 in the main design); joints 0+1 and 1+2 clear to +-60; vertebra 2 equals vertebra 1 turned 60 deg; thrust-to-weight >= 1.15 and added mass <= budget (46.2 vs 46.4 g); horn bearing and fan pod clear; mantle flanges clear.

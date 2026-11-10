@@ -4,10 +4,6 @@ description: Check the cephalo-1 root gear stage (40T/20T module 1, 7075-T6) - t
 ---
 # gear-check
 
-Constants in `arm-pin-hinge/root_gear.py`: `MOD`, `PA`, `Z_GEAR`, `Z_PIN`, `CDIST`, `FACE`, `SECTOR_DEG`, `AL_RHO`. Checks:
+`python3 tools/gear_check.py [--torque 4.9] [--allow 150] [--need 45]`
 
-- centre distance = (Z1+Z2)/2 * MOD (also in `tests/test_geometry.py`), tip radii 21 / 11 mm, root radius = rp - 1.25 m.
-- Contact ratio for standard 20 deg spur gears >= 1.2 (compute from base pitch and the path of contact).
-- Lewis bending: sigma = Ft / (face * m * Y); Ft = joint-0 torque / pinion pitch radius; Y about 0.32 for Z=20; compare with 7075-T6 allowable (about 150 MPa fatigue) and report the safety factor.
-- Backlash and sector range (`SECTOR_DEG` = +-55 covers +-45 command).
-Run `python3 -m pytest -q tests/test_geometry.py` for the geometry asserts. Mark torque and allowable as assumptions.
+Reads the constants from `root_gear.py`: centre distance, 2:1 ratio, undercut limit, contact ratio (1.64), root vs base circle, Lewis bending stress at pinion and gear for the given servo torque (stall 4.9 N m gives 153 / 126 MPa against an assumed 150 MPa allowable for 7075-T6, so WARN not FAIL), and that the tooth sector covers +-need deg. Torque and allowable are assumptions: say so. Bearing loads: `/bearing-load-check`.

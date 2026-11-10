@@ -4,4 +4,4 @@ description: Hover endurance and current-limit check for cephalo-1 packs using b
 ---
 # battery-endurance
 
-Run `python3 joint-study/sim/battery.py` (read its header for flags) and the pack table in DESIGN.md "Battery". Report per pack: mass, energy (Wh), current rating (A), hover draw, hover minutes (energy / (draw * voltage) with 80% usable), rated T/W. Known: any pack added on 15.08 kg drops rated T/W below 1.15; 16,000 mAh 15C gives only 240 A; climb at rated thrust draws ~205 A vs 180 A for two XT90s. Say which numbers are `[A]` assumptions.
+`python3 tools/study_report.py battery` tabulates `joint-study/results/battery.json`: per pack mass, hover minutes, current drawn vs continuous rating, rated and full-throttle T/W, with WARN for packs that cannot supply the hover current or drop T/W under 1.15 (all of them do). The EDF basis was superseded by the central prop (`central_prop.json`). Recompute: `cd joint-study/sim && python3 battery.py` (overwrites the JSON).

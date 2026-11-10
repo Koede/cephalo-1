@@ -4,4 +4,6 @@ description: Sanity-check the cephalo-1 arm in MuJoCo - loads, joint limits resp
 ---
 # mujoco-sanity
 
-Install `mujoco>=3.1`. Use `joint-study/sim/dynamics.py` (and `chain.build_chain`) to build the model; step 1000 steps from a bent pose with gravity. Check: no NaN/inf, joint angles within limits, total energy drift < 1% over 1 s with damping 0, identical final state for two runs with the same seed, tip position matches `tools/kin.Kin.tip` at the initial pose within 0.1 mm. Report each check PASS/FAIL.
+`python3 tools/mujoco_sanity.py [--joints 13 --length 1000 --twist 60 --poses 20 --seconds 1]`
+
+Builds an MJCF chain from the CAD's joint axes and checks: tip position equals `tools/kin.py` FK (error 2e-10 mm), the translational Jacobian equals `Kin.jacobian`, limits are respected (soft, 5 deg tolerance), no NaN over 2000 steps, energy conserved (no damping, no limits, no contacts) and deterministic reruns. It validates the kinematic model, not the servo dynamics. Needs `pip install mujoco`.

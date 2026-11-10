@@ -4,7 +4,6 @@ description: Find committed cephalo-1 outputs that no script regenerates, orphan
 ---
 # stale-output-clean
 
-1. `python3 tools/regen.py` then `python3 tools/golden_diff.py /tmp/cephalo_regen/main`: files only in the committed folder are either subassembly outputs or stale.
-2. `python3 tools/stl_integrity.py` reports `no stale duplicates` per `name_xN.stl` family.
-3. Known: `arm-pin-hinge/out/render.png` and `out_1m_13/root_gear_check.png` have no generator in the repo; `spec-sheet/cad_alt90` has no recorded command (probably `pin_cad.py --twist 90 --joints 13 --out ../spec-sheet/cad_alt90`); `joint-study/sim/make_options.py` points at a directory `arm` that no longer exists.
-4. Report, propose deletions or a recorded command in the README, and **do not delete anything** without confirmation.
+`python3 tools/stale_outputs.py` (report only, never deletes).
+
+Heuristic: looks for each committed image/svg/dxf/stl name in the python sources, lists `name_xN.stl` families with more than one N, and output folders not mentioned in README/DESIGN. Known: `root_gear_check.png` has no generator in the repo; `spec-sheet/cad_alt90` has no recorded command (probably `pin_cad.py --twist 90 --joints 13 --out ../spec-sheet/cad_alt90`). Propose, do not delete.

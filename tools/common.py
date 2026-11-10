@@ -4,12 +4,14 @@ Every tool in this folder imports the CAD modules from arm-pin-hinge/ through he
 paths, the default design (1 m, 13 joints, 60 deg helix, geared root, 5 STS3250) and the
 report/exit-code conventions live in one place.
 """
-import json, math, os, sys
+import json, math, os, sys, tempfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PIN_DIR = os.path.join(ROOT, "arm-pin-hinge")
 SIM_DIR = os.path.join(ROOT, "joint-study", "sim")
 MAIN_OUT = os.path.join(PIN_DIR, "out_1m_13")      # committed main design
+
+SCRATCH = os.path.join(tempfile.gettempdir(), "cephalo")     # portable scratch root (Linux/macOS/Windows)
 
 DEFAULT = dict(length=1000.0, joints=13, twist=60.0, rng=90.0, root_servos=5)
 

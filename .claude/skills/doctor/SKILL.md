@@ -4,13 +4,6 @@ description: One-screen health report for the cephalo-1 repo (python, dependenci
 ---
 # doctor
 
-Run these and summarise as OK / WARN / FAIL lines:
+`python3 tools/doctor.py [--fast]` (about 5 s, 25 s with the unit tests).
 
-- `python3 --version`; imports of numpy, manifold3d, trimesh, scipy, matplotlib, pytest, numba, mujoco (list which are missing and what each unlocks).
-- `git status -sb` and `git log --oneline -3`; note uncommitted changes and branch vs `origin/main`.
-- `python3 tools/check_gates.py` (committed main design gates) and `python3 -m pytest -q tests`.
-- Known path bugs: `grep -rn "/mnt/project-files" joint-study/sim`, `grep -n 'makedirs("results")' joint-study/sim/sweep.py`, `grep -n "\\barm\\b" joint-study/sim/make_options.py`.
-- Committed outputs with no generator in the repo: `arm-pin-hinge/out/render.png`, `arm-pin-hinge/out_1m_13/root_gear_check.png`.
-- Scripts must run from `arm-pin-hinge/` (they import each other); `tools/*.py` run from anywhere.
-
-End with the three most important actions.
+Reports PASS/WARN/FAIL for: python version, each dependency (required vs optional), git branch and changed files, committed main-design files, tools/tests/skills present, known `joint-study/sim` path bugs, the unit tests and the design gates. Ends with the next action. Quote any FAIL line verbatim and give the one pip command that fixes it.
