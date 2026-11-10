@@ -1,0 +1,10 @@
+prior,prior_joints,prior_miss_mm,here_dof,here_miss_mm,here_arrangement
+base-box rolling vertebrae,19,6,19,11.4,helix60
+current servo chain,9,12,11,27.4,alt90_roll4
+geared double hinges,8,12,11,25.9,alt90_roll4
+servo shells,9,12,11,27.4,alt90_roll4
+cross-axis flexures,17,18,23,11.9,alt90_roll4
+3-section rolling,8,18,8,33.7,alt90_roll4
+cycloidal modules,6,19,8,47.8,alt90_roll4
+one-piece printed rolling,8,22,11,36.1,alt90_roll4
+TPU spine,4,40,7,57.3,omni_roll4

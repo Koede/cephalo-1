@@ -1,0 +1,19 @@
+{
+ "configs": 94048,
+ "geometries": 5172,
+ "joint_types": 101,
+ "families": 28,
+ "feasible": 136,
+ "fail_counts": {
+  "walk_load": 84048,
+  "flight_load": 83056,
+  "struct": 70896,
+  "mantle": 45380,
+  "tw": 41735,
+  "walk": 28536,
+  "chan": 19356,
+  "fits": 3888
+ },
+ "validation_spearman": 0.8377292410617665,
+ "pareto_size": 42
+}

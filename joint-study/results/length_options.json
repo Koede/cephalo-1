@@ -1,0 +1,73 @@
+{
+ "options": [
+  {
+   "key": "a",
+   "title": "1 m on today's thrust",
+   "length_mm": 1000,
+   "joints": 7,
+   "servos": "STS3250 in joints 0-2, STS3215 in joints 3-6",
+   "thrust": "today's fans (10.8 N each)",
+   "pitch_mm": 142.85714285714286,
+   "vert_g": 72.8255812458248,
+   "arm_out_g": 919.655788196485,
+   "cad": "out_1m_7",
+   "mass_kg": 11.375207182887843,
+   "tw": 1.1524249329583989,
+   "miss_mm": 59.98988825911348,
+   "wave": {
+    "0.25": 20.21211530218674,
+    "0.5": 97.33666783052756,
+    "1.0": "sat"
+   },
+   "lift_mm": 138.2108034963136
+  },
+  {
+   "key": "b",
+   "title": "1 m with bigger claw fans",
+   "length_mm": 1000,
+   "joints": 13,
+   "servos": "STS3250 in joints 0-4, STS3215 in joints 5-12",
+   "thrust": "16 N claw fans, 48 % more fan thrust",
+   "pitch_mm": 76.92307692307692,
+   "vert_g": 31.02573209201938,
+   "arm_out_g": 1242.5627446490696,
+   "cad": "out_1m_13",
+   "mass_kg": 14.714407182887845,
+   "tw": 1.1790922329089588,
+   "miss_mm": 18.813106279182897,
+   "wave": {
+    "0.25": 38.13090316366932,
+    "0.5": 106.09705390624048,
+    "1.0": "sat"
+   },
+   "lift_mm": 344.75975131803665
+  },
+  {
+   "key": "c",
+   "title": "700 mm on today's thrust",
+   "length_mm": 700,
+   "joints": 9,
+   "servos": "STS3250 in joints 0-3, STS3215 in joints 4-8",
+   "thrust": "today's fans (10.8 N each)",
+   "pitch_mm": 77.77777777777777,
+   "vert_g": 31.567581988457597,
+   "arm_out_g": 853.609692939976,
+   "cad": "out_700_9",
+   "mass_kg": 11.361165028021492,
+   "tw": 1.1538493053128656,
+   "miss_mm": 30.74810241805749,
+   "wave": {
+    "0.25": null,
+    "0.5": 11.66597583396244,
+    "1.0": 26.80159089365176
+   },
+   "lift_mm": 6.317949492105912
+  }
+ ],
+ "ref_585": {
+  "mass_kg": 10.95,
+  "tw": 1.197,
+  "miss_mm": 26.4,
+  "joints": 9
+ }
+}

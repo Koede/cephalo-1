@@ -1,0 +1,3022 @@
+{
+ "assumptions": {
+  "margin_mm": 15.0,
+  "hub_sphere_mm": 100.0,
+  "arm_od_mm": 57.1,
+  "note": "wrist pivot at the arm tip; claw not designed yet, so its height is swept"
+ },
+ "rows": [
+  {
+   "claw_h_mm": 0.0,
+   "prop": "7 in",
+   "offset_mm": 60.0,
+   "frac_dirs_clear_in_every_pose": 0.0,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": null,
+   "highest_clear_dir_tilt_from_up_deg": null,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -20.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      54.7,
+      -20.0,
+      112.7,
+      156.4
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -5.1,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      99.7,
+      -20.0,
+      112.8,
+      135.3
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -20.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      54.7,
+      -20.0,
+      109.9,
+      153.5
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -4.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      99.7,
+      -19.9,
+      109.9,
+      132.0
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -19.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      54.7,
+      -19.9,
+      112.2,
+      156.2
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -4.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      99.7,
+      -19.9,
+      112.2,
+      134.9
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -20.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      54.7,
+      -20.0,
+      83.8,
+      125.7
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -4.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      99.7,
+      -19.9,
+      83.9,
+      101.4
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 0.0,
+   "prop": "7 in",
+   "offset_mm": 90.0,
+   "frac_dirs_clear_in_every_pose": 0.0,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": null,
+   "highest_clear_dir_tilt_from_up_deg": null,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -0.7,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      84.7,
+      -24.6,
+      112.0,
+      142.5
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.012,
+     "best_min_gap_mm": 19.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      129.7,
+      -24.3,
+      112.1,
+      126.1
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": 2.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      84.7,
+      -27.1,
+      109.0,
+      139.0
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.013,
+     "best_min_gap_mm": 19.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      129.7,
+      -26.9,
+      109.0,
+      122.3
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": 3.2,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      84.7,
+      -28.3,
+      111.2,
+      141.6
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.013,
+     "best_min_gap_mm": 19.2,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      129.7,
+      -27.9,
+      111.2,
+      125.0
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": 4.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      84.7,
+      -27.9,
+      83.0,
+      109.3
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.015,
+     "best_min_gap_mm": 19.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      129.7,
+      -27.8,
+      83.0,
+      90.0
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 0.0,
+   "prop": "7 in",
+   "offset_mm": 120.0,
+   "frac_dirs_clear_in_every_pose": 0.013,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": [
+    -0.613,
+    0.185,
+    0.768
+   ],
+   "highest_clear_dir_tilt_from_up_deg": 39.8,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.015,
+     "best_min_gap_mm": 25.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      114.6,
+      -26.9,
+      116.3,
+      131.6
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.09,
+     "best_min_gap_mm": 43.1,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      159.6,
+      -27.4,
+      110.6,
+      120.6
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.025,
+     "best_min_gap_mm": 26.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      114.6,
+      -25.3,
+      113.0,
+      127.7
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.097,
+     "best_min_gap_mm": 44.7,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      159.6,
+      -24.7,
+      113.0,
+      116.4
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.022,
+     "best_min_gap_mm": 28.7,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      114.6,
+      -28.2,
+      114.8,
+      130.1
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.095,
+     "best_min_gap_mm": 45.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      159.6,
+      -26.5,
+      113.4,
+      118.8
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.028,
+     "best_min_gap_mm": 29.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      114.6,
+      -25.8,
+      88.2,
+      96.1
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.1,
+     "best_min_gap_mm": 44.7,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      159.6,
+      -27.2,
+      88.2,
+      82.9
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 0.0,
+   "prop": "7.5 in",
+   "offset_mm": 60.0,
+   "frac_dirs_clear_in_every_pose": 0.0,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": null,
+   "highest_clear_dir_tilt_from_up_deg": null,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -20.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      54.4,
+      -20.0,
+      106.4,
+      151.0
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -7.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      99.4,
+      -20.0,
+      106.4,
+      129.4
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -20.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      54.4,
+      -20.0,
+      103.5,
+      148.1
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -7.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      99.4,
+      -19.9,
+      103.5,
+      126.2
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -19.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      54.4,
+      -19.9,
+      105.9,
+      150.9
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -7.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      99.4,
+      -19.9,
+      105.9,
+      129.0
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -20.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      54.4,
+      -20.0,
+      77.5,
+      120.7
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -7.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      99.4,
+      -19.9,
+      77.5,
+      95.7
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 0.0,
+   "prop": "7.5 in",
+   "offset_mm": 90.0,
+   "frac_dirs_clear_in_every_pose": 0.0,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": null,
+   "highest_clear_dir_tilt_from_up_deg": null,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -3.3,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      84.3,
+      -24.6,
+      105.7,
+      136.7
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.005,
+     "best_min_gap_mm": 16.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      129.3,
+      -24.3,
+      105.7,
+      120.0
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -0.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      84.3,
+      -27.1,
+      102.6,
+      133.3
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.007,
+     "best_min_gap_mm": 17.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      129.3,
+      -26.9,
+      102.6,
+      116.2
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -0.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      84.3,
+      -28.3,
+      104.8,
+      136.0
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.008,
+     "best_min_gap_mm": 17.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      129.3,
+      -27.9,
+      104.8,
+      118.9
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -0.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      84.3,
+      -27.9,
+      76.7,
+      103.8
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.01,
+     "best_min_gap_mm": 17.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      129.3,
+      -27.8,
+      76.7,
+      84.0
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 0.0,
+   "prop": "7.5 in",
+   "offset_mm": 120.0,
+   "frac_dirs_clear_in_every_pose": 0.01,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": [
+    -0.613,
+    0.185,
+    0.768
+   ],
+   "highest_clear_dir_tilt_from_up_deg": 39.8,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.012,
+     "best_min_gap_mm": 22.2,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      114.3,
+      -27.4,
+      110.1,
+      125.5
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.073,
+     "best_min_gap_mm": 41.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      159.3,
+      -27.4,
+      104.8,
+      114.3
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.017,
+     "best_min_gap_mm": 25.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      114.3,
+      -23.9,
+      106.8,
+      121.7
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.077,
+     "best_min_gap_mm": 43.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      159.3,
+      -23.0,
+      106.8,
+      110.1
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.017,
+     "best_min_gap_mm": 27.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      114.3,
+      -26.8,
+      108.6,
+      124.1
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.078,
+     "best_min_gap_mm": 43.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      159.3,
+      -24.9,
+      107.4,
+      112.5
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.02,
+     "best_min_gap_mm": 27.5,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      114.3,
+      -26.0,
+      82.2,
+      90.3
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.083,
+     "best_min_gap_mm": 43.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      159.3,
+      -26.3,
+      82.2,
+      76.6
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 40.0,
+   "prop": "7 in",
+   "offset_mm": 60.0,
+   "frac_dirs_clear_in_every_pose": 0.0,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": null,
+   "highest_clear_dir_tilt_from_up_deg": null,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -7.1,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      94.7,
+      -20.0,
+      112.8,
+      137.3
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.003,
+     "best_min_gap_mm": 20.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      139.7,
+      -20.0,
+      112.8,
+      122.6
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -7.1,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      94.7,
+      -19.9,
+      109.9,
+      134.1
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.003,
+     "best_min_gap_mm": 20.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      139.7,
+      -19.9,
+      109.9,
+      119.0
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -7.1,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      94.7,
+      -19.9,
+      112.2,
+      136.9
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.003,
+     "best_min_gap_mm": 20.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      139.7,
+      -19.9,
+      112.2,
+      121.9
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -7.1,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      94.7,
+      -19.9,
+      83.9,
+      103.7
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.003,
+     "best_min_gap_mm": 19.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      139.7,
+      -19.9,
+      83.9,
+      86.2
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 40.0,
+   "prop": "7 in",
+   "offset_mm": 90.0,
+   "frac_dirs_clear_in_every_pose": 0.002,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": [
+    -0.803,
+    -0.182,
+    0.568
+   ],
+   "highest_clear_dir_tilt_from_up_deg": 55.4,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.005,
+     "best_min_gap_mm": 16.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      124.7,
+      -24.4,
+      112.1,
+      127.5
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.112,
+     "best_min_gap_mm": 34.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      169.7,
+      -23.9,
+      108.0,
+      118.4
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.007,
+     "best_min_gap_mm": 18.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      124.7,
+      -26.9,
+      109.0,
+      123.8
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.117,
+     "best_min_gap_mm": 34.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      169.7,
+      -26.3,
+      109.0,
+      114.4
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.008,
+     "best_min_gap_mm": 18.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      124.7,
+      -27.8,
+      111.2,
+      126.4
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.112,
+     "best_min_gap_mm": 34.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      169.7,
+      -27.6,
+      110.4,
+      117.0
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.008,
+     "best_min_gap_mm": 18.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      124.7,
+      -27.8,
+      83.0,
+      91.7
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.112,
+     "best_min_gap_mm": 34.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      169.7,
+      -27.4,
+      83.1,
+      80.6
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 40.0,
+   "prop": "7 in",
+   "offset_mm": 120.0,
+   "frac_dirs_clear_in_every_pose": 0.065,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": [
+    -0.613,
+    0.185,
+    0.768
+   ],
+   "highest_clear_dir_tilt_from_up_deg": 39.8,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.077,
+     "best_min_gap_mm": 42.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      154.6,
+      -27.3,
+      112.5,
+      121.4
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.218,
+     "best_min_gap_mm": 57.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      199.6,
+      -27.2,
+      98.4,
+      118.2
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.085,
+     "best_min_gap_mm": 43.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      154.6,
+      -24.8,
+      113.0,
+      117.2
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.22,
+     "best_min_gap_mm": 56.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      199.6,
+      -23.7,
+      112.6,
+      113.9
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.083,
+     "best_min_gap_mm": 43.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      154.6,
+      -26.4,
+      114.8,
+      119.6
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.22,
+     "best_min_gap_mm": 56.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      199.6,
+      -24.2,
+      102.8,
+      116.2
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.09,
+     "best_min_gap_mm": 43.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      154.6,
+      -27.0,
+      88.2,
+      83.8
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.218,
+     "best_min_gap_mm": 44.7,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      199.6,
+      -26.6,
+      82.5,
+      79.9
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 40.0,
+   "prop": "7.5 in",
+   "offset_mm": 60.0,
+   "frac_dirs_clear_in_every_pose": 0.0,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": null,
+   "highest_clear_dir_tilt_from_up_deg": null,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -9.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      94.4,
+      -20.0,
+      106.4,
+      131.5
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.003,
+     "best_min_gap_mm": 19.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      139.4,
+      -20.0,
+      106.4,
+      116.4
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -9.5,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      94.4,
+      -19.9,
+      103.5,
+      128.3
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.003,
+     "best_min_gap_mm": 19.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      139.4,
+      -19.9,
+      103.5,
+      112.8
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -9.5,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      94.4,
+      -19.9,
+      105.9,
+      131.1
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.003,
+     "best_min_gap_mm": 19.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      139.4,
+      -19.9,
+      105.9,
+      115.8
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": -9.5,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      94.4,
+      -19.9,
+      77.5,
+      98.1
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.003,
+     "best_min_gap_mm": 19.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      139.4,
+      -19.9,
+      77.5,
+      80.1
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 40.0,
+   "prop": "7.5 in",
+   "offset_mm": 90.0,
+   "frac_dirs_clear_in_every_pose": 0.0,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": null,
+   "highest_clear_dir_tilt_from_up_deg": null,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.002,
+     "best_min_gap_mm": 15.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      124.3,
+      -24.4,
+      105.7,
+      121.4
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.082,
+     "best_min_gap_mm": 31.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      169.3,
+      -23.9,
+      102.1,
+      112.1
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.002,
+     "best_min_gap_mm": 15.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      124.3,
+      -26.9,
+      102.6,
+      117.7
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.088,
+     "best_min_gap_mm": 31.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      169.3,
+      -26.3,
+      102.6,
+      108.1
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.003,
+     "best_min_gap_mm": 16.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      124.3,
+      -27.8,
+      104.8,
+      120.4
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.08,
+     "best_min_gap_mm": 31.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      169.3,
+      -27.6,
+      104.3,
+      110.7
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.005,
+     "best_min_gap_mm": 15.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      124.3,
+      -27.8,
+      76.7,
+      85.7
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.088,
+     "best_min_gap_mm": 31.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      169.3,
+      -27.4,
+      76.7,
+      74.3
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 40.0,
+   "prop": "7.5 in",
+   "offset_mm": 120.0,
+   "frac_dirs_clear_in_every_pose": 0.043,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": [
+    -0.613,
+    0.185,
+    0.768
+   ],
+   "highest_clear_dir_tilt_from_up_deg": 39.8,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.065,
+     "best_min_gap_mm": 40.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      154.3,
+      -27.5,
+      106.6,
+      115.1
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.192,
+     "best_min_gap_mm": 55.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      199.3,
+      -26.5,
+      92.4,
+      111.9
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.068,
+     "best_min_gap_mm": 41.3,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      154.3,
+      -23.2,
+      106.8,
+      110.9
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.188,
+     "best_min_gap_mm": 55.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      199.3,
+      -24.5,
+      106.4,
+      107.5
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.07,
+     "best_min_gap_mm": 42.5,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      154.3,
+      -24.9,
+      108.6,
+      113.3
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.185,
+     "best_min_gap_mm": 55.5,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      199.3,
+      -23.2,
+      96.6,
+      109.8
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.075,
+     "best_min_gap_mm": 41.5,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      154.3,
+      -26.4,
+      82.2,
+      77.6
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.162,
+     "best_min_gap_mm": 44.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      199.3,
+      -24.9,
+      76.2,
+      73.6
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 80.0,
+   "prop": "7 in",
+   "offset_mm": 60.0,
+   "frac_dirs_clear_in_every_pose": 0.0,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": null,
+   "highest_clear_dir_tilt_from_up_deg": null,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": 15.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      134.7,
+      -20.0,
+      112.8,
+      123.9
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.575,
+     "best_min_gap_mm": 60.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      179.7,
+      -20.0,
+      106.0,
+      116.7
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": 15.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      134.7,
+      -19.9,
+      109.9,
+      120.3
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.568,
+     "best_min_gap_mm": 60.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      179.7,
+      -19.9,
+      109.9,
+      112.9
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": 15.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      134.7,
+      -19.9,
+      112.2,
+      123.2
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.573,
+     "best_min_gap_mm": 60.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      179.8,
+      -19.9,
+      108.0,
+      115.7
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": 14.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      134.7,
+      -19.9,
+      83.9,
+      87.7
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.567,
+     "best_min_gap_mm": 60.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      179.7,
+      -19.9,
+      83.9,
+      78.9
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 80.0,
+   "prop": "7 in",
+   "offset_mm": 90.0,
+   "frac_dirs_clear_in_every_pose": 0.067,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": [
+    -0.834,
+    0.107,
+    0.542
+   ],
+   "highest_clear_dir_tilt_from_up_deg": 57.2,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.09,
+     "best_min_gap_mm": 32.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      164.7,
+      -23.9,
+      109.6,
+      119.0
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.358,
+     "best_min_gap_mm": 50.3,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      209.7,
+      -23.2,
+      97.8,
+      117.9
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.097,
+     "best_min_gap_mm": 32.3,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      164.7,
+      -26.4,
+      109.0,
+      115.0
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.365,
+     "best_min_gap_mm": 50.3,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      209.7,
+      -25.8,
+      109.0,
+      113.8
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.09,
+     "best_min_gap_mm": 32.3,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      164.7,
+      -27.5,
+      111.1,
+      117.6
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.363,
+     "best_min_gap_mm": 50.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      209.7,
+      -27.1,
+      101.6,
+      116.3
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.093,
+     "best_min_gap_mm": 32.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      164.7,
+      -27.5,
+      83.0,
+      81.3
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.362,
+     "best_min_gap_mm": 49.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      209.7,
+      -26.6,
+      81.9,
+      79.9
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 80.0,
+   "prop": "7 in",
+   "offset_mm": 120.0,
+   "frac_dirs_clear_in_every_pose": 0.102,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": [
+    -0.725,
+    -0.102,
+    0.682
+   ],
+   "highest_clear_dir_tilt_from_up_deg": 47.0,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.2,
+     "best_min_gap_mm": 55.5,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      194.6,
+      -27.4,
+      99.7,
+      118.1
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.39,
+     "best_min_gap_mm": 69.1,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      239.6,
+      -25.6,
+      90.3,
+      123.2
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.202,
+     "best_min_gap_mm": 55.5,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      194.6,
+      -23.5,
+      113.0,
+      113.8
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.393,
+     "best_min_gap_mm": 69.2,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      239.6,
+      -25.9,
+      106.7,
+      118.8
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.202,
+     "best_min_gap_mm": 55.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      194.6,
+      -24.3,
+      103.9,
+      116.1
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.393,
+     "best_min_gap_mm": 67.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      239.7,
+      -24.9,
+      95.4,
+      121.0
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.2,
+     "best_min_gap_mm": 46.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      194.6,
+      -26.8,
+      83.3,
+      79.8
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.265,
+     "best_min_gap_mm": 53.3,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      239.6,
+      -23.5,
+      77.2,
+      85.7
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 80.0,
+   "prop": "7.5 in",
+   "offset_mm": 60.0,
+   "frac_dirs_clear_in_every_pose": 0.0,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": null,
+   "highest_clear_dir_tilt_from_up_deg": null,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": 14.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      134.4,
+      -20.0,
+      106.4,
+      117.7
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.39,
+     "best_min_gap_mm": 59.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      179.4,
+      -20.0,
+      99.9,
+      110.4
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": 14.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      134.4,
+      -19.9,
+      103.5,
+      114.1
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.383,
+     "best_min_gap_mm": 59.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      179.4,
+      -19.9,
+      103.5,
+      106.5
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": 14.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      134.4,
+      -19.9,
+      105.9,
+      117.1
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.387,
+     "best_min_gap_mm": 59.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      179.4,
+      -19.9,
+      101.8,
+      109.4
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.0,
+     "best_min_gap_mm": 14.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      134.4,
+      -19.9,
+      77.5,
+      81.7
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.382,
+     "best_min_gap_mm": 59.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      179.4,
+      -19.9,
+      77.5,
+      72.6
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 80.0,
+   "prop": "7.5 in",
+   "offset_mm": 90.0,
+   "frac_dirs_clear_in_every_pose": 0.04,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": [
+    -0.834,
+    0.107,
+    0.542
+   ],
+   "highest_clear_dir_tilt_from_up_deg": 57.2,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.068,
+     "best_min_gap_mm": 29.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      164.3,
+      -23.9,
+      103.6,
+      112.7
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.305,
+     "best_min_gap_mm": 47.7,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      209.3,
+      -23.2,
+      91.7,
+      111.6
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.072,
+     "best_min_gap_mm": 30.1,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      164.3,
+      -26.4,
+      102.6,
+      108.7
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.308,
+     "best_min_gap_mm": 47.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      209.3,
+      -25.8,
+      102.6,
+      107.4
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.067,
+     "best_min_gap_mm": 30.1,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      164.3,
+      -27.5,
+      104.8,
+      111.3
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.31,
+     "best_min_gap_mm": 47.7,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      209.3,
+      -27.1,
+      95.4,
+      110.0
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.073,
+     "best_min_gap_mm": 30.1,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      164.3,
+      -27.5,
+      76.7,
+      75.1
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.28,
+     "best_min_gap_mm": 44.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      209.3,
+      -26.6,
+      75.6,
+      73.6
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 80.0,
+   "prop": "7.5 in",
+   "offset_mm": 120.0,
+   "frac_dirs_clear_in_every_pose": 0.077,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": [
+    -0.725,
+    -0.102,
+    0.682
+   ],
+   "highest_clear_dir_tilt_from_up_deg": 47.0,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.173,
+     "best_min_gap_mm": 53.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      194.3,
+      -26.7,
+      93.8,
+      111.8
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.353,
+     "best_min_gap_mm": 63.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      239.3,
+      -24.7,
+      84.1,
+      117.0
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.172,
+     "best_min_gap_mm": 53.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      194.3,
+      -24.3,
+      106.8,
+      107.4
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.352,
+     "best_min_gap_mm": 66.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      239.3,
+      -26.8,
+      100.5,
+      112.6
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.17,
+     "best_min_gap_mm": 53.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      194.3,
+      -22.9,
+      97.7,
+      109.8
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.348,
+     "best_min_gap_mm": 67.3,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      239.3,
+      -25.7,
+      89.3,
+      114.8
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.17,
+     "best_min_gap_mm": 46.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      194.3,
+      -25.2,
+      77.1,
+      73.5
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.23,
+     "best_min_gap_mm": 47.3,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      239.3,
+      -23.6,
+      70.9,
+      79.6
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 120.0,
+   "prop": "7 in",
+   "offset_mm": 60.0,
+   "frac_dirs_clear_in_every_pose": 0.388,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": [
+    -0.972,
+    -0.118,
+    0.202
+   ],
+   "highest_clear_dir_tilt_from_up_deg": 78.4,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.408,
+     "best_min_gap_mm": 55.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      174.7,
+      -20.0,
+      107.3,
+      117.0
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.575,
+     "best_min_gap_mm": 71.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      219.8,
+      -20.0,
+      97.6,
+      118.0
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.402,
+     "best_min_gap_mm": 55.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      174.7,
+      -19.9,
+      109.9,
+      113.2
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.572,
+     "best_min_gap_mm": 71.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      219.8,
+      -19.9,
+      109.9,
+      114.1
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.407,
+     "best_min_gap_mm": 55.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      174.8,
+      -19.9,
+      109.1,
+      116.1
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.577,
+     "best_min_gap_mm": 71.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      219.8,
+      -19.9,
+      100.1,
+      116.9
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.4,
+     "best_min_gap_mm": 55.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      174.7,
+      -19.9,
+      83.9,
+      79.4
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.57,
+     "best_min_gap_mm": 71.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      219.7,
+      -19.9,
+      81.7,
+      80.4
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 120.0,
+   "prop": "7 in",
+   "offset_mm": 90.0,
+   "frac_dirs_clear_in_every_pose": 0.213,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": [
+    -0.77,
+    -0.362,
+    0.525
+   ],
+   "highest_clear_dir_tilt_from_up_deg": 58.3,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.313,
+     "best_min_gap_mm": 48.2,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      204.7,
+      -23.3,
+      98.9,
+      117.6
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.708,
+     "best_min_gap_mm": 70.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      249.7,
+      -22.5,
+      91.6,
+      124.7
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.318,
+     "best_min_gap_mm": 48.2,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      204.7,
+      -25.9,
+      109.0,
+      113.4
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.708,
+     "best_min_gap_mm": 70.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      249.7,
+      -25.1,
+      106.8,
+      120.5
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.32,
+     "best_min_gap_mm": 48.2,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      204.7,
+      -27.2,
+      102.5,
+      116.0
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.71,
+     "best_min_gap_mm": 70.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      249.7,
+      -26.5,
+      92.7,
+      122.9
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.317,
+     "best_min_gap_mm": 47.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      204.7,
+      -26.7,
+      82.5,
+      79.5
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.578,
+     "best_min_gap_mm": 70.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      249.7,
+      -25.8,
+      77.9,
+      87.9
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 120.0,
+   "prop": "7 in",
+   "offset_mm": 120.0,
+   "frac_dirs_clear_in_every_pose": 0.195,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": [
+    -0.18,
+    -0.825,
+    0.535
+   ],
+   "highest_clear_dir_tilt_from_up_deg": 57.7,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.367,
+     "best_min_gap_mm": 65.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      234.6,
+      -25.8,
+      90.9,
+      122.2
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.795,
+     "best_min_gap_mm": 77.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      279.7,
+      -23.2,
+      91.9,
+      134.9
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.367,
+     "best_min_gap_mm": 68.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      234.6,
+      -25.6,
+      107.3,
+      117.8
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.715,
+     "best_min_gap_mm": 77.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      279.7,
+      -27.1,
+      98.3,
+      130.7
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.365,
+     "best_min_gap_mm": 67.3,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      234.7,
+      -24.6,
+      96.5,
+      120.0
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.793,
+     "best_min_gap_mm": 79.5,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      279.7,
+      -27.0,
+      83.9,
+      132.6
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.253,
+     "best_min_gap_mm": 53.3,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      234.6,
+      -23.9,
+      77.7,
+      84.6
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.605,
+     "best_min_gap_mm": 73.0,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      279.6,
+      -25.9,
+      72.5,
+      99.6
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 120.0,
+   "prop": "7.5 in",
+   "offset_mm": 60.0,
+   "frac_dirs_clear_in_every_pose": 0.238,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": [
+    -0.972,
+    -0.118,
+    0.202
+   ],
+   "highest_clear_dir_tilt_from_up_deg": 78.4,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.263,
+     "best_min_gap_mm": 54.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      174.4,
+      -20.0,
+      101.2,
+      110.7
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.572,
+     "best_min_gap_mm": 71.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      219.4,
+      -20.0,
+      91.4,
+      111.8
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.257,
+     "best_min_gap_mm": 54.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      174.4,
+      -19.9,
+      103.5,
+      106.9
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.568,
+     "best_min_gap_mm": 71.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      219.4,
+      -19.9,
+      103.5,
+      107.8
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.262,
+     "best_min_gap_mm": 54.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      174.4,
+      -19.9,
+      103.0,
+      109.8
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.57,
+     "best_min_gap_mm": 71.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      219.4,
+      -19.9,
+      93.9,
+      110.6
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.255,
+     "best_min_gap_mm": 54.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      174.4,
+      -19.9,
+      77.5,
+      73.1
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.562,
+     "best_min_gap_mm": 71.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      219.4,
+      -19.9,
+      75.4,
+      74.2
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 120.0,
+   "prop": "7.5 in",
+   "offset_mm": 90.0,
+   "frac_dirs_clear_in_every_pose": 0.158,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": [
+    -0.77,
+    -0.362,
+    0.525
+   ],
+   "highest_clear_dir_tilt_from_up_deg": 58.3,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.265,
+     "best_min_gap_mm": 45.7,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      204.3,
+      -23.3,
+      92.9,
+      111.3
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.698,
+     "best_min_gap_mm": 69.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      249.3,
+      -22.5,
+      85.3,
+      118.6
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.267,
+     "best_min_gap_mm": 45.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      204.3,
+      -25.9,
+      102.6,
+      107.1
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.702,
+     "best_min_gap_mm": 69.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      249.3,
+      -25.1,
+      100.7,
+      114.4
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.265,
+     "best_min_gap_mm": 45.5,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      204.3,
+      -27.2,
+      96.3,
+      109.6
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.698,
+     "best_min_gap_mm": 69.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      249.3,
+      -26.5,
+      86.6,
+      116.7
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.263,
+     "best_min_gap_mm": 44.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      204.3,
+      -26.7,
+      76.3,
+      73.2
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.55,
+     "best_min_gap_mm": 69.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      249.3,
+      -25.8,
+      71.6,
+      81.9
+     ]
+    }
+   ]
+  },
+  {
+   "claw_h_mm": 120.0,
+   "prop": "7.5 in",
+   "offset_mm": 120.0,
+   "frac_dirs_clear_in_every_pose": 0.165,
+   "any_dir_within_30deg_of_up_clear_in_every_pose": false,
+   "highest_clear_dir": [
+    -0.18,
+    -0.825,
+    0.535
+   ],
+   "highest_clear_dir_tilt_from_up_deg": 57.7,
+   "poses": [
+    {
+     "pose": "stance 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.33,
+     "best_min_gap_mm": 63.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      234.3,
+      -25.0,
+      84.7,
+      116.0
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 1",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.592,
+     "best_min_gap_mm": 73.3,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      279.3,
+      -22.2,
+      85.6,
+      129.1
+     ]
+    },
+    {
+     "pose": "stance 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.328,
+     "best_min_gap_mm": 61.9,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      234.3,
+      -26.4,
+      101.0,
+      111.6
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 2",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.555,
+     "best_min_gap_mm": 73.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      279.3,
+      -26.6,
+      92.2,
+      124.9
+     ]
+    },
+    {
+     "pose": "stance 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.325,
+     "best_min_gap_mm": 66.4,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      234.3,
+      -25.5,
+      90.4,
+      113.8
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 3",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.618,
+     "best_min_gap_mm": 76.8,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      279.3,
+      -26.8,
+      77.9,
+      126.7
+     ]
+    },
+    {
+     "pose": "stance 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.217,
+     "best_min_gap_mm": 47.3,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      234.3,
+      -23.2,
+      71.5,
+      78.4
+     ]
+    },
+    {
+     "pose": "swing, foot up 45 mm 4",
+     "ik_ok": true,
+     "claw_tilt_deg": 0.2,
+     "frac_clear": 0.457,
+     "best_min_gap_mm": 69.6,
+     "up30_clear": false,
+     "straight_up_gaps_mm": [
+      279.3,
+      -26.8,
+      66.4,
+      93.9
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,358 @@
+{
+ "assumptions": {
+  "edf_system_kg": 0.55,
+  "central_kg": {
+   "22.0": {
+    "motor": 0.18,
+    "prop": 0.045,
+    "esc": 0.075
+   },
+   "17.0": {
+    "motor": 0.249,
+    "prop": 0.03,
+    "esc": 0.085
+   }
+  },
+  "mount_kg": {
+   "above": 0.07,
+   "below": 0.035
+  },
+  "guard_kg": 0.12,
+  "dome_d_mm": 260.0,
+  "dome_cd": 0.4,
+  "arm_cd": 1.1,
+  "margin_mm": 20.0,
+  "wh_per_kg": 192.0,
+  "usable": 0.8,
+  "other_W": 150.0
+ },
+ "edf_baseline": {
+  "robot_kg": 15.08,
+  "edf_N": 42.2,
+  "edf_W": 2967.0
+ },
+ "placements": {
+  "above, 22 in on a mast": {
+   "place": "above",
+   "prop_in": 22.0,
+   "disc_z_mm": 310,
+   "ground_clear_mm": null,
+   "arm_gaps_mm": {
+    "stance 1": 60.7,
+    "stance 1 foot up": 24.5,
+    "stance 2": 60.6,
+    "stance 2 foot up": 25.6,
+    "stance 3": 58.5,
+    "stance 3 foot up": 21.3,
+    "stance 4": 65.5,
+    "stance 4 foot up": 29.8,
+    "flight, arms straight out": 281.4
+   },
+   "download": {
+    "k_dome": 1.7,
+    "k_arm": 1.74,
+    "slip_r_mm": 212,
+    "f_dome": 0.063,
+    "f_arm_flight": 0.158,
+    "f_total": 0.221
+   },
+   "mass_change_kg": -0.18,
+   "robot_kg_no_pack": 14.9,
+   "central_max_N": 54.4,
+   "central_max_W": 907,
+   "packs": {
+    "0.0": {
+     "central_N": 40.4,
+     "fan_N": 14.34,
+     "central_W": 561,
+     "fans_W": 2445,
+     "total_W": 3157,
+     "current_A": 150,
+     "tw_rated": 1.166,
+     "tw_full": 1.461,
+     "hover_min": 0.0
+    },
+    "1.0": {
+     "central_N": 49.0,
+     "fan_N": 14.73,
+     "central_W": 775,
+     "fans_W": 2546,
+     "total_W": 3471,
+     "current_A": 165,
+     "tw_rated": 1.092,
+     "tw_full": 1.369,
+     "hover_min": 2.7
+    },
+    "1.6": {
+     "central_N": 49.0,
+     "fan_N": 15.46,
+     "central_W": 775,
+     "fans_W": 2739,
+     "total_W": 3664,
+     "current_A": 174,
+     "tw_rated": 1.053,
+     "tw_full": 1.32,
+     "hover_min": 4.0
+    },
+    "2.3": null
+   },
+   "takeoff_dome_only_f": 0.063
+  },
+  "above, 22 in with a ring guard": {
+   "place": "above",
+   "prop_in": 22.0,
+   "disc_z_mm": 310,
+   "ground_clear_mm": null,
+   "arm_gaps_mm": {
+    "stance 1": 60.7,
+    "stance 1 foot up": 24.5,
+    "stance 2": 60.6,
+    "stance 2 foot up": 25.6,
+    "stance 3": 58.5,
+    "stance 3 foot up": 21.3,
+    "stance 4": 65.5,
+    "stance 4 foot up": 29.8,
+    "flight, arms straight out": 281.4
+   },
+   "download": {
+    "k_dome": 1.7,
+    "k_arm": 1.74,
+    "slip_r_mm": 212,
+    "f_dome": 0.063,
+    "f_arm_flight": 0.158,
+    "f_total": 0.221
+   },
+   "mass_change_kg": -0.06,
+   "robot_kg_no_pack": 15.02,
+   "central_max_N": 54.4,
+   "central_max_W": 907,
+   "packs": {
+    "0.0": {
+     "central_N": 40.4,
+     "fan_N": 14.49,
+     "central_W": 561,
+     "fans_W": 2483,
+     "total_W": 3194,
+     "current_A": 152,
+     "tw_rated": 1.156,
+     "tw_full": 1.45,
+     "hover_min": 0.0
+    },
+    "1.0": {
+     "central_N": 49.0,
+     "fan_N": 14.88,
+     "central_W": 775,
+     "fans_W": 2584,
+     "total_W": 3509,
+     "current_A": 167,
+     "tw_rated": 1.084,
+     "tw_full": 1.359,
+     "hover_min": 2.6
+    },
+    "1.6": {
+     "central_N": 49.0,
+     "fan_N": 15.61,
+     "central_W": 775,
+     "fans_W": 2778,
+     "total_W": 3703,
+     "current_A": 176,
+     "tw_rated": 1.045,
+     "tw_full": 1.31,
+     "hover_min": 4.0
+    },
+    "2.3": null
+   },
+   "takeoff_dome_only_f": 0.063
+  },
+  "below, 17 in": {
+   "place": "below",
+   "prop_in": 17.0,
+   "disc_z_mm": -125,
+   "ground_clear_mm": 75,
+   "arm_gaps_mm": {
+    "stance 1": 59.2,
+    "stance 1 foot up": 59.1,
+    "stance 2": 55.9,
+    "stance 2 foot up": 55.7,
+    "stance 3": 59.2,
+    "stance 3 foot up": 59.1,
+    "stance 4": 21.9,
+    "stance 4 foot up": 21.7,
+    "flight, arms straight out": 96.5
+   },
+   "download": {
+    "k_dome": 0.6,
+    "k_arm": 0.5,
+    "slip_r_mm": 216,
+    "f_dome": 0.013,
+    "f_arm_flight": 0.023,
+    "f_total": 0.036
+   },
+   "mass_change_kg": -0.151,
+   "robot_kg_no_pack": 14.93,
+   "central_max_N": 49.9,
+   "central_max_W": 1141,
+   "packs": {
+    "0.0": {
+     "central_N": 38.8,
+     "fan_N": 13.64,
+     "central_W": 762,
+     "fans_W": 2268,
+     "total_W": 3180,
+     "current_A": 151,
+     "tw_rated": 1.203,
+     "tw_full": 1.498,
+     "hover_min": 0.0
+    },
+    "1.0": {
+     "central_N": 42.4,
+     "fan_N": 14.43,
+     "central_W": 871,
+     "fans_W": 2469,
+     "total_W": 3489,
+     "current_A": 166,
+     "tw_rated": 1.127,
+     "tw_full": 1.404,
+     "hover_min": 2.6
+    },
+    "1.6": {
+     "central_N": 42.4,
+     "fan_N": 15.16,
+     "central_W": 871,
+     "fans_W": 2660,
+     "total_W": 3680,
+     "current_A": 175,
+     "tw_rated": 1.086,
+     "tw_full": 1.353,
+     "hover_min": 4.0
+    },
+    "2.3": {
+     "central_N": 42.6,
+     "fan_N": 16.0,
+     "central_W": 878,
+     "fans_W": 2881,
+     "total_W": 3910,
+     "current_A": 186,
+     "tw_rated": 1.042,
+     "tw_full": 1.298,
+     "hover_min": 5.4
+    }
+   },
+   "takeoff_dome_only_f": 0.013
+  }
+ },
+ "edf_packs": {
+  "0.0": {
+   "total_W": 5281,
+   "hover_min": 0.0,
+   "tw_rated": 1.151
+  },
+  "1.0": {
+   "total_W": 5589,
+   "hover_min": 1.6,
+   "tw_rated": 1.079
+  },
+  "1.6": {
+   "total_W": 5780,
+   "hover_min": 2.6,
+   "tw_rated": 1.04
+  },
+  "2.3": {
+   "total_W": 6010,
+   "hover_min": 3.5,
+   "tw_rated": 0.998
+  }
+ },
+ "real_packs_under_dome": {
+  "Tattu 6S 16,000 mAh 30C LiPo": {
+   "central_N": 42.4,
+   "fan_N": 15.64,
+   "central_W": 871,
+   "fans_W": 2786,
+   "total_W": 3806,
+   "current_A": 181,
+   "tw_rated": 1.061,
+   "tw_full": 1.322,
+   "pack_kg": 1.988,
+   "pack_Wh": 355,
+   "hover_min": 4.5,
+   "cont_A": 480,
+   "burst_A": null,
+   "peak_A": 274,
+   "hover_ok": true,
+   "fans_over_16N": false
+  },
+  "Tattu 6S 22,000 mAh 25C LiPo": {
+   "central_N": 42.5,
+   "fan_N": 16.44,
+   "central_W": 874,
+   "fans_W": 3002,
+   "total_W": 4026,
+   "current_A": 192,
+   "tw_rated": 1.021,
+   "tw_full": 1.272,
+   "pack_kg": 2.65,
+   "pack_Wh": 488,
+   "hover_min": 5.8,
+   "cont_A": 550,
+   "burst_A": 1100,
+   "peak_A": 274,
+   "hover_ok": true,
+   "fans_over_16N": true
+  },
+  "2 x Tattu 6S 10,000 mAh 25C LiPo, parallel": {
+   "central_N": 42.5,
+   "fan_N": 16.62,
+   "central_W": 874,
+   "fans_W": 3052,
+   "total_W": 4077,
+   "current_A": 194,
+   "tw_rated": 1.013,
+   "tw_full": 1.261,
+   "pack_kg": 2.8,
+   "pack_Wh": 444,
+   "hover_min": 5.2,
+   "cont_A": 500,
+   "burst_A": 1000,
+   "peak_A": 274,
+   "hover_ok": true,
+   "fans_over_16N": true
+  },
+  "Tattu semi-solid 6S 33,000 mAh (350 Wh/kg)": {
+   "central_N": 42.4,
+   "fan_N": 16.09,
+   "central_W": 871,
+   "fans_W": 2907,
+   "total_W": 3928,
+   "current_A": 187,
+   "tw_rated": 1.039,
+   "tw_full": 1.294,
+   "pack_kg": 2.355,
+   "pack_Wh": 733,
+   "hover_min": 9.0,
+   "cont_A": null,
+   "burst_A": 330,
+   "peak_A": 274,
+   "hover_ok": false,
+   "fans_over_16N": true
+  },
+  "2 x DOGCOM semi-solid 6S 22,000 mAh 5C, parallel": {
+   "central_N": 42.5,
+   "fan_N": 16.6,
+   "central_W": 874,
+   "fans_W": 3046,
+   "total_W": 4070,
+   "current_A": 194,
+   "tw_rated": 1.014,
+   "tw_full": 1.263,
+   "pack_kg": 2.78,
+   "pack_Wh": 977,
+   "hover_min": 11.5,
+   "cont_A": 220,
+   "burst_A": 440,
+   "peak_A": 274,
+   "hover_ok": true,
+   "fans_over_16N": true
+  }
+ }
+}

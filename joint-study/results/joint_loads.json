@@ -1,0 +1,1021 @@
+{
+ "loads": {
+  "joint 1": {
+   "Hover, any pose": {
+    "pose": "random 12",
+    "F": [
+     0.0,
+     0.0,
+     13.2
+    ],
+    "M_hinge": 0.68,
+    "M_oop": 5.29,
+    "Rh": [
+     -45.04280702231477,
+     -97.84280668247908
+    ],
+    "Ri": [
+     45.26989639082081,
+     98.18656995198738
+    ],
+    "axial": 0.48780775819937433,
+    "held": 65,
+    "total": 65
+   },
+   "Rated thrust within 30 deg of straight up": {
+    "pose": "random 26",
+    "F": [
+     -5.66,
+     5.66,
+     13.86
+    ],
+    "M_hinge": 0.32,
+    "M_oop": 9.49,
+    "Rh": [
+     54.30935167381101,
+     -183.10867039670566
+    ],
+    "Ri": [
+     -54.7310914387675,
+     188.4387768248904
+    ],
+    "axial": 6.089966385980366,
+    "held": 381,
+    "total": 520
+   },
+   "Full throttle within 30 deg of straight up": {
+    "pose": "straight out",
+    "F": [
+     0.0,
+     10.7,
+     18.53
+    ],
+    "M_hinge": -3.08,
+    "M_oop": 14.43,
+    "Rh": [
+     -3.1403716864652784,
+     -294.4310962353056
+    ],
+    "Ri": [
+     -3.1403716864652793,
+     294.4310962353056
+    ],
+    "axial": 10.521433368782745,
+    "held": 293,
+    "total": 520
+   },
+   "Rated thrust within 60 deg of straight up": {
+    "pose": "random 28",
+    "F": [
+     9.8,
+     -9.8,
+     8.0
+    ],
+    "M_hinge": 3.91,
+    "M_oop": 12.08,
+    "Rh": [
+     -12.710308300645986,
+     243.3488419650732
+    ],
+    "Ri": [
+     15.00612060822106,
+     -249.00866639918416
+    ],
+    "axial": -13.247607783901746,
+    "held": 247,
+    "total": 520
+   },
+   "Rated thrust, any direction": {
+    "pose": "straight out",
+    "F": [
+     -1.63,
+     -7.93,
+     -13.8
+    ],
+    "M_hinge": -3.11,
+    "M_oop": 20.02,
+    "Rh": [
+     -3.156435091970231,
+     409.36205556866577
+    ],
+    "Ri": [
+     -3.156435091970231,
+     -407.7281164184521
+    ],
+    "axial": -26.794885637866166,
+    "held": 3261,
+    "total": 6500
+   },
+   "Full throttle, any direction": {
+    "pose": "straight out",
+    "F": [
+     -2.19,
+     -10.61,
+     -18.46
+    ],
+    "M_hinge": -3.12,
+    "M_oop": 24.98,
+    "Rh": [
+     -3.1618564913281517,
+     510.83258967142297
+    ],
+    "Ri": [
+     -3.1618564913281517,
+     -508.6471960580122
+    ],
+    "axial": -32.16664330261017,
+    "held": 2562,
+    "total": 6500
+   },
+   "Walking stance": {
+    "pose": "walking stance 1",
+    "F": [
+     0.0,
+     0.0,
+     21.13
+    ],
+    "M_hinge": 0.14,
+    "M_oop": 0.74,
+    "Rh": [
+     -0.7519148125338444,
+     -18.504601593545353
+    ],
+    "Ri": [
+     1.2391857929773968,
+     11.596892666574702
+    ],
+    "axial": 5.045216474716124,
+    "held": 4,
+    "total": 4
+   },
+   "Hard landing": {
+    "pose": "walking stance 1",
+    "F": [
+     0.0,
+     0.0,
+     73.95
+    ],
+    "M_hinge": 2.27,
+    "M_oop": 8.09,
+    "Rh": [
+     -20.504634007630415,
+     -188.32539445280912
+    ],
+    "Ri": [
+     23.996075033096275,
+     138.82961221343152
+    ],
+    "axial": 36.15047168650489,
+    "held": 3,
+    "total": 4
+   }
+  },
+  "joint 2": {
+   "Hover, any pose": {
+    "pose": "random 48",
+    "F": [
+     0.0,
+     0.0,
+     13.2
+    ],
+    "M_hinge": -0.59,
+    "M_oop": 5.43,
+    "Rh": [
+     -61.404695650795006,
+     -92.65324594378902
+    ],
+    "Ri": [
+     60.89523507719898,
+     92.18874703063616
+    ],
+    "axial": 1.5611001496065837,
+    "held": 64,
+    "total": 65
+   },
+   "Rated thrust within 30 deg of straight up": {
+    "pose": "random 40",
+    "F": [
+     -5.66,
+     -5.66,
+     13.86
+    ],
+    "M_hinge": 1.34,
+    "M_oop": 9.04,
+    "Rh": [
+     -15.923979118689756,
+     -181.68886044373377
+    ],
+    "Ri": [
+     19.266734574912853,
+     185.63129572019906
+    ],
+    "axial": 6.5471801128690394,
+    "held": 393,
+    "total": 520
+   },
+   "Full throttle within 30 deg of straight up": {
+    "pose": "straight out",
+    "F": [
+     0.0,
+     -10.7,
+     18.53
+    ],
+    "M_hinge": 2.61,
+    "M_oop": 13.58,
+    "Rh": [
+     2.873360295926509,
+     -277.18790838068156
+    ],
+    "Ri": [
+     2.873360295926509,
+     277.18790838068156
+    ],
+    "axial": 11.446387958008282,
+    "held": 308,
+    "total": 520
+   },
+   "Rated thrust within 60 deg of straight up": {
+    "pose": "random 32",
+    "F": [
+     13.86,
+     0.0,
+     8.0
+    ],
+    "M_hinge": 0.19,
+    "M_oop": 11.4,
+    "Rh": [
+     80.80277436257829,
+     214.97806902262417
+    ],
+    "Ri": [
+     -79.3156109538887,
+     -221.79866380665428
+    ],
+    "axial": -12.46883968506811,
+    "held": 272,
+    "total": 520
+   },
+   "Rated thrust, any direction": {
+    "pose": "straight out",
+    "F": [
+     0.24,
+     8.62,
+     -13.48
+    ],
+    "M_hinge": 2.0,
+    "M_oop": 18.05,
+    "Rh": [
+     2.5126378512302368,
+     368.21806730494035
+    ],
+    "Ri": [
+     2.5126378512302368,
+     -368.46038985185675
+    ],
+    "axial": -25.935501700440284,
+    "held": 3497,
+    "total": 6500
+   },
+   "Full throttle, any direction": {
+    "pose": "straight out",
+    "F": [
+     0.32,
+     11.52,
+     -18.03
+    ],
+    "M_hinge": 1.8,
+    "M_oop": 22.61,
+    "Rh": [
+     2.390894026145246,
+     461.32123402034495
+    ],
+    "Ri": [
+     2.390894026145246,
+     -461.6453404268456
+    ],
+    "axial": -31.329389460166677,
+    "held": 2739,
+    "total": 6500
+   },
+   "Walking stance": {
+    "pose": "walking stance 3",
+    "F": [
+     0.0,
+     0.0,
+     21.13
+    ],
+    "M_hinge": 0.29,
+    "M_oop": 0.55,
+    "Rh": [
+     -7.496762076648107,
+     -13.334494962411213
+    ],
+    "Ri": [
+     5.2193524369737965,
+     5.353553678366618
+    ],
+    "axial": 4.895763476769399,
+    "held": 4,
+    "total": 4
+   },
+   "Hard landing": {
+    "pose": "walking stance 3",
+    "F": [
+     0.0,
+     0.0,
+     73.95
+    ],
+    "M_hinge": -0.41,
+    "M_oop": 6.11,
+    "Rh": [
+     -36.79154678482346,
+     -146.98524519640532
+    ],
+    "Ri": [
+     22.02952948322413,
+     95.25331640077447
+    ],
+    "axial": 31.734012137993496,
+    "held": 4,
+    "total": 4
+   }
+  },
+  "joint 3": {
+   "Hover, any pose": {
+    "pose": "random 46",
+    "F": [
+     0.0,
+     0.0,
+     13.2
+    ],
+    "M_hinge": -0.58,
+    "M_oop": 4.81,
+    "Rh": [
+     -80.26948650760542,
+     -58.820506107589566
+    ],
+    "Ri": [
+     78.06940153484126,
+     57.160665342381485
+    ],
+    "axial": -0.32091152001674494,
+    "held": 63,
+    "total": 65
+   },
+   "Rated thrust within 30 deg of straight up": {
+    "pose": "random 32",
+    "F": [
+     5.66,
+     5.66,
+     13.86
+    ],
+    "M_hinge": 0.19,
+    "M_oop": 8.42,
+    "Rh": [
+     -2.949283256829501,
+     172.12620873515243
+    ],
+    "Ri": [
+     4.676598153079929,
+     -171.47503183102484
+    ],
+    "axial": -8.506642095801267,
+    "held": 367,
+    "total": 520
+   },
+   "Full throttle within 30 deg of straight up": {
+    "pose": "random 32",
+    "F": [
+     7.57,
+     7.57,
+     18.53
+    ],
+    "M_hinge": -0.31,
+    "M_oop": 11.96,
+    "Rh": [
+     -6.476269717946255,
+     242.9987975533901
+    ],
+    "Ri": [
+     7.642390415052015,
+     -244.8850492432143
+    ],
+    "axial": -13.240179607984107,
+    "held": 220,
+    "total": 520
+   },
+   "Rated thrust within 60 deg of straight up": {
+    "pose": "random 40",
+    "F": [
+     0.0,
+     -13.86,
+     8.0
+    ],
+    "M_hinge": 0.14,
+    "M_oop": 10.63,
+    "Rh": [
+     -9.510878579699302,
+     -215.70404804563083
+    ],
+    "Ri": [
+     13.30668286565223,
+     217.69677437182
+    ],
+    "axial": 13.397889965688345,
+    "held": 396,
+    "total": 520
+   },
+   "Rated thrust, any direction": {
+    "pose": "random 43",
+    "F": [
+     10.6,
+     -4.15,
+     -11.24
+    ],
+    "M_hinge": 3.02,
+    "M_oop": 14.13,
+    "Rh": [
+     159.4886801431091,
+     -242.40445249755507
+    ],
+    "Ri": [
+     -151.06959691216323,
+     243.38416880679037
+    ],
+    "axial": 22.961074908247287,
+    "held": 3565,
+    "total": 6500
+   },
+   "Full throttle, any direction": {
+    "pose": "random 32",
+    "F": [
+     -11.65,
+     -13.32,
+     -12.04
+    ],
+    "M_hinge": 0.75,
+    "M_oop": 17.96,
+    "Rh": [
+     21.758153110175797,
+     -361.00829977796525
+    ],
+    "Ri": [
+     -19.693581925413813,
+     370.6975583227236
+    ],
+    "axial": 26.82342424319779,
+    "held": 2766,
+    "total": 6500
+   },
+   "Walking stance": {
+    "pose": "walking stance 3",
+    "F": [
+     0.0,
+     0.0,
+     21.13
+    ],
+    "M_hinge": 0.19,
+    "M_oop": 0.54,
+    "Rh": [
+     -13.556548746785225,
+     -9.304856338452396
+    ],
+    "Ri": [
+     4.812360701510561,
+     3.153883424341938
+    ],
+    "axial": 0.5283013467617835,
+    "held": 4,
+    "total": 4
+   },
+   "Hard landing": {
+    "pose": "walking stance 3",
+    "F": [
+     0.0,
+     0.0,
+     73.95
+    ],
+    "M_hinge": -2.64,
+    "M_oop": 2.78,
+    "Rh": [
+     -70.69125586331526,
+     -52.98280165036555
+    ],
+    "Ri": [
+     18.794999788997465,
+     16.477129104888824
+    ],
+    "axial": 3.135438285864917,
+    "held": 4,
+    "total": 4
+   }
+  },
+  "joint 4": {
+   "Hover, any pose": {
+    "pose": "random 7",
+    "F": [
+     0.0,
+     0.0,
+     13.2
+    ],
+    "M_hinge": -0.33,
+    "M_oop": 5.22,
+    "Rh": [
+     33.34663995271414,
+     100.50446629856637
+    ],
+    "Ri": [
+     -33.99540336307337,
+     -101.73630595816698
+    ],
+    "axial": -3.5815688819900187,
+    "held": 65,
+    "total": 65
+   },
+   "Rated thrust within 30 deg of straight up": {
+    "pose": "random 26",
+    "F": [
+     -5.66,
+     5.66,
+     13.86
+    ],
+    "M_hinge": 0.31,
+    "M_oop": 7.94,
+    "Rh": [
+     42.82439307015794,
+     156.7532267409061
+    ],
+    "Ri": [
+     -42.98390730447508,
+     -155.81920072179605
+    ],
+    "axial": -9.12920760994354,
+    "held": 411,
+    "total": 520
+   },
+   "Full throttle within 30 deg of straight up": {
+    "pose": "straight out",
+    "F": [
+     0.0,
+     10.7,
+     18.53
+    ],
+    "M_hinge": 1.81,
+    "M_oop": 11.68,
+    "Rh": [
+     2.3393375148489572,
+     238.34538860914682
+    ],
+    "Ri": [
+     2.3393375148489572,
+     -238.34538860914682
+    ],
+    "axial": -13.296297136459373,
+    "held": 322,
+    "total": 520
+   },
+   "Rated thrust within 60 deg of straight up": {
+    "pose": "random 54",
+    "F": [
+     -13.86,
+     0.0,
+     8.0
+    ],
+    "M_hinge": -2.64,
+    "M_oop": 8.88,
+    "Rh": [
+     -87.06764527823059,
+     163.5505009345343
+    ],
+    "Ri": [
+     80.83857947985604,
+     -157.87716517869717
+    ],
+    "axial": -11.083970401656718,
+    "held": 324,
+    "total": 520
+   },
+   "Rated thrust, any direction": {
+    "pose": "random 7",
+    "F": [
+     -2.83,
+     -0.93,
+     -15.72
+    ],
+    "M_hinge": 0.74,
+    "M_oop": 13.93,
+    "Rh": [
+     -83.4377395828512,
+     -265.69194606651945
+    ],
+    "Ri": [
+     88.16426827520367,
+     276.4818076235018
+    ],
+    "axial": 22.338171368825233,
+    "held": 3870,
+    "total": 6500
+   },
+   "Full throttle, any direction": {
+    "pose": "straight out",
+    "F": [
+     -2.19,
+     -10.61,
+     -18.46
+    ],
+    "M_hinge": 1.84,
+    "M_oop": 17.87,
+    "Rh": [
+     2.3608223197118328,
+     -363.69015640916507
+    ],
+    "Ri": [
+     2.3608223197118328,
+     365.87555002257585
+    ],
+    "axial": 29.39177953493354,
+    "held": 2995,
+    "total": 6500
+   },
+   "Walking stance": {
+    "pose": "walking stance 4",
+    "F": [
+     0.0,
+     0.0,
+     21.13
+    ],
+    "M_hinge": 0.52,
+    "M_oop": 1.47,
+    "Rh": [
+     -20.62584249961036,
+     -26.130564843619872
+    ],
+    "Ri": [
+     14.206784084974666,
+     22.766091163451776
+    ],
+    "axial": -9.276622200584725,
+    "held": 4,
+    "total": 4
+   },
+   "Hard landing": {
+    "pose": "walking stance 4",
+    "F": [
+     0.0,
+     0.0,
+     73.95
+    ],
+    "M_hinge": 0.96,
+    "M_oop": 4.37,
+    "Rh": [
+     -81.84513877528039,
+     -71.16756099685742
+    ],
+    "Ri": [
+     46.622438050345856,
+     52.705998275558265
+    ],
+    "axial": -50.902744048018384,
+    "held": 4,
+    "total": 4
+   }
+  }
+ },
+ "rated": {
+  "joint 1": {
+   "Hover, any pose": {
+    "horn_N": 108,
+    "idler_N": 108,
+    "axial_N": 0,
+    "horn_ear_MPa": 4.4,
+    "idler_ear_MPa": 5.5,
+    "idler_bore_MPa": 4.2,
+    "stub_bend_MPa": 4.5,
+    "stub_shear_MPa": 2.2
+   },
+   "Rated thrust within 30 deg of straight up": {
+    "horn_N": 191,
+    "idler_N": 196,
+    "axial_N": 6,
+    "horn_ear_MPa": 6.0,
+    "idler_ear_MPa": 7.6,
+    "idler_bore_MPa": 7.7,
+    "stub_bend_MPa": 8.2,
+    "stub_shear_MPa": 3.9
+   },
+   "Full throttle within 30 deg of straight up": {
+    "horn_N": 294,
+    "idler_N": 294,
+    "axial_N": 11,
+    "horn_ear_MPa": 3.7,
+    "idler_ear_MPa": 4.7,
+    "idler_bore_MPa": 11.5,
+    "stub_bend_MPa": 12.3,
+    "stub_shear_MPa": 5.9
+   },
+   "Rated thrust within 60 deg of straight up": {
+    "horn_N": 244,
+    "idler_N": 249,
+    "axial_N": 13,
+    "horn_ear_MPa": 3.8,
+    "idler_ear_MPa": 5.0,
+    "idler_bore_MPa": 9.7,
+    "stub_bend_MPa": 10.4,
+    "stub_shear_MPa": 5.0
+   },
+   "Rated thrust, any direction": {
+    "horn_N": 409,
+    "idler_N": 408,
+    "axial_N": 27,
+    "horn_ear_MPa": 5.1,
+    "idler_ear_MPa": 6.3,
+    "idler_bore_MPa": 15.9,
+    "stub_bend_MPa": 17.0,
+    "stub_shear_MPa": 8.1
+   },
+   "Full throttle, any direction": {
+    "horn_N": 511,
+    "idler_N": 509,
+    "axial_N": 32,
+    "horn_ear_MPa": 6.3,
+    "idler_ear_MPa": 7.8,
+    "idler_bore_MPa": 19.9,
+    "stub_bend_MPa": 21.3,
+    "stub_shear_MPa": 10.1
+   },
+   "Walking stance": {
+    "horn_N": 19,
+    "idler_N": 12,
+    "axial_N": 5,
+    "horn_ear_MPa": 0.3,
+    "idler_ear_MPa": 0.3,
+    "idler_bore_MPa": 0.5,
+    "stub_bend_MPa": 0.5,
+    "stub_shear_MPa": 0.2
+   },
+   "Hard landing": {
+    "horn_N": 189,
+    "idler_N": 141,
+    "axial_N": 36,
+    "horn_ear_MPa": 3.7,
+    "idler_ear_MPa": 4.2,
+    "idler_bore_MPa": 5.5,
+    "stub_bend_MPa": 5.9,
+    "stub_shear_MPa": 2.8
+   }
+  },
+  "joint 2": {
+   "Hover, any pose": {
+    "horn_N": 111,
+    "idler_N": 110,
+    "axial_N": 2,
+    "horn_ear_MPa": 5.4,
+    "idler_ear_MPa": 6.8,
+    "idler_bore_MPa": 4.3,
+    "stub_bend_MPa": 4.6,
+    "stub_shear_MPa": 2.2
+   },
+   "Rated thrust within 30 deg of straight up": {
+    "horn_N": 182,
+    "idler_N": 187,
+    "axial_N": 7,
+    "horn_ear_MPa": 3.3,
+    "idler_ear_MPa": 4.5,
+    "idler_bore_MPa": 7.3,
+    "stub_bend_MPa": 7.8,
+    "stub_shear_MPa": 3.7
+   },
+   "Full throttle within 30 deg of straight up": {
+    "horn_N": 277,
+    "idler_N": 277,
+    "axial_N": 11,
+    "horn_ear_MPa": 3.5,
+    "idler_ear_MPa": 4.4,
+    "idler_bore_MPa": 10.8,
+    "stub_bend_MPa": 11.6,
+    "stub_shear_MPa": 5.5
+   },
+   "Rated thrust within 60 deg of straight up": {
+    "horn_N": 230,
+    "idler_N": 236,
+    "axial_N": 12,
+    "horn_ear_MPa": 8.3,
+    "idler_ear_MPa": 10.3,
+    "idler_bore_MPa": 9.2,
+    "stub_bend_MPa": 9.8,
+    "stub_shear_MPa": 4.7
+   },
+   "Rated thrust, any direction": {
+    "horn_N": 368,
+    "idler_N": 368,
+    "axial_N": 26,
+    "horn_ear_MPa": 4.6,
+    "idler_ear_MPa": 5.7,
+    "idler_bore_MPa": 14.4,
+    "stub_bend_MPa": 15.4,
+    "stub_shear_MPa": 7.3
+   },
+   "Full throttle, any direction": {
+    "horn_N": 461,
+    "idler_N": 462,
+    "axial_N": 31,
+    "horn_ear_MPa": 5.7,
+    "idler_ear_MPa": 7.1,
+    "idler_bore_MPa": 18.0,
+    "stub_bend_MPa": 19.3,
+    "stub_shear_MPa": 9.2
+   },
+   "Walking stance": {
+    "horn_N": 15,
+    "idler_N": 7,
+    "axial_N": 5,
+    "horn_ear_MPa": 0.7,
+    "idler_ear_MPa": 0.5,
+    "idler_bore_MPa": 0.3,
+    "stub_bend_MPa": 0.3,
+    "stub_shear_MPa": 0.1
+   },
+   "Hard landing": {
+    "horn_N": 152,
+    "idler_N": 98,
+    "axial_N": 32,
+    "horn_ear_MPa": 4.4,
+    "idler_ear_MPa": 3.4,
+    "idler_bore_MPa": 3.8,
+    "stub_bend_MPa": 4.1,
+    "stub_shear_MPa": 1.9
+   }
+  },
+  "joint 3": {
+   "Hover, any pose": {
+    "horn_N": 100,
+    "idler_N": 97,
+    "axial_N": 0,
+    "horn_ear_MPa": 6.4,
+    "idler_ear_MPa": 7.8,
+    "idler_bore_MPa": 3.8,
+    "stub_bend_MPa": 4.0,
+    "stub_shear_MPa": 1.9
+   },
+   "Rated thrust within 30 deg of straight up": {
+    "horn_N": 172,
+    "idler_N": 172,
+    "axial_N": 9,
+    "horn_ear_MPa": 2.3,
+    "idler_ear_MPa": 3.0,
+    "idler_bore_MPa": 6.7,
+    "stub_bend_MPa": 7.2,
+    "stub_shear_MPa": 3.4
+   },
+   "Full throttle within 30 deg of straight up": {
+    "horn_N": 243,
+    "idler_N": 245,
+    "axial_N": 13,
+    "horn_ear_MPa": 3.4,
+    "idler_ear_MPa": 4.3,
+    "idler_bore_MPa": 9.6,
+    "stub_bend_MPa": 10.2,
+    "stub_shear_MPa": 4.9
+   },
+   "Rated thrust within 60 deg of straight up": {
+    "horn_N": 216,
+    "idler_N": 218,
+    "axial_N": 13,
+    "horn_ear_MPa": 3.2,
+    "idler_ear_MPa": 4.4,
+    "idler_bore_MPa": 8.5,
+    "stub_bend_MPa": 9.1,
+    "stub_shear_MPa": 4.3
+   },
+   "Rated thrust, any direction": {
+    "horn_N": 290,
+    "idler_N": 286,
+    "axial_N": 23,
+    "horn_ear_MPa": 14.2,
+    "idler_ear_MPa": 17.0,
+    "idler_bore_MPa": 11.2,
+    "stub_bend_MPa": 12.0,
+    "stub_shear_MPa": 5.7
+   },
+   "Full throttle, any direction": {
+    "horn_N": 362,
+    "idler_N": 371,
+    "axial_N": 27,
+    "horn_ear_MPa": 5.8,
+    "idler_ear_MPa": 7.3,
+    "idler_bore_MPa": 14.5,
+    "stub_bend_MPa": 15.5,
+    "stub_shear_MPa": 7.4
+   },
+   "Walking stance": {
+    "horn_N": 16,
+    "idler_N": 6,
+    "axial_N": 1,
+    "horn_ear_MPa": 1.1,
+    "idler_ear_MPa": 0.5,
+    "idler_bore_MPa": 0.2,
+    "stub_bend_MPa": 0.2,
+    "stub_shear_MPa": 0.1
+   },
+   "Hard landing": {
+    "horn_N": 88,
+    "idler_N": 25,
+    "axial_N": 3,
+    "horn_ear_MPa": 5.6,
+    "idler_ear_MPa": 1.9,
+    "idler_bore_MPa": 1.0,
+    "stub_bend_MPa": 1.0,
+    "stub_shear_MPa": 0.5
+   }
+  },
+  "joint 4": {
+   "Hover, any pose": {
+    "horn_N": 106,
+    "idler_N": 107,
+    "axial_N": 4,
+    "horn_ear_MPa": 3.6,
+    "idler_ear_MPa": 4.5,
+    "idler_bore_MPa": 4.2,
+    "stub_bend_MPa": 4.5,
+    "stub_shear_MPa": 2.1
+   },
+   "Rated thrust within 30 deg of straight up": {
+    "horn_N": 162,
+    "idler_N": 162,
+    "axial_N": 9,
+    "horn_ear_MPa": 4.9,
+    "idler_ear_MPa": 6.1,
+    "idler_bore_MPa": 6.3,
+    "stub_bend_MPa": 6.8,
+    "stub_shear_MPa": 3.2
+   },
+   "Full throttle within 30 deg of straight up": {
+    "horn_N": 238,
+    "idler_N": 238,
+    "axial_N": 13,
+    "horn_ear_MPa": 3.0,
+    "idler_ear_MPa": 3.8,
+    "idler_bore_MPa": 9.3,
+    "stub_bend_MPa": 10.0,
+    "stub_shear_MPa": 4.7
+   },
+   "Rated thrust within 60 deg of straight up": {
+    "horn_N": 185,
+    "idler_N": 177,
+    "axial_N": 11,
+    "horn_ear_MPa": 8.1,
+    "idler_ear_MPa": 9.5,
+    "idler_bore_MPa": 6.9,
+    "stub_bend_MPa": 7.4,
+    "stub_shear_MPa": 3.5
+   },
+   "Rated thrust, any direction": {
+    "horn_N": 278,
+    "idler_N": 290,
+    "axial_N": 22,
+    "horn_ear_MPa": 9.1,
+    "idler_ear_MPa": 11.9,
+    "idler_bore_MPa": 11.3,
+    "stub_bend_MPa": 12.1,
+    "stub_shear_MPa": 5.8
+   },
+   "Full throttle, any direction": {
+    "horn_N": 364,
+    "idler_N": 366,
+    "axial_N": 29,
+    "horn_ear_MPa": 4.5,
+    "idler_ear_MPa": 5.7,
+    "idler_bore_MPa": 14.3,
+    "stub_bend_MPa": 15.3,
+    "stub_shear_MPa": 7.3
+   },
+   "Walking stance": {
+    "horn_N": 33,
+    "idler_N": 27,
+    "axial_N": 9,
+    "horn_ear_MPa": 1.8,
+    "idler_ear_MPa": 1.6,
+    "idler_bore_MPa": 1.0,
+    "stub_bend_MPa": 1.1,
+    "stub_shear_MPa": 0.5
+   },
+   "Hard landing": {
+    "horn_N": 108,
+    "idler_N": 70,
+    "axial_N": 51,
+    "horn_ear_MPa": 6.6,
+    "idler_ear_MPa": 4.9,
+    "idler_bore_MPa": 2.7,
+    "stub_bend_MPa": 2.9,
+    "stub_shear_MPa": 1.4
+   }
+  }
+ },
+ "limits": {
+  "petg_along": 45.0,
+  "petg_across": 25.0,
+  "sf": 2.0,
+  "xm430_radial_ref": 40.0,
+  "xm430_axial_ref": 20.0
+ }
+}

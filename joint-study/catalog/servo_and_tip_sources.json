@@ -1,0 +1,779 @@
+{
+ "meta": {
+  "project": "Cephalo-1 joint study",
+  "compiled": "2026-11-08",
+  "units": "stall_torque_Nm converted from kg.cm x 0.0980665 where maker gives kg.cm",
+  "caveat": "Specs as listed on the page read; reseller pages sometimes disagree with maker. Fields null = not found on page read."
+ },
+ "servos": [
+  {
+   "model": "STS3215 (12 V, e.g. C018/C047)",
+   "maker": "Feetech",
+   "bus_protocol": "Feetech STS/SCS half-duplex TTL serial bus, 3-pin daisy chain",
+   "mass_g": 55,
+   "dims_mm": [
+    45.2,
+    24.7,
+    35
+   ],
+   "stall_torque_Nm": 2.942,
+   "stall_torque_voltage_V": 12,
+   "no_load_speed_rpm_or_s_per_60deg": "0.222 s/60deg @12V (~45 rpm)",
+   "resolution_deg_or_counts": "4096 counts/360deg (12-bit magnetic encoder), 0.088deg",
+   "gear_material": "steel",
+   "approx_price_usd": 49.22,
+   "backlash_note": "No backlash figure published on the page read; measure on receipt.",
+   "source_url": "https://robotshop.com/products/feetech-12v-30kgcm-magnetic-encoding-servo-sts3215",
+   "notes": "Rated torque 10 kg.cm @12V; operating 4-14 V per RobotShop. Waveshare sells same part as ST3215 for ~$17-22."
+  },
+  {
+   "model": "ST3215 (Waveshare listing of STS3215, 12 V, SKU 22414)",
+   "maker": "Feetech (sold by Waveshare)",
+   "bus_protocol": "TTL UART serial bus, 38.4 kbps-1 Mbps, up to 253 IDs",
+   "mass_g": null,
+   "dims_mm": null,
+   "stall_torque_Nm": 2.942,
+   "stall_torque_voltage_V": 12,
+   "no_load_speed_rpm_or_s_per_60deg": "0.222 s/60deg (45 rpm) @12V",
+   "resolution_deg_or_counts": "4096 counts/360deg",
+   "gear_material": "copper and steel metal gears; nylon/fiberglass case",
+   "approx_price_usd": 19.0,
+   "backlash_note": "No backlash figure published on the page read; measure on receipt.",
+   "source_url": "https://www.waveshare.com/st3215-servo.htm",
+   "notes": "Stall current 2.7 A, kt 11 kg.cm/A. Page lists 0.07 kg per product line (likely packaged); dims only in an image. Price range $16.99-21.99."
+  },
+  {
+   "model": "ST3215-7.4V / STS3215 7.4 V variant (SKU 33014)",
+   "maker": "Feetech (sold by Waveshare)",
+   "bus_protocol": "TTL UART serial bus, same as 12 V",
+   "mass_g": null,
+   "dims_mm": null,
+   "stall_torque_Nm": 1.912,
+   "stall_torque_voltage_V": 7.4,
+   "no_load_speed_rpm_or_s_per_60deg": "0.192 s/60deg (52 rpm) @7.4V",
+   "resolution_deg_or_counts": "4096 counts/360deg",
+   "gear_material": "metal (series listing; not stated per-variant)",
+   "approx_price_usd": 16.99,
+   "backlash_note": "No backlash figure published on the page read; measure on receipt.",
+   "source_url": "https://www.waveshare.com/st3215-servo.htm?sku=33014",
+   "notes": "Stall current 2.5 A. Same housing as 12 V version is expected (~55 g, 45.2x24.7x35) but not confirmed on page. Eckstein listing (https://eckstein-shop.de/feetech-sts3215-so-arm101-servomotor-7v4-14kgcm-360grad-magnetencoder_1) gives ~65 g, 40.5x20x38 mm, >=15 kg.cm @6V, 0.16 s/60deg - inconsistent, treat as unreliable."
+  },
+  {
+   "model": "STS3032",
+   "maker": "Feetech",
+   "bus_protocol": "Feetech STS half-duplex TTL serial bus",
+   "mass_g": 20,
+   "dims_mm": [
+    23.2,
+    12.1,
+    28.5
+   ],
+   "stall_torque_Nm": 0.441,
+   "stall_torque_voltage_V": 6,
+   "no_load_speed_rpm_or_s_per_60deg": "0.09 s/60deg @6V",
+   "resolution_deg_or_counts": "360deg/4096 (page says potentiometer; magnetic-encoder versions also listed by Eckstein)",
+   "gear_material": "metal",
+   "approx_price_usd": 61.0,
+   "backlash_note": "No backlash figure published on the page read; measure on receipt.",
+   "source_url": "https://rcdrone.top/products/feetech-sts3032-servo-motor",
+   "notes": "4.8-6 V. $61 price on rcdrone looks high vs. typical; check per-unit vs pack. Micro-servo size class - candidate for distal vertebrae / tip joint."
+  },
+  {
+   "model": "SCS0009",
+   "maker": "Feetech",
+   "bus_protocol": "Feetech SCS half-duplex TTL serial bus (3-pin daisy chain)",
+   "mass_g": null,
+   "dims_mm": [
+    23.2,
+    12.1,
+    25.25
+   ],
+   "stall_torque_Nm": 0.226,
+   "stall_torque_voltage_V": 6,
+   "no_load_speed_rpm_or_s_per_60deg": null,
+   "resolution_deg_or_counts": "1024 steps (10-bit)",
+   "gear_material": "metal gearbox 1:416, plastic case",
+   "approx_price_usd": 16.0,
+   "backlash_note": "No backlash figure published on the page read; measure on receipt.",
+   "source_url": "https://openelab.io/products/feetech-scs0009-ultra-compact-servo",
+   "notes": "Voltage 4-7.4 V; rated torque 0.75 kg.cm. Price EUR 14.65 (openelab), AUD 22.64 (Pakronics). Mass not listed on either page read (SG90-class size suggests ~10-15 g, unverified). Used on the Amazing Hand."
+  },
+  {
+   "model": "STS3250 (C002)",
+   "maker": "Feetech",
+   "bus_protocol": "Feetech STS half-duplex TTL serial bus",
+   "mass_g": 74.5,
+   "dims_mm": [
+    45.22,
+    24.72,
+    35
+   ],
+   "stall_torque_Nm": 4.903,
+   "stall_torque_voltage_V": 12,
+   "no_load_speed_rpm_or_s_per_60deg": "0.133 s/60deg @12V",
+   "resolution_deg_or_counts": "0-4096 over 360deg",
+   "gear_material": "steel, 1:345",
+   "approx_price_usd": 125.0,
+   "backlash_note": "No backlash figure published on the page read; measure on receipt.",
+   "source_url": "https://rcdrone.top/products/feetech-sts3250-servo-motor",
+   "notes": "Rated torque 16 kg.cm, stall current 4.2 A @12V. openelab lists EUR 93.45 (https://openelab.io/products/feetech-sts3250-c002-servo-12v). Same housing as STS3215 - drop-in high-torque option for root vertebrae."
+  },
+  {
+   "model": "XL330-M288-T",
+   "maker": "ROBOTIS (Dynamixel)",
+   "bus_protocol": "DYNAMIXEL Protocol 2.0, half-duplex TTL multidrop, 9.6 kbps-4 Mbps (also S.BUS/iBUS/PWM)",
+   "mass_g": 18,
+   "dims_mm": [
+    20.0,
+    34.0,
+    26.0
+   ],
+   "stall_torque_Nm": 0.52,
+   "stall_torque_voltage_V": 5.0,
+   "no_load_speed_rpm_or_s_per_60deg": "103 rpm @5V (123 rpm @6V)",
+   "resolution_deg_or_counts": "4096 pulses/rev",
+   "gear_material": "engineering plastic",
+   "approx_price_usd": 27.49,
+   "backlash_note": "No backlash figure published on the page read; measure on receipt.",
+   "source_url": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/",
+   "notes": "Dims are W x H x D per ROBOTIS. 0.60 Nm @6V, 0.42 Nm @3.7V. Price from https://robotis.us/dynamixel-xl330-m288-t (sold out at read time)."
+  },
+  {
+   "model": "XL330-M077-T",
+   "maker": "ROBOTIS (Dynamixel)",
+   "bus_protocol": "DYNAMIXEL Protocol 2.0, half-duplex TTL",
+   "mass_g": 18,
+   "dims_mm": [
+    20.0,
+    34.0,
+    26.0
+   ],
+   "stall_torque_Nm": 0.215,
+   "stall_torque_voltage_V": 5.0,
+   "no_load_speed_rpm_or_s_per_60deg": "383 rpm @5V",
+   "resolution_deg_or_counts": "4096 pulses/rev",
+   "gear_material": "engineering plastic",
+   "approx_price_usd": 27.49,
+   "backlash_note": "No backlash figure published on the page read; measure on receipt.",
+   "source_url": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/",
+   "notes": "Fast/low-torque; suits a lightly loaded tip roll or fan-yaw axis. Price from https://robotis.us/dynamixel-xl330-m077-t/."
+  },
+  {
+   "model": "XL430-W250-T",
+   "maker": "ROBOTIS (Dynamixel)",
+   "bus_protocol": "DYNAMIXEL Protocol 2.0, half-duplex TTL",
+   "mass_g": 57.2,
+   "dims_mm": [
+    28.5,
+    46.5,
+    34.0
+   ],
+   "stall_torque_Nm": 1.4,
+   "stall_torque_voltage_V": 11.1,
+   "no_load_speed_rpm_or_s_per_60deg": "57 rpm @11.1V",
+   "resolution_deg_or_counts": "4096 pulses/rev",
+   "gear_material": "engineering plastic",
+   "approx_price_usd": 44.9,
+   "backlash_note": "No backlash figure published on the page read; measure on receipt.",
+   "source_url": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+   "notes": "1.5 Nm @12V. Price is ROBOTIS US MSRP from Jan 2021 announcement (https://www.robotis.us/robotis-blog/xl430-price-change-xseries-accessories/); RobotShop CA showed $70.28 (currency unclear) - current price unverified."
+  },
+  {
+   "model": "2XL430-W250-T (dual-axis)",
+   "maker": "ROBOTIS (Dynamixel)",
+   "bus_protocol": "DYNAMIXEL Protocol 2.0, half-duplex TTL; two IDs/control tables in one housing",
+   "mass_g": 98.2,
+   "dims_mm": [
+    36.0,
+    46.5,
+    36.0
+   ],
+   "stall_torque_Nm": 1.4,
+   "stall_torque_voltage_V": 11.1,
+   "no_load_speed_rpm_or_s_per_60deg": "57 rpm @11.1V (each axis)",
+   "resolution_deg_or_counts": "4096 pulses/rev",
+   "gear_material": "metal (per e-manual and RobotShop 'powder metallurgy')",
+   "approx_price_usd": 149.39,
+   "backlash_note": "No backlash figure published on the page read; measure on receipt.",
+   "source_url": "https://emanual.robotis.com/docs/en/dxl/x/2xl430-w250/",
+   "notes": "Two independent output axes in one body; torque is per axis. Price from https://www.robotshop.com/products/robotis-dynamixel-2xl430-w250-t-smart-servo-actuator."
+  },
+  {
+   "model": "LX-16A",
+   "maker": "Hiwonder",
+   "bus_protocol": "Hiwonder proprietary half-duplex UART serial bus, 115200 baud, IDs 0-253 (needs Hiwonder debug/bus board)",
+   "mass_g": 54,
+   "dims_mm": [
+    45.22,
+    24.72,
+    36.3
+   ],
+   "stall_torque_Nm": 1.667,
+   "stall_torque_voltage_V": 6.0,
+   "no_load_speed_rpm_or_s_per_60deg": "0.19 s/60deg @7.4V",
+   "resolution_deg_or_counts": "0-240deg range, 0.3deg accuracy",
+   "gear_material": "full metal",
+   "approx_price_usd": 16.99,
+   "backlash_note": "No backlash figure published on the page read; measure on receipt.",
+   "source_url": "https://www.hiwonder.com/products/lx-16a",
+   "notes": "Page is internally inconsistent: 17 kg.cm@6V and 20 kg.cm@7.4V in spec table; 15 kg.cm@6.6V and 17-19.5 kg.cm@7.4V elsewhere. 240deg limit (not 360). Working voltage 6-8.4 V."
+  },
+  {
+   "model": "HTS-35H",
+   "maker": "Hiwonder",
+   "bus_protocol": "Hiwonder UART serial bus, 115200 baud",
+   "mass_g": 64,
+   "dims_mm": [
+    54.38,
+    20.14,
+    45.5
+   ],
+   "stall_torque_Nm": 3.432,
+   "stall_torque_voltage_V": 11.1,
+   "no_load_speed_rpm_or_s_per_60deg": "0.18 s/60deg @11.1V",
+   "resolution_deg_or_counts": "0-240deg, 0.2deg accuracy",
+   "gear_material": "metal",
+   "approx_price_usd": 29.99,
+   "backlash_note": "No backlash figure published on the page read; measure on receipt.",
+   "source_url": "https://robotshop.com/products/hiwonder-hiwonder-hts-35h-high-voltage-bus-servo-w-35kg-torque-data-feedback",
+   "notes": "35 kg.cm not explicitly labelled 'stall' on listing. 9-12.6 V. Note: HTS-35H is a Hiwonder part, not Feetech."
+  }
+ ],
+ "tip_mechanisms": [
+  {
+   "id": "omni_wrist_III",
+   "name": "Ross-Hime Omni-Wrist III",
+   "mechanism": "Parallel spherical linkage (repeated identical linkages, preloaded bearings, no gears), driven by 2 linear actuators via cranks; constant-velocity-like pointing",
+   "dof": 2,
+   "range_deg": "180deg hemisphere + 5deg past horizon (+/-92.5deg)",
+   "singularity_free": true,
+   "actuators_needed": 2,
+   "notable_examples": "Omni-Wrist III (18 lb, 5 lb payload at 0.02deg resolution); NASA/DTIC laser-comm and sensor pointing",
+   "fdm_printable_notes": "Linkage is all revolute joints - printable at hobby scale with bearings/pins, but needs tight tolerances and many small bearings; large part count (4 legs). Through-hole fits fan wiring.",
+   "sources": [
+    {
+     "title": "Omni-Wrist III product page (Ross-Hime / anthrobot.com)",
+     "url": "https://www.anthrobot.com/omni_III/",
+     "what_it_supports": "180deg hemisphere range, singularity-free claim, zero backlash, linear actuators, specs"
+    },
+    {
+     "title": "Ross-Hime introduce Omni-Wrist III (Industrial Robot, 2000)",
+     "url": "https://emerald.com/insight/content/doi/10.1108/ir.2000.04927fad.008/full/html",
+     "what_it_supports": "Product announcement (search result; not read in full)"
+    }
+   ]
+  },
+  {
+   "id": "omni_wrist_VI",
+   "name": "Ross-Hime Omni-Wrist VI",
+   "mechanism": "Four-linkage parallel gimbal with tapered roller bearings, 2 actuators (linear or direct-drive rotary)",
+   "dof": 2,
+   "range_deg": "pitch +/-90, yaw +/-90 (180deg horizon-to-horizon)",
+   "singularity_free": true,
+   "actuators_needed": 2,
+   "notable_examples": "Sensor/antenna pointing, laser welding; heavy payload (45 lb with linear actuators)",
+   "fdm_printable_notes": "Same caveats as Omni-Wrist III; four linkages with heavy bearings - a scaled printed version is possible but part-count heavy.",
+   "sources": [
+    {
+     "title": "Omni-Wrist VI product page",
+     "url": "https://anthrobot.com/omni-wrist-vi/",
+     "what_it_supports": "+/-90deg pitch/yaw, 2-actuator drive, 'elimination of singularity or key hole' claim"
+    },
+    {
+     "title": "Gimbal mount expands drones' view (Machine Design)",
+     "url": "https://www.machinedesign.com/news/gimbal-mount-expands-drones-view",
+     "what_it_supports": "Use of the Omni-Wrist-style gimbal on drones (search result; not read)"
+    }
+   ]
+  },
+  {
+   "id": "rosheim_double_gimbal_wrist",
+   "name": "Rosheim compact double-gimbal (CV-style) wrist",
+   "mechanism": "Two gimbal assemblies in a housing (pitch, yaw) with spur gears, each gimbal takes about half the deflection; separate roll drive shaft passes through",
+   "dof": 3,
+   "range_deg": "up to ~180deg pitch/yaw total; roll 360deg continuous",
+   "singularity_free": true,
+   "actuators_needed": 3,
+   "notable_examples": "US 4,686,866 (Rosheim, 1987, assigned to Ross-Hime); ancestor of the Omni-Wrist family",
+   "fdm_printable_notes": "Two pushrods with ball ends drive pitch/yaw - very servo-friendly; double U-joint/spur-gear coupling printable in PETG/nylon. Roll shaft through-center can carry a fan-yaw axis.",
+   "sources": [
+    {
+     "title": "US4686866A Compact robot wrist actuator (Google Patents)",
+     "url": "https://patents.google.com/patent/US4686866",
+     "what_it_supports": "Mechanism, ~180deg pitch/yaw, singularity-free claim, push-rod actuation"
+    }
+   ]
+  },
+  {
+   "id": "milenkovic_2axis_nonsingular",
+   "name": "Milenkovic two-axis non-singular CV wrist (RU + RSR Clemens linkage)",
+   "mechanism": "RU chain + RSR Clemens linkage in parallel; pointer constrained to spherical motion, roll slaved as constant-velocity; pitch via 4-bar angle doubler",
+   "dof": 2,
+   "range_deg": "+/-100deg without interference; claims up to 180deg",
+   "singularity_free": true,
+   "actuators_needed": 2,
+   "notable_examples": "US 8,245,595 B2 (WARF)",
+   "fdm_printable_notes": "Pushrod or drum driven; all revolute/spherical joints; 4-bar angle reducer lets a 100deg crank give 200deg pitch - good fit for 180deg-limited hobby servos.",
+   "sources": [
+    {
+     "title": "US8245595B2 Two-axis non-singular robotic wrist",
+     "url": "https://patents.google.com/patent/US8245595B2/en",
+     "what_it_supports": "Mechanism, +/-100deg range, singularity-free claim, 2 actuators"
+    }
+   ]
+  },
+  {
+   "id": "duta_stanisic_spherical_wrist",
+   "name": "Duta-Stanisic dextrous spherical wrist (semicircular-link)",
+   "mechanism": "Redundant spherical linkage of four semicircular links on a central link with sliding blocks; one arm per hemisphere",
+   "dof": 2,
+   "range_deg": "Near full sphere (any relative motion except arm through arm); no numeric range given",
+   "singularity_free": true,
+   "actuators_needed": 2,
+   "notable_examples": "US 4,878,393 (1989)",
+   "fdm_printable_notes": "Curved sliding blocks on printed arcs suffer friction/wear in FDM; better as a concept than a garage build.",
+   "sources": [
+    {
+     "title": "US4878393A Dextrous spherical robot wrist",
+     "url": "https://patents.google.com/patent/US4878393",
+     "what_it_supports": "Mechanism and singularity-free claim; 2 or 4 actuators"
+    }
+   ]
+  },
+  {
+   "id": "ball_drive_omniwheel_sphere",
+   "name": "Ball Drive: sphere driven by 3 omni-wheels (inverse ballbot / Atlas)",
+   "mechanism": "Output sphere held in a cage and rotated by three omni-wheels pressed on it; constant Jacobian from wheel speeds to sphere angular velocity",
+   "dof": 3,
+   "range_deg": "Unlimited rotation of the sphere itself; usable output-shaft tilt limited by cage opening (typically <= +/-60-90deg)",
+   "singularity_free": true,
+   "actuators_needed": 3,
+   "notable_examples": "Atlas motion-simulator sphere (Carleton); CMU Ballbot inverse mouse-ball drive (2006)",
+   "fdm_printable_notes": "Omni-wheels and the sphere are printable (TPU rollers); slip under load and preload springs are the main issues; continuous-rotation servos or small geared motors with encoders needed. Mass of sphere+3 drives at a tentacle tip is a concern.",
+   "sources": [
+    {
+     "title": "Weiss, Langlois, Hayes - Unified treatment of the kinematic interface between a sphere and omnidirectional wheel actuators (J. Mech. Robotics 2011)",
+     "url": "https://carleton.ca/johnhayes/wp-content/uploads/Unified-Treatment-of-the-Kinematic-Interface-Between-a-Sphere-and-Omnidirectional-Wheel-Actuators.pdf",
+     "what_it_supports": "3 wheels needed for 3-DOF; slip notes; singular elevation angles for some wheel layouts"
+    },
+    {
+     "title": "Lauwers, Kantor, Hollis - A dynamically stable single-wheeled mobile robot with inverse mouse-ball drive (ICRA 2006)",
+     "url": "https://ri.cmu.edu/?p=9475",
+     "what_it_supports": "Ballbot inverse mouse-ball drive concept"
+    },
+    {
+     "title": "3D Printing Omni-Balls For Robot Locomotion (Hackaday)",
+     "url": "https://hackaday.com/2021/05/20/3d-printing-omni-balls-for-robot-locomotion/",
+     "what_it_supports": "Printable TPU-gripped spherical rolling elements"
+    }
+   ],
+   "singularity_note": "Kinematically singularity-free with 3 well-placed wheels; Carleton paper reports singular elevation angles (0, +/-90deg) for its specific wheel geometry."
+  },
+  {
+   "id": "abenics_spherical_gear",
+   "name": "ABENICS active ball joint (cross spherical gear + monopole gears)",
+   "mechanism": "Cross spherical gear (teeth swept in two directions on a sphere) driven by two monopole gear units on 2-DOF drives",
+   "dof": 3,
+   "range_deg": "Large; tilt limited by output-shaft interference (no figure in article)",
+   "singularity_free": null,
+   "actuators_needed": 4,
+   "notable_examples": "ABENICS (Abe et al., IEEE T-RO 2021)",
+   "fdm_printable_notes": "Original parts SLA/PEEK; community Thingiverse remix exists. FDM tooth accuracy on spherical gears is marginal - expect backlash.",
+   "sources": [
+    {
+     "title": "Active Ball Joint Uses Spherical Gear (Hackaday 2021)",
+     "url": "https://hackaday.com/2021/06/24/active-ball-joint-uses-spherical-gear",
+     "what_it_supports": "Mechanism description, SLA-printed parts, links to IEEE paper"
+    },
+    {
+     "title": "The ABENICS Active Ball Joint Mechanism (Hackster)",
+     "url": "https://www.hackster.io/news/the-abenics-active-ball-joint-mechanism-moves-an-output-link-with-three-degrees-of-freedom-5315bdc3c09b",
+     "what_it_supports": "3-DOF output link (search result; not read)"
+    }
+   ]
+  },
+  {
+   "id": "hog_drive_hemisphere",
+   "name": "HOG drive (hemispherical omnidirectional gimballed)",
+   "mechanism": "Spinning hemisphere on a 2-axis gimbal tilted by two servo control arms",
+   "dof": 2,
+   "range_deg": "Tilt range not specified",
+   "singularity_free": false,
+   "actuators_needed": 3,
+   "notable_examples": "Marginally Clever 3D printed HOG drive (Thingiverse 52097)",
+   "fdm_printable_notes": "Fully 3D printed hobby design; demonstrates 2 servos tilting a spinning element - analogous to tilting a fan.",
+   "sources": [
+    {
+     "title": "3D Printed HOG Drive (Hackaday 2013)",
+     "url": "https://hackaday.com/2013/02/28/3d-printed-hog-drive",
+     "what_it_supports": "Printable 2-servo gimbal on a spinning hemisphere"
+    }
+   ]
+  },
+  {
+   "id": "pan_tilt_servo_gimbal",
+   "name": "2-axis serial servo gimbal (pan-tilt / yaw-pitch)",
+   "mechanism": "Two orthogonal revolute axes in series, one servo each",
+   "dof": 2,
+   "range_deg": "Each axis limited by servo (180-360deg); hemisphere reachable",
+   "singularity_free": false,
+   "actuators_needed": 2,
+   "notable_examples": "SG90 pan-tilt brackets; model-rocket TVC gimbal (+/-5deg, 2x SG90, ABS)",
+   "fdm_printable_notes": "Easiest to print; singular (keyhole) when the outer-axis-aligned direction is commanded - fan pointing along pan axis needs fast pan slew.",
+   "sources": [
+    {
+     "title": "Design and Testing of a Low-Cost 3D-Printed Servo Gimbal for TVC in Model Rockets (arXiv 2509.00061)",
+     "url": "https://arxiv.org/html/2509.00061v1",
+     "what_it_supports": "2x SG90 2-axis printed gimbal, ABS vs PLA notes, +/-5deg"
+    },
+    {
+     "title": "Keyhole problem (Wikipedia)",
+     "url": "https://en.wikipedia.org/wiki/Keyhole_problem",
+     "what_it_supports": "Singularity of 2-axis az-el gimbals near the outer axis"
+    }
+   ]
+  },
+  {
+   "id": "bevel_differential_wrist",
+   "name": "Bevel-gear differential wrist (2 servos, 2 DOF)",
+   "mechanism": "Two input bevel gears mesh with one output bevel; same-direction input = pitch, opposite = roll/yaw",
+   "dof": 2,
+   "range_deg": "Pitch ~+/-90deg (housing-limited), roll continuous",
+   "singularity_free": false,
+   "actuators_needed": 2,
+   "notable_examples": "PCrnjak differential robot wrist (Printables 918284); CN112894783A 2-DOF differential joint module",
+   "fdm_printable_notes": "Very printable; both motors sit proximal (both servo torques add on each axis). Bevel teeth in PETG/nylon OK; backlash from printed teeth. Pitch-roll layout still has a roll-axis singularity at 90deg pitch for pointing.",
+   "sources": [
+    {
+     "title": "Differential robot wrist (Printables, PCrnjak)",
+     "url": "https://www.printables.com/model/918284-differential-robot-wrist",
+     "what_it_supports": "Fully printed differential wrist test fixture"
+    },
+    {
+     "title": "CN112894783A Two-DOF differential mechanical arm joint module",
+     "url": "https://patents.google.com/patent/CN112894783A/en",
+     "what_it_supports": "Bevel-gear differential pitch/yaw joint driven by two motors"
+    }
+   ]
+  },
+  {
+   "id": "agile_eye_3rrr_spm",
+   "name": "Spherical parallel manipulator - Agile Eye (3-RRR)",
+   "mechanism": "Three RRR legs, all axes intersecting at one center; base motors fixed",
+   "dof": 3,
+   "range_deg": "140deg cone, +/-30deg torsion",
+   "singularity_free": false,
+   "actuators_needed": 3,
+   "notable_examples": "Laval Agile Eye (Gosselin 1993), >1000deg/s",
+   "fdm_printable_notes": "Printable with curved links; all three servos stationary (low moving mass). Workspace smaller than Omni-Wrist; has singular poses. A 2-DOF variant has larger workspace.",
+   "sources": [
+    {
+     "title": "The Agile Eye (Laval Robotics Lab)",
+     "url": "https://robot.gmc.ulaval.ca/en/research/research-thrusts/parallel-mechanisms/the-agile-eye",
+     "what_it_supports": "3-RRR, 140deg cone +/-30deg torsion, singularity notes, 2-DOF variant"
+    }
+   ]
+  },
+  {
+   "id": "rolling_spm_printed",
+   "name": "Pure-rolling (homokinetic) spherical parallel manipulator, 3D printed",
+   "mechanism": "4-legged pure-rolling SPM similar to Omni-Wrist/Quaternion joint + decoupled yaw actuator",
+   "dof": 3,
+   "range_deg": "Hemispherical workspace; input angle up to ~75deg",
+   "singularity_free": true,
+   "actuators_needed": 3,
+   "notable_examples": "Generatively optimised compact 3-DoF SPM with Dynamixel XH430 (Frontiers Mech. Eng. 2025)",
+   "fdm_printable_notes": "All links printed in ABS; 428 g total incl. 246 g actuators - a direct printed reference for an Omni-Wrist-class joint.",
+   "sources": [
+    {
+     "title": "Generatively optimised compact 3-DoF SPM with tightly integrated actuators (Frontiers 2025)",
+     "url": "https://www.frontiersin.org/articles/10.3389/fmech.2025.1629405/full",
+     "what_it_supports": "Printed homokinetic SPM, singularity-free in workspace, mass figures"
+    }
+   ]
+  },
+  {
+   "id": "rss_pushrod_ball_joint",
+   "name": "2-RSS / 3-RSS pushrod-driven ball joint (Stewart-style wrist)",
+   "mechanism": "Central passive ball/U joint; 2 or 3 servo cranks with ball-end pushrods to the moving plate",
+   "dof": "2-3",
+   "range_deg": "Typically +/-30-45deg tilt (pushrod/plate geometry-limited)",
+   "singularity_free": false,
+   "actuators_needed": "2-3",
+   "notable_examples": "James Bruton tentacle of 3 Stewart platforms (18 servos); Rosheim pushrod wrist",
+   "fdm_printable_notes": "Cheapest/easiest: RC ball links + printed cranks. Range limited; needs pushrod clearance around fan.",
+   "sources": [
+    {
+     "title": "A Robot Tentacle with Big Doc Ock Energy (Hackster)",
+     "url": "https://www.hackster.io/news/a-robot-tentacle-with-big-doc-ock-energy-c02b9a7e3592",
+     "what_it_supports": "Servo-crank pushrod Stewart platforms as tentacle joints, mostly 3D printed"
+    },
+    {
+     "title": "US4686866A (Rosheim)",
+     "url": "https://patents.google.com/patent/US4686866",
+     "what_it_supports": "Push/pull rods with ball joints driving a wrist"
+    }
+   ]
+  },
+  {
+   "id": "cable_spherical_joint",
+   "name": "Cable/tendon-driven spherical joint",
+   "mechanism": "Passive ball joint, 3-4 tendons (antagonistic pairs) pulled by remote servos",
+   "dof": "2-3",
+   "range_deg": "Typically +/-30-60deg per joint (cable-angle limited)",
+   "singularity_free": null,
+   "actuators_needed": "2-4 (2 servos per joint in the Hackaday arm)",
+   "notable_examples": "Gear Down For What 8-joint ball-joint arm (16 servos, fishing line in tubing); Gilbank tendon wrist (uOttawa 2005)",
+   "fdm_printable_notes": "Moves mass off the tip; cable stretch/friction through a long tentacle is the main problem.",
+   "sources": [
+    {
+     "title": "A servo powered robotic arm but like you've never seen before (Hackaday 2018)",
+     "url": "https://hackaday.com/2018/09/04/a-servo-powered-robotic-arm-but-like-youve-never-seen-before",
+     "what_it_supports": "Printed ball joints, 2 servos per joint via cables"
+    },
+    {
+     "title": "Design and control of a three-DOF spherical tendon based manipulator (Gilbank, uOttawa 2005)",
+     "url": "https://ruor.uottawa.ca/items/5a6af383-0cf7-4d18-9771-d689f8b51e19/full",
+     "what_it_supports": "Tendon-based 3-DOF spherical wrist"
+    }
+   ]
+  },
+  {
+   "id": "three_roll_wrist",
+   "name": "Canted-axis three-roll wrist",
+   "mechanism": "Three concentric roll shafts with bevel pairs on canted (non-orthogonal) axes",
+   "dof": 3,
+   "range_deg": "Large; tool tip sweeps sphere surface",
+   "singularity_free": false,
+   "actuators_needed": 3,
+   "notable_examples": "Cincinnati-Milacron three-roll wrist",
+   "fdm_printable_notes": "Concentric tubes + bevels - hard at tentacle-tip scale; all motors proximal.",
+   "sources": [
+    {
+     "title": "3-Roll Robotic Wrist Mechanism (MathWorks Simscape example)",
+     "url": "https://in.mathworks.com/help/sm/ug/3-roll-robotic-wrist-mechanism.html",
+     "what_it_supports": "Mechanism: three bevel pairs, 3 independent axes"
+    }
+   ]
+  },
+  {
+   "id": "hooke_plus_roll",
+   "name": "Hooke (universal) joint with roll",
+   "mechanism": "U-joint for pitch/yaw + coaxial roll axis; (double U-joint version splits the bend)",
+   "dof": 3,
+   "range_deg": "Single U-joint ~+/-45deg practical; double ~+/-90deg",
+   "singularity_free": false,
+   "actuators_needed": 3,
+   "notable_examples": "Hirose ACM-R5 joints (U-joint + passive twist); Rosheim double-gimbal wrist",
+   "fdm_printable_notes": "Printable cross + yokes with pins/bearings; actuate via 2 pushrods or 2 servos on the yokes.",
+   "sources": [
+    {
+     "title": "Amphibious snake-like robot ACM-R5 (Make)",
+     "url": "https://makezine.com/article/technology/robotics/amphibious-snakelike-robo",
+     "what_it_supports": "Universal joint with passive twist at axis intersection"
+    },
+    {
+     "title": "US4686866A (Rosheim)",
+     "url": "https://patents.google.com/patent/US4686866",
+     "what_it_supports": "Two gimbals + roll shaft"
+    }
+   ]
+  },
+  {
+   "id": "thrust_vector_rotor_tilt",
+   "name": "Thrust-vectoring rotor tilt (tiltrotor / omnidirectional MAV)",
+   "mechanism": "Rotor on 1-axis tilt about arm (Voliro) or servo-driven tilt platform (gimballed quadrotor)",
+   "dof": "1-2",
+   "range_deg": "+/-40deg achieved (gimballed quad); full rotation about arm axis (Voliro)",
+   "singularity_free": null,
+   "actuators_needed": "1 per rotor axis",
+   "notable_examples": "Voliro omnidirectional hexacopter (ETH); TMU gimballed-rotor quadrotor (SAVOX SV-1232MG, CF-nylon prints); ducted-fan vane vectoring (Printables 722967)",
+   "fdm_printable_notes": "Direct servo-to-rotor-mount with CF-reinforced nylon prints proven in flight.",
+   "sources": [
+    {
+     "title": "Gimballed Rotor Mechanism for Omnidirectional Quadrotors (arXiv 2511.15909)",
+     "url": "https://arxiv.org/html/2511.15909v1",
+     "what_it_supports": "Servo tilt per rotor, +/-40deg, 3D printed CF-PA"
+    },
+    {
+     "title": "Voliro: an omnidirectional hexacopter with tiltable rotors (Kamel et al.)",
+     "url": "https://www.emergentmind.com/papers/1801.04581",
+     "what_it_supports": "Each rotor tilts about its arm axis"
+    },
+    {
+     "title": "Ducted fan thrust vectoring drone (Printables)",
+     "url": "https://www.printables.com/model/722967-ducted-fan-thrust-vectoring-drone",
+     "what_it_supports": "4 servo-driven vanes; printable"
+    }
+   ]
+  }
+ ],
+ "vertebra_joint_refs": [
+  {
+   "id": "cmu_modsnake",
+   "name": "CMU modular snake (Unified Snake)",
+   "what": "1-DOF modules, each rotated 90deg from the previous (alternating horizontal/vertical axes); 2x2x2.25 in modules; enclosed actuator + SMA brake",
+   "sources": [
+    {
+     "title": "A Novel Architecture for Modular Snake Robots (Johnson, Wright, Tesch, Lipkin, Choset)",
+     "url": "https://www.ri.cmu.edu/pub_files/2011/8/journal08.pdf",
+     "what_it_supports": "1 DOF/module, 90deg alternation, module size"
+    },
+    {
+     "title": "Design and architecture of the unified modular snake robot (ICRA 2012)",
+     "url": "https://ri.cmu.edu/publications/design-and-architecture-of-the-unified-modular-snake-robot",
+     "what_it_supports": "Module contents, SMA brake"
+    },
+    {
+     "title": "Modular Snake Robots (CMU RI)",
+     "url": "https://www.ri.cmu.edu/project/modular-snake-robots",
+     "what_it_supports": "Project overview"
+    }
+   ]
+  },
+  {
+   "id": "hirose_acm_r5",
+   "name": "Hirose ACM-R5 / ACM-R5H",
+   "what": "2-DOF universal joint per segment (2 servomotors) with passive twist; 9 segments = 18 DOF; self-contained units",
+   "sources": [
+    {
+     "title": "ACM (Robots Guide, IEEE)",
+     "url": "https://robotsguide.com/robots/acm",
+     "what_it_supports": "2 DOF and 2 servos per segment, 9 segments"
+    },
+    {
+     "title": "Amphibious snake-like robot ACM-R5 (Make)",
+     "url": "https://makezine.com/article/technology/robotics/amphibious-snakelike-robo",
+     "what_it_supports": "U-joint + bellows + passive twist"
+    },
+    {
+     "title": "Ohno & Hirose, paper proposing 3D gaits for the active cord mechanism (J. Robotics Mechatronics 15(4), 2003)",
+     "url": "https://www.fujipress.jp/jrm/rb/robot001500040424/",
+     "what_it_supports": "ACM concept"
+    }
+   ]
+  },
+  {
+   "id": "printed_servo_snakes",
+   "name": "Hobby printed servo-per-joint snakes",
+   "what": "Slitherbot: 16 MG90S, one per rib, PLA+TPU, >1 m; NTU bi-module concept (pitch+yaw pairs); TAMS printable modular robot (RC servo modules, ~EUR25 each, magnetic interfaces)",
+   "sources": [
+    {
+     "title": "Slitherbot (Hackaday.io)",
+     "url": "https://hackaday.io/project/178463-slitherbot",
+     "what_it_supports": "16 MG90S servo-per-segment printed snake"
+    },
+    {
+     "title": "Yeh & Lian, Modular design and simulation of biomimetic snake robots (IFAC 2008)",
+     "url": "https://skoge.folk.ntnu.no/prost/proceedings/ifac2008/data/papers/0748.pdf",
+     "what_it_supports": "Pitch+yaw bi-module layouts and joint amplitudes"
+    },
+    {
+     "title": "Printable Modular Robot (Uni Hamburg TAMS)",
+     "url": "https://tams-www.informatik.uni-hamburg.de/research/3d-printing/pmr",
+     "what_it_supports": "3D-printed RC-servo modules with pitch/yaw detection"
+    }
+   ]
+  },
+  {
+   "id": "compact_2dof_ujoint_module",
+   "name": "Compact 2-DOF universal-joint module (two servos per segment)",
+   "what": "Two orthogonal servo axes co-located in one segment (U-joint); ROBOTIS 2XL430 is an off-the-shelf dual-axis body for this; ACM-R5 uses the same idea",
+   "sources": [
+    {
+     "title": "2XL430-W250 e-manual",
+     "url": "https://emanual.robotis.com/docs/en/dxl/x/2xl430-w250/",
+     "what_it_supports": "Two independent axes in one 98 g housing"
+    },
+    {
+     "title": "ACM (Robots Guide)",
+     "url": "https://robotsguide.com/robots/acm",
+     "what_it_supports": "2 servos per U-joint segment"
+    }
+   ]
+  },
+  {
+   "id": "differential_bevel_2dof_module",
+   "name": "Differential bevel 2-DOF joint module",
+   "what": "Two motors drive two bevel gears on a cross shaft -> pitch + yaw, both motors share load",
+   "sources": [
+    {
+     "title": "CN112894783A Two-DOF differential joint module",
+     "url": "https://patents.google.com/patent/CN112894783A/en",
+     "what_it_supports": "Bevel differential pitch/yaw with two motors"
+    },
+    {
+     "title": "Differential robot wrist (Printables)",
+     "url": "https://www.printables.com/model/918284-differential-robot-wrist",
+     "what_it_supports": "Printed differential"
+    }
+   ]
+  },
+  {
+   "id": "rolling_contact_2to1",
+   "name": "Rolling-contact (2:1) joints that double range",
+   "what": "Equal-radius rolling surfaces: joint angle = 2x each half's rotation (q = (1 + r_d/r_p) q_d); allows full fold; Skyentific 'virtual sphere' rolling 2-DOF joint shows printed version with Dynamixels",
+   "sources": [
+    {
+     "title": "Control and Evaluation of a Humanoid Robot with Rolling Contact Knees (DRACO 3, arXiv 2210.00961)",
+     "url": "https://arxiv.org/pdf/2210.00961",
+     "what_it_supports": "2x angle relation for equal radii"
+    },
+    {
+     "title": "Skyentific virtual sphere rolling joint (Hackster)",
+     "url": "https://hackster.io/news/skyentific-s-virtual-sphere-rolling-joint-gives-this-3d-printed-robot-arm-mesmerizing-motion-729714de140d",
+     "what_it_supports": "Printed 2-DOF rolling joint, Dynamixel-driven, trunk-like motion"
+    },
+    {
+     "title": "Optimizing robotic joints (Harvard SEAS, Decker et al. PNAS 2026)",
+     "url": "https://seas.harvard.edu/index%2Ephp/news/optimizing-robotic-joints",
+     "what_it_supports": "Optimized non-circular RCJ profiles"
+    }
+   ]
+  },
+  {
+   "id": "overload_clutch_sea",
+   "name": "Overload clutches / series-elastic couplings for hobby servos",
+   "what": "DAGU magnetic servo clutch (8 neodymium magnets, ~850 g.cm hold, slips to protect gears); OpenSEA printed torsion-spring SEA (0.015 Nm/deg spring, PLA planetary). Spring-detent breakaways: no good source found.",
+   "sources": [
+    {
+     "title": "DAGU Magnetic Servo Clutch (rhydolabz)",
+     "url": "https://www.rhydolabz.com/dagu-magnetic-servo-clutches-for-miniature-servos",
+     "what_it_supports": "Magnetic breakaway horn for 8-9 g servos, holding torque"
+    },
+    {
+     "title": "OpenSEA: 3D printed planetary SEA (Frontiers Robotics & AI 2025)",
+     "url": "https://frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2025.1528266/full",
+     "what_it_supports": "Printed torsion-spring SEA, stiffness data"
+    }
+   ]
+  },
+  {
+   "id": "tentacle_actuator_per_segment",
+   "name": "Tentacle robots with actuators per segment",
+   "what": "James Bruton: 3 Stewart-platform segments (18 servos); Bruton 7-DOF Dynamixel tentacle arm (90deg rotating stages); Gear Down For What 8 ball joints / 16 servos (cable)",
+   "sources": [
+    {
+     "title": "A Robot Tentacle with Big Doc Ock Energy",
+     "url": "https://www.hackster.io/news/a-robot-tentacle-with-big-doc-ock-energy-c02b9a7e3592",
+     "what_it_supports": "6 servos per segment Stewart tentacle"
+    },
+    {
+     "title": "Open-Source 7-DOF Tentacle Arm (Circuit Digest)",
+     "url": "https://circuitdigest.com/news/open-source-7-dof-tentacle-arm-uses-ros-2-moveit-for-inverse-kinematics-and-features-a-holonomic-base",
+     "what_it_supports": "Dynamixel per joint serial tentacle"
+    },
+    {
+     "title": "Hackaday 2018 cable ball-joint arm",
+     "url": "https://hackaday.com/2018/09/04/a-servo-powered-robotic-arm-but-like-youve-never-seen-before",
+     "what_it_supports": "2 servos per ball joint"
+    },
+    {
+     "title": "Colossal Tentacle Robot (Hackster, EMF Camp)",
+     "url": "https://hackster.io/news/colossal-tentacle-robot-wows-emf-camp-crowds-eb97d1b45284",
+     "what_it_supports": "Oblique swivel joints (30/60deg canted) - canted-axis segment layout"
+    }
+   ]
+  }
+ ]
+}

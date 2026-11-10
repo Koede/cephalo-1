@@ -1,0 +1,92 @@
+{
+ "servo": {
+  "name": "STS3032",
+  "Lx": 28.5,
+  "Wy": 12.1,
+  "Lz": 23.2,
+  "front": 5.5,
+  "g": 20.0,
+  "stall_Nm": 0.44145
+ },
+ "motor": {
+  "name": "T-Motor MN5008 KV400",
+  "D": 55.6,
+  "H": 32.0,
+  "g": 132.0,
+  "holes_r": 12.5
+ },
+ "prop": {
+  "name": "16x5.4 CF 2-blade",
+  "R": 203.2,
+  "g": 26.0,
+  "hub_up": 21.0
+ },
+ "hinge_height_mm": 34.0,
+ "travel_deg": [
+  -4.0,
+  88.0
+ ],
+ "empty_close_deg": -5.5,
+ "interference_over_travel": {
+  "steps": 93,
+  "bad": []
+ },
+ "opening_mm": {
+  "0": 4.0,
+  "15": 12.5,
+  "30": 22.8,
+  "45": 34.3,
+  "60": 46.2,
+  "75": 57.7,
+  "88": 66.7
+ },
+ "prop_plane_above_tip_plate_mm": 102.0,
+ "prop_to_finger_top_mm": 23.5,
+ "folded_disc_plane_from_arm_axis_mm": 68.0,
+ "folded_disc_clear_of_arm_mm": 39.4,
+ "grip": {
+  "pinch_radius_mm": 45.6,
+  "F_half_stall_N": 4.8,
+  "F_stall_N": 9.7,
+  "holds_kg_half_stall": 0.59,
+  "holds_kg_stall": 1.18
+ },
+ "pod_weight_moment_Nm": 0.06,
+ "pod_weight_of_stall": 0.14,
+ "gyro_Nm": {
+  "0.25 rad/s": 0.058,
+  "0.5 rad/s": 0.116,
+  "1.0 rad/s": 0.231
+ },
+ "gyro_of_stall_at_0p5": 0.26,
+ "mass_g": {
+  "palm": 30.9,
+  "pod": 13.6,
+  "servo": 20.0,
+  "hardware": 8.0,
+  "pads": 2.0,
+  "claw_total": 74.5,
+  "with_motor_prop": 232.5
+ },
+ "parking": {
+  "collar": {
+   "r_min": 11.0,
+   "lobe": 2.0,
+   "a": [
+    55.0,
+    60.0
+   ]
+  },
+  "post_top_above_tip_plate_mm": 24.7,
+  "engages_from_deg": 86.4,
+  "post_axial_max_mm": 59.1,
+  "blade_root_axial_mm": 64.0,
+  "post_clear_of_blades_mm": 4.9,
+  "spring_N": 2.0,
+  "servo_load_Nm": 0.115,
+  "servo_load_with_pod_weight_of_stall": 0.4,
+  "cam_turning_torque_Nm": 0.0168,
+  "note": "valleys clocked 90 deg from the blades so the post seats with the blades along x; cam slope 35 deg [A]; the stopped motor's cogging plus bearing drag must stay under the cam torque [A: measure]"
+ },
+ "note": "thrust passes through the hinge at every angle; servo carries the pod's weight, the squeeze and any gyroscopic moment"
+}

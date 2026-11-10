@@ -1,0 +1,76 @@
+{
+ "outline_alpha": [
+  -35.9,
+  25.0
+ ],
+ "outline_beta": [
+  -21.15,
+  21.15
+ ],
+ "notch_alpha": [
+  -35.9,
+  25.0
+ ],
+ "notch_beta": [
+  -21.15,
+  21.15
+ ],
+ "old_opening_alpha": [
+  -20.55,
+  20.55
+ ],
+ "old_opening_beta": [
+  -20.55,
+  20.55
+ ],
+ "hole_edge_to_opening_mm": [
+  5.57,
+  14.9,
+  14.9,
+  5.57,
+  5.41,
+  5.41,
+  4.48,
+  4.48
+ ],
+ "flange_face_zeta": -40.7,
+ "cutter_depth": 30.0,
+ "holes": [
+  [
+   21.96,
+   21.96
+  ],
+  [
+   0.0,
+   31.05
+  ],
+  [
+   -0.0,
+   -31.05
+  ],
+  [
+   21.96,
+   -21.96
+  ],
+  [
+   -29.0,
+   -18.25
+  ],
+  [
+   -29.0,
+   18.25
+  ],
+  [
+   -38.4,
+   -9.0
+  ],
+  [
+   -38.4,
+   9.0
+  ]
+ ],
+ "hub_radius_used": 110.0,
+ "min_hub_radius_flanges_clear": 124.5,
+ "flange_face_radius_at_min": 83.8,
+ "flange_overlap_at_hub_radius_mm3": 408.1
+}

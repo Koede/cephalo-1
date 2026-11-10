@@ -1,0 +1,186 @@
+{
+ "baseline": [
+  {
+   "arch": "3-section tendons",
+   "configs": 14160,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 0.7926612041768786,
+   "min_mantle_util": 0.2133472,
+   "top_fail": {
+    "flight_load": 14152,
+    "walk_load": 13964,
+    "struct": 11664
+   }
+  },
+  {
+   "arch": "base-box tendons",
+   "configs": 16800,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 0.966099636965545,
+   "min_mantle_util": 0.3733575999999999,
+   "top_fail": {
+    "walk_load": 16784,
+    "flight_load": 15904,
+    "mantle": 13200
+   }
+  },
+  {
+   "arch": "graded servo chain",
+   "configs": 5120,
+   "feasible": 522,
+   "best_score": 0.5943101724761622,
+   "best": "rolling_1d / alt90 / N10",
+   "best_dof": 10,
+   "min_walk_util": 0.0341062361970556,
+   "min_mantle_util": 0.0,
+   "top_fail": {
+    "tw": 2734,
+    "walk_load": 2284,
+    "flight_load": 1928
+   }
+  },
+  {
+   "arch": "push-pull rods",
+   "configs": 6960,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 2.9160148390959164,
+   "min_mantle_util": 0.3733575999999999,
+   "top_fail": {
+    "walk_load": 6960,
+    "flight_load": 6960,
+    "mantle": 5184
+   }
+  },
+  {
+   "arch": "root servos + base-box tendons",
+   "configs": 12480,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 0.6136041965164254,
+   "min_mantle_util": 0.266684,
+   "top_fail": {
+    "walk_load": 12172,
+    "mantle": 8388,
+    "tw": 7384
+   }
+  },
+  {
+   "arch": "servo in every node",
+   "configs": 13120,
+   "feasible": 2601,
+   "best_score": 0.6748994654799784,
+   "best": "universal / omni_roll4 / N7",
+   "best_dof": 15,
+   "min_walk_util": 0.0587412793333144,
+   "min_mantle_util": 0.0,
+   "top_fail": {
+    "walk_load": 6896,
+    "flight_load": 6560,
+    "walk": 2832
+   }
+  }
+ ],
+ "tendon_optimistic": [
+  {
+   "arch": "3-section tendons",
+   "configs": 14160,
+   "feasible": 292,
+   "best_score": 0.5714289053052863,
+   "best": "rolling_2d / omni / N9",
+   "best_dof": 6,
+   "min_walk_util": 0.3501446706601405,
+   "min_mantle_util": 0.12800832,
+   "top_fail": {
+    "struct": 11664,
+    "walk_load": 9596,
+    "flight_load": 9440
+   }
+  },
+  {
+   "arch": "base-box tendons",
+   "configs": 16800,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 0.393827812047051,
+   "min_mantle_util": 0.2240145599999999,
+   "top_fail": {
+    "struct": 12768,
+    "walk_load": 11256,
+    "flight_load": 10800
+   }
+  },
+  {
+   "arch": "graded servo chain",
+   "configs": 5120,
+   "feasible": 522,
+   "best_score": 0.5956483640727551,
+   "best": "rolling_1d / alt90 / N10",
+   "best_dof": 10,
+   "min_walk_util": 0.0341062361970556,
+   "min_mantle_util": 0.0,
+   "top_fail": {
+    "tw": 2734,
+    "walk_load": 2284,
+    "flight_load": 1928
+   }
+  },
+  {
+   "arch": "push-pull rods",
+   "configs": 6960,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 1.5118758169241069,
+   "min_mantle_util": 0.2240145599999999,
+   "top_fail": {
+    "walk_load": 6960,
+    "flight_load": 6960,
+    "struct": 4368
+   }
+  },
+  {
+   "arch": "root servos + base-box tendons",
+   "configs": 12480,
+   "feasible": 478,
+   "best_score": 0.5596010961947461,
+   "best": "rolling_1d / alt90_roll4 / N7",
+   "best_dof": 8,
+   "min_walk_util": 0.2078523948153752,
+   "min_mantle_util": 0.1600104,
+   "top_fail": {
+    "tw": 7384,
+    "flight_load": 6240,
+    "chan": 6000
+   }
+  },
+  {
+   "arch": "servo in every node",
+   "configs": 13120,
+   "feasible": 2601,
+   "best_score": 0.6748994654799784,
+   "best": "universal / omni_roll4 / N7",
+   "best_dof": 15,
+   "min_walk_util": 0.0587412793333144,
+   "min_mantle_util": 0.0,
+   "top_fail": {
+    "walk_load": 6896,
+    "flight_load": 6560,
+    "walk": 2832
+   }
+  }
+ ]
+}

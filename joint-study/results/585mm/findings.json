@@ -1,0 +1,11 @@
+{
+ "lead": "68,640 arm designs from 101 joint types were rerun with vertebra size and mass taken from the CAD, and 3,123 pass every gate. The main design is the pin hinge in a 60\u00b0 helix with STS3250 servos in joints 0 to 3 and STS3215 beyond: 9 joints, a 26.4 mm shape miss, one repeated vertebra, and a score of 0.413 after dynamics, within 3 % of the top. The STS3250s fit the same cradle and stop the root stalling when the arm is lifted.",
+ "items": [
+  "<b>Main design: pin hinge, 60\u00b0 helix, 9 joints, STS3250 in joints 0 to 3.</b> 57.1 mm across, 65 mm pitch, one 23 g vertebra printed eight times per arm, collision-free to \u00b190\u00b0 per joint, about 784 g per arm outside the mantle. Robot 10.95 kg, thrust-to-weight 1.20 (gate 1.15). Wave-test tip error 14.6 mm and lift-test error 8.9 mm, with no saturation.",
+  "<b>Why the STS3250s:</b> with nine STS3215s the root joint stalls when the arm is lifted (84 mm lift-test error, flight-stress torque 116 % of stall). STS3250s in joints 0 to 3 bring that to 8.9 mm and 72 % for 0.62 kg on the robot. The all-STS3215 arm scores 0.332 (18th of 26); this fit scores 0.413, which would place 4th.",
+  "<b>The top three after dynamics are all 7-joint helix chains:</b> geared rolling, servo shell and U-bracket chain, 0.42 each, 29.1 to 29.6 mm miss, 9.6 to 9.9 kg. They give up two joints and some shape accuracy for less mass.",
+  "<b>Canted hinge: 7th after dynamics (0.380).</b> 7 joints, 42.5 mm miss, 10.4 kg. With their own geometry now, 15\u00b0 and 20\u00b0 cants fail the walking gate and 30\u00b0 passes only as a 5-node arm with a 50 mm miss.",
+  "<b>What changed since the first run:</b> every servo-per-joint design is now charged 29 g of printed structure and hardware per joint (measured on the pin-hinge CAD, was a 3 g guess) and a 57 mm diameter instead of 49 mm. Robots came out 1.5 to 2 kg heavier across the board, so the earlier 8.45 kg for the pin hinge was too light.",
+  "<b>Highest DOF that passes every gate: universal joints with roll, 22 DOF on a graded chain (15 DOF on uniform STS3215).</b> Best shape fits (10.7 and 14.7 mm miss), but 69 and 67 mm wave error with 57 and 75 % saturation, so stronger servos are needed."
+ ]
+}

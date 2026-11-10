@@ -1,0 +1,456 @@
+{
+ "as drawn": {
+  "a1_mm": 6.5,
+  "a2_mm": -24.5,
+  "cases": {
+   "Hover, straight out": {
+    "R1": 402.6518969069366,
+    "R2": 82.90059619683659,
+    "axial": 5.3512491557796344e-17,
+    "tooth": 320.5724762684385,
+    "M_axis": 6.024791807530348,
+    "M_oop": 3.6891210013106187e-16,
+    "pose": "straight out",
+    "F": [
+     0.0,
+     0.0,
+     13.2
+    ],
+    "note": "13.2 N up at the tip, arm level"
+   },
+   "Hover, any pose": {
+    "R1": 407.7892182784615,
+    "R2": 140.26169970489025,
+    "axial": 5.3512491557796344e-17,
+    "tooth": 269.8333557433246,
+    "M_axis": 5.07120826467802,
+    "M_oop": 2.250808284874733,
+    "pose": "random 51",
+    "F": [
+     0.0,
+     0.0,
+     13.2
+    ],
+    "note": "13.2 N up, curled, coiled and random poses up to +-45 deg per joint"
+   },
+   "Flight, rated thrust tilted 30 deg": {
+    "R1": 707.0741416013766,
+    "R2": 213.26310227883477,
+    "axial": 1.3319188015123838e-17,
+    "tooth": 492.98885579266545,
+    "M_axis": 9.265159798361122,
+    "M_oop": 2.8386031689230684,
+    "pose": "random 11",
+    "F": [
+     8.0,
+     0.0,
+     13.86
+    ],
+    "note": "16 N tilted 30 deg any way, any pose (the study's flight stress case)"
+   },
+   "Rated thrust, any direction": {
+    "R1": 1143.4765215374457,
+    "R2": 633.7050700246828,
+    "axial": 13.565759110360887,
+    "tooth": 516.4960919598298,
+    "M_axis": -9.70695132558824,
+    "M_oop": 16.146037468751082,
+    "pose": "random 6",
+    "F": [
+     4.67,
+     -13.57,
+     -7.08
+    ],
+    "note": "16 N pointed any way by the wrist gimbal, any pose, hinge moment within the gear's 9.8 N.m"
+   },
+   "Full throttle, any direction": {
+    "R1": 1275.912022140299,
+    "R2": 806.7598055819121,
+    "axial": 18.144202810107686,
+    "tooth": 458.1891404706916,
+    "M_axis": -8.611139084490938,
+    "M_oop": 21.69010681251197,
+    "pose": "random 32",
+    "F": [
+     6.25,
+     -18.14,
+     -9.47
+    ],
+    "note": "21.4 N pointed any way, any pose, hinge moment within the gear's 9.8 N.m"
+   },
+   "Walking stance": {
+    "R1": 88.00350855301473,
+    "R2": 23.428685610211236,
+    "axial": 4.320194634849861e-16,
+    "tooth": 57.97190562536433,
+    "M_axis": 1.089515438581039,
+    "M_oop": 0.318810404064631,
+    "pose": "walking stance 1",
+    "F": [
+     0.0,
+     0.0,
+     21.13
+    ],
+    "note": "21.1 N up at the foot (7 feet share 15.077 kg)"
+   },
+   "Hard landing": {
+    "R1": 624.2726451433238,
+    "R2": 104.90978591990765,
+    "axial": 3.666516569685075e-15,
+    "tooth": 463.0490439953588,
+    "M_axis": 8.702475394088161,
+    "M_oop": 0.09651587754698687,
+    "pose": "walking stance 4",
+    "F": [
+     0.0,
+     0.0,
+     73.95
+    ],
+    "note": "74 N: 4 feet share 15.077 kg, x2 for impact [A]"
+   },
+   "Gear at stall": {
+    "R1": 655.3651172039638,
+    "R2": 134.73920185529724,
+    "axial": 5.3512491557796344e-17,
+    "tooth": 521.4471085131969,
+    "M_axis": 9.8,
+    "M_oop": 3.6891210013106187e-16,
+    "pose": "straight out",
+    "note": "hinge moment at the gear's 9.8 N.m stall, hover loads otherwise"
+   }
+  },
+  "joints_1_4_rated_oop_Nm": {
+   "joint 1": 17.97,
+   "joint 2": 18.05,
+   "joint 3": 13.95,
+   "joint 4": 13.25
+  },
+  "design": {
+   "a1": 6.5,
+   "a2": -24.5,
+   "gear_brg": [
+    "6800",
+    1720,
+    830
+   ],
+   "pin_brg": [
+    "685",
+    681,
+    280
+   ],
+   "pin_brg_a": 23.7,
+   "idler": "printed PETG stub, 8 mm",
+   "idler_Z": 47.1,
+   "idler_allow": 40.0
+  },
+  "rating": {
+   "Hover, straight out": {
+    "gear_brg_N": 403,
+    "gear_brg_s0": 2.06,
+    "pin_brg_N": 154,
+    "pin_brg_s0": 1.82,
+    "servo_spline_N": 167,
+    "idler_N": 83,
+    "ear_MPa": 3.2,
+    "idler_bend_MPa": 3.7
+   },
+   "Hover, any pose": {
+    "gear_brg_N": 408,
+    "gear_brg_s0": 2.04,
+    "pin_brg_N": 130,
+    "pin_brg_s0": 2.16,
+    "servo_spline_N": 140,
+    "idler_N": 140,
+    "ear_MPa": 5.5,
+    "idler_bend_MPa": 6.3
+   },
+   "Flight, rated thrust tilted 30 deg": {
+    "gear_brg_N": 707,
+    "gear_brg_s0": 1.17,
+    "pin_brg_N": 237,
+    "pin_brg_s0": 1.18,
+    "servo_spline_N": 256,
+    "idler_N": 213,
+    "ear_MPa": 8.3,
+    "idler_bend_MPa": 9.5
+   },
+   "Rated thrust, any direction": {
+    "gear_brg_N": 1143,
+    "gear_brg_s0": 0.73,
+    "pin_brg_N": 248,
+    "pin_brg_s0": 1.13,
+    "servo_spline_N": 268,
+    "idler_N": 634,
+    "ear_MPa": 24.8,
+    "idler_bend_MPa": 28.3
+   },
+   "Full throttle, any direction": {
+    "gear_brg_N": 1276,
+    "gear_brg_s0": 0.65,
+    "pin_brg_N": 220,
+    "pin_brg_s0": 1.27,
+    "servo_spline_N": 238,
+    "idler_N": 807,
+    "ear_MPa": 31.5,
+    "idler_bend_MPa": 36.0
+   },
+   "Walking stance": {
+    "gear_brg_N": 88,
+    "gear_brg_s0": 9.43,
+    "pin_brg_N": 28,
+    "pin_brg_s0": 10.06,
+    "servo_spline_N": 30,
+    "idler_N": 23,
+    "ear_MPa": 0.9,
+    "idler_bend_MPa": 1.0
+   },
+   "Hard landing": {
+    "gear_brg_N": 624,
+    "gear_brg_s0": 1.33,
+    "pin_brg_N": 222,
+    "pin_brg_s0": 1.26,
+    "servo_spline_N": 241,
+    "idler_N": 105,
+    "ear_MPa": 4.1,
+    "idler_bend_MPa": 4.7
+   },
+   "Gear at stall": {
+    "gear_brg_N": 655,
+    "gear_brg_s0": 1.27,
+    "pin_brg_N": 250,
+    "pin_brg_s0": 1.12,
+    "servo_spline_N": 271,
+    "idler_N": 135,
+    "ear_MPa": 5.3,
+    "idler_bend_MPa": 6.0
+   }
+  }
+ },
+ "after the bearing check": {
+  "a1_mm": 12.0,
+  "a2_mm": -24.5,
+  "cases": {
+   "Hover, straight out": {
+    "R1": 341.9783234004119,
+    "R2": 22.22722666976296,
+    "axial": 5.3512491557796344e-17,
+    "tooth": 320.5724762684385,
+    "M_axis": 6.024791807530348,
+    "M_oop": 3.6891210013106187e-16,
+    "pose": "straight out",
+    "F": [
+     0.0,
+     0.0,
+     13.2
+    ],
+    "note": "13.2 N up at the tip, arm level"
+   },
+   "Hover, any pose": {
+    "R1": 346.34152785293986,
+    "R2": 79.57191973632163,
+    "axial": 5.3512491557796344e-17,
+    "tooth": 269.8333557433246,
+    "M_axis": 5.07120826467802,
+    "M_oop": 2.250808284874733,
+    "pose": "random 51",
+    "F": [
+     0.0,
+     0.0,
+     13.2
+    ],
+    "note": "13.2 N up, curled, coiled and random poses up to +-45 deg per joint"
+   },
+   "Flight, rated thrust tilted 30 deg": {
+    "R1": 600.528723003909,
+    "R2": 107.94539511112926,
+    "axial": 1.3319188015123838e-17,
+    "tooth": 492.98885579266545,
+    "M_axis": 9.265159798361122,
+    "M_oop": 2.8386031689230684,
+    "pose": "random 11",
+    "F": [
+     8.0,
+     0.0,
+     13.86
+    ],
+    "note": "16 N tilted 30 deg any way, any pose (the study's flight stress case)"
+   },
+   "Rated thrust, any direction": {
+    "R1": 971.1718402098854,
+    "R2": 466.20161255718006,
+    "axial": 13.565759110360887,
+    "tooth": 516.4960919598298,
+    "M_axis": -9.70695132558824,
+    "M_oop": 16.146037468751082,
+    "pose": "random 6",
+    "F": [
+     4.67,
+     -13.57,
+     -7.08
+    ],
+    "note": "16 N pointed any way by the wrist gimbal, any pose, hinge moment within the gear's 9.8 N.m"
+   },
+   "Full throttle, any direction": {
+    "R1": 1083.6513064753226,
+    "R2": 616.0493081874755,
+    "axial": 18.144202810107686,
+    "tooth": 458.1891404706916,
+    "M_axis": -8.611139084490938,
+    "M_oop": 21.69010681251197,
+    "pose": "random 32",
+    "F": [
+     6.25,
+     -18.14,
+     -9.47
+    ],
+    "note": "21.4 N pointed any way, any pose, hinge moment within the gear's 9.8 N.m"
+   },
+   "Walking stance": {
+    "R1": 74.74270589434127,
+    "R2": 10.236644339671264,
+    "axial": 4.320194634849861e-16,
+    "tooth": 57.97190562536433,
+    "M_axis": 1.089515438581039,
+    "M_oop": 0.318810404064631,
+    "pose": "walking stance 1",
+    "F": [
+     0.0,
+     0.0,
+     21.13
+    ],
+    "note": "21.1 N up at the foot (7 feet share 15.077 kg)"
+   },
+   "Hard landing": {
+    "R1": 530.2041643683024,
+    "R2": 13.172142025098502,
+    "axial": 3.666516569685075e-15,
+    "tooth": 463.0490439953588,
+    "M_axis": 8.702475394088161,
+    "M_oop": 0.09651587754698687,
+    "pose": "walking stance 4",
+    "F": [
+     0.0,
+     0.0,
+     73.95
+    ],
+    "note": "74 N: 4 feet share 15.077 kg, x2 for impact [A]"
+   },
+   "Gear at stall": {
+    "R1": 556.6114694061063,
+    "R2": 35.98568007144129,
+    "axial": 5.3512491557796344e-17,
+    "tooth": 521.4471085131969,
+    "M_axis": 9.8,
+    "M_oop": 3.6891210013106187e-16,
+    "pose": "straight out",
+    "note": "hinge moment at the gear's 9.8 N.m stall, hover loads otherwise"
+   }
+  },
+  "joints_1_4_rated_oop_Nm": {
+   "joint 1": 17.97,
+   "joint 2": 18.05,
+   "joint 3": 13.95,
+   "joint 4": 13.25
+  },
+  "design": {
+   "a1": 12.0,
+   "a2": -24.5,
+   "gear_brg": [
+    "61803",
+    2030,
+    1270
+   ],
+   "pin_brg": [
+    "695",
+    1025,
+    410
+   ],
+   "pin_brg_a": 24.2,
+   "idler": "7075 pin, 8 mm",
+   "idler_Z": 49.8,
+   "idler_allow": 500.0
+  },
+  "rating": {
+   "Hover, straight out": {
+    "gear_brg_N": 342,
+    "gear_brg_s0": 3.71,
+    "pin_brg_N": 150,
+    "pin_brg_s0": 2.74,
+    "servo_spline_N": 171,
+    "idler_N": 22,
+    "ear_MPa": 0.9,
+    "idler_bend_MPa": 0.9
+   },
+   "Hover, any pose": {
+    "gear_brg_N": 346,
+    "gear_brg_s0": 3.67,
+    "pin_brg_N": 126,
+    "pin_brg_s0": 3.25,
+    "servo_spline_N": 144,
+    "idler_N": 80,
+    "ear_MPa": 3.1,
+    "idler_bend_MPa": 3.4
+   },
+   "Flight, rated thrust tilted 30 deg": {
+    "gear_brg_N": 601,
+    "gear_brg_s0": 2.11,
+    "pin_brg_N": 230,
+    "pin_brg_s0": 1.78,
+    "servo_spline_N": 263,
+    "idler_N": 108,
+    "ear_MPa": 4.2,
+    "idler_bend_MPa": 4.6
+   },
+   "Rated thrust, any direction": {
+    "gear_brg_N": 971,
+    "gear_brg_s0": 1.31,
+    "pin_brg_N": 241,
+    "pin_brg_s0": 1.7,
+    "servo_spline_N": 275,
+    "idler_N": 466,
+    "ear_MPa": 18.2,
+    "idler_bend_MPa": 19.7
+   },
+   "Full throttle, any direction": {
+    "gear_brg_N": 1084,
+    "gear_brg_s0": 1.17,
+    "pin_brg_N": 214,
+    "pin_brg_s0": 1.92,
+    "servo_spline_N": 244,
+    "idler_N": 616,
+    "ear_MPa": 24.1,
+    "idler_bend_MPa": 26.0
+   },
+   "Walking stance": {
+    "gear_brg_N": 75,
+    "gear_brg_s0": 16.99,
+    "pin_brg_N": 27,
+    "pin_brg_s0": 15.14,
+    "servo_spline_N": 31,
+    "idler_N": 10,
+    "ear_MPa": 0.4,
+    "idler_bend_MPa": 0.4
+   },
+   "Hard landing": {
+    "gear_brg_N": 530,
+    "gear_brg_s0": 2.4,
+    "pin_brg_N": 216,
+    "pin_brg_s0": 1.9,
+    "servo_spline_N": 247,
+    "idler_N": 13,
+    "ear_MPa": 0.5,
+    "idler_bend_MPa": 0.6
+   },
+   "Gear at stall": {
+    "gear_brg_N": 557,
+    "gear_brg_s0": 2.28,
+    "pin_brg_N": 244,
+    "pin_brg_s0": 1.68,
+    "servo_spline_N": 278,
+    "idler_N": 36,
+    "ear_MPa": 1.4,
+    "idler_bend_MPa": 1.5
+   }
+  }
+ }
+}

@@ -1,0 +1,232 @@
+{
+ "assumptions": {
+  "robot_kg_without_battery": 15.08,
+  "edf_N": 42.2,
+  "edf_g_per_W": 1.45,
+  "other_W": 150.0,
+  "v_loaded": 21.0,
+  "wh_per_kg": 192.0,
+  "usable": 0.8
+ },
+ "no_battery": {
+  "robot_kg": 15.08,
+  "fan_hover_N": 13.22,
+  "fan_hover_W": 271,
+  "edf_W": 2967,
+  "total_W": 5281,
+  "current_A": 251,
+  "tw_rated": 1.151,
+  "tw_full": 1.443,
+  "fan_hover_pct_of_full": 62
+ },
+ "packs": {
+  "Tattu 6S 16000 mAh 15C": {
+   "robot_kg": 17.01,
+   "fan_hover_N": 15.59,
+   "fan_hover_W": 346,
+   "edf_W": 2967,
+   "total_W": 5888,
+   "current_A": 280,
+   "tw_rated": 1.02,
+   "tw_full": 1.279,
+   "fan_hover_pct_of_full": 73,
+   "pack_Wh": 355,
+   "pack_kg": 1.932,
+   "pack_cont_A": 240.0,
+   "current_ok": false,
+   "hover_min": 2.9
+  },
+  "Tattu 6S 22000 mAh 25C": {
+   "robot_kg": 17.62,
+   "fan_hover_N": 16.34,
+   "fan_hover_W": 372,
+   "edf_W": 2967,
+   "total_W": 6091,
+   "current_A": 290,
+   "tw_rated": 0.984,
+   "tw_full": 1.234,
+   "fan_hover_pct_of_full": 76,
+   "pack_Wh": 488,
+   "pack_kg": 2.544,
+   "pack_cont_A": 550.0,
+   "current_ok": true,
+   "hover_min": 3.8
+  },
+  "2 x 6S 10000 mAh 25C in parallel [A: 192 Wh/kg class]": {
+   "robot_kg": 17.39,
+   "fan_hover_N": 16.05,
+   "fan_hover_W": 362,
+   "edf_W": 2967,
+   "total_W": 6013,
+   "current_A": 286,
+   "tw_rated": 0.998,
+   "tw_full": 1.251,
+   "fan_hover_pct_of_full": 75,
+   "pack_Wh": 444,
+   "pack_kg": 2.3125,
+   "pack_cont_A": 500.0,
+   "current_ok": true,
+   "hover_min": 3.5
+  }
+ },
+ "per_kg": {
+  "0.5": {
+   "robot_kg": 15.58,
+   "fan_hover_N": 13.83,
+   "fan_hover_W": 290,
+   "edf_W": 2967,
+   "total_W": 5433,
+   "current_A": 259,
+   "tw_rated": 1.114,
+   "tw_full": 1.396,
+   "fan_hover_pct_of_full": 65,
+   "hover_min": 0.85
+  },
+  "1.0": {
+   "robot_kg": 16.08,
+   "fan_hover_N": 14.44,
+   "fan_hover_W": 309,
+   "edf_W": 2967,
+   "total_W": 5589,
+   "current_A": 266,
+   "tw_rated": 1.079,
+   "tw_full": 1.353,
+   "fan_hover_pct_of_full": 67,
+   "hover_min": 1.65
+  },
+  "1.5": {
+   "robot_kg": 16.58,
+   "fan_hover_N": 15.06,
+   "fan_hover_W": 329,
+   "edf_W": 2967,
+   "total_W": 5748,
+   "current_A": 274,
+   "tw_rated": 1.046,
+   "tw_full": 1.312,
+   "fan_hover_pct_of_full": 70,
+   "hover_min": 2.41
+  },
+  "2.0": {
+   "robot_kg": 17.08,
+   "fan_hover_N": 15.67,
+   "fan_hover_W": 349,
+   "edf_W": 2967,
+   "total_W": 5910,
+   "current_A": 281,
+   "tw_rated": 1.016,
+   "tw_full": 1.274,
+   "fan_hover_pct_of_full": 73,
+   "hover_min": 3.12
+  },
+  "2.5": {
+   "robot_kg": 17.58,
+   "fan_hover_N": 16.28,
+   "fan_hover_W": 370,
+   "edf_W": 2967,
+   "total_W": 6076,
+   "current_A": 289,
+   "tw_rated": 0.987,
+   "tw_full": 1.237,
+   "fan_hover_pct_of_full": 76,
+   "hover_min": 3.79
+  },
+  "3.0": {
+   "robot_kg": 18.08,
+   "fan_hover_N": 16.9,
+   "fan_hover_W": 391,
+   "edf_W": 2967,
+   "total_W": 6245,
+   "current_A": 297,
+   "tw_rated": 0.96,
+   "tw_full": 1.203,
+   "fan_hover_pct_of_full": 79,
+   "hover_min": 4.43
+  }
+ },
+ "sensitivity": {
+  "16 Ah pack, 0.0 kg of battery already in the 3.45 kg body allowance": {
+   "robot_kg": 17.01,
+   "fan_hover_N": 15.59,
+   "fan_hover_W": 346,
+   "edf_W": 2967,
+   "total_W": 5888,
+   "current_A": 280,
+   "tw_rated": 1.02,
+   "tw_full": 1.279,
+   "fan_hover_pct_of_full": 73,
+   "hover_min": 2.9
+  },
+  "16 Ah pack, 0.8 kg of battery already in the 3.45 kg body allowance": {
+   "robot_kg": 16.21,
+   "fan_hover_N": 14.6,
+   "fan_hover_W": 314,
+   "edf_W": 2967,
+   "total_W": 5631,
+   "current_A": 268,
+   "tw_rated": 1.07,
+   "tw_full": 1.342,
+   "fan_hover_pct_of_full": 68,
+   "hover_min": 3.0
+  },
+  "16 Ah pack, 1.5 kg of battery already in the 3.45 kg body allowance": {
+   "robot_kg": 15.51,
+   "fan_hover_N": 13.75,
+   "fan_hover_W": 287,
+   "edf_W": 2967,
+   "total_W": 5412,
+   "current_A": 258,
+   "tw_rated": 1.118,
+   "tw_full": 1.402,
+   "fan_hover_pct_of_full": 64,
+   "hover_min": 3.2
+  },
+  "16 Ah pack, central lift at 1.2 g/W": {
+   "robot_kg": 17.01,
+   "fan_hover_N": 15.59,
+   "fan_hover_W": 346,
+   "edf_W": 3585,
+   "total_W": 6506,
+   "current_A": 310,
+   "tw_rated": 1.02,
+   "tw_full": 1.279,
+   "fan_hover_pct_of_full": 73,
+   "hover_min": 2.6
+  },
+  "16 Ah pack, central lift at 1.45 g/W": {
+   "robot_kg": 17.01,
+   "fan_hover_N": 15.59,
+   "fan_hover_W": 346,
+   "edf_W": 2967,
+   "total_W": 5888,
+   "current_A": 280,
+   "tw_rated": 1.02,
+   "tw_full": 1.279,
+   "fan_hover_pct_of_full": 73,
+   "hover_min": 2.9
+  },
+  "16 Ah pack, central lift at 1.8 g/W": {
+   "robot_kg": 17.01,
+   "fan_hover_N": 15.59,
+   "fan_hover_W": 346,
+   "edf_W": 2390,
+   "total_W": 5311,
+   "current_A": 253,
+   "tw_rated": 1.02,
+   "tw_full": 1.279,
+   "fan_hover_pct_of_full": 73,
+   "hover_min": 3.2
+  },
+  "16 Ah pack, central lift at 4.5 g/W": {
+   "robot_kg": 17.01,
+   "fan_hover_N": 15.59,
+   "fan_hover_W": 346,
+   "edf_W": 956,
+   "total_W": 3877,
+   "current_A": 185,
+   "tw_rated": 1.02,
+   "tw_full": 1.279,
+   "fan_hover_pct_of_full": 73,
+   "hover_min": 4.4
+  }
+ }
+}

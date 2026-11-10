@@ -1,0 +1,587 @@
+{
+ "assumptions": {
+  "base_kg_no_pack": 15.189,
+  "rated_fraction": 0.75,
+  "usable": 0.8,
+  "other_W": 150,
+  "v_loaded": 21,
+  "today_fan_g": {
+   "motor": 52.6,
+   "prop": 8.0,
+   "esc": 15.0
+  },
+  "note": "prop and ESC masses assumed; motor masses from the makers' pages"
+ },
+ "fans": {
+  "2807 1250KV + 7.5 in 3-blade (today)": {
+   "full_N": 21.4,
+   "rated_N": 16.0,
+   "prop_in": 7.5,
+   "extra_tip_g": 0,
+   "tip_g": 130,
+   "src": "study's T-Motor 2807 table: 13.2 N at 270 W, 21.4 N at 551 W",
+   "hold_straight_fans_off": {
+    "joint3": 0.89,
+    "joint6": 0.8
+   },
+   "side_N": {
+    "rated_within_30": 192,
+    "full_any_dir": 511
+   },
+   "bearing_of_C0": {
+    "rated_within_30": 0.23,
+    "full_any_dir": 0.61
+   },
+   "stub_MPa_full_within_30": 12.3,
+   "packs": {
+    "Tattu 16 Ah 30C LiPo": {
+     "robot_kg": 17.18,
+     "tw_rated": 1.048,
+     "tw_full": 1.302,
+     "central_N": 42.4,
+     "fan_hover_N": 16.0,
+     "fan_hover_W": 359,
+     "total_W": 3892,
+     "current_A": 185,
+     "pack_cont_A": 480,
+     "current_ok": true,
+     "hover_min": 4.4,
+     "passes_1_15": false
+    },
+    "Tattu 22 Ah 25C LiPo": {
+     "robot_kg": 17.84,
+     "tw_rated": 1.009,
+     "hover": "no: fans past rated"
+    },
+    "2 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 17.97,
+     "tw_rated": 1.002,
+     "hover": "no: fans past rated"
+    },
+    "3 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 19.36,
+     "tw_rated": 0.93,
+     "hover": "no: fans past rated"
+    },
+    "4 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 20.75,
+     "tw_rated": 0.867,
+     "hover": "no: fans past rated"
+    }
+   }
+  },
+  "MN4006 KV380 + 15x5 CF": {
+   "full_N": 20.8,
+   "rated_N": 15.6,
+   "prop_in": 15,
+   "extra_tip_g": 39,
+   "tip_g": 169,
+   "src": "LIGPOWER MN4006 KV380, 24 V",
+   "hold_straight_fans_off": {
+    "joint3": 0.95,
+    "joint6": 0.87
+   },
+   "side_N": {
+    "rated_within_30": 186,
+    "full_any_dir": 496
+   },
+   "bearing_of_C0": {
+    "rated_within_30": 0.22,
+    "full_any_dir": 0.59
+   },
+   "stub_MPa_full_within_30": 11.9,
+   "packs": {
+    "Tattu 16 Ah 30C LiPo": {
+     "robot_kg": 17.49,
+     "tw_rated": 1.007,
+     "hover": "no: fans past rated"
+    },
+    "Tattu 22 Ah 25C LiPo": {
+     "robot_kg": 18.15,
+     "tw_rated": 0.97,
+     "hover": "no: fans past rated"
+    },
+    "2 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 18.28,
+     "tw_rated": 0.963,
+     "hover": "no: fans past rated"
+    },
+    "3 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 19.67,
+     "tw_rated": 0.895,
+     "hover": "no: fans past rated"
+    },
+    "4 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 21.06,
+     "tw_rated": 0.836,
+     "hover": "no: fans past rated"
+    }
+   }
+  },
+  "V3115 640KV + 10.5x5 3-blade": {
+   "full_N": 30.6,
+   "rated_N": 23.0,
+   "prop_in": 10.5,
+   "extra_tip_g": 80,
+   "tip_g": 210,
+   "src": "LIGPOWER V3115 KV640, 24 V",
+   "hold_straight_fans_off": {
+    "joint3": 1.02,
+    "joint6": 0.94
+   },
+   "side_N": {
+    "rated_within_30": 274,
+    "full_any_dir": 732
+   },
+   "bearing_of_C0": {
+    "rated_within_30": 0.33,
+    "full_any_dir": 0.88
+   },
+   "stub_MPa_full_within_30": 17.6,
+   "packs": {
+    "Tattu 16 Ah 30C LiPo": {
+     "robot_kg": 17.82,
+     "tw_rated": 1.327,
+     "tw_full": 1.678,
+     "central_N": 42.4,
+     "fan_hover_N": 16.7,
+     "fan_hover_W": 345,
+     "total_W": 3784,
+     "current_A": 180,
+     "pack_cont_A": 480,
+     "current_ok": true,
+     "hover_min": 4.5,
+     "passes_1_15": true
+    },
+    "Tattu 22 Ah 25C LiPo": {
+     "robot_kg": 18.48,
+     "tw_rated": 1.28,
+     "tw_full": 1.618,
+     "central_N": 42.4,
+     "fan_hover_N": 17.6,
+     "fan_hover_W": 372,
+     "total_W": 3994,
+     "current_A": 190,
+     "pack_cont_A": 550,
+     "current_ok": true,
+     "hover_min": 5.9,
+     "passes_1_15": true
+    },
+    "2 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 18.61,
+     "tw_rated": 1.271,
+     "tw_full": 1.606,
+     "central_N": 42.4,
+     "fan_hover_N": 17.7,
+     "fan_hover_W": 377,
+     "total_W": 4035,
+     "current_A": 192,
+     "pack_cont_A": 220,
+     "current_ok": true,
+     "hover_min": 11.6,
+     "passes_1_15": true
+    },
+    "3 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 20.0,
+     "tw_rated": 1.182,
+     "tw_full": 1.495,
+     "central_N": 35.2,
+     "fan_hover_N": 20.3,
+     "fan_hover_W": 457,
+     "total_W": 4461,
+     "current_A": 212,
+     "pack_cont_A": 330,
+     "current_ok": true,
+     "hover_min": 15.8,
+     "passes_1_15": true
+    },
+    "4 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 21.39,
+     "tw_rated": 1.106,
+     "tw_full": 1.398,
+     "central_N": 35.2,
+     "fan_hover_N": 22.0,
+     "fan_hover_W": 510,
+     "total_W": 4885,
+     "current_A": 233,
+     "pack_cont_A": 440,
+     "current_ok": true,
+     "hover_min": 19.2,
+     "passes_1_15": false
+    }
+   }
+  },
+  "V3115 900KV + 9.5x5 3-blade": {
+   "full_N": 39.6,
+   "rated_N": 29.7,
+   "prop_in": 9.5,
+   "extra_tip_g": 82,
+   "tip_g": 212,
+   "src": "LIGPOWER V3115 KV900, 24 V",
+   "hold_straight_fans_off": {
+    "joint3": 1.02,
+    "joint6": 0.95
+   },
+   "side_N": {
+    "rated_within_30": 354,
+    "full_any_dir": 945
+   },
+   "bearing_of_C0": {
+    "rated_within_30": 0.42,
+    "full_any_dir": 1.13
+   },
+   "stub_MPa_full_within_30": 22.7,
+   "packs": {
+    "Tattu 16 Ah 30C LiPo": {
+     "robot_kg": 17.84,
+     "tw_rated": 1.632,
+     "tw_full": 2.084,
+     "central_N": 44.9,
+     "fan_hover_N": 16.5,
+     "fan_hover_W": 404,
+     "total_W": 4349,
+     "current_A": 207,
+     "pack_cont_A": 480,
+     "current_ok": true,
+     "hover_min": 3.9,
+     "passes_1_15": true
+    },
+    "Tattu 22 Ah 25C LiPo": {
+     "robot_kg": 18.5,
+     "tw_rated": 1.574,
+     "tw_full": 2.01,
+     "central_N": 44.9,
+     "fan_hover_N": 17.3,
+     "fan_hover_W": 436,
+     "total_W": 4604,
+     "current_A": 219,
+     "pack_cont_A": 550,
+     "current_ok": true,
+     "hover_min": 5.1,
+     "passes_1_15": true
+    },
+    "2 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 18.63,
+     "tw_rated": 1.563,
+     "tw_full": 1.996,
+     "central_N": 44.9,
+     "fan_hover_N": 17.4,
+     "fan_hover_W": 443,
+     "total_W": 4654,
+     "current_A": 222,
+     "pack_cont_A": 220,
+     "current_ok": false,
+     "hover_min": 10.1,
+     "passes_1_15": false
+    },
+    "3 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 20.02,
+     "tw_rated": 1.454,
+     "tw_full": 1.857,
+     "central_N": 42.4,
+     "fan_hover_N": 19.4,
+     "fan_hover_W": 517,
+     "total_W": 5159,
+     "current_A": 246,
+     "pack_cont_A": 330,
+     "current_ok": true,
+     "hover_min": 13.6,
+     "passes_1_15": true
+    },
+    "4 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 21.41,
+     "tw_rated": 1.36,
+     "tw_full": 1.737,
+     "central_N": 42.4,
+     "fan_hover_N": 21.1,
+     "fan_hover_W": 574,
+     "total_W": 5616,
+     "current_A": 267,
+     "pack_cont_A": 440,
+     "current_ok": true,
+     "hover_min": 16.7,
+     "passes_1_15": true
+    }
+   }
+  },
+  "MN5008 KV400 + 15x5 CF": {
+   "full_N": 28.2,
+   "rated_N": 21.2,
+   "prop_in": 15,
+   "extra_tip_g": 103,
+   "tip_g": 233,
+   "src": "LIGPOWER MN5008 KV400, about 23 V",
+   "hold_straight_fans_off": {
+    "joint3": 1.06,
+    "joint6": 0.99
+   },
+   "side_N": {
+    "rated_within_30": 253,
+    "full_any_dir": 674
+   },
+   "bearing_of_C0": {
+    "rated_within_30": 0.3,
+    "full_any_dir": 0.81
+   },
+   "stub_MPa_full_within_30": 16.2,
+   "packs": {
+    "Tattu 16 Ah 30C LiPo": {
+     "robot_kg": 18.0,
+     "tw_rated": 1.231,
+     "tw_full": 1.55,
+     "central_N": 16.4,
+     "fan_hover_N": 20.1,
+     "fan_hover_W": 302,
+     "total_W": 2793,
+     "current_A": 133,
+     "pack_cont_A": 480,
+     "current_ok": true,
+     "hover_min": 6.1,
+     "passes_1_15": true
+    },
+    "Tattu 22 Ah 25C LiPo": {
+     "robot_kg": 18.67,
+     "tw_rated": 1.187,
+     "tw_full": 1.495,
+     "central_N": 23.2,
+     "fan_hover_N": 20.1,
+     "fan_hover_W": 302,
+     "total_W": 2930,
+     "current_A": 140,
+     "pack_cont_A": 550,
+     "current_ok": true,
+     "hover_min": 8.0,
+     "passes_1_15": true
+    },
+    "2 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 18.8,
+     "tw_rated": 1.179,
+     "tw_full": 1.485,
+     "central_N": 24.1,
+     "fan_hover_N": 20.2,
+     "fan_hover_W": 303,
+     "total_W": 2957,
+     "current_A": 141,
+     "pack_cont_A": 220,
+     "current_ok": true,
+     "hover_min": 15.9,
+     "passes_1_15": true
+    },
+    "3 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 20.19,
+     "tw_rated": 1.098,
+     "tw_full": 1.383,
+     "central_N": 29.9,
+     "fan_hover_N": 21.1,
+     "fan_hover_W": 325,
+     "total_W": 3276,
+     "current_A": 156,
+     "pack_cont_A": 330,
+     "current_ok": true,
+     "hover_min": 21.5,
+     "passes_1_15": false
+    },
+    "4 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 21.58,
+     "tw_rated": 1.027,
+     "tw_full": 1.294,
+     "central_N": 44.0,
+     "fan_hover_N": 21.2,
+     "fan_hover_W": 325,
+     "total_W": 3682,
+     "current_A": 175,
+     "pack_cont_A": 440,
+     "current_ok": true,
+     "hover_min": 25.5,
+     "passes_1_15": false
+    }
+   }
+  },
+  "MN5008 KV400 + 16x5.4 CF": {
+   "full_N": 33.5,
+   "rated_N": 25.1,
+   "prop_in": 16,
+   "extra_tip_g": 107,
+   "tip_g": 237,
+   "src": "LIGPOWER MN5008 KV400, about 23 V",
+   "hold_straight_fans_off": {
+    "joint3": 1.06,
+    "joint6": 0.99
+   },
+   "side_N": {
+    "rated_within_30": 300,
+    "full_any_dir": 799
+   },
+   "bearing_of_C0": {
+    "rated_within_30": 0.36,
+    "full_any_dir": 0.96
+   },
+   "stub_MPa_full_within_30": 19.2,
+   "packs": {
+    "Tattu 16 Ah 30C LiPo": {
+     "robot_kg": 18.04,
+     "tw_rated": 1.407,
+     "tw_full": 1.785,
+     "central_N": 13.7,
+     "fan_hover_N": 20.5,
+     "fan_hover_W": 285,
+     "total_W": 2602,
+     "current_A": 124,
+     "pack_cont_A": 480,
+     "current_ok": true,
+     "hover_min": 6.6,
+     "passes_1_15": true
+    },
+    "Tattu 22 Ah 25C LiPo": {
+     "robot_kg": 18.7,
+     "tw_rated": 1.357,
+     "tw_full": 1.722,
+     "central_N": 13.7,
+     "fan_hover_N": 21.3,
+     "fan_hover_W": 301,
+     "total_W": 2730,
+     "current_A": 130,
+     "pack_cont_A": 550,
+     "current_ok": true,
+     "hover_min": 8.6,
+     "passes_1_15": true
+    },
+    "2 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 18.83,
+     "tw_rated": 1.348,
+     "tw_full": 1.71,
+     "central_N": 13.8,
+     "fan_hover_N": 21.4,
+     "fan_hover_W": 304,
+     "total_W": 2754,
+     "current_A": 131,
+     "pack_cont_A": 220,
+     "current_ok": true,
+     "hover_min": 17.0,
+     "passes_1_15": true
+    },
+    "3 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 20.22,
+     "tw_rated": 1.255,
+     "tw_full": 1.593,
+     "central_N": 24.1,
+     "fan_hover_N": 21.9,
+     "fan_hover_W": 314,
+     "total_W": 3041,
+     "current_A": 145,
+     "pack_cont_A": 330,
+     "current_ok": true,
+     "hover_min": 23.1,
+     "passes_1_15": true
+    },
+    "4 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 21.61,
+     "tw_rated": 1.174,
+     "tw_full": 1.49,
+     "central_N": 24.1,
+     "fan_hover_N": 23.6,
+     "fan_hover_W": 350,
+     "total_W": 3332,
+     "current_A": 159,
+     "pack_cont_A": 440,
+     "current_ok": true,
+     "hover_min": 28.1,
+     "passes_1_15": true
+    }
+   }
+  },
+  "MN5008 KV400 + 17x5.8 CF": {
+   "full_N": 37.1,
+   "rated_N": 27.8,
+   "prop_in": 17,
+   "extra_tip_g": 116,
+   "tip_g": 246,
+   "src": "LIGPOWER MN5008 KV400, about 23 V",
+   "hold_straight_fans_off": {
+    "joint3": 1.08,
+    "joint6": 1.01
+   },
+   "side_N": {
+    "rated_within_30": 332,
+    "full_any_dir": 886
+   },
+   "bearing_of_C0": {
+    "rated_within_30": 0.4,
+    "full_any_dir": 1.06
+   },
+   "stub_MPa_full_within_30": 21.3,
+   "packs": {
+    "Tattu 16 Ah 30C LiPo": {
+     "robot_kg": 18.11,
+     "tw_rated": 1.524,
+     "tw_full": 1.942,
+     "central_N": 14.1,
+     "fan_hover_N": 20.5,
+     "fan_hover_W": 278,
+     "total_W": 2552,
+     "current_A": 122,
+     "pack_cont_A": 480,
+     "current_ok": true,
+     "hover_min": 6.7,
+     "passes_1_15": true
+    },
+    "Tattu 22 Ah 25C LiPo": {
+     "robot_kg": 18.77,
+     "tw_rated": 1.471,
+     "tw_full": 1.874,
+     "central_N": 14.1,
+     "fan_hover_N": 21.3,
+     "fan_hover_W": 294,
+     "total_W": 2681,
+     "current_A": 128,
+     "pack_cont_A": 550,
+     "current_ok": true,
+     "hover_min": 8.7,
+     "passes_1_15": true
+    },
+    "2 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 18.9,
+     "tw_rated": 1.461,
+     "tw_full": 1.861,
+     "central_N": 14.1,
+     "fan_hover_N": 21.5,
+     "fan_hover_W": 297,
+     "total_W": 2706,
+     "current_A": 129,
+     "pack_cont_A": 220,
+     "current_ok": true,
+     "hover_min": 17.3,
+     "passes_1_15": true
+    },
+    "3 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 20.29,
+     "tw_rated": 1.361,
+     "tw_full": 1.733,
+     "central_N": 24.1,
+     "fan_hover_N": 22.0,
+     "fan_hover_W": 307,
+     "total_W": 2990,
+     "current_A": 142,
+     "pack_cont_A": 330,
+     "current_ok": true,
+     "hover_min": 23.5,
+     "passes_1_15": true
+    },
+    "4 x DOGCOM 22 Ah 5C semi-solid": {
+     "robot_kg": 21.68,
+     "tw_rated": 1.273,
+     "tw_full": 1.622,
+     "central_N": 24.1,
+     "fan_hover_N": 23.7,
+     "fan_hover_W": 345,
+     "total_W": 3294,
+     "current_A": 157,
+     "pack_cont_A": 440,
+     "current_ok": true,
+     "hover_min": 28.5,
+     "passes_1_15": true
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,754 @@
+{
+ "lift_rows": [
+  {
+   "label": "unload",
+   "ok": true,
+   "worst": 0.153,
+   "clear_mm": 0.0,
+   "move_deg": 28.0,
+   "q_deg": [
+    49.0,
+    37.4,
+    -45.5,
+    -57.3,
+    82.0,
+    68.0,
+    -78.8,
+    -90.0,
+    -81.2,
+    -19.1,
+    -23.6,
+    2.1,
+    -13.4
+   ],
+   "need": [
+    0.153,
+    0.136,
+    0.151,
+    0.059,
+    0.147,
+    0.06,
+    0.153,
+    0.031,
+    0.039,
+    0.034,
+    0.088,
+    0.039,
+    0.003
+   ],
+   "pod_servo": 0.147
+  },
+  {
+   "label": "lift",
+   "ok": true,
+   "worst": 0.15,
+   "clear_mm": 0.0,
+   "move_deg": 24.4,
+   "q_deg": [
+    57.6,
+    39.9,
+    -39.6,
+    -73.7,
+    81.6,
+    63.7,
+    -80.6,
+    -90.0,
+    -85.1,
+    5.3,
+    -21.1,
+    13.0,
+    -24.1
+   ],
+   "need": [
+    0.127,
+    0.122,
+    0.148,
+    0.081,
+    0.15,
+    0.15,
+    0.15,
+    0.149,
+    0.042,
+    0.051,
+    0.099,
+    0.03,
+    0.01
+   ],
+   "pod_servo": 0.147
+  }
+ ],
+ "fold_pose": {
+  "ok": true,
+  "worst": 0.01,
+  "q_deg": [
+   86.8,
+   3.7,
+   -5.0,
+   2.3,
+   -2.4,
+   2.0,
+   -2.5,
+   2.9,
+   -3.1,
+   4.4,
+   -1.9,
+   4.3,
+   -0.3
+  ],
+  "finger_mm": [
+   120,
+   53,
+   1075
+  ],
+  "tip_dir": [
+   -0.0,
+   0.05,
+   1.0
+  ]
+ },
+ "move_to_fold_pose": [
+  {
+   "s": 0.0,
+   "worst": 0.15,
+   "clear_mm": 0.0
+  },
+  {
+   "s": 0.1,
+   "worst": 0.187,
+   "clear_mm": -20.5
+  },
+  {
+   "s": 0.2,
+   "worst": 0.259,
+   "clear_mm": -44.0
+  },
+  {
+   "s": 0.3,
+   "worst": 0.408,
+   "clear_mm": -90.4
+  },
+  {
+   "s": 0.4,
+   "worst": 0.594,
+   "clear_mm": -200.4
+  },
+  {
+   "s": 0.5,
+   "worst": 0.769,
+   "clear_mm": -412.6
+  },
+  {
+   "s": 0.6,
+   "worst": 0.873,
+   "clear_mm": -737.5
+  },
+  {
+   "s": 0.7,
+   "worst": 0.853,
+   "clear_mm": -1140.8
+  },
+  {
+   "s": 0.8,
+   "worst": 0.683,
+   "clear_mm": -1545.1
+  },
+  {
+   "s": 0.9,
+   "worst": 0.376,
+   "clear_mm": -1853.4
+  },
+  {
+   "s": 1.0,
+   "worst": 0.01,
+   "clear_mm": -1983.5
+  }
+ ],
+ "fold": [
+  {
+   "theta": 0.0,
+   "worst_joint": 0.01,
+   "j11": 0.01,
+   "j12": 0.0,
+   "pod_servo": 0.008,
+   "disc_clear_mm": {
+    "ground": 1320.5,
+    "central": 1205.8,
+    "own arm": 140.4,
+    "neighbours": 776.8
+   }
+  },
+  {
+   "theta": 2.0,
+   "worst_joint": 0.01,
+   "j11": 0.009,
+   "j12": 0.0,
+   "pod_servo": 0.003,
+   "disc_clear_mm": {
+    "ground": 1327.7,
+    "central": 1212.8,
+    "own arm": 140.3,
+    "neighbours": 784.0
+   }
+  },
+  {
+   "theta": 4.0,
+   "worst_joint": 0.01,
+   "j11": 0.009,
+   "j12": 0.0,
+   "pod_servo": 0.003,
+   "disc_clear_mm": {
+    "ground": 1327.5,
+    "central": 1212.6,
+    "own arm": 140.1,
+    "neighbours": 785.1
+   }
+  },
+  {
+   "theta": 6.0,
+   "worst_joint": 0.01,
+   "j11": 0.008,
+   "j12": 0.0,
+   "pod_servo": 0.008,
+   "disc_clear_mm": {
+    "ground": 1320.3,
+    "central": 1205.4,
+    "own arm": 139.7,
+    "neighbours": 779.6
+   }
+  },
+  {
+   "theta": 8.0,
+   "worst_joint": 0.01,
+   "j11": 0.007,
+   "j12": 0.0,
+   "pod_servo": 0.013,
+   "disc_clear_mm": {
+    "ground": 1313.1,
+    "central": 1198.2,
+    "own arm": 139.3,
+    "neighbours": 773.4
+   }
+  },
+  {
+   "theta": 10.0,
+   "worst_joint": 0.01,
+   "j11": 0.007,
+   "j12": 0.0,
+   "pod_servo": 0.018,
+   "disc_clear_mm": {
+    "ground": 1305.8,
+    "central": 1190.9,
+    "own arm": 138.7,
+    "neighbours": 766.9
+   }
+  },
+  {
+   "theta": 12.0,
+   "worst_joint": 0.01,
+   "j11": 0.006,
+   "j12": 0.0,
+   "pod_servo": 0.023,
+   "disc_clear_mm": {
+    "ground": 1298.4,
+    "central": 1183.6,
+    "own arm": 137.9,
+    "neighbours": 760.2
+   }
+  },
+  {
+   "theta": 14.0,
+   "worst_joint": 0.01,
+   "j11": 0.005,
+   "j12": 0.0,
+   "pod_servo": 0.028,
+   "disc_clear_mm": {
+    "ground": 1291.0,
+    "central": 1176.2,
+    "own arm": 137.1,
+    "neighbours": 753.3
+   }
+  },
+  {
+   "theta": 16.0,
+   "worst_joint": 0.01,
+   "j11": 0.005,
+   "j12": 0.0,
+   "pod_servo": 0.033,
+   "disc_clear_mm": {
+    "ground": 1283.6,
+    "central": 1168.8,
+    "own arm": 136.1,
+    "neighbours": 746.4
+   }
+  },
+  {
+   "theta": 18.0,
+   "worst_joint": 0.01,
+   "j11": 0.004,
+   "j12": 0.0,
+   "pod_servo": 0.038,
+   "disc_clear_mm": {
+    "ground": 1276.2,
+    "central": 1161.4,
+    "own arm": 134.9,
+    "neighbours": 739.3
+   }
+  },
+  {
+   "theta": 20.0,
+   "worst_joint": 0.01,
+   "j11": 0.003,
+   "j12": 0.0,
+   "pod_servo": 0.043,
+   "disc_clear_mm": {
+    "ground": 1268.7,
+    "central": 1153.9,
+    "own arm": 133.7,
+    "neighbours": 732.2
+   }
+  },
+  {
+   "theta": 22.0,
+   "worst_joint": 0.01,
+   "j11": 0.003,
+   "j12": 0.0,
+   "pod_servo": 0.048,
+   "disc_clear_mm": {
+    "ground": 1261.2,
+    "central": 1146.4,
+    "own arm": 132.3,
+    "neighbours": 725.0
+   }
+  },
+  {
+   "theta": 24.0,
+   "worst_joint": 0.01,
+   "j11": 0.002,
+   "j12": 0.0,
+   "pod_servo": 0.053,
+   "disc_clear_mm": {
+    "ground": 1253.7,
+    "central": 1138.9,
+    "own arm": 130.8,
+    "neighbours": 717.8
+   }
+  },
+  {
+   "theta": 26.0,
+   "worst_joint": 0.01,
+   "j11": 0.002,
+   "j12": 0.0,
+   "pod_servo": 0.058,
+   "disc_clear_mm": {
+    "ground": 1246.3,
+    "central": 1131.5,
+    "own arm": 129.1,
+    "neighbours": 710.5
+   }
+  },
+  {
+   "theta": 28.0,
+   "worst_joint": 0.01,
+   "j11": 0.001,
+   "j12": 0.0,
+   "pod_servo": 0.063,
+   "disc_clear_mm": {
+    "ground": 1238.8,
+    "central": 1124.0,
+    "own arm": 127.4,
+    "neighbours": 703.2
+   }
+  },
+  {
+   "theta": 30.0,
+   "worst_joint": 0.01,
+   "j11": 0.0,
+   "j12": 0.0,
+   "pod_servo": 0.067,
+   "disc_clear_mm": {
+    "ground": 1231.4,
+    "central": 1116.6,
+    "own arm": 125.5,
+    "neighbours": 695.9
+   }
+  },
+  {
+   "theta": 32.0,
+   "worst_joint": 0.01,
+   "j11": 0.0,
+   "j12": 0.0,
+   "pod_servo": 0.072,
+   "disc_clear_mm": {
+    "ground": 1224.0,
+    "central": 1109.2,
+    "own arm": 123.5,
+    "neighbours": 688.6
+   }
+  },
+  {
+   "theta": 34.0,
+   "worst_joint": 0.01,
+   "j11": 0.001,
+   "j12": 0.0,
+   "pod_servo": 0.076,
+   "disc_clear_mm": {
+    "ground": 1216.7,
+    "central": 1101.8,
+    "own arm": 121.4,
+    "neighbours": 681.2
+   }
+  },
+  {
+   "theta": 36.0,
+   "worst_joint": 0.01,
+   "j11": 0.001,
+   "j12": 0.0,
+   "pod_servo": 0.081,
+   "disc_clear_mm": {
+    "ground": 1209.4,
+    "central": 1094.5,
+    "own arm": 119.2,
+    "neighbours": 674.0
+   }
+  },
+  {
+   "theta": 38.0,
+   "worst_joint": 0.01,
+   "j11": 0.002,
+   "j12": 0.0,
+   "pod_servo": 0.085,
+   "disc_clear_mm": {
+    "ground": 1202.2,
+    "central": 1087.3,
+    "own arm": 116.8,
+    "neighbours": 666.7
+   }
+  },
+  {
+   "theta": 40.0,
+   "worst_joint": 0.01,
+   "j11": 0.003,
+   "j12": 0.0,
+   "pod_servo": 0.089,
+   "disc_clear_mm": {
+    "ground": 1195.1,
+    "central": 1080.2,
+    "own arm": 114.4,
+    "neighbours": 659.5
+   }
+  },
+  {
+   "theta": 42.0,
+   "worst_joint": 0.01,
+   "j11": 0.003,
+   "j12": 0.0,
+   "pod_servo": 0.093,
+   "disc_clear_mm": {
+    "ground": 1188.0,
+    "central": 1073.1,
+    "own arm": 111.9,
+    "neighbours": 652.3
+   }
+  },
+  {
+   "theta": 44.0,
+   "worst_joint": 0.01,
+   "j11": 0.004,
+   "j12": 0.0,
+   "pod_servo": 0.097,
+   "disc_clear_mm": {
+    "ground": 1181.1,
+    "central": 1066.1,
+    "own arm": 109.2,
+    "neighbours": 645.2
+   }
+  },
+  {
+   "theta": 46.0,
+   "worst_joint": 0.01,
+   "j11": 0.004,
+   "j12": 0.0,
+   "pod_servo": 0.101,
+   "disc_clear_mm": {
+    "ground": 1174.2,
+    "central": 1059.2,
+    "own arm": 106.5,
+    "neighbours": 638.2
+   }
+  },
+  {
+   "theta": 48.0,
+   "worst_joint": 0.01,
+   "j11": 0.005,
+   "j12": 0.0,
+   "pod_servo": 0.105,
+   "disc_clear_mm": {
+    "ground": 1167.5,
+    "central": 1052.5,
+    "own arm": 103.6,
+    "neighbours": 631.3
+   }
+  },
+  {
+   "theta": 50.0,
+   "worst_joint": 0.01,
+   "j11": 0.005,
+   "j12": 0.0,
+   "pod_servo": 0.109,
+   "disc_clear_mm": {
+    "ground": 1160.8,
+    "central": 1045.8,
+    "own arm": 100.7,
+    "neighbours": 624.5
+   }
+  },
+  {
+   "theta": 52.0,
+   "worst_joint": 0.01,
+   "j11": 0.005,
+   "j12": 0.0,
+   "pod_servo": 0.112,
+   "disc_clear_mm": {
+    "ground": 1154.3,
+    "central": 1039.3,
+    "own arm": 97.7,
+    "neighbours": 617.8
+   }
+  },
+  {
+   "theta": 54.0,
+   "worst_joint": 0.01,
+   "j11": 0.006,
+   "j12": 0.0,
+   "pod_servo": 0.115,
+   "disc_clear_mm": {
+    "ground": 1148.0,
+    "central": 1033.0,
+    "own arm": 94.6,
+    "neighbours": 611.2
+   }
+  },
+  {
+   "theta": 56.0,
+   "worst_joint": 0.01,
+   "j11": 0.006,
+   "j12": 0.0,
+   "pod_servo": 0.119,
+   "disc_clear_mm": {
+    "ground": 1141.7,
+    "central": 1026.7,
+    "own arm": 91.5,
+    "neighbours": 604.7
+   }
+  },
+  {
+   "theta": 58.0,
+   "worst_joint": 0.01,
+   "j11": 0.007,
+   "j12": 0.0,
+   "pod_servo": 0.122,
+   "disc_clear_mm": {
+    "ground": 1135.6,
+    "central": 1020.6,
+    "own arm": 88.2,
+    "neighbours": 598.5
+   }
+  },
+  {
+   "theta": 60.0,
+   "worst_joint": 0.01,
+   "j11": 0.007,
+   "j12": 0.0,
+   "pod_servo": 0.124,
+   "disc_clear_mm": {
+    "ground": 1129.7,
+    "central": 1014.7,
+    "own arm": 84.9,
+    "neighbours": 592.3
+   }
+  },
+  {
+   "theta": 62.0,
+   "worst_joint": 0.01,
+   "j11": 0.007,
+   "j12": 0.0,
+   "pod_servo": 0.127,
+   "disc_clear_mm": {
+    "ground": 1123.9,
+    "central": 1008.9,
+    "own arm": 81.5,
+    "neighbours": 586.4
+   }
+  },
+  {
+   "theta": 64.0,
+   "worst_joint": 0.01,
+   "j11": 0.008,
+   "j12": 0.0,
+   "pod_servo": 0.13,
+   "disc_clear_mm": {
+    "ground": 1118.3,
+    "central": 1003.3,
+    "own arm": 78.1,
+    "neighbours": 580.6
+   }
+  },
+  {
+   "theta": 66.0,
+   "worst_joint": 0.01,
+   "j11": 0.008,
+   "j12": 0.0,
+   "pod_servo": 0.132,
+   "disc_clear_mm": {
+    "ground": 1112.9,
+    "central": 997.9,
+    "own arm": 74.5,
+    "neighbours": 575.0
+   }
+  },
+  {
+   "theta": 68.0,
+   "worst_joint": 0.01,
+   "j11": 0.008,
+   "j12": 0.0,
+   "pod_servo": 0.134,
+   "disc_clear_mm": {
+    "ground": 1107.7,
+    "central": 992.7,
+    "own arm": 71.0,
+    "neighbours": 569.7
+   }
+  },
+  {
+   "theta": 70.0,
+   "worst_joint": 0.01,
+   "j11": 0.009,
+   "j12": 0.0,
+   "pod_servo": 0.137,
+   "disc_clear_mm": {
+    "ground": 1102.6,
+    "central": 987.6,
+    "own arm": 67.4,
+    "neighbours": 564.6
+   }
+  },
+  {
+   "theta": 72.0,
+   "worst_joint": 0.01,
+   "j11": 0.009,
+   "j12": 0.0,
+   "pod_servo": 0.139,
+   "disc_clear_mm": {
+    "ground": 1097.8,
+    "central": 982.8,
+    "own arm": 63.7,
+    "neighbours": 559.7
+   }
+  },
+  {
+   "theta": 74.0,
+   "worst_joint": 0.01,
+   "j11": 0.009,
+   "j12": 0.0,
+   "pod_servo": 0.14,
+   "disc_clear_mm": {
+    "ground": 1093.1,
+    "central": 978.1,
+    "own arm": 60.0,
+    "neighbours": 555.0
+   }
+  },
+  {
+   "theta": 76.0,
+   "worst_joint": 0.01,
+   "j11": 0.009,
+   "j12": 0.0,
+   "pod_servo": 0.142,
+   "disc_clear_mm": {
+    "ground": 1088.7,
+    "central": 973.7,
+    "own arm": 56.3,
+    "neighbours": 550.7
+   }
+  },
+  {
+   "theta": 78.0,
+   "worst_joint": 0.01,
+   "j11": 0.01,
+   "j12": 0.0,
+   "pod_servo": 0.143,
+   "disc_clear_mm": {
+    "ground": 1084.4,
+    "central": 969.4,
+    "own arm": 52.5,
+    "neighbours": 546.6
+   }
+  },
+  {
+   "theta": 80.0,
+   "worst_joint": 0.01,
+   "j11": 0.01,
+   "j12": 0.0,
+   "pod_servo": 0.145,
+   "disc_clear_mm": {
+    "ground": 1080.4,
+    "central": 965.4,
+    "own arm": 48.7,
+    "neighbours": 542.8
+   }
+  },
+  {
+   "theta": 82.0,
+   "worst_joint": 0.01,
+   "j11": 0.01,
+   "j12": 0.0,
+   "pod_servo": 0.146,
+   "disc_clear_mm": {
+    "ground": 1076.6,
+    "central": 961.6,
+    "own arm": 44.9,
+    "neighbours": 539.2
+   }
+  },
+  {
+   "theta": 84.0,
+   "worst_joint": 0.01,
+   "j11": 0.01,
+   "j12": 0.0,
+   "pod_servo": 0.147,
+   "disc_clear_mm": {
+    "ground": 1073.0,
+    "central": 958.0,
+    "own arm": 41.0,
+    "neighbours": 536.0
+   }
+  },
+  {
+   "theta": 86.0,
+   "worst_joint": 0.01,
+   "j11": 0.01,
+   "j12": 0.0,
+   "pod_servo": 0.147,
+   "disc_clear_mm": {
+    "ground": 1069.7,
+    "central": 954.7,
+    "own arm": 37.2,
+    "neighbours": 533.1
+   }
+  },
+  {
+   "theta": 88.0,
+   "worst_joint": 0.01,
+   "j11": 0.01,
+   "j12": 0.0,
+   "pod_servo": 0.409,
+   "disc_clear_mm": {
+    "ground": 1066.6,
+    "central": 951.6,
+    "own arm": 33.3,
+    "neighbours": 530.5
+   }
+  }
+ ],
+ "max_joint_move_deg": 92.9
+}

@@ -1,0 +1,264 @@
+{
+ "pod, ESC at the tip": {
+  "hover": {
+   "robot_kg": 18.91,
+   "tw_rated": 1.34,
+   "hover_min": 16.9,
+   "current_A": 132,
+   "central_N": 14.6,
+   "fan_hover_N": 21.4,
+   "total_W": 2770
+  },
+  "cases": {
+   "Hover, any pose": {
+    "horn_N": 221,
+    "idler_N": 225,
+    "stub_MPa": 9.4,
+    "held": "23/65"
+   },
+   "Rated thrust within 30 deg of straight up": {
+    "horn_N": 345,
+    "idler_N": 345,
+    "stub_MPa": 14.4,
+    "held": "193/520"
+   },
+   "Rated thrust within 60 deg of straight up": {
+    "horn_N": 369,
+    "idler_N": 383,
+    "stub_MPa": 16.0,
+    "held": "167/520"
+   },
+   "Rated thrust, any direction": {
+    "horn_N": 599,
+    "idler_N": 597,
+    "stub_MPa": 24.9,
+    "held": "2257/6500"
+   },
+   "Full throttle, any direction": {
+    "horn_N": 756,
+    "idler_N": 753,
+    "stub_MPa": 31.5,
+    "held": "1762/6500"
+   },
+   "Walking stance": {
+    "horn_N": 39,
+    "idler_N": 30,
+    "stub_MPa": 1.3,
+    "held": "4/4"
+   },
+   "Hard landing": {
+    "horn_N": 247,
+    "idler_N": 184,
+    "stub_MPa": 7.7,
+    "held": "2/4"
+   }
+  },
+  "foot_N": 26.5,
+  "walk_on_tip_need_over_stall": [
+   0.19,
+   0.23,
+   0.1,
+   0.15,
+   0.11,
+   0.48,
+   1.43,
+   0.72,
+   0.85,
+   1.27,
+   0.4,
+   0.21,
+   0.0
+  ],
+  "walk_on_folded_finger_worst_roll": [
+   0.31,
+   0.42,
+   0.31,
+   0.37,
+   0.25,
+   0.67,
+   1.81,
+   1.1,
+   1.23,
+   1.65,
+   0.71,
+   0.51,
+   0.38
+  ],
+  "walk_on_folded_finger_mean_roll": [
+   0.19,
+   0.23,
+   0.15,
+   0.18,
+   0.12,
+   0.48,
+   1.43,
+   0.72,
+   0.85,
+   1.27,
+   0.4,
+   0.24,
+   0.24
+  ],
+  "straight_out_fans_off": [
+   0.85,
+   0.74,
+   0.63,
+   1.08,
+   0.45,
+   0.62,
+   1.01,
+   0.4,
+   0.3,
+   0.44,
+   0.15,
+   0.09,
+   0.08
+  ],
+  "straight_out_4N_assist": [
+   0.44,
+   0.36,
+   0.29,
+   0.45,
+   0.17,
+   0.2,
+   0.27,
+   0.08,
+   0.04,
+   0.02,
+   0.01,
+   0.02,
+   0.03
+  ]
+ },
+ "pod, ESC moved to joint 10": {
+  "hover": {
+   "robot_kg": 18.91,
+   "tw_rated": 1.34,
+   "hover_min": 16.9,
+   "current_A": 132,
+   "central_N": 14.6,
+   "fan_hover_N": 21.4,
+   "total_W": 2770
+  },
+  "cases": {
+   "Hover, any pose": {
+    "horn_N": 224,
+    "idler_N": 228,
+    "stub_MPa": 9.5,
+    "held": "23/65"
+   },
+   "Rated thrust within 30 deg of straight up": {
+    "horn_N": 349,
+    "idler_N": 349,
+    "stub_MPa": 14.6,
+    "held": "191/520"
+   },
+   "Rated thrust within 60 deg of straight up": {
+    "horn_N": 369,
+    "idler_N": 383,
+    "stub_MPa": 16.0,
+    "held": "166/520"
+   },
+   "Rated thrust, any direction": {
+    "horn_N": 596,
+    "idler_N": 593,
+    "stub_MPa": 24.8,
+    "held": "2262/6500"
+   },
+   "Full throttle, any direction": {
+    "horn_N": 753,
+    "idler_N": 750,
+    "stub_MPa": 31.3,
+    "held": "1758/6500"
+   },
+   "Walking stance": {
+    "horn_N": 39,
+    "idler_N": 30,
+    "stub_MPa": 1.3,
+    "held": "4/4"
+   },
+   "Hard landing": {
+    "horn_N": 247,
+    "idler_N": 185,
+    "stub_MPa": 7.7,
+    "held": "2/4"
+   }
+  },
+  "foot_N": 26.5,
+  "walk_on_tip_need_over_stall": [
+   0.19,
+   0.23,
+   0.1,
+   0.15,
+   0.11,
+   0.48,
+   1.43,
+   0.73,
+   0.85,
+   1.28,
+   0.4,
+   0.21,
+   0.0
+  ],
+  "walk_on_folded_finger_worst_roll": [
+   0.31,
+   0.42,
+   0.31,
+   0.38,
+   0.26,
+   0.67,
+   1.81,
+   1.1,
+   1.23,
+   1.66,
+   0.71,
+   0.52,
+   0.38
+  ],
+  "walk_on_folded_finger_mean_roll": [
+   0.19,
+   0.23,
+   0.15,
+   0.18,
+   0.12,
+   0.48,
+   1.43,
+   0.73,
+   0.85,
+   1.28,
+   0.4,
+   0.24,
+   0.24
+  ],
+  "straight_out_fans_off": [
+   0.85,
+   0.73,
+   0.63,
+   1.07,
+   0.45,
+   0.61,
+   0.99,
+   0.39,
+   0.3,
+   0.42,
+   0.14,
+   0.08,
+   0.07
+  ],
+  "straight_out_4N_assist": [
+   0.44,
+   0.36,
+   0.28,
+   0.44,
+   0.16,
+   0.2,
+   0.26,
+   0.08,
+   0.03,
+   0.01,
+   0.02,
+   0.02,
+   0.03
+  ]
+ }
+}

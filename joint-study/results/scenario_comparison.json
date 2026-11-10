@@ -1,0 +1,278 @@
+{
+ "baseline": [
+  {
+   "arch": "3-section tendons",
+   "configs": 19824,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 1.157840153979916,
+   "min_mantle_util": 0.2133472,
+   "top_fail": {
+    "walk_load": 19824,
+    "flight_load": 19824,
+    "struct": 19824
+   }
+  },
+  {
+   "arch": "base-box tendons",
+   "configs": 23520,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 1.5490341041168083,
+   "min_mantle_util": 0.3733575999999999,
+   "top_fail": {
+    "walk_load": 23520,
+    "flight_load": 23520,
+    "struct": 23520
+   }
+  },
+  {
+   "arch": "graded servo chain",
+   "configs": 5120,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 0.22126983384077,
+   "min_mantle_util": 0.0,
+   "top_fail": {
+    "tw": 4930,
+    "walk_load": 3124,
+    "flight_load": 2672
+   }
+  },
+  {
+   "arch": "push-pull rods",
+   "configs": 9744,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 7.110220893796614,
+   "min_mantle_util": 0.3733575999999999,
+   "top_fail": {
+    "walk_load": 9744,
+    "flight_load": 9744,
+    "struct": 9744
+   }
+  },
+  {
+   "arch": "root servos + base-box tendons",
+   "configs": 17472,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 1.3129882060861628,
+   "min_mantle_util": 0.266684,
+   "top_fail": {
+    "walk_load": 17472,
+    "flight_load": 17472,
+    "struct": 17472
+   }
+  },
+  {
+   "arch": "servo in every node",
+   "configs": 18368,
+   "feasible": 136,
+   "best_score": 0.4920980512292566,
+   "best": "pin_hinge / alt90_roll4 / N7",
+   "best_dof": 8,
+   "min_walk_util": 0.1366550952032778,
+   "min_mantle_util": 0.0,
+   "top_fail": {
+    "walk_load": 10364,
+    "flight_load": 9824,
+    "tw": 9752
+   }
+  }
+ ],
+ "tendon_optimistic": [
+  {
+   "arch": "3-section tendons",
+   "configs": 19824,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 0.4032699455219135,
+   "min_mantle_util": 0.12800832,
+   "top_fail": {
+    "struct": 19824,
+    "walk_load": 18508,
+    "flight_load": 13216
+   }
+  },
+  {
+   "arch": "base-box tendons",
+   "configs": 23520,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 0.4862663159754939,
+   "min_mantle_util": 0.2240145599999999,
+   "top_fail": {
+    "struct": 23520,
+    "walk_load": 21968,
+    "flight_load": 15680
+   }
+  },
+  {
+   "arch": "graded servo chain",
+   "configs": 5120,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 0.22126983384077,
+   "min_mantle_util": 0.0,
+   "top_fail": {
+    "tw": 4930,
+    "walk_load": 3124,
+    "flight_load": 2672
+   }
+  },
+  {
+   "arch": "push-pull rods",
+   "configs": 9744,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 2.1992553256497502,
+   "min_mantle_util": 0.2240145599999999,
+   "top_fail": {
+    "walk_load": 9744,
+    "flight_load": 9744,
+    "struct": 9744
+   }
+  },
+  {
+   "arch": "root servos + base-box tendons",
+   "configs": 17472,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 0.377568502772012,
+   "min_mantle_util": 0.1600104,
+   "top_fail": {
+    "struct": 17472,
+    "walk_load": 15312,
+    "tw": 12011
+   }
+  },
+  {
+   "arch": "servo in every node",
+   "configs": 18368,
+   "feasible": 136,
+   "best_score": 0.4920980512292566,
+   "best": "pin_hinge / alt90_roll4 / N7",
+   "best_dof": 8,
+   "min_walk_util": 0.1366550952032778,
+   "min_mantle_util": 0.0,
+   "top_fail": {
+    "walk_load": 10364,
+    "flight_load": 9824,
+    "tw": 9752
+   }
+  }
+ ],
+ "more_thrust": [
+  {
+   "arch": "3-section tendons",
+   "configs": 19824,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 1.113841971995963,
+   "min_mantle_util": 0.2133472,
+   "top_fail": {
+    "walk_load": 19824,
+    "flight_load": 19824,
+    "struct": 19656
+   }
+  },
+  {
+   "arch": "base-box tendons",
+   "configs": 23520,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 1.4937231687550734,
+   "min_mantle_util": 0.3733575999999999,
+   "top_fail": {
+    "walk_load": 23520,
+    "flight_load": 23520,
+    "struct": 23472
+   }
+  },
+  {
+   "arch": "graded servo chain",
+   "configs": 5120,
+   "feasible": 72,
+   "best_score": 0.3855324143965117,
+   "best": "canted_hinge / helix60 / N7",
+   "best_dof": 7,
+   "min_walk_util": 0.2056143338000823,
+   "min_mantle_util": 0.0,
+   "top_fail": {
+    "tw": 4013,
+    "walk_load": 3104,
+    "flight_load": 2488
+   }
+  },
+  {
+   "arch": "push-pull rods",
+   "configs": 9744,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 6.845122687699235,
+   "min_mantle_util": 0.3733575999999999,
+   "top_fail": {
+    "walk_load": 9744,
+    "flight_load": 9744,
+    "struct": 9720
+   }
+  },
+  {
+   "arch": "root servos + base-box tendons",
+   "configs": 17472,
+   "feasible": 0,
+   "best_score": null,
+   "best": "",
+   "best_dof": null,
+   "min_walk_util": 1.2637650526040258,
+   "min_mantle_util": 0.266684,
+   "top_fail": {
+    "walk_load": 17472,
+    "flight_load": 17472,
+    "struct": 17472
+   }
+  },
+  {
+   "arch": "servo in every node",
+   "configs": 18368,
+   "feasible": 2319,
+   "best_score": 0.5995389012440367,
+   "best": "rolling_1d / alt90_roll4 / N11",
+   "best_dof": 13,
+   "min_walk_util": 0.1451906373738534,
+   "min_mantle_util": 0.0,
+   "top_fail": {
+    "walk_load": 10368,
+    "flight_load": 10024,
+    "tw": 5296
+   }
+  }
+ ]
+}

@@ -1,0 +1,49 @@
+{
+ "socket_g": 30.08610277705173,
+ "end_cap_g": 1.9290214359317377,
+ "bearing_cap_g": 2.0889551399225743,
+ "gear_g": 15.046167475856652,
+ "pinion_g": 6.433075280824696,
+ "gear_bearing": "61803",
+ "gear_bearing_g": 7.5,
+ "pinion_bearing": "695",
+ "pinion_bearing_g": 2.2,
+ "idler_pin_g": 1.285257986011151,
+ "hw_extra_g": 5.4,
+ "root_brg": "61803",
+ "old_socket_g": 23.226002773563145,
+ "joint0_lid_g": 2.50708052171805,
+ "added_g_per_arm": 46.23549680031736,
+ "estimate_g": 45.0,
+ "budget_g": 46.38108695652199,
+ "robot_kg": 15.08388397440254,
+ "thrust_to_weight": 1.1500887987098916,
+ "mantle_cutout": {
+  "alpha_min": -35.9,
+  "alpha_max": 25.0,
+  "beta_min": -21.14939773,
+  "beta_max": 21.14939773,
+  "arm_R": 28.55
+ },
+ "bulge_mm": 6.849999999999998,
+ "gear_tip_r": 21.0,
+ "pinion_tip_r": 11.0,
+ "centre_distance": 30.0,
+ "servo_case_alpha": [
+  -32.5,
+  2.5
+ ],
+ "servo_case_zeta": [
+  -64.2,
+  -19.0
+ ],
+ "socket_zeta": [
+  -66.7,
+  15.0
+ ],
+ "flange_zeta": [
+  -40.7,
+  -37.7
+ ],
+ "arm_all_g": 1394.0313247446682
+}

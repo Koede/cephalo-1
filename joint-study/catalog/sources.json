@@ -1,0 +1,1314 @@
+[
+  {
+    "family_id": "pin_hinge_same_plane",
+    "name": "Planar pin hinges (all axes parallel)",
+    "mechanism": "Rigid links joined by pins whose axes are all parallel, so the chain bends in one plane only; two antagonistic tendons per plane (or one tendon + return spring).",
+    "dof_per_joint": "1 bend",
+    "reported_range_deg_per_joint": [
+      15,
+      45
+    ],
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "PLA",
+      "PETG",
+      "steel pin",
+      "nylon/steel tendon"
+    ],
+    "printable_fdm": "yes",
+    "print_notes": "Print knuckles flat so the pin bore axis is vertical (round holes, loads in-plane); 0.3-0.5 mm radial pin clearance for FDM; print-in-place hinges need >=0.4 mm gap; pin knuckles crack along layers if the bore is printed horizontally.",
+    "non_printed_parts": [
+      "steel pins / M2-M3 bolts or 1.75 mm filament as pins",
+      "tendons",
+      "optional return springs"
+    ],
+    "known_issues": [
+      "only planar motion -> needs a base yaw servo for 3D reach",
+      "pin backlash accumulates over many links",
+      "pins bend/wear under cycling (seen in printed Sarrus arm)",
+      "under-constrained chain: S-shapes unless spring-loaded"
+    ],
+    "sources": [
+      {
+        "title": "Multi-material 3D printed tendon-driven continuum segment (Leeds, ICRA preprint)",
+        "url": "https://eprints.whiterose.ac.uk/id/eprint/145152/1/ICRA%20-%202nd%20edit%20-%20draft%202.pdf",
+        "what_it_supports": "Vertebrae on Tango+ backbone; v0.2 soft hinges alternated 90 deg (~15 deg/vertebra, 135 deg total); keyed vertebrae cut torsional play 5.6->1.4 deg/vertebra; payload 0.4-1.3 kg; key-base fracture under torsion; nylon then 0.7 mm braided steel tendons"
+      },
+      {
+        "title": "Sarrus linkage aerial drone arm (Idaho State Univ. robotics lab)",
+        "url": "https://www.isu.edu/media/libraries/college-of-science-and-engineering/mechanical-engineering-v2/robotics-research-lab/Sarrus_Linkage_Aerial_Drone_Arm_Final.pdf",
+        "what_it_supports": "Stacked Sarrus links, ABS, 10.2 -> 33 cm (~3.2:1), ~450 g; torsion springs + single cable; pins bent/failed after dozens of cycles; singularity at full extension"
+      }
+    ],
+    "source_note": "No source dedicated to an all-parallel printed pin-hinge tentacle was verified; Leeds v0.2 (single-DOF hinges, ~15 deg each) and the ISU Sarrus arm (pin bending/failure) are indirect evidence. Range is engineering estimate.",
+    "confidence": "low"
+  },
+  {
+    "family_id": "pin_hinge_alternating",
+    "name": "Alternating 90-degree pin hinges (snake-robot style)",
+    "mechanism": "Single-axis hinges whose axes alternate by 90 deg along the chain, so pairs of joints approximate a universal joint; 2 antagonistic tendon pairs give spatial bending.",
+    "dof_per_joint": "1 bend (2 bend per hinge pair)",
+    "reported_range_deg_per_joint": [
+      15,
+      60
+    ],
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "Stratasys Vero + Tango+ (multi-material)",
+      "PLA",
+      "bearings (TENDRIM)",
+      "nylon fishing line",
+      "0.7 mm braided steel wire"
+    ],
+    "printable_fdm": "yes",
+    "print_notes": "FDM equivalent of Leeds design: print vertebrae separately with pin or key/keyway; keys fracture at base under torsion, so add fillets and print with layers perpendicular to key shear; keep pin bores vertical.",
+    "non_printed_parts": [
+      "pins or small bearings",
+      "tendons",
+      "optional elastic core (TPU rod/spring)"
+    ],
+    "known_issues": [
+      "torsional play per vertebra (5.6 deg measured -> 1.4 deg with tighter keys)",
+      "anisotropic bending (diagonal directions need both pairs)",
+      "tendon-link collision limits roll range (TENDRIM +/-60 deg)",
+      "gearbox stripping before stall in Leeds tests"
+    ],
+    "sources": [
+      {
+        "title": "Multi-material 3D printed tendon-driven continuum segment (Leeds, ICRA preprint)",
+        "url": "https://eprints.whiterose.ac.uk/id/eprint/145152/1/ICRA%20-%202nd%20edit%20-%20draft%202.pdf",
+        "what_it_supports": "Vertebrae on Tango+ backbone; v0.2 soft hinges alternated 90 deg (~15 deg/vertebra, 135 deg total); keyed vertebrae cut torsional play 5.6->1.4 deg/vertebra; payload 0.4-1.3 kg; key-base fracture under torsion; nylon then 0.7 mm braided steel tendons"
+      },
+      {
+        "title": "New 3D printed continuum soft robot can lift 3 pounds (3DPrint.com)",
+        "url": "https://3dprint.com/242354/new-3d-printed-continuum-soft-robot-can-lift-3-pounds/",
+        "what_it_supports": "Popular summary of the Leeds segment: 4 tendons, interlocking vertebrae, 1300 g payload, ~10 deg/s under max load"
+      },
+      {
+        "title": "Design of the new modular tendon-driven manipulator TENDRIM (TU Braunschweig)",
+        "url": "https://www.tu-braunschweig.de/fileadmin/Redaktionsgruppen/Institute_Fakultaet_5/IFR/Dateien_RT/Publikationen/Design_of_the_new_modular_tendon-driven_manipulator_TENDRIM.pdf",
+        "what_it_supports": "Bearing-based pitch+roll joints per module (universal-joint equivalent); working range ~120 deg pitch, +/-60 deg roll limited by tendon-link collision; all tendons must stay in tension"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "family_id": "universal_cardan",
+    "name": "Universal / Cardan joints",
+    "mechanism": "Cross-pin (or tubular synovial) universal joints between discs give pitch and yaw at one location while blocking twist; tendons through disc holes drive bending.",
+    "dof_per_joint": "2 bend",
+    "reported_range_deg_per_joint": [
+      20,
+      45
+    ],
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "PLA (printed U-joint backbone)",
+      "laser-cut tube",
+      "off-the-shelf metal U-joints",
+      "1 mm braided steel tendons",
+      "Kevlar string",
+      "helical steel springs"
+    ],
+    "printable_fdm": "yes",
+    "print_notes": "U-CAAMS printed its U-joint backbone in PLA; print yokes with bores vertical, cross-pin as metal pin; 0.2-0.3 mm clearance; yoke ears are weak across layers - orient so bending load is in-plane; add radial springs for shape recovery.",
+    "non_printed_parts": [
+      "cross pins",
+      "helical springs",
+      "tendons",
+      "optionally commercial mini U-joints"
+    ],
+    "known_issues": [
+      "good torsional stiffness (major advantage on a drone vs NiTi backbone)",
+      "self-weight sag and gravity-driven in-plane error",
+      "per-joint angle limit stops tight curling",
+      "backlash from pin clearance",
+      "tendon friction with helical routing"
+    ],
+    "sources": [
+      {
+        "title": "U-Joint CAAMS: universal-joint continuum manipulator for aerial manipulation (arXiv 2607.03321)",
+        "url": "https://arxiv.org/pdf/2607.03321",
+        "what_it_supports": "Drone-mounted PLA-printed tubular U-joint backbone + radial helical springs, 3x1 mm steel tendons, 3x Dynamixel XL430; arm 430 g; bending kept <180 deg to avoid props; 2.5-45x lower out-of-plane error under downwash than NiTi backbone; gravity sag in-plane"
+      },
+      {
+        "title": "Universal-jointed tendon-driven continuum robot (arXiv 2409.13165)",
+        "url": "https://arxiv.org/html/2409.13165v1",
+        "what_it_supports": "Synovial U-joint laser-cut from tube with open centre channel; bending-angle limit is a design parameter; helical/parallel tendon routing; tendon friction must be modelled"
+      },
+      {
+        "title": "A DIY tentacle bot right out of Doctor Octopus' lab (Hackster)",
+        "url": "https://www.hackster.io/news/a-diy-tentacle-bot-right-out-of-doctor-octopus-lab-41f5a4273260",
+        "what_it_supports": "Hobby 10-disk tentacle with small universal joints + printed adapters, Kevlar strings, 2 servos; U-joints block twist; string slipped on pulleys until wheels redesigned"
+      }
+    ],
+    "source_note": "Per-joint range not reported numerically in sources; 20-45 deg is an engineering estimate typical of U-joint geometry.",
+    "confidence": "medium"
+  },
+  {
+    "family_id": "ball_socket_printed",
+    "name": "Printed ball-and-socket (snap fit / print-in-place)",
+    "mechanism": "Spherical ball in a socket (or discs riding on balls threaded on an elastic core) gives 2 bend + free axial rotation; tendons through disc holes bend the chain.",
+    "dof_per_joint": "2 bend + 1 axial (twist unconstrained)",
+    "reported_range_deg_per_joint": [
+      30,
+      97
+    ],
+    "reported_min_bend_radius_or_pitch_mm": 35,
+    "materials_seen": [
+      "PLA discs",
+      "20 mm wooden balls",
+      "rubber string core",
+      "compression springs",
+      "printed ball joints",
+      "fishing line in tubing"
+    ],
+    "printable_fdm": "yes",
+    "print_notes": "Print-in-place needs ~0.2 mm clearance and may stick; snap-fit sockets should be PETG/nylon (PLA cracks); print sockets with opening facing up; layer lines on the ball add stick-slip - sand or use a bought ball/bead.",
+    "non_printed_parts": [
+      "balls/beads (wood, steel, Delrin)",
+      "elastic core string",
+      "springs",
+      "tendons",
+      "PTFE/Bowden tubing"
+    ],
+    "known_issues": [
+      "no torsional constraint -> chain twists unless tendons or keys resist it",
+      "friction/stick-slip at sphere",
+      "snap fit loosens with wear",
+      "redundant chain not suited to precise position control"
+    ],
+    "sources": [
+      {
+        "title": "Tendon-driven continuum robot with ball joints (ROBOMECH Journal 2024)",
+        "url": "https://robomechjournal.springeropen.com/articles/10.1186/s40648-024-00272-4",
+        "what_it_supports": "8 PLA discs + 7 x 20 mm wooden balls on rubber string, 3 tendons at 120 deg, SG90 servos, 270 mm/80 g, ~190 g payload; per-joint max 2*theta (~97 deg derived from geometry); CR-10 printed"
+      },
+      {
+        "title": "A servo powered robotic arm, but like you've never seen before (Hackaday 2018)",
+        "url": "https://hackaday.com/2018/09/04/a-servo-powered-robotic-arm-but-like-youve-never-seen-before",
+        "what_it_supports": "8 printed ball-joint segments, 16 remote RC servos, fishing line routed in tubing (Bowden) to decouple joints"
+      },
+      {
+        "title": "3D printed ball joints (Fab Academy 2024, week 05)",
+        "url": "https://fabacademy.org/2024/labs/skylab/students/eka-prawira/assignments/week05/3d-printed-ball-joints",
+        "what_it_supports": "Print-in-place ball joint with -0.2 mm cavity clearance; may stick depending on printer tolerance"
+      }
+    ],
+    "source_note": "97 deg is derived from the ROBOMECH geometry (2*asin(0.75)), not a stated measurement; 35 mm is the ROBOMECH ball spacing (pitch).",
+    "confidence": "medium"
+  },
+  {
+    "family_id": "ball_socket_magnetic",
+    "name": "Magnetic ball joints",
+    "mechanism": "A steel ball held to a seat by a permanent magnet (or a chain of magnetised spheres) forms a self-retaining spherical joint that separates instead of breaking under overload.",
+    "dof_per_joint": "2 bend + 1 axial",
+    "reported_range_deg_per_joint": null,
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "NdFeB cylinder/disc magnets",
+      "steel balls",
+      "magnetised NdFeB spheres",
+      "polymer skin"
+    ],
+    "printable_fdm": "partly",
+    "print_notes": "Housings and seats print easily; magnet pockets need ~0.1-0.2 mm press fit or glue; keep magnets away from flight controller compass.",
+    "non_printed_parts": [
+      "neodymium magnets",
+      "steel balls",
+      "tendons",
+      "glue"
+    ],
+    "known_issues": [
+      "holding force limited (~3 kg per RepRap joint) -> joint pops apart under tentacle bending moments",
+      "pole misalignment with magnetised balls",
+      "magnetic interference with drone compass/magnetometer",
+      "no torsion stiffness"
+    ],
+    "sources": [
+      {
+        "title": "Magnet joint (RepRap wiki)",
+        "url": "https://www.reprap.org/wiki/Magnet_joint",
+        "what_it_supports": "Magnet+steel-ball joints ~3 kg holding force each; magnetised-ball pole misalignment -> use cylinder magnet + plain steel ball"
+      },
+      {
+        "title": "Ball chain robots (Pittiglio, Mencattelli, Dupont; arXiv 2302.03728)",
+        "url": "https://arxiv.org/abs/2302.03728v1",
+        "what_it_supports": "Chain of permanently magnetised spheres in polymer skin bends to very small radii; steered by external field (not tendons)"
+      },
+      {
+        "title": "CN105522588A Magnetic ball-joint robot (Google Patents)",
+        "url": "https://patents.google.com/patent/CN105522588A/en",
+        "what_it_supports": "Ball-cup joint held/driven by windings + permanent magnets; 3-DOF from one joint; single-magnet version loses axial rotation"
+      }
+    ],
+    "confidence": "low"
+  },
+  {
+    "family_id": "rolling_contact_1d",
+    "name": "Rolling-contact joints (cam / CORE style) with straps or cables",
+    "mechanism": "Two convex cam surfaces roll on each other without slip, constrained by crossed flexure straps or cables; rotation axis moves with contact point and tendon length can stay constant.",
+    "dof_per_joint": "1 bend",
+    "reported_range_deg_per_joint": [
+      22,
+      90
+    ],
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "SLS PA2200 (monolithic)",
+      "PLA/printed links",
+      "0.4 mm flexure straps",
+      "PE braid in PTFE tubes"
+    ],
+    "printable_fdm": "partly",
+    "print_notes": "Cams print well in PLA/PETG; monolithic flexure straps (0.4 mm) are marginal on FDM - use TPU or separate Dyneema/steel straps; cam surfaces printed with layers along the rolling direction to avoid ridges.",
+    "non_printed_parts": [
+      "straps or crossed cables (Dyneema/steel)",
+      "tendons",
+      "PTFE liner tubes"
+    ],
+    "known_issues": [
+      "strap stress near material limit",
+      "low lateral/transverse strength (broke at 5 N)",
+      "tendon-joint collision limits angle",
+      "tendon friction -> hysteresis",
+      "cam slip if strap tension lost"
+    ],
+    "sources": [
+      {
+        "title": "Monolithic compliant rolling-contact joint tendon manipulator (PMC8354933)",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8354933/",
+        "what_it_supports": "Half-cylinder cams + 4 x 0.4 mm flexure straps, SLS PA2200, 10.6 mm discs; joint >180 deg in tests; 8 joints give 180 deg; constant tendon length; strap stress near/above 50 MPa; breaks at 5 N transverse"
+      },
+      {
+        "title": "Rolling-joint design optimization for tendon driven snake-like surgical robots (Imperial Spiral)",
+        "url": "https://spiral.imperial.ac.uk/entities/publication/16b86df7-3305-4c06-9955-9c4ff168ff02",
+        "what_it_supports": "3D printed serial rolling joints; tendon-joint collision limits joint angle; 0.9 mm repeatability, 5.6 N force"
+      },
+      {
+        "title": "Tendon-driven rolling-contact mechanism model (arXiv 2409.00616)",
+        "url": "https://www.arxiv.org/pdf/2409.00616",
+        "what_it_supports": "Planar 5-link rolling-contact prototype (~20 mm links), 0.28 mm PE braid in PTFE tubes; tendon friction -> hysteresis, 2-4 mm tip error"
+      }
+    ],
+    "source_note": "22 deg/joint derived from 180 deg over 8 joints in PMC8354933; single test joints exceeded 180 deg.",
+    "confidence": "medium"
+  },
+  {
+    "family_id": "rolling_contact_2d",
+    "name": "2-axis / spherical rolling contact joints",
+    "mechanism": "Spherical surfaces roll on each other (or stacked orthogonal pulleyless rolling units) giving 2-DOF rolling bending with no spin about the contact normal.",
+    "dof_per_joint": "2 bend",
+    "reported_range_deg_per_joint": null,
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "iron sphere shells",
+      "permanent magnets",
+      "EVA foam",
+      "rolling units (unspecified)"
+    ],
+    "printable_fdm": "partly",
+    "print_notes": "Spherical rolling surfaces need smooth finish - print with fine layers or sand; constraining straps/cables in 2 axes is fiddly; stacked orthogonal 1-D rolling units are easier to print than true spherical rollers.",
+    "non_printed_parts": [
+      "constraint cables/straps or magnets",
+      "tendons",
+      "friction coating"
+    ],
+    "known_issues": [
+      "slip unless strongly constrained",
+      "complex tendon routing to keep length constant in both axes",
+      "foam/coating deformation changes radius"
+    ],
+    "sources": [
+      {
+        "title": "Kinematics of spherical rolling contact joint and manipulator (FreeBOT, freeformrobotics.org)",
+        "url": "https://freeformrobotics.org/wp-content/uploads/2022/07/21-0985_MS.pdf",
+        "what_it_supports": "2-DOF spherical rolling contact joint (no spin about normal); magnet-held 68 mm iron spheres; EVA foam for friction, foam deformation -> slip"
+      },
+      {
+        "title": "Discrete bending joint using multiple unit PREF joints for isotropic 2-DOF motion (KNU)",
+        "url": "https://research.knu.ac.kr/en/publications/design-of-a-discrete-bending-joint-using-multiple-unit-pref-joint/",
+        "what_it_supports": "Stacked pulleyless rolling units give 2-DOF isotropic discrete bending; stacking order matters"
+      }
+    ],
+    "confidence": "low"
+  },
+  {
+    "family_id": "gear_meshed_rolling",
+    "name": "Gear-meshed rolling joints",
+    "mechanism": "Rolling surfaces carry gear teeth (single tooth or partial gears / geared anti-parallelograms) so the links cannot slip while rolling; doubles effective angle per pivot pair.",
+    "dof_per_joint": "1 bend",
+    "reported_range_deg_per_joint": null,
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "structural steel",
+      "FDM printed plastic (hobby tentacle)"
+    ],
+    "printable_fdm": "yes",
+    "print_notes": "Partial gears print well with module >=1 mm; print teeth flat on the bed; add side plates/links to hold mesh; PETG or nylon for wear.",
+    "non_printed_parts": [
+      "link pins",
+      "cables",
+      "wire guides/springs"
+    ],
+    "known_issues": [
+      "no-slip and high torsional stiffness (steel proto 3 N*m)",
+      "tooth backlash",
+      "added weight vs plain rolling joint",
+      "hobby build needs reinforcement and droops under load"
+    ],
+    "sources": [
+      {
+        "title": "Design and analysis of a rolling joint based on gear tooth for continuum robot (BUAA, ICIRA 2021)",
+        "url": "https://buaa.globalimpact.cn/en/publications/design-and-analysis-of-a-rolling-joint-based-on-gear-tooth-for-co/",
+        "what_it_supports": "Single gear tooth + rolling surfaces at pitch diameter: no slip, low friction, high torsional stiffness (steel proto: 1000 N axial, 3 N*m torsion)"
+      },
+      {
+        "title": "A tentacle that's a work of art (Hackaday 2020)",
+        "url": "https://hackaday.com/2020/09/15/a-tentacle-thats-a-work-of-art",
+        "what_it_supports": "Hobby 3D-printed tentacle of anti-parallelogram units synchronised by gears (geared rolling equivalent), cable winches; ~500 g handling estimated by commenter"
+      },
+      {
+        "title": "Tendon-driven rolling-contact mechanism model (arXiv 2409.00616)",
+        "url": "https://www.arxiv.org/pdf/2409.00616",
+        "what_it_supports": "Planar 5-link rolling-contact prototype (~20 mm links), 0.28 mm PE braid in PTFE tubes; tendon friction -> hysteresis, 2-4 mm tip error"
+      }
+    ],
+    "confidence": "low"
+  },
+  {
+    "family_id": "cross_axis_flexure",
+    "name": "Cross-axis (X) flexural pivots",
+    "mechanism": "Two thin leaf flexures crossing in an X between two bodies give a pivot with a near-fixed centre and higher off-axis stiffness than a single leaf.",
+    "dof_per_joint": "1 bend",
+    "reported_range_deg_per_joint": [
+      10,
+      40
+    ],
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "PLA (FDM)",
+      "lattice flexures (hexagonal/re-entrant/square)"
+    ],
+    "printable_fdm": "yes",
+    "print_notes": "Print leaves vertical so they consist of continuous perimeters (not stacked layers in bending); 0.1 mm layers for lattice hinges; supports damage thin hinges; PLA leaves fatigue/creep - prefer PETG, nylon or PP.",
+    "non_printed_parts": [
+      "none required",
+      "tendons"
+    ],
+    "known_issues": [
+      "limited angle before yield in PLA",
+      "parasitic twist with asymmetric lattices",
+      "FDM defects cause scatter",
+      "creep under sustained load"
+    ],
+    "sources": [
+      {
+        "title": "Compliant cross-axis joints with 3D-printed lattice flexures (Applied Sciences 12(13):6635)",
+        "url": "https://mdpi.com/2076-3417/12/13/6635",
+        "what_it_supports": "FDM PLA cross-axis pivots; lattice hinges 2-10x more deflection than solid; support removal damaged hinges; parasitic twist from asymmetric lattices"
+      }
+    ],
+    "source_note": "Source reports displacement not angle; 10-40 deg is typical cross-spring pivot range from general practice.",
+    "confidence": "low"
+  },
+  {
+    "family_id": "compliant_notch_flexure",
+    "name": "Notch / living-hinge flexures (circular, leaf) in PETG/TPU/PP",
+    "mechanism": "A locally thinned section (notch, leaf or metamaterial cell) between rigid segments bends elastically to form a monolithic joint; tendons on each side.",
+    "dof_per_joint": "1 bend",
+    "reported_range_deg_per_joint": [
+      29,
+      110
+    ],
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "TPU 87A/95A",
+      "PA2200 (SLS)",
+      "PETG",
+      "PP"
+    ],
+    "printable_fdm": "yes",
+    "print_notes": "Orient so the hinge is bent along the perimeters, never across layer lines (delamination); TPU print slow (20-30 mm/s), no retraction issues with direct drive; PP living hinges need hinge flexed right after printing; PLA hinges crack within tens-hundreds of cycles.",
+    "non_printed_parts": [
+      "tendons",
+      "optional PTFE liners"
+    ],
+    "known_issues": [
+      "fatigue at notch (PLA worst)",
+      "low torsional/shear stiffness",
+      "TPU hysteresis/creep",
+      "stiffness set at print time"
+    ],
+    "sources": [
+      {
+        "title": "Bioinspired 3D printable flexure joint with cellular metamaterial architecture (PMC10236482)",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10236482",
+        "what_it_supports": "Monolithic FDM TPU 87A flexure joint ~95-110 deg range, 3-stage stiffness; no fatigue data"
+      },
+      {
+        "title": "Monolithic TPU flexure joints for confined-space tendon-driven robotic arms (Univ. Moratuwa)",
+        "url": "https://dl.lib.uom.lk/items/d7bfeb2e-0ea7-4452-9768-a842e9a02746/full",
+        "what_it_supports": "FDM TPU flexure joint: max 29.2 deg at 15.5 N, linear force-displacement"
+      },
+      {
+        "title": "Monolithic compliant rolling-contact joint tendon manipulator (PMC8354933)",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8354933/",
+        "what_it_supports": "Half-cylinder cams + 4 x 0.4 mm flexure straps, SLS PA2200, 10.6 mm discs; joint >180 deg in tests; 8 joints give 180 deg; constant tendon length; strap stress near/above 50 MPa; breaks at 5 N transverse"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "family_id": "cross_notch_2d",
+    "name": "Two orthogonal notch flexures per segment",
+    "mechanism": "Each segment has two notch flexures at 90 deg (stacked or alternating), giving 2-axis bending from a monolithic print; essentially the compliant version of alternating hinges.",
+    "dof_per_joint": "2 bend (per segment pair)",
+    "reported_range_deg_per_joint": [
+      10,
+      20
+    ],
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "Tango+/Vero multi-material",
+      "TPU",
+      "nylon",
+      "nitinol tube"
+    ],
+    "printable_fdm": "yes",
+    "print_notes": "Print the whole chain vertically in TPU or PETG so notches are bent along perimeters; one of the two notch axes will be bent across layer lines if printed horizontally - avoid.",
+    "non_printed_parts": [
+      "tendons (4, two antagonistic pairs)"
+    ],
+    "known_issues": [
+      "torsional softness at notches",
+      "diagonal bending needs both pairs",
+      "fatigue concentrated at notch roots"
+    ],
+    "sources": [
+      {
+        "title": "Multi-material 3D printed tendon-driven continuum segment (Leeds, ICRA preprint)",
+        "url": "https://eprints.whiterose.ac.uk/id/eprint/145152/1/ICRA%20-%202nd%20edit%20-%20draft%202.pdf",
+        "what_it_supports": "Vertebrae on Tango+ backbone; v0.2 soft hinges alternated 90 deg (~15 deg/vertebra, 135 deg total); keyed vertebrae cut torsional play 5.6->1.4 deg/vertebra; payload 0.4-1.3 kg; key-base fracture under torsion; nylon then 0.7 mm braided steel tendons"
+      },
+      {
+        "title": "Notched continuum robot for orthopaedic surgery (Frontiers Bioeng. 2024, 10.3389/fbioe.2024.1470069)",
+        "url": "https://www.frontiersin.org/journals/bioengineering-and-biotechnology/articles/10.3389/fbioe.2024.1470069/full",
+        "what_it_supports": "Nitinol tube with symmetric rectangular notches, 2 cables, planar bending; 3D-printed nylon prototype 66 mm with 15 notches; rounded notch corners to cut stress concentration"
+      }
+    ],
+    "source_note": "Leeds v0.2 alternated soft hinges at 90 deg (~15 deg/vertebra); no FDM orthogonal-notch tentacle verified.",
+    "confidence": "low"
+  },
+  {
+    "family_id": "vertebral_disc_spine",
+    "name": "Vertebrae/discs on central elastic backbone (classic tendon-driven continuum)",
+    "mechanism": "Spacer discs fixed along a flexible backbone (NiTi rod, spring, TPU rod or elastomer) guide 3-4 tendons; pulling tendons bends the segment near constant curvature.",
+    "dof_per_joint": "2 bend per section (continuous)",
+    "reported_range_deg_per_joint": [
+      90,
+      180
+    ],
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "PLA discs",
+      "TPU 95A backbone",
+      "NiTi rod",
+      "Dragon Skin silicone",
+      "fishing line",
+      "steel guide rods"
+    ],
+    "printable_fdm": "yes",
+    "print_notes": "Discs print flat; tendon holes drilled/reamed or lined with PTFE; TPU backbone print at 100% infill, square section prints better than round; friction-fit discs to backbone.",
+    "non_printed_parts": [
+      "backbone rod (NiTi/spring steel) if not TPU",
+      "tendons",
+      "PTFE liners",
+      "servos/spools"
+    ],
+    "known_issues": [
+      "disc-tendon friction",
+      "tendon slack/backlash under compression",
+      "one actuator set per section",
+      "TPU nonlinearity/anisotropy",
+      "torsion if backbone is soft"
+    ],
+    "sources": [
+      {
+        "title": "Tendon-driven continuum robots 101 (Open Continuum Robotics, U Toronto)",
+        "url": "https://www.cs.toronto.edu/~jbk/opencontinuumrobotics/101/2022/11/11/tdcr-intro.html",
+        "what_it_supports": "Spacer-disk vs lumen designs; >=3 tendons for spatial bending; disk-tendon friction, tendon slack/backlash, one motor set per segment"
+      },
+      {
+        "title": "Tendon-actuated robots with a tapered flexible polymer backbone (arXiv 2603.19124)",
+        "url": "https://arxiv.org/pdf/2603.19124",
+        "what_it_supports": "FDM TPU 95A backbone (100% infill, square section, 34.5 cm) + 10 PLA discs on Bambu X1C; 3 tendons, 2-25 N; TPU nonlinearity/FDM anisotropy -> tension-scheduled modulus"
+      },
+      {
+        "title": "Reducing actuator requirements in continuum robots through optimized cable routing (Case et al. 2018, Yale)",
+        "url": "https://www.eng.yale.edu/Faboratory/publications/journal/2018/Case et al. - 2018 - Reducing Actuator Requirements in Continuum Robots through Optimized Cable Routing.pdf",
+        "what_it_supports": "Dragon Skin 10 segments + PLA vertebrae with fishing-line cables over steel guide rods; crossing routing cuts actuator count 12->8; 30-47 mm tip error from friction"
+      }
+    ],
+    "source_note": "Range is per section (whole segment), not per disc.",
+    "confidence": "medium"
+  },
+  {
+    "family_id": "spring_backbone_continuum",
+    "name": "Single superelastic/steel spring backbone with spacer discs",
+    "mechanism": "One NiTi or spring-steel rod/spring provides the elastic restoring force; printed spacer discs carry 3-4 tendons; used on existing aerial continuum manipulators.",
+    "dof_per_joint": "2 bend per section (+ extension/twist in some designs)",
+    "reported_range_deg_per_joint": [
+      30,
+      180
+    ],
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "superelastic NiTi rod (0.635-1 mm)",
+      "PLA discs",
+      "aluminium/resin discs",
+      "Spectra/fishing-line tendons",
+      "epoxy"
+    ],
+    "printable_fdm": "partly",
+    "print_notes": "Discs are printed (PLA) and epoxied/friction-fit to the rod; NiTi must be bought; rod must not be bent past superelastic strain.",
+    "non_printed_parts": [
+      "NiTi or spring-steel backbone",
+      "tendons",
+      "epoxy",
+      "servos"
+    ],
+    "known_issues": [
+      "thin NiTi backbone is torsionally weak -> out-of-plane errors under drone downwash",
+      "few discs -> shape deviates from arc",
+      "rod buckling under high tendon tension"
+    ],
+    "sources": [
+      {
+        "title": "Tilt-X aerial continuum manipulator (arXiv 2602.23576)",
+        "url": "https://arxiv.org/html/2602.23576v1",
+        "what_it_supports": "Superelastic NiTi backbone, PLA disks, Spectra cables, 20 mm dia, 590 mm reach on X500 quad; downwash sensitivity; actuators at hub keep CoG fixed"
+      },
+      {
+        "title": "A modular continuum manipulator for aerial manipulation and perching (arXiv 2206.06246)",
+        "url": "https://arxiv.org/pdf/2206.06246",
+        "what_it_supports": "NiTi backbone + 9 PLA printed disks, 4 fishing-wire tendons, 4x XL430; 420 g incl. actuation; not yet flown"
+      },
+      {
+        "title": "FAS - a fully actuated segment for tendon-driven continuum robots (Frontiers Robot. AI 2022)",
+        "url": "https://www.frontiersin.org/articles/10.3389/frobt.2022.873446",
+        "what_it_supports": "0.635 mm NiTi backbone, 12 floating 7 mm disks spaced by ring magnets; bend+extend+twist; few disks -> shape deviation"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "family_id": "concentric_tube_or_rod",
+    "name": "Notched / slotted tube continuum",
+    "mechanism": "A tube with repeated symmetric or asymmetric notches bends where material is removed; a tendon (asymmetric) or tendon pair (symmetric) bends it.",
+    "dof_per_joint": "1 bend (planar) or 2 with rotated notch rows",
+    "reported_range_deg_per_joint": null,
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "nitinol tube",
+      "3D-printed nylon (prototype)",
+      "laser-cut tube (U-joint variant)"
+    ],
+    "printable_fdm": "partly",
+    "print_notes": "Printable as a vertical TPU/nylon/PETG tube with notches; notch roots must be filleted; scale for a drone tentacle (20-40 mm dia) makes this effectively a notch-flexure tentacle.",
+    "non_printed_parts": [
+      "tendons",
+      "nitinol tube if metal"
+    ],
+    "known_issues": [
+      "stress concentration at notch corners",
+      "low torsional stiffness",
+      "small range per notch, many notches needed",
+      "metal versions need laser cutting"
+    ],
+    "sources": [
+      {
+        "title": "Notched continuum robot for orthopaedic surgery (Frontiers Bioeng. 2024, 10.3389/fbioe.2024.1470069)",
+        "url": "https://www.frontiersin.org/journals/bioengineering-and-biotechnology/articles/10.3389/fbioe.2024.1470069/full",
+        "what_it_supports": "Nitinol tube with symmetric rectangular notches, 2 cables, planar bending; 3D-printed nylon prototype 66 mm with 15 notches; rounded notch corners to cut stress concentration"
+      },
+      {
+        "title": "Universal-jointed tendon-driven continuum robot (arXiv 2409.13165)",
+        "url": "https://arxiv.org/html/2409.13165v1",
+        "what_it_supports": "Synovial U-joint laser-cut from tube with open centre channel; bending-angle limit is a design parameter; helical/parallel tendon routing; tendon friction must be modelled"
+      }
+    ],
+    "confidence": "low"
+  },
+  {
+    "family_id": "tpu_monolithic_tentacle",
+    "name": "One-piece printed TPU tentacle with tendon channels",
+    "mechanism": "Entire tapered tentacle printed as one TPU part (solid core, ribs or wedge units) with integral tendon channels; bends by elastic deformation.",
+    "dof_per_joint": "2 bend (continuous)",
+    "reported_range_deg_per_joint": [
+      90,
+      360
+    ],
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "TPU 95A",
+      "eTPU-95A",
+      "TPU 87A",
+      "UHMWPE cables",
+      "PA-12 (SLS)"
+    ],
+    "printable_fdm": "yes",
+    "print_notes": "Direct-drive extruder, slow speed, 100% infill for backbone; print vertically or in segments joined with dovetails (SpiRobs printed 1 m arm in 4 parts); square section prints more reliably; tendon channels >=1.5 mm, ream after printing.",
+    "non_printed_parts": [
+      "UHMWPE/Dyneema tendons",
+      "optional PTFE liners"
+    ],
+    "known_issues": [
+      "TPU nonlinear + anisotropic stiffness",
+      "hysteresis/creep",
+      "channel friction in TPU is high",
+      "tall TPU prints wobble; bed size (256 mm) forces segmented print"
+    ],
+    "sources": [
+      {
+        "title": "Tendon-actuated robots with a tapered flexible polymer backbone (arXiv 2603.19124)",
+        "url": "https://arxiv.org/pdf/2603.19124",
+        "what_it_supports": "FDM TPU 95A backbone (100% infill, square section, 34.5 cm) + 10 PLA discs on Bambu X1C; 3 tendons, 2-25 N; TPU nonlinearity/FDM anisotropy -> tension-scheduled modulus"
+      },
+      {
+        "title": "SpiRobs full paper (arXiv 2303.09861 PDF)",
+        "url": "https://arxiv.org/pdf/2303.09861",
+        "what_it_supports": "Wedge units from log spiral (dtheta=30 deg), taper 5-15 deg, eTPU-95A on Bambu FDM, UHMWPE cables; 24 units/45 cm (2 cables), 42 units/1 m (3 cables, 5-120 mm dia); elastic layer 5-10% width; thin layers self-collide/buckle"
+      },
+      {
+        "title": "Monolithic TPU flexure joints for confined-space tendon-driven robotic arms (Univ. Moratuwa)",
+        "url": "https://dl.lib.uom.lk/items/d7bfeb2e-0ea7-4452-9768-a842e9a02746/full",
+        "what_it_supports": "FDM TPU flexure joint: max 29.2 deg at 15.5 N, linear force-displacement"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "family_id": "wedge_tentacle_spirob",
+    "name": "Logarithmic-spiral wedge segment tentacles (SpiRobs)",
+    "mechanism": "Wedge units sized by a logarithmic spiral share a thin elastic spine; 2-3 cables curl the body into a tight log spiral where neighbouring wedges touch, wrapping objects octopus-style.",
+    "dof_per_joint": "1 bend (2 cables) or 2 bend (3 cables), per wedge gap",
+    "reported_range_deg_per_joint": [
+      15,
+      30
+    ],
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "eTPU-95A (FDM, Bambu)",
+      "ST1400 resin (SLA micro)",
+      "UHMWPE cables"
+    ],
+    "printable_fdm": "yes",
+    "print_notes": "Print in TPU 95A; elastic spine 5% (2-cable) to 10% (3-cable) of unit width; long arms printed in pieces joined by dovetails; 256 mm bed fits a ~25 cm 15-deg-taper arm in one go.",
+    "non_printed_parts": [
+      "UHMWPE cables",
+      "servos/spools"
+    ],
+    "known_issues": [
+      "thin spine self-collides and buckles under antagonistic loads",
+      "thick spine needs much higher cable force (up to 60-100 N)",
+      "grasp space smaller than reach",
+      "curvature fixed by geometry (radius shrinks to tip)"
+    ],
+    "sources": [
+      {
+        "title": "SpiRobs full paper (arXiv 2303.09861 PDF)",
+        "url": "https://arxiv.org/pdf/2303.09861",
+        "what_it_supports": "Wedge units from log spiral (dtheta=30 deg), taper 5-15 deg, eTPU-95A on Bambu FDM, UHMWPE cables; 24 units/45 cm (2 cables), 42 units/1 m (3 cables, 5-120 mm dia); elastic layer 5-10% width; thin layers self-collide/buckle"
+      },
+      {
+        "title": "SpiRobs: logarithmic spiral-shaped robots (arXiv 2303.09861, abstract)",
+        "url": "https://www.arxiv.org/abs/2303.09861",
+        "what_it_supports": "Octopus-inspired log-spiral robots; mm to 1 m scales; grasp up to 260x self-weight; cheap fabrication"
+      }
+    ],
+    "source_note": "Per-gap range approx equal to the 30 deg log-spiral step closing; 15-30 deg is derived from design parameters, not measured.",
+    "confidence": "medium"
+  },
+  {
+    "family_id": "kresling_origami",
+    "name": "Kresling origami modules",
+    "mechanism": "Twisted-polygon fold pattern couples axial contraction with rotation; differential actuation of facets/pouches adds bending; can be bistable.",
+    "dof_per_joint": "2 bend + 1 axial + coupled twist",
+    "reported_range_deg_per_joint": null,
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "3D-printed sandwich-plate cores",
+      "PET/paper film",
+      "pneumatic pouches"
+    ],
+    "printable_fdm": "partly",
+    "print_notes": "Thin TPU or PETG panels with TPU living-hinge creases can be printed flat then folded, or printed as sandwich plates; crease fatigue is the main failure.",
+    "non_printed_parts": [
+      "tendons or pneumatic pouches",
+      "optional prestress springs"
+    ],
+    "known_issues": [
+      "twist coupled to contraction (needs opposite-handed stacks)",
+      "bistability can snap unexpectedly",
+      "crease fatigue",
+      "low bending stiffness in folded state"
+    ],
+    "sources": [
+      {
+        "title": "Bending stiffness of generalized Kresling modules for robotic manipulation (NSF PAR)",
+        "url": "https://par.nsf.gov/biblio/10224771-examine-bending-stiffness-generalized-kresling-modules-robotic-manipulation",
+        "what_it_supports": "Kresling bending stiffness switches between stable states; 3D-printed sandwich-plate cores; coupled twist complicates use"
+      },
+      {
+        "title": "Origami-inspired universally deformable module (TechXplore, Nature Comms 2023)",
+        "url": "https://techxplore.com/news/2023-08-origami-inspired-universally-deformable-module-robotics.amp",
+        "what_it_supports": "Two-level opposite-handed Kresling, pneumatic (vacuum + pouches), 7 motion modes; classic Kresling couples twist and contraction"
+      }
+    ],
+    "confidence": "low"
+  },
+  {
+    "family_id": "yoshimura_or_waterbomb_origami",
+    "name": "Yoshimura / waterbomb origami continuum segments",
+    "mechanism": "Collapsible folded tubes (Yoshimura diamond pattern or waterbomb bases) act as tendon-guided bellows that bend and contract; often stiffened by a spring or NiTi backbone.",
+    "dof_per_joint": "2 bend + 1 axial",
+    "reported_range_deg_per_joint": [
+      30,
+      45
+    ],
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "PET film 0.1-0.18 mm",
+      "paper",
+      "steel compression spring backbone",
+      "NiTi backbone",
+      "nylon/steel thread tendons"
+    ],
+    "printable_fdm": "partly",
+    "print_notes": "Normally laser-cut film; FDM alternative is thin PETG panels with TPU hinges (multi-material) or printing TPU directly as a thin folded surface; creases fatigue.",
+    "non_printed_parts": [
+      "PET film/paper",
+      "adhesive",
+      "backbone spring or NiTi",
+      "tendons"
+    ],
+    "known_issues": [
+      "low torsional strength (film twisted at ~0.43 N*m)",
+      "crease fatigue",
+      "nonlinear axial stiffness",
+      "fabrication variation between tendons"
+    ],
+    "sources": [
+      {
+        "title": "Origami continuum manipulation module (Santoso et al., IROS 2017, WPI)",
+        "url": "https://softrobotics.wpi.edu/papers/2017/2017-Santoso-IROS.pdf",
+        "what_it_supports": "Yoshimura PET module: 2 bend + 1 axial DOF, 35.5 deg at 45 mm arc, 65->30 mm collapse, 110 g; 5 mil film twists at ~0.43 N*m"
+      },
+      {
+        "title": "An extensible continuum robot with integrated origami parallel modules (academia.edu)",
+        "url": "https://www.academia.edu/17412316/An_Extensible_Continuum_Robot_with_Integrated_Origami_Parallel_Modules",
+        "what_it_supports": "Waterbomb-base origami parallel modules on steel spring backbone; up to 45 deg/module, >180 deg over 6 modules; crease fatigue"
+      },
+      {
+        "title": "Design of lightweight and extensible tendon-driven continuum robot using origami (Kyung Hee)",
+        "url": "https://khu.elsevierpure.com/en/publications/design-of-lightweight-and-extensible-tendon-driven-continuum-robo/",
+        "what_it_supports": "Paper origami tendon guides on NiTi backbone: >10x extension, +/-167 deg yaw/pitch, 21.9 g"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "family_id": "tensegrity_segment",
+    "name": "Tensegrity / cable-strut segments",
+    "mechanism": "Rigid struts held in a pretensioned cable network; shortening active cables bends the module while it remains compliant and impact tolerant.",
+    "dof_per_joint": "2 bend (+ axial) per module",
+    "reported_range_deg_per_joint": null,
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "CFRP tubes",
+      "Kevlar cord",
+      "3D-printed vertebrae/nodes",
+      "silicone lattice",
+      "pneumatic cylinders"
+    ],
+    "printable_fdm": "partly",
+    "print_notes": "Nodes/vertebrae print easily; struts best as carbon rod; cable tensioning by hand is tedious and variable.",
+    "non_printed_parts": [
+      "struts (carbon/aluminium rod)",
+      "many cables/elastic cords",
+      "actuators"
+    ],
+    "known_issues": [
+      "many cables to tension and maintain",
+      "slack/taut switching makes dynamics nonlinear",
+      "parasitic bending",
+      "estimation hard at deep bends"
+    ],
+    "sources": [
+      {
+        "title": "DeXteR dexterous continuum tensegrity manipulator (NSF PAR)",
+        "url": "https://par.nsf.gov/biblio/10403600-design-modeling-framework-dexter-dexterous-continuum-tensegrity-manipulator",
+        "what_it_supports": "Vertebra modules of 2 curved links + 12 strings; 10 modules built; slack/taut string switching -> nonlinear dynamics"
+      },
+      {
+        "title": "Tensegrity manipulator TM-40 estimation and control (arXiv 2603.05976)",
+        "url": "https://arxiv.org/html/2603.05976v1",
+        "what_it_supports": "5 class-1 modules, CFRP struts, Kevlar passive cables, pneumatic active cables; 1.16 m; deep-bend estimation errors"
+      },
+      {
+        "title": "Flexible actuated tensegrity spine for quadrupeds (arXiv 1804.06527)",
+        "url": "https://ar5iv.labs.arxiv.org/html/1804.06527",
+        "what_it_supports": "3D-printed tetrahedral vertebrae, laser-cut silicone lattice, hand-set cable tension; asymmetric parasitic bending"
+      }
+    ],
+    "confidence": "low"
+  },
+  {
+    "family_id": "helical_spring_joint",
+    "name": "Coil-spring joints / helical compliant segments",
+    "mechanism": "A coil spring between rigid adaptors (or around a backbone) acts as an omnidirectional bending joint and restoring element; tendons pass outside or through it.",
+    "dof_per_joint": "2 bend (+ uncontrolled twist)",
+    "reported_range_deg_per_joint": [
+      30,
+      180
+    ],
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "steel compression springs",
+      "torque coil (counter-wound steel)",
+      "NiTi anti-buckling rod",
+      "3D-printed adaptors"
+    ],
+    "printable_fdm": "partly",
+    "print_notes": "Adaptors print easily; printed TPU/PETG helices possible but buy springs for consistency; spring ends need clamping pockets.",
+    "non_printed_parts": [
+      "coil springs",
+      "tendons",
+      "anti-buckling rod"
+    ],
+    "known_issues": [
+      "poor torsional stiffness -> tangling and flipping",
+      "spring buckling under compression",
+      "nonlinear bending response",
+      "friction tension loss over length"
+    ],
+    "sources": [
+      {
+        "title": "Tendon-driven compliant snake robot with global bending and twisting (arXiv 2407.16054)",
+        "url": "https://arxiv.org/pdf/2407.16054",
+        "what_it_supports": "Coil-spring continuum joints over torque-coil backbone + NiTi rod anti-buckling; poor torsional stiffness -> tangling/flipping; friction tension loss along length"
+      },
+      {
+        "title": "U-Joint CAAMS: universal-joint continuum manipulator for aerial manipulation (arXiv 2607.03321)",
+        "url": "https://arxiv.org/pdf/2607.03321",
+        "what_it_supports": "Drone-mounted PLA-printed tubular U-joint backbone + radial helical springs, 3x1 mm steel tendons, 3x Dynamixel XL430; arm 430 g; bending kept <180 deg to avoid props; 2.5-45x lower out-of-plane error under downwash than NiTi backbone; gravity sag in-plane"
+      },
+      {
+        "title": "An extensible continuum robot with integrated origami parallel modules (academia.edu)",
+        "url": "https://www.academia.edu/17412316/An_Extensible_Continuum_Robot_with_Integrated_Origami_Parallel_Modules",
+        "what_it_supports": "Waterbomb-base origami parallel modules on steel spring backbone; up to 45 deg/module, >180 deg over 6 modules; crease fatigue"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "family_id": "bellows_pneumatic",
+    "name": "Printed/molded bellows soft actuators (PneuNet, fiber-reinforced)",
+    "mechanism": "Elastomer chambers with an inextensible strain layer (PneuNet) or fiber wrapping bend when pressurised; no tendons needed.",
+    "dof_per_joint": "1 bend per actuator (2-3 chambers give 2 bend)",
+    "reported_range_deg_per_joint": [
+      90,
+      270
+    ],
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "Ecoflex 0030/0050",
+      "Dragon Skin",
+      "nylon/paper strain layer",
+      "fiber/thread reinforcement"
+    ],
+    "printable_fdm": "partly",
+    "print_notes": "Molds print well in PLA; direct TPU printing of bellows is possible but leak-prone at layer seams - needs sealing; silicone casting needs vacuum degassing.",
+    "non_printed_parts": [
+      "silicone",
+      "tubing",
+      "pump/valves",
+      "air supply"
+    ],
+    "known_issues": [
+      "leaks at tube entry and bubbles",
+      "pump + valves add mass to a drone",
+      "slow response",
+      "delamination/rupture at high pressure"
+    ],
+    "sources": [
+      {
+        "title": "PneuNet actuators (Soft Robotics Toolkit)",
+        "url": "https://softroboticstoolkit.com/synergistic-design/fabrication/pneunet",
+        "what_it_supports": "Ecoflex 0030/0050 two-layer molded chambers with nylon strain layer; bubbles, uneven cure, tube-entry leaks"
+      },
+      {
+        "title": "Mechanically programmable bend radius for fiber-reinforced soft actuators (Harvard Biodesign)",
+        "url": "https://biodesign.seas.harvard.edu/publications/mechanically-programmable-bend-radius-fiber-reinforced-soft-actuators",
+        "what_it_supports": "Fiber-reinforced elastomer bender; conformal covering programs bend radius/axis"
+      },
+      {
+        "title": "This robotic tentacle can easily grasp smooth objects (MIT Technology Review, 2017)",
+        "url": "https://www.technologyreview.com/2017/03/30/106134/this-robotic-tentacle-can-easily-grasp-smooth-objects",
+        "what_it_supports": "Festo OctopusGripper: pneumatic silicone tentacle curls inward, two rows of vacuum suction cups"
+      }
+    ],
+    "source_note": "Bending-angle range is general PneuNet knowledge; sources opened did not give numbers.",
+    "confidence": "low"
+  },
+  {
+    "family_id": "granular_jamming",
+    "name": "Variable-stiffness jamming segments (add-on)",
+    "mechanism": "A membrane filled with granules (e.g. ground coffee) or layers stiffens when vacuum compacts it, locking the segment shape.",
+    "dof_per_joint": "0 (stiffness modulation add-on)",
+    "reported_range_deg_per_joint": null,
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "ground coffee",
+      "latex/silicone membrane",
+      "layer-jamming flaps",
+      "vacuum pump"
+    ],
+    "printable_fdm": "partly",
+    "print_notes": "End caps/fittings printable; membrane must be bought or cast; TPU membranes leak.",
+    "non_printed_parts": [
+      "membrane",
+      "granules",
+      "vacuum pump",
+      "valves",
+      "tubing"
+    ],
+    "known_issues": [
+      "weak in tension",
+      "bulky and heavy (pump) for a drone",
+      "buckling during jamming transition",
+      "leakage"
+    ],
+    "sources": [
+      {
+        "title": "How we made an octopus-inspired surgical robot using coffee (Scientific American)",
+        "url": "https://www.scientificamerican.com/article/how-we-made-an-octopus-inspired-surgical-robot-using-coffee",
+        "what_it_supports": "STIFF-FLOP: ground-coffee granular jamming chamber in silicone pneumatic arm, vacuum switches soft->stiff"
+      },
+      {
+        "title": "Variable-stiffness continuum robot review/prototype (Machines 10(7):581)",
+        "url": "https://www2.mdpi.com/2075-1702/10/7/581",
+        "what_it_supports": "Granular jamming background: weak in tension, bulky, buckling during jamming transition; layer-jamming prototype to 60x stiffness at -60 kPa"
+      },
+      {
+        "title": "Robotic modules for a continuum manipulator with variable stiffness joints (Sant'Anna)",
+        "url": "https://iris.santannapisa.it/retrieve/b9abd812-31ae-4e46-a1cc-aadcd0caf90b/Robotic_Modules_for_a_Continuum_Manipulator_With_Variable_Stiffness_Joints.pdf",
+        "what_it_supports": "Friction-locking alternative to jamming: pressurised pads on ball joint, +95% stiffness at 500 kPa; 0-30 deg/module, 35 mm, 7 g; valves bulky"
+      }
+    ],
+    "confidence": "low"
+  },
+  {
+    "family_id": "scissor_or_sarrus",
+    "name": "Scissor / Sarrus linkages for extension",
+    "mechanism": "Stacked Sarrus (or scissor) linkages provide a 1-DOF telescoping stroke with high axial stiffness; usually combined with a bending section.",
+    "dof_per_joint": "1 axial",
+    "reported_range_deg_per_joint": null,
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "ABS",
+      "torsion springs",
+      "rubber-coated wire",
+      "pins"
+    ],
+    "printable_fdm": "yes",
+    "print_notes": "Plates print flat; hinge pins should be steel (printed pins bent and failed); limit hinge to just below full extension to avoid singularity.",
+    "non_printed_parts": [
+      "steel pins",
+      "torsion springs",
+      "cable",
+      "pulley"
+    ],
+    "known_issues": [
+      "pin bending/failure after dozens of cycles",
+      "singularity/unstable equilibrium at full extension",
+      "spring torque vs actuator torque mismatch",
+      "~450 g for 33 cm stroke"
+    ],
+    "sources": [
+      {
+        "title": "Sarrus linkage aerial drone arm (Idaho State Univ. robotics lab)",
+        "url": "https://www.isu.edu/media/libraries/college-of-science-and-engineering/mechanical-engineering-v2/robotics-research-lab/Sarrus_Linkage_Aerial_Drone_Arm_Final.pdf",
+        "what_it_supports": "Stacked Sarrus links, ABS, 10.2 -> 33 cm (~3.2:1), ~450 g; torsion springs + single cable; pins bent/failed after dozens of cycles; singularity at full extension"
+      },
+      {
+        "title": "An extensible continuum robot with integrated origami parallel modules (academia.edu)",
+        "url": "https://www.academia.edu/17412316/An_Extensible_Continuum_Robot_with_Integrated_Origami_Parallel_Modules",
+        "what_it_supports": "Waterbomb-base origami parallel modules on steel spring backbone; up to 45 deg/module, >180 deg over 6 modules; crease fatigue"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "family_id": "pantograph_parallel_continuum",
+    "name": "Parallel continuum / Stewart-like mini segments",
+    "mechanism": "Several flexible rods or tendon-driven continuum legs join a base to a moving platform, giving multi-DOF motion with higher stiffness than a single serial backbone.",
+    "dof_per_joint": "3 (planar) to 6 (spatial) per module",
+    "reported_range_deg_per_joint": [
+      60,
+      120
+    ],
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "NiTi/spring-steel rods",
+      "tendons",
+      "bearings + rods/triangles (TENDRIM)"
+    ],
+    "printable_fdm": "partly",
+    "print_notes": "Platforms and base print easily; flexible legs should be NiTi, spring steel or carbon rod; printed TPU legs too floppy.",
+    "non_printed_parts": [
+      "flexible legs",
+      "linear actuators or servos",
+      "bearings"
+    ],
+    "known_issues": [
+      "singularities (type I/II)",
+      "leg buckling under load",
+      "more actuators per module",
+      "complex kinematics"
+    ],
+    "sources": [
+      {
+        "title": "Singularity analysis of 3-DOF planar parallel continuum robots (Frontiers Robot. AI 2023)",
+        "url": "https://www.frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2022.1082185/pdf",
+        "what_it_supports": "Parallel continuum robots: continuum legs + passive joints, constant-curvature model; type I/II singularities; loads/instability not modelled"
+      },
+      {
+        "title": "Design of the new modular tendon-driven manipulator TENDRIM (TU Braunschweig)",
+        "url": "https://www.tu-braunschweig.de/fileadmin/Redaktionsgruppen/Institute_Fakultaet_5/IFR/Dateien_RT/Publikationen/Design_of_the_new_modular_tendon-driven_manipulator_TENDRIM.pdf",
+        "what_it_supports": "Bearing-based pitch+roll joints per module (universal-joint equivalent); working range ~120 deg pitch, +/-60 deg roll limited by tendon-link collision; all tendons must stay in tension"
+      }
+    ],
+    "source_note": "Range taken from TENDRIM pitch/roll working limits (modular tendon-driven parallel-type module).",
+    "confidence": "low"
+  },
+  {
+    "family_id": "cable_tie_or_chain",
+    "name": "Chain / drag-chain-like interlocking links",
+    "mechanism": "Links interlock with hard stops (like a cable carrier or keyed vertebrae) so the chain bends freely in one plane to a fixed minimum radius and resists twist and back-bending.",
+    "dof_per_joint": "1 bend (hard-stopped)",
+    "reported_range_deg_per_joint": [
+      10,
+      30
+    ],
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "nylon/Delrin/PTFE/UHMW plastics",
+      "Vero/Tango+",
+      "PLA"
+    ],
+    "printable_fdm": "yes",
+    "print_notes": "Many printable drag-chain designs exist; snap pins must be PETG/nylon; stop-dogs set the bend limit - print with layers perpendicular to stop impact.",
+    "non_printed_parts": [
+      "optional metal pins",
+      "tendons"
+    ],
+    "known_issues": [
+      "single plane only",
+      "stops make bending discrete and jerky",
+      "polygon crimping at tight radius",
+      "sag over long spans"
+    ],
+    "sources": [
+      {
+        "title": "Cable carriers: review of options to handle cables and hoses (Machine Design)",
+        "url": "https://www.machinedesign.com/automation-iiot/cables-connectors-enclosures/article/21833410/cable-carriers-review-of-options-to-handle-cables-and-hoses",
+        "what_it_supports": "Drag-chain link construction, stop-dogs, bend radius set by cable (5-10x OD), polygon crimping when too tight; 3D robot carriers twist/coil 540 deg"
+      },
+      {
+        "title": "Multi-material 3D printed tendon-driven continuum segment (Leeds, ICRA preprint)",
+        "url": "https://eprints.whiterose.ac.uk/id/eprint/145152/1/ICRA%20-%202nd%20edit%20-%20draft%202.pdf",
+        "what_it_supports": "Vertebrae on Tango+ backbone; v0.2 soft hinges alternated 90 deg (~15 deg/vertebra, 135 deg total); keyed vertebrae cut torsional play 5.6->1.4 deg/vertebra; payload 0.4-1.3 kg; key-base fracture under torsion; nylon then 0.7 mm braided steel tendons"
+      }
+    ],
+    "source_note": "Per-link angle is typical drag-chain geometry, not from a tentacle paper.",
+    "confidence": "low"
+  },
+  {
+    "family_id": "twisted_string",
+    "name": "Twisted-string actuated joints",
+    "mechanism": "A motor twists two or more strings so they shorten, giving a high-ratio linear pull that can drive a tendon joint without gearbox.",
+    "dof_per_joint": "1 (actuator, pulls one tendon)",
+    "reported_range_deg_per_joint": null,
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "UHMWPE/Dyneema-type strings",
+      "hyperelastic rods (variable ratio design)"
+    ],
+    "printable_fdm": "partly",
+    "print_notes": "Motor mounts and string terminations print easily; strings must be bought.",
+    "non_printed_parts": [
+      "strings",
+      "small DC motor + encoder",
+      "return spring/buckling element"
+    ],
+    "known_issues": [
+      "string life hard to predict (fatigue)",
+      "nonlinear contraction",
+      "one-way pull needs return mechanism",
+      "twisting inside Bowden adds friction/hysteresis"
+    ],
+    "sources": [
+      {
+        "title": "Twisted string actuators: life cycle, twisting inside Bowden cables, passive return (KAIST)",
+        "url": "https://iris.kaist.ac.kr/publication/twisted-string-actuators-life-cycle-twisting-inside-bowden-cables-and-passive-return-mechanisms/",
+        "what_it_supports": "No reliable TSA life model; twisting inside Bowden adds friction/hysteresis; one-way pull needs return spring or buckling element; nonlinear contraction"
+      },
+      {
+        "title": "Twisted string actuator with load-adaptive transmission (Actuators 13(12), DOAJ record)",
+        "url": "https://doaj.org/article/0efc11da34a5486c9022d4bce362ce75",
+        "what_it_supports": "TSA converts motor rotation to pull with high ratio; variable-ratio design applied to robot finger (2.1-6.2x ratio change)"
+      }
+    ],
+    "confidence": "low"
+  },
+  {
+    "family_id": "tendon_routing_bowden",
+    "name": "Bowden tendon routing friction (actuation side)",
+    "mechanism": "Tendons run in sheaths from base-mounted servos to the joints; friction follows the capstan law T_out = T_in * exp(-mu * total wrap angle), so cumulative sheath bending sets force loss.",
+    "dof_per_joint": null,
+    "reported_range_deg_per_joint": null,
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "PTFE tube",
+      "fishing line / Dyneema / Spectra",
+      "braided steel",
+      "nylon-coated cable"
+    ],
+    "printable_fdm": "partly",
+    "print_notes": "Printed guides should be PTFE-lined or use steel guide pins/pulleys; avoid routing tendons through raw printed holes (layer ridges abrade lines).",
+    "non_printed_parts": [
+      "PTFE/Bowden sheaths",
+      "pulleys/bearings",
+      "tendons",
+      "ferrules"
+    ],
+    "known_issues": [
+      "exponential tension loss with total bend angle (mu 0.2-0.3 typical examples)",
+      "hysteresis/backlash",
+      "distal segment tendons pass through proximal ones (coupling)",
+      "tendon stretch"
+    ],
+    "sources": [
+      {
+        "title": "Cable mechanism maths: designing against the capstan equation (Hackaday 2021)",
+        "url": "https://hackaday.com/2021/01/26/cable-mechanism-maths-designing-against-the-capstan-equation",
+        "what_it_supports": "T_load/T_hold = exp(mu*theta), cumulative bend angle counts; mu 0.2-0.3 examples; minimise bends, use pulleys, nylon-coated cable"
+      },
+      {
+        "title": "Tendon-driven continuum robots 101 (Open Continuum Robotics, U Toronto)",
+        "url": "https://www.cs.toronto.edu/~jbk/opencontinuumrobotics/101/2022/11/11/tdcr-intro.html",
+        "what_it_supports": "Spacer-disk vs lumen designs; >=3 tendons for spatial bending; disk-tendon friction, tendon slack/backlash, one motor set per segment"
+      },
+      {
+        "title": "A servo powered robotic arm, but like you've never seen before (Hackaday 2018)",
+        "url": "https://hackaday.com/2018/09/04/a-servo-powered-robotic-arm-but-like-youve-never-seen-before",
+        "what_it_supports": "8 printed ball-joint segments, 16 remote RC servos, fishing line routed in tubing (Bowden) to decouple joints"
+      }
+    ],
+    "confidence": "medium"
+  },
+  {
+    "family_id": "_octopus_bioinspired",
+    "name": "Octopus-inspired arm references (summary)",
+    "mechanism": "Tapered, soft or wedge-segmented arms that curl from tip to base to wrap objects; actuation by cables, SMA or pneumatics.",
+    "dof_per_joint": null,
+    "reported_range_deg_per_joint": null,
+    "reported_min_bend_radius_or_pitch_mm": null,
+    "materials_seen": [
+      "eTPU-95A",
+      "silicone",
+      "braided PE sleeve",
+      "SMA springs",
+      "UHMWPE cables",
+      "vacuum suction cups"
+    ],
+    "printable_fdm": "partly",
+    "print_notes": "SpiRobs is the only octopus-like design here printed on a consumer FDM printer (Bambu, TPU 95A).",
+    "non_printed_parts": [
+      "cables",
+      "SMA/pneumatics (for non-tendon designs)"
+    ],
+    "known_issues": [
+      "silicone/SMA arms are slow and heavy for a drone",
+      "tendon arms need careful taper vs force trade-off"
+    ],
+    "summary": [
+      {
+        "system": "SpiRobs (2025 log-spiral)",
+        "segments": "24 units over 45 cm (2 cables); 42 units over 1 m (3 cables); 6 x 25 cm arms in gripper",
+        "taper": "5-15 deg; 1 m arm 120 -> 5 mm diameter",
+        "bend": "curls into full log spiral, curvature radius decreases linearly to tip; grasps 5.6-115 mm objects"
+      },
+      {
+        "system": "Cianchetti octopus arm (OCTOPUS IP)",
+        "segments": "3 virtual bending segments, 11 transverse SMA springs at 30 mm pitch",
+        "taper": "400 mm long, 30 -> 14 mm diameter conical",
+        "bend": "~85 deg simple bending; one cable for retroflexion/grasp"
+      },
+      {
+        "system": "Festo OctopusGripper",
+        "segments": "single pneumatic silicone tentacle with 2 rows of suction cups",
+        "taper": "conical",
+        "bend": "curls inward around object; numbers not given in source"
+      },
+      {
+        "system": "Aerial continuum arms (not octopus but drone-relevant)",
+        "segments": "Tilt-X: 590 mm reach, 20 mm dia; U-joint CAAMS 430 g; modular NiTi CM 420 g",
+        "taper": "none",
+        "bend": "kept <180 deg to clear props"
+      }
+    ],
+    "sources": [
+      {
+        "title": "SpiRobs full paper (arXiv 2303.09861 PDF)",
+        "url": "https://arxiv.org/pdf/2303.09861",
+        "what_it_supports": "Wedge units from log spiral (dtheta=30 deg), taper 5-15 deg, eTPU-95A on Bambu FDM, UHMWPE cables; 24 units/45 cm (2 cables), 42 units/1 m (3 cables, 5-120 mm dia); elastic layer 5-10% width; thin layers self-collide/buckle"
+      },
+      {
+        "title": "Octopus-inspired soft arm (Cianchetti et al., Actuators 2014, Sant'Anna IRIS)",
+        "url": "https://iris.santannapisa.it/retrieve/dd9e0b31-c180-709e-e053-3705fe0a83fd/actuators-03-00226.pdf",
+        "what_it_supports": "400 mm conical arm, 30->14 mm diameter, braided PE sleeve + SMA springs + 1 cable, ~85 deg simple bend, 3 virtual bending segments"
+      },
+      {
+        "title": "This robotic tentacle can easily grasp smooth objects (MIT Technology Review, 2017)",
+        "url": "https://www.technologyreview.com/2017/03/30/106134/this-robotic-tentacle-can-easily-grasp-smooth-objects",
+        "what_it_supports": "Festo OctopusGripper: pneumatic silicone tentacle curls inward, two rows of vacuum suction cups"
+      },
+      {
+        "title": "OCTOPUS Integrating Project results (bioroboticsinstitute.it archive)",
+        "url": "https://www.bioroboticsinstitute.it/vecchi/Octopus/www.octopusproject.eu/results.html",
+        "what_it_supports": "Silicone muscular-hydrostat arm: longitudinal cables + transverse SMA, sensorised skin, passive suckers; stretch/contract/curl any direction"
+      }
+    ],
+    "extra_aerial_sources": [
+      {
+        "title": "U-Joint CAAMS: universal-joint continuum manipulator for aerial manipulation (arXiv 2607.03321)",
+        "url": "https://arxiv.org/pdf/2607.03321",
+        "what_it_supports": "Drone-mounted PLA-printed tubular U-joint backbone + radial helical springs, 3x1 mm steel tendons, 3x Dynamixel XL430; arm 430 g; bending kept <180 deg to avoid props; 2.5-45x lower out-of-plane error under downwash than NiTi backbone; gravity sag in-plane"
+      },
+      {
+        "title": "Tilt-X aerial continuum manipulator (arXiv 2602.23576)",
+        "url": "https://arxiv.org/html/2602.23576v1",
+        "what_it_supports": "Superelastic NiTi backbone, PLA disks, Spectra cables, 20 mm dia, 590 mm reach on X500 quad; downwash sensitivity; actuators at hub keep CoG fixed"
+      },
+      {
+        "title": "A modular continuum manipulator for aerial manipulation and perching (arXiv 2206.06246)",
+        "url": "https://arxiv.org/pdf/2206.06246",
+        "what_it_supports": "NiTi backbone + 9 PLA printed disks, 4 fishing-wire tendons, 4x XL430; 420 g incl. actuation; not yet flown"
+      }
+    ],
+    "confidence": "medium"
+  }
+]

@@ -1,0 +1,7 @@
+arch,configs,feasible,best_score,best,best_dof,min_walk_util,min_mantle_util,top_fail
+3-section tendons,14160,0,,,,0.7926612041768786,0.2133472,"{'flight_load': 14152, 'walk_load': 13964, 'struct': 11664}"
+base-box tendons,16800,0,,,,0.966099636965545,0.3733575999999999,"{'walk_load': 16784, 'flight_load': 15904, 'mantle': 13200}"
+graded servo chain,5120,522,0.5943101724761622,rolling_1d / alt90 / N10,10.0,0.0341062361970556,0.0,"{'tw': 2734, 'walk_load': 2284, 'flight_load': 1928}"
+push-pull rods,6960,0,,,,2.9160148390959164,0.3733575999999999,"{'walk_load': 6960, 'flight_load': 6960, 'mantle': 5184}"
+root servos + base-box tendons,12480,0,,,,0.6136041965164254,0.266684,"{'walk_load': 12172, 'mantle': 8388, 'tw': 7384}"
+servo in every node,13120,2601,0.6748994654799784,universal / omni_roll4 / N7,15.0,0.0587412793333144,0.0,"{'walk_load': 6896, 'flight_load': 6560, 'walk': 2832}"

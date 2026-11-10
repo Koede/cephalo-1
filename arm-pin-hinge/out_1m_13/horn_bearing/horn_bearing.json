@@ -1,0 +1,108 @@
+{
+ "bearing": {
+  "name": "6705 (61705) 25 x 32 x 4",
+  "d": 25.0,
+  "D": 32.0,
+  "B": 4.0,
+  "C0_N": 833.85,
+  "C_N": 1079.1000000000001,
+  "g": 6.0
+ },
+ "joints": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "stack_alpha": {
+  "lid_top": 18.0,
+  "bearing": [
+   18.0,
+   22.0
+  ],
+  "horn": [
+   19.5,
+   22.5
+  ],
+  "horn_ear": [
+   22.5,
+   26.5
+  ],
+  "gap_bearing_to_ear": 0.5
+ },
+ "housing_r": 17.8,
+ "sleeve_r": [
+  10.3,
+  12.5
+ ],
+ "ear_root_r": 12.5,
+ "arm_R": 28.55,
+ "max_r_new_ring": 28.3,
+ "max_r_new_ear": 28.5,
+ "static_interference_mm3": 0.0,
+ "sweeps": {
+  "1": [
+   -90.0,
+   90.0
+  ],
+  "2": [
+   -90.0,
+   90.0
+  ],
+  "4": [
+   -90.0,
+   90.0
+  ]
+ },
+ "pairs": {
+  "1": [],
+  "3": []
+ },
+ "mass_g": {
+  "lid_extra": 0.83,
+  "vertebra_extra": 0.94,
+  "bearing": 6.0,
+  "per_joint": 8.1,
+  "per_arm": 32.3,
+  "robot": 259.0
+ },
+ "robot_kg_before": 16.92,
+ "robot_kg_after": 17.18,
+ "tw_rated_before": 1.061,
+ "tw_rated_after": 1.045,
+ "loads": {
+  "hover, any pose (13.2 N fans)": {
+   "N": 111,
+   "of_C0": 0.13,
+   "twice_of_C0": 0.27
+  },
+  "16 N rated, fan within 30 deg of up": {
+   "N": 191,
+   "of_C0": 0.23,
+   "twice_of_C0": 0.46
+  },
+  "16 N rated, within 60 deg": {
+   "N": 244,
+   "of_C0": 0.29,
+   "twice_of_C0": 0.59
+  },
+  "16 N rated, any direction": {
+   "N": 409,
+   "of_C0": 0.49,
+   "twice_of_C0": 0.98
+  },
+  "21.4 N full, any direction": {
+   "N": 511,
+   "of_C0": 0.61,
+   "twice_of_C0": 1.23
+  }
+ },
+ "lid_screw_hole_MPa": {
+  "hover, any pose (13.2 N fans)": 4.6,
+  "16 N rated, fan within 30 deg of up": 8.0,
+  "16 N rated, within 60 deg": 10.2,
+  "16 N rated, any direction": 17.0,
+  "21.4 N full, any direction": 21.3
+ },
+ "note": "load split between this bearing and the servo's own output bearing is set by the fits and is not modelled [A]"
+}

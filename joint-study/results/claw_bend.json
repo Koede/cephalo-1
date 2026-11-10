@@ -1,0 +1,56 @@
+{
+ "prop_R_mm": 203.2,
+ "bend_radius_mm": 233.2,
+ "first_half_mm": 233,
+ "second_half_mm": 115,
+ "fingertips_past_prop_mm": 90.0,
+ "tube": "16 x 14 mm carbon",
+ "added_g_per_claw": 37,
+ "tip_g": 275,
+ "wake_blockage": 0.021,
+ "grip_moment_Nm": {
+  "object_kg": 0.5,
+  "M": 1.14,
+  "of_STS3215_stall": 0.39
+ },
+ "foot_on_jaws": {
+  "foot_N": 26.4,
+  "M": 6.15,
+  "of_STS3215_stall": 2.09
+ },
+ "floor_grab_tilt_limit_deg": {
+  "toward_prop": 11.7,
+  "sideways": 23.9,
+  "away_from_prop": "none"
+ },
+ "old_wrist_tilt_limit_deg": 8.9,
+ "packs": {
+  "2 x DOGCOM 22 Ah 5C semi-solid": {
+   "robot_kg": 19.13,
+   "tw_rated": 1.292,
+   "hover_min": 16.0,
+   "hover_W": 2933,
+   "hover_A": 140,
+   "pack_A": 220,
+   "fan_hover_N": 21.5
+  },
+  "3 x DOGCOM 22 Ah 5C semi-solid": {
+   "robot_kg": 20.52,
+   "tw_rated": 1.205,
+   "hover_min": 21.8,
+   "hover_W": 3228,
+   "hover_A": 154,
+   "pack_A": 330,
+   "fan_hover_N": 22.3
+  },
+  "Tattu 22 Ah 25C LiPo": {
+   "robot_kg": 19.0,
+   "tw_rated": 1.301,
+   "hover_min": 8.1,
+   "hover_W": 2906,
+   "hover_A": 138,
+   "pack_A": 550,
+   "fan_hover_N": 21.4
+  }
+ }
+}

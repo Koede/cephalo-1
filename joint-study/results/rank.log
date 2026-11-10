@@ -1,0 +1,46 @@
+/tmp/claude-0/-home-user/a3da0fa4-f9ef-5d1a-9ed5-6405fb58b06f/scratchpad/js/rank.py:72: DtypeWarning: Columns (0: remote_drive, 1: grade_split) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(os.path.join(RES, "sweep.csv")); df["row_id"] = np.arange(len(df))
+{
+ "configs": 94048,
+ "geometries": 5172,
+ "joint_types": 101,
+ "families": 28,
+ "feasible": 136,
+ "fail_counts": {
+  "walk_load": 84048,
+  "flight_load": 83056,
+  "struct": 70896,
+  "mantle": 45380,
+  "tw": 41735,
+  "walk": 28536,
+  "chan": 19356,
+  "fits": 3888
+ },
+ "validation_spearman": 0.8377292410617665,
+ "pareto_size": 42
+}
+                        prior  prior_joints  prior_miss_mm  here_dof  here_miss_mm here_arrangement
+0  base-box rolling vertebrae            19              6        19          11.4          helix60
+1         current servo chain             9             12        11          27.4      alt90_roll4
+2        geared double hinges             8             12        11          25.9      alt90_roll4
+3                servo shells             9             12        11          27.4      alt90_roll4
+4         cross-axis flexures            17             18        23          11.9      alt90_roll4
+5           3-section rolling             8             18         8          33.7      alt90_roll4
+6           cycloidal modules             6             19         8          47.8      alt90_roll4
+7   one-piece printed rolling             8             22        11          36.1      alt90_roll4
+8                   TPU spine             4             40         7          57.3       omni_roll4
+                 family                  variant  range_deg  arrangement actuation  N  local_servo root_servo remote_drive compliance  dof  miss_mean_mm  util_walk  util_flight_nom  util_land  tip_err_mm  total_mass_kg  thrust_to_weight  n_drives_robot  cost_usd  assembly_h     score  wave_tip_rms_mm  lift_tip_rms_mm    sag_mm  final_score
+3             pin_hinge             M3_bolt_PETG         90        alt90     local  7  STS3215_12V        NaN          NaN      rigid    7     48.451657   0.606674         0.415016   5.445053    7.326192      10.907207          1.201873              56   1081.92   14.000000  0.466024       858.759284        20.119822  6.202951     0.057543
+6           servo_shell          horn+idler_PETG         90        alt90     local  7  STS3215_12V        NaN          NaN      rigid    7     48.451657   0.606674         0.415016   5.566101    7.320864      11.276807          1.162481              56   1122.80   18.666667  0.455135       852.632453        26.248030  5.568083     0.055802
+7   servo_chain_bracket   printed_U_bracket_PETG         90        alt90     local  7  STS3215_12V        NaN          NaN      rigid    7     48.451657   0.606674         0.415016   5.602563    7.321797      11.388807          1.151049              56   1128.40   18.666667  0.450850       856.202922        25.014494  5.727603     0.055094
+4            rolling_1d  TPU_flexure_straps_PETG         90        alt90     local  7  STS3215_12V        NaN          NaN      rigid    7     47.554325   0.786471         0.408099   5.267466    7.707310      10.828807          1.210574              56   1078.00   13.066667  0.465984       827.717665        61.213622  4.118573     0.053570
+9   servo_chain_bracket   printed_U_bracket_PETG        120      helix60     local  7  STS3215_12V        NaN          NaN      rigid    7     49.000476   0.409184         0.483579   6.165530    8.374288      11.388807          1.151049              56   1128.40   18.666667  0.443121       967.592463        84.532499  6.688092     0.035460
+5             pin_hinge             M3_bolt_PETG        120      helix60     local  7  STS3215_12V        NaN          NaN      rigid    7     49.000476   0.409184         0.483579   5.997493    8.376811      10.907207          1.201873              56   1081.92   14.000000  0.458040       968.007445        94.608296  7.182404     0.035385
+1          gear_rolling        printed_spur_PETG        120        alt90     local  7  STS3215_12V        NaN          NaN      rigid    7     41.569942   0.667121         0.408099   5.593136    7.314630      11.086407          1.182446              56   1078.00   20.533333  0.472304       845.342777       181.091458  4.526136     0.035126
+8           servo_shell          horn+idler_PETG        120      helix60     local  7  STS3215_12V        NaN          NaN      rigid    7     49.000476   0.409184         0.483579   6.126643    8.373753      11.276807          1.162481              56   1122.80   18.666667  0.447331       967.543085        92.422618  6.536479     0.034880
+0             pin_hinge             M3_bolt_PETG        120  alt90_roll4     local  7  STS3215_12V        NaN          NaN      rigid    8     39.237853   0.636768         0.415016   5.263932    9.433438      11.067207          1.184497              64   1169.92   15.066667  0.492098       991.883078       193.525155  5.985665     0.026128
+2          gear_rolling        printed_spur_PETG        120  alt90_roll4     local  7  STS3215_12V        NaN          NaN      rigid    8     39.889331   0.667104         0.408099   5.645541    9.205115      11.246407          1.165623              64   1166.00   21.600000  0.471387      1062.782375       170.290514  4.422867     0.023529
+13           rolling_1d  TPU_flexure_straps_PETG         90       planar     local  7  STS3215_12V        NaN          NaN      rigid    7    115.422396   0.866568         0.477268   5.860834    8.336525      10.828807          1.210574              56   1078.00   13.066667  0.263421       916.938060       116.622798  6.466879     0.020981
+10         gear_rolling        printed_spur_PETG        120      helix60     local  7  STS3215_12V        NaN          NaN      rigid    7     49.501283   0.708315         0.480989   4.632497    6.949124      11.086407          1.182446              56   1078.00   20.533333  0.442209       983.091401       292.889031  6.123679     0.017145
+11          servo_shell          horn+idler_PETG        120       planar     local  7  STS3215_12V        NaN          NaN      rigid    7    100.876121   0.769788         0.484185   6.096162    8.162117      11.276807          1.162481              56   1122.80   18.666667  0.284736      1132.887575       126.547283  8.551635     0.014198
+12  servo_chain_bracket   printed_U_bracket_PETG        120       planar     local  7  STS3215_12V        NaN          NaN      rigid    7    100.876121   0.769788         0.484185   6.136486    8.164553      11.388807          1.151049              56   1128.40   18.666667  0.282052      1137.308199       124.698812  8.774742     0.014021
