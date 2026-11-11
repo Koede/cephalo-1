@@ -39,3 +39,9 @@ in [DESIGN.md](DESIGN.md).
 The raw sweep data from the joint study (`joint-study/results/**/sweep*.csv.gz` and
 `pareto_front.csv.gz`, about 70 MB) is left out. Running `joint-study/sim/run_study.py` and
 `rank.py` rebuilds it.
+
+## Checks and tools
+
+`pip install -r requirements.txt`, then `python3 tools/doctor.py` (health) and `python3 tools/check_all.py` (the full verification chain, about 40 s).
+`tools/` holds the checks (joint range, DOF, collision, gates, STL integrity, golden diff, mass, gear, fasteners, workspace, MuJoCo cross-check, study results);
+`tests/` the pytest suite; `.claude/skills/` the Claude Code skills that wrap them (`skills-index` lists them). All tools run from any directory and write scratch output to the system temp folder.
