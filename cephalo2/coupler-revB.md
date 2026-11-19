@@ -578,3 +578,17 @@ Note: the 0.5 mm occupancy grid misses walls under 1.5 mm (erosion), so the rang
 **Open decision: ring stroke.** One cord over K1 to K3 needs 22.2 mm of cord travel; today's rings move 13.7 / 12.7 mm.
 Recommended S1: a 2:1 tackle at each bead and both servos pulling the one ring (11.1 mm ring stroke, 83 / 28 N per finger,
 margins 1.51 / 1.26; no servo saved). See `hand3_hub_v3.png`.
+
+Decision (2026-11-19): **stroke S1** - 2:1 tackle at each bead (cord anchored on the root block, down round the bead, back up into the grip), both servos pull the one base ring (the curl servo's yokes re-hooked onto the base ring's flange); ring stroke 11.1 mm; inner ring removed.
+
+**Stroke S1 built (2026-11-19):** `hand3e/hand3_hub_v3.py` adds the drive: the curl servo's two yoke halves are now made like the base
+ones and hook the base ring's flange at their own azimuths (lips at 15.9-51.9 and -165.8 to -129.8 deg, clear of the base lips);
+all lip inner edges at r 27.7; the inner ring is gone; each bead has an eyelet and the cord is anchored in the root block, runs down
+round the eyelet and back up into the grip (two strands 1.4 mm apart). Ring stroke 11.1 mm for 22.2 mm of cord.
+
+**Motion sim:** `hand3_v3_sim.py`, `hand3_v3_sim_template.html`, `hand3_v3_site/` (artifact "hand3 hub v3 motion sim").
+Timeline: cross, spin-up, hover, spin-down, roots to 3 + 1, curl to the empty-hand limit, open, to 2 + 2, curl, open, back to the
+cross. The order in which roots move is planned so no two blocks ever come closer than 58 deg (a first hand-picked order collided:
+root 0 into root 3). HUD: root azimuths, pins, imbalance at 12,500 rpm and the spin interlock, ring stroke, servo state.
+Whole-timeline overlap check (`hand3_v3_sim_overlap.json`): one 0.25 mm3 hit, hub E's frame against an idler bracket (2 grid
+cells, existing in hub E). Next: the parked fork + roller station (options study first).

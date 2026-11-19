@@ -1,0 +1,11 @@
+{
+ "cell_mm": 0.5,
+ "overlaps": [
+  {
+   "a": "hub E frame",
+   "b": "idlers MR63",
+   "t": 0.0,
+   "vol_mm3": 0.25
+  }
+ ]
+}

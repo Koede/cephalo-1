@@ -102,7 +102,8 @@ def root_block(az=0.0):
             m -= slot_xy(0.0, s, PIN_X - 1.05 - 0.25, PIN_X + V["float_"] + 1.05, V["slot_w"]) ^ box([-60, -60, Z_GAP[0] - 2], [60, 60, Z_GAP[1] + 2])   # leg bore
             m -= slot_xy(0.0, s, PIN_X - 1.1 - 0.25, 40.0, V["arm_slot_w"]) ^ box([-60, -60, Z_ARM[0] - 0.05], [60, 60, Z_GAP[1] + 2])            # arm slot
         # curl cord: from the bead under the disc rim straight up into the grip's underside at r = bead eye (channel dia 1.2)
-        m -= cyl(0.6, Z_GAP[0] - 3, H.Z["blade"] + 1.0, c=(V["bead"]["eye_r"], 0, 0), n=16)
+        for s in (-1, 1):                                                    # 2:1 tackle: anchor strand and running strand
+            m -= cyl(0.6, Z_GAP[0] - 3, H.Z["blade"] + 1.0, c=(V["bead"]["eye_r"], s * 0.7, 0), n=16)
         _RG["m"] = m
     return _RG["m"].rotate([0, 0, float(az)])
 
@@ -132,6 +133,7 @@ def bead(az=0.0, pull=0.0):
     zh = (z + rl["z_stem"] - 0.1, z + rl["z_stem"] + rl["z_head"] + 0.1)
     m -= cyl(rl["head"][1] + 0.1, *zh, n=128) - cyl(rl["head"][0] - 0.1, zh[0] - 1, zh[1] + 1, n=128)
     m -= cyl(rl["stem"][1] + 0.15, z - 1, zh[0] + 0.01, n=128) - cyl(rl["stem"][0] - 0.15, z - 2, zh[1], n=128)
+    m -= cyl(0.5, -3, 3, "y", c=(bd["eye_r"], 0, z + bd["dz"][1] - 0.3), n=12)          # eyelet for the 2:1 tackle (cord turns round it)
     return m.rotate([0, 0, float(az)])
 
 
@@ -171,6 +173,52 @@ def assembly(pose=POSES["flight cross"], fold=(0.0, 0.0, 0.0), pull=0.0, lifted=
         for n, m in finger(az, fold).items(): out[f"finger {k} {n}"] = m
         if springs: out[f"spring box {k}"] = spring_box(az, k)
     return out
+
+
+# ---------------------------------------------------------------- drive (decision S1: 2:1 tackle, both servos pull the one ring)
+TACKLE = 2.0
+K_STROKE = dict(K1=HC.LEVER[0] * np.radians(H.FOLD_MAX[0]), K23=HC.LEVER[1] * np.radians(H.FOLD_MAX[1]) + HC.LEVER[2] * np.radians(H.FOLD_MAX[2]))
+CORD_STROKE = K_STROKE["K1"] + K_STROKE["K23"] + HC.STRETCH                    # one cord over K1..K3: 22.2 mm
+RING_STROKE = CORD_STROKE / TACKLE                                            # 11.1 mm, both yoke pairs together
+LIP_R0 = HC.R_LIP_OUT[0] + 0.6                                                # all lips moved out: beads and cords pass inside them
+
+
+def yoke(which, side, pull=0.0):
+    """A yoke half hooking the base ring's flange.  'out' halves are hub E's base yokes; 'in' halves are the curl servo's yokes,
+    now made like the 'out' ones (lip over the base ring flange, legs 18 / 8) at their own azimuths and rods.  Lip inner edge at
+    LIP_R0.  Moves down with the ring when pulling (pull + the 1 mm flight gap)."""
+    az, (ax, ay), _, _ = HC.HALVES[(which, side)]
+    lz = HC.Z_LIP_OUT; lf = HC.LEG["out"]; arc = HC.arc
+    m = arc(LIP_R0, HC.R_LIP_OUT[1] + 1.0, lz[0], lz[1], az, HC.LIP_HALF)
+    m += arc(HC.R_FL_OUT + HC.ARM_CLR, HC.R_LEG[1], lz[0] - 2.5, lz[0] + 0.5, az, HC.LEG_HALF + 2.0)
+    zb0, zb1 = lz[0] - lf[0], lz[0] - lf[1]
+    m += arc(HC.R_LEG[0], HC.R_LEG[1], zb0, lz[0] + 0.5, az, HC.LEG_HALF)
+    bosses = [cyl(3.2, zb0, zb1, c=(*HC.rod_xy(az, k), 0)) for k in (-1, 1)]
+    eye = cyl(2.2, zb0, zb0 + 4.0, c=(ax, ay, 0))
+    m += M_.batch_hull(bosses + [app(box([HC.R_LEG[0], -3.0, zb0], [HC.R_LEG[0] + 1.0, 3.0, zb1]), T(rot("z", az))), eye])
+    for k in (-1, 1): m -= cyl(1.6, zb0 - 1, zb1 + 1, c=(*HC.rod_xy(az, k), 0))
+    m -= cyl(0.6, zb0 - 1, zb0 + 5.0, c=(ax, ay, 0)) + cyl(1.4, zb0 + 2.0, zb0 + 5.0, c=(ax, ay, 0))
+    return m.translate([0, 0, -(pull + HC.GAP) if pull > 0 else 0.0])
+
+
+def drive(pull=0.0):
+    """name -> manifold: the static drive of hub E minus the inner (curl) ring, with the four yoke halves on the base ring."""
+    hw = HC.hardware(); P = HC._parts(); out = {}
+    out["frame"] = P["frame"][0]; out["tie ring"] = P["tie_ring"][0]
+    for n, m in hw.items():
+        if n == "motor_base": continue
+        out[n] = m
+    for w in ("out", "in"):
+        for sd in ("near", "far"): out[f"yoke {w} {sd}"] = yoke(w, sd, pull)
+    return out
+
+
+def tackle_cords(az=0.0, pull=0.0):
+    """2:1 tackle: the cord is anchored in the root block, runs down round the bead's eyelet and back up into the grip channel.
+    Two strands at +-0.7 mm beside the root's centre line, r = bead eye."""
+    a = np.radians(az); r = V["bead"]["eye_r"]; zb = Z_RING_TOP - pull + V["bead"]["dz"][1] - 0.3
+    u = np.array([np.cos(a), np.sin(a), 0.0]); n = np.array([-np.sin(a), np.cos(a), 0.0])
+    return [np.array([u * r + n * s * 0.7 + [0, 0, zb], u * r + n * s * 0.7 + [0, 0, Z_GAP[0] - 1.0]]) for s in (-1, 1)]
 
 
 def export(d="hand3_v3_stl"):
