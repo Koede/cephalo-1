@@ -11,9 +11,9 @@
  "locked: males x female barrels (sliding fit, expected 0)": 0.0,
  "locked: collar x socket / nose ring": [
   0.0,
-  -1.1069704181077e-16
+  -2.772304955045435e-16
  ],
- "nose ring x socket (faces touch, expected 0)": 9.451952566984223e-15,
+ "nose ring x socket (faces touch, expected 0)": 9.25766353767482e-15,
  "screws x socket / nose ring / collar / female barrels / hand base": [
   0.0,
   9.80118763926896e-17,
@@ -28,7 +28,7 @@
  "collar axial play (mm)": 0.2,
  "axial play of a locked hand (mm): lug between nose ring and lip": 0.1,
  "collar step bearing on the nose ring: annulus (mm2)": 270.2,
- "collar sweep open->locked: collar x socket/nose worst overlap": 9.12990386417456e-15,
+ "collar sweep open->locked: collar x socket/nose worst overlap": 8.852348108018271e-15,
  "collar sweep: hand stand-off needed (deg, mm); ramp draws it in to 0": [
   [
    -60.0,
@@ -238,7 +238,7 @@
   5.0
  ],
  "push-in path (collar open): worst overlap": 0.0,
- "wrong clocking blocked by the key (overlap at 2 mm in, expected > 0)": 10.56029269229865,
+ "wrong clocking blocked by the key (overlap at 2 mm in, expected > 0)": 10.086537277813765,
  "locked hand pulled 1 mm: lug x collar overlap (expected > 0)": 106.09751949005202,
  "bullet engagement depth (mm)": 8.5,
  "O-ring x nose ring (seated in the groove, expected 0)": 0.0,
@@ -248,7 +248,7 @@
   0.0,
   0.0
  ],
- "O-ring squeeze volume at lock, hand on the lips (expected > 0)": 8.553,
+ "O-ring squeeze volume at lock, hand on the lips (expected > 0)": 8.662,
  "locked + preloaded (hand on the lips): base x collar / nose ring (expected 0)": [
   0.0,
   0.0
@@ -259,60 +259,70 @@
   1.5
  ],
  "preload": {
-  "squeeze_mm": 0.17,
-  "squeeze_pct": 17,
-  "F_N": 38.2,
+  "shims": 3,
+  "shim_mm": 0.15,
+  "cs_stretched_mm": 0.976,
+  "squeeze_mm": 0.176,
+  "squeeze_pct": 18,
+  "squeeze_full_in_pct": 28,
+  "squeeze_untuned_without_shims_mm": 0.026,
+  "F_N": 40.8,
   "F_band_N": [
-   12.1,
-   80.3
+   32.7,
+   49.8
   ],
-  "hand3_still_to_g": 9.8,
-  "hand3_still_to_g_low": 3.1,
-  "collar_lock_torque_Nm": 0.45,
-  "collar_hold_friction_Nm": 0.248,
-  "free_ring_standoff_mm": 0.27,
-  "ramp_capture_margin_mm": 0.23
+  "F_band_untuned_print_pm0p1_N": [
+   13.5,
+   85.8
+  ],
+  "hand3_still_to_g": 10.5,
+  "hand3_still_to_g_low": 8.4,
+  "collar_lock_torque_Nm": 0.48,
+  "collar_hold_friction_Nm": 0.265,
+  "free_ring_standoff_mm": 0.28,
+  "ramp_capture_margin_mm": 0.22,
+  "ring_stretch_pct": 4.8
  },
  "stress, static": {
-  "lug_force_N": 107.5,
-  "lug_shear_MPa": 2.4,
-  "lug_bending_MPa": 5.8,
-  "lip_bending_MPa": 5.8,
-  "collar_wall_MPa": 5.9,
-  "collar_step_MPa": 4.5,
-  "lug_on_lip_bearing_MPa": 4.9,
+  "lug_force_N": 97.4,
+  "lug_shear_MPa": 2.2,
+  "lug_bending_MPa": 5.3,
+  "lip_bending_MPa": 5.2,
+  "collar_wall_MPa": 5.3,
+  "collar_step_MPa": 4.1,
+  "lug_on_lip_bearing_MPa": 4.5,
   "spigot_bearing_MPa": 0.5,
-  "step_on_nose_ring_MPa": 0.8,
-  "screw_tension_N": 79.8,
-  "factor_vs_PA_CF_interlayer_30MPa": 5.08,
-  "factor_screw_vs_M3_insert_pullout_1000N_est": 12.5
+  "step_on_nose_ring_MPa": 0.72,
+  "screw_tension_N": 69.7,
+  "factor_vs_PA_CF_interlayer_30MPa": 5.61,
+  "factor_screw_vs_M3_insert_pullout_1000N_est": 14.4
  },
  "stress, rolling over a 20 mm step (2 g, est.)": {
-  "lug_force_N": 188.3,
-  "lug_shear_MPa": 4.2,
-  "lug_bending_MPa": 10.2,
-  "lip_bending_MPa": 10.1,
-  "collar_wall_MPa": 10.3,
-  "collar_step_MPa": 7.9,
-  "lug_on_lip_bearing_MPa": 8.7,
+  "lug_force_N": 178.1,
+  "lug_shear_MPa": 4.0,
+  "lug_bending_MPa": 9.6,
+  "lip_bending_MPa": 9.6,
+  "collar_wall_MPa": 9.8,
+  "collar_step_MPa": 7.5,
+  "lug_on_lip_bearing_MPa": 8.2,
   "spigot_bearing_MPa": 0.9,
-  "step_on_nose_ring_MPa": 1.39,
-  "screw_tension_N": 132.9,
-  "factor_vs_PA_CF_interlayer_30MPa": 2.9,
-  "factor_screw_vs_M3_insert_pullout_1000N_est": 7.5
+  "step_on_nose_ring_MPa": 1.32,
+  "screw_tension_N": 122.7,
+  "factor_vs_PA_CF_interlayer_30MPa": 3.07,
+  "factor_screw_vs_M3_insert_pullout_1000N_est": 8.1
  },
  "stress, 3 g landing on the wheels (est.)": {
-  "lug_force_N": 269.0,
-  "lug_shear_MPa": 6.0,
-  "lug_bending_MPa": 14.5,
-  "lip_bending_MPa": 14.4,
-  "collar_wall_MPa": 14.8,
-  "collar_step_MPa": 11.3,
-  "lug_on_lip_bearing_MPa": 12.4,
+  "lug_force_N": 258.9,
+  "lug_shear_MPa": 5.8,
+  "lug_bending_MPa": 14.0,
+  "lip_bending_MPa": 13.9,
+  "collar_wall_MPa": 14.2,
+  "collar_step_MPa": 10.9,
+  "lug_on_lip_bearing_MPa": 11.9,
   "spigot_bearing_MPa": 1.4,
-  "step_on_nose_ring_MPa": 1.99,
-  "screw_tension_N": 185.9,
-  "factor_vs_PA_CF_interlayer_30MPa": 2.03,
-  "factor_screw_vs_M3_insert_pullout_1000N_est": 5.4
+  "step_on_nose_ring_MPa": 1.92,
+  "screw_tension_N": 175.8,
+  "factor_vs_PA_CF_interlayer_30MPa": 2.11,
+  "factor_screw_vs_M3_insert_pullout_1000N_est": 5.7
  }
 }

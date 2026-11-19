@@ -24,7 +24,7 @@ parts["nose ring"] = dict(m=HB.nose_ring(), g="arm", c="#3d4046")
 parts["female bullets (Castle 4 mm)"] = dict(m=U(HB.female_bullets()), g="arm", c="#c9a227")
 parts["3 x M3x20 DIN 7984"] = dict(m=U(HB.screws()), g="arm", c="#b8bcc4")
 parts["detent ball 3 mm"] = dict(m=HB.detent_ball(), g="arm", c="#e8e8f0")
-parts["O-ring 22 x 1.0 NBR 70A"] = dict(m=HB.oring(), g="arm", c="#1a7f37")
+parts["O-ring 21 x 1.0 NBR 70A (on Ø22, 3 x 0.05 shims)"] = dict(m=HB.oring(), g="arm", c="#1a7f37")
 parts["locking collar"] = dict(m=HB.collar(0), g="collar", c="#d2542d")
 # hands
 parts["hand base"] = dict(m=HB.hand_base(), g="hand", c="#30343a", h="all")

@@ -47,7 +47,13 @@ P = dict(
     groove_w=3.2, groove_h=2.6, r_wire_cb=6.5,                       # motor-lead grooves in the hand base's bottom face
     # rev B.3 (2026-11-18, coupler_preload_study.py, option A): face O-ring in the nose-ring face, inside the bullets.  It pushes
     # the hand out until its lugs bear on the collar lips, so the 0.1 mm play cannot rattle.  NBR 70A 22 x 1.0, groove 11.0-12.4
-    oring_id=22.0, oring_cs=1.0, og_r=(11.0, 12.4), og_depth=0.73, oring_E=5.5, mu=0.30,
+    # rev B.3.1 corrections: the groove faces DOWN (toward the hand), so a loose ring would drop out with no hand on: the ring is
+    # a 21 x 1.0, stretched 4.8 % onto the groove's Ø22 inner wall, which holds it.  And the force is tolerance-sensitive
+    # (12-80 N for +-0.1 mm), so the groove is printed DEEP (0.85) and set with 0.05 mm PET shim washers under the ring after
+    # measuring the printed stack: target squeeze 0.17 mm, +-0.025 after tuning.
+    oring_id=21.0, oring_cs=1.0, og_r=(11.0, 12.4), og_depth=0.85, shim_step=0.05, sq_target=0.17, oring_E=5.5, mu=0.30,
+    # rev B.3.1 optimisation: six lightening pockets in the socket body from its back face, between the bullets and the screws
+    pocket_r=(12.0, 19.0), pocket_z=8.0, pocket_az=(0.0, 60.0, 120.0, 180.0, 240.0, 300.0), pocket_half=(17.0, 17.0), pocket_wall=1.0,
 )
 
 
@@ -110,7 +116,22 @@ def arm_socket():
     x, y = at(P["det_r_in"], P["det_az"]); a = np.radians(P["det_az"])
     bore = mf.Manifold.cylinder(P["R_body"] - P["det_r_in"] + 1, P["det_bore"] / 2, P["det_bore"] / 2, 20).rotate([0, 90, 0]).rotate([0, 0, P["det_az"]])
     cut += bore.translate([x, y, P["det_z"]])                                                             # radial blind bore: spring + ball
-    return b - cut
+    return b - cut - pockets()
+
+
+def pockets():
+    """Lightening pockets, open at the socket's back face (the tip bay's end face closes them): annular sectors r 12-19 from
+    z 8 to the back, centred between each bullet and its neighbouring screw, trimmed to keep pocket_wall round every bore."""
+    out = []
+    for az in P["pocket_az"]:
+        out.append(sector(P["pocket_r"][0], P["pocket_r"][1], az - P["pocket_half"][0], az + P["pocket_half"][1], P["pocket_z"], P["z_back"] + 1))
+    pk = mf.Manifold.batch_boolean(out, mf.OpType.Add)
+    keep = []
+    for az in P["az_bullet"]:
+        keep.append(cyl(P["fem_bore"] / 2 + P["pocket_wall"], 0, P["z_back"] + 2, 32).translate([*at(P["r_bullet"], az), 0]))
+    for r, az in P["screws"]:
+        keep.append(cyl(P["screw_d"] / 2 + P["pocket_wall"] + 0.3, 0, P["z_back"] + 2, 24).translate([*at(r, az), 0]))
+    return pk - mf.Manifold.batch_boolean(keep, mf.OpType.Add)
 
 
 def nose_ring():
@@ -123,27 +144,47 @@ def nose_ring():
 def oring(free=False):
     """The 22 x 1.0 O-ring seated on its groove floor, drawn round (uncompressed): where it overlaps the hand base's flange top
     is the squeeze.  free=True: the same ring, with the hand pushed out by it before the collar turns."""
-    rc = P["oring_id"] / 2 + P["oring_cs"] / 2; r = P["oring_cs"] / 2; zc = P["og_depth"] - r
+    r = cs_eff() / 2; rc = P["og_r"][0] + r; zc = depth_eff() - r
     cs = mf.CrossSection.circle(r, 32).translate([rc, zc])
     return mf.Manifold.revolve(cs, N)
 
 
+def cs_eff():
+    """Cross-section of the ring stretched onto the groove's inner wall (volume kept: cs x (1 - stretch / 2))."""
+    st = max(2 * P["og_r"][0] / P["oring_id"] - 1, 0.0)
+    return P["oring_cs"] * (1 - st / 2)
+
+
+def shims():
+    """Number of shim_step PET washers under the ring that bring the squeeze nearest sq_target (nominal print)."""
+    want = cs_eff() - P["ax_clr"] - P["sq_target"]                 # groove depth wanted
+    return int(round(max(P["og_depth"] - want, 0.0) / P["shim_step"]))
+
+
+def depth_eff():
+    return P["og_depth"] - shims() * P["shim_step"]
+
+
 def oring_force(squeeze):
     """Face-compressed O-ring (Lindley): N, for a squeeze in mm."""
-    e = max(squeeze, 0.0) / P["oring_cs"]; rc = P["oring_id"] / 2 + P["oring_cs"] / 2
-    return P["oring_E"] * P["oring_cs"] * (1.25 * e ** 1.5 + 50 * e ** 6) * 2 * np.pi * rc
+    c = cs_eff(); e = max(squeeze, 0.0) / c; rc = P["og_r"][0] + c / 2
+    return P["oring_E"] * c * (1.25 * e ** 1.5 + 50 * e ** 6) * 2 * np.pi * rc
 
 
 def preload():
     """Axial preload on the lugs at lock (O-ring + 5 spring pins), its print-tolerance band, and what it means."""
-    sq = P["oring_cs"] - P["og_depth"] - P["ax_clr"]; pogo = 5 * 0.060 * 9.81
-    F = oring_force(sq) + pogo; Flo = oring_force(sq - 0.1) + pogo; Fhi = oring_force(sq + 0.1) + pogo
+    c = cs_eff(); sq = c - depth_eff() - P["ax_clr"]; pogo = 5 * 0.060 * 9.81; tt = P["shim_step"] / 2
+    F = oring_force(sq) + pogo; Flo = oring_force(sq - tt) + pogo; Fhi = oring_force(sq + tt) + pogo
     rl = (P["lip_r0"] + P["lug_r1"]) / 2; tr = P["ramp"] / (rl * np.radians(P["ramp_deg"])); mu = P["mu"]
     lock = F * rl * 1e-3 * (tr + mu) / (1 - mu * tr) + 0.08
-    return dict(squeeze_mm=round(sq, 2), squeeze_pct=round(100 * sq / P["oring_cs"]), F_N=round(F, 1), F_band_N=[round(Flo, 1), round(Fhi, 1)],
+    sq0 = c - P["og_depth"] - P["ax_clr"]
+    return dict(shims=shims(), shim_mm=round(shims() * P["shim_step"], 2), cs_stretched_mm=round(c, 3), squeeze_mm=round(sq, 3), squeeze_pct=round(100 * sq / c),
+                squeeze_full_in_pct=round(100 * (sq + P["ax_clr"]) / c), squeeze_untuned_without_shims_mm=round(sq0, 3),
+                F_N=round(F, 1), F_band_N=[round(Flo, 1), round(Fhi, 1)], F_band_untuned_print_pm0p1_N=[round(oring_force(sq - 0.1) + pogo, 1), round(oring_force(sq + 0.1) + pogo, 1)],
                 hand3_still_to_g=round(F / (0.3964 * 9.81), 1), hand3_still_to_g_low=round(Flo / (0.3964 * 9.81), 1),
                 collar_lock_torque_Nm=round(lock, 2), collar_hold_friction_Nm=round(F * rl * 1e-3 * mu, 3),
-                free_ring_standoff_mm=round(P["oring_cs"] - P["og_depth"], 2), ramp_capture_margin_mm=round(P["ramp"] - (P["oring_cs"] - P["og_depth"] - P["ax_clr"]), 2))
+                free_ring_standoff_mm=round(c - depth_eff(), 2), ramp_capture_margin_mm=round(P["ramp"] - (c - depth_eff() - P["ax_clr"]), 2),
+                ring_stretch_pct=round(100 * max(2 * P["og_r"][0] / P["oring_id"] - 1, 0), 1))
 
 
 def detent_ball(theta=0.0):

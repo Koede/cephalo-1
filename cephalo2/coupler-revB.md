@@ -129,3 +129,27 @@ Supersedes B.2 only in the nose ring. The lugs, lips, ramp, collar and hand base
 - **STLs:** `coupler_revB3_stl.zip` (socket, nose ring with groove, collar, hand base, hand3 pack frame).
 - **Viewer:** https://claude.ai/artifact/Cp2PWLZZN2RphhcBBLhQCe (now with the O-ring).
 - **Buy, per arm:** 1 × O-ring 22 × 1.0 NBR 70A, plus spares.
+
+## Rev B.3.1 — corrections and lightening (2026-11-18)
+
+**Corrections**
+- **O-ring would fall out with no hand on.** The groove faces down, toward the hand, so an unstretched 22 × 1.0 ring sat loose. It is now a **21 × 1.0 NBR 70A**, stretched 4.8 % onto the groove's Ø22 inner wall, which holds it. The effective cross-section is 0.976 mm.
+- **Preload was tolerance-sensitive** (12–80 N for ±0.1 mm of print error). The groove is now printed **0.85 deep** and set with **0.05 mm PET shim washers** (Ø22.2 × 24.6) under the ring. Measure the printed stack, then add shims until the squeeze is 0.17 mm. At the nominal print that takes 3 shims.
+
+**Optimisation**
+- Six blind lightening pockets go into the socket body from its back face (r 12–19, z 8 → 16). They sit between the bullets and the screws, with at least 1.0 mm round every bore.
+- Socket mass: **12.8 → 9.3 g**. Walls: 1.0 mm to the bullet bores, 1.3 mm to the OD, 1.4 mm to the spigot bore.
+
+| | B.3 | B.3.1 |
+|---|---|---|
+| Squeeze | 0.17 mm (17 %) | 0.176 mm (18 %), ±0.025 after shimming |
+| Preload | 38 N (12–80) | 41 N (33–50) |
+| hand3 held still to | 9.8 g (3.1 low) | 10.5 g (8.4 low) |
+| Collar lock / hold torque | 0.45 / 0.25 N·m | 0.48 / 0.27 N·m |
+| 3 g landing factor (PA-CF interlayer) | 2.03 | 2.11 |
+| Screw factor | 5.4 | 5.7 |
+| Socket mass | 12.8 g | 9.3 g |
+
+All the interference and clearance checks pass (`handmount_b_check.json`).
+
+**Buy list change:** O-ring 21 × 1.0 NBR 70A (was 22 × 1.0), plus 0.05 mm PET film for the shims.
