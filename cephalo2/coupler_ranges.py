@@ -132,8 +132,8 @@ def _clearance(A, B):
         r = np.linspace(lo, hi, 400)
         gz = np.max([np.min(np.maximum(B.zlo(r) - A.zhi(r), A.zlo(r) - B.zhi(r)))])
         seps.append((float(gz), "height"))
-    elif not seps:
-        seps.append((gr, "radius"))
+    else:                                                     # radius ranges apart: the height gap of the whole boxes also counts
+        za, zb = zr(A), zr(B); seps.append((max(zb[0] - za[1], za[0] - zb[1]), "height"))
     return max(seps)
 
 
@@ -164,7 +164,7 @@ def parts():
         hand += [Rev(f"lug {az:.0f}", "hand", a, P["lug_r0"], P["lug_r1"], lug_lo, 0.0),
                  Rev(f"lug {az:.0f} root fillet", "hand", a, R, R + f, gusset_lo, -t)]
     for az in P["az_bullet"]:
-        hand.append(Cyl(f"male bullet {az:.0f}", "hand", P["r_bullet"], az, P["pin_d"] / 2, 0.0, P["fem_recess"] + P["pin_len"] - 0.5))
+        hand.append(Cyl(f"male bullet pin {az:.0f}", "hand", P["r_bullet"], az, P["pin_d"] / 2, 0.0, P["pin_len"]))
     z0 = P["collar_z"][0]
     col += [Rev("collar wall", "collar", FULL, cb, P["R_collar"], z0, zt),
             Rev("collar step", "collar", FULL, P["collar_bore"], P["R_collar"], P["z_nose"], zt),
@@ -178,8 +178,8 @@ def parts():
     kwc = np.degrees(P["key_w"] / 2 / P["r_bore"]) + 2.0
     holes = [Rev("keyway", "arm", [(P["az_key"] - kwc, P["az_key"] + kwc)], P["r_bore"] - 0.5, P["r_bore"] + P["key_h"] + 0.3, -1.0, P["z_bore"])]
     for az in P["az_bullet"]:
-        holes += [Cyl(f"bullet mouth {az:.0f}", "arm", P["r_bullet"], az, P["pin_d"] / 2 + 0.6, -1.0, P["fem_recess"] + 0.01),
-                  Cyl(f"female bore {az:.0f}", "arm", P["r_bullet"], az, P["fem_bore"] / 2, P["fem_recess"], P["fem_recess"] + P["fem_depth"])]
+        holes += [Cyl(f"bullet mouth {az:.0f}", "arm", P["r_bullet"], az, P["mouth_r"], -1.0, P["fem_recess"] + 0.01),
+                  Cyl(f"female bore {az:.0f}", "arm", P["r_bullet"], az, P["fem_bore"] / 2, P["fem_recess"], P["z_back"] + 1.0)]
     holes.append(Cyl("detent bore", "arm", (P["det_r_in"] + P["R_body"]) / 2, P["det_az"], P["det_bore"] / 2, P["det_z"] - P["det_bore"] / 2, P["det_z"] + P["det_bore"] / 2))
     arm += [Rev("nose ring", "arm", FULL, P["r_bore"], P["R_nose"], 0.0, P["z_nose"], holes),
             Rev("socket body", "arm", FULL, P["r_bore"], P["R_body"], P["z_nose"], P["z_back"], holes),
@@ -188,9 +188,57 @@ def parts():
         arm += [Cyl(f"screw head {az:.0f}", "arm", r, az, 2.75, P["cbore_h"] - 2.0, P["cbore_h"]),       # DIN 7984 M3: head d 5.5, k 2.0
                 Cyl(f"screw shank {az:.0f}", "arm", r, az, 1.5, P["cbore_h"], P["cbore_h"] + 20.0)]
     for az in P["az_bullet"]:
-        arm.append(Cyl(f"female barrel {az:.0f}", "arm", P["r_bullet"], az, 2.8, P["fem_recess"], P["fem_recess"] + P["fem_depth"]))
+        arm.append(Cyl(f"female barrel {az:.0f}", "arm", P["r_bullet"], az, P["bul_od"] / 2, P["fem_recess"], P["fem_recess"] + P["bul_len"]))
     arm.append(Cyl("detent ball", "arm", P["ball_rc"], P["det_az"], P["ball_d"] / 2, P["det_z"] - P["ball_d"] / 2, P["det_z"] + P["ball_d"] / 2))
     return hand, col, arm
+
+
+def wire_paths():
+    """Lead paths as chains of round sections (Cyl), so the same range math applies.  Connector frame: hand base bottom
+    face at z_flange[0]; hand3's pack frame below it, its clear centre channel r < 7 (hand3_cad: nothing inside r 7 from
+    the pack frame to the motor base at hand3 z 54)."""
+    rw = P["wire_od"] / 2; fz0 = P["z_flange"][0]; gz = (fz0 + 0.15, fz0 + 0.15 + P["wire_od"])        # wire lies on the pack-frame disc
+    hand, hand_hw, arm, tipbay = [], [], [], []
+    for az in P["az_bullet"]:
+        # side-entry from the male cup's saddle, then radially inward along the groove to the centre pocket
+        for k, r in enumerate(np.arange(P["r_bullet"] - P["bul_od"] / 2 - 0.2, P["lead_rv"] + P["lead_bend_r"] - 0.01, -0.3)):
+            hand.append(Cyl(f"hand lead {az:.0f} @{k}", "hand", r, az, rw, *gz))
+        # 90 deg bend, radius lead_bend_r (around a mandrel), from horizontal to vertical at r = lead_rv, then straight down.
+        # Each sampled cross-section is exact: it spans +- rw cos q in r and +- rw sin q in z (q = bend angle), +- rw sideways.
+        Rb = P["lead_bend_r"]; zc = (gz[0] + gz[1]) / 2; r_v = P["lead_rv"]
+        for k, q in enumerate(np.linspace(0, 90, 31)):
+            c, sn = np.cos(np.radians(q)), np.sin(np.radians(q)); rr = r_v + Rb * c; zz = zc - Rb * sn
+            da = np.degrees(np.arcsin(min(rw / rr, 1.0)))
+            dr, dz = rw * c + 0.05, rw * sn + 0.05                     # 0.05: half the sampling step
+            hand.append(Rev(f"hand lead {az:.0f} bend @{k}", "hand", [(az - da, az + da)], rr - dr, rr + dr, zz - dz, zz + dz))
+        hand.append(Cyl(f"hand lead {az:.0f} down @0", "hand", r_v, az, rw, fz0 - 60.0, zc - Rb))
+        # arm side: female cup tail 1.5 past the socket back into the tip bay, ESC lead soldered on axis
+        arm.append(Cyl(f"female tail {az:.0f}", "arm", P["r_bullet"], az, P["bul_od"] / 2, P["z_back"], P["fem_recess"] + P["bul_len"]))
+        arm.append(Cyl(f"ESC lead {az:.0f}", "arm", P["r_bullet"], az, rw, P["fem_recess"] + P["bul_len"], P["fem_recess"] + P["bul_len"] + 8.0))
+    for az in P["hand_screw_az"]:          # M3 heat-set insert (OD 4.0, 6 long) + M3 x 8 DIN 7991 countersunk from the pack side
+        hand_hw.append(Cyl(f"hand insert {az:.0f}", "hand", P["hand_screw_r"], az, 2.0, fz0, fz0 + 6.0))
+        hand_hw.append(Cyl(f"hand screw head {az:.0f}", "hand", P["hand_screw_r"], az, 3.0, fz0 - 2.5, fz0 - 1.0))
+    # hand3 pack frame below the hand base: hub disc r 7 .. 17.5, 2.5 thick, then the frame; centre channel r < 7 open
+    ch = P["pf_chamfer"]                                                # B.6: 45 deg chamfer on the tube's inner top edge (lead bend)
+    top = lambda rr: fz0 - np.clip(ch - (rr - 7.0), 0, None)
+    hand_hw.append(Rev("hand3 pack-frame disc", "hand3", FULL, 7.0, 17.5, fz0 - 2.5, top))
+    hand_hw.append(Rev("hand3 servos (r >= 15.3)", "hand3", FULL, 15.3, 42.9, fz0 - 50.8, fz0 - 3.0))
+    hand_hw.append(Rev("hand3 pack-frame centre tube (r 7-10)", "hand3", FULL, 7.0, 10.0, fz0 - 50.0, top))
+    # tip bay end face (arm side, behind the socket): plate z_back .. +2.5 with 3 x M3 insert bosses at the screw positions,
+    # and a hole for each female tail (B.6: three Ø6.0 at r_bullet; the old spec had only a centre Ø21 opening)
+    for r, az in P["screws"]:
+        tipbay.append(Cyl(f"tip-bay insert boss {az:.0f}", "arm", r, az, 3.2, P["z_back"], P["z_back"] + 8.0))
+    fits = {"male body in its bore (radial)": (P["male_bore"] - P["bul_od"]) / 2, "female body in its bore (radial)": (P["fem_bore"] - P["bul_od"]) / 2,
+            "pin in the mouth lead-in (radial)": P["mouth_r"] - P["pin_d"] / 2, "lead in its groove (each side)": (P["groove_w"] - P["wire_od"]) / 2,
+            "lead in its groove (depth, closed by the pack-frame disc)": P["groove_h"] - P["wire_od"] - 0.15,
+            "3 leads going down hand3's r 7 channel (7 - r_v - wire r)": 7.0 - P["lead_rv"] - P["wire_od"] / 2,
+            "leads side by side at r_v (gap between leads)": round(float(2 * P["lead_rv"] * np.sin(np.radians(60)) - P["wire_od"]), 3),
+            "lead bend radius / wire OD": round(P["lead_bend_r"] / P["wire_od"], 2),
+            "bullet engagement (mm)": P["pin_len"] - P["fem_recess"],
+            "female tail past the socket back, into the tip bay (mm)": P["fem_recess"] + P["bul_len"] - P["z_back"],
+            "tip-bay hole for each tail: dia 6.0 vs body 5.0 (radial)": 0.5,
+            "wheel hand: 3 x 20 AWG F60 Pro V leads (OD 1.8, bundle dia 3.9) through its dia 6.8 back-plate hole (radial)": round(3.4 - 0.9 * (1 + 2 / np.sqrt(3)), 2)}
+    return dict(hand=hand, hand_hw=hand_hw, arm=arm, tipbay=tipbay), fits
 
 
 def check():
@@ -223,12 +271,20 @@ def check():
     run("collar vs arm, theta -30 (ball retracted)", [x.moved(dth=-P["twist"] / 2) for x in col], [a for a in arm if a.name != "detent ball"], skip=(("collar step", "nose ring"),))
     # inside the arm: screws, barrels, detent among themselves
     run("arm internals", arm_noself, arm_noself, skip=())
-    out = [o for o in out if o["a"] != o["b"]]
+    # wiring: motor phase leads (14 AWG silicone, OD wire_od) arm -> bullets -> hand -> motor
+    wires, wfits = wire_paths()
+    hw = [x for x in hand if not x.name.startswith(("male bullet",))]
+    run("wiring, hand side", wires["hand"], hw + wires["hand_hw"], skip=(("hand lead", "hand flange"),))
+    run("wiring, hand side (leads vs each other)", wires["hand"], wires["hand"], skip=())
+    run("wiring, arm side", wires["arm"], [a for a in arm if not a.name.startswith(("female barrel", "nose ring", "socket body", "retaining"))] + wires["tipbay"], skip=())
+    lead = lambda n: " ".join(n.split(" ")[:3]) if n.startswith("hand lead") else n
+    out = [o for o in out if o["a"] != o["b"] and lead(o["a"]) != lead(o["b"])]
     # fits that must be clearance fits (inner part inside its bore)
     fits = {"spigot in bore (radial)": P["r_bore"] - P["r_spigot"], "hand flange inside the lips (radial)": P["lip_r0"] - R,
             "lug tips inside the collar wall (radial)": cb - P["lug_r1"], "collar bore on the socket body (radial)": P["collar_bore"] - P["R_body"],
             "collar wall outside the nose ring (radial)": cb - P["R_nose"], "lug underside above the lip top (axial, seated)": -t - zl,
             "lugs pass the open lips (deg each side)": (120 - P["lip_w"]) / 2 - P["lug_w"] / 2}
+    fits.update(wfits)
     return out, fits
 
 

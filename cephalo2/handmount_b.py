@@ -27,7 +27,13 @@ P = dict(
     # socket body
     R_body=20.3, z_back=16.0, r_bore=10.6, z_bore=11.0,
     # bullets (Castle 4 mm: male pin dia 4.0, contact length 9; female barrel OD 5.6 in a 6.0 bore, est. from the part)
-    r_bullet=15.4, az_bullet=(90.0, 210.0, 330.0), pin_d=4.0, pin_len=9.0, fem_bore=6.0, fem_depth=13.0, fem_recess=1.2,
+    # rev B.6 (2026-11-19): real Castle 4 mm CC bullet dims (17 mm long, 5 mm OD body, 4 mm pin; 13-16 AWG) and real 14 AWG
+    # silicone (3.5 mm OD, 60 A).  Male: 5 mm body flush in the hand base, 9 mm pin above the face.  Female: 5 mm body in a
+    # 5.2 bore through the socket, mouth recessed 0.5, its solder cup 1.5 past the back face into the tip bay (ESC leads
+    # soldered there).  Hand leads: side-entry into the male cup's saddle (opening faces the centre), 3.8 x 3.8 groove to
+    # the centre pocket, then down hand3's clear r < 7 centre channel to the motor (z 54 in hand3).
+    r_bullet=15.4, az_bullet=(90.0, 210.0, 330.0), pin_d=4.0, pin_len=9.0, bul_od=5.0, bul_len=17.0, male_body=7.8,
+    fem_bore=5.2, fem_depth=17.0, fem_recess=0.5, mouth_r=2.4, male_bore=5.05, wire_od=3.5, lead_bend_r=3.0, lead_rv=2.4, pf_chamfer=1.5,
     # key: rib on the plug, slot in the bore
     az_key=30.0, key_w=3.0, key_h=1.6,
     # hand base
@@ -45,8 +51,9 @@ P = dict(
     # pins (rev A board, unchanged)
     z_pad=5.0, pad_t=1.6, r_pad=7.0, pinboard_r=10.5, z_pinboard=9.3, pinboard_t=1.6, pin_r=(0.0, 2.3, 3.6, 4.9, 6.2),
     screws=((17.0, 30.0), (17.0, 150.0), (17.0, 270.0)), screw_d=3.4,      # 3 screws, each midway between two bullets
-    hand_screw_r=13.0, hand_screw_az=(45.0, 135.0, 225.0, 315.0),   # 4 x M3 heat-set inserts (dia 4.0 x 6) for the hand's own body
-    groove_w=3.2, groove_h=2.6, r_wire_cb=6.5,                       # motor-lead grooves in the hand base's bottom face
+    hand_screw_r=13.0, hand_screw_az=(30.0, 150.0, 270.0),   # 4 x M3 heat-set inserts (dia 4.0 x 6) for the hand's own body
+    groove_w=3.8, groove_h=3.8, r_wire_cb=6.5,   # B.6: 3 hand inserts at 30/150/270 (midway between the leads; 4 at 90 deg could not clear 3 leads at 120 deg)
+      # B.6: 14 AWG silicone is 3.5 OD (was 3.2 x 2.6)                       # motor-lead grooves in the hand base's bottom face
     # rev B.3 (2026-11-18, coupler_preload_study.py, option A): face O-ring in the nose-ring face, inside the bullets.  It pushes
     # the hand out until its lugs bear on the collar lips, so the 0.1 mm play cannot rattle.  NBR 70A 22 x 1.0, groove 11.0-12.4
     # rev B.3.1 corrections: the groove faces DOWN (toward the hand), so a loose ring would drop out with no hand on: the ring is
@@ -162,9 +169,8 @@ def _socket_cuts():
     cut += sector(P["r_bore"] - 0.5, P["r_bore"] + P["key_h"] + 0.3, P["az_key"] - P["key_w"] / 2 / P["r_bore"] * 57.3 - 2, P["az_key"] + P["key_w"] / 2 / P["r_bore"] * 57.3 + 2, -1, P["z_bore"])
     for az in P["az_bullet"]:
         x, y = at(P["r_bullet"], az)
-        cut += cyl(P["fem_bore"] / 2, P["fem_recess"], P["fem_recess"] + P["fem_depth"], 32).translate([x, y, 0])
-        cut += cyl(P["pin_d"] / 2 + 0.6, -1, P["fem_recess"] + 0.01, 32).translate([x, y, 0])           # mouth: pin lead-in, female recessed 1.2 (touch-safe)
-        cut += cyl(1.6, 0, P["z_back"] + 1, 16).translate([x, y, 0])                                    # 14 AWG lead exit
+        cut += cyl(P["fem_bore"] / 2, P["fem_recess"], P["z_back"] + 1, 32).translate([x, y, 0])         # female body bore, through the back
+        cut += cyl(P["mouth_r"], -1, P["fem_recess"] + 0.01, 32).translate([x, y, 0])                    # mouth: pin lead-in, female recessed 0.5 (touch-safe)
     for r, az in P["screws"]:
         x, y = at(r, az)
         cut += cyl(P["screw_d"] / 2, -1, P["z_back"] + 1, 24).translate([x, y, 0])                       # M3 x 20 through nose ring + body into the tip bay
@@ -275,7 +281,7 @@ def female_bullets():
     out = []
     for az in P["az_bullet"]:
         x, y = at(P["r_bullet"], az)
-        out.append((cyl(2.8, P["fem_recess"], P["fem_recess"] + P["fem_depth"], 32) - cyl(2.0, P["fem_recess"] - 1, P["fem_recess"] + 9.5, 32)).translate([x, y, 0]))
+        out.append((cyl(P["bul_od"] / 2, P["fem_recess"], P["fem_recess"] + P["bul_len"], 32) - cyl(P["pin_d"] / 2, P["fem_recess"] - 1, P["fem_recess"] + 9.5, 32)).translate([x, y, 0]))
     return out
 
 
@@ -289,7 +295,7 @@ def hand_base():
     cut = cyl(P["r_pad"] + 0.15, P["z_pad"] - P["pad_t"], P["z_spigot_top"] + 1) + cyl(3.5, fz0 - 1, P["z_pad"])        # pad board well + wire bore
     cut += cyl(P["r_wire_cb"], fz0 - 1, fz0 + P["groove_h"])                                                    # wire turn pocket under the bore
     for az in P["az_bullet"]:
-        x, y = at(P["r_bullet"], az); cut += cyl(2.05, fz0 - 1, fz1 + 0.01, 32).translate([x, y, 0])               # male bullet press bore
+        x, y = at(P["r_bullet"], az); cut += cyl(P["male_bore"] / 2, fz0 - 1, fz1 + 0.01, 32).translate([x, y, 0])   # male bullet body bore (epoxy)
         g = P["groove_w"] / 2                                                                                    # motor-lead groove: bullet tail -> centre pocket
         cut += mf.Manifold.cube([P["r_bullet"] + 0.5, P["groove_w"], P["groove_h"] + 1]).translate([0, -g, fz0 - 1]).rotate([0, 0, float(az)])
     for az in P["hand_screw_az"]:                                                                                # 4 x M3 inserts for the hand
@@ -301,7 +307,7 @@ def male_bullets():
     out = []
     for az in P["az_bullet"]:
         x, y = at(P["r_bullet"], az)
-        out.append(cyl(P["pin_d"] / 2, P["z_flange"][0] + 1.0, P["z_flange"][1] + P["fem_recess"] + P["pin_len"] - 0.5, 32).translate([x, y, 0]))
+        out.append((cyl(P["bul_od"] / 2, -P["male_body"], 0.0, 32) + cyl(P["pin_d"] / 2, -0.01, P["pin_len"], 32)).translate([x, y, 0]))
     return out
 
 
@@ -404,7 +410,7 @@ def checks():
     # with the collar locked, the hand cannot come out: pull it 1 mm
     res["locked hand pulled 1 mm: lug x collar overlap (expected > 0)"] = vol(place(Hb, 1.0 + P["ramp"]), C0)
     # engagement depth of each bullet
-    res["bullet engagement depth (mm)"] = round(P["z_flange"][1] + P["fem_recess"] + P["pin_len"] - 0.5 - P["fem_recess"], 2)
+    res["bullet engagement depth (mm)"] = round(P["pin_len"] - P["fem_recess"], 2)
     # rev B.3 O-ring: seated in its groove, squeezed by the hand at lock (hand pushed out onto the lips: dz = ax_clr)
     Ro = oring()
     res["O-ring x nose ring (seated in the groove, expected 0)"] = vol(Ro, Nr)
@@ -412,7 +418,7 @@ def checks():
     res["O-ring squeeze volume at lock, hand on the lips (expected > 0)"] = round(vol(Ro, place(Hb, P["ax_clr"])), 3)
     res["locked + preloaded (hand on the lips): base x collar / nose ring (expected 0)"] = [vol(place(Hb, P["ax_clr"]), C0), vol(place(Hb, P["ax_clr"]), Nr)]
     res["O-ring groove walls: to the socket bore / to the female-bullet mouth / to the screw counterbore (mm)"] = [
-        round(P["og_r"][0] - P["r_bore"], 2), round(P["r_bullet"] - (P["pin_d"] / 2 + 0.6) - P["og_r"][1], 2), round(17.0 - P["cbore_d"] / 2 - P["og_r"][1], 2)]
+        round(P["og_r"][0] - P["r_bore"], 2), round(P["r_bullet"] - P["mouth_r"] - P["og_r"][1], 2), round(17.0 - P["cbore_d"] / 2 - P["og_r"][1], 2)]
     res["preload"] = preload()
     # stresses at the wheel-hand design cases
     cases = json.load(open("wheelhand_sizing.json"))["connector"] if os.path.exists("wheelhand_sizing.json") else {}

@@ -8,15 +8,15 @@
   0.0,
   0.0
  ],
- "locked: males x female barrels (sliding fit, expected 0)": -1.7763568394002505e-15,
+ "locked: males x female barrels (sliding fit, expected 0)": 1.1934897514720433e-15,
  "locked: collar x socket / nose ring": [
   0.0,
-  3.608224830031759e-16
+  1.5716594692349872e-15
  ],
- "nose ring x socket (faces touch, expected 0)": 1.270251265284017e-15,
+ "nose ring x socket (faces touch, expected 0)": 9.154569463598605e-15,
  "screws x socket / nose ring / collar / female barrels / hand base": [
   0.0,
-  1.8127860323957634e-16,
+  1.5699247457590104e-16,
   0.0,
   0.0,
   0.0
@@ -28,7 +28,7 @@
  "collar axial play (mm)": 0.2,
  "axial play of a locked hand (mm): lug between nose ring and lip": 0.1,
  "collar step bearing on the nose ring: annulus (mm2)": 400.0,
- "collar sweep open->locked: collar x socket/nose worst overlap": 6.536356742317673e-15,
+ "collar sweep open->locked: collar x socket/nose worst overlap": 6.507083283660564e-15,
  "collar sweep: hand stand-off needed (deg, mm); ramp draws it in to 0": [
   [
    -60.0,
@@ -255,7 +255,7 @@
  ],
  "O-ring groove walls: to the socket bore / to the female-bullet mouth / to the screw counterbore (mm)": [
   0.4,
-  0.4,
+  0.6,
   1.5
  ],
  "preload": {

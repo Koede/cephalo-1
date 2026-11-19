@@ -126,7 +126,7 @@ Supersedes B.2 only in the nose ring. The lugs, lips, ramp, collar and hand base
 - **Stress model:** the old flat 30 N preload on a lug is replaced by one lug's share of the O-ring preload at the stiff end of the band (80 N / 3). 3 g landing: lug 14.5, lip 14.4, wall 14.8, step 11.3 MPa, **factor 2.03**. Screws 186 N (factor 5.4, est.).
 - **Mass:** nose ring 4.3 g (was 4.4 g), plus a 0.1 g O-ring.
 - **Tuning on the bench:** the force is tolerance-sensitive (12-80 N for ±0.1 mm). Print the nose ring, measure the gap, and reprint it at the right groove depth (4 g, 0.05 mm steps). The 0.4 mm groove walls are one extrusion line: check they print.
-- **STLs:** `coupler_revB5_stl.zip` (rev B.5) (socket, nose ring with groove, collar, hand base, hand3 pack frame).
+- **STLs:** `coupler_revB6_stl.zip` (rev B.6) (socket, nose ring with groove, collar, hand base, hand3 pack frame).
 - **Viewer:** https://claude.ai/artifact/Cp2PWLZZN2RphhcBBLhQCe (now with the O-ring).
 - **Buy, per arm:** 1 × O-ring 22 × 1.0 NBR 70A, plus spares.
 
@@ -314,3 +314,49 @@ Collisions are now checked with math, not mesh booleans (`coupler_ranges.py` →
 - wall outside nose ring 0.4
 - lug above lip, seated 0.1
 - lugs pass the open lips: 3° each side
+
+## Rev B.6 — the bullets wired end to end (2026-11-19)
+
+The three bullets carry the motor phases from the arm's tip-bay ESC to the hand's motor. B.5 modelled the bullets and their wire paths with guessed sizes. The real parts did not fit the model, so the whole path is now sized from datasheet dimensions and checked by range math (`coupler_ranges.py`: 25,826 pairs, **0 collisions**).
+
+**Real parts**
+- **Castle 4 mm CC bullet:** 17 mm long, 5 mm OD body, 4 mm pin, 13–16 AWG, 75 A.
+- **14 AWG silicone:** 3.5 mm OD, 60 A.
+- **T-Motor F60 Pro V (wheel hand):** its own 20 AWG leads, 150 mm.
+
+**What was wrong in B.5 and what changed**
+
+| Item | B.5 | B.6 |
+|---|---|---|
+| Female bullet | 13 mm body, Ø6 bore, separate Ø3.2 lead hole | 17 mm body in a Ø5.2 bore **through** the socket. Mouth recessed 0.5. The solder cup sits 1.5 mm past the back face, inside the tip bay |
+| ESC side | lead hole too small for 14 AWG (3.5 OD) | the ESC phase leads are soldered straight onto the female cups in the tip bay |
+| Tip-bay end face | only a centre Ø21 opening, which the leads at r 15.4 would hit | **adds 3 × Ø6.0 holes at r 15.4, az 90/210/330** for the female tails |
+| Male bullet | Ø4.1 bore (the body is Ø5) | 5 mm body flush in a Ø5.05 bore (epoxy), 9 mm pin above the face. Engagement 8.5 mm |
+| Hand lead grooves | 3.2 × 2.6 (wire is 3.5) | **3.8 × 3.8**, closed by hand3's pack-frame disc |
+| Lead route in the hand | not checked | see below |
+| Hand base screws | 4 inserts at 45/135/225/315: the leads at 210/330 ran 0.1–0.4 mm into the 225/315 inserts (4-fold vs 3-fold spacing can never be more than 15° apart) | **3 inserts at 30/150/270**, midway between the leads. The countersunk heads clear hand3's servos by height (heads z ≤ 2.5, servos z ≥ 3.0) at any clocking, so DELTA stays 0 |
+| hand3 pack frame | centre tube r 7–10 with a square top edge | **1.5 mm × 45° chamfer** on the tube's inner top edge, for the lead bends |
+
+**Hand-side lead route (hand3)**
+1. Side-entry solder into the male cup's saddle, with the saddle opening facing the centre.
+2. Along the groove to the centre pocket.
+3. 90° bend at R 3.0 (around a Ø6 mandrel; 0.86 × OD, fine-strand silicone, static).
+4. Vertical at r 2.4.
+5. Down hand3's clear r < 7 centre channel to the motor base (hand3 z 54). Nothing in hand3 sits inside r 7 below z 54; servos start at r 15.3.
+
+**Clearances on the hand-side route**
+- 0.15 mm to the pack-frame disc top. This is just the lead's lay height.
+- ≥ 0.3 mm between leads (exact gap 0.66).
+- 2.85 mm to the tube wall going down.
+
+**Wheel hand:** the motor's own 20 AWG leads (Ø3.9 bundle) go up through its Ø6.8 back-plate hole (1.46 mm margin) into the same pocket and grooves, and are soldered into the male cups (tin them heavily: the cup is sized for 13–16 AWG). The wheel-mode limit is 13 A.
+
+**Electrical path, end to end:** tip-bay ESC (45 A) → 14 AWG leads → female cups → 8.5 mm bullet engagement → male cups → 14 AWG (hand3) or 20 AWG (wheel) → motor.
+
+**Masses (PA-CF / PAHT-CF):** socket 9.4, nose ring 4.9, collar 13.4, hand base 13.8 g.
+
+**Files**
+- STLs: `coupler_revB6_stl.zip`, including the chamfered hand3 pack frame.
+- The viewer shows the phase leads (red) and the tip-bay holes.
+
+**Buy list:** 3 × Castle 4 mm CC bullet pairs per arm; 14 AWG silicone (about 0.1 m per hand3, plus ESC leads); 3 M3 heat-set inserts and 3 M3 × 8 DIN 7991 per hand; epoxy for the bullet bodies.

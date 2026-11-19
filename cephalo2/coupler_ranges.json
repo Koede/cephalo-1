@@ -1,5 +1,5 @@
 {
- "pairs_checked": 3365,
+ "pairs_checked": 25826,
  "collisions": [],
  "fits_mm": {
   "spigot in bore (radial)": 0.25,
@@ -8,7 +8,19 @@
   "collar bore on the socket body (radial)": 0.1999999999999993,
   "collar wall outside the nose ring (radial)": 0.3999999999999986,
   "lug underside above the lip top (axial, seated)": 0.10000000000000009,
-  "lugs pass the open lips (deg each side)": 3.0
+  "lugs pass the open lips (deg each side)": 3.0,
+  "male body in its bore (radial)": 0.02499999999999991,
+  "female body in its bore (radial)": 0.10000000000000009,
+  "pin in the mouth lead-in (radial)": 0.3999999999999999,
+  "lead in its groove (each side)": 0.1499999999999999,
+  "lead in its groove (depth, closed by the pack-frame disc)": 0.14999999999999983,
+  "3 leads going down hand3's r 7 channel (7 - r_v - wire r)": 2.8499999999999996,
+  "leads side by side at r_v (gap between leads)": 0.657,
+  "lead bend radius / wire OD": 0.86,
+  "bullet engagement (mm)": 8.5,
+  "female tail past the socket back, into the tip bay (mm)": 1.5,
+  "tip-bay hole for each tail: dia 6.0 vs body 5.0 (radial)": 0.5,
+  "wheel hand: 3 x 20 AWG F60 Pro V leads (OD 1.8, bundle dia 3.9) through its dia 6.8 back-plate hole (radial)": 1.46
  },
  "tightest": [
   {
@@ -76,27 +88,11 @@
    "ok": true
   },
   {
-   "state": "locked, hand dz 0.0",
-   "a": "lug 0",
-   "b": "socket body",
-   "clearance_mm": 0.1,
-   "separated_by": "radius",
-   "ok": true
-  },
-  {
-   "state": "locked, hand dz 0.0",
-   "a": "lug 120",
-   "b": "socket body",
-   "clearance_mm": 0.1,
-   "separated_by": "radius",
-   "ok": true
-  },
-  {
-   "state": "locked, hand dz 0.0",
-   "a": "lug 240",
-   "b": "socket body",
-   "clearance_mm": 0.1,
-   "separated_by": "radius",
+   "state": "wiring, hand side",
+   "a": "hand lead 90 bend @7",
+   "b": "hand3 pack-frame disc",
+   "clearance_mm": 0.148,
+   "separated_by": "height",
    "ok": true
   },
   {
@@ -129,6 +125,22 @@
    "b": "retaining flange",
    "clearance_mm": 0.2,
    "separated_by": "height",
+   "ok": true
+  },
+  {
+   "state": "locked, hand dz 0.0",
+   "a": "hand spigot",
+   "b": "nose ring",
+   "clearance_mm": 0.25,
+   "separated_by": "radius",
+   "ok": true
+  },
+  {
+   "state": "locked, hand dz 0.0",
+   "a": "hand spigot",
+   "b": "socket body",
+   "clearance_mm": 0.25,
+   "separated_by": "radius",
    "ok": true
   }
  ]

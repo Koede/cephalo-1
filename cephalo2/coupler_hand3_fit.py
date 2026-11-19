@@ -27,7 +27,9 @@ def to_conn(m, delta):
 def pack_frame_b():
     m = C3.pack_frame() + C3.cyl(R_DISC, 0, 2.5, n=96)
     if BOSS[1] > 0: m += C3.cyl(BOSS[0], -BOSS[1], 0.01, n=96)
-    return m - C3.cyl(7, -BOSS[1] - 1, 60)
+    ch = HB.P["pf_chamfer"]                                   # rev B.6: 45 deg chamfer on the centre tube's top inner edge, room for the
+    cone = mf.Manifold.cylinder(ch + 0.01, 7 + ch, 7, 96).translate([0, 0, -0.01])   # motor leads' 90 deg bend into the r 7 channel
+    return m - C3.cyl(7, -BOSS[1] - 1, 60) - cone
 
 
 def hand_screws_h3(delta):
