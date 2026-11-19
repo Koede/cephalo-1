@@ -1,0 +1,225 @@
+{
+ "layout": {
+  "disc_r": 25.5,
+  "disc_t": 2.0,
+  "gap": 6.0,
+  "z0": 91.0,
+  "boss_r": 7.0,
+  "block_r": [
+   9.0,
+   24.3
+  ],
+  "block_half": 27.0,
+  "neck_half": 5.0,
+  "rib_h": 1.0,
+  "ribs": [
+   [
+    13.5,
+    15.5
+   ],
+   [
+    22.3,
+    24.0
+   ]
+  ],
+  "groove_clr": 0.1,
+  "pin_r": 20.0,
+  "pin_daz": 21.0,
+  "wire_d": 2.0,
+  "hole": [
+   2.1,
+   2.6
+  ],
+  "lift": 2.3,
+  "foot": 0.4,
+  "float_": 0.5,
+  "slot_w": 2.2,
+  "tab_r": 28.5,
+  "step": 30.0,
+  "detent_N": 3.0,
+  "T_motor": 0.62,
+  "wire_g_per_mm": 0.024661502330679874
+ },
+ "derived": {
+  "lateral": 7.167358990906005,
+  "holes_deg": [
+   9.0,
+   21.0,
+   39.0,
+   51.0,
+   69.0,
+   81.0,
+   99.0,
+   111.0,
+   129.0,
+   141.0,
+   159.0,
+   171.0,
+   189.0,
+   201.0,
+   219.0,
+   231.0,
+   249.0,
+   261.0,
+   279.0,
+   291.0,
+   309.0,
+   321.0,
+   339.0,
+   351.0
+  ],
+  "web": 2.0887902047863913,
+  "rib_area": 70.0557458900781,
+  "pin_g": 0.3699225349601981,
+  "pin_cf_N": 15.212454496272095
+ },
+ "keep_swing": "with the swinging root grip, pins clear of its sweep need a shoe 56 to 68 deg wide (numeric sweep of the CAD grip), so roots could not sit 60 deg apart, and the lift tabs cannot cross the grip",
+ "checks": [
+  {
+   "what": "stack height",
+   "value": "2 + 6 + 2 = 10 mm",
+   "result": "same as today (10): shaft and nut unchanged",
+   "ok": true
+  },
+  {
+   "what": "closest two roots",
+   "value": "block spans 54 deg",
+   "result": "60 deg apart: 6 deg (0.9 mm at the inner end) between blocks",
+   "ok": true
+  },
+  {
+   "what": "holes in the base disc",
+   "value": "24 holes, dia 2.1 x 2.6 slots, on r 20",
+   "result": "closest pair 12 deg: web 2.1 mm",
+   "ok": true
+  },
+  {
+   "what": "no two roots want the same hole",
+   "value": "all four poses",
+   "result": "ok",
+   "ok": true
+  },
+  {
+   "what": "pins either side of the neck",
+   "value": "7.17 mm off the centre line",
+   "result": "neck half-width 5: 1.17 mm between wire and neck; 1.04 mm wall to the block's edge",
+   "ok": true
+  },
+  {
+   "what": "finger pull on the ribs",
+   "value": "826 N on 70 mm2",
+   "result": "11.8 MPa bearing (printed PA-CF)",
+   "ok": true
+  },
+  {
+   "what": "finger pull through the neck",
+   "value": "826 N on 60 mm2",
+   "result": "13.8 MPa tension",
+   "ok": true
+  },
+  {
+   "what": "pins, full motor torque",
+   "value": "7.8 N per root",
+   "result": "1.2 MPa shear per pin",
+   "ok": true
+  },
+  {
+   "what": "pins, 20 N sideways on a fingertip (parked)",
+   "value": "114 N at the pins",
+   "result": "18 MPa shear, 14 MPa on the hole edge",
+   "ok": true
+  },
+  {
+   "what": "keeper while spinning",
+   "value": "pin 0.37 g thrown outward with 15.2 N",
+   "result": "foot 0.4 mm catches under the disc (float 0.5 mm): cannot lift",
+   "ok": true
+  },
+  {
+   "what": "keeper at rest",
+   "value": "printed snap nib, 3 N",
+   "result": "x165 over 5 g of shake",
+   "ok": true
+  },
+  {
+   "what": "pin lift inside the block",
+   "value": "lift 2.3 mm, wire 2.0 mm",
+   "result": "slot depth needed 4.3 of 6 mm: 1.7 mm of block left under the arm",
+   "ok": true
+  },
+  {
+   "what": "pin feet under the disc",
+   "value": "r 19 to 21.9, z 90.2 to 91",
+   "result": "nearest spinning part below is the curl ring (top z 87): 3.2 mm lower",
+   "ok": true
+  },
+  {
+   "what": "lift tabs vs the yoke lips (do not spin)",
+   "value": "tabs r 25.5 to 28.5, z 94.7 and up",
+   "result": "lips r 27.1 to 32.5 top z 89: 4.7 mm above them",
+   "ok": true
+  },
+  {
+   "what": "shake from 0.05 mm hole play",
+   "value": "0.14 mm at the finger's centre of mass",
+   "result": "2.1 N",
+   "ok": true
+  },
+  {
+   "what": "imbalance if spun in 'flight cross'",
+   "value": "",
+   "result": "0 N",
+   "ok": true
+  },
+  {
+   "what": "imbalance if spun in '2 + 2 pinch'",
+   "value": "",
+   "result": "0 N",
+   "ok": true
+  },
+  {
+   "what": "imbalance if spun in '3 + 1 thumb'",
+   "value": "",
+   "result": "826 N: motor blocked",
+   "ok": false
+  },
+  {
+   "what": "imbalance if spun in 'all four on one side'",
+   "value": "",
+   "result": "1430 N: motor blocked",
+   "ok": false
+  },
+  {
+   "what": "cord path from the curl ring (r 22 to 24) to the finger",
+   "value": "ring sits under the disc (r 25.5)",
+   "result": "no straight path yet: needs its own layout",
+   "ok": false
+  }
+ ],
+ "poses": {
+  "flight cross": [
+   0,
+   90,
+   180,
+   270
+  ],
+  "2 + 2 pinch": [
+   30,
+   150,
+   210,
+   330
+  ],
+  "3 + 1 thumb": [
+   30,
+   90,
+   150,
+   270
+  ],
+  "all four on one side": [
+   0,
+   60,
+   120,
+   180
+  ]
+ }
+}

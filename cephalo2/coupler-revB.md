@@ -520,3 +520,14 @@ that has moved; (5) roller and fork parts not chosen.
 5. Actuators: one small servo on a 3-position cam (out / roller in / fork lift), one continuous-rotation servo for the roller.
 6. Cords: each ring gets a top bead flange; a C-clip traveller per finger slides round it (ring-and-traveller); the cord runs from
    the traveller through an eyelet in the shoe tab. Same cord length at any azimuth. Least mature part.
+
+**Root lock v3, "rail block + two axial latch pins" (2026-11-19):** `hand3_root_lock_bolt.py/.png/.json`, to scale with interval checks.
+Found while laying out the bolt-lock shoe: the swinging root grip (lag) sweeps the space the pins need. A numeric sweep of the CAD
+grip gives a shoe 56 to 68 deg wide for pins clear of it, so roots could not sit 60 deg apart, and lift tabs cannot cross the grip.
+Proposal: drop the sideways swing; the finger is fixed in a root block and root travel gives the 2 + 2 pose instead.
+Block: PA-CF wedge 54 deg wide between two 2 mm discs, 6 mm gap (stack 10 mm = today, so shaft and nut are unchanged); two ribs top
+and bottom in ring grooves carry the 826 N (11.8 MPa bearing; neck 13.8 MPa). Lock: two L-shaped dia 2 music-wire pins 7.2 mm either
+side of the centre line, legs into 24 slot holes on r 20 (web 2.1 mm), arms out past the rim as lift tabs; a 0.4 mm foot on each leg
+catches under the disc when the spin throws the pin 0.5 mm outward (15 N). 30 deg steps. 20 N sideways on a fingertip: 14 MPa at
+the hole edges. Open: cord path from the curl ring (it sits under the disc); spin interlock for 3 + 1 / one-sided poses; fork,
+roller and sensor parts; the decision to drop the swing (pending).
