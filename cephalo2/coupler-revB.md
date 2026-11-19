@@ -492,3 +492,10 @@ little holes and couple the parts crosswise. Study: `hand3_root_lock_study.py/.p
 dowel in each root carrier, thrown outward through one of 24 holes (15 deg) in a rim wall at r 24; 22.8 N seat force at 12,500 rpm,
 6.5 N side load at full motor torque, release by a parked pusher. 15 deg holes need a hole circle of r 17.2 or more, so they cannot
 sit on the centre spindle. Decision on the lock pending.
+
+**Root lock, user's correction (2026-11-19):** the pins are to be **axial** (parallel to the shaft), **two per root, one on each
+side of the root's centre line**. First numbers (hand calc, est.): two dia 3 steel dowels at +-15 deg on an r 18 hole circle (24 holes,
+web 1.7 mm, 9.3 mm apart, 1.3 mm clear of the dia 5 swing pin). If the pair took the whole 826 N pull: 29 MPa shear per pin (double
+shear), 34 MPa hole bearing in 2 mm leaves. Under spin the pull loads the pins sideways, so about 124 N of friction (mu 0.15) resists
+withdrawal against under 1 N of axial load; a spring holds them at rest. Open: positive keeper for the spinning state, and how the
+pins are withdrawn and the root indexed while parked. Not drawn yet.
