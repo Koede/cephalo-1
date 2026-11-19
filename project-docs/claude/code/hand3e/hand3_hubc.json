@@ -1,0 +1,277 @@
+{
+ "servo": {
+  "name": "Feetech STS3215",
+  "stall": 2.94,
+  "rated": 0.981,
+  "m": 55.0,
+  "size": [
+   45.2,
+   24.7,
+   35.0
+  ],
+  "volts": "12 V",
+  "stall_A": 2.7,
+  "deg": 360.0,
+  "sec60": 0.222
+ },
+ "spool_r": 4.0,
+ "levers": [
+  6.0,
+  4.0,
+  3.0
+ ],
+ "e_lag": 2.8,
+ "lag_spring_Nm": 0.0054,
+ "ext_k1_Nm": 0.02,
+ "ext_k2_Nm": 0.004,
+ "ext_k3_Nm": 0.016,
+ "stretch": 2.0,
+ "stack_dz": 4.0,
+ "travel_b": 13.72,
+ "travel_c": 12.73,
+ "base": {
+  "travel": 13.7,
+  "spool_deg": 211,
+  "eta": 0.564,
+  "F_stall_ring": 415,
+  "F_rated_ring": 138,
+  "F_stall_finger": 103.7,
+  "F_rated_finger": 34.6,
+  "F_peak_need": 54.9,
+  "margin": 1.89,
+  "tpu_k": 27.5,
+  "t_noload_s": 0.78,
+  "t_at_peak_s": 1.66
+ },
+ "curl": {
+  "travel": 12.7,
+  "spool_deg": 197,
+  "eta": 0.573,
+  "F_stall_ring": 421,
+  "F_rated_ring": 141,
+  "F_stall_finger": 105.3,
+  "F_rated_finger": 35.1,
+  "F_peak_need": 49.9,
+  "margin": 2.11,
+  "tpu_k": 24.9,
+  "t_noload_s": 0.73,
+  "t_at_peak_s": 1.38
+ },
+ "links": {
+  "base": {
+   "k_N_per_mm": 27.7,
+   "stretch_at_peak_mm": 1.98
+  },
+  "curl": {
+   "k_N_per_mm": 25.2,
+   "stretch_at_peak_mm": 1.98
+  }
+ },
+ "curl_limit_empty_mm": 1.79,
+ "base_folded_mm": 7.02,
+ "k1_limit_full_curl_deg": 45.1,
+ "empty_hand_rule": "firmware interlock (empty hand: the two rings may not both pass their limits): curl ring travel <= 1.79 mm while the base ring is past 7.02 mm (K1 > 45.1 deg), and base ring travel <= 7.02 mm while the curl ring is past 1.79 mm.  On an object the fingers stop at contact first; the interlock only stops an empty fist from driving fingertips into the hub plate and into each other at stall force.",
+ "halves": {
+  "out_near": {
+   "az": 146.1,
+   "attach": [
+    -29.5,
+    19.8
+   ]
+  },
+  "out_far": {
+   "az": -32.2,
+   "attach": [
+    31.5,
+    -19.8
+   ]
+  },
+  "in_near": {
+   "az": 33.9,
+   "attach": [
+    29.5,
+    19.8
+   ]
+  },
+  "in_far": {
+   "az": -147.8,
+   "attach": [
+    -31.5,
+    -19.8
+   ]
+  }
+ },
+ "z": {
+  "out": [
+   84.0,
+   87.0
+  ],
+  "fl_out": [
+   84.0,
+   86.0
+  ],
+  "fl_in": [
+   67.27836874360608,
+   69.27836874360608
+  ],
+  "lip_out": [
+   87.0,
+   89.0
+  ],
+  "lip_in": [
+   70.27836874360608,
+   72.27836874360608
+  ],
+  "servo_top": 51.4,
+  "bridge_top": 53.4,
+  "blade": 96.0,
+  "hub_lo": 91.0
+ },
+ "mass": {
+  "total": 396.4,
+  "rings + cage": 22.5,
+  "yokes": 9.3,
+  "frame": 27.7,
+  "servos": 110.0,
+  "spools": 0.6,
+  "guide rods (pultruded carbon rod)": 7.0,
+  "other hardware": 10.7,
+  "motor": 98.5,
+  "hub plates + lag tubes": 33.7,
+  "heel": 2.4,
+  "fingers": 30.7,
+  "pins + bushings": 11.2,
+  "allowance: prop_nut": 2.0,
+  "allowance: screws": 4.0,
+  "allowance: cords_links_springs": 6.0,
+  "allowance: wiring_hall": 8.0,
+  "allowance: arm_collar": 12.0
+ },
+ "com_from_spigot": 58.4,
+ "mass_source": "tests/hand3_tests.py t8 (PA12 phalanges, AlSi10Mg grips + plates, pins + bushings, carbon rods, steel hardware, allowances)",
+ "part_mass": {
+  "cage": 3.6,
+  "ring_in": 10.9,
+  "ring_out": 3.7,
+  "frame": 27.7,
+  "yoke_out_near": 1.8,
+  "yoke_out_far": 1.8,
+  "yoke_in_near": 1.6,
+  "yoke_in_far": 1.6,
+  "spool": 0.3,
+  "tie_ring": 2.3,
+  "link_base": 0.1,
+  "link_curl": 0.1
+ },
+ "checks": {
+  "flight": {
+   "overlaps": {},
+   "rotating_overlaps": {},
+   "min_gap_rot_stat": 0.79,
+   "at": "ring_out|yoke_out_far"
+  },
+  "base_full": {
+   "overlaps": {},
+   "rotating_overlaps": {},
+   "min_gap_rot_stat": 0.0,
+   "at": "ring_out|yoke_out_near"
+  },
+  "curl_full": {
+   "overlaps": {},
+   "rotating_overlaps": {},
+   "min_gap_rot_stat": 0.0,
+   "at": "ring_in|yoke_in_near"
+  },
+  "grasp": {
+   "overlaps": {},
+   "rotating_overlaps": {},
+   "min_gap_rot_stat": 0.0,
+   "at": "ring_out|yoke_out_near"
+  },
+  "both_full": {
+   "overlaps": {},
+   "rotating_overlaps": {},
+   "min_gap_rot_stat": 0.0,
+   "at": "ring_out|yoke_out_near"
+  },
+  "half_spread": {
+   "overlaps": {},
+   "rotating_overlaps": {},
+   "min_gap_rot_stat": 0.0,
+   "at": "ring_out|yoke_out_near"
+  },
+  "empty_close_base_full_curl_at_its_limit": {
+   "overlaps": {},
+   "rotating_overlaps": {},
+   "min_gap_rot_stat": 0.0,
+   "at": "ring_out|yoke_out_near"
+  },
+  "empty_close_full_curl_base_at_its_limit": {
+   "overlaps": {},
+   "rotating_overlaps": {},
+   "min_gap_rot_stat": 0.0,
+   "at": "ring_out|yoke_out_near"
+  },
+  "flight_spin_min_gap": 0.79,
+  "flight_spin_at": "ring_out|yoke_out_far",
+  "stack_margin": {
+   "ring_out": 6.28,
+   "ring_in": 1.14
+  },
+  "bodies": {
+   "cage": 1,
+   "ring_in": 1,
+   "ring_out": 1,
+   "frame": 1,
+   "yoke_out_near": 1,
+   "yoke_out_far": 1,
+   "yoke_in_near": 1,
+   "yoke_in_far": 1,
+   "spool": 1,
+   "tie_ring": 1,
+   "link_base": 1,
+   "link_curl": 1
+  },
+  "lag_tube_bodies": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "hardware_empty": [],
+  "tip_vs_hub_full_curl_mm3": 886.25,
+  "tip_vs_hub_at_limit_mm3": 0.0,
+  "spread_arm_mm": {
+   "0": [
+    2.8,
+    2.8,
+    2.8
+   ],
+   "1": [
+    2.8,
+    2.8,
+    2.8
+   ],
+   "2": [
+    2.8,
+    2.8,
+    2.8
+   ],
+   "3": [
+    2.8,
+    2.8,
+    2.8
+   ]
+  }
+ },
+ "envelope": {
+  "r_max": 40.8,
+  "d_max": 81.6,
+  "block": "49.2 x 36 mm frame, 53.4 mm to the bridge top; motor mount at z 58.0"
+ },
+ "rod_material": "cfrp",
+ "electrical": {
+  "servo_stall_A": 5.4,
+  "rail": "12 V arm bus"
+ }
+}

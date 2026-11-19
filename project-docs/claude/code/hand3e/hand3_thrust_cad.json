@@ -1,0 +1,51 @@
+{
+ "note": "R 114.3 mm, pitch 16.0 deg, levers [6.0, 4.0, 3.0]: BEMT + NeuralFoil plan D at full throttle with the knuckle drag computed directly from the finger solids (frontal area beyond the airfoil x Cd 0.5); no 0.965 shortcut. Estimate, no spin test. thrust_test.py",
+ "knuckle_area_mm2": [
+  76.4,
+  39.3,
+  21.3
+ ],
+ "cd": 0.5,
+ "low": {
+  "T_max": 21.48,
+  "rpm": 12472,
+  "P_shaft": 814,
+  "qT": 0.029,
+  "hover11_P_el": 373,
+  "hover13_9_P_el": 529,
+  "I_A": 54.4,
+  "P_el": 1283,
+  "tip_speed": 149.3,
+  "limit": "voltage",
+  "T_at_design_rpm": 21.24,
+  "I_no_limit_A": 54.4,
+  "P_el_no_limit": 1283,
+  "hover11_rpm": 8924
+ },
+ "high": {
+  "T_max": 24.76,
+  "rpm": 11292,
+  "P_shaft": 749,
+  "qT": 0.0256,
+  "hover11_P_el": 277,
+  "hover13_9_P_el": 394,
+  "I_A": 55.2,
+  "P_el": 1230,
+  "tip_speed": 135.2,
+  "limit": "current",
+  "T_at_design_rpm": 24.76,
+  "I_no_limit_A": 60.0,
+  "P_el_no_limit": 1416,
+  "hover11_rpm": 7526
+ },
+ "K_W_per_N15": 10.22,
+ "check": {
+  "result": "PASS",
+  "min_low_N": 20.0,
+  "body_r_mm": 40.8,
+  "rpm_design": 12400.0,
+  "rpm_proof": 14260,
+  "I_max": 55.2,
+  "P_max": 1303.0
+ }
+}
