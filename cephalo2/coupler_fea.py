@@ -236,9 +236,58 @@ def load_vector(M, az_deg):
 _ML = {}
 
 
+def amg_solve_gpu(A, b, B, x0=None, tol=1e-9):
+    """Same solve on an NVIDIA GPU (CuPy): the smoothed-aggregation hierarchy is still built once on the CPU by pyamg, then
+    copied to the GPU; the V-cycle uses damped Jacobi smoothing (2 sweeps each way, symmetric, so PCG stays valid) and a dense
+    coarse solve, and the finest level always uses the current matrix A.  Set FEA_GPU=1 to use it."""
+    import pyamg, cupy as cp, cupyx.scipy.sparse as cs
+    key = ("gpu", A.shape[0])
+    if key not in _ML:
+        _ML.clear()
+        ml = pyamg.smoothed_aggregation_solver(A.tobsr(blocksize=(3, 3)), B=B, symmetry="symmetric", strength=("symmetric", {"theta": 0.0}),
+                                               smooth=("jacobi", {"omega": 4.0 / 3.0}), max_coarse=500)
+        lv = []
+        for L in ml.levels[:-1]:
+            lv.append(dict(A=cs.csr_matrix(L.A.tocsr()), P=cs.csr_matrix(L.P.tocsr()), R=cs.csr_matrix(L.R.tocsr())))
+        Ac = ml.levels[-1].A.toarray()
+        _ML[key] = dict(lv=lv, Ac_inv=cp.asarray(np.linalg.pinv(Ac)))
+        print(f"      gpu hierarchy: {len(lv) + 1} levels, coarse {Ac.shape[0]}", flush=True)
+    H = _ML[key]; lv = H["lv"]
+    lv[0]["A"] = cs.csr_matrix(A.tocsr())                                         # finest level: the current contact state
+    for L in lv:                                                                 # Jacobi weight from the spectral radius of D^-1 A
+        if "dinv" not in L or L is lv[0]:
+            d = L["A"].diagonal(); L["dinv"] = 1.0 / d
+            v = cp.random.default_rng(1).standard_normal(L["A"].shape[0])
+            for _ in range(20):
+                v = L["dinv"] * (L["A"] @ v); lam = float(cp.linalg.norm(v)); v /= lam
+            L["w"] = 1.0 / (1.1 * lam) * 4.0 / 3.0 * 0.75
+    def vcycle(k, r):
+        if k == len(lv):
+            return H["Ac_inv"] @ r
+        L = lv[k]; x = L["w"] * L["dinv"] * r
+        for _ in range(1):
+            x += L["w"] * L["dinv"] * (r - L["A"] @ x)
+        rc = L["R"] @ (r - L["A"] @ x); x += L["P"] @ vcycle(k + 1, rc)
+        for _ in range(2):
+            x += L["w"] * L["dinv"] * (r - L["A"] @ x)
+        return x
+    Ag = lv[0]["A"]; bg = cp.asarray(b); x = cp.asarray(x0) if x0 is not None else cp.zeros_like(bg)
+    r = bg - Ag @ x; z = vcycle(0, r); p = z.copy(); rz = float(r @ z); nb = float(cp.linalg.norm(bg)); it = 0
+    while it < 6000:
+        q = Ag @ p; a = rz / float(p @ q); x += a * p; r -= a * q; it += 1
+        if float(cp.linalg.norm(r)) < tol * nb: break
+        z = vcycle(0, r); rz2 = float(r @ z); p = z + (rz2 / rz) * p; rz = rz2
+    xh = cp.asnumpy(x); res = np.linalg.norm(A @ xh - b) / np.linalg.norm(b)
+    print(f"      gpu cg {it} it, rel. residual {res:.1e}", flush=True)
+    assert res < 1e-6, "solver did not converge"
+    return xh
+
+
 def amg_solve(A, b, B, x0=None, tol=1e-9):
     """CG with a smoothed-aggregation AMG preconditioner; the hierarchy is built once per model (first contact state)
     and reused while the active set changes (it only has to be a good preconditioner, the CG solves the true system)."""
+    if os.environ.get("FEA_GPU"):
+        return amg_solve_gpu(A, b, B, x0, tol)
     import pyamg
     from scipy.sparse.linalg import cg
     key = A.shape[0]
