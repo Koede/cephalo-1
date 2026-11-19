@@ -546,3 +546,9 @@ Jacobi-smoothed V-cycle PCG on the RTX 3060. Test run (206k + 99k + 41k dofs, on
 contact step, whole case in about 4 minutes on Saturn.
 
 Decision (2026-11-19): **cord route B** (one base pull ring, wire hoop, C-clip bead per finger; K1 to K3 curl together; inner ring and one STS3215 removed; yoke lip inner edge to r 27.7). Next: hub v3 CAD (discs, root blocks, latch pins, hoop, beads) and range checks.
+
+**Rev B.7 strength (FEA on Saturn's GPU, 2026-11-19):** `coupler_fea_B7coarse.json`, `fea_B7coarse_gpu.log`, `coupler_fea_B7_section.png`.
+3 g landing (est.), loads toward az 60 / 90 / 110 / 300 (110 and 300 bracket the new exit slot). Element-mean von Mises, worst case:
+hand-base lugs 31.0 MPa (B.5: 27.8), flange 27.9 (B.5: 26.2, same spot, not at the slot), collar wall 22.9 (B.5: 22.1); collar lip
+peaks remain fillet-end artefacts (section bands as in B.5). No hot spot at the exit slot. Against PAHT-CF Z 64 MPa dry, about 54 wet:
+safety factor 1.7 or more on the worst element, about as in B.5. Rev B.7 strength: OK.
