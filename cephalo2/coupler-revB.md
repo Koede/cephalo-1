@@ -533,3 +533,14 @@ the hole edges. Open: cord path from the curl ring (it sits under the disc); spi
 roller and sensor parts; the decision to drop the swing (pending).
 
 Decision (2026-11-19): **drop the sideways swing (lag)**; finger fixed in its root block; root travel gives 2 + 2. Next: cord path layout (today's cords run up inside the hollow swing pin at r 20, a path that disappears), then CAD of the v3 hub.
+
+**Cord route study (2026-11-19):** `hand3_cord_route_study.py/.png/.json`. With roots that travel, the one-piece base disc (out to
+r 25.5) means anything below it that follows a root must go round the rim; 3.2 mm of height under the disc above the rings.
+Recommended B: keep only the outer (base) pull ring with a music-wire hoop on top; each finger's cord ends in a C-clip bead that
+slides round the hoop (ring-and-traveller), goes out under the rim and up into the finger root; K1 to K3 curl together on one cord;
+the inner ring and one STS3215 go (-55 g). Needs the static yoke lip's inner edge moved out 0.6 mm (r 27.1 -> 27.7). A (two hoops,
+separate K1) works but is tight; C hanger arm, D Bowden, F rod through the shaft rejected; E ball-in-cradles is the fallback.
+
+**GPU FEA on Saturn (2026-11-19):** `coupler_fea.py` has an optional CuPy solve (FEA_GPU=1): pyamg hierarchy built on the CPU,
+Jacobi-smoothed V-cycle PCG on the RTX 3060. Test run (206k + 99k + 41k dofs, one load case): about 300 to 350 CG iterations per
+contact step, whole case in about 4 minutes on Saturn.

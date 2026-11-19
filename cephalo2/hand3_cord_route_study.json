@@ -1,0 +1,81 @@
+{
+ "question": "cord route from the spinning pull rings to a travelling root",
+ "gap_under_disc": 3.200000000000003,
+ "disc_r": 25.5,
+ "lip_r0": 27.1,
+ "options": [
+  {
+   "key": "A",
+   "name": "Two traveller hoops under the disc rim (keeps K1 and K2+K3 separate)",
+   "how": "Each pull ring carries a steel wire hoop on top; each finger's cord ends in a C-clip bead that slides round its hoop. The cord goes out under the disc rim and up into the finger root.",
+   "clr": "outer bead to the static yoke lip: 0.1 mm; inner cord over the outer bead about 0.6 mm (est.)",
+   "load": "bead 0.3 g at r 26: 13 N outward, held by the hoop",
+   "parts": "2 x 0.8 mm music-wire hoops, 8 brass C-clips (est.)",
+   "servos": "2 (as today)",
+   "grip": "K1 and K2+K3 separate",
+   "risk": "tightest; two hoops share 4 mm under the disc",
+   "verdict": "works, tight"
+  },
+  {
+   "key": "B",
+   "name": "One ring, one hoop: K1 to K3 curl together",
+   "how": "As A with only the outer (base) ring. The inner ring and its servo go; each finger curls all three knuckles from one cord (today's K2+K3 cord path).",
+   "clr": "yoke lip inner edge moved out 0.6 mm (r 27.1 -> 27.7, still 2.3 mm over the flange): bead clears it by 0.7 mm; 3.2 mm of height for one hoop (est. 2.0 used)",
+   "load": "same bead: 13 N on the hoop",
+   "parts": "1 hoop, 4 C-clips; minus 1 STS3215 (-55 g)",
+   "servos": "1 (one STS3215 freed)",
+   "grip": "one curl motion per finger; no separate K1",
+   "risk": "less grip shaping; finger force sharing must be re-sized",
+   "verdict": "recommended",
+   "tint": true
+  },
+  {
+   "key": "C",
+   "name": "Hanger arm from each root block down past the rim, slotted guide on the ring",
+   "how": "A thin arm hangs from the block outside the disc rim and drags a slider on a rail on the pull ring; the cord runs inside the arm.",
+   "clr": "arm at r 25.7 to 26.9: 0.2 mm to the yoke lip, hits the base ring top when pulled 13 mm down",
+   "load": "arm 0.6 g at r 26 (est.): 26 N bending it outward",
+   "parts": "4 printed arms, 2 rails",
+   "servos": "2",
+   "grip": "K1 and K2+K3 separate",
+   "risk": "arm must reach 13 mm down through the moving ring: collides",
+   "verdict": "rejected (fit)"
+  },
+  {
+   "key": "D",
+   "name": "Bowden cables with a slack loop round the hub",
+   "how": "Sheathed cable from a fixed anchor on the ring to the root block; the sheath lies in a channel and takes up the root's travel.",
+   "clr": "needs about 80 mm of loose sheath per finger (half a turn at r 25) in a channel outside the rim: no room under the cage",
+   "load": "80 mm of sheath (est. 1.5 g) at r 28: 72 N of fling",
+   "parts": "4 Bowden cables, channel",
+   "servos": "2",
+   "grip": "K1 and K2+K3 separate",
+   "risk": "friction round half a turn (est. 30 to 50 % loss); fling",
+   "verdict": "rejected"
+  },
+  {
+   "key": "E",
+   "name": "Ball-end cords that drop into 12 cradles on the ring",
+   "how": "Each cord ends in a ball sitting in one of 12 open cradles (every 30 deg). When the root moves, the ball slides out over a ramp and drops into the next.",
+   "clr": "like A (one ring) but the ball must climb out sideways when slack: cradle walls 1.5 mm",
+   "load": "ball 0.5 g at r 26: 22 N, seated by the spin",
+   "parts": "12 cradles per ring, 4 balls",
+   "servos": "1 or 2",
+   "grip": "as A or B",
+   "risk": "ball can hop to the wrong cradle; needs slack at each move",
+   "verdict": "fallback for B"
+  },
+  {
+   "key": "F",
+   "name": "Keep everything on the rotor top: pull plate above the hub",
+   "how": "Rings move above the top disc; pulled through a hollow motor shaft by a static rod.",
+   "clr": "SE 2816 shaft is solid dia 5: no rod through it",
+   "load": "-",
+   "parts": "different motor",
+   "servos": "2",
+   "grip": "-",
+   "risk": "motor change",
+   "verdict": "rejected (motor)"
+  }
+ ]
+}
