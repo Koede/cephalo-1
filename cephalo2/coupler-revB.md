@@ -483,3 +483,12 @@ block -> motor base. The 5 signal wires share the slot and the rail in their own
 - Joint size (lap joint 14 -> 18 AWG under heat shrink, taken as dia 3.8 x 9).
 
 **Open**: the wheel hand keeps the B.6 hand base (radial grooves to the centre); the B.7 grooves are the hand3 variant.
+
+## hand3 independent fingers: option F chosen, root-lock layout study (2026-11-19)
+
+Decision: **F, roots travel round the hub** (from `hand3_indep_fingers_study.png`). Rule added by the user: joints must stay steady
+under rotation, so nothing on the rotor may be held by a servo or friction while it spins. User's idea: pins that slide out through
+little holes and couple the parts crosswise. Study: `hand3_root_lock_study.py/.png/.json` (estimates). Recommended L1: dia 3 steel
+dowel in each root carrier, thrown outward through one of 24 holes (15 deg) in a rim wall at r 24; 22.8 N seat force at 12,500 rpm,
+6.5 N side load at full motor torque, release by a parked pusher. 15 deg holes need a hole circle of r 17.2 or more, so they cannot
+sit on the centre spindle. Decision on the lock pending.
