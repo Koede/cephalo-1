@@ -507,3 +507,16 @@ pair; a parked fork lifts the tab 2.9 mm and holds the shoe while a roller turns
 Open: (1) spinning keeper: the pull is on the lips so the pins are not jammed, only a 3 N spring holds them; (2) stack 13 mm leaves
 0.2 mm of shaft for the nut; (3) 3 + 1 and one-sided poses must never spin (826 / 1430 N); 2 + 2 is balanced; (4) cords to a root
 that has moved; (5) roller and fork parts not chosen.
+
+**Root lock, crystallised concept "bolt-lock shoe" (2026-11-19, deliberation; hand estimates, not drawn or checked yet):**
+1. Keeper: pins stay truly axial. Each pin gets a 0.3 mm neck at the base disc's lower face and the 12 holes are radial slots
+   (3.05 x 3.45). A spring and, when spinning, the finger's own 826 N pull push the shoe 0.35 mm outward onto the rim lips, so the
+   neck hooks under the slot edge: the pins cannot lift. Release when parked: the fork first nudges the shoe 0.35 mm inward, then lifts.
+2. Steps: 30 deg, 12 holes (cross at 0/90/180/270; 2 + 2, 3 + 1 and one-sided are all multiples of 30 deg). Web between holes 6.2 mm.
+3. Height: hub_lo 91 -> 90, discs 2.5 -> 2.0, leaves 1.5 -> 1.25: stack 11.5 mm, 2.7 mm of shaft left for the heel nut (today 3.2);
+   plus 4 screws through the top disc into the centre boss.
+4. Spin interlock with no wires on the rotor: one fixed reflective sensor at the fork station; before spin-up the roller turns the
+   rotor once and the firmware checks four tabs, all down, 90 deg apart (roller servo encoder).
+5. Actuators: one small servo on a 3-position cam (out / roller in / fork lift), one continuous-rotation servo for the roller.
+6. Cords: each ring gets a top bead flange; a C-clip traveller per finger slides round it (ring-and-traveller); the cord runs from
+   the traveller through an eyelet in the shoe tab. Same cord length at any azimuth. Least mature part.
