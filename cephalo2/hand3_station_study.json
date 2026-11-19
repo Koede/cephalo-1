@@ -1,0 +1,115 @@
+{
+ "common": {
+  "roller": {
+   "part": "Pololu 298:1 Micro Metal Gearmotor HPCB 6V (#3069)",
+   "contact": "rubber tyre dia 8 on the cage outside (r 21.5), z 62 to 78, now free with the inner ring gone",
+   "needed_Nm_at_rotor": 0.05,
+   "tangential_N": 2.33,
+   "press_N": 3.9,
+   "roller_Nm": 0.0093,
+   "N20_stall_Nm": 0.334,
+   "margin_at_25pct_of_stall": 9.0,
+   "rotor_rpm": 20.5,
+   "seconds_per_30deg": 0.24
+  },
+  "servo": {
+   "part": "TowerPro SG92R micro servo (Adafruit #169)",
+   "force_at_10mm_N": 24.5,
+   "need_N": 8.0
+  },
+  "sensor": {
+   "part": "Pololu QTR-1A reflectance sensor (#2458)",
+   "range_mm": [
+    3,
+    6
+   ]
+  },
+  "station_az": 90.0,
+  "gap_to_nearest_lip_deg": 38.1,
+  "service_band": {
+   "r_in": 26.9,
+   "z": [
+    86.0,
+    89.7
+   ],
+   "height": 3.7
+  },
+  "flange_S1": {
+   "ring_force_stall_N": 830,
+   "per_lip_N": 207,
+   "arm_mm": 2.55,
+   "MPa_t2": 43.8,
+   "MPa_t3": 19.5,
+   "MPa_t2_with_slots": 87.5
+  }
+ },
+ "options": [
+  {
+   "key": "A",
+   "name": "Slide in the free band under the root + a rocker on each root",
+   "how": "A static blade slides in radially at the station, under the finger and above the bead. It pushes the two rocker tips of the root standing there: the rocker pulls both pins 0.5 mm in and 2.1 mm up, and the blade's notch holds the root and its bead while the roller turns the hub.",
+   "rotor": "4 rockers on the roots, est. 0.4 g each",
+   "static": "SG92R servo on the slide (25 N at a 10 mm horn vs 8 N needed), N20 roller on the cage, QTR-1A",
+   "access": "free band z 86.0 to 89.7 (3.7 mm) from r 26.9 outward, under the finger, above the ring flange",
+   "mass": "+22 g static, +1.6 g rotor (est.)",
+   "risk": "new rocker in a crowded root block",
+   "verdict": "recommended",
+   "tint": true
+  },
+  {
+   "key": "B",
+   "name": "Prongs rise from below through slots in the ring flange",
+   "how": "Two prongs climb at r 27.5 through slots in the spinning flange (lined up when parked), ramp the tabs inward, lift them and hold the root.",
+   "rotor": "24 to 36 slots in the pull-ring flange",
+   "static": "SG92R on a vertical slide, N20 roller, QTR-1A",
+   "access": "free column at the station from z 60 to the tabs (yokes, idlers, cords all elsewhere)",
+   "mass": "+22 g static (est.)",
+   "risk": "flange bending at stall 43.8 MPa now, 87.5 MPa with slots (PA-CF)",
+   "verdict": "rejected (flange)"
+  },
+  {
+   "key": "C",
+   "name": "Contacts touch the parked root; shape-memory wire lifts the pins",
+   "how": "Pogo pins on the static side touch two pads on the root at the station; a Flexinol / Muscle Wire loop in the root block pulls the pins in and up. Hold by a fork on the bead.",
+   "rotor": "4 x 0.005 in wires per root (2.2 N each at 200 mA), pads, est. 0.6 g per root",
+   "static": "pogo block + fork servo, N20 roller, QTR-1A",
+   "access": "pads must sit in the same band as A's rocker tips",
+   "mass": "+18 g static, +2.4 g rotor (est.)",
+   "risk": "needs the same access as A plus wiring on every root; wire fatigue",
+   "verdict": "no better than A"
+  },
+  {
+   "key": "D",
+   "name": "Another Cephalo hand moves the roots",
+   "how": "A neighbouring arm's hand grips the root, presses the tabs and turns it; the rotor is held by its own pins on the other roots.",
+   "rotor": "tabs stay as they are",
+   "static": "none on this hand",
+   "access": "from outside, at the tabs and fingers",
+   "mass": "0 g",
+   "risk": "needs a second hand within reach and fine control; slow",
+   "verdict": "fallback / field repair"
+  },
+  {
+   "key": "E",
+   "name": "Set the roots by hand between flights",
+   "how": "The user lifts the two tabs with a fingernail and slides the root; the pose is fixed for the next flight.",
+   "rotor": "none",
+   "static": "none",
+   "access": "by hand",
+   "mass": "0 g",
+   "risk": "no pose change during a mission",
+   "verdict": "day-one option"
+  },
+  {
+   "key": "F",
+   "name": "Flight motor turns the hub, static fork holds the root",
+   "how": "The ESC creeps the rotor round while a fork holds the lifted root.",
+   "rotor": "none",
+   "static": "fork + lifter (same access problem as A)",
+   "access": "as A",
+   "mass": "+12 g",
+   "risk": "sensorless ESC cannot creep 30 deg reliably at standstill",
+   "verdict": "rejected (ESC)"
+  }
+ ]
+}

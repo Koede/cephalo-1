@@ -592,3 +592,14 @@ cross. The order in which roots move is planned so no two blocks ever come close
 root 0 into root 3). HUD: root azimuths, pins, imbalance at 12,500 rpm and the spin interlock, ring stroke, servo state.
 Whole-timeline overlap check (`hand3_v3_sim_overlap.json`): one 0.25 mm3 hit, hub E's frame against an idler bracket (2 grid
 cells, existing in hub E). Next: the parked fork + roller station (options study first).
+
+**Station options study (2026-11-19):** `hand3_station_study.py/.png/.json`. The parked station must turn the rotor to a root, free
+its pins, hold the root and bead while the hub turns, drop the pins and check all 8 pins before spin-up. Station at az 90 (38 deg
+from the nearest yoke lip). Free space found by slicing every part in the station plane: a band z 86.0 to 89.7 (3.7 mm) from
+r 26.9 outward, under the finger and above the ring flange; and the cage outside (r 21.5, z 60 to 78), free now that the inner ring
+is gone, for a roller. Recommended A: a static blade slides in that band and pushes a rocker on the root that unhooks and lifts both
+pins; the blade's notch holds root and bead; Pololu 298:1 HPCB N20 roller on the cage (margin 9 at a quarter of stall, 30 deg in
+0.24 s); SG92R on the slide (24.5 N vs 8 N); Pololu QTR-1A for the pin check. B (prongs through flange slots) fails on flange
+bending; C (contacts + SMA wire) needs the same access plus wiring; D (another hand) and E (by hand) need no station; F (flight
+motor creeps the rotor) rejected. Side finding: S1 puts both servos on one ring: flange bending 43.8 MPa at stall with 2 mm,
+19.5 MPa with a 3 mm flange (to apply).
