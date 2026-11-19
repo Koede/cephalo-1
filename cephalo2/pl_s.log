@@ -1,0 +1,9 @@
+   t 20.70 arm 2: err   4.0 mm clr    19 mm target x +0.20 y +0.12 z -0.37 q [ 17.  24.  61.  15.   8.   5.  20. -16.]
+   t 20.75 arm 2: err   4.1 mm clr    18 mm target x +0.20 y +0.13 z -0.37 q [ 19.  24.  60.  16.   6.   3.  22. -16.]
+   t 21.00 arm 2: err   4.1 mm clr    19 mm target x +0.20 y +0.12 z -0.37 q [ 15.  24.  67.  15.   3.   1.  21. -13.]
+   t 21.05 arm 2: err   4.4 mm clr    19 mm target x +0.20 y +0.13 z -0.37 q [ 18.  24.  63.  18.   1.   1.  24. -15.]
+plan arm 2: max IK error 4.4 mm, axis 2.7 deg | min body clearance 9 mm | min joint-limit margin 5.8 deg | peak joint speed 166 deg/s
+   t 23.20 arm 6: err   9.0 mm clr    20 mm target x -0.20 y +0.00 z -0.22 q [-15. -24.  95. -27.  95.  15. -94.  32.]
+   t 23.25 arm 6: err  17.1 mm clr    20 mm target x -0.20 y +0.00 z -0.20 q [-22. -25.  96. -36.  97.   7. -90.  39.]
+   t 23.30 arm 6: err  16.8 mm clr    19 mm target x -0.19 y +0.00 z -0.19 q [-26. -25.  96. -43.  97.   5. -83.  44.]
+plan arm 6: max IK error 17.1 mm, axis 7.3 deg | min body clearance 9 mm | min joint-limit margin 3.4 deg | peak joint speed 183 deg/s

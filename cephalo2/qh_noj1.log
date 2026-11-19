@@ -1,0 +1,29 @@
+h_noj1: 21 s wall | exy_mean 8.06 exy_max 44.83 ez_max 54.24 tilt_max 37.29 yaw_max 11.98 sat_frac 0.61 servo 1.00 tie_mm 16.32 vmin 22.89 crash 5.39 J 959.92 | slip 15.9
+
+[monitor4] quad4h_run_HAND_ARMS_HAND_T23.35_PACKS2_PROPxl_TAKEOFFv7: 1 run(s), 5.4 s simulated | packs 2, belly edf, prop xl | min pack 22.61 V, max 255 A
+  OVER  1.60  pigtail          1.60      at   4.73 s arm1 j0                  over 0.29 s  servo lead current / rating (3 A Molex 5264 pigtail; STS3250 on its own 5 A lead)
+  OVER  1.55  tip_Nm           7.75 N m  at   4.36 s arm5                     over 0.01 s  spigot-pod coupler bending (5 N m design target for the undrawn tip bay, est.)
+  OVER  1.43  bus_A           21.42 A    at   4.73 s bus 0 (arms 0+1)         over 0.07 s  12 V buck, peak (one per arm pair, est.)
+  OVER  1.33  prop_ceil        1.33      at   5.21 s arm3                     over 0.01 s  claw-prop / hand-prop thrust / its ceiling at the loaded pack voltage
+  OVER  1.22  thermal          1.22      at   5.39 s arm3 j4                  over 1.58 s  servo rms torque over 10 s / rated (heating)
+  OVER  1.13  esc_A           50.82 A    at   5.21 s arm3                     over 0.00 s  claw-prop ESC (hand arms scaled to their 60 A controller)
+  OVER  1.10  bus_1s_A        10.96 A    at   4.89 s                          over 0.18 s  12 V buck, 1 s average (est.)
+  OVER  1.05  belly_ceil       1.05      at   4.68 s                          over 2.65 s  EDF thrust / its ceiling at the loaded pack voltage
+  OVER  1.04  trunk_A         20.81 A    at   4.73 s arm1                     over 0.01 s  arm power trunk 18 AWG, short peaks (est.)
+  LIM   1.00  trunk_1s_A      10.02 A    at   4.89 s                                       arm power trunk 18 AWG, 1 s average (est.)
+  LIM   1.00  gear             1.00      at   4.44 s arm1 j0                               gear-train load / strip limit (3 x stall, est.)
+  LIM   1.00  servo            1.00      at   4.37 s arm5 j0                               servo torque / stall
+  near  0.94  tap_A            9.40 A    at   4.73 s arm1 j0+j1                            2-servo power tap (JST VH)
+  near  0.89  belly_A        116.29 A    at   5.21 s                                       EDF controller
+  near  0.88  cell_low         0.88      at   4.69 s                                       cell voltage under load (3.3 V/cell -> 1.0)
+  near  0.85  pack_conn_A    127.64 A    at   4.69 s                                       pack connector XT150 (per pack)
+  ok    0.78  belly_lead_A   116.29 A    at   5.21 s                                       belly lead XT150
+  ok    0.73  pack_A         127.64 A    at   4.69 s                                       pack current per pack (35 C sustained, est.)
+  ok    0.40  slip             0.40      at   4.97 s arm2 j2                               clutch slip / travel (1 = hard stop)
+  ok    0.27  joint_F        224.00 N    at   4.44 s arm1 j7                               joint radial force (6800 C0; 623 C0 is 220 N)
+  ok    0.26  rail74_A         1.28 A    at   0.00 s                                       7.4 V rail buck (est.)
+  ok    0.18  link_MPa         3.61 MPa  at   4.44 s arm1 j1                               link cradle bending stress (printed PETG, est.)
+  ok    0.00  bus_V            0.00 V    at   0.00 s                                       12 V bus overvoltage above 12 V (regeneration; limit 12.6 V)
+  ok    0.00  hand_sw_A        0.00 A    at   0.00 s                                       hand 12 V switch, continuous (Pololu #2811; 7.2 A max)
+  ok    0.00  pogo_A           0.00 A    at   0.00 s                                       hand connector spring pin (derated)
+  -> monitor_out_quad_none/quad4h_run_HAND_ARMS_HAND_T23.35_PACKS2_PROPxl_TAKEOFFv7.json | 9 channel(s) over their rating

@@ -1,0 +1,31 @@
+grasp_shovel_i1000: 82 s wall | exy_mean 1.72 exy_max 3.09 ez_max 1.43 tilt_max 2.52 yaw_max 4.49 sat_frac 0.00 servo 0.80 tie_mm 12.99 vmin 22.82 crash 0.00 clr_mm 51.00 grasp_slip_mm 4.37 grasp_turn_deg 2.14 drop 0.00 J 5.60 | slip 0.2
+  hand 2 (shovel): start pose error 0.0 mm / 0.0 deg | knuckle rms/rated 0.94 0.56 | peak/stall 0.36 0.28 | servo current peak 2.7 A
+  hand 6 (shovel): start pose error 0.0 mm / 0.0 deg | knuckle rms/rated 0.76 0.69 | peak/stall 0.27 0.28 | servo current peak 2.6 A
+
+[monitor4] quad4h_run_HAND_ARMS2-6_HAND_K10.22_HAND_T21.48_PACKS2_PROPxl_TAKEOFFv7: 1 run(s), 13.0 s simulated | packs 2, belly edf, prop xl | min pack 22.91 V, max 204 A
+  OVER  1.32  thermal          1.32      at  13.00 s arm0 j0                  over 6.60 s  servo rms torque over 10 s / rated (heating)
+  LIM   1.00  belly_ceil       1.00      at   0.59 s                                       EDF thrust / its ceiling at the loaded pack voltage
+  near  0.86  cell_low         0.86      at  12.12 s                                       cell voltage under load (3.3 V/cell -> 1.0)
+  near  0.86  belly_A        111.52 A    at   0.59 s                                       EDF controller
+  near  0.85  prop_ceil        0.85      at   7.16 s arm1                                  claw-prop / hand-prop thrust / its ceiling at the loaded pack voltage
+  ok    0.81  servo            0.81      at   7.17 s arm1 j0                               servo torque / stall
+  ok    0.74  belly_lead_A   111.52 A    at   0.59 s                                       belly lead XT150
+  ok    0.68  pack_conn_A    102.18 A    at   0.59 s                                       pack connector XT150 (per pack)
+  ok    0.64  pigtail          0.64      at  12.81 s arm2 j5                               servo lead current / rating (3 A Molex 5264 pigtail; STS3250 on its own 5 A lead)
+  ok    0.58  pack_A         102.18 A    at   0.59 s                                       pack current per pack (35 C sustained, est.)
+  ok    0.57  esc_A           25.72 A    at   7.16 s arm1                                  claw-prop ESC (hand arms scaled to their 60 A controller)
+  ok    0.40  bus_A            6.04 A    at   7.54 s bus 3 (arms 6+7)                      12 V buck, peak (one per arm pair, est.)
+  ok    0.37  bus_1s_A         3.67 A    at   7.95 s                                       12 V buck, 1 s average (est.)
+  ok    0.35  gear             0.35      at  12.81 s arm2 j5                               gear-train load / strip limit (3 x stall, est.)
+  ok    0.26  rail74_A         1.28 A    at   0.00 s                                       7.4 V rail buck (est.)
+  ok    0.24  tap_A            2.40 A    at  11.73 s arm6 j0+j1                            2-servo power tap (JST VH)
+  ok    0.22  trunk_A          4.47 A    at   7.52 s arm6                                  arm power trunk 18 AWG, short peaks (est.)
+  ok    0.20  trunk_1s_A       2.03 A    at   3.72 s                                       arm power trunk 18 AWG, 1 s average (est.)
+  ok    0.15  tip_Nm           0.74 N m  at  12.93 s arm2                                  spigot-pod coupler bending (5 N m design target for the undrawn tip bay, est.)
+  ok    0.05  link_MPa         1.08 MPa  at   7.16 s arm1 j1                               link cradle bending stress (printed PETG, est.)
+  ok    0.03  joint_F         22.11 N    at   7.16 s arm1 j7                               joint radial force (6800 C0; 623 C0 is 220 N)
+  ok    0.01  slip             0.01      at   7.16 s arm1 j0                               clutch slip / travel (1 = hard stop)
+  ok    0.00  bus_V            0.00 V    at   0.00 s                                       12 V bus overvoltage above 12 V (regeneration; limit 12.6 V)
+  ok    0.00  hand_sw_A        0.00 A    at   0.00 s                                       hand 12 V switch, continuous (Pololu #2811; 7.2 A max)
+  ok    0.00  pogo_A           0.00 A    at   0.00 s                                       hand connector spring pin (derated)
+  -> monitor_out_quad_grasp_shovel_i1000/quad4h_run_HAND_ARMS2-6_HAND_K10.22_HAND_T21.48_PACKS2_PROPxl_TAKEOFFv7.json | 1 channel(s) over their rating

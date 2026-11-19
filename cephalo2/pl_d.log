@@ -1,0 +1,17 @@
+plan arm 2: max IK error 3.8 mm, axis 1.8 deg | min body clearance 9 mm | min joint-limit margin 5.5 deg | peak joint speed 172 deg/s
+   t 11.65 arm 6: err   5.9 mm clr    20 mm target x -0.18 y -0.00 z -0.23 q [-20.  -0.  95.  -0.  95.  -0. -79.   0.]
+   t 11.70 arm 6: err   8.4 mm clr    20 mm target x -0.18 y -0.00 z -0.22 q [-22.  -0.  95.  -0.  95.  -0. -78.   0.]
+   t 11.75 arm 6: err   9.3 mm clr    20 mm target x -0.18 y -0.00 z -0.22 q [-24.  -0.  95.  -0.  95.  -0. -76.   0.]
+   t 11.80 arm 6: err   9.3 mm clr    19 mm target x -0.18 y -0.00 z -0.22 q [-24.  -0.  95.  -0.  95.  -0. -76.   0.]
+   t 11.85 arm 6: err   9.2 mm clr    19 mm target x -0.18 y +0.00 z -0.22 q [-24.  -0.  95.  -0.  95.  -0. -75.   0.]
+   t 11.90 arm 6: err   9.1 mm clr    19 mm target x -0.18 y +0.00 z -0.22 q [-25.  -0.  95.  -0.  95.  -0. -75.   0.]
+   t 11.95 arm 6: err   8.8 mm clr    19 mm target x -0.18 y -0.00 z -0.22 q [-26.  -0.  95.  -0.  95.  -0. -74.   0.]
+   t 12.00 arm 6: err   8.4 mm clr    19 mm target x -0.19 y +0.00 z -0.22 q [-27.  -0.  95.  -0.  95.  -0. -73.   0.]
+   t 12.05 arm 6: err   7.6 mm clr    19 mm target x -0.19 y -0.00 z -0.22 q [-29.  -0.  95.  -0.  95.  -0. -71.   0.]
+   t 12.10 arm 6: err   6.7 mm clr    19 mm target x -0.20 y -0.00 z -0.22 q [-31.  -0.  94.  -0.  95.  -0. -69.   0.]
+   t 12.15 arm 6: err   5.6 mm clr    19 mm target x -0.21 y -0.00 z -0.22 q [-34.  -0.  94.  -0.  95.  -0. -67.   0.]
+   t 12.20 arm 6: err   5.7 mm clr    18 mm target x -0.22 y +0.00 z -0.22 q [-36.  -0.  91.  -0.  95.  -0. -62.   0.]
+   t 12.25 arm 6: err   5.6 mm clr    18 mm target x -0.24 y -0.00 z -0.22 q [-38.  -0.  86.  -0.  95.  -0. -55.   0.]
+   t 12.30 arm 6: err   5.2 mm clr    18 mm target x -0.25 y -0.00 z -0.22 q [-38.  -0.  80.  -0.  95.  -0. -48.  -0.]
+   t 12.35 arm 6: err   4.5 mm clr    18 mm target x -0.26 y -0.00 z -0.22 q [-38.  -0.  74.  -0.  95.  -0. -41.  -0.]
+plan arm 6: max IK error 9.3 mm, axis 2.4 deg | min body clearance 9 mm | min joint-limit margin 4.5 deg | peak joint speed 179 deg/s

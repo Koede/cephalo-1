@@ -1,0 +1,5 @@
+hit: sim 2.6 s in 9 s wall | end phase hit
+  peak floor force 0 N, 10 ms average 0 N = 0.0 x weight
+  impact 0.00 m/s | body decel (10 ms) 0 g | bumper/dome 0 N | arm-floor 0 N | servo 1.00 | gear 0.39 of limit | clutch slip 2 deg | clutches at stop 0
+    hover    servo 0.15 | gear 0.05 | slip    0 deg | clutches at stop 0
+    hit      servo 1.00 | gear 0.39 | slip    2 deg | clutches at stop 0

@@ -1,0 +1,17 @@
+Q_REACH [-14.7   0.   60.6   0.   64.3  -0.  -19.7   0. ] Q_CARRY [-43.    0.   77.7   0.   92.1  -0.  -36.5   0. ]
+reach residual mm 0.0 axis z -1.0
+carry residual mm 0.0 axis z -1.0
+mission pess: sim 26.1 s in 78 s wall | latched False at None | miss 0.4102573485276328 | finger-object offset at close 0.42869022728347494
+HOVER                                        err  52.5 cm | tilt  0.4 | yaw  2.1 | servo 0.30 (arm7 j7) | slip  0.1 | sat 1 | lean  6.4 | fan 10.1 | grip   0.0 N
+FLY NORTH 2.5 m: south arms lean             err  10.7 cm | tilt  0.6 | yaw  0.3 | servo 0.42 (arm2 j6) | slip  0.1 | sat 0 | lean 41.3 | fan  9.9 | grip   0.0 N
+CLIMB 0.8 m: arms tuck in                    err   3.8 cm | tilt  0.4 | yaw  0.4 | servo 0.21 (arm5 j2) | slip  0.1 | sat 1 | lean 13.8 | fan 10.1 | grip   0.0 N
+FLY EAST 2.5 m: west arms lean               err  10.7 cm | tilt  0.6 | yaw  0.6 | servo 0.43 (arm0 j6) | slip  0.1 | sat 0 | lean 41.3 | fan  9.9 | grip   0.0 N
+DESCEND to the object: arms flare            err   3.9 cm | tilt  0.4 | yaw  0.4 | servo 0.23 (arm6 j2) | slip  0.1 | sat 0 | lean 13.8 | fan  9.5 | grip   0.0 N
+GRAB: arm 2 stops its prop and reaches down  err  24.3 cm | tilt  0.8 | yaw  0.4 | servo 0.53 (arm2 j2) | slip  0.1 | sat 1 | lean 11.5 | fan 10.1 | grip   0.0 N
+GRAB: lower onto the object                  err  41.7 cm | tilt  7.6 | yaw  0.7 | servo 1.00 (arm2 j4) | slip  1.4 | sat 1 | lean 15.2 | fan 10.1 | grip   0.0 N
+GRAB: line up the fingers (tip sensor)       err  45.1 cm | tilt  7.8 | yaw  0.7 | servo 0.38 (arm2 j2) | slip  0.2 | sat 1 | lean 36.8 | fan 10.1 | grip   0.0 N
+GRAB: fingers close                          err  44.9 cm | tilt  4.0 | yaw  1.4 | servo 0.88 (arm2 j2) | slip  0.3 | sat 1 | lean 38.8 | fan 10.1 | grip   0.0 N
+LIFT the object                              err  75.3 cm | tilt  1.6 | yaw  1.6 | servo 0.92 (arm2 j2) | slip  0.4 | sat 1 | lean 10.1 | fan 10.1 | grip   0.0 N
+FLY HOME carrying it (7 claw-props)          err  87.1 cm | tilt  8.2 | yaw  7.8 | servo 1.00 (arm2 j0) | slip  4.1 | sat 1 | lean 39.9 | fan 10.1 | grip   0.0 N
+DESCEND at home                              err  83.8 cm | tilt  4.4 | yaw  3.2 | servo 0.48 (arm2 j2) | slip  0.2 | sat 1 | lean 29.0 | fan 10.1 | grip   0.0 N
+rms/rated 0.63

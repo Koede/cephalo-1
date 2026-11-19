@@ -1,0 +1,7 @@
+baseline mid: sim 16 s in 37 s wall
+hover (0.5-2 s): xy 0.0 cm, tilt 0.00 deg, yaw 0.00 deg, servo 0.10
+gust        xy max  10.9 cm end   1.6 | tilt  7.5 | yaw max    0.0 end    0.0 deg | servo 0.12 | slip  0.0 | sat 0 | claw axis max  8.0 deg
+yaw kick    xy max   1.6 cm end   0.3 | tilt  1.0 | yaw max  115.0 end  115.0 deg | servo 0.10 | slip  0.0 | sat 0 | claw axis max  1.4 deg
+side hit    xy max   4.8 cm end   1.6 | tilt  2.7 | yaw max  180.0 end   93.1 deg | servo 1.00 | slip  9.3 | sat 0 | claw axis max 14.9 deg
+move 0.6 m  xy max  43.5 cm end   4.3 | tilt  2.5 | yaw max  180.0 end  153.7 deg | servo 0.09 | slip  0.0 | sat 0 | claw axis max  2.9 deg
+rms servo / rated over the run: 0.29

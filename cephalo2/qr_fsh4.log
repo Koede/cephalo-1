@@ -1,0 +1,31 @@
+fsh4: 66 s wall | exy_mean 1.58 exy_max 3.21 ez_max 2.10 tilt_max 2.51 yaw_max 4.31 sat_frac 0.00 servo 1.00 tie_mm 6.67 vmin 22.76 crash 0.00 clr_mm 49.57 grasp_slip_mm 6.63 grasp_turn_deg 5.79 drop 0.00 J 8.68 | slip 0.2
+  hand 2 (shovel): start pose error 0.0 mm / 0.0 deg | knuckle rms/rated 0.69 0.72 0.99 | peak/stall 0.27 0.30 0.41 | servo current peak 4.0 A
+  hand 6 (shovel): start pose error 0.0 mm / 0.0 deg | knuckle rms/rated 0.75 0.74 1.08 | peak/stall 0.31 0.31 0.43 | servo current peak 4.0 A
+
+[monitor4] quad4h_run_HAND_ARMS2-6_HAND_T21.3_PACKS2_PROPxl_TAKEOFFv7: 1 run(s), 13.0 s simulated | packs 2, belly edf, prop xl | min pack 22.86 V, max 205 A
+  OVER  1.77  thermal          1.77      at  13.00 s arm2 j5                  over 8.28 s  servo rms torque over 10 s / rated (heating)
+  OVER  1.06  pigtail          1.06      at   9.22 s arm2 j5                  over 0.01 s  servo lead current / rating (3 A Molex 5264 pigtail; STS3250 on its own 5 A lead)
+  LIM   1.00  servo            1.00      at   9.00 s arm2 j5                               servo torque / stall
+  LIM   1.00  belly_ceil       1.00      at   3.42 s                                       EDF thrust / its ceiling at the loaded pack voltage
+  near  0.87  cell_low         0.87      at  12.07 s                                       cell voltage under load (3.3 V/cell -> 1.0)
+  near  0.85  belly_A        110.60 A    at   0.28 s                                       EDF controller
+  ok    0.82  prop_ceil        0.82      at   8.30 s arm7                                  claw-prop / hand-prop thrust / its ceiling at the loaded pack voltage
+  ok    0.74  belly_lead_A   110.60 A    at   0.28 s                                       belly lead XT150
+  ok    0.68  pack_conn_A    102.30 A    at  12.06 s                                       pack connector XT150 (per pack)
+  ok    0.58  pack_A         102.30 A    at  12.06 s                                       pack current per pack (35 C sustained, est.)
+  ok    0.54  esc_A           24.26 A    at   8.30 s arm7                                  claw-prop ESC (hand arms scaled to their 60 A controller)
+  ok    0.48  bus_1s_A         4.81 A    at   8.83 s                                       12 V buck, 1 s average (est.)
+  ok    0.45  bus_A            6.70 A    at   8.44 s bus 1 (arms 2+3)                      12 V buck, peak (one per arm pair, est.)
+  ok    0.42  gear             0.42      at   9.18 s arm2 j5                               gear-train load / strip limit (3 x stall, est.)
+  ok    0.39  trunk_1s_A       3.92 A    at   8.82 s                                       arm power trunk 18 AWG, 1 s average (est.)
+  ok    0.32  tap_A            3.25 A    at   9.22 s arm2 j4+j5                            2-servo power tap (JST VH)
+  ok    0.29  tip_Nm           1.45 N m  at   9.15 s arm2                                  spigot-pod coupler bending (5 N m design target for the undrawn tip bay, est.)
+  ok    0.29  trunk_A          5.73 A    at   8.43 s arm2                                  arm power trunk 18 AWG, short peaks (est.)
+  ok    0.26  rail74_A         1.28 A    at   0.00 s                                       7.4 V rail buck (est.)
+  ok    0.06  link_MPa         1.29 MPa  at   9.15 s arm2 j1                               link cradle bending stress (printed PETG, est.)
+  ok    0.03  joint_F         21.42 N    at   9.14 s arm2 j0                               joint radial force (6800 C0; 623 C0 is 220 N)
+  ok    0.01  slip             0.01      at   4.57 s arm7 j0                               clutch slip / travel (1 = hard stop)
+  ok    0.00  bus_V            0.00 V    at   0.00 s                                       12 V bus overvoltage above 12 V (regeneration; limit 12.6 V)
+  ok    0.00  hand_sw_A        0.00 A    at   0.00 s                                       hand 12 V switch, continuous (Pololu #2811; 7.2 A max)
+  ok    0.00  pogo_A           0.00 A    at   0.00 s                                       hand connector spring pin (derated)
+  -> monitor_out_quad_fsh4/quad4h_run_HAND_ARMS2-6_HAND_T21.3_PACKS2_PROPxl_TAKEOFFv7.json | 2 channel(s) over their rating

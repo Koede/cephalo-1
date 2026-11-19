@@ -1,0 +1,116 @@
+robot 11.84 kg  W 116.1 N  hand thrust 0.0 N
+load fraction 6 / 8 props: [np.float64(0.467), np.float64(0.349)]
+mid: sim 62.0 s in 229 s wall
+battery 2 pack(s), start 100 %: end 89 %, used 1.06 Ah
+01 rest       0.0-  1.0 s | servo 0.58 | tilt  0.1 | sat 0 | gov min 1.00 | fan max 0.0 N | arm6 j0 t0.07
+02 get up     1.0-  7.5 s | servo 0.77 | tilt  1.3 | sat 0 | gov min 1.00 | fan max 0.0 N | arm1 j4 t4.17
+03 idle       7.6-  8.7 s | servo 0.24 | tilt  0.0 | sat 0 | gov min 1.00 | fan max 0.0 N | arm2 j0 t8.73
+04 walk       8.8- 24.1 s | servo 1.00 | tilt  1.7 | sat 0 | gov min 0.45 | fan max 0.0 N | arm0 j4 t9.20
+05 wave      24.1- 31.4 s | servo 0.83 | tilt  0.4 | sat 0 | gov min 1.00 | fan max 0.0 N | arm1 j4 t30.90
+06 idle      31.4- 32.0 s | servo 0.38 | tilt  0.1 | sat 0 | gov min 1.00 | fan max 0.0 N | arm1 j4 t31.40
+07 take off  32.0- 38.0 s | servo 1.00 | tilt  0.6 | sat 1 | gov min 0.45 | fan max 28.0 N | arm0 j0 t33.50
+08 fly       38.0- 40.9 s | servo 0.46 | tilt  1.1 | sat 0 | gov min 1.00 | fan max 14.1 N | arm0 j2 t38.13
+09 fly       40.9- 44.5 s | servo 0.92 | tilt  1.0 | sat 0 | gov min 0.70 | fan max 23.2 N | arm0 j2 t43.87
+10 idle      44.5- 45.3 s | servo 0.24 | tilt  0.4 | sat 0 | gov min 1.00 | fan max 12.7 N | arm7 j0 t44.70
+11 land      45.3- 52.8 s | servo 1.00 | tilt  7.1 | sat 1 | gov min 0.45 | fan max 28.0 N | arm0 j0 t48.27
+12 idle      52.9- 53.8 s | servo 0.28 | tilt  0.1 | sat 0 | gov min 1.00 | fan max 0.0 N | arm5 j0 t52.90
+13 lie down  53.9- 60.9 s | servo 0.91 | tilt  1.3 | sat 0 | gov min 0.73 | fan max 0.0 N | arm0 j2 t56.40
+14 rest      61.0- 62.0 s | servo 0.24 | tilt  0.0 | sat 0 | gov min 1.00 | fan max 0.0 N | arm7 j4 t60.97
+{
+ "level": "none",
+ "prog": "day",
+ "robot_kg": 11.836879999999999,
+ "hand_T": 0.0,
+ "min_V": 22.77676166386303,
+ "peak_pack_A": 230.398026719744,
+ "peak_edf_A": 115.08497118345105,
+ "edf_ratio_max": 1.0164456591807158,
+ "fan_ratio_max": [
+  0.813727163178993,
+  0.9998947721846265,
+  0.9338711879062531,
+  0.6520298292480203,
+  0.9183560173292294,
+  0.999945681579368,
+  0.9204400390475355,
+  0.9296740619953404
+ ],
+ "fan_ratio_max_air": [
+  0.813727163178993,
+  0.9994419305473627,
+  0.6680935620287503,
+  0.6520298292480203,
+  0.9183560173292294,
+  0.9930975909006811,
+  0.75573023049325,
+  0.9296740619953404
+ ],
+ "hand_fan_max_N": [
+  26.148393261375087,
+  25.772321093330994
+ ],
+ "hand_ceiling_min_N": [
+  28.0,
+  28.0
+ ],
+ "esc_peak_A": [
+  24.10909318965081,
+  33.03926396803272,
+  29.27565356247939,
+  17.228926896115436,
+  29.145433942829317,
+  32.80770258471778,
+  28.64635618411444,
+  29.664008781641126
+ ],
+ "esc_over": [
+  0.5357576264366847,
+  0.7342058659562827,
+  0.48792755937465654,
+  0.38286504213589856,
+  0.6476763098406515,
+  0.7290600574381729,
+  0.47743926973524065,
+  0.6592001951475805
+ ],
+ "tilt_max": 7.096546666324077,
+ "tilt_max_air": 3.3758945998042527,
+ "servo_max": 1.0,
+ "servo_hand_arms": [
+  1.0,
+  1.0
+ ],
+ "sat_max": 1,
+ "z_max": 1.0865226336906786,
+ "soc_end": 0.8936952827777338,
+ "refused": false,
+ "t_end": 61.966799999908936
+}
+
+[monitor4] hand3_fly_none_day_HAND_ARMS_HAND_T23.35_J1STS3250_PACKS2_PROPxl_TAKEOFFv7: 1 run(s), 62.0 s simulated | packs 2, belly edf, prop xl | min pack 22.89 V, max 227 A
+  OVER  1.40  thermal          1.40      at  35.46 s arm0 j0                  over 47.77 s servo rms torque over 10 s / rated (heating)
+  OVER  1.25  pigtail          1.25      at  49.16 s arm4 j0                  over 0.07 s  servo lead current / rating (3 A Molex 5264 pigtail; STS3250 on its own 5 A lead)
+  OVER  1.01  belly_ceil       1.01      at  37.04 s                          over 0.31 s  EDF thrust / its ceiling at the loaded pack voltage
+  LIM   1.00  servo            1.00      at   9.15 s arm0 j4                               servo torque / stall
+  LIM   1.00  prop_ceil        1.00      at  34.55 s arm5                                  claw-prop / hand-prop thrust / its ceiling at the loaded pack voltage
+  near  0.91  bus_A           13.70 A    at  49.85 s bus 2 (arms 4+5)                      12 V buck, peak (one per arm pair, est.)
+  near  0.88  belly_A        114.74 A    at  33.01 s                                       EDF controller
+  near  0.86  cell_low         0.86      at  37.08 s                                       cell voltage under load (3.3 V/cell -> 1.0)
+  ok    0.76  belly_lead_A   114.74 A    at  33.01 s                                       belly lead XT150
+  ok    0.76  tip_Nm           3.80 N m  at  14.24 s arm4                                  spigot-pod coupler bending (5 N m design target for the undrawn tip bay, est.)
+  ok    0.76  pack_conn_A    113.51 A    at  37.08 s                                       pack connector XT150 (per pack)
+  ok    0.74  bus_1s_A         7.43 A    at  49.46 s                                       12 V buck, 1 s average (est.)
+  ok    0.73  esc_A           32.87 A    at  49.40 s arm1                                  claw-prop ESC (hand arms scaled to their 60 A controller)
+  ok    0.65  pack_A         113.51 A    at  37.08 s                                       pack current per pack (35 C sustained, est.)
+  ok    0.63  tap_A            6.28 A    at  49.16 s arm4 j0+j1                            2-servo power tap (JST VH)
+  ok    0.53  trunk_1s_A       5.26 A    at  50.08 s                                       arm power trunk 18 AWG, 1 s average (est.)
+  ok    0.51  gear             0.51      at  48.67 s arm4 j4                               gear-train load / strip limit (3 x stall, est.)
+  ok    0.45  trunk_A          9.09 A    at  49.16 s arm4                                  arm power trunk 18 AWG, short peaks (est.)
+  ok    0.43  slip             0.43      at  48.49 s arm4 j4                               clutch slip / travel (1 = hard stop)
+  ok    0.26  rail74_A         1.28 A    at   0.00 s                                       7.4 V rail buck (est.)
+  ok    0.11  joint_F         91.85 N    at  49.57 s arm4 j7                               joint radial force (6800 C0; 623 C0 is 220 N)
+  ok    0.10  link_MPa         2.04 MPa  at  49.57 s arm4 j0                               link cradle bending stress (printed PETG, est.)
+  ok    0.00  bus_V            0.00 V    at   0.00 s                                       12 V bus overvoltage above 12 V (regeneration; limit 12.6 V)
+  ok    0.00  hand_sw_A        0.00 A    at   0.00 s                                       hand 12 V switch, continuous (Pololu #2811; 7.2 A max)
+  ok    0.00  pogo_A           0.00 A    at   0.00 s                                       hand connector spring pin (derated)
+  -> monitor_out_none_day/hand3_fly_none_day_HAND_ARMS_HAND_T23.35_J1STS3250_PACKS2_PROPxl_TAKEOFFv7.json | 3 channel(s) over their rating

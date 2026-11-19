@@ -1,0 +1,7 @@
+organic pess: sim 16 s in 36 s wall
+hover (0.5-2 s): xy 1.5 cm, tilt 0.32 deg, yaw 0.22 deg, servo 0.12
+gust        xy max   9.2 cm end   3.2 | tilt  2.4 | yaw max    0.2 end    0.2 deg | servo 0.14 | slip  0.0 | sat 0 | claw axis max  8.7 deg
+yaw kick    xy max   3.4 cm end   1.8 | tilt  0.1 | yaw max    7.9 end    0.2 deg | servo 0.12 | slip  0.0 | sat 0 | claw axis max  5.1 deg
+side hit    xy max   3.4 cm end   0.9 | tilt  1.5 | yaw max    3.9 end    0.2 deg | servo 1.00 | slip 10.8 | sat 0 | claw axis max 16.3 deg
+move 0.6 m  xy max   4.0 cm end   1.6 | tilt  0.6 | yaw max    0.7 end    0.2 deg | servo 0.13 | slip  0.0 | sat 0 | claw axis max 10.6 deg
+rms servo / rated over the run: 0.31

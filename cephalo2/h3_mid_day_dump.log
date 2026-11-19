@@ -1,0 +1,88 @@
+robot 12.66 kg  W 124.2 N  hand thrust 23.35 N
+load fraction 6 / 8 props: [np.float64(0.551), np.float64(0.405)]
+mid: sim 65.1 s in 78 s wall
+battery 2 pack(s), start 100 %: end 88 %, used 1.19 Ah
+01 rest       0.0-  1.0 s | servo 0.61 | tilt  0.1 | sat 0 | gov min 1.00 | fan max 0.0 N | arm1 j0 t0.20
+02 get up     1.0-  8.5 s | servo 1.00 | tilt  1.8 | sat 0 | gov min 0.45 | fan max 0.0 N | arm6 j2 t2.17
+03 idle       8.6-  9.7 s | servo 0.27 | tilt  0.0 | sat 0 | gov min 1.00 | fan max 0.0 N | arm6 j0 t8.60
+04 walk       9.8- 23.8 s | servo 1.00 | tilt  1.3 | sat 0 | gov min 0.45 | fan max 0.0 N | arm0 j4 t10.20
+05 wave      23.8- 31.1 s | servo 0.84 | tilt  0.3 | sat 0 | gov min 1.00 | fan max 0.0 N | arm1 j4 t30.57
+06 idle      31.1- 31.7 s | servo 0.37 | tilt  0.1 | sat 0 | gov min 1.00 | fan max 0.0 N | arm1 j4 t31.10
+07 take off  31.7- 38.5 s | servo 1.00 | tilt  2.6 | sat 1 | gov min 0.45 | fan max 28.0 N | arm0 j0 t33.17
+08 fly       38.5- 41.4 s | servo 0.50 | tilt  1.0 | sat 0 | gov min 1.00 | fan max 14.0 N | arm2 j2 t38.70
+09 fly       41.4- 45.0 s | servo 1.00 | tilt 82.7 | sat 1 | gov min 0.45 | fan max 27.9 N | arm3 j2 t42.13
+10 idle      45.0- 45.8 s | servo 0.91 | tilt 77.9 | sat 0 | gov min 0.62 | fan max 0.0 N | arm7 j5 t45.27
+11 land      45.8- 54.2 s | servo 1.00 | tilt 80.2 | sat 0 | gov min 0.45 | fan max 0.1 N | arm4 j2 t47.30
+12 idle      54.2- 55.2 s | servo 1.00 | tilt 16.1 | sat 0 | gov min 0.45 | fan max 0.0 N | arm3 j2 t54.23
+13 lie down  55.3- 64.1 s | servo 1.00 | tilt 16.8 | sat 0 | gov min 0.45 | fan max 0.0 N | arm0 j2 t55.27
+14 rest      64.1- 65.1 s | servo 0.25 | tilt  0.0 | sat 0 | gov min 1.00 | fan max 0.0 N | arm6 j6 t64.10
+{
+ "level": "mid",
+ "prog": "day",
+ "robot_kg": 12.664879999999998,
+ "hand_T": 23.35,
+ "min_V": 22.29968983753671,
+ "peak_pack_A": 262.4570871064744,
+ "peak_edf_A": 115.08955077318733,
+ "edf_ratio_max": 1.022926782889411,
+ "fan_ratio_max": [
+  0.6441188931683668,
+  0.9999638157505946,
+  0.9900198806545164,
+  0.9382503439433293,
+  0.996667425653963,
+  0.99995479417231,
+  0.9989220296615431,
+  0.861714324362883
+ ],
+ "fan_ratio_max_air": [
+  0.6441188931683668,
+  0.9507245740159045,
+  0.9900198806545164,
+  0.9382503439433293,
+  0.996667425653963,
+  0.8998856939362614,
+  0.9989220296615431,
+  0.861714324362883
+ ],
+ "hand_fan_max_N": [
+  23.11696421328296,
+  23.32482939259703
+ ],
+ "hand_ceiling_min_N": [
+  23.35,
+  23.35
+ ],
+ "esc_peak_A": [
+  17.225302639936135,
+  32.60350923875332,
+  50.34064227679417,
+  30.282791223885088,
+  33.104827750246955,
+  32.59203251803193,
+  50.59931746039207,
+  26.556376203172913
+ ],
+ "esc_over": [
+  0.3827845031096919,
+  0.7245224275278516,
+  0.8390107046132361,
+  0.6729509160863353,
+  0.7356628388943768,
+  0.7242673892895984,
+  0.8433219576732012,
+  0.5901416934038425
+ ],
+ "tilt_max": 82.73560943612958,
+ "tilt_max_air": 82.73560943612958,
+ "servo_max": 1.0,
+ "servo_hand_arms": [
+  1.0,
+  1.0
+ ],
+ "sat_max": 1,
+ "z_max": 1.0891429215903827,
+ "soc_end": 0.8814022454934687,
+ "refused": false,
+ "t_end": 65.06679999990172
+}

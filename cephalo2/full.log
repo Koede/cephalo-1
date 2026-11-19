@@ -1,0 +1,10 @@
+sim 29.1 s in 53 s wall | phase done
+max attitude error (flight) 7.7 deg | max xy error 10.4 cm | max claw-prop 28.0 N | min pack 21.8 V | dome contact 0.0 N
+  hover     servo 0.15 x stall | slip  0.0 deg | saturated frames 0
+  edf       servo 0.28 x stall | slip  0.1 deg | saturated frames 0
+  roll      servo 0.94 x stall | slip  0.1 deg | saturated frames 32
+  inverted  servo 0.31 x stall | slip  0.1 deg | saturated frames 0
+  land      servo 0.77 x stall | slip  0.2 deg | saturated frames 0
+  stand     servo 0.27 x stall | slip  0.0 deg | saturated frames 0
+  walk      servo 0.99 x stall | slip  0.1 deg | saturated frames 0
+  done      servo 0.57 x stall | slip  0.1 deg | saturated frames 0
