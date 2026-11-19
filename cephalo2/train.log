@@ -1,0 +1,7 @@
+gen 0 (ansatz): J 18.7 | exy_mean 5.80 exy_max 15.95 ez_max 1.81 tilt_max 5.14 yaw_max 7.50 sat_frac 0.04 servo 0.82 tie_mm 14.51 vmin 22.65 crash 0.00 J 18.69
+gen 1: best 8.9 mean 360.9 | overall best 8.9 | exy_mean 2.63 exy_max 5.70 ez_max 2.17 tilt_max 3.25 yaw_max 5.38 sat_frac 0.02 servo 0.82 tie_mm 14.57 vmin 22.67 crash 0.00 J 8.91
+gen 2: best 6.7 mean 10.3 | overall best 6.7 | exy_mean 1.74 exy_max 3.70 ez_max 2.13 tilt_max 3.25 yaw_max 5.06 sat_frac 0.01 servo 0.87 tie_mm 14.49 vmin 22.68 crash 0.00 J 6.74
+gen 3: best 6.3 mean 9.1 | overall best 6.3 | exy_mean 1.58 exy_max 3.45 ez_max 2.36 tilt_max 2.97 yaw_max 4.31 sat_frac 0.01 servo 0.84 tie_mm 14.51 vmin 22.68 crash 0.00 J 6.32
+gen 4: best 7.4 mean 322.1 | overall best 6.3 | exy_mean 1.77 exy_max 3.96 ez_max 2.41 tilt_max 3.37 yaw_max 4.23 sat_frac 0.04 servo 0.82 tie_mm 14.58 vmin 22.67 crash 0.00 J 7.38
+gen 5: best 6.5 mean 123.5 | overall best 6.3 | exy_mean 1.80 exy_max 4.04 ez_max 2.11 tilt_max 2.41 yaw_max 5.23 sat_frac 0.00 servo 0.82 tie_mm 14.51 vmin 22.69 crash 0.00 J 6.47
+gen 6: best 5.5 mean 8.0 | overall best 5.5 | exy_mean 1.31 exy_max 3.17 ez_max 2.11 tilt_max 2.17 yaw_max 5.51 sat_frac 0.00 servo 0.82 tie_mm 14.48 vmin 22.69 crash 0.00 J 5.49

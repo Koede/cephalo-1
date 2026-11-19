@@ -1,0 +1,4 @@
+  impact at t 1.64 s, speed 4.79 m/s, tilt 0 deg
+cut: sim 4.0 s in 6 s wall | end phase getup
+  peak floor force 7528 N, 10 ms average 3854 N = 36.0 x weight
+  impact 4.79 m/s | peak body decel 17 g | bumper/dome 0 N | arm-floor 0 N | servo 1.00 | gear 1.68 of limit | clutch slip 13 deg | clutches at stop 0

@@ -1,0 +1,26 @@
+  impact at t 1.72 s, speed 5.50 m/s, tilt 105 deg
+  re-index at 3.71 s: arm 0 j0 -60 deg, arm 0 j5 +90 deg, arm 0 j6 -90 deg, arm 1 j1 -60 deg, arm 1 j2 -90 deg, arm 1 j4 -90 deg, arm 2 j2 -90 deg, arm 2 j4 +90 deg, arm 2 j5 +90 deg, arm 2 j6 +90 deg, arm 3 j2 -90 deg, arm 3 j5 -90 deg, arm 4 j2 +90 deg, arm 5 j0 +120 deg, arm 5 j1 -60 deg, arm 5 j5 +90 deg, arm 6 j0 +120 deg, arm 6 j1 +60 deg, arm 6 j5 -90 deg, arm 7 j7 +90 deg
+  righting: tilt 180 deg, axis arm 4, fit error 1.5 deg, path s 1.00
+  pre-flight: arms [1] still off their pose, going anyway
+  roll axis moved to arm 6
+  wobble done at 18.71 s, leg 4 pops out (tilt 14.7 deg off level)
+  pivot roll lost at 21.91 s (attitude error 77 deg): motors cut
+  impact at t 21.98 s, speed 5.50 m/s, tilt 57 deg
+  re-index at 24.43 s: arm 0 j0 -60 deg, arm 0 j2 -90 deg, arm 1 j2 -90 deg, arm 1 j3 +90 deg, arm 2 j4 -90 deg, arm 2 j5 +90 deg, arm 7 j0 -60 deg, arm 7 j2 -90 deg
+  righting: tilt 180 deg, axis arm 2, fit error 0.4 deg, path s 1.00
+  wobble done at 37.93 s, leg 0 pops out (tilt 11.5 deg off level)
+hit: sim 45.3 s in 140 s wall | end phase done
+  peak floor force 2778 N, 10 ms average 1903 N = 18.2 x weight
+  impact 5.50 m/s | body decel (10 ms) 32 g | bumper/dome 470 N | arm-floor 2304 N | servo 1.00 | gear 1.08 of limit | clutch slip 131 deg | clutches past a crest 20
+  worst gear at {'t': 22.09520000000186, 'phase': 'impact', 'arm': 7, 'joint': 0, 'servo': 0.3333333333333333, 'inertia': 0.7452668351754326, 'clutch_deg': 3.4151143679024423}
+  worst link-shell stop torque 105.0 N m at {'t': 1.763199999999871, 'arm': 2, 'joint': 0, 'phase': 'impact'} | per joint 105 52 15 16 84 6 3 2
+    hover    servo 0.16 | gear 0.06 | slip    0 deg | clutches at stop 0
+    hit      servo 1.00 | gear 0.44 | slip    1 deg | clutches at stop 0
+    fall     servo 1.00 | gear 0.55 | slip   23 deg | clutches at stop 0
+    impact   servo 1.00 | gear 1.08 | slip  131 deg | clutches at stop 20
+    reindex  servo 1.00 | gear 0.53 | slip  115 deg | clutches at stop 20
+    assess   servo 0.89 | gear 0.39 | slip   32 deg | clutches at stop 0
+    rearm    servo 0.89 | gear 0.94 | slip   30 deg | clutches at stop 0
+    lift     servo 1.00 | gear 0.77 | slip   14 deg | clutches at stop 0
+    roll     servo 1.00 | gear 0.86 | slip    1 deg | clutches at stop 0
+    upright  servo 0.30 | gear 0.10 | slip    0 deg | clutches at stop 0

@@ -1,0 +1,372 @@
+"""Three-phalanx hand-prop, park-and-dock version: dimensioned drawings from hand3_design.py (2026-11-13).
+python3 hand3_blueprints.py -> hand3_bp_0..5.png.  Drawn from design parameters, not from CAD solids: fits are still to be checked."""
+import json, numpy as np
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+from matplotlib.patches import Circle, Rectangle, Polygon, Wedge
+import hand3_design as H
+
+D = H.design()
+INK = "#111418"; DIM = "#0b5cad"; MUTE = "#6b7280"; PAD = "#e8912d"; BODY = "#dfe3e8"; STEEL = "#b8bec6"; BRASS = "#c9a227"; TPU = "#7fb3d5"
+ROLE = dict(base="#d1242f", middle="#1f6feb", tip="#8250df", spread="#57606a")
+SERVO_C = dict(STS3032="#f0b72f", SCS0009="#f7d98a")
+
+
+def page(title, sub, n, w=9.0, h=12.0):
+    fig = plt.figure(figsize=(w, h), dpi=120)
+    fig.patches.append(Rectangle((0.02, 0.015), 0.96, 0.97, transform=fig.transFigure, fc="white", ec=INK, lw=1.2, zorder=0))
+    fig.text(0.04, 0.965, title, fontsize=17, fontweight="bold", color=INK, va="top")
+    fig.text(0.04, 0.938, sub, fontsize=9.5, color=MUTE, va="top")
+    fig.patches.append(Rectangle((0.02, 0.015), 0.96, 0.04, transform=fig.transFigure, fc="#f3f4f6", ec=INK, lw=1.0, zorder=1))
+    fig.text(0.04, 0.035, f"CEPHALO-1  three-joint hand-prop, park and dock   |   sheet {n} of 5   |   2026-11-13   |   dimensions in mm   |   design values, not yet fit-checked in CAD",
+             fontsize=7.6, color=INK, va="center", zorder=2)
+    return fig
+
+
+def view(fig, rect, xl, yl, name=None):
+    ax = fig.add_axes(rect); ax.set_aspect("equal"); ax.axis("off"); ax.set_xlim(*xl); ax.set_ylim(*yl); ax.set_zorder(5); ax.patch.set_alpha(0)
+    if name: ax.text(xl[0], yl[1], name, fontsize=9.5, fontweight="bold", color=INK, va="top", ha="left")
+    return ax
+
+
+def dimh(ax, x0, x1, y, txt, yref=None, fs=7.5, off=0.0):
+    ax.annotate("", xy=(x0, y), xytext=(x1, y), arrowprops=dict(arrowstyle="<|-|>", color=DIM, lw=0.8, mutation_scale=7))
+    if yref is not None:
+        for x in (x0, x1): ax.plot([x, x], [yref, y], color=DIM, lw=0.5)
+    ax.text((x0 + x1) / 2 + off, y, txt, color=DIM, fontsize=fs, ha="center", va="bottom")
+
+
+def dimv(ax, y0, y1, x, txt, xref=None, fs=7.5, ha="left"):
+    ax.annotate("", xy=(x, y0), xytext=(x, y1), arrowprops=dict(arrowstyle="<|-|>", color=DIM, lw=0.8, mutation_scale=7))
+    if xref is not None:
+        for y in (y0, y1): ax.plot([xref, x], [y, y], color=DIM, lw=0.5)
+    ax.text(x + (0.6 if ha == "left" else -0.6), (y0 + y1) / 2, txt, color=DIM, fontsize=fs, ha=ha, va="center")
+
+
+def note(ax, xy, xyt, txt, fs=7.5, c=INK):
+    ax.annotate(txt, xy=xy, xytext=xyt, fontsize=fs, color=c, ha="center", va="center", arrowprops=dict(arrowstyle="-", color=c, lw=0.6))
+
+
+def table(fig, x, y, rows, colw, fs=7.6, rh=0.0185, head=True):
+    for i, r in enumerate(rows):
+        xx = x
+        for j, cell in enumerate(r):
+            fig.text(xx, y - i * rh, str(cell), fontsize=fs, color=INK, va="top", fontweight="bold" if (head and i == 0) else "normal"); xx += colw[j]
+        if head and i == 0: fig.lines.append(plt.Line2D([x, x + sum(colw)], [y - rh * 0.82, y - rh * 0.82], transform=fig.transFigure, color=INK, lw=0.6))
+
+
+def para(fig, x, y, items, width=128, fs=7.8, lh=0.0165, bullet="·  "):
+    import textwrap
+    for it in items:
+        for i, l in enumerate(textwrap.wrap(it, width)):
+            fig.text(x, y, (bullet if i == 0 else "    ") + l, fontsize=fs, color=INK, va="top"); y -= lh
+        y -= lh * 0.25
+    return y
+
+
+def rrect(c, R, w, h):
+    p = np.array([[-w / 2, -h / 2], [w / 2, -h / 2], [w / 2, h / 2], [-w / 2, h / 2]])
+    return p @ R.T + c
+
+
+def rot(a):
+    return np.array([[np.cos(a), -np.sin(a)], [np.sin(a), np.cos(a)]])
+
+
+KN = H.KN; S = D["sizing"]; KL = D["knuckles"]; Zs = D["Z"]
+
+
+# ---------------------------------------------------------------- sheet 0: plans compared
+def bp0():
+    fig = page("0  Design plans compared", "Whole-hand plans on the same numbers (estimates). The pick is drawn on sheets 1-5.", 0)
+    P = D["plans"]
+    for i, p in enumerate(P):
+        y1 = 0.905 - i * 0.134
+        fig.patches.append(Rectangle((0.04, y1 - 0.124), 0.92, 0.124, transform=fig.transFigure, fc="#f3fbf5" if p["ok"] else "white", ec="#1a7f37" if p["ok"] else "#c8ced6", lw=2 if p["ok"] else 0.8, zorder=1))
+        ax = view(fig, [0.05, y1 - 0.12, 0.30, 0.115], (-135, 135), (-12, 118))
+        around = p["plan"][0] in "CE"; h = p["pack_h"]; od = p["pack_od"]; hub = p["hub_z"]
+        ax.add_patch(Rectangle((-16, -10), 32, 10, fc=BODY, ec=INK, lw=0.7))                                    # arm tip
+        m0 = 4 if around else h
+        if h > 0: ax.add_patch(Rectangle((-od / 2, 4 if around else 0), od, h, fc=SERVO_C["STS3032"], ec=INK, lw=0.8, alpha=0.9))
+        if p["plan"][0] == "E": ax.add_patch(Rectangle((-30, hub - 28), 60, 24, fc="#c8ced6", ec=INK, lw=0.7))
+        ax.add_patch(Rectangle((-17, m0), 34, 31, fc="#30363d", ec=INK, lw=0.8, zorder=3))
+        ax.plot([-127, 127], [hub, hub], color="#3b4252", lw=3.5, solid_capstyle="round")
+        ax.add_patch(Rectangle((-28, hub - 5), 56, 10, fc=STEEL, ec=INK, lw=0.7, zorder=4))
+        dimv(ax, 0, hub, 131, f"{hub}", fs=6.5)
+        fig.text(0.37, y1 - 0.012, p["plan"], fontsize=10.5, fontweight="bold", color=INK, va="top")
+        if p["ok"]: fig.text(0.945, y1 - 0.012, "PICK", fontsize=9, fontweight="bold", color="white", va="top", ha="right", bbox=dict(boxstyle="round,pad=0.3", fc="#1a7f37", ec="none"))
+        lines = [f"{p['servos']} servo{'s' if p['servos'] > 1 else ''}   ·   {p['mass']} g per hand (+{p['added_vs_xl']} g on the XL pod)",
+                 f"pack Ø{p['pack_od']:.0f} × {p['pack_h']:.0f} mm, {p['gap_to_rotor']} mm under the rotor, covers {p['blocked_disc_pct']} % of the disc" if p["pack_h"] else "no servo pack; key cage Ø60 round the motor",
+                 f"blade plane {p['hub_z']} mm from the spigot, centre of mass at {p['com_z']} mm",
+                 p["note"]]
+        for k, l in enumerate(lines):
+            fig.text(0.37, y1 - 0.040 - k * 0.021, l, fontsize=8.6, color="#b42318" if (k == 3 and not p["ok"]) else INK, va="top")
+    fig.text(0.04, 0.225, "Why A:", fontsize=10, fontweight="bold", color=INK, va="top")
+    why = ["Only A, B and C give every joint its own actuator, which is what 'fingers move at the same time, each on its own' needs.",
+           "B does not pack: flat servos need four tiers and a Ø119 drum.  C is the shortest but puts a Ø137 ring 12 mm under the rotor (29 % of the disc).",
+           "A is the narrowest pack that fits 14 servos, sits 38 mm below the rotor, and keeps the cords straight up from spool to claw bar.",
+           "D saves 93 g but loses tip-only and middle-only curl.  E is 304 g lighter but moves one joint at a time.",
+           "Servo mix inside A: base and middle joints need 52-69 N of cord, so STS3032; tip joints need 21 N, so the lighter SCS0009."]
+    para(fig, 0.04, 0.203, why, width=132, fs=8.2, lh=0.0165)
+    fig.savefig("hand3_bp_0.png"); plt.close(fig)
+
+
+# ---------------------------------------------------------------- sheet 1: finger
+def bp1():
+    fig = page("1  Finger", "One of four. Grip face (pads) is the +z, thrust side. Radii are from the rotor axis.", 1)
+    # --- plan view
+    ax = view(fig, [0.05, 0.63, 0.90, 0.27], (6, 136), (-22, 23), "PLAN (grip face)")
+    ax.add_patch(Wedge((0, 0), 28, -40, 40, fc="#eef1f4", ec=MUTE, lw=0.6, ls="--")); ax.text(11, -19, "hub Ø56", fontsize=7, color=MUTE)
+    ax.add_patch(Polygon([[14.5, -6], [KN[0] - 1.2, -H.W_KN[0] / 2], [KN[0] - 1.2, H.W_KN[0] / 2], [14.5, 6]], closed=True, fc=STEEL, ec=INK, lw=0.9))     # root grip
+    ax.add_patch(Circle((H.R_LAG, 0), 2.0, fc="white", ec=INK, lw=0.9)); note(ax, (H.R_LAG, 2), (17, 19), "lag pivot Ø4 × 0.5 tube, r 20", 6.8)
+    ends = KN + [H.R_TIP]
+    for k in range(3):
+        r0, r1 = KN[k] + 1.2, ends[k + 1] - (1.2 if k < 2 else 0)
+        c0, c1 = H.chord(r0), H.chord(r1)
+        ax.add_patch(Polygon([[r0, -c0 / 2], [r1, -c1 / 2], [r1, c1 / 2], [r0, c0 / 2]], closed=True, fc=BODY, ec=INK, lw=0.9))
+        pw0, pw1 = H.PAD_W * c0, H.PAD_W * c1
+        ax.add_patch(Polygon([[r0 + 5, -pw0 / 2], [r1 - 5, -pw1 / 2], [r1 - 5, pw1 / 2], [r0 + 5, pw0 / 2]], closed=True, fc=PAD, ec=INK, lw=0.5, alpha=0.75))
+        ax.add_patch(Rectangle((KN[k] - H.BARREL[k] / 2, -H.W_KN[k] / 2), H.BARREL[k], H.W_KN[k], fc="#9aa3ad", ec=INK, lw=0.8, zorder=4))
+        ax.text(KN[k], H.W_KN[k] / 2 + 1.6, f"{H.W_KN[k]:.1f} wide", fontsize=6.6, color=DIM, ha="center")
+    for y, c in ((-0.9, ROLE["tip"]), (0, ROLE["middle"]), (0.9, ROLE["base"])): ax.plot([H.R_LAG, 118 if c == ROLE["tip"] else (88 if c == ROLE["middle"] else 56)], [y, y], color=c, lw=1.0, zorder=6)
+    for r, s in zip(KN + [H.R_TIP], ("K1", "K2", "K3", "tip")):
+        ax.plot([r, r], [-14, -11], color=DIM, lw=0.5); ax.text(r, -16.5, f"{s}\nr {r:.0f}", fontsize=7.5, color=DIM, ha="center", va="center")
+    for k in range(3): dimh(ax, KN[k], ends[k + 1], 15.5, f"{H.PH[k]:.0f}", yref=11)
+    ax.text(48, -12.2, f"chord {H.chord(KN[0]):.1f} at K1", fontsize=6.6, color=DIM, ha="center"); ax.text(121, -9.6, "chord 12.0\nat the tip", fontsize=6.6, color=DIM, ha="center")
+    # --- side view
+    ax = view(fig, [0.05, 0.40, 0.90, 0.21], (6, 136), (-19, 17), "SIDE (straight, flight position)")
+    ax.add_patch(Rectangle((14.5, -3), KN[0] - 1.2 - 14.5, 6, fc=STEEL, ec=INK, lw=0.9))
+    for k in range(3):
+        r0, r1 = KN[k] + 1.2, ends[k + 1] - (1.2 if k < 2 else 0); t0, t1 = H.thick(r0), H.thick(r1)
+        ax.add_patch(Polygon([[r0, -t0 / 2], [r1, -t1 / 2], [r1, t1 / 2], [r0, t0 / 2]], closed=True, fc=BODY, ec=INK, lw=0.9))
+        ax.add_patch(Polygon([[r0 + 5, t0 / 2], [r1 - 5, t1 / 2], [r1 - 5, t1 / 2 + H.PAD_T], [r0 + 5, t0 / 2 + H.PAD_T]], closed=True, fc=PAD, ec=INK, lw=0.5))
+        ax.add_patch(Circle((KN[k], 0), H.BARREL[k] / 2, fc="#9aa3ad", ec=INK, lw=0.8, zorder=4)); ax.add_patch(Circle((KN[k], 0), H.PIN_D[k] / 2, fc="white", ec=INK, lw=0.7, zorder=5))
+        col = [ROLE["base"], ROLE["middle"], ROLE["tip"]][k]; hk = H.LEVER[k]
+        xs = [H.R_LAG, KN[k] - 16, KN[k] - 6, KN[k] + 6, KN[k] + 14] if k else [H.R_LAG + 2, KN[k] - 5, KN[k] + 6, KN[k] + 14]
+        ys = [0, 0, hk, hk, hk - 1.2] if k else [hk, hk, hk, hk - 1.2]
+        ax.plot(xs, ys, color=col, lw=1.3, zorder=6)
+        ax.plot([KN[k] - 3.5, KN[k] + 3.5], [hk + 0.9, hk + 0.9], color=INK, lw=2.2, zorder=6)                 # saddle bridge
+        ax.text(KN[k], hk + 2.6, f"lever {hk:.1f}", fontsize=6.8, color=DIM, ha="center")
+        note(ax, (KN[k], -H.BARREL[k] / 2), (KN[k], -9.5), f"barrel Ø{H.BARREL[k]:.1f}, pin Ø{H.PIN_D[k]:.0f}", 6.6)
+    ax.plot([H.R_LAG, 122], [-2.6, -1.9], color="#1a7f37", lw=1.0, ls="--", zorder=6); note(ax, (52, -2.3), (52, -15.5), "extensor: Ø1 elastic cord in a back groove", 6.6, "#1a7f37")
+    ax.text(48, -5.2, f"{H.thick(KN[0]):.1f} thick at K1", fontsize=6.6, color=DIM, ha="center"); ax.text(124, -5.2, "3.2 at the tip", fontsize=6.6, color=DIM, ha="center")
+    note(ax, (112, 3.4), (114, 11), f"TPU pad {H.PAD_T:.1f} thick, 0.6 × chord wide", 6.6, "#9a5b00")
+    # --- section + curled view
+    ax = view(fig, [0.05, 0.215, 0.42, 0.16], (-12, 12), (-5.5, 7.5), "SECTION at r 48 (4 : 1)")
+    c, t = H.chord(48), H.thick(48)
+    th = np.linspace(0, np.pi, 30); up = np.c_[c / 2 * np.cos(th), t / 2 * np.sin(th) ** 0.6]; lo = np.c_[c / 2 * np.cos(th[::-1]), -t / 2 * np.sin(th[::-1]) ** 0.6]
+    ax.add_patch(Polygon(np.vstack([up, lo]), closed=True, fc=BODY, ec=INK, lw=0.9))
+    ax.add_patch(Rectangle((-H.PAD_W * c / 2, t / 2 - 0.15), H.PAD_W * c, H.PAD_T, fc=PAD, ec=INK, lw=0.6))
+    for y, col in ((-0.9, ROLE["tip"]), (0.9, ROLE["middle"])): ax.add_patch(Circle((y, 0), 0.5, fc="white", ec=col, lw=1.2, zorder=6))
+    ax.add_patch(Circle((0, -t / 2 + 0.55), 0.55, fc="white", ec="#1a7f37", lw=1.0, zorder=6))
+    dimh(ax, -c / 2, c / 2, -4.6, f"{c:.1f}", yref=-t / 2); dimv(ax, -t / 2, t / 2, c / 2 + 1.2, f"{t:.1f}", fs=6.8); dimh(ax, -H.PAD_W * c / 2, H.PAD_W * c / 2, 5.4, f"pad {H.PAD_W * c:.1f}", yref=t / 2 + H.PAD_T)
+    note(ax, (0.9, 0), (8.6, -3.0), "cord channels\nØ1.0 at ±0.9", 6.3)
+    ax = view(fig, [0.50, 0.215, 0.45, 0.16], (-34, 62), (-14, 50), "FULL CURL (base 90°, middle 90°, tip 85°)")
+    p = np.array([0.0, 0.0]); a = 0.0
+    ax.add_patch(Rectangle((-10, -3), 10, 6, fc=STEEL, ec=INK, lw=0.8))
+    for k in range(3):
+        a += np.radians(H.FOLD_MAX[k]); R = rot(a); t = H.thick(KN[k] + H.PH[k] / 2) / 2
+        ax.add_patch(Polygon(np.array([[1.2, -t], [H.PH[k] - 1.2, -t], [H.PH[k] - 1.2, t], [1.2, t]]) @ R.T + p, closed=True, fc=BODY, ec=INK, lw=0.8))
+        ax.add_patch(Polygon(np.array([[5, t], [H.PH[k] - 5, t], [H.PH[k] - 5, t + H.PAD_T], [5, t + H.PAD_T]]) @ R.T + p, closed=True, fc=PAD, ec=INK, lw=0.4))
+        ax.add_patch(Circle(p, H.BARREL[k] / 2, fc="#9aa3ad", ec=INK, lw=0.7, zorder=4)); p = p + R @ np.array([H.PH[k], 0])
+    ax.text(-22, 20, "hub", fontsize=6.6, color=MUTE, ha="center")
+    W = D["wrap"]
+    table(fig, 0.05, 0.195, [["Object", "middle joint", "tip joint", ""], ["Ø16 rod", f"{W['D16'][0]}°", f"{W['D16'][1]}°", "beyond the 90° / 85° limits: pinch it with the tips instead"],
+                             ["Ø32 handle", f"{W['D32'][0]}°", f"{W['D32'][1]}°", "wraps"], ["Ø38 handle", f"{W['D38'][0]}°", f"{W['D38'][1]}°", "wraps"], ["Ø70 ball", f"{W['D70'][0]}°", f"{W['D70'][1]}°", "wraps"]],
+          [0.10, 0.10, 0.08, 0.5], fs=7.4, rh=0.0165)
+    fig.text(0.05, 0.105, "Material: phalanges and root grip PA-CF, printed flat on the back face (layers along the span). Pads TPU 95A, glued and keyed.  "
+             "Cords: 0.6 mm Dyneema braid.", fontsize=7.6, color=INK, va="top")
+    fig.text(0.05, 0.088, f"Finger mass outboard of the lag pin {KL[0]['m_out_g']:.1f} g (est.).  In flight each knuckle sits on a {H.PRECONE:.0f}° preconed stop face; spin holds it there with {min(k['lock_ratio'] for k in KL[1:]):.1f}× the thrust moment.",
+             fontsize=7.6, color=INK, va="top")
+    fig.savefig("hand3_bp_1.png"); plt.close(fig)
+
+
+# ---------------------------------------------------------------- sheet 2: knuckle
+def bp2():
+    fig = page("2  Knuckle", "K1 drawn 5 : 1; K2 and K3 are the same layout with the sizes in the table.", 2)
+    k = 0; W = H.W_KN[k]; ck, lg, gp = H.CHEEK[k], H.LUG[k], H.GAP[k]
+    ax = view(fig, [0.05, 0.60, 0.52, 0.30], (-13, 14), (-11.5, 11.5), "PLAN (K1)")
+    ax.add_patch(Rectangle((-13, -W / 2), 13 - 0.6, W, fc=STEEL, ec=INK, lw=0.9))                           # proximal body (root grip)
+    for sg in (-1, 1):
+        y0 = sg * (W / 2 - ck) if sg > 0 else -W / 2
+        ax.add_patch(Rectangle((-0.6, y0), 4.6, ck, fc=STEEL, ec=INK, lw=0.9))                              # cheeks
+        yl = sg * gp / 2 if sg > 0 else -gp / 2 - lg
+        ax.add_patch(Rectangle((-3.4, yl), 3.4 + 13, lg, fc=BODY, ec=INK, lw=0.9, zorder=3))                # distal lugs
+        yb = min(y0, yl); ax.add_patch(Rectangle((-H.BUSH_OD[k] / 2, yb), H.BUSH_OD[k], ck + lg + H.CLR, fc=BRASS, ec=INK, lw=0.6, zorder=4))
+        ax.add_patch(Rectangle((-H.PIN_D[k] / 2, yb), H.PIN_D[k], H.PIN_L[k], fc="#eef1f4", ec=INK, lw=0.7, zorder=5))
+    ax.add_patch(Rectangle((4.0, -W / 2 + 1.5), 9, W - 3, fc=BODY, ec=INK, lw=0.9, zorder=2))
+    for y, c in ((-0.9, ROLE["tip"]), (0, ROLE["middle"]), (0.9, ROLE["base"])): ax.plot([-13, 13], [y, y], color=c, lw=1.1, zorder=6)
+    ax.plot([0, 0], [-10.6, 10.6], color=MUTE, lw=0.6, ls="-."); ax.text(0.3, 10.9, "pin axis", fontsize=6.8, color=MUTE)
+    dimv(ax, -W / 2, W / 2, -11.6, f"{W:.1f}", fs=7)
+    ax.text(5.2, W / 2 - ck / 2, f"cheek {ck}", fontsize=6.6, color=DIM, va="center"); ax.text(9.2, gp / 2 + lg + 0.9, f"lug {lg}", fontsize=6.6, color=DIM, ha="center")
+    ax.text(9.2, -0.2, f"gap {gp}", fontsize=6.6, color=DIM, ha="center", va="top", bbox=dict(fc="white", ec="none", pad=0.4), zorder=8)
+    note(ax, (-1.6, -W / 2 + 1.5), (-8.5, -9.8), f"Ø{H.PIN_D[k]:.0f} × {H.PIN_L[k]:.0f} hardened dowel (ISO 8734)\nin a {H.BUSH_OD[k]:.0f} × {H.PIN_D[k]:.0f} brass bushing", 6.6)
+    ax = view(fig, [0.58, 0.60, 0.38, 0.30], (-12, 13), (-8, 12), "SIDE (K1)")
+    t = H.thick(KN[0]) / 2
+    ax.add_patch(Polygon([[-12, -3], [-1.0, -3], [-0.35, 0], [-2.6, 3], [-12, 3]], closed=True, fc=STEEL, ec=INK, lw=0.9))
+    ax.add_patch(Polygon([[0.35, 0], [1.0, -t], [13, -t], [13, t], [2.6, t]], closed=True, fc=BODY, ec=INK, lw=0.9))
+    ax.add_patch(Circle((0, 0), H.BARREL[k] / 2, fc="#9aa3ad", ec=INK, lw=0.8, alpha=0.55, zorder=3)); ax.add_patch(Circle((0, 0), H.BUSH_OD[k] / 2, fc=BRASS, ec=INK, lw=0.6, zorder=4)); ax.add_patch(Circle((0, 0), H.PIN_D[k] / 2, fc="#eef1f4", ec=INK, lw=0.6, zorder=5))
+    ax.plot([-12, -4, 3.5, 12], [H.LEVER[k], H.LEVER[k], H.LEVER[k], H.LEVER[k] - 1.5], color=ROLE["base"], lw=1.3, zorder=6)
+    ax.add_patch(Rectangle((-3.5, H.LEVER[k] + 0.4), 7, 1.0, fc=INK, ec=INK, zorder=6)); note(ax, (2.5, H.LEVER[k] + 1.0), (8, 10.6), "saddle bridge:\ncord under it", 6.6)
+    ax.plot([-12, 12], [0, 0], color=ROLE["middle"], lw=1.0, zorder=7)
+    dimv(ax, 0, H.LEVER[k], -6.5, f"{H.LEVER[k]:.1f}", fs=7, ha="right")
+    note(ax, (-0.7, -1.6), (-6.5, -6.6), f"stop faces meet here:\n{H.PRECONE:.0f}° precone", 6.6); note(ax, (-1.6, 2.2), (-8.5, 7.3), "45° reliefs:\n90° of fold", 6.6)
+    rows = [["", "K1 base", "K2 middle", "K3 tip"], ["radius", *[f"{r:.0f}" for r in KN]], ["stub pins (2 each)", *[f"Ø{d:.0f} × {l:.0f}" for d, l in zip(H.PIN_D, H.PIN_L)]],
+            ["brass bushings", *[f"{o:.0f} × {d:.0f}" for o, d in zip(H.BUSH_OD, H.PIN_D)]], ["cheek / lug / gap", *[f"{c} / {l} / {g}" for c, l, g in zip(H.CHEEK, H.LUG, H.GAP)]],
+            ["knuckle width", *[f"{w:.1f}" for w in H.W_KN]], ["barrel Ø", *[f"{b}" for b in H.BARREL]], ["cord lever arm", *[f"{l}" for l in H.LEVER]],
+            ["fold range", *[f"−{H.PRECONE:.0f}° … {f:.0f}°" for f in H.FOLD_MAX]],
+            ["pull at proof speed", *[f"{k_['F_proof']} N" for k_ in KL[1:]]], ["bearing: cheek / lug", *[f"{k_['bearing_cheek_MPa']:.0f} / {k_['bearing_lug_MPa']:.0f} MPa" for k_ in KL[1:]]],
+            ["pin shear", *[f"{k_['pin_shear_MPa']:.0f} MPa" for k_ in KL[1:]]], ["flight lock (spin / thrust)", *[f"{k_['lock_ratio']:.1f} ×" for k_ in KL[1:]]]]
+    table(fig, 0.06, 0.555, rows, [0.27, 0.21, 0.21, 0.21], fs=8.4, rh=0.0215)
+    txt = [f"Proof speed {D['rpm_proof']:,} rpm = 1.15 × the {D['rpm_26N']:,} rpm needed for 26.5 N (est.). Loads are mass outboard × ω² × CG radius.",
+           "Bearing stress is on the brass bushing's outer face in PA-CF. 55 MPa at K1 is high for a printed part: the cheek seats are the first thing to pull-test (target 1.7 kN per knuckle).",
+           "If the K1 cheeks fail the pull test: machine the root grip and its fork from 6061 aluminium (the grip is a 16 × 15 × 6 mm block).",
+           "Cords cross on the pin axis in the gap between the lugs: Ø1.0 channels at −0.9 / 0 / +0.9 mm. Only the knuckle's own cord runs over the saddle."]
+    para(fig, 0.06, 0.255, txt, width=120, fs=8.0, lh=0.0185)
+    fig.savefig("hand3_bp_2.png"); plt.close(fig)
+
+
+# ---------------------------------------------------------------- sheet 3: hub, cage, claws
+def bp3():
+    fig = page("3  Hub, followers and claw bars", "Rotating parts in grey and colours; stationary claw bars in yellow. Rotor parked at its index.", 3)
+    ax = view(fig, [0.05, 0.49, 0.90, 0.42], (-66, 66), (-60, 60), "TOP (hub plates removed)")
+    ax.add_patch(Circle((0, 0), 51, fc="none", ec=MUTE, lw=0.7, ls="--")); ax.text(-60, -52, "dashed: servo pack Ø102 (below)", fontsize=6.6, color=MUTE)
+    ax.add_patch(Circle((0, 0), 28, fc="none", ec=MUTE, lw=0.7, ls="-.")); ax.text(-60, -56, "dash-dot: hub plates Ø56", fontsize=6.6, color=MUTE)
+    ax.add_patch(Wedge((0, 0), H.HUB["cage_r"][1], 0, 360, width=H.HUB["cage_r"][1] - H.HUB["cage_r"][0], fc="#c8ced6", ec=INK, lw=0.7))
+    ax.add_patch(Circle((0, 0), 17, fc="#30363d", ec=INK)); ax.text(0, 0, "motor\nØ34", color="white", fontsize=7.5, ha="center", va="center")
+    for a in H.FINGER_AZ:
+        t = np.radians(a); e = np.array([np.cos(t), np.sin(t)])
+        ax.plot([e[0] * 30, e[0] * 64], [e[1] * 30, e[1] * 64], color="#9aa3ad", lw=9, solid_capstyle="butt", alpha=0.5, zorder=1)
+        ax.add_patch(Circle(e * 20, 2.0, fc="white", ec=INK, lw=0.9, zorder=6))
+    for c in D["channels"]:
+        t = np.radians(c["az"]); R = rot(t); e = R[:, 0]; col = ROLE[c["role"]]
+        ax.add_patch(Polygon(rrect(e * H.HUB["r_follow"], R, 5.0, 6.0), closed=True, fc=col, ec=INK, lw=0.6, zorder=4))
+        ax.add_patch(Polygon(rrect(e * 29.5, R, 4.0, 5.0), closed=True, fc=col, ec=INK, lw=0.6, zorder=4))                    # fin
+        ax.add_patch(Polygon(rrect(e * (H.HUB["claw_r"] + 28.0) / 2, R, H.HUB["claw_r"] - 28.0, 3.4), closed=True, fc=SERVO_C["STS3032"], ec=INK, lw=0.6, zorder=5, alpha=0.9))
+        ax.add_patch(Polygon(rrect(e * H.HUB["claw_r"], R, 4.0, 5.0), closed=True, fc="#b98900", ec=INK, lw=0.6, zorder=6))
+        ax.text(e[0] * 58.5, e[1] * 58.5, f"{c['name']}\n{c['az']:.0f}°", fontsize=5.8, color=col, ha="center", va="center")
+    fig.text(0.5, 0.475, f"lag pivots r 20 at 45 / 135 / 225 / 315°   ·   followers r {H.HUB['r_follow']}   ·   fins r {H.HUB['fin_r'][0]:.0f}-{H.HUB['fin_r'][1]:.0f}   ·   claw bars r {H.HUB['claw_r']}   ·   cage r {H.HUB['cage_r'][0]}-{H.HUB['cage_r'][1]:.0f}",
+             fontsize=7.4, color=DIM, ha="center", va="top")
+    # side half-section
+    ax = view(fig, [0.03, 0.075, 0.58, 0.375], (-6, 80), (40, 118), "SIDE, upper part (half section)")
+    ax.add_patch(Rectangle((0, -8), 16, 8, fc=BODY, ec=INK, lw=0.8)); ax.text(8, -4, "arm tip", fontsize=6.5, ha="center", va="center")
+    ax.add_patch(Rectangle((0, 0), 51, Zs["pack1"], fc="#fbf3da", ec=INK, lw=0.8)); pass
+    ax.add_patch(Rectangle((0, Zs["pack1"]), 17, H.MOTOR["can_L"], fc="#30363d", ec=INK, lw=0.8)); ax.text(8.5, Zs["pack1"] + 15, "motor", color="white", fontsize=7, ha="center", va="center")
+    ax.add_patch(Rectangle((0, Zs["motor_top"]), 2.5, Zs["shaft_tip"] - Zs["motor_top"], fc=STEEL, ec=INK, lw=0.6))
+    ax.add_patch(Rectangle((19.5, Zs["cage_lo"]), 3.5, Zs["hub_lo"] - Zs["cage_lo"], fc="#c8ced6", ec=INK, lw=0.7))
+    for z0 in (Zs["hub_lo"], Zs["hub_hi"] - 2.5): ax.add_patch(Rectangle((2.5, z0), 25.5, 2.5, fc=STEEL, ec=INK, lw=0.7))
+    ax.add_patch(Rectangle((14.5, Zs["hub_lo"] + 2.5), 50, 5.0, fc=BODY, ec=INK, lw=0.8)); ax.text(52, Zs["blade"], "finger root", fontsize=6.5, ha="center", va="center")
+    ax.add_patch(Rectangle((19, Zs["hub_lo"] - 1), 2.0, 12, fc="white", ec=INK, lw=0.7, zorder=4))                                       # lag tube
+    ft = Zs["fin_top"]; ax.add_patch(Rectangle((23.2, ft - 10), 4.6, 10, fc=ROLE["base"], ec=INK, lw=0.6, zorder=4)); ax.add_patch(Rectangle((27, ft - 2), 4, 2, fc=ROLE["base"], ec=INK, lw=0.6, zorder=4))
+    ax.plot([20, 20, 24.5, 24.5], [Zs["hub_lo"] - 1, ft + 1.5, ft - 0.5, ft - 4], color=ROLE["base"], lw=1.0, zorder=6)
+    ax.add_patch(Rectangle((23.9, ft - 9.5), 1.4, 5.5, fc=TPU, ec=INK, lw=0.5, zorder=6)); note(ax, (25.3, ft - 7), (40, ft - 13), "TPU link", 6.5)
+    ax.add_patch(Rectangle((H.HUB["claw_r"] - 2, 30), 4, Zs["claw_hi"] - 30, fc=SERVO_C["STS3032"], ec=INK, lw=0.7, zorder=5)); ax.text(30, 47, "servo pack (sheet 4)", fontsize=6.8, color="#7a5a00", ha="center")
+    ax.add_patch(Rectangle((28.0, Zs["claw_lo"]), H.HUB["claw_r"] - 26.0, 2.0, fc=SERVO_C["STS3032"], ec=INK, lw=0.7, zorder=5)); note(ax, (40, Zs["claw_hi"]), (62, Zs["claw_hi"] + 14), "claw bar\n(stationary)", 6.5)
+    note(ax, (29, ft - 1), (40, ft - 5), "fin", 6.5); note(ax, (25.5, ft - 9.5), (36, ft - 20), "follower", 6.5); note(ax, (20, Zs["hub_lo"] + 8), (36, Zs["hub_hi"] + 6), "lag tube: cords inside", 6.5)
+    ax.add_patch(Rectangle((0, Zs["shaft_tip"]), 8, 10, fc=TPU, ec=INK, lw=0.7)); note(ax, (8, Zs["heel"] - 5), (30, Zs["heel"] - 3), "TPU heel over the prop nut", 6.5)
+    fig.text(0.63, 0.44, "z levels", fontsize=9, fontweight="bold", color=INK, va="top")
+    rows = [["level", "z"], ["spigot face", "0.0"], ["pack top = motor mount", f"{Zs['pack1']}"], ["cage bottom", f"{Zs['cage_lo']}"], ["fin top, follower home", f"{Zs['fin_top']}"],
+            ["claw bar underside (flight)", f"{Zs['claw_lo']}"], ["motor can top (can 31, assumed)", f"{Zs['motor_top']}"], ["hub lower plate", f"{Zs['hub_lo']}"], ["blade plane", f"{Zs['blade']}"],
+            ["hub top", f"{Zs['hub_hi']}"], ["shaft tip (46.2 overall)", f"{Zs['shaft_tip']}"], ["heel (foot when standing)", f"{Zs['heel']}"]]
+    table(fig, 0.63, 0.415, rows, [0.26, 0.06], fs=7.6, rh=0.0185)
+    extra = [f"Flight: {H.HUB['flight_gap']:.0f} mm between claw bars and fins.", f"Follower travel {H.HUB['follow_travel']} mm (base joint needs {S['base']['travel']}).",
+             "Parking: Hall switch US5881 (Adafruit #158)", "+ N52 3 × 2 magnet on the cage; the two", "spread claws have V notches (±10°)."]
+    for i, l in enumerate(extra): fig.text(0.63, 0.185 - i * 0.0175, l, fontsize=7.4, color=INK, va="top")
+    fig.savefig("hand3_bp_3.png"); plt.close(fig)
+
+
+# ---------------------------------------------------------------- sheet 4: servo pack
+def bp4():
+    fig = page("4  Servo pack", "Stationary drum between the arm's spigot and the motor: 14 bus servos in two tiers, one spool and one claw bar each.", 4)
+    for tier, rect in ((1, [0.04, 0.545, 0.46, 0.365]), (2, [0.50, 0.545, 0.46, 0.365])):
+        ax = view(fig, rect, (-62, 62), (-62, 62), f"TIER {tier}  (z {2.5 + (tier - 1) * 24.5:.1f} - {2.5 + tier * 24.5:.1f})")
+        ax.add_patch(Circle((0, 0), 51, fc="#fdfaf0", ec=INK, lw=0.9)); ax.add_patch(Circle((0, 0), 10, fc=BODY, ec=INK, lw=0.8)); ax.add_patch(Circle((0, 0), 7, fc="white", ec=INK, lw=0.6))
+        for c in D["channels"]:
+            t = np.radians(c["az"]); R = rot(t); e = R[:, 0]; sv = S[c["role"]]["servo"]; hgt = H.SERVOS[sv]["size"][2]
+            if c["tier"] == tier:
+                r1 = H.PACK["spool_r_pos"] - 2.0; r0 = r1 - hgt
+                ax.add_patch(Polygon(rrect(e * (r0 + r1) / 2, R, hgt, 12.1), closed=True, fc=SERVO_C[sv], ec=INK, lw=0.8, zorder=3))
+                ax.add_patch(Polygon(rrect(e * H.PACK["spool_r_pos"], R, 4.0, 2 * S[c["role"]]["spool_r"] + 2), closed=True, fc=STEEL, ec=INK, lw=0.6, zorder=4))
+                ax.text(e[0] * (r0 + r1) / 2, e[1] * (r0 + r1) / 2, sv[:3] + "\n" + sv[3:], fontsize=5.0, ha="center", va="center", rotation=(c["az"] + 90) % 180 - 90, zorder=5)
+                ax.text(e[0] * 57.5, e[1] * 57.5, c["name"], fontsize=6.0, color=ROLE[c["role"]], ha="center", va="center")
+            else:
+                ax.add_patch(Circle(e * H.PACK["spool_r_pos"], 0.9, fc=ROLE[c["role"]], ec="none", zorder=4, alpha=0.6))                    # the other tier's cords / bars
+        if tier == 1:
+            dimh(ax, 0, H.PACK["r_in"], -2.5, "", fs=6); ax.text(9, -6.5, f"r {H.PACK['r_in']:.0f}", fontsize=6.5, color=DIM, ha="center")
+    ax = view(fig, [0.05, 0.305, 0.52, 0.235], (-62, 62), (-8, 92), "SIDE")
+    ax.add_patch(Rectangle((-16, -8), 32, 8, fc=BODY, ec=INK, lw=0.8)); ax.text(0, -4, "arm tip Ø32", fontsize=6.5, ha="center", va="center")
+    for z0 in (0, 51.5, 26.0): ax.add_patch(Rectangle((-51, z0), 102, 2.5 if z0 != 26.0 else 1.0, fc=BODY, ec=INK, lw=0.7))
+    ax.add_patch(Rectangle((-10, 2.5), 20, 49, fc="white", ec=INK, lw=0.7)); ax.text(0, 27, "spine\nØ20", fontsize=6.3, ha="center", va="center")
+    for z0, sv, x in ((3.0, "STS3032", 1), (27.5, "SCS0009", 1), (3.0, "SCS0009", -1), (27.5, "STS3032", -1)):
+        hgt = H.SERVOS[sv]["size"][2]; r1 = 46.5; r0 = r1 - hgt
+        ax.add_patch(Rectangle((x * r0 if x > 0 else -r1, z0), hgt, 23.2, fc=SERVO_C[sv], ec=INK, lw=0.8)); ax.text(x * (r0 + r1) / 2, z0 + 11.6, sv, fontsize=6, ha="center", va="center")
+        ax.add_patch(Rectangle((x * 46.5 if x > 0 else -50.5, z0 + 8.6), 4, 6, fc=STEEL, ec=INK, lw=0.6))
+        ax.add_patch(Rectangle((x * 48.5 - 2, z0 + 15), 4, Zs["claw_hi"] - z0 - 15, fc=SERVO_C["STS3032"], ec=INK, lw=0.6, alpha=0.85, zorder=4))
+        ax.add_patch(Rectangle((28 if x > 0 else -48.5, Zs["claw_lo"]), 20.5, 2, fc=SERVO_C["STS3032"], ec=INK, lw=0.6, zorder=4))
+    ax.add_patch(Rectangle((-17, 54), 34, 31, fc="#30363d", ec=INK, lw=0.8)); ax.text(0, 69, "motor", color="white", fontsize=7, ha="center", va="center")
+    dimh(ax, -51, 51, 88.5, "Ø102", yref=54); dimv(ax, 0, 54, 57, "54", fs=7)
+    note(ax, (48.5, 62), (36, 76), "claw bar 4 × 5,\nguided 36 mm", 6.3)
+    rows = [["Joint", "Servo", "Spool r", "Cord pull: need / stall", "Hold: need / rated", "Travel", "Time"]]
+    for nm in ("base", "middle", "tip"):
+        z = S[nm]; rows.append([nm + f" (lever {z['lever']})", z["servo"], f"{z['spool_r']}", f"{z['F_peak_need']} / {z['F_stall']} N  (×{z['margin']})", f"{z['F_hold_need']} / {z['F_rated']} N",
+                                f"{z['travel']} mm = {z['spool_deg']}°", f"{z['t_full_s']} s"])
+    z = S["spread"]; rows.append(["spread (eye r 9)", z["servo"], f"{z['spool_r']}", f"{z['F_stall']} N stall = {z['torque_per_blade_Nm']} N·m per blade", "", f"{z['travel']} mm", ""])
+    table(fig, 0.05, 0.290, rows, [0.135, 0.085, 0.06, 0.245, 0.15, 0.14, 0.06], fs=7.2, rh=0.018)
+    fig.text(0.62, 0.525, "Layout", fontsize=9, fontweight="bold", color=INK, va="top")
+    lay = ["Each servo lies with its shaft pointing outward: 23.2 along the pod axis, 12.1 tangential, 25.25 / 28.5 radial.",
+           f"Neighbours in a tier are {D['pack']['tier_gap']} mm apart at their inner corners; tier 1 cords pass tier 2 bodies by {D['pack']['cord_gap']} mm.",
+           "Spool Ø5-7; the cord runs straight up to the foot of its claw bar at r 48.5.",
+           "A 0.5 N/mm compression spring on each bar lifts it clear of the rotor."]
+    para(fig, 0.62, 0.503, lay, width=44, fs=7.3, lh=0.0158)
+    para(fig, 0.05, 0.185, [f"Requirement used: 5 N at the fingertip with the finger straight for 10 s, 2 N held. Efficiency {H.ETA} (spool, cord, bar guides). All 14 servos on one 7.4 V bus: {D['electrical']['servo_stall_A']} A if every servo stalls at once."],
+         width=130, fs=7.6, lh=0.017, bullet="")
+    para(fig, 0.05, 0.140, ["Feetech STS3032: 20 g, 0.441 N·m stall (rated torque assumed stall / 3). Feetech SCS0009: 13.2 g, 23.2 × 12.1 × 25.25 mm, 2.3 kg·cm stall and 0.7 kg·cm rated at 6 V, 0.1 s / 60°, 300°.",
+                            "Frame: PA-CF, three plates on a Ø20 spine tube (motor wires inside); M3 into the spigot coupler below, 19 × 19 mm M3 motor pattern on top."], width=130, fs=7.6, lh=0.017, bullet="")
+    fig.savefig("hand3_bp_4.png"); plt.close(fig)
+
+
+# ---------------------------------------------------------------- sheet 5: assembly, masses, parts
+def bp5():
+    fig = page("5  Assembly, masses and parts", "Side view to scale with the rotor in the flight cross. The XL claw-prop pod is shown dashed for size.", 5)
+    ax = view(fig, [0.05, 0.60, 0.90, 0.31], (-135, 135), (-34, 122))
+    ax.add_patch(Rectangle((-16, -34), 32, 34, fc=BODY, ec=INK, lw=0.8)); ax.text(0, -18, "arm tip\n(tip bay Ø32)", fontsize=6.8, ha="center", va="center")
+    ax.add_patch(Rectangle((-51, 0), 102, 54, fc="#fbf3da", ec=INK, lw=0.9)); ax.text(-32, 27, "servo pack\n14 servos", fontsize=7.5, ha="center", va="center", color="#7a5a00")
+    ax.add_patch(Rectangle((-17, 54), 34, 31, fc="#30363d", ec=INK, lw=0.8)); ax.text(0, 69, "SE 2816", color="white", fontsize=6.8, ha="center", va="center")
+    ax.add_patch(Rectangle((-23, Zs["cage_lo"]), 46, Zs["hub_lo"] - Zs["cage_lo"], fc="#c8ced6", ec=INK, lw=0.6, alpha=0.6))
+    ax.add_patch(Rectangle((-28, Zs["hub_lo"]), 56, 10, fc=STEEL, ec=INK, lw=0.8))
+    for sg in (-1, 1):
+        ax.add_patch(Polygon([[sg * 14.5, Zs["blade"] - 2.3], [sg * 127, Zs["blade"] - 1.6], [sg * 127, Zs["blade"] + 1.6], [sg * 14.5, Zs["blade"] + 2.3]], closed=True, fc=BODY, ec=INK, lw=0.8))
+        for r in KN: ax.add_patch(Circle((sg * r, Zs["blade"]), 3.2, fc="#9aa3ad", ec=INK, lw=0.6, zorder=4))
+        ax.add_patch(Rectangle((sg * 48.5 - 2, 40), 4, Zs["claw_hi"] - 40, fc=SERVO_C["STS3032"], ec=INK, lw=0.6)); ax.add_patch(Rectangle((28 if sg > 0 else -48.5, Zs["claw_lo"]), 20.5, 2, fc=SERVO_C["STS3032"], ec=INK, lw=0.6))
+    ax.add_patch(Rectangle((-8, Zs["shaft_tip"]), 16, 10, fc=TPU, ec=INK, lw=0.7))
+    ax.add_patch(Rectangle((-17, 4), 34, 35, fc="none", ec=MUTE, lw=0.9, ls="--")); ax.plot([-95, 95], [43, 43], color=MUTE, lw=0.9, ls="--"); ax.text(98, 43, "XL claw-prop\n(Ø190, 156 g)", fontsize=6.3, color=MUTE, va="center")
+    dimh(ax, -127, 127, 116, "Ø254 rotor", yref=Zs["blade"]); dimv(ax, 0, Zs["blade"], -62, f"{Zs['blade']:.0f} to the blade plane", fs=7, ha="right"); dimv(ax, 0, Zs["heel"], 60, f"{Zs['heel']:.1f} overall", fs=7)
+    ax.plot([-6, 6], [D["com_from_spigot"]] * 2, color="#b42318", lw=1.5, zorder=8); ax.plot([0, 0], [D["com_from_spigot"] - 6, D["com_from_spigot"] + 6], color="#b42318", lw=1.5, zorder=8)
+    ax.text(8, D["com_from_spigot"] - 9, f"centre of mass {D['com_from_spigot']:.0f}", fontsize=6.5, color="#b42318", zorder=8, bbox=dict(fc="white", ec="none", pad=0.5))
+    M = D["mass"]
+    rows = [["Mass (est.)", "g"], ["14 servos (10 × STS3032, 4 × SCS0009)", M["servos"]], ["pack frame", M["pack_frame"]], ["14 claw bars", M["claw_bars"]], ["spools, springs, screws", M["spools_springs_screws"]],
+            ["wiring, Hall switch, magnets", M["wiring_hall_magnets"]], ["motor", M["motor"]], ["4 fingers with root grips", M["fingers"]], ["hub plates, lag tubes", M["hub_plates_lag_tubes"]],
+            ["cage, 14 followers, TPU links", M["cage_followers_links"]], ["prop nut, TPU heel", M["nut_heel"]], ["TOTAL per hand", M["total"]], ["XL claw-prop pod, for comparison", 156.0]]
+    table(fig, 0.05, 0.575, rows, [0.33, 0.07], fs=7.8, rh=0.0185)
+    rows = [["Bought parts (one hand)", "Qty"], ["BrotherHobby SE 2816 810KV, Ø34 × 46.2, 19 × 19 M3, M5 shaft", 1], ["Feetech STS3032 bus servo (base, middle, spread)", 10], ["Feetech SCS0009 bus servo (tips)", 4],
+            ["ISO 8734 hardened dowel Ø3 × 6 (K1, K2)", 16], ["ISO 8734 hardened dowel Ø2 × 5 (K3)", 8], ["brass bushing 4 × 3 × 6 / 3 × 2 × 5", "16 / 8"], ["stainless tube Ø4 × 0.5 × 14 (lag pivots)", 4],
+            ["Dyneema braid 0.6 mm (curl cords, spread cords, spool cords)", "4 m"], ["elastic cord Ø1 (extensors)", "0.6 m"], ["compression spring Ø5 × 15, 0.5 N/mm (bar return)", 14],
+            ["Hall switch US5881 (Adafruit #158) + N52 3 × 2 magnet", "1 + 1"], ["M3 × 8 screws + M3 heat-set inserts (pack, motor)", 12], ["M2 × 6 self-tapping (servo ears)", 28], ["M5 nyloc nut", 1]]
+    table(fig, 0.47, 0.575, rows, [0.42, 0.06], fs=7.4, rh=0.0178)
+    fig.text(0.05, 0.305, "Printed parts", fontsize=9, fontweight="bold", color=INK, va="top")
+    pr = ["PA-CF: 12 phalanges, 4 root grips, 2 hub plates, cage, 14 followers, pack frame (3 plates + spine), 14 claw bars, 14 spools.", "TPU 95A: 12 pads, 12 links (3.0 / 2.6 / 1.7 mm square × 12 mm for base / middle / tip), heel."]
+    para(fig, 0.05, 0.287, pr, width=150, fs=7.6, lh=0.016)
+    fig.text(0.05, 0.238, "Before this is CAD", fontsize=9, fontweight="bold", color=INK, va="top")
+    od = ["The hand weighs 3.4 × the XL pod. The arm servos, the walk and the legged landing must be re-run with it before it goes on the robot; plan it for the two hand arms (2 and 6) only.",
+          "Thrust of thick finger blades with pads and hinge barrels is not known. The motor is sized from the maker's test on a real 10 × 5 × 3 (28 N at 895 W, 1,303 W at full throttle), so finger blades that need a quarter more power still reach 26.5 N.",
+          "Measure before drawing: motor can length (31 assumed), STS3032 and SCS0009 shaft positions and ear holes.",
+          "Parking the rotor on its index with a drone ESC is unproven: crawl, Hall pulse, brake, then the spread claws centre it.",
+          "First print: one finger + one base servo, spool and claw bar on a bench block: checks the knuckle seats, the lever arms, the TPU link and the cord forces."]
+    para(fig, 0.05, 0.218, od, width=150, fs=7.6, lh=0.016)
+    fig.savefig("hand3_bp_5.png"); plt.close(fig)
+
+
+if __name__ == "__main__":
+    for f in (bp0, bp1, bp2, bp3, bp4, bp5): f()
+    json.dump(D, open("hand3_design.json", "w"), indent=1); print("done")

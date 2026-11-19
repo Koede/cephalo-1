@@ -1,0 +1,5 @@
+xargs: python3: terminated by signal 9
+[concat @ 0x5563669f4000] Impossible to open 'rchunk_01.mp4'
+[in#0/concat @ 0x5563669f3f00] Error during demuxing: No such file or directory
+[in#0/concat @ 0x5563669f3f00] Error retrieving a packet from demuxer: No such file or directory
+done

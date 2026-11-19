@@ -1,0 +1,11 @@
+  impact at t 1.73 s, speed 5.55 m/s, tilt 58 deg
+hit: sim 4.0 s in 9 s wall | end phase assess
+  peak floor force 4012 N, 10 ms average 2530 N = 23.6 x weight
+  impact 5.55 m/s | body decel (10 ms) 31 g | bumper/dome 529 N | arm-floor 741 N | servo 1.00 | gear 2.25 of limit | clutch slip 66 deg | clutches at stop 7
+  worst gear at {'t': 1.737199999999874, 'phase': 'impact', 'arm': 2, 'joint': 1, 'servo': 0.3333333333333333, 'inertia': 1.9176484855923737, 'clutch_deg': None}
+  worst link-shell stop torque 50.9 N m at {'t': 1.7411999999998735, 'arm': 1, 'joint': 0, 'phase': 'impact'}
+    hover    servo 0.15 | gear 0.05 | slip    0 deg | clutches at stop 0
+    hit      servo 1.00 | gear 0.42 | slip   11 deg | clutches at stop 0
+    fall     servo 1.00 | gear 0.57 | slip   43 deg | clutches at stop 2
+    impact   servo 1.00 | gear 2.25 | slip   66 deg | clutches at stop 7
+    assess   servo 0.73 | gear 0.55 | slip   41 deg | clutches at stop 1

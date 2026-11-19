@@ -1,0 +1,6 @@
+mid: sim 15.9 s in 52 s wall
+01 idle     0.0-  0.5 s | servo 0.24 x stall | tilt  0.0 | slip  0.1 | fan max  0.0 N, sat 0 | governor min 1.00 | arm3 j4 t0.07
+02 take off   0.5-  5.9 s | servo 0.84 x stall | tilt  0.3 | slip  0.2 | fan max 12.6 N, sat 1 | governor min 0.75 | arm4 j0 t2.00
+03 fly      6.0-  8.2 s | servo 0.33 x stall | tilt  0.9 | slip  0.1 | fan max  8.6 N, sat 0 | governor min 1.00 | arm2 j2 t7.10
+04 land     8.2- 14.9 s | servo 0.72 x stall | tilt  0.8 | slip  0.3 | fan max 12.6 N, sat 1 | governor min 0.75 | arm0 j4 t12.23
+05 idle    14.9- 15.9 s | servo 0.20 x stall | tilt  0.0 | slip  0.0 | fan max  0.0 N, sat 0 | governor min 1.00 | arm1 j0 t14.93

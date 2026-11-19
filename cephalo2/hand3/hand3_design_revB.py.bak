@@ -1,0 +1,238 @@
+"""Three-phalanx hand-prop, 'park and dock' version: the exact design as parameters + the sizing that picked them (2026-11-13).
+Single source of truth for hand3_blueprints.py.  No CAD solids yet: dimensions here are design values to be fit-checked in CAD.
+python3 hand3_design.py -> hand3_design.json (and the sizing tables on stdout).   Units: mm, N, g unless noted.
+
+How it works: the hand is used with the rotor stopped and parked.  Each of the 12 finger joints has its own cord, which
+ends (through a TPU link) on a plain sliding follower in a cage under the hub.  Fourteen stationary claw bars (12 joints +
+2 spread) stand round the cage; each is pulled down by its own small bus servo on a spool and pushes one follower's fin.
+In flight the claw bars sit 1 mm above the fins and nothing stationary touches the rotor.
+"""
+import json
+import numpy as np
+
+# ------------------------------------------------------------------ rotor and finger
+R_TIP, R_LAG = 127.0, 20.0
+KN = [30.0, 66.0, 98.0]                         # knuckle radii K1, K2, K3
+PH = [KN[1] - KN[0], KN[2] - KN[1], R_TIP - KN[2]]
+# Blade section (2026-11-13, after the thrust calculation, hand3_thrust.py / hand3_blade_opt.py): the first finger (18 -> 12 mm
+# chord, 4.5 -> 3.2 mm thick, 2 mm pad standing proud: 36-43 % thick) gave only 7-8 N.  Now a thin cambered airfoil whose
+# upper surface is partly the pad: total thickness = printed thickness + pad, 19-20 % of the chord.
+CHORD, THICK = (22.0, 18.0), (3.4, 2.4)          # at the lag pin -> at the tip; THICK = printed PA-CF under the pad
+def chord(r): return float(np.interp(r, [R_LAG, R_TIP], CHORD))
+def thick(r): return float(np.interp(r, [R_LAG, R_TIP], THICK))
+PAD_T, PAD_W = 1.0, 0.6                          # TPU 95A pad, inlaid flush in the upper surface from 15 % to 75 % of the chord
+PAD_X = (0.15, 0.75)
+CAMBER, CAMBER_X = 0.03, 0.4                     # NACA 4-digit camber line (3 % at 40 % chord)
+PITCH = 12.0                                     # deg, set by the root grip; all knuckle pins are pitched with it
+RPM_MAX = 12400.0                                # design speed = the motor's knee on 6S; full throttle with these blades is 11,600-12,300 rpm (est.)
+SPREAD_MAX = 47.0                                # deg of lag swing from the flight cross: the two fingers of a pair then toe in 2 deg
+FAIRING = "printed teardrop over each saddle bridge; bullet ends on each hinge barrel"
+
+
+def section(r, n=60):
+    """Airfoil at radius r in mm, chord along x from the leading edge: x, upper y, lower y (y from the chord line)."""
+    c = chord(r); t = (thick(r) + PAD_T) / c
+    x = 0.5 * (1 - np.cos(np.linspace(0, np.pi, n)))
+    yt = 5 * t * (0.2969 * np.sqrt(x) - 0.1260 * x - 0.3516 * x ** 2 + 0.2843 * x ** 3 - 0.1036 * x ** 4)
+    yc = np.where(x < CAMBER_X, CAMBER / CAMBER_X ** 2 * (2 * CAMBER_X * x - x ** 2), CAMBER / (1 - CAMBER_X) ** 2 * ((1 - 2 * CAMBER_X) + 2 * CAMBER_X * x - x ** 2))
+    return x * c, (yc + yt) * c, (yc - yt) * c
+FOLD_MAX = [90.0, 90.0, 85.0]                    # deg
+PRECONE = 2.0
+# knuckle hardware: [K1, K2, K3]
+PIN_D = [3.0, 3.0, 2.0]; PIN_L = [8.0, 6.0, 5.0]             # ISO 8734 hardened dowel stubs, two per knuckle
+BUSH_OD = [4.0, 4.0, 3.0]                                    # brass bushing over each stub
+CHEEK = [3.2, 2.6, 2.0]; LUG = [3.6, 3.2, 2.8]; GAP = [3.0, 3.0, 2.4]; CLR = 0.2   # K1 widened 2026-11-13 (the chord is now 21.6 mm there)
+BARREL = [7.5, 6.5, 5.0]                                     # hinge barrel diameter
+LEVER = [6.0, 4.5, 3.5]                                      # cord height above the pin axis where it crosses its own knuckle
+CORD_D = 0.6                                                 # Dyneema braid
+EXT_D, EXT_OFF = 1.0, [3.2, 2.8, 2.2]                        # elastic extensor cord: back groove along the phalanges, over the back of each barrel
+W_KN = [2 * (c + CLR + l) + g for c, l, g in zip(CHEEK, LUG, GAP)]
+
+HUB_GRIP_T = 5.0                                             # root grip thickness at the lag eye
+ROOT_GRIP = "6061 aluminium for flight (lag eye + K1 fork); printed PA-CF only for the bench finger"
+
+# ------------------------------------------------------------------ requirements (what the hand must do)
+F_TIP_PEAK = 5.0          # N at the middle of the tip phalanx with the finger straight (worst lever), for 10 s
+F_TIP_HOLD = 2.0          # N sustained (servo rated torque)
+MARGIN = 1.25             # peak force margin wanted on every joint
+ETA = 0.62                # spool + cord (0.75, as the XL claw) x claw bar guides (0.83: 20 mm overhang on a 36 mm guide, mu 0.15); est.
+TPU_STRETCH = 3.0         # mm of series stretch at peak force (sets the link section)
+E_TPU = 30.0              # MPa, TPU 95A printed (est.)
+
+# ------------------------------------------------------------------ bought actuators (maker data)
+SERVOS = {
+    "SCS0009": dict(name="Feetech SCS0009", m=13.2, stall=0.2256, rated=0.0686, sec60=0.10, deg=300.0, size=(23.2, 12.1, 25.25), volts="4-7.4 V", stall_A=1.0),
+    "STS3032": dict(name="Feetech STS3032", m=20.0, stall=0.441, rated=0.147, sec60=0.10, deg=360.0, size=(23.2, 12.1, 28.5), volts="6-7.4 V", stall_A=1.4),
+}   # STS3032 rated torque and stall current: assumed (stall / 3; 1.4 A)
+MOTOR = dict(name="BrotherHobby SE 2816 810KV", d=34.0, L=46.2, m=98.5, mount="19 x 19 mm, 4 x M3", I_max=55.2, P_max=1303.0,
+             test="HQ 10x5x3, 6S: 22.4 N at 10,163 rpm / 633 W; 28.3 N at 10,935 rpm / 895 W; 34.7 N at 12,368 rpm / 1303 W",
+             can_L=31.0)   # can length assumed: measure
+SPOOL_MIN = 2.5           # mm spool radius: 0.6 mm cord on Ø5 (D/d 8)
+
+
+# ------------------------------------------------------------------ sizing
+def joint_torques(F):
+    """Torque at K1, K2, K3 for a force F at the middle of the tip phalanx, finger straight (N m)."""
+    a = PH[2] / 2
+    return [F * (PH[0] + PH[1] + a) * 1e-3, F * (PH[1] + a) * 1e-3, F * a * 1e-3]
+
+
+def size_joint(k, lever):
+    """Best servo + spool for joint k at a given lever arm: lightest servo that meets peak margin, hold and travel."""
+    Tp = joint_torques(F_TIP_PEAK)[k]; Th = joint_torques(F_TIP_HOLD)[k]
+    Fp, Fh = Tp / (lever * 1e-3), Th / (lever * 1e-3)
+    travel = lever * np.radians(FOLD_MAX[k]) + TPU_STRETCH
+    best = None
+    for key, s in SERVOS.items():
+        ang = np.radians(s["deg"] - 30.0)                        # keep 30 deg in hand
+        for rs in np.arange(SPOOL_MIN, 6.01, 0.5):
+            if travel > rs * ang: continue
+            Fmax = s["stall"] * ETA / (rs * 1e-3); Frated = s["rated"] * ETA / (rs * 1e-3)
+            if Fmax < MARGIN * Fp or Frated < 0.98 * Fh: continue
+            cand = dict(servo=key, spool_r=float(rs), F_peak_need=round(Fp, 1), F_hold_need=round(Fh, 1), F_stall=round(Fmax, 1), F_rated=round(Frated, 1),
+                        margin=round(Fmax / Fp, 2), travel=round(travel, 1), spool_deg=round(float(np.degrees(travel / rs))),
+                        t_full_s=round(float(np.degrees(travel / rs)) / 60 * s["sec60"], 2), m=s["m"])
+            if best is None or (cand["m"], -cand["margin"]) < (best["m"], -best["margin"]): best = cand
+    return best
+
+
+def thrust_moment(rk, T=26.5):
+    rr = np.linspace(R_LAG, R_TIP, 2000); dr = rr[1] - rr[0]
+    tb = np.array([chord(r) for r in rr]) * rr ** 2; tb = tb / (tb.sum() * dr) * (T / 4)
+    m = rr >= rk
+    return float((tb[m] * (rr[m] - rk)).sum() * dr) * 1e-3
+
+
+def knuckle_loads(rpm_proof):
+    w = 2 * np.pi * rpm_proof / 60
+    rr = np.linspace(R_LAG, R_TIP, 2000) * 1e-3; dr = rr[1] - rr[0]
+    lam = np.array([1250e-9 * 0.75 * chord(r * 1e3) * thick(r * 1e3) + 1200e-9 * PAD_W * chord(r * 1e3) * PAD_T for r in rr]) * 1e3   # kg/m
+    out = []
+    for i, rk in enumerate([R_LAG] + KN):
+        m = rr >= rk * 1e-3; M = lam[m].sum() * dr + (0.0012 if i == 0 else 0.0006 * (4 - i) / 3)        # + pins, bushings, cords outboard
+        rc = (lam[m] * rr[m]).sum() * dr / (lam[m].sum() * dr); F = M * w * w * rc
+        d = dict(name=["lag pin", "K1", "K2", "K3"][i], m_out_g=round(M * 1e3, 2), rc=round(rc * 1e3, 1), F_proof=round(F))
+        if i == 0: d.update(bearing_eye_MPa=round(F / (4.0 * HUB_GRIP_T), 1), tube_shear_MPa=round(F / (2 * np.pi * (2.0 ** 2 - 1.5 ** 2)), 1))   # Ø4 x 0.5 tube in the grip eye
+        if i > 0:
+            k = i - 1
+            d.update(bearing_cheek_MPa=round(F / 2 / (BUSH_OD[k] * CHEEK[k]), 1), bearing_lug_MPa=round(F / 2 / (BUSH_OD[k] * LUG[k]), 1),
+                     pin_shear_MPa=round(F / 2 / (np.pi * PIN_D[k] ** 2 / 4), 1),
+                     lock_ratio=round(np.radians(PRECONE) * (rc - rk * 1e-3) * F / 1.3225 / max(thrust_moment(rk), 1e-9), 2))
+        out.append(d)
+    return out
+
+
+def pair_gap(toe_deg):
+    """Smallest gap between the two flat fingers of a pair lying side by side, toed in by toe_deg (plan geometry; lag pins 28.3 mm apart)."""
+    sep = 2 * R_LAG * np.sin(np.radians(45)); s = np.linspace(0, R_TIP - R_LAG, 200)
+    c = np.array([chord(R_LAG + x) for x in s])
+    return float(np.min(sep - 2 * s * np.sin(np.radians(toe_deg)) - c / np.cos(np.radians(toe_deg))))
+
+
+def wrap(R_obj):
+    """Knuckle angles for the three phalanges lying tangent on a round object (radius to the object surface)."""
+    Re = [R_obj + thick(KN[k] + PH[k] / 2) / 2 + PAD_T for k in range(3)]
+    a2 = np.degrees(np.arctan(PH[0] / 2 / Re[0]) + np.arctan(PH[1] / 2 / Re[1]))
+    a3 = np.degrees(np.arctan(PH[1] / 2 / Re[1]) + np.arctan(PH[2] / 2 / Re[2]))
+    return round(float(a2)), round(float(a3))
+
+
+# ------------------------------------------------------------------ hub, cage, claws (axial stack from the arm's spigot face, z = 0)
+FINGER_AZ = [45.0, 135.0, 225.0, 315.0]
+ROLE_DAZ = {"tip": -22.0, "base": 0.0, "middle": 22.0}
+CHANNELS = [dict(name=f"F{f + 1} {role}", az=(FINGER_AZ[f] + d) % 360, role=role, finger=f) for f in range(4) for role, d in ROLE_DAZ.items()]
+CHANNELS += [dict(name="spread A", az=0.0, role="spread", finger=None), dict(name="spread B", az=180.0, role="spread", finger=None)]
+HUB = dict(plate_d=56.0, plate_t=2.5, grip_t=5.0, lag_tube="Ø4 x 0.5 stainless tube", r_follow=25.5, fin_r=(27.0, 31.0), fin_w=5.0, fin_t=2.0,
+           cage_r=(19.5, 23.0), follow_travel=12.5, claw_r=48.5, claw_bar=(4.0, 5.0), claw_tip_r=28.0, flight_gap=1.0, guide_len=36.0)
+# Servo pack, plan A: a drum between the spigot and the motor. Servos lie with the shaft pointing radially outward (length 23.2
+# along the pod axis, width 12.1 tangential, height radial), in two tiers of seven; every spool sits at r 48.5 under its claw bar.
+PACK = dict(tiers=2, tier_h=24.5, plate_t=2.5, r_in=18.0, spool_r_pos=48.5, spool_w=4.0, spine_d=(20.0, 14.0))
+_order = sorted(range(len(CHANNELS)), key=lambda i: CHANNELS[i]["az"])
+for _n, _i in enumerate(_order): CHANNELS[_i]["tier"] = 1 + _n % 2          # alternate tiers round the circle
+Z = {}
+Z["pack0"] = 0.0; Z["pack1"] = PACK["plate_t"] + PACK["tiers"] * PACK["tier_h"] + PACK["plate_t"]          # 54.0: pack top = motor mount
+Z["motor_top"] = Z["pack1"] + MOTOR["can_L"]
+Z["hub_lo"] = Z["motor_top"] + 2.0; Z["blade"] = Z["hub_lo"] + HUB["plate_t"] + HUB["grip_t"] / 2
+Z["hub_hi"] = Z["hub_lo"] + 2 * HUB["plate_t"] + HUB["grip_t"]; Z["shaft_tip"] = Z["pack1"] + MOTOR["L"]
+Z["fin_top"] = Z["hub_lo"] - 5.0; Z["claw_lo"] = Z["fin_top"] + HUB["flight_gap"]; Z["claw_hi"] = Z["claw_lo"] + 2.0
+Z["cage_lo"] = Z["fin_top"] - HUB["fin_t"] - HUB["follow_travel"] - 8.0 - 1.0; Z["heel"] = Z["shaft_tip"] + 10.0
+
+
+def pack_check(sizing):
+    """Plan A clearances: neighbours in a tier at their inner corners; lower-tier cords past upper-tier bodies."""
+    out = dict(tier_gap=1e9, cord_gap=1e9)
+    for t in (1, 2):
+        az = sorted(c["az"] for c in CHANNELS if c["tier"] == t)
+        for a, b in zip(az, az[1:] + [az[0] + 360]):
+            out["tier_gap"] = min(out["tier_gap"], 2 * PACK["r_in"] * np.sin(np.radians(b - a) / 2) - 12.1)
+    for c in CHANNELS:
+        if c["tier"] != 1: continue
+        for u in CHANNELS:
+            if u["tier"] != 2: continue
+            d = abs((c["az"] - u["az"] + 180) % 360 - 180)
+            if d < 90: out["cord_gap"] = min(out["cord_gap"], PACK["spool_r_pos"] * np.sin(np.radians(d)) - 12.1 / 2 - sizing[c["role"]]["spool_r"])
+    out["od"] = 2 * (PACK["spool_r_pos"] + PACK["spool_w"] / 2 + 0.5); out["height"] = Z["pack1"]
+    return {k: round(float(v), 1) for k, v in out.items()}
+
+
+def plans(m_servo_mix, rot=69.4):
+    """Whole-design plans compared on the same numbers (all est.). z = distance from the spigot face; disc = Ø254 rotor."""
+    cage = 21.0; mot = MOTOR["m"]; can = MOTOR["can_L"]          # rot = fingers + hub plates + nut and heel
+    def row(name, n_servo, m_servo, frame, od, h, around_motor, note, ok):
+        z_pack = (4 + h / 2) if around_motor else h / 2
+        z_mot0 = 4.0 if around_motor else h
+        hub = z_mot0 + can + 2 + 5
+        m_pack = m_servo + frame
+        tot = m_pack + mot + rot + cage
+        com = (m_pack * z_pack + mot * (z_mot0 + can / 2) + rot * hub + cage * (hub - 22)) / tot
+        return dict(plan=name, servos=n_servo, mass=round(tot), added_vs_xl=round(tot - 156), pack_od=od, pack_h=h, hub_z=round(hub), com_z=round(com),
+                    blocked_disc_pct=round(100 * (od / 254.0) ** 2), gap_to_rotor=round(hub - (4 + h if around_motor else h)), note=note, ok=ok)
+    return [row("A drum under the motor, 2 tiers, shafts radial", 14, m_servo_mix, 91.2, 102.0, 54.0, False, "all 12 joints + 2 spread at once", True),
+            row("B flat pancake tiers, shafts tangential", 14, m_servo_mix, 100.0, 119.0, 57.0, False, "does not pack: needs 4 tiers and Ø119", False),
+            row("C ring round the motor, 1 tier", 14, m_servo_mix, 95.0, 137.0, 26.0, True, "shortest, but a Ø137 ring 12 mm under the rotor", False),
+            row("D drum, 2 servos per finger (middle + tip coupled)", 10, 6 * 20.0 + 4 * 13.2, 78.0, 102.0, 54.0, False, "not joint by joint", False),
+            row("E key hub, one pusher (no servo pack)", 1, 20.0, 20.0, 60.0, 0.0, True, "one joint at a time, about 20 s", False)]
+
+
+def design():
+    # lever arms: scan what each knuckle allows; the drawn design uses LEVER (the largest that fits the barrel and pad)
+    opts = {0: [4.5, 5.0, 5.5, 6.0], 1: [3.5, 4.0, 4.5], 2: [3.0, 3.5]}
+    scan = {["base", "middle", "tip"][k]: {lv: size_joint(k, lv) for lv in opts[k]} for k in range(3)}
+    sizing = {["base", "middle", "tip"][k]: dict(lever=LEVER[k], **size_joint(k, LEVER[k])) for k in range(3)}
+    # spread: one servo per pair, two cords, eye radius 9 mm on each blade root
+    s = SERVOS["STS3032"]; rs = 3.5
+    sizing["spread"] = dict(servo="STS3032", spool_r=rs, F_stall=round(s["stall"] * ETA / (rs * 1e-3), 1), eye_r=9.0, m=s["m"],
+                            torque_per_blade_Nm=round(s["stall"] * ETA / (rs * 1e-3) / 2 * 9.0e-3, 2), travel=round(9.0 * np.radians(SPREAD_MAX), 1))
+    for nm in ("base", "middle", "tip"):
+        z = sizing[nm]; kk = z["F_peak_need"] / TPU_STRETCH; A = kk * 12.0 / E_TPU
+        z.update(tpu_k=round(kk, 1), tpu_side=round(float(np.sqrt(A)), 1), tpu_len=12.0)
+    rpm = RPM_MAX; kl = knuckle_loads(1.15 * rpm)
+    pk = pack_check(sizing)
+    n_role = dict(base=4, middle=4, tip=4, spread=2)
+    m_servo = sum(n_role[r] * sizing[r]["m"] for r in n_role)
+    finger = kl[0]["m_out_g"]
+    mass = dict(servos=round(m_servo, 1), pack_frame=38.0, claw_bars=round(14 * 1.8, 1), spools_springs_screws=16.0, wiring_hall_magnets=12.0,
+                motor=MOTOR["m"], fingers=round(4 * (finger + 3.0), 1), hub_plates_lag_tubes=17.0, cage_followers_links=21.0, nut_heel=6.0)
+    mass["total"] = round(sum(mass.values()), 1)
+    stat = mass["servos"] + mass["pack_frame"] + mass["claw_bars"] + mass["spools_springs_screws"] + mass["wiring_hall_magnets"]
+    com = (stat * Z["pack1"] / 2 + MOTOR["m"] * (Z["pack1"] + MOTOR["can_L"] / 2) + (mass["fingers"] + mass["hub_plates_lag_tubes"] + mass["nut_heel"]) * Z["blade"]
+           + mass["cage_followers_links"] * (Z["cage_lo"] + 12)) / mass["total"]
+    return dict(rpm_max=round(rpm), rpm_proof=round(1.15 * rpm), blade=dict(chord=CHORD, thick=THICK, pad=PAD_T, camber=CAMBER, pitch=PITCH,
+                tc=(round((thick(KN[0]) + PAD_T) / chord(KN[0]), 3), round((THICK[1] + PAD_T) / CHORD[1], 3)), fairing=FAIRING,
+                           chord_at_knuckles=[round(chord(r), 1) for r in KN], thick_at_knuckles=[round(thick(r), 2) for r in KN]),
+                spread=dict(max_deg=SPREAD_MAX, toe_in_deg=SPREAD_MAX - 45.0, pair_gap_mm=round(pair_gap(SPREAD_MAX - 45.0), 1), pair_gap_parallel_mm=round(pair_gap(0.0), 1)), sizing=sizing, lever_scan=scan, knuckles=kl, W_knuckle=[round(w, 1) for w in W_KN],
+                wrap={f"D{int(2 * R)}": wrap(R) for R in (8.0, 16.0, 19.0, 35.0)}, Z={k: round(v, 1) for k, v in Z.items()},
+                channels=CHANNELS, pack=pk, plans=plans(m_servo, mass["fingers"] + mass["hub_plates_lag_tubes"] + mass["nut_heel"]),
+                mass=mass, com_from_spigot=round(float(com), 1), xl_pod=dict(m=156.0, hub=43.0),
+                electrical=dict(servo_stall_A=round(4 * 1.0 + 10 * 1.4, 1), rail="7.4 V"), motor=MOTOR)
+
+
+if __name__ == "__main__":
+    D = design()
+    json.dump(D, open("hand3_design.json", "w"), indent=1)
+    for nm, sc in D["lever_scan"].items():
+        print(nm, {lv: ((v["servo"], v["spool_r"], v["margin"]) if v else None) for lv, v in sc.items()})
+    for nm, v in D["sizing"].items(): print(nm, v)
+    for k_ in D["knuckles"]: print(k_)
+    print("pack", D["pack"]); print("mass", D["mass"], "com", D["com_from_spigot"])
+    for p in D["plans"]: print(p)

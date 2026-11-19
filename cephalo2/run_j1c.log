@@ -1,0 +1,9 @@
+model: nq 206 nv 204 nbody 211 | robot 10.16 kg | fan max 12.6 N (mid) | T_END 39.5 s
+sim 39.5 s in 59 s wall
+stand       servo 0.51x stall (arm6 j0) | gear 0.32 (arm2 j0) | rms/rated 0.47 | slip 0.1 deg | tilt 0.0 | fan max 0.0 N | saturated fans 0
+walk        servo 0.90x stall (arm4 j0) | gear 0.67 (arm4 j0) | rms/rated 0.67 | slip 0.1 deg | tilt 0.3 | fan max 0.0 N | saturated fans 0
+take-off    servo 0.51x stall (arm2 j2) | gear 0.20 (arm2 j2) | rms/rated 0.52 | slip 0.1 deg | tilt 2.6 | fan max 12.2 N | saturated fans 0
+hover       servo 0.07x stall (arm0 j4) | gear 0.03 (arm4 j4) | rms/rated 0.20 | slip 0.0 deg | tilt 1.3 | fan max 8.9 N | saturated fans 0
+hit side    servo 1.00x stall (arm2 j1) | gear 1.01 (arm2 j1) | rms/rated 0.84 | slip 11.2 deg | tilt 3.6 | fan max 9.3 N | saturated fans 0
+hit radial  servo 1.00x stall (arm6 j0) | gear 0.93 (arm6 j1) | rms/rated 1.13 | slip 10.6 deg | tilt 5.0 | fan max 10.2 N | saturated fans 0
+landing     servo 1.00x stall (arm1 j0) | gear 2.97 (arm2 j2) | rms/rated 1.74 | slip 48.1 deg | tilt 175.2 | fan max 12.6 N | saturated fans 3

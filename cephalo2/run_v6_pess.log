@@ -1,0 +1,9 @@
+model: nq 198 nv 196 nbody 203 | robot 10.15 kg | fan max 10.1 N (pess) | T_END 36.5 s
+sim 36.5 s in 59 s wall
+stand       servo 0.51x stall (arm4 j0) | gear 0.28 (arm4 j0) | rms/rated 0.53 | slip 0.1 deg | tilt 0.0 | fan max 0.0 N | saturated fans 0
+walk        servo 1.00x stall (arm0 j6) | gear 0.56 (arm4 j0) | rms/rated 0.78 | slip 0.2 deg | tilt 0.4 | fan max 0.0 N | saturated fans 0
+take-off    servo 0.93x stall (arm4 j0) | gear 0.52 (arm4 j0) | rms/rated 0.74 | slip 0.4 deg | tilt 2.7 | fan max 10.1 N | saturated fans 2
+hover       servo 0.10x stall (arm6 j2) | gear 0.03 (arm6 j2) | rms/rated 0.26 | slip 0.0 deg | tilt 1.0 | fan max 8.1 N | saturated fans 0
+hit side    servo 1.00x stall (arm2 j1) | gear 0.98 (arm2 j1) | rms/rated 0.90 | slip 9.8 deg | tilt 2.8 | fan max 9.3 N | saturated fans 0
+hit radial  servo 1.00x stall (arm6 j0) | gear 0.85 (arm6 j1) | rms/rated 1.32 | slip 12.1 deg | tilt 4.9 | fan max 9.9 N | saturated fans 1
+landing     servo 1.00x stall (arm4 j4) | gear 0.46 (arm4 j5) | rms/rated 0.91 | slip 31.0 deg | tilt 7.9 | fan max 10.1 N | saturated fans 3
