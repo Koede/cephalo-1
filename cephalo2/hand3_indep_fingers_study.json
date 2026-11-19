@@ -1,0 +1,344 @@
+{
+ "question": "each hand3 finger moves round the hub ring independently",
+ "date": "2026-11-19",
+ "recommended": "D",
+ "common": {
+  "rpm_max": 12500.0,
+  "rpm_hover": 10900.0,
+  "g_at_lag_pin": 3493.0,
+  "finger_g": 8.73,
+  "finger_com_r": 55.2,
+  "pin_to_com": 35.2,
+  "finger_cf_N": 826.3,
+  "finger_cf_design_module_N": 839,
+  "lag_restoring_Nm_per_sin": 10.54,
+  "lag_restoring_at_47_Nm": 7.71,
+  "lag_spring_Nm": 0.0054,
+  "rpm_restoring_10x_spring": 1046.0,
+  "imbalance_one_finger_stuck_47_N": 420.4,
+  "base_cord_peak_need_N": 54.9,
+  "base_cord_hold_need_N": 22.0,
+  "lag_only_travel": 2.3,
+  "lag_cord_need_N": 1.93,
+  "side_force_rated_today": 1.18,
+  "hub_E": {
+   "mass": 396.4,
+   "r_max": 40.8,
+   "stack_margin": 1.14,
+   "radii": {
+    "cage": [
+     19.5,
+     21.5
+    ],
+    "ring_in": [
+     21.9,
+     23.9
+    ],
+    "ring_out": [
+     24.3,
+     26.3
+    ],
+    "lip_out": [
+     27.1,
+     30.0
+    ],
+    "lip_in": [
+     30.5,
+     32.5
+    ],
+    "leg": [
+     33.5,
+     36.0
+    ],
+    "rod": 37.6,
+    "bell": 17.0
+   },
+   "lag_sign": [
+    -1,
+    1,
+    -1,
+    1
+   ],
+   "spread_max": 47.0
+  }
+ },
+ "options": {
+  "A": {
+   "F_stall_finger": 103.7,
+   "F_rated_finger": 34.6,
+   "margin_peak": 1.89,
+   "margin_hold": 1.58,
+   "mass": 396.4,
+   "r_max": 40.8,
+   "stack_margin": 1.14,
+   "stall_W": 64.8
+  },
+  "B": {
+   "r_max": 43.3,
+   "d_max": 86.6,
+   "longer": 16.7,
+   "ring_r": [
+    26.7,
+    28.7
+   ],
+   "F_stall_finger": 207.4,
+   "margin_peak": 3.78,
+   "ring_g": 3.7,
+   "cf_ring_N": "0 net (closed ring, balanced)",
+   "added_g": 74.7,
+   "stall_W": 97.2,
+   "four_rings": {
+    "r_max": 48.3,
+    "d_max": 96.6,
+    "longer": 50.2,
+    "ring_r": [
+     26.7,
+     28.7
+    ]
+   },
+   "mass": 471.1
+  },
+  "C": {
+   "tilt_deg": 19.3,
+   "bore_clearance_need": 3.94,
+   "bore_clearance_have": 0.8,
+   "fits_ring_guide": false,
+   "far_rim_rise": 3.64,
+   "headroom_to_roots": 4.6,
+   "rim_gap": 0.96,
+   "patterns": "one finger alone, two neighbours, all four; not two opposite, not three (plane: z0 + z2 = z1 + z3)",
+   "added_g": 118.0,
+   "stall_W": 129.6,
+   "mass": 514.4
+  },
+  "D": {
+   "sector_half_deg": 38.0,
+   "lip_half_deg": 12.0,
+   "park_tolerance_deg": 24.0,
+   "spool_r": 3.0,
+   "spool_deg": 262.1,
+   "spool_deg_have": 330.0,
+   "eta": 0.565,
+   "F_stall_finger": 83.0,
+   "F_rated_finger": 27.7,
+   "margin_peak": 1.51,
+   "margin_hold": 1.26,
+   "side_force_rated": 0.95,
+   "side_force_stall": 2.84,
+   "puller_half_deg": 14.9,
+   "puller_az0": 78.0,
+   "puller_gap_deg": 14.4,
+   "puller_gap_mm": 9.4,
+   "tier_fit": {
+    "x": {
+     "need": 46.4,
+     "have": 45.2,
+     "over": 1.2
+    },
+    "y": {
+     "need": 28.5,
+     "have": 35.0,
+     "over": -6.5
+    },
+    "z": {
+     "need": 24.2,
+     "have": 24.7,
+     "over": -0.5
+    }
+   },
+   "sector_g": 1.22,
+   "cf_sector_N": 56.8,
+   "key_shear_MPa": 7.1,
+   "added_rot_g": 1.5,
+   "added_g": 58.1,
+   "stall_W": 61.2,
+   "rail_6V_A": 4.8,
+   "r_max": 40.8,
+   "longer": 0.0,
+   "mass": 454.5
+  },
+  "E": {
+   "key_g": 0.4,
+   "cf_key_N": 13.6,
+   "park_tolerance_deg": 1.4,
+   "F_stall_finger_one": 414.8,
+   "added_rot_g": 3.6,
+   "added_g": 24.8,
+   "stall_W": 70.8,
+   "mass": 421.2
+  },
+  "F": {
+   "min_root_spacing_deg": 45.0,
+   "four_fingers_within_deg": 134.9,
+   "detent_deg": 15.0,
+   "finger_radial_N": 826.3,
+   "finger_radial_proof_N": 1092.8,
+   "leaf_tension_MPa": 55.1,
+   "leaf_tension_proof_MPa": 72.9,
+   "leaf_bearing_MPa": 55.1,
+   "spindle_bearing_MPa": 19.7,
+   "al6061_yield_MPa": 276,
+   "tube_bending_MPa": 222.4,
+   "hub_stack": 12.0,
+   "hub_stack_today": 10.0,
+   "dog_load_N": 14.2,
+   "imb_per_0p05mm_seat_N": 1.88,
+   "imb_today_0p05mm_pin_N": 2.07,
+   "imb_1deg_N": 14.4,
+   "imb_one_detent_N": 215.7,
+   "imb_3plus1_N": 1168.5,
+   "imb_all_one_side_N": 2161.0,
+   "roller_torque_need": 0.0106,
+   "roller_torque_rated": 0.147,
+   "roller_margin": 13.9,
+   "index_90deg_s": 0.43,
+   "com_shift_parked_mm": 2.8,
+   "added_rot_g": 12.0,
+   "added_g": 55.2,
+   "stall_W": 78.0,
+   "mass": 451.6
+  },
+  "G": {
+   "motor_I_max_A": 55.2,
+   "thrust_I_A": 54.4,
+   "shaft_torque_Nm": 0.62,
+   "index_torque_need_Nm": 0.03,
+   "added_rot_g": 12.0,
+   "added_g": 46.2,
+   "note": "sensored FOC controller rated 55 A phase + shaft encoder replaces the planned ESC (est.)",
+   "mass": 442.6
+  },
+  "H": {
+   "g_at_r20": 3493.0,
+   "servo_cf_N": 308.4,
+   "servo_cf_kgf": 31.4,
+   "slip_ring_rated_rpm": 300.0,
+   "overspeed": 41.7,
+   "shaft": "SE 2816 shaft is solid: no bore for wires",
+   "added_rot_g": 44.0,
+   "imb_1g_at_r20_N": 34.3
+  }
+ },
+ "table": [
+  {
+   "key": "A",
+   "name": "Keep hub E (two rings, mirror spread)",
+   "verdict": "baseline",
+   "What each finger can do": "All four together. Neighbours swing opposite ways into two pairs, 0-47\u00b0. Roots fixed at 45/135/225/315\u00b0.",
+   "Actuators (rotating or not)": "2 x STS3215, not rotating (base ring: spread + K1; curl ring: K2 + K3).",
+   "What crosses to the spinning side": "Nothing. Yoke lips hook the ring flange across a 1 mm gap.",
+   "Added mass": "0 g. Hand 396 g.",
+   "Balance in flight": "Self-centring: centrifugal pull returns each finger to the cross with 7.7 N m at 47\u00b0 (lag spring 5.4 mN m).",
+   "Centrifugal load at 12,500 rpm": "No new parts. Each finger pulls 826 N on its lag pin (3,493 x gravity at r 20).",
+   "Force / torque: have vs need": "Base cord 104 N stall / 35 N rated per finger; need 55 / 22 N: margin 1.89 / 1.58. Stall 65 W at 12 V.",
+   "Parts to buy": "Nothing.",
+   "Hub \u00d8 / height": "\u00d881.6, no change. Stack margin 1.1 mm.",
+   "Main risk": "Does not do what was asked."
+  },
+  {
+   "key": "B",
+   "name": "Third nested ring (pairs split)",
+   "verdict": "works, partial",
+   "What each finger can do": "Each PAIR on its own (F1+F4, F2+F3); inside a pair still mirrored. Works at any rotor angle.",
+   "Actuators (rotating or not)": "3 x STS3215, not rotating.",
+   "What crosses to the spinning side": "Nothing (third hooked flange).",
+   "Added mass": "+3.7 g rotating ring; hand about 471 g (+75, est.).",
+   "Balance in flight": "Self-centring as A. Ring is closed and round: balanced.",
+   "Centrifugal load at 12,500 rpm": "Closed ring: hoop load only, no net force.",
+   "Force / torque: have vs need": "One servo per two fingers: 207 N stall per finger, margin 3.78. Stall 97 W.",
+   "Parts to buy": "1 x STS3215, 2 x \u00d83 carbon rod, 2 x MR63 bearing.",
+   "Hub \u00d8 / height": "\u00d886.6 (+5); hand +16.7 mm long (one more flange level). Four rings: \u00d897, +50 mm: rejected.",
+   "Main risk": "Longer wrist lever for a half answer; a ring per finger does not fit."
+  },
+  {
+   "key": "C",
+   "name": "Tilting base ring (3 pull points)",
+   "verdict": "tight, partial",
+   "What each finger can do": "One finger alone, two neighbours, or all four. Not two opposite, not three (cord anchors stay in one plane).",
+   "Actuators (rotating or not)": "4 x STS3215, not rotating (3 on the base ring, 1 curl).",
+   "What crosses to the spinning side": "Nothing.",
+   "Added mass": "about 0 g rotating; hand about 514 g (+118, est.).",
+   "Balance in flight": "Self-centring as A; ring must sit flat before spin-up (3 servo positions).",
+   "Centrifugal load at 12,500 rpm": "No new rotor parts; a tilted ring would wobble, so flat is a spin-up condition.",
+   "Force / torque: have vs need": "Tilt 19\u00b0 needs 3.9 mm bore clearance, ring has 0.8: new ball-type guide. Rim rises 3.6 mm, 1.0 mm left under the roots. Stall 130 W.",
+   "Parts to buy": "2 x STS3215, 2 x \u00d83 rod, MR63 bearings.",
+   "Hub \u00d8 / height": "\u00d8 unchanged; servo block one servo wider or taller (est.).",
+   "Main risk": "Ring jams or keys bind when tilted; only some patterns."
+  },
+  {
+   "key": "D",
+   "name": "Base ring cut into four sectors, 4 pullers",
+   "verdict": "RECOMMENDED",
+   "What each finger can do": "EACH finger on its own: any spread 0-47\u00b0, then its own K1 fold. Curl (K2 + K3) stays shared. Roots stay at the cross.",
+   "Actuators (rotating or not)": "4 x STS3032 (20 g) + 1 x STS3215, all not rotating. The four small servos fill today's upper servo bay.",
+   "What crosses to the spinning side": "Nothing. Four lips hook four flange sectors; rotor parks within \u00b124\u00b0.",
+   "Added mass": "+1.5 g rotating (keys); hand about 454 g (+58, est.).",
+   "Balance in flight": "Self-centring as A: by 1,046 rpm the centrifugal return is 10 x the lag spring. Rule: all pullers released before spin-up.",
+   "Centrifugal load at 12,500 rpm": "Each sector 1.2 g at r 27: 57 N on its key (7 MPa on 8 mm\u00b2, PA-CF). Four equal sectors: balanced.",
+   "Force / torque: have vs need": "STS3032 on \u00d86 spool: 83 N stall / 28 N rated; margin 1.51 / 1.26 (target 1.25 / 1.0). Stall 61 W; 6 V rail 4.8 A.",
+   "Parts to buy": "4 x Feetech STS3032, 4 x \u00d83 carbon rod, 8 x MR63, 6 V 5 A buck regulator (est.).",
+   "Hub \u00d8 / height": "\u00d881.6 and height unchanged (est.). Servo bay 46.4 vs 45.2 mm: +1.2 mm. Rod pairs 9.4 mm apart.",
+   "Main risk": "A sector cocks on its key under an off-centre pull; sideways pinch is weak (0.9 N)."
+  },
+  {
+   "key": "E",
+   "name": "One ring + pick-up latch per finger",
+   "verdict": "works, on/off only",
+   "What each finger can do": "Each finger is IN or OUT of the base stroke. Those that are in move together by the same amount.",
+   "Actuators (rotating or not)": "2 x STS3215 + 1 x SCS0009 selector (13 g), not rotating.",
+   "What crosses to the spinning side": "Nothing; the selector flips latches only when parked within \u00b11.4\u00b0.",
+   "Added mass": "+3.6 g rotating; hand about 421 g (+25, est.).",
+   "Balance in flight": "Self-centring as A. A latch that flips in flight does nothing (cords are slack).",
+   "Centrifugal load at 12,500 rpm": "Each 0.4 g latch at r 20: 14 N, taken by the cage slot; it must slide along the axis so the load cannot flip it.",
+   "Force / torque: have vs need": "One finger alone gets the whole ring: 415 N stall (TPU link limits it). Stall 71 W.",
+   "Parts to buy": "1 x Feetech SCS0009; 4 printed latches, \u00d81.5 pins.",
+   "Hub \u00d8 / height": "\u00d8 and height unchanged (est.).",
+   "Main risk": "\u00b11\u00b0 parking again (rev D's weak point); small latches at 3,500 x gravity; no in-between angles."
+  },
+  {
+   "key": "F",
+   "name": "Roots on carrier rings, roller + pawl index",
+   "verdict": "only way to move roots",
+   "What each finger can do": "Each ROOT travels round the hub in 15\u00b0 steps: 3 + 1 thumb, 2 + 2, all four inside 135\u00b0. Roots no closer than 45\u00b0. Spread and curl as A.",
+   "Actuators (rotating or not)": "2 x STS3215 + STS3032 roller drive + SCS0009 cam (roller in, pawl in). Not rotating.",
+   "What crosses to the spinning side": "Nothing. Roller and pawl touch the rotor only when parked.",
+   "Added mass": "+12 g rotating (est.); hand about 452 g (+55, est.).",
+   "Balance in flight": "NOT self-centring. Must be back at the cross and locked before spin-up: 1\u00b0 off = 14 N, one step off = 216 N, 3 + 1 = 1168 N. V-seats at 0.05 mm: 1.9 N (today's pins: 2.1 N).",
+   "Centrifugal load at 12,500 rpm": "Each carrier takes its finger's 826 N (1093 N proof). 1.5 mm 6061 leaves: 55 MPa tension, 55 MPa bearing (yield 276). Lag tube bending 222 MPa: too high, needs a stiffer pin.",
+   "Force / torque: have vs need": "Roller needs 11 mN m, has 147: x14. 90\u00b0 in 0.4 s. Dogs carry 14 N. Stall 78 W.",
+   "Parts to buy": "STS3032, SCS0009, laser-cut 6061 leaves (8), \u00d814 spindle, 4 dog pins + springs, Hall sensor + 4 magnets.",
+   "Hub \u00d8 / height": "Hub stack 12 mm (today 10); \u00d8 unchanged (est.). New hub, cage and cord followers.",
+   "Main risk": "A missed lock is a destroyed hand; whole rotor hub redesigned and re-proofed."
+  },
+  {
+   "key": "G",
+   "name": "Carrier rings, flight motor indexes vs pawl",
+   "verdict": "rejected (controller)",
+   "What each finger can do": "As F.",
+   "Actuators (rotating or not)": "2 x STS3215 + SCS0009 pawl. The SE 2816 itself turns the hub to each new angle.",
+   "What crosses to the spinning side": "Nothing.",
+   "Added mass": "+12 g rotating (est.); hand about 443 g (est.).",
+   "Balance in flight": "As F: locked cross is a hard spin-up condition.",
+   "Centrifugal load at 12,500 rpm": "As F.",
+   "Force / torque: have vs need": "Motor has 0.62 N m, indexing needs about 0.03: plenty. But the planned ESC cannot hold an angle at zero speed.",
+   "Parts to buy": "Sensored FOC drive for 54 A + shaft encoder in place of the ESC (est.), SCS0009, carrier parts as F.",
+   "Hub \u00d8 / height": "As F.",
+   "Main risk": "Changes the motor drive of a flight-critical rotor for a parked-only feature."
+  },
+  {
+   "key": "H",
+   "name": "Servos on the rotor, slip ring",
+   "verdict": "rejected (physics)",
+   "What each finger can do": "Anything, in principle.",
+   "Actuators (rotating or not)": "4 micro servos ON the rotor.",
+   "What crosses to the spinning side": "Slip ring for power + data: 6 wires, 2 A, rated 300 rpm (Adafruit 736). Rotor runs 12,500 rpm: 42 x over.",
+   "Added mass": "+44 g rotating.",
+   "Balance in flight": "Every 1 g out of place at r 20 is 34 N of shake.",
+   "Centrifugal load at 12,500 rpm": "A 9 g servo at r 20 weighs 308 N (31 kgf).",
+   "Force / torque: have vs need": "Not sized: fails before torque matters.",
+   "Parts to buy": "None that survive.",
+   "Hub \u00d8 / height": "n/a",
+   "Main risk": "Already rejected in the hub rethink (option E there); the motor shaft is solid."
+  }
+ ]
+}

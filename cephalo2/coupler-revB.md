@@ -441,3 +441,45 @@ stubs on the back face, below the cage.
 Loss at 36 A hover, 3 phases, 80 mm run + 20 mm motor stub (est.): A uncut 18 AWG 8.1 W; B copper strip 3.3 W; **C 14 AWG 4.2 W
 (recommended)**; D 16 AWG 5.7 W; E split front/back 4.2 W but 0.7 mm from a moving cord; F C in a printed rail 4.2 W; G old corridors
 rejected; H servo refactor not needed. Decision pending.
+
+## Rev B.7: motor leads in a cover rail on hub E's back face (2026-11-19)
+
+Chosen from `hubE_lead_options_study.png`: **option F** (14 AWG down the back face inside a printed rail).
+Files: `hubE_leads.py` (one place for the lead geometry, the rail, the frame cuts and the clearance math), `hubE_leads.json`.
+
+**Route of each phase.** Male bullet cup (side entry) -> groove in the hand-base bottom face -> its lane in one exit slot ->
+45 deg dive between the collar lip and the servo corner, through a notch in hub E's frame plate -> up the back face of the servo
+stack inside the rail -> inline lap joint to the motor's own 18 AWG lead, cut to a 14 to 25 mm stub -> through a notch in the top
+block -> motor base. The 5 signal wires share the slot and the rail in their own lane.
+
+**What changed**
+
+| Part | Change |
+|---|---|
+| Hand base (hand3 variant) | Grooves follow the new paths; one exit slot through the rim at az 268 to 308 (middle of a lug gap, 1.0 mm of full rim left to the nearest lug end); centre pocket r 6.5 -> 4.5 (signal wires only); 4 M3 inserts at az 50 / 170 / 240 / 355 (were 3). 13.1 g (was 13.8). |
+| Collar | 1.2 mm chamfer on the lips' bottom inner edge (not a bearing face). Gives the diving leads 0.7 mm to the lip and 0.7 mm to the servo corner. |
+| hand3 mount | Clocked 20 deg on the coupler so the back face points at the lug gap. |
+| Hub E frame | No centre hole; 4 countersunk holes; plate notch 14.5 x 3; top-block notch 8.4 wide; two bosses for the rail screws. 27.7 g. |
+| New: lead rail | PA-CF U-channel 15.4 x 6 x 44.4 mm, 1.75 g, 2 x M2 x 6 thread-forming screws. Reliefs for the servo rear axle boss and the signal wires. |
+
+**Numbers.** Lead lengths 45 to 80 mm of 14 AWG plus 14 to 25 mm of 18 AWG. Loss 3.6 W at 36 A hover, 8.2 W at 54.4 A max (est.).
+
+**Checks**
+- `hubE_leads.py`: exact distance along every lead to collar, servos, plate, bridge, top block, cords, spinning cage and curl ring,
+  rail walls, inserts, other bullets: **0 collisions**. Tightest real gaps: top block notch 0.15, frame bridge 0.25, servo 0.71,
+  collar 0.72, spinning curl ring (fully pulled) 1.19, spinning cage 1.20, moving cords 12.6 mm.
+- `coupler_ranges.py`: 3442 pairs, **0 collisions** (lead results included).
+- `coupler_sim_overlap.py` (whole motion sim, 0.5 mm cells): **only the O-ring squeeze is left** (1.75 mm3, intended).
+
+**Other fixes in the sim so that nothing overlaps**
+- Empty hand: opposite fingertips cross from 72 % of full curl at full spread. The sim now stops at 70 % ("until the tips meet").
+- Detent ball backs 0.8 mm into its bore while the collar turns.
+- Tip bay sketch has insert bosses and bores for the 3 socket screws.
+- Rail screws are M2 x 6, not x 8: an 8 mm screw would poke out of its boss toward the collar (bottom) and the curl ring (top).
+
+**Estimates to measure on the real parts**
+- SE 2816 lead exit height on the motor base (modelled 1.3 mm above the mount face). The spinning cage starts 3 mm above it.
+- STS3215 rear axle boss size and the positions of its two bus ports (rail windows at zh 12 and 37 are placeholders).
+- Joint size (lap joint 14 -> 18 AWG under heat shrink, taken as dia 3.8 x 9).
+
+**Open**: the wheel hand keeps the B.6 hand base (radial grooves to the centre); the B.7 grooves are the hand3 variant.

@@ -51,8 +51,15 @@ P = dict(
     # pins (rev A board, unchanged)
     z_pad=5.0, pad_t=1.6, r_pad=7.0, pinboard_r=10.5, z_pinboard=9.3, pinboard_t=1.6, pin_r=(0.0, 2.3, 3.6, 4.9, 6.2),
     screws=((17.0, 30.0), (17.0, 150.0), (17.0, 270.0)), screw_d=3.4,      # 3 screws, each midway between two bullets
-    hand_screw_r=13.0, hand_screw_az=(30.0, 150.0, 270.0),   # 4 x M3 heat-set inserts (dia 4.0 x 6) for the hand's own body
-    groove_w=3.8, groove_h=3.8, r_wire_cb=6.5,   # B.6: 3 hand inserts at 30/150/270 (midway between the leads; 4 at 90 deg could not clear 3 leads at 120 deg)
+    hand_screw_r=13.0, hand_screw_az=(50.0, 170.0, 240.0, 355.0),   # B.7: 4 x M3 heat-set inserts (dia 4.0 x 6), placed clear of the new lead grooves
+    groove_w=3.8, groove_h=3.8, r_wire_cb=4.5,
+    # rev B.7 (2026-11-19, hubE_lead_options_study option F, hubE_leads.py): hand3 hub E has no centre channel (its two servos lie
+    # across the middle), so the leads leave the hand base sideways, through an exit slot in the middle of a lug gap, dive 45 deg
+    # between the collar lip and the servo corner and run up the empty back face of the servo stack inside a cover rail.
+    # lanes: x' of each lead in the exit slot (aligned frame, see hubE_leads.py); sig = the 5 signal wires (26 AWG bundle, est.)
+    lead_exit_az=290.0, lanes=dict(B=-5.6, sig=-2.55, A=0.5, C=4.2), lead_sv=20.6, lead_alpha=45.0, lead_d=2.5,
+    stub_od=2.3, sig_od=2.2, sig_ztop=38.0, sig_ports=(12.0, 37.0),
+    lip_chamfer_bot=1.2,          # B.7: chamfer on the lips' bottom inner edge (not a bearing face): the diving leads then clear lip and servo corner by 0.7 mm each   # B.6: 3 hand inserts at 30/150/270 (midway between the leads; 4 at 90 deg could not clear 3 leads at 120 deg)
       # B.6: 14 AWG silicone is 3.5 OD (was 3.2 x 2.6)                       # motor-lead grooves in the hand base's bottom face
     # rev B.3 (2026-11-18, coupler_preload_study.py, option A): face O-ring in the nose-ring face, inside the bullets.  It pushes
     # the hand out until its lugs bear on the collar lips, so the 0.1 mm play cannot rattle.  NBR 70A 22 x 1.0, groove 11.0-12.4
@@ -132,7 +139,8 @@ def lip_seg(a0, a1, ztop, n=N):
     # true arc fillet radius w, centre (cb - w, ztop + w), from the lip top round to 80 deg (10 deg short of tangent to the wall)
     arc = [(cb - w + w * np.sin(np.radians(q)), ztop + w - w * np.cos(np.radians(q))) for q in np.linspace(0, 80, P["arc_n"] + 1)]
     xe, ze = arc[-1]
-    prof = [(P["lip_r0"], z0), (cb + e, z0), (cb + e, ze + e)] + arc[::-1] + [(P["lip_r0"] + c, ztop), (P["lip_r0"], ztop - c)]
+    cbt = P["lip_chamfer_bot"]
+    prof = [(P["lip_r0"], z0 + cbt), (P["lip_r0"] + cbt, z0), (cb + e, z0), (cb + e, ze + e)] + arc[::-1] + [(P["lip_r0"] + c, ztop), (P["lip_r0"], ztop - c)]
     return rev(prof, a0, a1, n)
 
 
@@ -293,12 +301,20 @@ def hand_base():
         m += lug(az)
     m += sector(P["r_spigot"] - 0.5, P["r_bore"] + P["key_h"], P["az_key"] - P["key_w"] / 2 / P["r_bore"] * 57.3, P["az_key"] + P["key_w"] / 2 / P["r_bore"] * 57.3, fz1 - 0.5, P["z_bore"] - 1.0)
     cut = cyl(P["r_pad"] + 0.15, P["z_pad"] - P["pad_t"], P["z_spigot_top"] + 1) + cyl(3.5, fz0 - 1, P["z_pad"])        # pad board well + wire bore
-    cut += cyl(P["r_wire_cb"], fz0 - 1, fz0 + P["groove_h"])                                                    # wire turn pocket under the bore
+    cut += cyl(P["r_wire_cb"], fz0 - 1, fz0 + P["groove_h"])                                                    # signal-wire turn pocket under the bore
     for az in P["az_bullet"]:
         x, y = at(P["r_bullet"], az); cut += cyl(P["male_bore"] / 2, fz0 - 1, fz1 + 0.01, 32).translate([x, y, 0])   # male bullet body bore (epoxy)
-        g = P["groove_w"] / 2                                                                                    # motor-lead groove: bullet tail -> centre pocket
-        cut += mf.Manifold.cube([P["r_bullet"] + 0.5, P["groove_w"], P["groove_h"] + 1]).translate([0, -g, fz0 - 1]).rotate([0, 0, float(az)])
-    for az in P["hand_screw_az"]:                                                                                # 4 x M3 inserts for the hand
+    import hubE_leads as HL                                                                                      # B.7: grooves follow the lead paths
+    for name, d in HL.paths(0.5).items():
+        if name.startswith(("stub", "joint")):
+            continue
+        gw = d["r"] + 0.15; pts = HL.to_conn(d["pts"][d["pts"][:, 2] < -0.1]); gh = 2 * d["r"] + 0.3 if name != "sig" else P["groove_h"]
+        tools = [cyl(gw, fz0 - 1, fz0 + gh, 20).translate([float(p[0]), float(p[1]), 0]) for p in pts[::2]]
+        cut += mf.Manifold.batch_boolean([mf.Manifold.batch_hull([tools[i], tools[i + 1]]) for i in range(len(tools) - 1)], mf.OpType.Add)
+    n = HL.PLATE_NOTCH; s0 = HL.P["lead_sA"] - 2.0                                                                  # exit slot through the rim, all four lanes
+    slot = mf.Manifold.cube([n["x"][1] - n["x"][0] - 0.4, P["R_flange"] + 2 - s0, P["groove_h"] + 1]).translate([n["x"][0] + 0.2, -(P["R_flange"] + 2), fz0 - 1])
+    cut += slot.rotate([0, 0, float(HL.PSI)])
+    for az in P["hand_screw_az"]:                                                                                # M3 inserts for the hand
         x, y = at(P["hand_screw_r"], az); cut += cyl(2.0, fz0 - 0.01, fz0 + 6.0, 24).translate([x, y, 0])
     return m - cut
 

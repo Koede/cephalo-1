@@ -200,18 +200,7 @@ def wire_paths():
     rw = P["wire_od"] / 2; fz0 = P["z_flange"][0]; gz = (fz0 + 0.15, fz0 + 0.15 + P["wire_od"])        # wire lies on the pack-frame disc
     hand, hand_hw, arm, tipbay = [], [], [], []
     for az in P["az_bullet"]:
-        # side-entry from the male cup's saddle, then radially inward along the groove to the centre pocket
-        for k, r in enumerate(np.arange(P["r_bullet"] - P["bul_od"] / 2 - 0.2, P["lead_rv"] + P["lead_bend_r"] - 0.01, -0.3)):
-            hand.append(Cyl(f"hand lead {az:.0f} @{k}", "hand", r, az, rw, *gz))
-        # 90 deg bend, radius lead_bend_r (around a mandrel), from horizontal to vertical at r = lead_rv, then straight down.
-        # Each sampled cross-section is exact: it spans +- rw cos q in r and +- rw sin q in z (q = bend angle), +- rw sideways.
-        Rb = P["lead_bend_r"]; zc = (gz[0] + gz[1]) / 2; r_v = P["lead_rv"]
-        for k, q in enumerate(np.linspace(0, 90, 31)):
-            c, sn = np.cos(np.radians(q)), np.sin(np.radians(q)); rr = r_v + Rb * c; zz = zc - Rb * sn
-            da = np.degrees(np.arcsin(min(rw / rr, 1.0)))
-            dr, dz = rw * c + 0.05, rw * sn + 0.05                     # 0.05: half the sampling step
-            hand.append(Rev(f"hand lead {az:.0f} bend @{k}", "hand", [(az - da, az + da)], rr - dr, rr + dr, zz - dz, zz + dz))
-        hand.append(Cyl(f"hand lead {az:.0f} down @0", "hand", r_v, az, rw, fz0 - 60.0, zc - Rb))
+        # hand side (rev B.7): the leads no longer run to the centre; their whole path is checked in hubE_leads.check()
         # arm side: female cup tail 1.5 past the socket back into the tip bay, ESC lead soldered on axis
         arm.append(Cyl(f"female tail {az:.0f}", "arm", P["r_bullet"], az, P["bul_od"] / 2, P["z_back"], P["fem_recess"] + P["bul_len"]))
         arm.append(Cyl(f"ESC lead {az:.0f}", "arm", P["r_bullet"], az, rw, P["fem_recess"] + P["bul_len"], P["fem_recess"] + P["bul_len"] + 8.0))
@@ -232,8 +221,6 @@ def wire_paths():
     fits = {"male body in its bore (radial)": (P["male_bore"] - P["bul_od"]) / 2, "female body in its bore (radial)": (P["fem_bore"] - P["bul_od"]) / 2,
             "pin in the mouth lead-in (radial)": P["mouth_r"] - P["pin_d"] / 2, "lead in its groove (each side)": (P["groove_w"] - P["wire_od"]) / 2,
             "lead in its groove (depth, closed by the pack-frame disc)": P["groove_h"] - P["wire_od"] - 0.15,
-            "3 leads through hub E's plate hole r 8 (8 - r_v - wire r)": 8.0 - P["lead_rv"] - P["wire_od"] / 2,
-            "leads side by side at r_v (gap between leads)": round(float(2 * P["lead_rv"] * np.sin(np.radians(60)) - P["wire_od"]), 3),
             "lead bend radius / wire OD": round(P["lead_bend_r"] / P["wire_od"], 2),
             "bullet engagement (mm)": P["pin_len"] - P["fem_recess"],
             "female tail past the socket back, into the tip bay (mm)": P["fem_recess"] + P["bul_len"] - P["z_back"],
@@ -286,6 +273,10 @@ def check():
             "collar wall outside the nose ring (radial)": cb - P["R_nose"], "lug underside above the lip top (axial, seated)": -t - zl,
             "lugs pass the open lips (deg each side)": (120 - P["lip_w"]) / 2 - P["lug_w"] / 2}
     fits.update(wfits)
+    import hubE_leads as HL                    # rev B.7 lead route: exact distances along every lead (negative = collision)
+    for k, (gap, who) in HL.check().items():
+        fits["leads B.7: " + k] = gap
+        out.append(dict(state="leads B.7", a=who or "rail", b=k, clearance_mm=gap, separated_by="dist", ok=bool(gap > -EPS)))
     return out, fits
 
 
@@ -294,7 +285,7 @@ if __name__ == "__main__":
     bad = [o for o in out if not o["ok"]]
     worst = {}
     for o in out:
-        k = (o["a"].split(" ")[0] + " " + o["a"].split(" ")[1], o["b"].split(" ")[0] + " " + o["b"].split(" ")[1])
+        k = (" ".join(o["a"].split(" ")[:2]), " ".join(o["b"].split(" ")[:2]))
         if k not in worst or o["clearance_mm"] < worst[k]["clearance_mm"]:
             worst[k] = o
     tight = sorted(worst.values(), key=lambda o: o["clearance_mm"])[:15]

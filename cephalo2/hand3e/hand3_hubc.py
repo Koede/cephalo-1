@@ -158,13 +158,16 @@ def frame():
     for k in range(4):
         a = np.radians(45 + 90 * k); p = 19.0 / 2 * np.sqrt(2) * np.array([np.cos(a), np.sin(a)])
         m -= cyl(1.7, Z_SERVO_TOP - 1, Z["pack1"] + 1, c=(p[0], p[1], 0), n=24) + cyl(3.0, Z_SERVO_TOP - 1, Z_SERVO_TOP + 1.8, c=(p[0], p[1], 0), n=32)
-    # coupler rev B.6 (2026-11-19): the plate bolts to the coupler hand base's 3 M3 inserts at r 13, az 30/150/270 (midway
-    # between the bullet leads; the old r 9.5 az 90/210/330 holes sat on the lead lines), M3 x 8 DIN 7991 countersunk from
-    # inside; centre hole r 8 (was 4) passes the 3 x 14 AWG phase leads (bent R 3 to r 2.4) and the 5 signal wires.
-    for a in (30.0, 150.0, 270.0):
-        p = 13.0 * np.array([np.cos(np.radians(a)), np.sin(np.radians(a))])
+    # coupler rev B.7 (2026-11-19, ../hubE_leads.py): the plate bolts to the coupler hand base's 4 M3 inserts (r 13), M3 x 8
+    # DIN 7991 countersunk from inside.  No centre hole: the servos lie across the middle, so the motor leads and the signal
+    # wires leave the hand base sideways and run up the back face (y = -Y_HALF) in a cover rail.  Plate notch for the leads'
+    # dive, top-block notch for the motor's 18 AWG stubs, two bosses for the rail's M2 thread-forming screws.
+    import sys as _sys
+    _sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+    import hubE_leads as HL
+    for a in HL.P["hand_screw_az"]:
+        ah = np.radians(180.0 - (a - HL.PSI)); p = HL.P["hand_screw_r"] * np.array([np.cos(ah), np.sin(ah)])
         m -= cyl(1.7, -1, 3, c=(p[0], p[1], 0), n=24) + M_.cylinder(1.7, 1.6, 3.2, 32).translate([p[0], p[1], 0.31])
-    m -= cyl(8.0, -1, 3, n=48)
     for (which, side), (az, _, _, _) in HALVES.items():
         for k in (-1, 1):
             q = rod_xy(az, k); u = q / np.linalg.norm(q)
@@ -172,7 +175,7 @@ def frame():
             m -= cyl(1.52, 1.0, 7.0, c=(*q, 0), n=24)
     for name, c, din, dout in corners():
         m += bracket(name)[0]
-    return m
+    return m - HL.frame_cuts() + HL.frame_adds()
 
 
 _BR = {}

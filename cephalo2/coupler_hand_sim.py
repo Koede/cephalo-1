@@ -14,6 +14,7 @@ import os, sys, json, base64
 import numpy as np
 import manifold3d as mf
 import handmount_b as HB
+import hubE_leads as HL
 
 HERE = os.path.dirname(os.path.abspath(__file__)); H3E = os.path.join(HERE, "hand3e")
 sys.path.insert(0, H3E); _cwd = os.getcwd(); os.chdir(H3E)
@@ -26,6 +27,9 @@ P = HB.P; FPS = 20; T_END = 30.0
 THR = json.load(open(os.path.join(H3E, "hand3_thrust_cad.json")))["low"]
 HUB = json.load(open(os.path.join(H3E, "hand3_hubc.json")))
 I_HOVER = 36.0; T_HOVER = THR["T_max"] * (I_HOVER / THR["I_A"]) ** (2 / 3); RPM_HOVER = THR["rpm"] * np.sqrt(T_HOVER / THR["T_max"])
+
+
+CURL_EMPTY = 0.70            # fraction of full curl an empty, fully spread hand reaches before opposite fingertips meet (tips cross from 0.72)
 
 
 def ease(x):
@@ -41,7 +45,7 @@ def state(t):
     th = -60 + 60 * seg(t, 5, 7) - 60 * seg(t, 26, 28)
     w = seg(t, 8, 10) * (1 - seg(t, 14, 15.5))                       # throttle fraction of hover rpm
     spread = H.SPREAD_MAX * (seg(t, 15.5, 18) - seg(t, 24.5, 26))
-    curl = seg(t, 18, 21) - seg(t, 23, 24.5)
+    curl = CURL_EMPTY * (seg(t, 18, 21) - seg(t, 23, 24.5))      # empty hand: the fingers stop where their tips meet
     fold = tuple(f * curl for f in H.FOLD_MAX)
     lag = tuple(s * spread for s in H.LAG_SIGN)
     pull_b = HC.E_LAG * np.radians(spread) + HC.LEVER[0] * np.radians(fold[0])
@@ -73,7 +77,13 @@ ROT_Y180 = np.diag([-1.0, 1.0, -1.0, 1.0])                  # hand3 -> connector
 
 
 def hand_to_conn(dz):
-    return Tz(P["z_flange"][0] + dz) @ ROT_Y180
+    return HL.hand3_to_conn_matrix(dz)                       # rev B.7: also clocked PSI about z (lead exit in a lug gap)
+
+
+def ball_pose(th):
+    """Detent ball: seated in a dimple at the two stops (theta 0 / -twist), pushed 0.8 back into its bore in between."""
+    d = min(abs(th), abs(th + P["twist"])); back = 0.8 * min(d / 6.0, 1.0); a = np.radians(P["det_az"])
+    A = np.eye(4); A[0, 3] = -back * np.cos(a); A[1, 3] = -back * np.sin(a); return A
 
 
 def mesh(m, tol=0.04):
@@ -91,18 +101,12 @@ def capsules(pts, r):
 
 
 def leads():
-    rw = P["wire_od"] / 2; fz0 = P["z_flange"][0]; zc = fz0 + 0.15 + rw; hand, arm = [], []
+    """ESC leads on the arm side (the hand side comes from hubE_leads)."""
+    rw = P["wire_od"] / 2; arm = []
     for az in P["az_bullet"]:
-        u = np.array([np.cos(np.radians(az)), np.sin(np.radians(az))])
-        pts = [(*(u * P["r_bullet"]), -P["male_body"] + 1.0), (*(u * (P["r_bullet"] - 2.5)), zc), (*(u * (P["lead_rv"] + P["lead_bend_r"])), zc)]
-        for q in np.linspace(0, 90, 7)[1:]:
-            rr = P["lead_rv"] + P["lead_bend_r"] * np.cos(np.radians(q)); pts.append((*(u * rr), zc - P["lead_bend_r"] * np.sin(np.radians(q))))
-        pts.append((*(u * P["lead_rv"]), fz0 - 56.0))                 # down hub E's open centre to the motor mount (hand3 z 58)
-        hand.append(capsules(pts, rw))
-        top = P["fem_recess"] + P["bul_len"]
-        arm.append(capsules([(*(u * P["r_bullet"]), top - 2.0), (*(u * P["r_bullet"]), top + 6.0), (*(u * 9.0), top + 14.0)], rw))
-    U = lambda L: mf.Manifold.batch_boolean(L, mf.OpType.Add)
-    return U(arm), U(hand)
+        u = np.array([np.cos(np.radians(az)), np.sin(np.radians(az))]); top = P["fem_recess"] + P["bul_len"]
+        arm.append(capsules([(*(u * P["r_bullet"]), top + rw + 0.3), (*(u * P["r_bullet"]), top + 6.0), (*(u * 9.0), top + 14.0)], rw))
+    return mf.Manifold.batch_boolean(arm, mf.OpType.Add)
 
 
 def build():
@@ -115,26 +119,35 @@ def build():
     tip = HB.cyl(20.0, P["z_back"], 46.0, 64) - HB.cyl(18.0, P["z_back"] + 2.5, 47, 64) - HB.cyl(P["pinboard_r"], P["z_back"] - 1, 47, 48)
     for az in P["az_bullet"]:
         tip -= HB.cyl(3.0, P["z_back"] - 1, P["z_back"] + 3.0, 24).translate([*HB.at(P["r_bullet"], az), 0])
-    al, hl = leads()
+    for r_, az in P["screws"]:                                   # insert bosses and bores for the 3 socket screws
+        tip += HB.cyl(3.2, P["z_back"], P["z_back"] + 8.0, 24).translate([*HB.at(r_, az), 0]) ^ HB.cyl(20.0, P["z_back"], 46.0, 64)
+        tip -= HB.cyl(1.6, P["z_back"] - 1, P["z_back"] + 9.0, 20).translate([*HB.at(r_, az), 0])
+    al = leads()
     add("arm tip bay (sketch, ESC inside)", tip, "#6b7079", "arm", I4, 0.35)
     add("socket body", HB.arm_socket(), "#2b2d31", "arm", I4)
     add("nose ring", HB.nose_ring(), "#3d4046", "arm", I4)
     add("female bullets (Castle 4 mm)", U(HB.female_bullets()), "#d4a72c", "arm", I4, metal=True)
     add("ESC phase leads 14 AWG", al, "#b0302a", "arm", I4)
     add("3 x M3x20 DIN 7984", U(HB.screws()), "#b8bcc4", "arm", I4, metal=True)
-    add("detent ball", HB.detent_ball(), "#e8e8f0", "arm", I4, metal=True)
+    add("detent ball", HB.detent_ball(), "#e8e8f0", "arm", lambda s, sp: ball_pose(s["th"]), metal=True)
     add("O-ring 21 x 1.0", HB.oring(), "#1a7f37", "arm", I4)
     add("locking collar", HB.collar(0), "#d2542d", "collar", lambda s, sp: Rz(s["th"]))
     # hand side: coupler hand base + bullets + leads, moving with the push-in
     HP = lambda s, sp: Tz(s["dz"])
     add("hand base", HB.hand_base(), "#30343a", "hand", HP)
     add("male bullets", U(HB.male_bullets()), "#d4a72c", "hand", HP, metal=True)
-    add("motor phase leads 14 AWG", hl, "#b0302a", "hand", HP)
+    LM = HL.lead_meshes("conn")
+    add("motor phase leads 14 AWG", U([LM[f"lead {k}"] for k in "BAC"]), "#b0302a", "hand", HP)
+    add("solder joints (heat shrink)", U([LM[f"joint {k}"] for k in "BAC"]), "#111111", "hand", HP)
+    add("motor stubs 18 AWG", U([LM[f"stub {k}"] for k in "BAC"]), "#d2452d", "hand", HP)
+    add("signal wires (5 x 26 AWG)", LM["sig"], "#e6c229", "hand", HP)
     # hand3 hub E, posed like hand3_hubc.assembly()
     R = C.parts(); HPp = HC._parts(); FAZ = C.FAZ
     G = lambda s: hand_to_conn(s["dz"])
     S = lambda sp: M(C.T(C.rot("z", sp)))
     add("hub E frame", HPp["frame"][0], "#e9e9e4", "hand3", lambda s, sp: G(s))
+    add("lead cover rail", HL.rail(), "#f08a24", "hand3", lambda s, sp: G(s), 0.55)
+    add("rail screws 2 x M2x6", U(HL.rail_screws()), "#b8bcc4", "hand3", lambda s, sp: G(s), metal=True)
     add("hub E tie ring", HPp["tie_ring"][0], "#cfcfc8", "hand3", lambda s, sp: G(s))
     for w, sd in HC.YOKES:
         add(f"yoke {w} {sd}", HPp[f"yoke_{w}_{sd}"][0], "#a9b3bd", "hand3",
@@ -178,7 +191,7 @@ def main():
         moving = abs(state(min(t + 0.05, T_END))["pull_b"] - s["pull_b"]) + abs(state(min(t + 0.05, T_END))["pull_c"] - s["pull_c"]) > 1e-3
         phase = ("approach" if t < 3 else "push in: bullets engage" if t < 5 else "collar turns to lock" if t < 7 else "locked" if t < 8 else
                  "rotor spin-up" if t < 10 else "hover (fingers are the rotor fins)" if t < 14 else "spin-down" if t < 15.5 else
-                 "spread (lag)" if t < 18 else "curl (K1, K2, K3)" if t < 21 else "hold grip" if t < 23 else "open" if t < 26 else
+                 "spread (lag)" if t < 18 else "curl (K1, K2, K3) until the tips meet" if t < 21 else "hold grip" if t < 23 else "open" if t < 26 else
                  "collar turns to unlock" if t < 28 else "pull out")
         hud.append(dict(t=round(float(t), 2), ph=phase, dz=round(s["dz"], 1), th=round(s["th"], 1), rpm=int(rpm), A=round(amps, 1),
                         T=round(thrust, 1), spread=round(s["spread"], 1), fold=[round(f, 1) for f in s["fold"]],

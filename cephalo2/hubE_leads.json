@@ -1,0 +1,89 @@
+{
+ "psi_deg": 20.0,
+ "lead_sA": 15.832,
+ "lengths_mm": {
+  "lead B": 68.7,
+  "joint B": 9.0,
+  "stub B": 15.8,
+  "lead C": 45.3,
+  "joint C": 9.0,
+  "stub C": 25.4,
+  "lead A": 79.9,
+  "joint A": 9.0,
+  "stub A": 14.4,
+  "sig": 56.4
+ },
+ "loss_hover_W": 3.59,
+ "loss_max_W": 8.19,
+ "clearances_mm": {
+  "collar (lips as a full ring, wall)": {
+   "gap": 0.716,
+   "at": "lead B"
+  },
+  "servo bodies": {
+   "gap": 0.708,
+   "at": "lead A"
+  },
+  "frame plate (with its notch)": {
+   "gap": 0.15,
+   "at": "sig"
+  },
+  "frame bridge": {
+   "gap": 0.25,
+   "at": "stub A"
+  },
+  "moving cords": {
+   "gap": 12.547,
+   "at": "lead A"
+  },
+  "top block (with its notch)": {
+   "gap": 0.15,
+   "at": "stub A"
+  },
+  "curl pull ring, fully pulled (spins)": {
+   "gap": 1.19,
+   "at": "stub C"
+  },
+  "rotor cage (spins)": {
+   "gap": 1.202,
+   "at": "stub C"
+  },
+  "rail inner walls": {
+   "gap": 0.1,
+   "at": "joint B"
+  },
+  "lead to lead (touching side by side = 0)": {
+   "gap": 0.052,
+   "at": "joint C | lead A"
+  },
+  "hand-base insert bores (wall left)": {
+   "gap": 0.459,
+   "at": "lead B"
+  },
+  "other bullets' bores (wall left)": {
+   "gap": 3.134,
+   "at": "lead A"
+  },
+  "exit slot to the lug ends at the rim (mm of full rim, each side)": {
+   "gap": 0.99,
+   "at": "slot az 267.8..308.1"
+  },
+  "rail + bosses below the curl ring's lowest sweep (axial)": {
+   "gap": 1.14,
+   "at": "ring bottom zh 54.5, r >= 21.9; rail parts reach r 26.6"
+  },
+  "rail to the moving cords": {
+   "gap": 16.33,
+   "at": ""
+  },
+  "rail below the collar (axial, rail top edge is at zh 0)": {
+   "gap": 1.2,
+   "at": "bosses start at zh 0"
+  },
+  "rail screw heads to the servo rear bosses, est. (in x')": {
+   "gap": 16.2,
+   "at": ""
+  }
+ },
+ "collisions": []
+}

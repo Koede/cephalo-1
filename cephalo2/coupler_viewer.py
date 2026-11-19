@@ -1,4 +1,4 @@
-"""Writes coupler_site/: a three.js viewer of connector rev B.6 (hand/arm coupler) with the insert-and-lock sequence,
+"""Writes coupler_site/: a three.js viewer of connector rev B.7 (hand/arm coupler) with the insert-and-lock sequence,
 a section cut, an explode slider and three hands (bare base, hand3 base, wheel hand).  Meshes come straight from the
 CAD (handmount_b.py, coupler_hand3_fit.py, wheelhand.py) and are packed as base64 Float32/Uint32 in coupler_data.js.
 python3 coupler_viewer.py"""
@@ -23,23 +23,13 @@ def _capsules(pts, r):
 
 
 def phase_leads():
-    """Rev B.6 motor phase leads, 14 AWG silicone (OD 3.5): ESC -> female cup tail (tip bay) and male cup -> groove ->
-    90 deg bend R 3 -> down hand3's r < 7 centre channel toward the motor."""
-    P = HB.P; rw = P["wire_od"] / 2; fz0 = P["z_flange"][0]; zc = fz0 + 0.15 + rw
-    hand, arm = [], []
+    """ESC phase leads on the arm side, 14 AWG silicone (OD 3.5): ESC -> female cup tail in the tip bay.  The hand side
+    (rev B.7) comes from hubE_leads: exit slot, dive, back face of hub E's servo stack inside the cover rail."""
+    P = HB.P; rw = P["wire_od"] / 2; arm = []
     for az in P["az_bullet"]:
-        u = np.array([np.cos(np.radians(az)), np.sin(np.radians(az))])
-        pts = [(*(u * P["r_bullet"]), -P["male_body"] + 1.0), (*(u * (P["r_bullet"] - 2.5)), zc)]
-        pts += [(*(u * (P["lead_rv"] + P["lead_bend_r"])), zc)]
-        for q in np.linspace(0, 90, 7)[1:]:
-            rr = P["lead_rv"] + P["lead_bend_r"] * np.cos(np.radians(q)); zz = zc - P["lead_bend_r"] * np.sin(np.radians(q))
-            pts.append((*(u * rr), zz))
-        pts.append((*(u * P["lead_rv"]), fz0 - 30.0))
-        hand.append(_capsules(pts, rw))
-        top = P["fem_recess"] + P["bul_len"]
-        arm.append(_capsules([(*(u * P["r_bullet"]), top - 2.0), (*(u * P["r_bullet"]), top + 6.0), (*(u * 9.0), top + 14.0)], rw))
-    U_ = lambda L: mf.Manifold.batch_boolean(L, mf.OpType.Add)
-    return U_(arm), U_(hand)
+        u = np.array([np.cos(np.radians(az)), np.sin(np.radians(az))]); top = P["fem_recess"] + P["bul_len"]
+        arm.append(_capsules([(*(u * P["r_bullet"]), top + rw + 0.3), (*(u * P["r_bullet"]), top + 6.0), (*(u * 9.0), top + 14.0)], rw))
+    return mf.Manifold.batch_boolean(arm, mf.OpType.Add)
 
 parts = {}
 # arm side (fixed); 'g' = group: arm (static), collar (turns), hand (slides)
@@ -50,7 +40,7 @@ parts["arm tip bay (sketch)"] = dict(m=tip, g="arm", c="#6b7079", o=0.35)
 parts["socket body"] = dict(m=HB.arm_socket(), g="arm", c="#2b2d31")
 parts["nose ring"] = dict(m=HB.nose_ring(), g="arm", c="#3d4046")
 parts["female bullets (Castle 4 mm)"] = dict(m=U(HB.female_bullets()), g="arm", c="#c9a227")
-_al, _hl = phase_leads()
+_al = phase_leads()
 parts["ESC phase leads 14 AWG (to the tip-bay ESC)"] = dict(m=_al, g="arm", c="#b0302a")
 parts["3 x M3x20 DIN 7984"] = dict(m=U(HB.screws()), g="arm", c="#b8bcc4")
 parts["detent ball 3 mm"] = dict(m=HB.detent_ball(), g="arm", c="#e8e8f0")
@@ -59,13 +49,23 @@ parts["locking collar"] = dict(m=HB.collar(0), g="collar", c="#d2542d")
 # hands
 parts["hand base"] = dict(m=HB.hand_base(), g="hand", c="#30343a", h="all")
 parts["male bullets"] = dict(m=U(HB.male_bullets()), g="hand", c="#c9a227", h="all")
-parts["motor phase leads 14 AWG (to the hand motor)"] = dict(m=_hl, g="hand", c="#b0302a", h="all")
-pf = F.pack_frame_b() - F.holes(0.0)
-parts["hand3 pack frame (lower)"] = dict(m=F.to_conn(pf.trim_by_plane([0, 0, -1], -40.0), 0.0), g="hand", c="#e9e9e4", h="hand3")
-hw = F.C3.hardware()
-sv = U([m for k, (m, _, _) in hw.items() if k.startswith("servo")]).trim_by_plane([0, 0, -1], -40.0)
-parts["hand3 servos (tier 1)"] = dict(m=F.to_conn(sv, 0.0), g="hand", c="#1f4e8c", h="hand3")
-parts["hand3 base screws M3x8 DIN 7991 (3, B.6)"] = dict(m=F.to_conn(F.hand_screws_h3(0.0), 0.0), g="hand", c="#b8bcc4", h="hand3")
+import sys
+sys.path.insert(0, "hand3e"); _cwd = os.getcwd(); os.chdir("hand3e")
+import hand3_hubc as HC
+os.chdir(_cwd)
+import hubE_leads as HL
+A = HL.hand3_to_conn_matrix(0.0)[:3, :4]; LM = HL.lead_meshes("conn")
+parts["motor phase leads 14 AWG"] = dict(m=U([LM[f"lead {k}"] for k in "BAC"]), g="hand", c="#b0302a", h="hand3")
+parts["solder joints (heat shrink)"] = dict(m=U([LM[f"joint {k}"] for k in "BAC"]), g="hand", c="#111111", h="hand3")
+parts["motor stubs 18 AWG"] = dict(m=U([LM[f"stub {k}"] for k in "BAC"]), g="hand", c="#d2452d", h="hand3")
+parts["signal wires (5 x 26 AWG)"] = dict(m=LM["sig"], g="hand", c="#e6c229", h="hand3")
+hw = HC.hardware()
+parts["hand3 hub E frame"] = dict(m=HC.frame().transform(A), g="hand", c="#e9e9e4", h="hand3")
+parts["hand3 servos 2 x STS3215"] = dict(m=U([m for k, m in hw.items() if k.startswith("servo")]).transform(A), g="hand", c="#1f4e8c", h="hand3")
+parts["hand3 spools, idlers, rods"] = dict(m=U([m for k, m in hw.items() if not k.startswith(("servo", "motor"))]).transform(A), g="hand", c="#9aa1aa", h="hand3")
+parts["hand3 motor base (SE 2816)"] = dict(m=hw["motor_base"].transform(A), g="hand", c="#555a63", h="hand3")
+parts["lead cover rail"] = dict(m=HL.rail().transform(A), g="hand", c="#f08a24", h="hand3", o=0.6)
+parts["rail screws 2 x M2x6"] = dict(m=U(HL.rail_screws()).transform(A), g="hand", c="#b8bcc4", h="hand3")
 W = WH.parts()
 for k, c in (("housing", "#3a3f46"), ("wheel_hub", "#e9e9e4"), ("tyre", "#202022"), ("motor", "#8a1d1d"), ("carrier2", "#9aa0a8")):
     parts["wheel hand: " + k] = dict(m=W[k], g="hand", c=c, h="wheel", o=0.5 if k == "housing" else 1.0)

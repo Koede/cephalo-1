@@ -1,0 +1,13 @@
+{
+ "cell_mm": 0.5,
+ "frames": 23,
+ "overlaps": [
+  {
+   "a": "O-ring 21 x 1.0",
+   "b": "hand base",
+   "t": 4.5,
+   "vol_mm3": 1.75,
+   "cells": 14
+  }
+ ]
+}
