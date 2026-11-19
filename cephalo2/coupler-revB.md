@@ -422,3 +422,22 @@ The three bullets carry the motor phases from the arm's tip-bay ESC to the hand'
 - Hub E would need two 5–6 mm tunnels in its frame top block (z 51.4–55) into the centre hole under the motor, plus two plate notches.
 - The hand-base grooves would run outward to the corridors.
 - Study: `hubE_lead_route_study.png`. **Awaiting Forest's go-ahead before building it.**
+
+## Motor leads through hub E: wider options study (2026-11-19)
+
+Files: `hubE_lead_options_study.py`, `.png`, `.json`.
+
+Two findings changed the picture from the first route search:
+
+- **The first search left the moving cords out.** The two "far" cords cross the front (+y) face of the servo stack at y 22.5
+  (z 10.4 and z 35). The front-corridor lead of the first route (y 23.5) would rub both of them (gap -0.5 mm). That route is rejected.
+- **The back (-y) face of the servo stack is empty.** No spools, no cords (nearest cord 26 mm away), free space out to 12+ mm
+  over the full height z 2 to 51. Three 14 AWG leads fit there side by side with no change to the hand outline.
+
+14 AWG could not be routed before only because of the last 8 mm: the gap between the motor base (r 17) and the swept cage (r 19.5)
+is 2.5 mm, too small for a 3.5 mm wire. The motor's own 18 AWG leads (2.3 mm) fit that gap, so the 14 AWG is joined to short motor
+stubs on the back face, below the cage.
+
+Loss at 36 A hover, 3 phases, 80 mm run + 20 mm motor stub (est.): A uncut 18 AWG 8.1 W; B copper strip 3.3 W; **C 14 AWG 4.2 W
+(recommended)**; D 16 AWG 5.7 W; E split front/back 4.2 W but 0.7 mm from a moving cord; F C in a printed rail 4.2 W; G old corridors
+rejected; H servo refactor not needed. Decision pending.
