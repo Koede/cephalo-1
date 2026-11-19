@@ -1,0 +1,23 @@
+plan arm 2: max IK error 2.2 mm, axis 1.2 deg | min body clearance 9 mm | min joint-limit margin 5.8 deg | peak joint speed 166 deg/s
+plan arm 6: max IK error 17.1 mm, axis 7.3 deg | min body clearance 9 mm | min joint-limit margin 3.4 deg | peak joint speed 156 deg/s
+chores shovel mid: sim 30.0 s in 108 s wall
+grasp: {'t': 5.75, 'hand': 2, 'obj': 'shovel', 'offset_mm': 10.1, 'grasped': True}
+grasp: {'t': 14.15, 'hand': 6, 'obj': 'shovel', 'offset_mm': 18.2, 'grasped': True}
+HOVER                                              err   4.5 cm | tilt  0.4 | yaw  0.2 | servo 0.30 (arm7 j7) | slip  0.0 | sat 0 | fan  8.6 | grip   0.0 N 0.00 N m
+DESCEND over the shovel                            err   3.3 cm | tilt  0.4 | yaw  0.2 | servo 0.14 (arm7 j2) | slip  0.0 | sat 0 | fan  8.3 | grip   0.0 N 0.00 N m
+PICK UP: arm 2 stops its prop, reaches down        err   3.3 cm | tilt  1.4 | yaw  0.3 | servo 0.71 (arm2 j3) | slip  0.1 | sat 0 | fan 11.1 | grip   0.0 N 0.00 N m
+PICK UP: lower onto the shovel                     err   3.0 cm | tilt  0.2 | yaw  0.1 | servo 0.33 (arm3 j2) | slip  0.1 | sat 0 | fan 12.2 | grip   0.0 N 0.00 N m
+PICK UP: fingers close                             err   3.0 cm | tilt  3.3 | yaw  0.0 | servo 0.42 (arm2 j0) | slip  0.1 | sat 0 | fan 11.9 | grip  10.0 N 0.08 N m
+LIFT the shovel (arm 2, balance point)             err   9.9 cm | tilt  3.7 | yaw  0.1 | servo 0.38 (arm1 j2) | slip  0.1 | sat 0 | fan 12.1 | grip   4.3 N 0.05 N m
+CARRY it to the sandbox (7 claw-props)             err   5.0 cm | tilt  0.7 | yaw  1.9 | servo 0.43 (arm3 j2) | slip  0.1 | sat 0 | fan 12.4 | grip   4.0 N 0.01 N m
+HAND OVER: arm 6 takes the handle top              err   3.5 cm | tilt  1.6 | yaw  2.0 | servo 0.61 (arm6 j2) | slip  0.1 | sat 0 | fan 12.4 | grip   5.5 N 0.17 N m
+TWO HANDS: tilt the blade down, line up            err   3.1 cm | tilt  0.5 | yaw  0.1 | servo 0.39 (arm2 j4) | slip  0.1 | sat 1 | fan 12.6 | grip   5.2 N 0.98 N m
+DIG: push the blade in                             err   4.5 cm | tilt  1.5 | yaw  0.2 | servo 0.44 (arm6 j2) | slip  0.1 | sat 0 | fan 12.1 | grip   5.1 N 1.00 N m
+DIG: lever the scoop out                           err  10.4 cm | tilt  3.0 | yaw  0.1 | servo 0.65 (arm2 j4) | slip  0.1 | sat 1 | fan 12.6 | grip   7.7 N 0.98 N m
+DIG: carry the scoop aside                         err  10.6 cm | tilt  2.1 | yaw  3.0 | servo 0.46 (arm2 j4) | slip  0.1 | sat 1 | fan 12.6 | grip   7.4 N 0.64 N m
+DIG: tip the sand off                              err  13.0 cm | tilt  1.4 | yaw  1.4 | servo 0.58 (arm2 j4) | slip  0.1 | sat 1 | fan 12.6 | grip   7.4 N 0.65 N m
+Back over the sandbox                              err   8.3 cm | tilt  1.4 | yaw  3.3 | servo 0.35 (arm6 j1) | slip  0.1 | sat 0 | fan 12.2 | grip   5.2 N 0.98 N m
+STAB the shovel back into the sand                 err   5.0 cm | tilt  2.9 | yaw  0.6 | servo 0.44 (arm6 j2) | slip  0.1 | sat 1 | fan 12.6 | grip   5.3 N 1.00 N m
+LET GO: both hands release, props back on          err   6.7 cm | tilt  2.8 | yaw  1.5 | servo 1.00 (arm2 j0) | slip  0.2 | sat 0 | fan 11.7 | grip   5.0 N 0.98 N m
+FLY ON (8 claw-props)                              err   4.4 cm | tilt  0.6 | yaw  0.7 | servo 0.32 (arm6 j6) | slip  0.1 | sat 0 | fan 10.5 | grip   0.0 N 0.00 N m
+rms/rated 0.71
