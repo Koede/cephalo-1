@@ -1,0 +1,80 @@
+mesh maxvol 2.0 mm3
+parsing switches
+success
+Transforming over 1000 vertices to C_CONTIGUOUS.
+Transforming over 1000 elements to C_CONTIGUOUS.
+  hand base: 47926 tets, 234318 dofs (49.9 s)
+parsing switches
+success
+Transforming over 1000 vertices to C_CONTIGUOUS.
+Transforming over 1000 elements to C_CONTIGUOUS.
+  collar: 24632 tets, 123159 dofs (20.5 s)
+parsing switches
+success
+Transforming over 1000 vertices to C_CONTIGUOUS.
+Transforming over 1000 elements to C_CONTIGUOUS.
+  nose ring: 7820 tets, 44814 dofs (5.6 s)
+  contact pairs (found/slaves, both ways): hand-nose (1059, 1208, 565, 672), lip-lug (103, 497, 66, 185), step-nose (128, 193, 136, 472), spigot 410, collar bore 192
+      cg 95 it, rel. residual 9.9e-10
+    contact iteration 0: 1132 changes; active c1 809 c2 124 c3 120 rs 344 rc 130
+      cg 136 it, rel. residual 9.3e-10
+    contact iteration 1: 642 changes; active c1 755 c2 69 c3 143 rs 230 rc 142
+      cg 165 it, rel. residual 9.3e-10
+    contact iteration 2: 403 changes; active c1 599 c2 51 c3 135 rs 173 rc 120
+      cg 194 it, rel. residual 9.1e-10
+    contact iteration 3: 198 changes; active c1 519 c2 56 c3 124 rs 142 rc 117
+      cg 208 it, rel. residual 9.6e-10
+    contact iteration 4: 111 changes; active c1 465 c2 62 c3 110 rs 142 rc 122
+      cg 222 it, rel. residual 9.5e-10
+    contact iteration 5: 94 changes; active c1 436 c2 100 c3 105 rs 142 rc 118
+      cg 217 it, rel. residual 9.4e-10
+    contact iteration 6: 46 changes; active c1 414 c2 115 c3 101 rs 142 rc 115
+      cg 214 it, rel. residual 9.9e-10
+    contact iteration 7: 23 changes; active c1 397 c2 115 c3 101 rs 142 rc 113
+      cg 211 it, rel. residual 9.2e-10
+    contact iteration 8: 12 changes; active c1 387 c2 115 c3 101 rs 142 rc 111
+      cg 196 it, rel. residual 9.0e-10
+    contact iteration 9: 2 changes; active c1 385 c2 115 c3 101 rs 142 rc 111
+      cg 139 it, rel. residual 9.9e-10
+    contact iteration 10: 0 changes; active c1 385 c2 115 c3 101 rs 142 rc 111
+  contact resultants (N): hand->nose ring 237.6, lips<-lugs 237.4, collar step->nose ring 237.4
+  az 90: 1671 s, tilt 0.1575 deg
+     hand base: lugs (incl. root at the flange rim) vM max  82.53 elem  27.75 p99.9  26.58 | s1 max  88.40 elem  25.34 p99.9  24.93 | szz elem  13.35  at [20.4, -7.1, -3.5]
+     hand base: flange / spigot (rest)          vM max  38.88 elem  26.15 p99.9  26.64 | s1 max  49.60 elem  30.33 p99.9  32.94 | szz elem  28.28  at [-1.8, -20.5, -4.4]
+     collar: lip                                vM max 155.36 elem  49.77 p99.9  41.76 | s1 max  54.81 elem  20.31 p99.9  22.14 | szz elem  10.07  at [-4.3, -22.6, -3.7]
+     collar: wall (below the step)              vM max  30.55 elem  22.12 p99.9  18.77 | s1 max  36.84 elem  27.85 p99.9  23.00 | szz elem  26.64  at [-2.4, -23.7, -3.1]
+     collar: step / wall corner                 vM max   7.89 elem   4.09 p99.9   5.90 | s1 max   7.46 elem   4.14 p99.9   5.37 | szz elem   2.68  at [-14.7, -14.7, 3.7]
+     collar: sleeve                             vM max   2.89 elem   2.38 p99.9   2.69 | s1 max   2.97 elem   2.37 p99.9   2.66 | szz elem   0.22  at [4.3, -20.5, 7.7]
+     nose ring: nose ring                       vM max  14.74 elem   6.84 p99.9   7.45 | s1 max  12.17 elem   6.19 p99.9   6.07 | szz elem   4.38  at [-11.2, -20.4, 3.4]
+      cg 101 it, rel. residual 9.3e-10
+    contact iteration 0: 1120 changes; active c1 818 c2 124 c3 123 rs 342 rc 132
+      cg 143 it, rel. residual 8.9e-10
+    contact iteration 1: 577 changes; active c1 806 c2 80 c3 139 rs 229 rc 134
+      cg 166 it, rel. residual 9.7e-10
+    contact iteration 2: 351 changes; active c1 654 c2 54 c3 120 rs 193 rc 114
+      cg 196 it, rel. residual 8.8e-10
+    contact iteration 3: 252 changes; active c1 535 c2 56 c3 101 rs 186 rc 137
+      cg 203 it, rel. residual 9.7e-10
+    contact iteration 4: 142 changes; active c1 443 c2 61 c3 94 rs 188 rc 137
+      cg 204 it, rel. residual 9.0e-10
+    contact iteration 5: 119 changes; active c1 367 c2 63 c3 103 rs 187 rc 134
+      cg 210 it, rel. residual 1.0e-09
+    contact iteration 6: 59 changes; active c1 324 c2 65 c3 109 rs 187 rc 134
+      cg 214 it, rel. residual 1.0e-09
+    contact iteration 7: 85 changes; active c1 271 c2 66 c3 127 rs 189 rc 131
+      cg 195 it, rel. residual 1.0e-09
+    contact iteration 8: 36 changes; active c1 240 c2 67 c3 125 rs 189 rc 131
+      cg 186 it, rel. residual 9.8e-10
+    contact iteration 9: 11 changes; active c1 229 c2 67 c3 125 rs 189 rc 131
+      cg 174 it, rel. residual 9.0e-10
+    contact iteration 10: 0 changes; active c1 229 c2 67 c3 125 rs 189 rc 131
+  contact resultants (N): hand->nose ring 230.5, lips<-lugs 230.3, collar step->nose ring 230.3
+  az 180: 1638 s, tilt 0.1456 deg
+     hand base: lugs (incl. root at the flange rim) vM max  83.68 elem  27.84 p99.9  26.70 | s1 max  90.01 elem  21.50 p99.9  21.65 | szz elem  11.51  at [20.4, -7.1, -3.5]
+     hand base: flange / spigot (rest)          vM max  33.62 elem  20.93 p99.9  19.23 | s1 max  39.03 elem  24.07 p99.9  22.96 | szz elem  19.53  at [18.7, -8.7, -4.5]
+     collar: lip                                vM max 108.64 elem  37.59 p99.9  40.56 | s1 max  58.37 elem  18.51 p99.9  21.15 | szz elem   9.80  at [21.2, 7.8, -3.8]
+     collar: wall (below the step)              vM max  24.38 elem  21.12 p99.9  18.94 | s1 max  30.30 elem  26.04 p99.9  22.69 | szz elem  24.85  at [22.8, 6.9, -3.0]
+     collar: step / wall corner                 vM max   9.64 elem   4.46 p99.9   5.97 | s1 max   7.93 elem   4.19 p99.9   5.88 | szz elem   2.18  at [20.6, 2.0, 3.7]
+     collar: sleeve                             vM max   2.57 elem   2.15 p99.9   2.46 | s1 max   2.56 elem   2.13 p99.9   2.38 | szz elem   0.22  at [15.0, 14.4, 7.7]
+     nose ring: nose ring                       vM max  17.60 elem   7.72 p99.9   8.01 | s1 max  16.81 elem   7.97 p99.9   6.88 | szz elem   5.33  at [22.2, -6.6, 3.3]
+EXIT 0

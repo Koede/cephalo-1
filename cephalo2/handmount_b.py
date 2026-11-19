@@ -33,7 +33,7 @@ P = dict(
     # hand base
     R_flange=20.6, r_spigot=10.35, z_spigot_top=10.4, lug_az=(0.0, 120.0, 240.0), lug_r0=20.4,
     # rev B.2 primaries (set by coupler_opt.py): lugs at the TOP of the flange, clamped between the nose ring and the lip
-    lug_w=56.0, lug_r1=23.3,      # B.2 48 / 22.4; B.4 56 / 23.3 (FEA: lug root + lip-wall fillet bands; bearing room for the fillet)
+    lug_w=50.0, lug_r1=23.3,      # B.2 48 / 22.4; B.4 56 / 23.3; B.5 50 (lips overhang) (FEA: lug root + lip-wall fillet bands; bearing room for the fillet)
     t_lug=3.6, t_lip=3.2, t_wall=4.0,   # B.2 2.6 / 2.7 / 3.3
     t_step=2.4, ax_clr=0.1,
     lip_r0=20.9, collar_bore=20.5, twist=60.0, ramp=0.4, ramp_deg=8.0, flute=0.5,
@@ -58,10 +58,15 @@ P = dict(
     # corner under the lug, worst at the lug's side edge where the 66 deg lip ran past the 48 deg lug).  Fixes: a root fillet
     # (gusset) under each lug, a matching chamfer on the lip's inner top edge, lips stopped lip_inset inside the lug edges,
     # a fillet where the lip meets the collar wall, a chamfer on the lug's bottom outer edge to clear it, lugs 1 mm longer.
-    lug_fillet=1.0, lip_chamfer=0.9, wall_fillet=0.8, arc_n=8, lug_chamfer=0.5, lip_inset=0.0,
+    lug_fillet=1.0, lip_chamfer=0.9, wall_fillet=0.8, arc_n=8, lug_chamfer=0.5, lip_inset=0.0,   # B.5: unused (lips overhang the lugs, see lip_w)
     # B.4 FEA pass 2: a square lip end acts as a punch edge (flange z-tension 37-47 MPa at the lip end): the trailing end of each
     # lip is relieved lip_relief over lip_relief_deg (the leading end already has the 0.4 mm lead-in ramp), lips as wide as the lugs
     lip_relief=0.12, lip_relief_deg=8.0,
+    # rev B.5 (2026-11-19, FEA B.4: collar lip-wall fillet 20-28 MPa): the lip is made as long as the insertion gaps allow
+    # (lip_w = 120 - gap_w) so it overhangs each lug end and spreads the wall's load over more arc; both ends are relieved
+    # from relief_in deg inside the lug edge (lip_relief at the edge, rising on over the overhang) so the lug's end never
+    # bears on a full-height lip.  The lead-in ramp still sets the leading tip.
+    relief_in=4.0, lip_overhang=True,
     # rev B.3.1 optimisation: six lightening pockets in the socket body from its back face, between the bullets and the screws
     pocket_r=(12.0, 19.0), pocket_z=8.0, pocket_az=(0.0, 60.0, 120.0, 180.0, 240.0, 300.0), pocket_half=(17.0, 17.0), pocket_wall=1.0,
 )
@@ -70,7 +75,7 @@ P = dict(
 def derive():
     """Everything that follows from the primaries."""
     P["gap_w"] = P["lug_w"] + 6.0                                  # only the insertion gap minimum; lips are lip_w wide
-    P["lip_w"] = P["lug_w"] - 2 * P["lip_inset"]
+    P["lip_w"] = 120.0 - P["gap_w"] if P["lip_overhang"] else P["lug_w"] - 2 * P["lip_inset"]
     P["lug_r"] = (P["lug_r0"], P["lug_r1"]); P["lug_z"] = (-P["t_lug"], 0.0)
     P["R_nose"] = P["lug_r1"] + 0.1; P["collar_cb"] = P["lug_r1"] + 0.5
     zl = -P["t_lug"] - P["ax_clr"]; P["lip_z"] = (zl - P["t_lip"], zl); P["lip_r"] = (P["lip_r0"], P["collar_cb"])
@@ -127,7 +132,11 @@ def lip_seg(a0, a1, ztop, n=N):
 def lip_drop(m):
     """Drop of the lip top (mm) at m deg from its leading end: lead-in ramp + trailing relief."""
     seg = P["lip_w"]
-    return P["ramp"] * np.clip(1 - m / P["ramp_deg"], 0, 1) + P["lip_relief"] * np.clip(1 - (seg - m) / P["lip_relief_deg"], 0, 1)
+    if not P["lip_overhang"]:
+        return P["ramp"] * np.clip(1 - m / P["ramp_deg"], 0, 1) + P["lip_relief"] * np.clip(1 - (seg - m) / P["lip_relief_deg"], 0, 1)
+    ov = (seg - P["lug_w"]) / 2                                       # overhang past each lug edge, deg
+    rel = lambda e: P["lip_relief"] * np.clip((P["relief_in"] - e) / P["relief_in"], 0, None)   # e: deg inside the lug edge
+    return np.maximum(P["ramp"] * np.clip(1 - m / P["ramp_deg"], 0, 1), rel(m - ov) + 0 * m) + rel(seg - m - ov)
 
 
 def lip(az, nst=48):
@@ -331,7 +340,8 @@ def stresses(M, Fr, sig_allow=30.0):
     s_wall = F / (b * t) + 6 * F * (Rm - rc) / (b * t ** 2)
     rn = (P["collar_bore"] + P["R_nose"]) / 2
     s_step = 6 * F * (cb - rn) / (b * P["t_step"] ** 2)
-    bear_lug = F / (np.radians(P["lip_w"] - P["ramp_deg"] - 0.5 * P["lip_relief_deg"]) * rc * (P["lug_r1"] - P["lug_chamfer"] - P["lip_r0"] - P["lip_chamfer"] - 0.3))   # B.4: flat lip x flat lug, 0.3 radial float
+    arc = (P["lug_w"] - P["relief_in"]) if P["lip_overhang"] else (P["lip_w"] - P["ramp_deg"] - 0.5 * P["lip_relief_deg"])
+    bear_lug = F / (np.radians(arc) * rc * (P["lug_r1"] - P["lug_chamfer"] - P["lip_r0"] - P["lip_chamfer"] - 0.3))   # B.4: flat lip x flat lug, 0.3 radial float
     bear_sp = Fr / (2 * P["r_spigot"] * (P["z_bore"] - P["z_nose"]) * 0.5)
     step_face = F / (0.5 * np.pi * (P["R_nose"] ** 2 - P["collar_bore"] ** 2))
     F_scr = 0.0
