@@ -531,3 +531,5 @@ side of the centre line, legs into 24 slot holes on r 20 (web 2.1 mm), arms out 
 catches under the disc when the spin throws the pin 0.5 mm outward (15 N). 30 deg steps. 20 N sideways on a fingertip: 14 MPa at
 the hole edges. Open: cord path from the curl ring (it sits under the disc); spin interlock for 3 + 1 / one-sided poses; fork,
 roller and sensor parts; the decision to drop the swing (pending).
+
+Decision (2026-11-19): **drop the sideways swing (lag)**; finger fixed in its root block; root travel gives 2 + 2. Next: cord path layout (today's cords run up inside the hollow swing pin at r 20, a path that disappears), then CAD of the v3 hub.
