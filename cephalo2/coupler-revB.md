@@ -230,3 +230,22 @@ Fillet bands read off the sections, as engineering values:
 - Both critical fillets now sit at factor ≈ 1.4–2.0 against the *estimated* 30 MPa PA-CF interlayer strength, in the *estimated* 3 g wheel landing. That's borderline rather than comfortable.
 - These are coarse-mesh, linear-elastic numbers. The next real data point should be a printed pull test of a lug and collar pair (bench), not another FEA round.
 - If the printed parts come up short, SLS/MJF PA12 for the collar and hand base (isotropic, about 48 MPa) adds margin with no geometry change.
+
+## Face rethink (2026-11-19): the bullets stay
+
+**Question:** should the three motor-phase bullets be in the face at all? They force a straight push, which is why the collar exists. Studies: `coupler_face_study.png`, `coupler_face_study2.png`.
+
+**Options considered:**
+
+| Option | What it is | Outcome |
+|---|---|---|
+| B | Gold contact rings on the hand + spring pins; the hand twists, no collar | Out: needs a custom gold-plated PCB |
+| B2 / C2 | Mill-Max spring pins onto Mill-Max gold target studs (stock Digi-Key/Mouser parts) | See below |
+| D | One Amass MR60 plug in the face | Not chosen |
+| F | MR60 plug on a lead, plugged by hand, with a twist bayonet | Not chosen |
+
+**Decision (Forest):** keep the 4 mm bullets (rev B.5). Rule: every part must be easy to buy.
+- 4 mm gold bullets are the most available part: Castle or generic, from RC shops or Amazon.
+- They carry the 36 A hover current with well under 1 W of loss. Six spring pins in parallel per phase (up to 20 mΩ contact resistance each) would waste up to about 13 W per hand inside the coupler.
+
+**Next:** print a lug and collar pair for the pull test (bench).
