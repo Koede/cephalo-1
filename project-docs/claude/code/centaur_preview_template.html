@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Centauri-1: full-model preview</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --ink:#1d2127; --mute:#5c6470; --line:#e2e5ea; --ok:#1f8a4c; --warn:#c0392b; --acc:#2f6db3; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--ink); }
+  header { padding:12px 16px 6px; }
+  h1 { font-size:18px; margin:0 0 2px; }
+  .sub { color:var(--mute); font-size:13px; }
+  .wrap { display:grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap:12px; padding:8px 12px 12px; }
+  @media (max-width: 900px) { .wrap { grid-template-columns: 1fr; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px; }
+  #view { position:relative; height:62vh; min-height:360px; border-radius:8px; overflow:hidden; background:linear-gradient(#eef1f5,#dfe4ea); }
+  #view canvas { display:block; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 2px; }
+  .chip { border:1px solid var(--line); background:#fff; border-radius:16px; padding:4px 10px; font-size:12px; cursor:pointer; user-select:none; }
+  .chip.off { opacity:.4; text-decoration:line-through; }
+  .chip .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; vertical-align:-1px; }
+  .btns { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+  button { border:1px solid var(--line); background:#fff; border-radius:6px; padding:5px 10px; font-size:12px; cursor:pointer; }
+  button.on { background:var(--acc); color:#fff; border-color:var(--acc); }
+  .tabs { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px; }
+  .tabs button { font-size:12px; }
+  #plot { height:52vh; min-height:340px; }
+  .note { color:var(--mute); font-size:12.5px; margin:6px 2px 0; line-height:1.4; }
+  table { border-collapse:collapse; width:100%; font-size:13px; }
+  td, th { padding:6px 8px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+  th { font-weight:600; color:var(--mute); font-size:12px; }
+  .ok { color:var(--ok); font-weight:600; } .warn { color:var(--warn); font-weight:600; }
+  .stats { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+  .stat { background:var(--bg); border-radius:8px; padding:6px 10px; font-size:12px; color:var(--mute); }
+  .stat b { display:block; color:var(--ink); font-size:15px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Centauri-1: Cephalo-1 docked on its horse body (Equo-1)</h1>
+  <div class="sub">Look and layout study (hand calculations, not CAD). Drag to orbit, pinch or scroll to zoom. Plots on the right are the numbers behind each design choice.</div>
+</header>
+<div class="wrap">
+  <div class="card">
+    <div id="view"></div>
+    <div class="chips" id="chips"></div>
+    <div class="btns">
+      <button data-v="iso" class="on">3/4 view</button><button data-v="side">Side</button><button data-v="front">Front</button><button data-v="top">Top</button>
+      <button id="spin">Auto-rotate</button><button id="xray">See inside</button>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+  <div class="card">
+    <div class="tabs" id="tabs"></div>
+    <div id="plot"></div>
+    <div class="note" id="pnote"></div>
+  </div>
+  <div class="card" style="grid-column: 1 / -1;">
+    <h3 style="margin:2px 0 6px; font-size:15px;">Design rules: the guiding numbers and where v2 stands</h3>
+    <table id="rules"></table>
+    <div class="note">Estimates throughout: actuator constants partly derived, shock spring rate unpublished, no dynamics simulation yet. Rules are re-checked every time a study script is re-run.</div>
+  </div>
+</div>
+<script>
+const D = /*DATA*/null;
+// ------------------------------------------------------------------ 3D
+const view = document.getElementById('view');
+const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+view.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(35, 1, 10, 20000);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; controls.target.set(-150, 520, 0);
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8f96, 0.75));
+const sun = new THREE.DirectionalLight(0xffffff, 0.65); sun.position.set(800, 1600, 900); scene.add(sun);
+const fill = new THREE.DirectionalLight(0xffffff, 0.25); fill.position.set(-900, 500, -700); scene.add(fill);
+const grid = new THREE.GridHelper(2400, 24, 0xb8bfc8, 0xd3d8de); grid.position.y = 0; scene.add(grid);
+const ground = new THREE.Mesh(new THREE.CircleGeometry(1300, 48), new THREE.MeshLambertMaterial({color:0xe9ecef}));
+ground.rotation.x = -Math.PI/2; ground.position.y = -1; scene.add(ground);
+const TAGS = {octopus:"Octopus", shell:"Body shell", covers:"Pauldrons + leg covers", frame:"Panel ribs, stringers, girdle", legs:"Legs", actuators:"Actuators", belts:"Knee belts", suspension:"Swing unit + shocks", tail:"Tail", reach:"Arm working poses"};
+const TAGCOL = {octopus:"#e8833a", shell:"#e4e8ee", covers:"#3a3f47", frame:"#9aa7b4", legs:"#5b7fa6", actuators:"#2f3136", belts:"#b0b6bd", suspension:"#2e9e5b", tail:"#c9661f", reach:"#2f6db3"};
+const groups = {}; const skinMats = [];
+for (const g of D.geo) {
+  const v = new Float32Array(g.v.length);
+  for (let i = 0; i < g.v.length; i += 3) { v[i] = g.v[i]; v[i+1] = g.v[i+2]; v[i+2] = -g.v[i+1]; }
+  const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(v, 3)); geo.computeVertexNormals();
+  const mat = new THREE.MeshLambertMaterial({color:g.c, transparent:g.a < 1, opacity:g.a, side:THREE.DoubleSide, depthWrite:g.a >= 1});
+  if (g.tag === 'frame' && g.a < 0.5) skinMats.push(mat);
+  const mesh = new THREE.Mesh(geo, mat); scene.add(mesh);
+  (groups[g.tag] = groups[g.tag] || []).push(mesh);
+}
+const chips = document.getElementById('chips');
+for (const [t, name] of Object.entries(TAGS)) {
+  if (!groups[t]) continue;
+  const c = document.createElement('span'); c.className = 'chip';
+  c.innerHTML = `<span class="dot" style="background:${TAGCOL[t]}"></span>${name}`;
+  c.onclick = () => { c.classList.toggle('off'); for (const m of groups[t]) m.visible = !c.classList.contains('off'); };
+  chips.appendChild(c);
+}
+const VIEWS = {iso:[1500, 1150, 1500], side:[0, 600, 2300], front:[2300, 650, 0], top:[0, 2600, 10]};
+function setView(k) { const p = VIEWS[k]; camera.position.set(p[0] - 150, p[1], p[2]); controls.target.set(-150, 520, 0); controls.update();
+  document.querySelectorAll('[data-v]').forEach(b => b.classList.toggle('on', b.dataset.v === k)); }
+document.querySelectorAll('[data-v]').forEach(b => b.onclick = () => setView(b.dataset.v));
+setView('iso');
+document.getElementById('spin').onclick = e => { controls.autoRotate = !controls.autoRotate; e.target.classList.toggle('on'); };
+let xr = false;
+document.getElementById('xray').onclick = e => { xr = !xr; e.target.classList.toggle('on'); for (const t of ['shell','covers']) for (const m of (groups[t]||[])) { m.material.transparent = xr; m.material.opacity = xr ? 0.18 : 1; m.material.depthWrite = !xr; m.material.needsUpdate = true; } };
+function resize() { const w = view.clientWidth, h = view.clientHeight; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+window.addEventListener('resize', resize); resize();
+(function loop() { requestAnimationFrame(loop); controls.update(); renderer.render(scene, camera); })();
+const st = document.getElementById('stats');
+st.innerHTML = [["Centaur mass (est.)", D.info.mass_total.toFixed(1) + " kg"], ["Top of octopus", Math.round(D.info.top) + " mm"],
+  ["Horse scale", D.info.scale.toFixed(2)], ["Front legs carry", D.info.share + " %"], ["Model", D.info.ntri.toLocaleString() + " triangles"]].map(([a,b]) => `<div class="stat">${a}<b>${b}</b></div>`).join('');
+// ------------------------------------------------------------------ plots
+const lay = (t, extra) => Object.assign({title:{text:t, font:{size:14}}, margin:{l:52, r:12, t:40, b:60}, legend:{orientation:'h', y:-0.22, font:{size:11}},
+  paper_bgcolor:'#fff', plot_bgcolor:'#fff', font:{family:'-apple-system, Segoe UI, Roboto, sans-serif', size:12}}, extra || {});
+const cfg = {displayModeBar:false, responsive:true};
+const short = ["stand","walk","trot","trot shaped","get up","land 2.5 g","push 0.25 g","slope 10°"];
+const JC = {hip:'#2f6db3', knee:'#d43a2f', abd:'#2e9e5b'};
+const PLOTS = {
+  "Leg margins": () => {
+    const tr = [];
+    for (const leg of ['front','rear']) for (const j of ['hip','knee','abd']) for (const k of ['rated','peak']) {
+      tr.push({type:'bar', name:`${j} ${k}`, x:short, y:D.margins[leg][j][k].map(v => v == null ? null : Math.min(v, 6)), marker:{color:JC[j], opacity:k==='rated'?1:0.45},
+        visible: leg==='front', legendgroup:j+k, showlegend: leg==='front'});
+    }
+    const shape = [{type:'line', xref:'paper', x0:0, x1:1, y0:1, y1:1, line:{dash:'dash', color:'#333'}}];
+    return [tr, lay("Torque margin per case (actuator ÷ need, capped at 6)", {barmode:'group', yaxis:{title:'margin', range:[0,6]}, shapes:shape,
+      updatemenus:[{type:'buttons', direction:'right', x:0, y:1.13, xanchor:'left', buttons:[
+        {label:'Front leg', method:'update', args:[{visible:tr.map((_, i) => i < 6)}]},
+        {label:'Rear leg', method:'update', args:[{visible:tr.map((_, i) => i >= 6)}]}]}]}),
+      "Every bar has to stay above the dashed line. Front: RobStride 03 hip, RobStride 06 knee and abduction. Worst: front hip on a 10° slope, abduction in a 0.25 g side shove."];
+  },
+  "Actuator choice": () => {
+    const s = D.sets;
+    return [[{type:'scatter', mode:'markers+text', x:s.map(o => o.mass), y:s.map(o => o.peak), text:s.map(o => o.name.replace(/^\S+\s+/, '')),
+      textposition:'top center', textfont:{size:10}, marker:{size:14, color:s.map(o => o.peak >= 1.1 && o.rms >= 1.2 ? '#1f8a4c' : '#c0392b')}, name:'peak margin'}],
+      lay("Leg actuator sets: worst peak margin vs four-leg mass", {xaxis:{title:'four legs, kg'}, yaxis:{title:'worst peak margin, all cases'},
+        shapes:[{type:'line', xref:'paper', x0:0, x1:1, y0:1.1, y1:1.1, line:{dash:'dash', color:'#333'}}]}),
+      "Only the RobStride 03 front-hip set clears every case. The cheaper sets fail on the slope and the side shove, not on plain walking."];
+  },
+  "Knee belt": () => {
+    const k = Object.keys(D.belt);
+    return [[{type:'bar', name:'teeth (shear)', x:k, y:k.map(c => D.belt[c].teeth), marker:{color:'#2f6db3'}},
+             {type:'bar', name:'belt tension', x:k, y:k.map(c => Math.min(D.belt[c].tension, 8)), marker:{color:'#9aa7b4'}}],
+      lay("Knee belt margins: HTD 5M PU/steel 25 mm, 30T : 60T", {barmode:'group', yaxis:{title:'margin'},
+        shapes:[{type:'line', xref:'paper', x0:0, x1:1, y0:1.25, y1:1.25, line:{dash:'dash', color:'#333'}}]}),
+      "Bigger pulleys (30T : 60T, same 2:1) cut the belt pull 20 %. Teeth are the limit: x1.28 at a 2.5 g landing on a pair, just above the 1.25 rule."];
+  },
+  "Torque–speed": () => {
+    const tr = [{type:'scatter', mode:'lines', name:'RobStride 06 available (39.6 V)', x:D.Tline, y:D.line06, line:{color:'#2f3136', width:3}},
+                {type:'scatter', mode:'lines', name:'RobStride 03 available', x:D.T03, y:D.line03, line:{color:'#8a8f96', width:3, dash:'dot'}}];
+    const cols = {"walk":'#2f6db3', "trot":'#d43a2f', "fast trot":'#7b4fc0'};
+    for (const [k, v] of Object.entries(D.ts)) if (k.startsWith('front'))
+      tr.push({type:'scatter', mode:'markers', name:'knee, ' + k.replace('front ',''), x:v.knee_T, y:v.knee_rpm, marker:{size:5, color:cols[k.replace('front ','')]}});
+    return [tr, lay("Knee actuator: needed vs available speed", {xaxis:{title:'actuator torque, N m'}, yaxis:{title:'actuator speed, rpm'}}),
+      "Every gait point sits well under the line (x2.05 at worst, fast trot). The RS06 line uses a derived torque constant and an assumed winding resistance."];
+  },
+  "Mass budget": () => {
+    const k = Object.keys(D.mass);
+    return [[{type:'bar', orientation:'h', x:k.map(n => D.mass[n]), y:k, marker:{color:['#e8833a','#5b7fa6','#9aa7b4','#2e9e5b','#c9661f','#7a5cc0','#d43a2f','#c8ced6']},
+      text:k.map(n => D.mass[n].toFixed(2) + ' kg'), textposition:'auto'}], lay("Where the 34 kg goes (est.)", {margin:{l:190, r:12, t:40, b:40}, xaxis:{title:'kg'}}),
+      "The octopus is about 38 % of the centaur, so it sits over the forelegs. Legs are the next biggest block: actuator choice drives mass more than structure does."];
+  },
+  "Rear shocks": () => {
+    const p = D.shock.pts;
+    return [[{type:'scatter', mode:'lines', name:'hip sink (bump stop at 30 mm)', x:D.shock.F, y:D.shock.sink, line:{color:'#2e9e5b', width:3}},
+             {type:'scatter', mode:'markers+text', name:'cases', x:Object.values(p).map(a => a[0]), y:Object.values(p).map(a => a[1]),
+              text:Object.keys(p).map(s => s.split(' (')[0]), textposition:'top left', marker:{size:10, color:'#d43a2f'}}],
+      lay("Rear swing unit: load at the hips vs sink", {xaxis:{title:'both hind feet, N'}, yaxis:{title:'hip sink, mm'}}),
+      "Two goBILDA Big Bore 190 mm dampers at the hip line, about 4.9 N/mm each. Bounce is 4.6 Hz, close to trot step rates, so the oil damping matters."];
+  },
+  "Scale vs arms": () => {
+    const W = D.sweep; const x = W.s;
+    return [[{type:'scatter', mode:'lines+markers', name:'floor reach short, standing (mm)', x, y:W["T1 floor, standing"], line:{color:'#c0392b'}},
+             {type:'scatter', mode:'lines+markers', name:'floor reach short, bowing <= 12° (mm)', x, y:W["T2 floor, bowing"], line:{color:'#e8833a'}},
+             {type:'scatter', mode:'lines+markers', name:'leg peak margin (x)', x, y:W.peak, yaxis:'y2', line:{color:'#2f6db3'}},
+             {type:'scatter', mode:'lines+markers', name:'speed headroom (x)', x, y:W.speed, yaxis:'y2', line:{color:'#2e9e5b'}}],
+      lay("Horse scale: can the front tentacles still work as arms?", {xaxis:{title:'horse scale (1 = v2, 490 mm hips)', autorange:'reversed'},
+        yaxis:{title:'hand short of the floor, mm'}, yaxis2:{title:'margin', overlaying:'y', side:'right', range:[0, 3.2]},
+        shapes:[{type:'line', x0:D.info.scale, x1:D.info.scale, yref:'paper', y0:0, y1:1, line:{dash:'dot', color:'#333'}},
+                {type:'line', xref:'paper', x0:0, x1:1, yref:'y2', y0:1.5, y1:1.5, line:{dash:'dash', color:'#2e9e5b', width:1}}]}),
+      "Only the horse scales; the octopus, its 478 mm arms, the collar, neck sheaths and all bought parts keep their size. At 0.75 (dotted) the hands reach the floor with an 8° bow and work at a table, while leg margins grow and speed headroom (1.54) stays above 1.5. Smaller than 0.7 fails the speed rule and the sheath no longer fits."];
+  },
+  "Tail": () => {
+    const k = Object.keys(D.tail);
+    return [[0,1,2,3].map(j => ({type:'bar', name:`joint ${j+1}`, x:k.map(s => s.split(',')[0]), y:k.map(s => 100 * D.tail[s][j]),
+      marker:{color:['#2f6db3','#5b7fa6','#2e9e5b','#9aa7b4'][j]}})),
+      lay("Tail servos: % of rated torque per pose", {barmode:'group', yaxis:{title:'% of rated'},
+        shapes:[{type:'line', xref:'paper', x0:0, x1:1, y0:100, y1:100, line:{dash:'dash', color:'#333'}}]}),
+      "Raked as a kickstand on the servos alone it would be at 147 %; hard stops at 'straight' carry that pose instead, with no servo torque."];
+  },
+};
+const tabs = document.getElementById('tabs'); const pnote = document.getElementById('pnote');
+function show(name) {
+  const [tr, l, note] = PLOTS[name](); Plotly.react('plot', tr, l, cfg); pnote.textContent = note;
+  tabs.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.textContent === name));
+}
+for (const n of Object.keys(PLOTS)) { const b = document.createElement('button'); b.textContent = n; b.onclick = () => show(n); tabs.appendChild(b); }
+show("Leg margins");
+// ------------------------------------------------------------------ rules
+document.getElementById('rules').innerHTML = '<tr><th>Rule</th><th>v2 value</th><th>Status</th></tr>' + D.rules.map(r =>
+  `<tr><td>${r.rule}</td><td>${r.value.toFixed(r.unit === 'x' ? 2 : 1)} ${r.unit === 'x' ? '×' : r.unit.replace(' max','')}</td><td class="${r.ok ? 'ok' : 'warn'}">${r.ok ? 'meets it' : 'watch'}</td></tr>`).join('');
+</script>
+</body>
+</html>
