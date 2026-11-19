@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cephalo-2 3D model</title>
+<style>
+ html,body{margin:0;height:100%;overflow:hidden;background:#e9edf1;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#15171a}
+ #c{position:fixed;inset:0;touch-action:none}
+ #bar{position:fixed;top:10px;left:10px;right:10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;pointer-events:none}
+ #bar>*{pointer-events:auto}
+ h1{font-size:16px;margin:0 8px 0 2px;font-weight:700;background:rgba(255,255,255,.85);padding:6px 10px;border-radius:8px}
+ button{font:inherit;font-size:13px;border:1px solid #c5ccd4;background:#fff;border-radius:8px;padding:6px 10px;cursor:pointer}
+ button.on{background:#15171a;color:#fff;border-color:#15171a}
+ #panel{position:fixed;left:10px;bottom:10px;max-width:min(360px,calc(100vw - 20px));background:rgba(255,255,255,.92);border-radius:10px;
+        padding:10px 12px;font-size:12.5px;line-height:1.45;box-shadow:0 2px 10px rgba(0,0,0,.08);max-height:45vh;overflow:auto}
+ #panel h2{font-size:13px;margin:0 0 4px}
+ #panel label{display:flex;gap:6px;align-items:center;margin:2px 0;cursor:pointer}
+ .sw{display:inline-block;width:11px;height:11px;border-radius:3px;border:1px solid rgba(0,0,0,.2)}
+ #hint{position:fixed;right:10px;bottom:10px;font-size:11.5px;color:#4a5058;background:rgba(255,255,255,.8);padding:4px 8px;border-radius:6px}
+ #load{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;color:#4a5058}
+ details summary{cursor:pointer;font-weight:600}
+</style></head><body>
+<canvas id="c"></canvas>
+<div id="load">Loading Cephalo-2...</div>
+<div id="bar">
+ <h1>Cephalo-2</h1>
+ <button id="b-stand" class="on">Standing</button>
+ <button id="b-flight">Flying</button>
+ <button id="b-all" class="on">hand3 on all 8</button>
+ <button id="b-mixed">old: hand3 on 2</button>
+ <button id="b-xray">X-ray turret</button>
+ <button id="b-spin">Auto-rotate</button>
+ <button id="b-reset">Reset view</button>
+</div>
+<div id="panel">
+ <h2>Parts</h2>
+ <div id="groups"></div>
+ <details><summary>What is in Cephalo-2</summary>
+ <ul style="padding-left:16px;margin:4px 0">
+  <li><b>Arms</b>: rev 4 tentacles, 8 servo joints each, clutches, winch line, a camera in every tip bay.</li>
+  <li><b>Hands</b>: hand3 on all eight arms (four fingers that are also a 9 in rotor). The "old" button shows the earlier mix: hand3 on arms 2 and 6, XL claw-props on the other six.</li>
+  <li><b>Bayonet connector</b> on every tip (orange: arm socket, dark: the shared hand base). Quarter-turn, 3 lugs, 5 spring pins. Drawn on the tip axis; every hand sits 9.9 mm further out than before.</li>
+  <li><b>Belly rotor</b>: 4-blade, 22 in Scabbard rotor in place of the EDF. Standing, the blades are stowed upright in the turret; flying, they are out.</li>
+  <li><b>Turret</b> ("bucket"): scabbard cage, elevator, fold rods, dock latch pins, and 5 cameras (4 side, 1 up) behind clear windows. No eyestalks.</li>
+ </ul>
+ Estimated mass 14.8 kg. The flight sim is not updated yet; this is the geometry.
+ </details>
+</div>
+<div id="hint">Drag to rotate, pinch or scroll to zoom, two fingers or right-drag to pan</div>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+"three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+window.C2GLB = window.C2GLB || {};
+function loadScript(src){ return new Promise((res, rej) => { const e = document.createElement('script'); e.src = src; e.onload = res; e.onerror = () => rej(new Error('missing ' + src)); document.head.appendChild(e); }); }
+function b64(s){ const b = atob(s), u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u.buffer; }
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0xe9edf1);
+const cam = new THREE.PerspectiveCamera(38, 1, 0.01, 50);
+const controls = new OrbitControls(cam, canvas); controls.enableDamping = true; controls.target.set(0, 0.05, 0);
+scene.add(new THREE.HemisphereLight(0xffffff, 0xb8b2a8, 1.6));
+const sun = new THREE.DirectionalLight(0xffffff, 2.2); sun.position.set(1.2, 2.5, 1.0); sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, {left:-1, right:1, top:1, bottom:-1, near:0.1, far:6}); scene.add(sun);
+const fill = new THREE.DirectionalLight(0xffffff, 0.6); fill.position.set(-1.5, 0.8, -1); scene.add(fill);
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(6, 6), new THREE.ShadowMaterial({opacity:0.18}));
+ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+const grid = new THREE.GridHelper(6, 24, 0xb9c0c8, 0xd3d8de); scene.add(grid);
+const loader = new GLTFLoader(); const models = {mixed:{}, all:{}}; const groups = {};
+let hands = 'all';
+async function loadSet(h){
+  if (models[h].stand) return;
+  document.getElementById('load').style.display = 'flex';
+  for (const p of ['stand', 'flight']){
+    const key = `${h}_${p}`;
+    if (!window.C2GLB[key]) await loadScript(`cephalo2_${key}.js`);
+    const buf = b64(window.C2GLB[key]); delete window.C2GLB[key];
+    const g = await new Promise((res, rej) => loader.parse(buf, '', res, rej));
+    models[h][p] = prep(g.scene, p); models[h][p].visible = false; scene.add(models[h][p]);
+  }
+  document.getElementById('load').style.display = 'none';
+  applyGroups(); setX(xray);
+}
+const SW = {"turret shell":"#eeeeea","arms and hands":"#3866c7","bayonet connectors":"#f28c26","belly rotor":"#2a2b2f","scabbard cage":"#c7ccd3","cameras":"#d83020","body":"#8c9299"};
+const FLOOR = {stand:-0.300, flight:-0.62};
+function prep(root, pose){
+  root.rotation.x = -Math.PI / 2;                        // model is z-up
+  root.traverse(o => { if (o.isMesh){ o.castShadow = true; o.receiveShadow = true;
+     const g = ((o.name || o.parent.name || '').split('|')[0] || 'body').replace(/_/g, ' ');
+     o.userData.group = g; (groups[g] = groups[g] || []).push(o);
+     if (g === 'turret shell' && !o.material.transparent) o.userData.shell = true;
+     o.material.side = THREE.DoubleSide; } });
+  return root;
+}
+let pose = 'stand', xray = false, spin = false;
+function show(p){
+  pose = p; for (const h in models) for (const k in models[h]) models[h][k].visible = (h === hands && k === p);
+  ground.position.y = FLOOR[p]; grid.position.y = FLOOR[p] + 0.0005;
+  document.getElementById('b-stand').classList.toggle('on', p === 'stand');
+  document.getElementById('b-flight').classList.toggle('on', p === 'flight');
+}
+function setX(on){
+  xray = on; document.getElementById('b-xray').classList.toggle('on', on);
+  for (const o of groups['turret shell'] || []) if (o.userData.shell){
+    o.material.transparent = on; o.material.opacity = on ? 0.18 : 1; o.material.depthWrite = !on; o.material.needsUpdate = true; o.castShadow = !on; }
+}
+function reset(){ if (pose === 'stand'){ cam.position.set(0.95, 0.55, 1.05); controls.target.set(0, -0.02, 0); } else { cam.position.set(1.25, 0.85, 1.4); controls.target.set(0, 0.12, 0); } controls.update(); }
+const hidden = {};
+function applyGroups(){ for (const g in groups) for (const o of groups[g]) o.visible = !hidden[g]; }
+async function setHands(h){
+  hands = h; document.getElementById('b-mixed').classList.toggle('on', h === 'mixed'); document.getElementById('b-all').classList.toggle('on', h === 'all');
+  await loadSet(h); show(pose);
+}
+async function main(){
+  await loadSet('all');
+  const box = document.getElementById('groups');
+  for (const g of Object.keys(SW)) if (groups[g]){
+    const l = document.createElement('label');
+    l.innerHTML = `<input type="checkbox" checked> <span class="sw" style="background:${SW[g]}"></span> ${g}`;
+    l.querySelector('input').onchange = e => { hidden[g] = !e.target.checked; applyGroups(); };
+    box.appendChild(l);
+  }
+  show('stand'); reset();
+}
+document.getElementById('b-mixed').onclick = () => setHands('mixed').catch(err);
+document.getElementById('b-all').onclick = () => setHands('all').catch(err);
+function err(e){ document.getElementById('load').style.display = 'flex'; document.getElementById('load').textContent = 'Could not load the model: ' + e; }
+document.getElementById('b-stand').onclick = () => { show('stand'); reset(); };
+document.getElementById('b-flight').onclick = () => { show('flight'); reset(); };
+document.getElementById('b-xray').onclick = () => setX(!xray);
+document.getElementById('b-spin').onclick = () => { spin = !spin; controls.autoRotate = spin; document.getElementById('b-spin').classList.toggle('on', spin); };
+document.getElementById('b-reset').onclick = reset;
+function resize(){ const w = innerWidth, h = innerHeight; renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, cam); });
+main().catch(err);
+</script></body></html>

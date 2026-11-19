@@ -1,0 +1,35 @@
+{
+ "side bays to cage": 10.638931274414062,
+ "cradles to cage (lug 0.2 under the top ring)": 0.1999969482421875,
+ "zenith bay + bridge to cage (bridge sits on the ring: 0 expected)": 0.0,
+ "zenith bridge to side cradles (ring between them)": 3.1999969482421875,
+ "camera parts to turret shell": 2.753702868830054,
+ "window check: side cone clear of the shell hole (worst margin mm)": {
+  "side": 0.74,
+  "roof": 0.72
+ },
+ "side lens front to window disc": 0.46472483407439513,
+ "zenith lens front to roof disc": 0.399993896484375,
+ "bezels to cradles": 8.558803684518615,
+ "camera parts to fold ring + rods": 141.51037907291098,
+ "camera parts to latch pins": 164.91953910166376,
+ "camera parts to elevator, whole stroke (worst, at u)": [
+  2.2942926468130356,
+  170.0
+ ],
+ "camera parts to stowed blades": 17.15804094927128,
+ "guest sector left free below the cameras (z from guest socket top to cradle bottom, mm)": [
+  82.0,
+  176.9
+ ],
+ "side bay inner edge radius (inboard strip left for belts, mm)": 55.2,
+ "mass_g": {
+  "cameras": 45.0,
+  "cradles": 23.715398388927948,
+  "bridge": 13.178992134006595,
+  "bezels": 6.852098549405256,
+  "discs": 5.074300454078234,
+  "screws_wire": 12.0,
+  "total": 105.82078952641803
+ }
+}

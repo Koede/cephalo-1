@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cephalo-2 hand/arm coupler rev B.2</title>
+<style>
+html,body{margin:0;height:100%;background:#15171b;color:#e6e6e6;font:13px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;overflow:hidden}
+#c{position:fixed;inset:0}
+#ui{position:fixed;left:10px;top:10px;width:300px;max-width:calc(100vw - 20px);background:rgba(20,22,26,.88);border:1px solid #333;border-radius:10px;padding:10px 12px;box-sizing:border-box}
+#ui h1{font-size:15px;margin:0 0 6px}
+#ui label{display:block;margin:8px 0 2px;color:#aaa}
+#ui input[type=range]{width:100%}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+button{background:#2a2e35;color:#eee;border:1px solid #444;border-radius:6px;padding:5px 9px;font:inherit;cursor:pointer}
+button.on{background:#d2542d;border-color:#d2542d}
+#state{margin-top:6px;color:#f0c27a;min-height:1.4em}
+#legend{position:fixed;right:10px;top:10px;width:270px;max-height:calc(100vh - 20px);overflow:auto;background:rgba(20,22,26,.88);border:1px solid #333;border-radius:10px;padding:8px 10px;box-sizing:border-box;font-size:12px}
+#legend div{display:flex;align-items:center;gap:6px;cursor:pointer;padding:1px 0}
+#legend span.sw{width:12px;height:12px;border-radius:3px;flex:none;border:1px solid #555}
+#legend .off{opacity:.35}
+#min{position:absolute;right:8px;top:6px;padding:1px 7px}
+@media (max-width:700px){#legend{top:auto;bottom:10px;max-height:30vh;width:calc(100vw - 20px)}#ui{max-height:55vh;overflow:auto}}
+</style></head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui"><button id="min">–</button>
+<h1>Hand/arm coupler · rev B.2</h1>
+<div id="body">
+<label>Insert &amp; lock: push straight in, then turn the collar __TWIST__°</label>
+<input id="seq" type="range" min="0" max="1000" value="1000">
+<div class="row"><button id="play">▶ play</button><button id="b0">open</button><button id="b1">locked</button></div>
+<div id="state"></div>
+<label>Explode</label><input id="exp" type="range" min="0" max="1000" value="0">
+<label>Hand</label>
+<div class="row" id="hands"><button data-h="all" class="on">bare base</button><button data-h="hand3">hand3</button><button data-h="wheel">wheel hand</button></div>
+<label>Section</label>
+<div class="row" id="cuts"><button data-a="none" class="on">none</button><button data-a="90">through a bullet</button><button data-a="0">through the detent</button><button data-a="30">through the key</button></div>
+<p style="color:#999;margin:10px 0 0">Drag to orbit, pinch/scroll to zoom. Click a legend row to hide a part. Up is into the arm; the hand hangs below.</p>
+</div></div>
+<div id="legend"></div>
+<script src="coupler_data.js"></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+"three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+const TW = __TWIST__;
+const cv = document.getElementById('c');
+const R = new THREE.WebGLRenderer({canvas:cv, antialias:true}); R.setPixelRatio(Math.min(devicePixelRatio,2)); R.localClippingEnabled = true;
+const S = new THREE.Scene(); S.background = new THREE.Color('#15171b');
+const cam = new THREE.PerspectiveCamera(35, 1, 1, 5000); cam.position.set(120, 45, 150);
+const ctl = new OrbitControls(cam, cv); ctl.target.set(-20, -5, 0); ctl.enableDamping = true;
+S.add(new THREE.HemisphereLight(0xffffff, 0x303038, 1.1));
+const d1 = new THREE.DirectionalLight(0xffffff, 1.6); d1.position.set(150, 200, 120); S.add(d1);
+const d2 = new THREE.DirectionalLight(0xbcd0ff, 0.6); d2.position.set(-150, -60, -100); S.add(d2);
+const root = new THREE.Group(); root.rotation.x = -Math.PI/2; S.add(root);       // connector z -> screen up
+const G = {arm:new THREE.Group(), collar:new THREE.Group(), hand:new THREE.Group()};
+for (const g of Object.values(G)) root.add(g);
+const clip = new THREE.Plane(new THREE.Vector3(0,0,1), 0); let clipOn = false;
+const b64 = (s, T) => { const b = atob(s), u = new Uint8Array(b.length); for (let i=0;i<b.length;i++) u[i]=b.charCodeAt(i); return new T(u.buffer); };
+const meshes = {}; const legend = document.getElementById('legend'); let handSel = 'all';
+for (const [name, d] of Object.entries(window.CPL)) {
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(b64(d.v, Float32Array), 3));
+  geo.setIndex(new THREE.BufferAttribute(b64(d.t, Uint32Array), 1));
+  const ng = geo.toNonIndexed(); ng.computeVertexNormals();
+  const mat = new THREE.MeshStandardMaterial({color:d.c, metalness:/bullet|M3|ball/.test(name)?0.8:0.1, roughness:/bullet|M3|ball/.test(name)?0.3:0.65,
+     side:THREE.DoubleSide, transparent:d.o<1, opacity:d.o, depthWrite:d.o>=1, clippingPlanes:[]});
+  const m = new THREE.Mesh(ng, mat); m.userData = {h:d.h, g:d.g, name, user:true};
+  G[d.g].add(m); meshes[name] = m;
+  const row = document.createElement('div'); row.innerHTML = `<span class="sw" style="background:${d.c}"></span>${name}`;
+  row.onclick = () => { m.userData.user = !m.userData.user; row.classList.toggle('off', !m.userData.user); vis(); };
+  m.userData.row = row; legend.appendChild(row);
+}
+function vis(){ for (const m of Object.values(meshes)) { const h = m.userData.h; const ok = !h || h==='all' || h===handSel; m.visible = ok && m.userData.user; m.userData.row.style.display = ok ? '' : 'none'; } }
+vis();
+// sequence: 0..0.5 hand slides in with the collar open, 0.5..1 collar turns to locked; explode pulls parts apart along the axis
+const seq = document.getElementById('seq'), exp = document.getElementById('exp'), st = document.getElementById('state');
+const ease = t => t<.5 ? 2*t*t : 1-Math.pow(-2*t+2,2)/2;
+function apply(){
+  const s = seq.value/1000, e = exp.value/1000;
+  const dz = s < .5 ? 40*(1-ease(s/.5)) : 0;
+  const th = s < .5 ? -TW : -TW + TW*ease((s-.5)/.5);
+  G.collar.rotation.z = THREE.MathUtils.degToRad(th);
+  G.collar.position.z = -42*e;
+  G.hand.position.z = -dz - 90*e;
+  for (const m of Object.values(meshes)) {
+    const n = m.userData.name; m.position.set(0,0,0);
+    if (n==='nose ring') m.position.z = -22*e;
+    if (n.startsWith('3 x M3')) m.position.z = -68*e;
+    if (n.startsWith('arm tip')) m.position.z = 30*e;
+    if (n.startsWith('detent')) { m.position.x = 10*e; }
+    if (n.startsWith('hand3 base screws')) m.position.z = -30*e;
+  }
+  st.textContent = s < .5 ? (s < .02 ? 'hand off; collar open (gaps over the lugs)' : `pushing in: ${dz.toFixed(1)} mm to seat · key sets the clocking · bullets meet at 8.5 mm`)
+     : (s > .98 ? 'LOCKED: lip segments under all three lugs, ball in the locked dimple' : `turning the collar: ${th.toFixed(0)}° (ramp draws the hand in, ball clicks out of the open dimple)`);
+}
+seq.oninput = apply; exp.oninput = apply; apply();
+let playing = false, t0 = 0;
+document.getElementById('play').onclick = () => { playing = !playing; t0 = performance.now() - seq.value/1000*6000; document.getElementById('play').textContent = playing ? '❚❚ pause' : '▶ play'; };
+document.getElementById('b0').onclick = () => { seq.value = 0; apply(); };
+document.getElementById('b1').onclick = () => { seq.value = 1000; apply(); };
+for (const b of document.querySelectorAll('#hands button')) b.onclick = () => { handSel = b.dataset.h; for (const x of document.querySelectorAll('#hands button')) x.classList.toggle('on', x===b); vis(); };
+for (const b of document.querySelectorAll('#cuts button')) b.onclick = () => {
+  for (const x of document.querySelectorAll('#cuts button')) x.classList.toggle('on', x===b);
+  clipOn = b.dataset.a !== 'none';
+  if (clipOn) { const a = THREE.MathUtils.degToRad(+b.dataset.a); clip.normal.set(-Math.sin(a), 0, -Math.cos(a)); clip.constant = 0; }   // plane through the axis at azimuth a (keeps the half away from the default camera)
+  for (const m of Object.values(meshes)) { if (m.userData.name.startsWith('arm tip')) continue; m.material.clippingPlanes = clipOn ? [clip] : []; m.material.needsUpdate = true; }
+};
+document.getElementById('min').onclick = () => { const b = document.getElementById('body'); b.style.display = b.style.display==='none' ? '' : 'none'; };
+function size(){ const w = innerWidth, h = innerHeight; R.setSize(w, h, false); cam.aspect = w/h; cam.updateProjectionMatrix(); }
+addEventListener('resize', size); size();
+(function loop(now){ requestAnimationFrame(loop);
+  if (playing) { let s = ((now - t0) % 7500) / 6000; seq.value = Math.min(s,1)*1000; apply(); }
+  ctl.update(); R.render(S, cam); })(0);
+const Q = new URLSearchParams(location.search);
+if (Q.get('seq')) { seq.value = Q.get('seq'); } if (Q.get('exp')) { exp.value = Q.get('exp'); } apply();
+if (Q.get('hand')) document.querySelector(`#hands button[data-h="${Q.get('hand')}"]`).click();
+if (Q.get('cut')) document.querySelector(`#cuts button[data-a="${Q.get('cut')}"]`).click();
+window.__ready = true;
+</script></body></html>

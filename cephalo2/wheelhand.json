@@ -1,0 +1,87 @@
+{
+ "stage 1: centre distance / ring - sun check": [
+  11.25,
+  11.25
+ ],
+ "stage 2: centre distance / ring - sun check": [
+  14.4,
+  14.4
+ ],
+ "planet tip clearance to neighbours, stage 1 / 2 (mm)": [
+  3.49,
+  4.14
+ ],
+ "unexpected overlaps (mm^3)": {},
+ "meshing through one pitch: interference (mm^3, 0 = backlash kept)": {
+  "sun1 x planets1": 0,
+  "planets1 x ring1 (housing)": 0
+ },
+ "lever: socket mouth to tyre centre plane (mm)": 70.2,
+ "ground clearance with the axle level: housing / collar under the wheel (mm)": [
+  32.6,
+  33.3
+ ],
+ "rim inner radius vs housing outer radius (mm)": [
+  51.5,
+  27.4
+ ],
+ "length: socket mouth to the hub nut (mm)": 94.2,
+ "mass (g)": {
+  "hand_base": 12.2,
+  "housing": 45.4,
+  "sun1": 1.3,
+  "planets1": 3.6,
+  "carrier1_sun2": 2.8,
+  "planets2": 9.3,
+  "carrier2": 4.1,
+  "pins1": 0.4,
+  "pins2": 1.3,
+  "shaft": 11.1,
+  "nut": 1.1,
+  "wheel_hub": 55.5,
+  "tyre": 76.7,
+  "motor (F60 Pro V 1750 kV, with leads)": 34.3,
+  "2 x 698-2RS": 14.4,
+  "3 x 4 mm bullets, M3 screws, wire, grease (est.)": 12.0,
+  "total": 285.5
+ },
+ "Z stations": {
+  "plate": [
+   -10.0,
+   -7.0
+  ],
+  "motor": [
+   -41.7,
+   -10.0
+  ],
+  "shaft_tip": -48.2,
+  "s1": [
+   -52.7,
+   -47.7
+  ],
+  "c1": [
+   -55.7,
+   -53.300000000000004
+  ],
+  "s2": [
+   -63.7,
+   -55.7
+  ],
+  "c2": [
+   -67.2,
+   -64.3
+  ],
+  "nose": [
+   -82.2,
+   -67.8
+  ],
+  "web": [
+   -86.2,
+   -83.2
+  ],
+  "hub": [
+   -86.2,
+   -54.2
+  ]
+ }
+}

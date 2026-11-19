@@ -1,0 +1,1674 @@
+[
+ {
+  "chord": [
+   24,
+   18
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.02,
+  "tc": [
+   0.184,
+   0.189
+  ],
+  "toe_max": 2.3,
+  "pitch": 13.0,
+  "low": {
+   "T_max": 22.8,
+   "rpm": 12026,
+   "P_shaft": 797,
+   "tip_mach": 0.47,
+   "hover_rpm": 9362,
+   "hover_P_el": 470,
+   "hover_FM": 0.42,
+   "hover_alpha75": 5.4
+  },
+  "high": {
+   "T_max": 26.4,
+   "rpm": 11387,
+   "P_shaft": 755,
+   "tip_mach": 0.45,
+   "hover_rpm": 8225,
+   "hover_P_el": 356,
+   "hover_FM": 0.55,
+   "hover_alpha75": 4.3
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   24,
+   18
+  ],
+  "thick": [
+   3.2,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.02,
+  "tc": [
+   0.176,
+   0.189
+  ],
+  "toe_max": 2.3,
+  "pitch": 13.0,
+  "low": {
+   "T_max": 22.8,
+   "rpm": 11983,
+   "P_shaft": 794,
+   "tip_mach": 0.47,
+   "hover_rpm": 9315,
+   "hover_P_el": 466,
+   "hover_FM": 0.42,
+   "hover_alpha75": 5.4
+  },
+  "high": {
+   "T_max": 26.4,
+   "rpm": 11347,
+   "P_shaft": 752,
+   "tip_mach": 0.44,
+   "hover_rpm": 8201,
+   "hover_P_el": 355,
+   "hover_FM": 0.56,
+   "hover_alpha75": 4.2
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   24,
+   18
+  ],
+  "thick": [
+   3.2,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.03,
+  "tc": [
+   0.176,
+   0.189
+  ],
+  "toe_max": 2.3,
+  "pitch": 12.0,
+  "low": {
+   "T_max": 22.8,
+   "rpm": 12148,
+   "P_shaft": 805,
+   "tip_mach": 0.48,
+   "hover_rpm": 9454,
+   "hover_P_el": 475,
+   "hover_FM": 0.42,
+   "hover_alpha75": 4.5
+  },
+  "high": {
+   "T_max": 26.6,
+   "rpm": 11467,
+   "P_shaft": 760,
+   "tip_mach": 0.45,
+   "hover_rpm": 8252,
+   "hover_P_el": 354,
+   "hover_FM": 0.56,
+   "hover_alpha75": 3.3
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   18
+  ],
+  "thick": [
+   3.2,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.02,
+  "tc": [
+   0.191,
+   0.189
+  ],
+  "toe_max": 2.3,
+  "pitch": 13.0,
+  "low": {
+   "T_max": 22.7,
+   "rpm": 12171,
+   "P_shaft": 807,
+   "tip_mach": 0.48,
+   "hover_rpm": 9495,
+   "hover_P_el": 479,
+   "hover_FM": 0.41,
+   "hover_alpha75": 5.5
+  },
+  "high": {
+   "T_max": 26.5,
+   "rpm": 11488,
+   "P_shaft": 762,
+   "tip_mach": 0.45,
+   "hover_rpm": 8294,
+   "hover_P_el": 358,
+   "hover_FM": 0.55,
+   "hover_alpha75": 4.4
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   24,
+   18
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.03,
+  "tc": [
+   0.184,
+   0.189
+  ],
+  "toe_max": 2.3,
+  "pitch": 12.0,
+  "low": {
+   "T_max": 22.7,
+   "rpm": 12191,
+   "P_shaft": 808,
+   "tip_mach": 0.48,
+   "hover_rpm": 9504,
+   "hover_P_el": 479,
+   "hover_FM": 0.41,
+   "hover_alpha75": 4.5
+  },
+  "high": {
+   "T_max": 26.7,
+   "rpm": 11510,
+   "P_shaft": 763,
+   "tip_mach": 0.45,
+   "hover_rpm": 8280,
+   "hover_P_el": 355,
+   "hover_FM": 0.55,
+   "hover_alpha75": 3.3
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   24,
+   18
+  ],
+  "thick": [
+   3.2,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.04,
+  "tc": [
+   0.176,
+   0.189
+  ],
+  "toe_max": 2.3,
+  "pitch": 11.0,
+  "low": {
+   "T_max": 22.7,
+   "rpm": 12298,
+   "P_shaft": 815,
+   "tip_mach": 0.48,
+   "hover_rpm": 9599,
+   "hover_P_el": 485,
+   "hover_FM": 0.41,
+   "hover_alpha75": 3.6
+  },
+  "high": {
+   "T_max": 26.9,
+   "rpm": 11693,
+   "P_shaft": 775,
+   "tip_mach": 0.46,
+   "hover_rpm": 8379,
+   "hover_P_el": 357,
+   "hover_FM": 0.55,
+   "hover_alpha75": 2.4
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   18
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.02,
+  "tc": [
+   0.199,
+   0.189
+  ],
+  "toe_max": 2.3,
+  "pitch": 13.0,
+  "low": {
+   "T_max": 22.6,
+   "rpm": 12216,
+   "P_shaft": 810,
+   "tip_mach": 0.48,
+   "hover_rpm": 9550,
+   "hover_P_el": 484,
+   "hover_FM": 0.41,
+   "hover_alpha75": 5.6
+  },
+  "high": {
+   "T_max": 26.5,
+   "rpm": 11531,
+   "P_shaft": 764,
+   "tip_mach": 0.45,
+   "hover_rpm": 8322,
+   "hover_P_el": 359,
+   "hover_FM": 0.55,
+   "hover_alpha75": 4.4
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   18
+  ],
+  "thick": [
+   3.2,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.03,
+  "tc": [
+   0.191,
+   0.189
+  ],
+  "toe_max": 2.3,
+  "pitch": 12.0,
+  "low": {
+   "T_max": 22.6,
+   "rpm": 12335,
+   "P_shaft": 818,
+   "tip_mach": 0.48,
+   "hover_rpm": 9641,
+   "hover_P_el": 488,
+   "hover_FM": 0.4,
+   "hover_alpha75": 4.7
+  },
+  "high": {
+   "T_max": 26.7,
+   "rpm": 11613,
+   "P_shaft": 770,
+   "tip_mach": 0.45,
+   "hover_rpm": 8351,
+   "hover_P_el": 358,
+   "hover_FM": 0.55,
+   "hover_alpha75": 3.4
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   24,
+   18
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.04,
+  "tc": [
+   0.184,
+   0.189
+  ],
+  "toe_max": 2.3,
+  "pitch": 11.0,
+  "low": {
+   "T_max": 22.6,
+   "rpm": 12340,
+   "P_shaft": 818,
+   "tip_mach": 0.48,
+   "hover_rpm": 9651,
+   "hover_P_el": 489,
+   "hover_FM": 0.4,
+   "hover_alpha75": 3.6
+  },
+  "high": {
+   "T_max": 26.9,
+   "rpm": 11738,
+   "P_shaft": 778,
+   "tip_mach": 0.46,
+   "hover_rpm": 8409,
+   "hover_P_el": 358,
+   "hover_FM": 0.55,
+   "hover_alpha75": 2.5
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   18
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.03,
+  "tc": [
+   0.199,
+   0.189
+  ],
+  "toe_max": 2.3,
+  "pitch": 12.0,
+  "low": {
+   "T_max": 22.5,
+   "rpm": 12374,
+   "P_shaft": 820,
+   "tip_mach": 0.48,
+   "hover_rpm": 9697,
+   "hover_P_el": 493,
+   "hover_FM": 0.4,
+   "hover_alpha75": 4.7
+  },
+  "high": {
+   "T_max": 26.7,
+   "rpm": 11661,
+   "P_shaft": 773,
+   "tip_mach": 0.46,
+   "hover_rpm": 8382,
+   "hover_P_el": 359,
+   "hover_FM": 0.55,
+   "hover_alpha75": 3.5
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   18
+  ],
+  "thick": [
+   3.2,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.04,
+  "tc": [
+   0.191,
+   0.189
+  ],
+  "toe_max": 2.3,
+  "pitch": 12.0,
+  "low": {
+   "T_max": 22.3,
+   "rpm": 11921,
+   "P_shaft": 790,
+   "tip_mach": 0.47,
+   "hover_rpm": 9368,
+   "hover_P_el": 479,
+   "hover_FM": 0.41,
+   "hover_alpha75": 4.4
+  },
+  "high": {
+   "T_max": 26.2,
+   "rpm": 11052,
+   "P_shaft": 733,
+   "tip_mach": 0.43,
+   "hover_rpm": 8028,
+   "hover_P_el": 351,
+   "hover_FM": 0.56,
+   "hover_alpha75": 3.0
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   18
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.03,
+  "tc": [
+   0.199,
+   0.189
+  ],
+  "toe_max": 2.3,
+  "pitch": 12.0,
+  "low": {
+   "T_max": 22.3,
+   "rpm": 12321,
+   "P_shaft": 817,
+   "tip_mach": 0.48,
+   "hover_rpm": 9697,
+   "hover_P_el": 498,
+   "hover_FM": 0.39,
+   "hover_alpha75": 4.7
+  },
+  "high": {
+   "T_max": 26.5,
+   "rpm": 11612,
+   "P_shaft": 770,
+   "tip_mach": 0.45,
+   "hover_rpm": 8382,
+   "hover_P_el": 362,
+   "hover_FM": 0.54,
+   "hover_alpha75": 3.5
+  },
+  "lever": [
+   6.0,
+   4.5,
+   3.5
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   18
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.04,
+  "tc": [
+   0.199,
+   0.189
+  ],
+  "toe_max": 2.3,
+  "pitch": 12.0,
+  "low": {
+   "T_max": 22.2,
+   "rpm": 11962,
+   "P_shaft": 793,
+   "tip_mach": 0.47,
+   "hover_rpm": 9422,
+   "hover_P_el": 484,
+   "hover_FM": 0.4,
+   "hover_alpha75": 4.5
+  },
+  "high": {
+   "T_max": 26.2,
+   "rpm": 11096,
+   "P_shaft": 736,
+   "tip_mach": 0.43,
+   "hover_rpm": 8057,
+   "hover_P_el": 352,
+   "hover_FM": 0.56,
+   "hover_alpha75": 3.1
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   16
+  ],
+  "thick": [
+   3.2,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.02,
+  "tc": [
+   0.193,
+   0.212
+  ],
+  "toe_max": 2.8,
+  "pitch": 14.0,
+  "low": {
+   "T_max": 22.1,
+   "rpm": 12335,
+   "P_shaft": 818,
+   "tip_mach": 0.48,
+   "hover_rpm": 9748,
+   "hover_P_el": 505,
+   "hover_FM": 0.39,
+   "hover_alpha75": 6.7
+  },
+  "high": {
+   "T_max": 26.2,
+   "rpm": 11314,
+   "P_shaft": 750,
+   "tip_mach": 0.44,
+   "hover_rpm": 8209,
+   "hover_P_el": 358,
+   "hover_FM": 0.55,
+   "hover_alpha75": 5.3
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   16
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.02,
+  "tc": [
+   0.201,
+   0.212
+  ],
+  "toe_max": 2.8,
+  "pitch": 14.0,
+  "low": {
+   "T_max": 21.9,
+   "rpm": 12375,
+   "P_shaft": 820,
+   "tip_mach": 0.48,
+   "hover_rpm": 9817,
+   "hover_P_el": 511,
+   "hover_FM": 0.39,
+   "hover_alpha75": 6.8
+  },
+  "high": {
+   "T_max": 26.2,
+   "rpm": 11366,
+   "P_shaft": 753,
+   "tip_mach": 0.44,
+   "hover_rpm": 8242,
+   "hover_P_el": 359,
+   "hover_FM": 0.55,
+   "hover_alpha75": 5.3
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   16
+  ],
+  "thick": [
+   3.2,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.03,
+  "tc": [
+   0.193,
+   0.212
+  ],
+  "toe_max": 2.8,
+  "pitch": 13.0,
+  "low": {
+   "T_max": 21.8,
+   "rpm": 12424,
+   "P_shaft": 817,
+   "tip_mach": 0.49,
+   "hover_rpm": 9885,
+   "hover_P_el": 514,
+   "hover_FM": 0.38,
+   "hover_alpha75": 5.8
+  },
+  "high": {
+   "T_max": 26.4,
+   "rpm": 11429,
+   "P_shaft": 758,
+   "tip_mach": 0.45,
+   "hover_rpm": 8257,
+   "hover_P_el": 357,
+   "hover_FM": 0.55,
+   "hover_alpha75": 4.3
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   24,
+   18
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.5,
+  "camber": 0.02,
+  "tc": [
+   0.205,
+   0.217
+  ],
+  "toe_max": 2.3,
+  "pitch": 14.0,
+  "low": {
+   "T_max": 21.7,
+   "rpm": 11943,
+   "P_shaft": 792,
+   "tip_mach": 0.47,
+   "hover_rpm": 9517,
+   "hover_P_el": 501,
+   "hover_FM": 0.39,
+   "hover_alpha75": 6.5
+  },
+  "high": {
+   "T_max": 26.0,
+   "rpm": 11127,
+   "P_shaft": 738,
+   "tip_mach": 0.44,
+   "hover_rpm": 8101,
+   "hover_P_el": 356,
+   "hover_FM": 0.56,
+   "hover_alpha75": 5.1
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   16
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.03,
+  "tc": [
+   0.201,
+   0.212
+  ],
+  "toe_max": 2.8,
+  "pitch": 14.0,
+  "low": {
+   "T_max": 21.6,
+   "rpm": 11990,
+   "P_shaft": 795,
+   "tip_mach": 0.47,
+   "hover_rpm": 9576,
+   "hover_P_el": 506,
+   "hover_FM": 0.39,
+   "hover_alpha75": 6.6
+  },
+  "high": {
+   "T_max": 25.7,
+   "rpm": 10797,
+   "P_shaft": 716,
+   "tip_mach": 0.42,
+   "hover_rpm": 7907,
+   "hover_P_el": 351,
+   "hover_FM": 0.56,
+   "hover_alpha75": 4.9
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   16
+  ],
+  "thick": [
+   3.2,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.04,
+  "tc": [
+   0.193,
+   0.212
+  ],
+  "toe_max": 2.8,
+  "pitch": 13.0,
+  "low": {
+   "T_max": 21.6,
+   "rpm": 12061,
+   "P_shaft": 800,
+   "tip_mach": 0.47,
+   "hover_rpm": 9633,
+   "hover_P_el": 509,
+   "hover_FM": 0.39,
+   "hover_alpha75": 5.6
+  },
+  "high": {
+   "T_max": 25.9,
+   "rpm": 10934,
+   "P_shaft": 725,
+   "tip_mach": 0.43,
+   "hover_rpm": 7975,
+   "hover_P_el": 352,
+   "hover_FM": 0.56,
+   "hover_alpha75": 4.0
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   24,
+   18
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.5,
+  "camber": 0.03,
+  "tc": [
+   0.205,
+   0.217
+  ],
+  "toe_max": 2.3,
+  "pitch": 13.0,
+  "low": {
+   "T_max": 21.6,
+   "rpm": 12081,
+   "P_shaft": 801,
+   "tip_mach": 0.47,
+   "hover_rpm": 9654,
+   "hover_P_el": 511,
+   "hover_FM": 0.39,
+   "hover_alpha75": 5.6
+  },
+  "high": {
+   "T_max": 26.3,
+   "rpm": 11250,
+   "P_shaft": 746,
+   "tip_mach": 0.44,
+   "hover_rpm": 8156,
+   "hover_P_el": 355,
+   "hover_FM": 0.55,
+   "hover_alpha75": 4.2
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   16
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.04,
+  "tc": [
+   0.201,
+   0.212
+  ],
+  "toe_max": 2.8,
+  "pitch": 13.0,
+  "low": {
+   "T_max": 21.5,
+   "rpm": 12102,
+   "P_shaft": 802,
+   "tip_mach": 0.47,
+   "hover_rpm": 9703,
+   "hover_P_el": 517,
+   "hover_FM": 0.38,
+   "hover_alpha75": 5.7
+  },
+  "high": {
+   "T_max": 26.0,
+   "rpm": 10978,
+   "P_shaft": 728,
+   "tip_mach": 0.43,
+   "hover_rpm": 8005,
+   "hover_P_el": 353,
+   "hover_FM": 0.56,
+   "hover_alpha75": 4.0
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   20,
+   16
+  ],
+  "thick": [
+   3.2,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.02,
+  "tc": [
+   0.21,
+   0.212
+  ],
+  "toe_max": 2.8,
+  "pitch": 15.0,
+  "low": {
+   "T_max": 21.4,
+   "rpm": 12028,
+   "P_shaft": 797,
+   "tip_mach": 0.47,
+   "hover_rpm": 9655,
+   "hover_P_el": 516,
+   "hover_FM": 0.38,
+   "hover_alpha75": 7.7
+  },
+  "high": {
+   "T_max": 25.6,
+   "rpm": 10843,
+   "P_shaft": 719,
+   "tip_mach": 0.42,
+   "hover_rpm": 7967,
+   "hover_P_el": 356,
+   "hover_FM": 0.55,
+   "hover_alpha75": 6.0
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   18
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.5,
+  "camber": 0.02,
+  "tc": [
+   0.222,
+   0.217
+  ],
+  "toe_max": 2.3,
+  "pitch": 14.0,
+  "low": {
+   "T_max": 21.4,
+   "rpm": 12134,
+   "P_shaft": 804,
+   "tip_mach": 0.47,
+   "hover_rpm": 9755,
+   "hover_P_el": 522,
+   "hover_FM": 0.38,
+   "hover_alpha75": 6.8
+  },
+  "high": {
+   "T_max": 26.1,
+   "rpm": 11304,
+   "P_shaft": 749,
+   "tip_mach": 0.44,
+   "hover_rpm": 8223,
+   "hover_P_el": 361,
+   "hover_FM": 0.55,
+   "hover_alpha75": 5.3
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   24,
+   18
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.5,
+  "camber": 0.04,
+  "tc": [
+   0.205,
+   0.217
+  ],
+  "toe_max": 2.3,
+  "pitch": 12.0,
+  "low": {
+   "T_max": 21.4,
+   "rpm": 12203,
+   "P_shaft": 809,
+   "tip_mach": 0.48,
+   "hover_rpm": 9799,
+   "hover_P_el": 524,
+   "hover_FM": 0.38,
+   "hover_alpha75": 4.8
+  },
+  "high": {
+   "T_max": 26.5,
+   "rpm": 11466,
+   "P_shaft": 760,
+   "tip_mach": 0.45,
+   "hover_rpm": 8278,
+   "hover_P_el": 358,
+   "hover_FM": 0.55,
+   "hover_alpha75": 3.3
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   20,
+   16
+  ],
+  "thick": [
+   3.2,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.03,
+  "tc": [
+   0.21,
+   0.212
+  ],
+  "toe_max": 2.8,
+  "pitch": 14.0,
+  "low": {
+   "T_max": 21.3,
+   "rpm": 12153,
+   "P_shaft": 806,
+   "tip_mach": 0.48,
+   "hover_rpm": 9772,
+   "hover_P_el": 523,
+   "hover_FM": 0.38,
+   "hover_alpha75": 6.8
+  },
+  "high": {
+   "T_max": 25.8,
+   "rpm": 10936,
+   "P_shaft": 725,
+   "tip_mach": 0.43,
+   "hover_rpm": 8004,
+   "hover_P_el": 355,
+   "hover_FM": 0.55,
+   "hover_alpha75": 5.0
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   20,
+   16
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.02,
+  "tc": [
+   0.219,
+   0.212
+  ],
+  "toe_max": 2.8,
+  "pitch": 15.0,
+  "low": {
+   "T_max": 21.2,
+   "rpm": 12069,
+   "P_shaft": 800,
+   "tip_mach": 0.47,
+   "hover_rpm": 9732,
+   "hover_P_el": 524,
+   "hover_FM": 0.37,
+   "hover_alpha75": 7.8
+  },
+  "high": {
+   "T_max": 25.6,
+   "rpm": 10896,
+   "P_shaft": 722,
+   "tip_mach": 0.43,
+   "hover_rpm": 8004,
+   "hover_P_el": 358,
+   "hover_FM": 0.55,
+   "hover_alpha75": 6.1
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   20,
+   16
+  ],
+  "thick": [
+   3.2,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.04,
+  "tc": [
+   0.21,
+   0.212
+  ],
+  "toe_max": 2.8,
+  "pitch": 13.0,
+  "low": {
+   "T_max": 21.2,
+   "rpm": 12262,
+   "P_shaft": 813,
+   "tip_mach": 0.48,
+   "hover_rpm": 9903,
+   "hover_P_el": 535,
+   "hover_FM": 0.37,
+   "hover_alpha75": 5.9
+  },
+  "high": {
+   "T_max": 26.0,
+   "rpm": 11121,
+   "P_shaft": 737,
+   "tip_mach": 0.43,
+   "hover_rpm": 8107,
+   "hover_P_el": 357,
+   "hover_FM": 0.55,
+   "hover_alpha75": 4.2
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   18
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.5,
+  "camber": 0.03,
+  "tc": [
+   0.222,
+   0.217
+  ],
+  "toe_max": 2.3,
+  "pitch": 13.0,
+  "low": {
+   "T_max": 21.2,
+   "rpm": 12269,
+   "P_shaft": 813,
+   "tip_mach": 0.48,
+   "hover_rpm": 9898,
+   "hover_P_el": 534,
+   "hover_FM": 0.37,
+   "hover_alpha75": 5.9
+  },
+  "high": {
+   "T_max": 26.3,
+   "rpm": 11435,
+   "P_shaft": 758,
+   "tip_mach": 0.45,
+   "hover_rpm": 8285,
+   "hover_P_el": 360,
+   "hover_FM": 0.54,
+   "hover_alpha75": 4.4
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   20,
+   16
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.03,
+  "tc": [
+   0.219,
+   0.212
+  ],
+  "toe_max": 2.8,
+  "pitch": 14.0,
+  "low": {
+   "T_max": 21.1,
+   "rpm": 12193,
+   "P_shaft": 808,
+   "tip_mach": 0.48,
+   "hover_rpm": 9850,
+   "hover_P_el": 533,
+   "hover_FM": 0.37,
+   "hover_alpha75": 6.8
+  },
+  "high": {
+   "T_max": 25.8,
+   "rpm": 10989,
+   "P_shaft": 729,
+   "tip_mach": 0.43,
+   "hover_rpm": 8041,
+   "hover_P_el": 357,
+   "hover_FM": 0.55,
+   "hover_alpha75": 5.1
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   20,
+   16
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.04,
+  "tc": [
+   0.219,
+   0.212
+  ],
+  "toe_max": 2.8,
+  "pitch": 13.0,
+  "low": {
+   "T_max": 20.9,
+   "rpm": 12301,
+   "P_shaft": 815,
+   "tip_mach": 0.48,
+   "hover_rpm": 9985,
+   "hover_P_el": 545,
+   "hover_FM": 0.36,
+   "hover_alpha75": 5.9
+  },
+  "high": {
+   "T_max": 26.0,
+   "rpm": 11173,
+   "P_shaft": 741,
+   "tip_mach": 0.44,
+   "hover_rpm": 8145,
+   "hover_P_el": 359,
+   "hover_FM": 0.55,
+   "hover_alpha75": 4.2
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   18
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.5,
+  "camber": 0.04,
+  "tc": [
+   0.222,
+   0.217
+  ],
+  "toe_max": 2.3,
+  "pitch": 12.0,
+  "low": {
+   "T_max": 20.9,
+   "rpm": 12378,
+   "P_shaft": 819,
+   "tip_mach": 0.48,
+   "hover_rpm": 10051,
+   "hover_P_el": 548,
+   "hover_FM": 0.36,
+   "hover_alpha75": 5.0
+  },
+  "high": {
+   "T_max": 26.5,
+   "rpm": 11656,
+   "P_shaft": 773,
+   "tip_mach": 0.46,
+   "hover_rpm": 8414,
+   "hover_P_el": 363,
+   "hover_FM": 0.54,
+   "hover_alpha75": 3.5
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   16
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.5,
+  "camber": 0.02,
+  "tc": [
+   0.224,
+   0.244
+  ],
+  "toe_max": 2.8,
+  "pitch": 15.0,
+  "low": {
+   "T_max": 19.7,
+   "rpm": 12270,
+   "P_shaft": 813,
+   "tip_mach": 0.48,
+   "hover_rpm": 10278,
+   "hover_P_el": 598,
+   "hover_FM": 0.33,
+   "hover_alpha75": 8.1
+  },
+  "high": {
+   "T_max": 25.8,
+   "rpm": 11298,
+   "P_shaft": 749,
+   "tip_mach": 0.44,
+   "hover_rpm": 8255,
+   "hover_P_el": 365,
+   "hover_FM": 0.54,
+   "hover_alpha75": 6.3
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   16
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.5,
+  "camber": 0.03,
+  "tc": [
+   0.224,
+   0.244
+  ],
+  "toe_max": 2.8,
+  "pitch": 14.0,
+  "low": {
+   "T_max": 19.5,
+   "rpm": 12379,
+   "P_shaft": 819,
+   "tip_mach": 0.48,
+   "hover_rpm": 10416,
+   "hover_P_el": 610,
+   "hover_FM": 0.32,
+   "hover_alpha75": 7.2
+  },
+  "high": {
+   "T_max": 26.0,
+   "rpm": 11411,
+   "P_shaft": 757,
+   "tip_mach": 0.45,
+   "hover_rpm": 8307,
+   "hover_P_el": 365,
+   "hover_FM": 0.54,
+   "hover_alpha75": 5.4
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   16
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.5,
+  "camber": 0.04,
+  "tc": [
+   0.224,
+   0.244
+  ],
+  "toe_max": 2.8,
+  "pitch": 13.0,
+  "low": {
+   "T_max": 19.1,
+   "rpm": 12430,
+   "P_shaft": 816,
+   "tip_mach": 0.49,
+   "hover_rpm": 10575,
+   "hover_P_el": 628,
+   "hover_FM": 0.31,
+   "hover_alpha75": 6.3
+  },
+  "high": {
+   "T_max": 26.2,
+   "rpm": 11611,
+   "P_shaft": 770,
+   "tip_mach": 0.45,
+   "hover_rpm": 8426,
+   "hover_P_el": 368,
+   "hover_FM": 0.54,
+   "hover_alpha75": 4.5
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   20,
+   16
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.5,
+  "camber": 0.02,
+  "tc": [
+   0.245,
+   0.244
+  ],
+  "toe_max": 2.8,
+  "pitch": 15.0,
+  "low": {
+   "T_max": 18.6,
+   "rpm": 12409,
+   "P_shaft": 818,
+   "tip_mach": 0.49,
+   "hover_rpm": 10678,
+   "hover_P_el": 651,
+   "hover_FM": 0.3,
+   "hover_alpha75": 8.4
+  },
+  "high": {
+   "T_max": 25.8,
+   "rpm": 11541,
+   "P_shaft": 765,
+   "tip_mach": 0.45,
+   "hover_rpm": 8437,
+   "hover_P_el": 374,
+   "hover_FM": 0.53,
+   "hover_alpha75": 6.5
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   22,
+   18
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.03,
+  "tc": [
+   0.199,
+   0.189
+  ],
+  "toe_max": 2.3,
+  "pitch": 14.0,
+  "low": {
+   "T_max": 18.4,
+   "rpm": 10326,
+   "P_shaft": 685,
+   "tip_mach": 0.4,
+   "hover_rpm": 8937,
+   "hover_P_el": 555,
+   "hover_FM": 0.35,
+   "hover_alpha75": 6.1
+  },
+  "high": {
+   "T_max": 21.6,
+   "rpm": 9504,
+   "P_shaft": 630,
+   "tip_mach": 0.37,
+   "hover_rpm": 7594,
+   "hover_P_el": 402,
+   "hover_FM": 0.49,
+   "hover_alpha75": 4.6
+  },
+  "lever": [
+   6.0,
+   4.5,
+   3.5
+  ],
+  "faired": false
+ },
+ {
+  "chord": [
+   20,
+   16
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.5,
+  "camber": 0.03,
+  "tc": [
+   0.245,
+   0.244
+  ],
+  "toe_max": 2.8,
+  "pitch": 14.0,
+  "low": {
+   "T_max": 18.3,
+   "rpm": 12469,
+   "P_shaft": 814,
+   "tip_mach": 0.49,
+   "hover_rpm": 10823,
+   "hover_P_el": 665,
+   "hover_FM": 0.29,
+   "hover_alpha75": 7.5
+  },
+  "high": {
+   "T_max": 26.0,
+   "rpm": 11659,
+   "P_shaft": 773,
+   "tip_mach": 0.46,
+   "hover_rpm": 8498,
+   "hover_P_el": 374,
+   "hover_FM": 0.52,
+   "hover_alpha75": 5.6
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ },
+ {
+  "chord": [
+   20,
+   16
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.5,
+  "camber": 0.04,
+  "tc": [
+   0.245,
+   0.244
+  ],
+  "toe_max": 2.8,
+  "pitch": 14.0,
+  "low": {
+   "T_max": 18.1,
+   "rpm": 12129,
+   "P_shaft": 804,
+   "tip_mach": 0.47,
+   "hover_rpm": 10591,
+   "hover_P_el": 669,
+   "hover_FM": 0.29,
+   "hover_alpha75": 7.4
+  },
+  "high": {
+   "T_max": 25.4,
+   "rpm": 11141,
+   "P_shaft": 739,
+   "tip_mach": 0.44,
+   "hover_rpm": 8208,
+   "hover_P_el": 369,
+   "hover_FM": 0.53,
+   "hover_alpha75": 5.3
+  },
+  "lever": [
+   6.0,
+   4.0,
+   3.0
+  ],
+  "faired": true
+ }
+]

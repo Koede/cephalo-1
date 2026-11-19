@@ -1,0 +1,13 @@
+{
+ "fold_servo x fold_servo_pulley": 234.9,
+ "fold_jackshaft x fold_jack_pulleys": 159.2,
+ "lead_screws x screw_pulleys": 1038.3,
+ "idler_posts x idlers": 771.5,
+ "elev_shaft x elev_pulleys": 147.0,
+ "elev_pulleys x elev_belts": 23.4,
+ "elev_bottom_pulleys x elev_belts": 23.4,
+ "elev_hangers x cameras": 4.0,
+ "miter_shaft x miter_jack": 13.3,
+ "jackshaft x jack_pulley": 73.5,
+ "elev_servo x elev_servo_pulley": 187.9
+}

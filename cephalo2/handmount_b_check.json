@@ -1,0 +1,286 @@
+{
+ "locked: base x socket / nose ring / collar": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "locked: males x socket / nose ring": [
+  0.0,
+  0.0
+ ],
+ "locked: males x female barrels (sliding fit, expected 0)": 0.0,
+ "locked: collar x socket / nose ring": [
+  0.0,
+  -1.1069704181077e-16
+ ],
+ "nose ring x socket (faces touch, expected 0)": 9.451952566984223e-15,
+ "screws x socket / nose ring / collar / female barrels / hand base": [
+  0.0,
+  5.637851296924623e-17,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "screw head below the mouth face (mm)": -0.2,
+ "assembly: collar slid on from the mouth end over the bare socket: worst overlap (expected 0)": 0.0,
+ "collar retained: pulled 0.2 mm toward the hand, overlap with the nose ring (expected > 0)": 54.010706842718086,
+ "collar retained: pushed 0.4 mm into the arm, overlap with the retaining flange (expected > 0)": 59.68811137595234,
+ "collar axial play (mm)": 0.2,
+ "axial play of a locked hand (mm): lug between nose ring and lip": 0.1,
+ "collar step bearing on the nose ring: annulus (mm2)": 270.2,
+ "collar sweep open->locked: collar x socket/nose worst overlap": 9.12990386417456e-15,
+ "collar sweep: hand stand-off needed (deg, mm); ramp draws it in to 0": [
+  [
+   -60.0,
+   0.0
+  ],
+  [
+   -57.5,
+   0.0
+  ],
+  [
+   -55.0,
+   0.0
+  ],
+  [
+   -52.5,
+   0.0
+  ],
+  [
+   -50.0,
+   0.0
+  ],
+  [
+   -47.5,
+   0.0
+  ],
+  [
+   -45.0,
+   0.0
+  ],
+  [
+   -42.5,
+   0.0
+  ],
+  [
+   -40.0,
+   0.0
+  ],
+  [
+   -37.5,
+   0.0
+  ],
+  [
+   -35.0,
+   0.0
+  ],
+  [
+   -32.5,
+   0.0
+  ],
+  [
+   -30.0,
+   0.0
+  ],
+  [
+   -27.5,
+   0.0
+  ],
+  [
+   -25.0,
+   0.0
+  ],
+  [
+   -22.5,
+   0.0
+  ],
+  [
+   -20.0,
+   0.0
+  ],
+  [
+   -17.5,
+   0.0
+  ],
+  [
+   -15.0,
+   0.0
+  ],
+  [
+   -12.5,
+   0.0
+  ],
+  [
+   -10.0,
+   0.0
+  ],
+  [
+   -7.5,
+   0.0
+  ],
+  [
+   -5.0,
+   0.0
+  ],
+  [
+   -2.5,
+   0.0
+  ],
+  [
+   0.0,
+   0.0
+  ]
+ ],
+ "detent: ball pushed in by the collar (deg, mm); 0 = seated in a dimple": [
+  [
+   -60.0,
+   0.0
+  ],
+  [
+   -57.5,
+   0.7
+  ],
+  [
+   -55.0,
+   0.8
+  ],
+  [
+   -52.5,
+   0.8
+  ],
+  [
+   -50.0,
+   0.8
+  ],
+  [
+   -47.5,
+   0.8
+  ],
+  [
+   -45.0,
+   0.8
+  ],
+  [
+   -42.5,
+   0.8
+  ],
+  [
+   -40.0,
+   0.8
+  ],
+  [
+   -37.5,
+   0.8
+  ],
+  [
+   -35.0,
+   0.8
+  ],
+  [
+   -32.5,
+   0.8
+  ],
+  [
+   -30.0,
+   0.8
+  ],
+  [
+   -27.5,
+   0.8
+  ],
+  [
+   -25.0,
+   0.8
+  ],
+  [
+   -22.5,
+   0.8
+  ],
+  [
+   -20.0,
+   0.8
+  ],
+  [
+   -17.5,
+   0.8
+  ],
+  [
+   -15.0,
+   0.8
+  ],
+  [
+   -12.5,
+   0.8
+  ],
+  [
+   -10.0,
+   0.8
+  ],
+  [
+   -7.5,
+   0.8
+  ],
+  [
+   -5.0,
+   0.8
+  ],
+  [
+   -2.5,
+   0.7
+  ],
+  [
+   0.0,
+   0.0
+  ]
+ ],
+ "detent: spring pocket length seated / pressed (mm)": [
+  5.8,
+  5.0
+ ],
+ "push-in path (collar open): worst overlap": 0.0,
+ "wrong clocking blocked by the key (overlap at 2 mm in, expected > 0)": 13.442304797081698,
+ "locked hand pulled 1 mm: lug x collar overlap (expected > 0)": 106.09751949005202,
+ "bullet engagement depth (mm)": 8.5,
+ "stress, static": {
+  "lug_force_N": 110.8,
+  "lug_shear_MPa": 2.5,
+  "lug_bending_MPa": 6.0,
+  "lip_bending_MPa": 5.9,
+  "collar_wall_MPa": 6.1,
+  "collar_step_MPa": 4.7,
+  "lug_on_lip_bearing_MPa": 5.1,
+  "spigot_bearing_MPa": 0.5,
+  "step_on_nose_ring_MPa": 0.82,
+  "screw_tension_N": 63.1,
+  "factor_vs_PA_CF_interlayer_30MPa": 4.93,
+  "factor_screw_vs_M3_insert_pullout_1000N_est": 15.9
+ },
+ "stress, rolling over a 20 mm step (2 g, est.)": {
+  "lug_force_N": 191.5,
+  "lug_shear_MPa": 4.3,
+  "lug_bending_MPa": 10.3,
+  "lip_bending_MPa": 10.3,
+  "collar_wall_MPa": 10.5,
+  "collar_step_MPa": 8.1,
+  "lug_on_lip_bearing_MPa": 8.8,
+  "spigot_bearing_MPa": 0.9,
+  "step_on_nose_ring_MPa": 1.42,
+  "screw_tension_N": 116.1,
+  "factor_vs_PA_CF_interlayer_30MPa": 2.85,
+  "factor_screw_vs_M3_insert_pullout_1000N_est": 8.6
+ },
+ "stress, 3 g landing on the wheels (est.)": {
+  "lug_force_N": 272.3,
+  "lug_shear_MPa": 6.1,
+  "lug_bending_MPa": 14.7,
+  "lip_bending_MPa": 14.6,
+  "collar_wall_MPa": 15.0,
+  "collar_step_MPa": 11.5,
+  "lug_on_lip_bearing_MPa": 12.5,
+  "spigot_bearing_MPa": 1.4,
+  "step_on_nose_ring_MPa": 2.02,
+  "screw_tension_N": 169.2,
+  "factor_vs_PA_CF_interlayer_30MPa": 2.01,
+  "factor_screw_vs_M3_insert_pullout_1000N_est": 5.9
+ }
+}

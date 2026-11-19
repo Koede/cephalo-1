@@ -1,0 +1,26 @@
+{
+ "note": "rev D (9 in, pitch 16 deg): BEMT + NeuralFoil plan D at full throttle x 0.965 (the rev C ratio of the CAD-knuckle-drag result to the plain plan D result). Estimate, no spin test.",
+ "knuckle_area_mm2": [
+  71.2,
+  39.0,
+  24.6
+ ],
+ "cd": 0.5,
+ "low": {
+  "T_max": 20.15,
+  "rpm": 12547,
+  "P_shaft": 809,
+  "qT": 0.0295,
+  "hover11_P_el": 387,
+  "hover13_9_P_el": 549
+ },
+ "high": {
+  "T_max": 23.34,
+  "rpm": 11400,
+  "P_shaft": 756,
+  "qT": 0.0262,
+  "hover11_P_el": 290,
+  "hover13_9_P_el": 412
+ },
+ "K_W_per_N15": 10.6
+}

@@ -1,0 +1,23 @@
+{
+ "knuckle_area_mm2": [
+  70.9,
+  38.8,
+  24.5
+ ],
+ "cd": 0.5,
+ "hover_share_N": 13.9,
+ "low": {
+  "T_max": 21.3,
+  "rpm": 12040,
+  "P_shaft": 798,
+  "hover_rpm": 9722,
+  "hover_P_el": 525
+ },
+ "high": {
+  "T_max": 25.4,
+  "rpm": 11368,
+  "P_shaft": 754,
+  "hover_rpm": 8403,
+  "hover_P_el": 380
+ }
+}

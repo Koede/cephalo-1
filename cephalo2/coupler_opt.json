@@ -1,0 +1,226 @@
+{
+ "fos_target": 2.0,
+ "best": {
+  "lug_w": 49.0,
+  "lug_r1": 22.0,
+  "t": {
+   "t_lug": 2.4,
+   "t_lip": 2.5,
+   "t_wall": 3.2,
+   "t_step": 2.4
+  },
+  "mass": {
+   "socket": 12.77,
+   "nose": 4.14,
+   "collar": 8.74,
+   "hand_base": 12.13
+  },
+  "total": 37.78,
+  "R_collar": 26.2,
+  "fos": 2.01,
+  "bear": 18.7
+ },
+ "top": [
+  {
+   "lug_w": 49.0,
+   "lug_r1": 22.0,
+   "t": {
+    "t_lug": 2.4,
+    "t_lip": 2.5,
+    "t_wall": 3.2,
+    "t_step": 2.4
+   },
+   "mass": {
+    "socket": 12.77,
+    "nose": 4.14,
+    "collar": 8.74,
+    "hand_base": 12.13
+   },
+   "total": 37.78,
+   "R_collar": 26.2,
+   "fos": 2.01,
+   "bear": 18.7
+  },
+  {
+   "lug_w": 47.0,
+   "lug_r1": 22.0,
+   "t": {
+    "t_lug": 2.4,
+    "t_lip": 2.5,
+    "t_wall": 3.3,
+    "t_step": 2.4
+   },
+   "mass": {
+    "socket": 12.77,
+    "nose": 4.14,
+    "collar": 8.95,
+    "hand_base": 12.12
+   },
+   "total": 37.98,
+   "R_collar": 26.3,
+   "fos": 2.0,
+   "bear": 19.5
+  },
+  {
+   "lug_w": 48.0,
+   "lug_r1": 22.0,
+   "t": {
+    "t_lug": 2.4,
+    "t_lip": 2.5,
+    "t_wall": 3.3,
+    "t_step": 2.4
+   },
+   "mass": {
+    "socket": 12.77,
+    "nose": 4.14,
+    "collar": 8.95,
+    "hand_base": 12.13
+   },
+   "total": 37.99,
+   "R_collar": 26.3,
+   "fos": 2.04,
+   "bear": 19.1
+  },
+  {
+   "lug_w": 45.0,
+   "lug_r1": 22.0,
+   "t": {
+    "t_lug": 2.4,
+    "t_lip": 2.6,
+    "t_wall": 3.3,
+    "t_step": 2.4
+   },
+   "mass": {
+    "socket": 12.77,
+    "nose": 4.14,
+    "collar": 9.04,
+    "hand_base": 12.12
+   },
+   "total": 38.07,
+   "R_collar": 26.3,
+   "fos": 2.0,
+   "bear": 20.4
+  },
+  {
+   "lug_w": 46.0,
+   "lug_r1": 22.0,
+   "t": {
+    "t_lug": 2.4,
+    "t_lip": 2.6,
+    "t_wall": 3.3,
+    "t_step": 2.4
+   },
+   "mass": {
+    "socket": 12.77,
+    "nose": 4.14,
+    "collar": 9.04,
+    "hand_base": 12.12
+   },
+   "total": 38.07,
+   "R_collar": 26.3,
+   "fos": 2.03,
+   "bear": 19.9
+  },
+  {
+   "lug_w": 49.0,
+   "lug_r1": 22.1,
+   "t": {
+    "t_lug": 2.4,
+    "t_lip": 2.5,
+    "t_wall": 3.3,
+    "t_step": 2.4
+   },
+   "mass": {
+    "socket": 12.77,
+    "nose": 4.2,
+    "collar": 9.03,
+    "hand_base": 12.15
+   },
+   "total": 38.15,
+   "R_collar": 26.4,
+   "fos": 2.0,
+   "bear": 16.6
+  },
+  {
+   "lug_w": 48.0,
+   "lug_r1": 22.1,
+   "t": {
+    "t_lug": 2.4,
+    "t_lip": 2.6,
+    "t_wall": 3.3,
+    "t_step": 2.4
+   },
+   "mass": {
+    "socket": 12.77,
+    "nose": 4.2,
+    "collar": 9.12,
+    "hand_base": 12.14
+   },
+   "total": 38.23,
+   "R_collar": 26.4,
+   "fos": 2.02,
+   "bear": 16.9
+  },
+  {
+   "lug_w": 46.0,
+   "lug_r1": 22.1,
+   "t": {
+    "t_lug": 2.5,
+    "t_lip": 2.6,
+    "t_wall": 3.3,
+    "t_step": 2.4
+   },
+   "mass": {
+    "socket": 12.77,
+    "nose": 4.2,
+    "collar": 9.2,
+    "hand_base": 12.14
+   },
+   "total": 38.31,
+   "R_collar": 26.4,
+   "fos": 2.01,
+   "bear": 17.6
+  },
+  {
+   "lug_w": 47.0,
+   "lug_r1": 22.1,
+   "t": {
+    "t_lug": 2.5,
+    "t_lip": 2.6,
+    "t_wall": 3.3,
+    "t_step": 2.4
+   },
+   "mass": {
+    "socket": 12.77,
+    "nose": 4.2,
+    "collar": 9.19,
+    "hand_base": 12.15
+   },
+   "total": 38.31,
+   "R_collar": 26.4,
+   "fos": 2.04,
+   "bear": 17.3
+  },
+  {
+   "lug_w": 44.0,
+   "lug_r1": 22.0,
+   "t": {
+    "t_lug": 2.5,
+    "t_lip": 2.6,
+    "t_wall": 3.4,
+    "t_step": 2.4
+   },
+   "mass": {
+    "socket": 12.77,
+    "nose": 4.14,
+    "collar": 9.33,
+    "hand_base": 12.12
+   },
+   "total": 38.36,
+   "R_collar": 26.4,
+   "fos": 2.03,
+   "bear": 20.8
+  }
+ ],
+ "n": 210
+}

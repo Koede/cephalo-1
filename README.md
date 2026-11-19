@@ -27,6 +27,8 @@ in [DESIGN.md](DESIGN.md).
 - `servo-clutch-rev4/`: a separate design line from the Octopus Drone project. Its rev 4 has 8 servo-in-link
   joints per arm (478 mm), winch-tensioned detent clutches and 6 in claw-props. The folder holds design docs,
   MuJoCo full-robot sims, clutch part generators and renderers. See its own README.
+- `cephalo2/`: Cephalo-2, the current Octopus Drone robot built on the rev 4 arms (hand3, hand/arm coupler rev B.2,
+  belly rotor, turret cameras, wheel hand). Code, design notes, check results and STLs. See its own README.
 
 ## Regenerating the main design
 

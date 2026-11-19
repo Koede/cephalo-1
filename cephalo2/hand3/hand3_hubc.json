@@ -1,0 +1,122 @@
+{
+ "servo": {
+  "name": "Feetech STS3215",
+  "stall": 2.94,
+  "rated": 0.981,
+  "m": 55.0,
+  "size": [
+   45.2,
+   24.7,
+   35.0
+  ],
+  "volts": "12 V",
+  "stall_A": 2.7,
+  "deg": 360.0
+ },
+ "spool_r": 4.0,
+ "levers": [
+  6.0,
+  4.0,
+  3.0
+ ],
+ "e_lag": 2.5,
+ "lag_spring_Nm": 0.006,
+ "ext_k1_Nm": 0.02,
+ "ext_k2_Nm": 0.004,
+ "ext_k3_Nm": 0.02,
+ "stretch": 2.0,
+ "base": {
+  "travel": 13.5,
+  "spool_deg": 193,
+  "F_stall_ring": 382,
+  "F_rated_ring": 128,
+  "F_stall_finger": 95.5,
+  "F_rated_finger": 31.9,
+  "F_peak_need": 54.9,
+  "margin": 1.74,
+  "tpu_k": 27.5,
+  "t_full_s": 0.71
+ },
+ "curl": {
+  "travel": 12.7,
+  "spool_deg": 182,
+  "F_stall_ring": 382,
+  "F_rated_ring": 128,
+  "F_stall_finger": 95.5,
+  "F_rated_finger": 31.9,
+  "F_peak_need": 49.9,
+  "margin": 1.92,
+  "tpu_k": 24.9,
+  "t_full_s": 0.67
+ },
+ "z": {
+  "out": [
+   80.0,
+   83.0
+  ],
+  "fl_out": [
+   80.0,
+   82.0
+  ],
+  "fl_in": [
+   63.52446016813728,
+   65.52446016813728
+  ],
+  "lip_out": [
+   83.0,
+   85.0
+  ],
+  "lip_in": [
+   66.52446016813728,
+   68.52446016813728
+  ],
+  "servo_top": 49.4
+ },
+ "mass": {
+  "fingers": 34.9,
+  "hub_plates_lag_tubes": 33.7,
+  "heel_nut": 4.8,
+  "motor": 98.5,
+  "servos": 110.0,
+  "frame": 22.8,
+  "yokes": 6.8,
+  "rings_cage": 22.4,
+  "rods_spools_screws": 14.0,
+  "cords_links_springs": 6.0,
+  "wiring_hall": 8.0,
+  "arm_collar": 12.0,
+  "total": 373.9
+ },
+ "com_from_spigot": 54.5,
+ "checks": {
+  "flight": {
+   "overlaps": {},
+   "min_gap_rot_stat": 0.5,
+   "at": "ring_in|yoke_in"
+  },
+  "base_full": {
+   "overlaps": {},
+   "min_gap_rot_stat": 0.0,
+   "at": "ring_out|yoke_out"
+  },
+  "curl_full": {
+   "overlaps": {},
+   "min_gap_rot_stat": 0.0,
+   "at": "ring_in|yoke_in"
+  },
+  "grasp": {
+   "overlaps": {},
+   "min_gap_rot_stat": 0.0,
+   "at": "ring_out|yoke_out"
+  },
+  "flight_spin_min_gap": 0.5
+ },
+ "envelope": {
+  "body": "49 x 48 mm servo block, 49.4 mm tall; rings and yokes inside \u00d872; four rod tabs to \u00d882",
+  "stack_margin": 1.39
+ },
+ "electrical": {
+  "servo_stall_A": 5.4,
+  "rail": "12 V arm bus"
+ }
+}

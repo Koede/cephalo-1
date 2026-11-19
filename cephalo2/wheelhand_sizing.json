@@ -1,0 +1,72 @@
+{
+ "loads": {
+  "weight_N": 145.2861,
+  "per_wheel_N": 36.321525,
+  "drive_force_design_N": 14.155719388598456,
+  "traction_limit_N": 29.05722,
+  "wheel_torque_design_Nm": 0.8493431633159073,
+  "wheel_torque_traction_Nm": 1.7434332,
+  "wheel_rpm_at_vmax": 238.73241463784302
+ },
+ "motor": {
+  "ratio": 36.0,
+  "eta": 0.8464,
+  "torque_design_mNm": 27.874368676351715,
+  "torque_traction_mNm": 57.21727315689981,
+  "current_design_A": 6.108244858329666,
+  "current_traction_A": 11.485612958809151,
+  "current_peak_rating_A": 40.5,
+  "rpm_at_vmax": 8594.36692696235,
+  "duty_at_vmax": 0.2212192259192368,
+  "no_load_ground_speed_ms": 6.780604143997971,
+  "min_smooth_speed_ms": 0.3490658503988659,
+  "P_elec_design_W": 28.72472069552435,
+  "stall_wheel_torque_at_40A_Nm": 6.567628585045642,
+  "copper_loss_traction_W": 12.862132241357559
+ },
+ "gears": [
+  {
+   "stage": 1,
+   "ratio": 6.0,
+   "module": 0.5,
+   "face": 5.0,
+   "sun_pd": 7.5,
+   "ring_pd": 37.5,
+   "input_torque_Nm": 0.057217273156899805,
+   "mesh_force_N": 6.35747479521109,
+   "sun_root_MPa": 8.689031610766866,
+   "planet_root_MPa": 6.548471892062926,
+   "planet_rpm_rel_at_vmax": 4297.183463481175
+  },
+  {
+   "stage": 2,
+   "ratio": 6.0,
+   "module": 0.8,
+   "face": 8.0,
+   "sun_pd": 9.600000000000001,
+   "ring_pd": 48.0,
+   "input_torque_Nm": 0.3158393478260869,
+   "mesh_force_N": 27.41661005434782,
+   "sun_root_MPa": 17.49698565415322,
+   "planet_root_MPa": 11.755349611685835,
+   "planet_rpm_rel_at_vmax": 716.1972439135292
+  }
+ ],
+ "connector": {
+  "static": {
+   "radial_N": 36.321525,
+   "bending_Nm": 2.6224141050000003,
+   "twist_Nm": 0.8493431633159073
+  },
+  "rolling over a 20 mm step (2 g, est.)": {
+   "radial_N": 72.64305,
+   "bending_Nm": 5.2448282100000005,
+   "twist_Nm": 1.7434332
+  },
+  "3 g landing on the wheels (est.)": {
+   "radial_N": 108.964575,
+   "bending_Nm": 7.8672423149999995,
+   "twist_Nm": 1.7434332
+  }
+ }
+}

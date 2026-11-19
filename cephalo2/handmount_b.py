@@ -1,0 +1,298 @@
+"""Hand connector rev B for Cephalo-2 (2026-11-18): motor power through the joint, so motor hands really swap.
+Replaces the rev A bayonet (handmount.py), whose 5 spring pins carry 5.2 A each; hand3 had to hard-wire its rotor's
+phase leads down the arm, and a wheel hand could not be swapped at all.
+
+What changes (rev A -> rev B):
+  * three motor phase contacts: Castle Creations 4 mm high-current bullets (75 A).  Female halves sit in the arm socket,
+    males stand out of the hand base.  The hand's own motor (hand3 rotor, wheel motor, ...) runs off the arm's ESC.
+  * the hand no longer twists: bullets need a straight push.  The hand base has a key, enters straight, and a
+    LOCKING COLLAR on the socket turns 60 deg: three internal lip segments slide behind the hand's flange lugs and hold them.
+    A ball detent holds the collar at locked and at open.
+  * the five spring pins (12 V, GND, servo data, servo return, hand ID) stay, on the same pin board at the centre.
+  * sized for the wheel hand: 9.4 N m bending + 110 N radial + 1.9 N m twist (3 g landing on a wheel, est.).
+Frame (mm): z = connector axis, +z into the arm; z = 0 = socket mouth face; the hand hangs toward -z.
+Rev B.1 (same day, from the assembly check): rev B's collar could neither be fitted nor hold a pulled hand (its lip
+r 20.9 < socket r 21, and nothing under it to bear on).  Now: socket body r 20.3, a separate NOSE RING at the mouth
+that the collar's step bears on, 3 x M3 x 20 DIN 7984 at az 30/150/270 (clear of the bullets) through ring + socket
+into inserts in the tip bay, radial 3 mm ball detent, lead grooves under the hand base.  Notes: coupler-revB.md.
+Parts: arm_socket + nose_ring (PA-CF, 3 x M3 into the tip bay end), collar (PA-CF), hand_base (PA-CF, shared by every hand).
+python3 handmount_b.py -> checks (overlaps at open / pushed / locked, collar sweep, bullet alignment, stresses), STLs
+"""
+import os, json
+import numpy as np
+import manifold3d as mf
+
+N = 120
+P = dict(
+    # socket body
+    R_body=20.3, z_back=16.0, r_bore=10.6, z_bore=11.0,
+    # bullets (Castle 4 mm: male pin dia 4.0, contact length 9; female barrel OD 5.6 in a 6.0 bore, est. from the part)
+    r_bullet=15.4, az_bullet=(90.0, 210.0, 330.0), pin_d=4.0, pin_len=9.0, fem_bore=6.0, fem_depth=13.0, fem_recess=1.2,
+    # key: rib on the plug, slot in the bore
+    az_key=30.0, key_w=3.0, key_h=1.6,
+    # hand base
+    R_flange=20.6, r_spigot=10.35, z_spigot_top=10.4, lug_az=(0.0, 120.0, 240.0), lug_r0=20.4,
+    # rev B.2 primaries (set by coupler_opt.py): lugs at the TOP of the flange, clamped between the nose ring and the lip
+    lug_w=48.0, lug_r1=22.4, t_lug=2.6, t_lip=2.7, t_wall=3.3, t_step=2.4, ax_clr=0.1,
+    lip_r0=20.9, collar_bore=20.5, twist=60.0, ramp=0.4, ramp_deg=8.0, flute=0.5,
+    retain_r=23.0,
+    # nose ring: separate ring at the mouth, clamped by the 3 socket screws; the collar's -z stop and the hand's seat
+    z_nose=3.5, cbore_d=6.2, cbore_h=2.2,          # counterbores for M3x20 DIN 7984 low-head screws (head 5.5 x 2.0)
+    # ball detent: 3 mm steel ball on a small spring in a radial blind bore in the socket body; dimples in the collar bore
+    det_az=0.0, ball_d=3.0, det_bore=3.1, det_r_in=12.5, ball_rc=19.8,   # ball centre radius when seated: 1.0 proud of the body
+    # pins (rev A board, unchanged)
+    z_pad=5.0, pad_t=1.6, r_pad=7.0, pinboard_r=10.5, z_pinboard=9.3, pinboard_t=1.6, pin_r=(0.0, 2.3, 3.6, 4.9, 6.2),
+    screws=((17.0, 30.0), (17.0, 150.0), (17.0, 270.0)), screw_d=3.4,      # 3 screws, each midway between two bullets
+    hand_screw_r=13.0, hand_screw_az=(45.0, 135.0, 225.0, 315.0),   # 4 x M3 heat-set inserts (dia 4.0 x 6) for the hand's own body
+    groove_w=3.2, groove_h=2.6, r_wire_cb=6.5,                       # motor-lead grooves in the hand base's bottom face
+)
+
+
+def derive():
+    """Everything that follows from the primaries."""
+    P["gap_w"] = P["lug_w"] + 6.0
+    P["lug_r"] = (P["lug_r0"], P["lug_r1"]); P["lug_z"] = (-P["t_lug"], 0.0)
+    P["R_nose"] = P["lug_r1"] + 0.1; P["collar_cb"] = P["lug_r1"] + 0.5
+    zl = -P["t_lug"] - P["ax_clr"]; P["lip_z"] = (zl - P["t_lip"], zl); P["lip_r"] = (P["lip_r0"], P["collar_cb"])
+    P["z_flange"] = (min(P["lip_z"][0] - 1.2, -7.0), 0.0)          # flange bottom 1.2 below the collar: hands bolt on flat, no boss
+    P["R_collar"] = P["collar_cb"] + P["t_wall"] + P["flute"]
+    P["det_z"] = P["z_nose"] + 2.0
+    z1 = max(P["z_nose"] + P["t_step"], P["det_z"] + 2.3)
+    P["collar_z"] = (P["lip_z"][0], z1); P["sleeve_r"] = P["collar_bore"] + 2.2
+    P["retain_z"] = (z1 + 0.2, z1 + 2.2)
+    return P
+
+
+derive()
+
+
+def cyl(r, z0, z1, n=N):
+    return mf.Manifold.cylinder(z1 - z0, r, r, n).translate([0, 0, z0])
+
+
+def rev(profile, a0, a1, n=N):
+    cs = mf.CrossSection([[(float(r), float(z)) for r, z in profile]])
+    return mf.Manifold.revolve(cs, n, float(a1 - a0)).rotate([0, 0, float(a0)])
+
+
+def sector(r0, r1, a0, a1, z0, z1):
+    return rev([(r0, z0), (r1, z0), (r1, z1), (r0, z1)], a0, a1)
+
+
+def at(r, az):
+    a = np.radians(az); return r * np.cos(a), r * np.sin(a)
+
+
+# ---------------------------------------------------------------- arm side
+def _socket_cuts():
+    """Holes shared by the socket body and the nose ring (they are drilled as one stack)."""
+    cut = cyl(P["r_bore"], -1, P["z_bore"]) + cyl(P["pinboard_r"] + 0.1, P["z_bore"] - 0.1, P["z_back"] + 1)     # spigot bore + pin-board seat (wires out the back)
+    cut += sector(P["r_bore"] - 0.5, P["r_bore"] + P["key_h"] + 0.3, P["az_key"] - P["key_w"] / 2 / P["r_bore"] * 57.3 - 2, P["az_key"] + P["key_w"] / 2 / P["r_bore"] * 57.3 + 2, -1, P["z_bore"])
+    for az in P["az_bullet"]:
+        x, y = at(P["r_bullet"], az)
+        cut += cyl(P["fem_bore"] / 2, P["fem_recess"], P["fem_recess"] + P["fem_depth"], 32).translate([x, y, 0])
+        cut += cyl(P["pin_d"] / 2 + 0.6, -1, P["fem_recess"] + 0.01, 32).translate([x, y, 0])           # mouth: pin lead-in, female recessed 1.2 (touch-safe)
+        cut += cyl(1.6, 0, P["z_back"] + 1, 16).translate([x, y, 0])                                    # 14 AWG lead exit
+    for r, az in P["screws"]:
+        x, y = at(r, az)
+        cut += cyl(P["screw_d"] / 2, -1, P["z_back"] + 1, 24).translate([x, y, 0])                       # M3 x 20 through nose ring + body into the tip bay
+        cut += cyl(P["cbore_d"] / 2, -1, P["cbore_h"], 24).translate([x, y, 0])                          # low head sits below the mouth face
+    return cut
+
+
+def arm_socket():
+    """Socket body: z_nose .. z_back, the collar rides on it (r 20.3) between the nose ring and the retaining flange."""
+    b = cyl(P["R_body"], P["z_nose"], P["z_back"]) + cyl(P["retain_r"], P["retain_z"][0], P["retain_z"][1])
+    cut = _socket_cuts()
+    x, y = at(P["det_r_in"], P["det_az"]); a = np.radians(P["det_az"])
+    bore = mf.Manifold.cylinder(P["R_body"] - P["det_r_in"] + 1, P["det_bore"] / 2, P["det_bore"] / 2, 20).rotate([0, 90, 0]).rotate([0, 0, P["det_az"]])
+    cut += bore.translate([x, y, P["det_z"]])                                                             # radial blind bore: spring + ball
+    return b - cut
+
+
+def nose_ring():
+    """Mouth ring (PA-CF), clamped between the 3 screw heads and the socket body.  Fitted after the collar: it is what
+    keeps the collar on, and the hand's flange seats on its face (z = 0)."""
+    return cyl(P["R_nose"], 0.0, P["z_nose"]) - _socket_cuts()
+
+
+def detent_ball(theta=0.0):
+    """Where the ball sits for a collar turn theta: pushed out as far as the collar bore lets it (seated in a dimple at 0 / -twist)."""
+    return mf.Manifold.sphere(P["ball_d"] / 2, 24).translate([*at(P["ball_rc"], P["det_az"]), P["det_z"]])
+
+
+def collar(theta=0.0):
+    """Collar at turn theta (0 = locked, -twist = open).  A C-section ring: inner STEP (z_nose .. +t_step) that bears on
+    the nose ring top, WALL (t_wall) down past the nose ring and the hand's lugs, and three LIP segments under the lugs.
+    A short sleeve above the step carries on the socket body and holds the detent dimples.  Turning to locked carries
+    each lip segment under a lug; its top face ramps up by `ramp` over the first ramp_deg."""
+    z0, z1 = P["collar_z"]; zl = P["lip_z"][1]; zs = P["z_nose"]; zt = zs + P["t_step"]; cb = P["collar_cb"]
+    body = cyl(P["R_collar"], z0, zt) + cyl(P["sleeve_r"], zt - 0.01, z1) - cyl(P["collar_bore"], zs - 0.01, z1 + 1) - cyl(cb, z0 - 1, zs)
+    for k in range(12):
+        x, y = at(P["R_collar"] + 1.4 - P["flute"], 30 * k); body -= cyl(1.4, z0 + 1, zt - 1, 16).translate([x, y, 0])
+    seg = 120 - P["gap_w"]; nst = 20
+    for k in range(3):
+        a0 = P["lug_az"][k] - seg / 2                                        # at theta 0 the segment is centred on lug k
+        for i in range(nst):
+            aa = a0 + i * seg / nst; bb = a0 + (i + 1) * seg / nst
+            frac = min((i + 0.5) * (seg / nst) / P["ramp_deg"], 1.0)
+            ztop = zl - P["ramp"] * (1 - frac)                                # leading edge (low angle side) lower
+            body += sector(P["lip_r0"], cb + 0.25, aa - 0.01, bb + 0.01, z0, ztop)
+    for a in (P["det_az"], P["det_az"] + P["twist"]):                         # detent dimples: locked, open
+        body -= mf.Manifold.sphere(P["ball_d"] / 2 + 0.05, 24).translate([*at(P["ball_rc"], a), P["det_z"]])
+    return body.rotate([0, 0, float(theta)])
+
+
+def female_bullets():
+    out = []
+    for az in P["az_bullet"]:
+        x, y = at(P["r_bullet"], az)
+        out.append((cyl(2.8, P["fem_recess"], P["fem_recess"] + P["fem_depth"], 32) - cyl(2.0, P["fem_recess"] - 1, P["fem_recess"] + 9.5, 32)).translate([x, y, 0]))
+    return out
+
+
+# ---------------------------------------------------------------- hand side (shared base)
+def hand_base():
+    fz0, fz1 = P["z_flange"]
+    m = cyl(P["R_flange"], fz0, fz1) + cyl(P["r_spigot"], fz1 - 0.5, P["z_spigot_top"])
+    for az in P["lug_az"]:
+        m += sector(P["lug_r"][0], P["lug_r"][1], az - P["lug_w"] / 2, az + P["lug_w"] / 2, P["lug_z"][0], P["lug_z"][1])
+    m += sector(P["r_spigot"] - 0.5, P["r_bore"] + P["key_h"], P["az_key"] - P["key_w"] / 2 / P["r_bore"] * 57.3, P["az_key"] + P["key_w"] / 2 / P["r_bore"] * 57.3, fz1 - 0.5, P["z_bore"] - 1.0)
+    cut = cyl(P["r_pad"] + 0.15, P["z_pad"] - P["pad_t"], P["z_spigot_top"] + 1) + cyl(3.5, fz0 - 1, P["z_pad"])        # pad board well + wire bore
+    cut += cyl(P["r_wire_cb"], fz0 - 1, fz0 + P["groove_h"])                                                    # wire turn pocket under the bore
+    for az in P["az_bullet"]:
+        x, y = at(P["r_bullet"], az); cut += cyl(2.05, fz0 - 1, fz1 + 0.01, 32).translate([x, y, 0])               # male bullet press bore
+        g = P["groove_w"] / 2                                                                                    # motor-lead groove: bullet tail -> centre pocket
+        cut += mf.Manifold.cube([P["r_bullet"] + 0.5, P["groove_w"], P["groove_h"] + 1]).translate([0, -g, fz0 - 1]).rotate([0, 0, float(az)])
+    for az in P["hand_screw_az"]:                                                                                # 4 x M3 inserts for the hand
+        x, y = at(P["hand_screw_r"], az); cut += cyl(2.0, fz0 - 0.01, fz0 + 6.0, 24).translate([x, y, 0])
+    return m - cut
+
+
+def male_bullets():
+    out = []
+    for az in P["az_bullet"]:
+        x, y = at(P["r_bullet"], az)
+        out.append(cyl(P["pin_d"] / 2, P["z_flange"][0] + 1.0, P["z_flange"][1] + P["fem_recess"] + P["pin_len"] - 0.5, 32).translate([x, y, 0]))
+    return out
+
+
+def place(m, dz=0.0):
+    return m.translate([0, 0, -float(dz)])
+
+
+# ---------------------------------------------------------------- checks
+def vol(a, b):
+    return float((a ^ b).volume())
+
+
+def screws():
+    """3 x M3 x 20 DIN 7984 (low head 5.5 x 2.0): head bottom on the counterbore floor, tip 6.2 into the tip bay's inserts."""
+    out = []
+    for r, az in P["screws"]:
+        x, y = at(r, az)
+        out.append((cyl(2.75, P["cbore_h"] - 2.0, P["cbore_h"], 24) + cyl(1.45, P["cbore_h"], P["cbore_h"] + 20.0, 16)).translate([x, y, 0]))
+    return out
+
+
+def stresses(M, Fr, sig_allow=30.0):
+    """Hand formulas (no FEA).  The hand's bending moment M is carried as a couple by the lugs (1.5 effective) + 30 N
+    preload.  One lug's force F then runs lug -> lip -> collar wall -> step -> nose ring -> screws.  The collar is a
+    C-clamp: lug and nose-ring reactions both act inside the wall, so the wall sees tension + bending F * e.
+    Load spreads in the wall over the lug arc + 0.78 sqrt(R t) each side (shell decay length), at most one 120 deg sector."""
+    w = np.radians(P["lug_w"]); rc = (P["lip_r0"] + P["lug_r1"]) / 2; cb = P["collar_cb"]
+    F = M / (rc * 1.5e-3) + 30.0
+    root = w * P["R_flange"]; arm = rc - P["R_flange"]
+    tau = F / (root * P["t_lug"]); s_lug = 6 * F * arm / (root * P["t_lug"] ** 2)
+    s_lip = 6 * F * (cb - rc) / (w * cb * P["t_lip"] ** 2)
+    t = P["t_wall"]; Rm = cb + t / 2; b = min(w * Rm + 1.56 * np.sqrt(Rm * t), 2 * np.pi * Rm / 3)
+    s_wall = F / (b * t) + 6 * F * (Rm - rc) / (b * t ** 2)
+    rn = (P["collar_bore"] + P["R_nose"]) / 2
+    s_step = 6 * F * (cb - rn) / (b * P["t_step"] ** 2)
+    bear_lug = F / (w * rc * (P["lug_r1"] - P["lip_r0"] - 0.3))               # 0.3 = radial float of the collar
+    bear_sp = Fr / (2 * P["r_spigot"] * (P["z_bore"] - P["z_nose"]) * 0.5)
+    step_face = F / (0.5 * np.pi * (P["R_nose"] ** 2 - P["collar_bore"] ** 2))
+    F_scr = 0.0
+    for phi in np.radians(np.arange(0, 360, 5)):
+        d = np.array([P["R_nose"] + r * np.cos(np.radians(az) - phi) for r, az in P["screws"]])
+        F_scr = max(F_scr, M * 1e3 * d.max() / (d ** 2).sum())
+    F_scr += 30.0 / len(P["screws"])
+    worst = max(tau, s_lug, s_lip, s_wall, s_step)
+    return dict(lug_force_N=round(F, 1), lug_shear_MPa=round(tau, 1), lug_bending_MPa=round(s_lug, 1), lip_bending_MPa=round(s_lip, 1),
+                collar_wall_MPa=round(s_wall, 1), collar_step_MPa=round(s_step, 1), lug_on_lip_bearing_MPa=round(bear_lug, 1),
+                spigot_bearing_MPa=round(bear_sp, 1), step_on_nose_ring_MPa=round(step_face, 2), screw_tension_N=round(F_scr, 1),
+                factor_vs_PA_CF_interlayer_30MPa=round(sig_allow / worst, 2), factor_screw_vs_M3_insert_pullout_1000N_est=round(1000 / F_scr, 1))
+
+
+def checks():
+    S, Nr, Hb = arm_socket(), nose_ring(), hand_base()
+    Fb = mf.Manifold.batch_boolean(female_bullets(), mf.OpType.Add); Mb = mf.Manifold.batch_boolean(male_bullets(), mf.OpType.Add)
+    Sc = mf.Manifold.batch_boolean(screws(), mf.OpType.Add); C0 = collar(0)
+    res = {}
+    # locked: collar at 0, hand home (dz 0)
+    res["locked: base x socket / nose ring / collar"] = [vol(Hb, S), vol(Hb, Nr), vol(Hb, C0)]
+    res["locked: males x socket / nose ring"] = [vol(Mb, S), vol(Mb, Nr)]
+    res["locked: males x female barrels (sliding fit, expected 0)"] = vol(Mb, Fb)
+    res["locked: collar x socket / nose ring"] = [vol(C0, S), vol(C0, Nr)]
+    res["nose ring x socket (faces touch, expected 0)"] = vol(Nr, S)
+    res["screws x socket / nose ring / collar / female barrels / hand base"] = [vol(Sc, S), vol(Sc, Nr), vol(Sc, C0), vol(Sc, Fb), vol(Sc, Hb)]
+    res["screw head below the mouth face (mm)"] = round(0.0 - (P["cbore_h"] - 2.0), 2)
+    # assembly: the collar slides on from the hand end BEFORE the nose ring is fitted, up to the retaining flange
+    worst = max(vol(C0.translate([0, 0, -float(d)]), S) for d in np.linspace(40, 0, 41))
+    res["assembly: collar slid on from the mouth end over the bare socket: worst overlap (expected 0)"] = worst
+    res["collar retained: pulled 0.2 mm toward the hand, overlap with the nose ring (expected > 0)"] = vol(C0.translate([0, 0, -0.2]), Nr)
+    res["collar retained: pushed 0.4 mm into the arm, overlap with the retaining flange (expected > 0)"] = vol(C0.translate([0, 0, 0.4]), S)
+    res["collar axial play (mm)"] = round(P["retain_z"][0] - P["collar_z"][1] + 0.0, 2)
+    res["axial play of a locked hand (mm): lug between nose ring and lip"] = P["ax_clr"]
+    res["collar step bearing on the nose ring: annulus (mm2)"] = round(np.pi * (P["R_nose"] ** 2 - P["collar_bore"] ** 2), 1)
+    # collar sweep with the hand home: open -> locked
+    worst, path, det = 0.0, [], []
+    ball = detent_ball()
+    for th in np.linspace(-P["twist"], 0, 25):
+        Ct = collar(th)
+        worst = max(worst, vol(Ct, S), vol(Ct, Nr))
+        dz = next((d for d in np.arange(0.0, 1.21, 0.05) if vol(Ct, place(Hb, d)) < 1e-6), None)
+        path.append((round(float(th), 1), None if dz is None else round(float(dz), 2)))
+        # ball: how far the collar pushes it in (0 = seated in a dimple)
+        push = next((d for d in np.arange(0.0, 1.21, 0.05) if vol(Ct, ball.translate([*at(-d, P["det_az"]), 0])) < 1e-4), None)
+        det.append((round(float(th), 1), None if push is None else round(float(push), 2)))
+    res["collar sweep open->locked: collar x socket/nose worst overlap"] = worst
+    res["collar sweep: hand stand-off needed (deg, mm); ramp draws it in to 0"] = path
+    res["detent: ball pushed in by the collar (deg, mm); 0 = seated in a dimple"] = det
+    spring_room = P["ball_rc"] - P["ball_d"] / 2 - P["det_r_in"]
+    res["detent: spring pocket length seated / pressed (mm)"] = [round(spring_room, 2), round(spring_room - max(v for _, v in det if v is not None), 2)]
+    # straight insertion with the collar open: hand from 25 mm out to home
+    worst = 0.0
+    for dz in np.linspace(25, 0, 26):
+        h = place(Hb, dz); worst = max(worst, vol(h, S), vol(h, Nr), vol(h, collar(-P["twist"])))
+    res["push-in path (collar open): worst overlap"] = worst
+    # wrong clocking: rotate the hand by 120 deg -> the key must hit the socket stack
+    hw = place(Hb.rotate([0, 0, 120]), -2.0 + 9.4)
+    res["wrong clocking blocked by the key (overlap at 2 mm in, expected > 0)"] = vol(hw, S) + vol(hw, Nr)
+    # with the collar locked, the hand cannot come out: pull it 1 mm
+    res["locked hand pulled 1 mm: lug x collar overlap (expected > 0)"] = vol(place(Hb, 1.0 + P["ramp"]), C0)
+    # engagement depth of each bullet
+    res["bullet engagement depth (mm)"] = round(P["z_flange"][1] + P["fem_recess"] + P["pin_len"] - 0.5 - P["fem_recess"], 2)
+    # stresses at the wheel-hand design cases
+    cases = json.load(open("wheelhand_sizing.json"))["connector"] if os.path.exists("wheelhand_sizing.json") else {}
+    for case, v in cases.items():
+        res[f"stress, {case}"] = stresses(v["bending_Nm"], v["radial_N"])
+    for k, v in res.items(): print(f"  {k:72s} {v}")
+    json.dump(res, open("handmount_b_check.json", "w"), indent=1, default=float)
+    return res
+
+
+def to_trimesh(m):
+    import trimesh
+    me = m.to_mesh(); return trimesh.Trimesh(np.asarray(me.vert_properties)[:, :3], np.asarray(me.tri_verts), process=False)
+
+
+def export(d="handmount_b_stl"):
+    os.makedirs(d, exist_ok=True)
+    for n, m in (("arm_socket_PA-CF", arm_socket()), ("nose_ring_PA-CF", nose_ring()), ("collar_PA-CF", collar(0)), ("hand_base_PA-CF", hand_base())):
+        t = to_trimesh(m); t.export(f"{d}/{n}.stl")
+        print(f"  {n:18s} watertight {t.is_watertight} bodies {len(m.decompose())} vol {m.volume()/1000:.2f} cm3 mass {m.volume()/1000*1.15:.1f} g bbox {np.round(t.extents, 1)}")
+
+
+if __name__ == "__main__":
+    checks(); export()

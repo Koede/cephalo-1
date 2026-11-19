@@ -1,0 +1,140 @@
+--- body4.py	2026-11-11 09:50:20.229888757 -0800
++++ body4h.py	2026-11-14 19:14:09.709144192 -0800
+@@ -62,6 +62,10 @@
+ Q_LIE = np.radians([15.5, 0, 0, 0, 0, 0, -15.5, 0])           # rest4 lying pose (arm straight, sloping to the floor)
+ Q_MID = np.radians([-45, 0, 0, 0, 40, 0, 10, 0])              # rest4 mid pose (foot lifted and swung out)
+ LEAD = C.foot_drop()
++BO = [C.BLADE_OFF] * 8                           # per-arm blade-plane offset from the spigot (hand arms differ)
++HAND = {}                                        # arm -> dict(T=ceiling at V_REF_H, K=W/N^1.5); filled by hand3_fly.py
++V_REF_H = 22.2
++QT = [None] * 8                                  # per-arm rotor torque / thrust (m); None = the XL pod value
+ DOWN = np.array([0, 0, -1.0])
+ assert C.RG < 1e-9
+ 
+@@ -747,7 +751,7 @@
+             for k in range(C.NJ):
+                 d.qpos[self.ja[i, k]] = q0[k] / 2; d.qpos[self.jb[i, k]] = q0[k] / 2
+         d.qpos[2] = z0; d.qpos[self.imp_q:self.imp_q + 3] = [0, 0, -5]
+-        d.ctrl[:] = np.tile(q0, 8)
++        d.ctrl[:8 * C.NJ] = np.tile(q0, 8)
+         mujoco.mj_forward(m, d)
+         # motor layer
+         self.q_cmd = np.tile(q0, (8, 1)); self.qd_cmd = np.zeros((8, 8)); self.goal = self.q_cmd.copy(); self.goal_prev = self.goal.copy()
+@@ -774,22 +778,25 @@
+         # power
+         self.bat = PW.Battery(PACKS, SOC0) if POWER else None
+         self.fmax_eff = F_MAX; self.edf_cap = C.EDF_MAX; self.refused = False
++        self.fmax_arm = np.full(8, F_MAX); self.k_ratio = np.array([(HAND[i]["K"] / PROP_P["K"]) ** (2 / 3) if i in HAND else 1.0 for i in range(8)])
+         # intent queue
+         self.program = [SKILLS[c[0]](*c[1:]) for c in program]
+         self.cur = None; self.log_skills = []
+ 
+     # ---------------------------------------------------------------- power self-model
+     def load_fraction(self, n_fans):
+-        """Fraction of the thrust ceilings needed to hover on n claw-props + EDF, at the voltage the battery would sag
+-        to while doing it (the robot knows its pack voltage and resistance)."""
+-        if self.bat is None:
+-            return (C.W_ROBOT - C.EDF_MAX) / (n_fans * F_MAX)
++        """Fraction of the summed thrust ceilings needed to hover on n claw-props (6: arms 1,2,3,5,6,7) + EDF, at the
++        voltage the battery would sag to (per-arm ceilings: hand arms differ from the XL pods)."""
++        arms = list(range(8)) if n_fans == 8 else [1, 2, 3, 5, 6, 7]
++        kr = np.array([self.k_ratio[i] for i in arms])
+         b = PW.Battery(self.bat.n, self.bat.soc)
+         f = (C.W_ROBOT - C.EDF_MAX) / n_fans; e = C.EDF_MAX
+-        for _ in range(20):                                 # fixed point: thrust -> power -> voltage -> ceilings
+-            b.step(e, np.full(n_fans, f), np.full((8, 8), 0.25), 0.0)
+-            e = min(C.EDF_MAX, b.edf_max()); f = (C.W_ROBOT - e) / n_fans
+-        return f / (F_MAX * b.claw_scale())
++        for _ in range(20):
++            b.step(e, np.full(n_fans, f) * kr, np.full((8, 8), 0.25), 0.0, k_claw=PROP_P["K"])
++            e = min(C.EDF_MAX, b.edf_max())
++            cap = sum(HAND[i]["T"] * min(1.0, (b.V / V_REF_H) ** 1.5) if i in HAND else PW.claw_max(PROP, b.V) for i in arms)
++            f = (C.W_ROBOT - e) / n_fans
++        return (C.W_ROBOT - e) / cap
+ 
+     # ---------------------------------------------------------------- senses
+     def sense(self):
+@@ -806,7 +813,7 @@
+                 if g in self.toe: f[self.toe[g]] += abs(out[0])
+                 else: belly += abs(out[0])
+         self.foot_f = f; self.belly_f = belly
+-        self.load = np.abs(d.actuator_force.reshape(8, C.NJ)) / C.STALL
++        self.load = np.abs(d.actuator_force[:8 * C.NJ].reshape(8, C.NJ)) / C.STALL
+         self.q_meas = 2 * d.qpos[self.ja]
+ 
+     def foot_range(self, i):
+@@ -876,7 +883,7 @@
+ 
+     def axis_jac(self, i, q):
+         cs, ax, R, p = fk(i, q, np.zeros(3), np.eye(3))
+-        a0 = R[:, 0]; h0 = p + a0 * C.BLADE_OFF
++        a0 = R[:, 0]; h0 = p + a0 * BO[i]
+         J = np.cross(ax, a0).T; Jp = np.cross(ax, h0 - cs).T
+         J[:, :2] = 0; Jp[:, :2] = 0
+         return a0, J, Jp
+@@ -901,11 +908,12 @@
+         yaw = float(np.arctan2(Rb[1, 0], Rb[0, 0]))
+         Mz = float(np.clip(g_["kp_psi"] * wrap(yr - yaw) + g_["kd_psi"] * (vyr - wW[2]), -MZ_MAX, MZ_MAX))
+         self.Mz_dem = Mz
+-        hub = np.array([d.xpos[self.pod[i]] + d.xmat[self.pod[i]].reshape(3, 3)[:, 0] * C.BLADE_OFF for i in range(8)])
++        hub = np.array([d.xpos[self.pod[i]] + d.xmat[self.pod[i]].reshape(3, 3)[:, 0] * BO[i] for i in range(8)])
+         r = hub[:, :2] - com[:2]; rn = np.linalg.norm(r, axis=1); rh = r / rn[:, None]
+         tan = np.stack([-rh[:, 1], rh[:, 0]], 1)
+         f = np.maximum(self.fan, 2.0)
+         g = (self.gate > 0.5) & np.array([o is None for o in self.override])
++        if os.environ.get("H3_HANDLEAN", "0") == "0": g = g & np.array([i not in HAND for i in range(8)])      # hand arms stay upright (heavy pods): the other six lean
+         Fn = np.linalg.norm(Fh)
+         u = Fh / Fn if Fn > 1e-6 else np.zeros(2)
+         w = (np.clip(-(rh @ u), 0, 1) ** 1.5 + 0.05) * g
+@@ -1077,10 +1085,10 @@
+                 Mx -= self.iatt[0]; My -= self.iatt[1]
+             M_edf = np.cross(pb - com, edf * ez)
+             nr = 4 if PROP_TORQUE else 3
+-            A = np.zeros((nr, len(on))); fmax = self.fmax_eff * wgt[on]
++            A = np.zeros((nr, len(on))); fmax = self.fmax_arm[on] * wgt[on]
+             for j, i in enumerate(on):
+-                ax = d.xmat[self.pod[i]].reshape(3, 3)[:, 0]; r = d.xpos[self.pod[i]] + ax * C.BLADE_OFF - com
+-                mo = np.cross(r, ax) - (PROP_P["q_per_T"] * SPIN[i] * ax if PROP_TORQUE else 0)
++                ax = d.xmat[self.pod[i]].reshape(3, 3)[:, 0]; r = d.xpos[self.pod[i]] + ax * BO[i] - com
++                mo = np.cross(r, ax) - ((QT[i] or PROP_P["q_per_T"]) * SPIN[i] * ax if PROP_TORQUE else 0)
+                 A[:, j] = [ax[2], mo[0], mo[1], mo[2]][:nr]
+             b = [F_need, Mx - M_edf[0], My - M_edf[1]]
+             if PROP_TORQUE: b.append(getattr(self, "Mz_dem", 0.0) * self.g["mz_alloc"])
+@@ -1088,14 +1096,14 @@
+             for j, i in enumerate(on):
+                 cmd[i] = F[j]
+         self.fan += (cmd - self.fan) * min(1.0, DT / 0.04)
+-        self.sat = int(np.sum((cmd >= self.fmax_eff - 1e-6) & (wgt > 0.99)))
++        self.sat = int(np.sum((cmd >= self.fmax_arm - 1e-6) & (wgt > 0.99)))
+         for i in range(8):
+             if self.fan[i] > 1e-3:
+                 R = d.xmat[self.pod[i]].reshape(3, 3); f = self.fan[i] * R[:, 0]
+                 d.xfrc_applied[self.pod[i], :3] = f
+-                d.xfrc_applied[self.pod[i], 3:] = np.cross(R[:, 0] * C.BLADE_OFF + d.xpos[self.pod[i]] - d.xipos[self.pod[i]], f)
++                d.xfrc_applied[self.pod[i], 3:] = np.cross(R[:, 0] * BO[i] + d.xpos[self.pod[i]] - d.xipos[self.pod[i]], f)
+                 if PROP_TORQUE:                      # rotor reaction torque on the pod, opposite to the spin
+-                    d.xfrc_applied[self.pod[i], 3:] -= PROP_P["q_per_T"] * SPIN[i] * self.fan[i] * R[:, 0]
++                    d.xfrc_applied[self.pod[i], 3:] -= (QT[i] or PROP_P["q_per_T"]) * SPIN[i] * self.fan[i] * R[:, 0]
+         d.xfrc_applied[self.torso, :3] += edf * ez
+         d.xfrc_applied[self.torso, 3:] += np.cross(pb - d.xipos[self.torso], edf * ez)
+         v = d.qvel[0:3]
+@@ -1124,8 +1132,9 @@
+             if t - t_ctrl >= CTRL_DT - 1e-9:
+                 self.sense()
+                 if self.bat is not None:
+-                    self.bat.step(self.edf, self.fan, self.load, CTRL_DT, k_claw=PROP_P["K"])
++                    self.bat.step(self.edf, self.fan * self.k_ratio, self.load, CTRL_DT, k_claw=PROP_P["K"])
+                     self.fmax_eff = F_MAX * self.bat.claw_scale() if PROP == "std" else PW.claw_max(PROP, self.bat.V)
++                    self.fmax_arm = np.array([HAND[i]["T"] * min(1.0, (self.bat.V / V_REF_H) ** 1.5) if i in HAND else self.fmax_eff for i in range(8)])
+                     self.edf_cap = min(C.EDF_MAX, self.bat.edf_max())
+                 self.reflexes(CTRL_DT)
+                 if self.cur is None or self.cur.done:
+@@ -1138,7 +1147,7 @@
+                 self.spine(CTRL_DT)
+                 dq_jump = max(dq_jump, float(np.abs(self.qd_cmd - prev_qd).max()) / CTRL_DT)
+                 prev_qd = self.qd_cmd.copy()
+-                d.ctrl[:] = self.q_cmd.ravel()
++                d.ctrl[:8 * C.NJ] = self.q_cmd.ravel()
+                 self.T_line += (self.winch_target - self.T_line) * min(1, CTRL_DT / 0.15)
+                 t_ctrl = t
+                 lab = self.cur.label(self)

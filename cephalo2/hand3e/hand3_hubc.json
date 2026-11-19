@@ -1,0 +1,5 @@
+{"servo": {"name": "Feetech STS3215", "stall": 2.94, "rated": 0.981, "m": 55.0}, "spool_r": 4.0, "levers": [6.0, 4.0, 3.0], "e_lag": 2.8,
+ "lag_spring_Nm": 0.0054, "ext_k1_Nm": 0.02, "ext_k2_Nm": 0.004, "ext_k3_Nm": 0.016, "stretch": 2.0, "stack_dz": 4.0, "travel_b": 13.72, "travel_c": 12.73,
+ "base": {"F_stall_finger": 103.7, "F_rated_finger": 34.6, "tpu_k": 27.5}, "curl": {"F_stall_finger": 105.3, "F_rated_finger": 35.1, "tpu_k": 24.9},
+ "mass": {"total": 396.4}, "com_from_spigot": 58.6, "z": {"blade": 96.0, "hub_lo": 91.0}, "envelope": {"r_max": 40.8, "d_max": 81.6},
+ "note": "workspace extract of claude/code/hand3e/hand3_hubc.json (the fields the sims and renderer use); hand3-final.md gives 396.4 g, COM 58.6 mm"}

@@ -1,0 +1,338 @@
+{
+ "root_grip": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1163.7,
+  "material": "alu",
+  "mass_g": 3.14,
+  "size": [
+   25.8,
+   18.4,
+   12.2
+  ]
+ },
+ "lag_tube": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 136.6,
+  "material": "steel",
+  "mass_g": 1.07,
+  "size": [
+   5.0,
+   5.0,
+   12.5
+  ]
+ },
+ "hub_lower": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 6049.1,
+  "material": "alu",
+  "mass_g": 16.33,
+  "size": [
+   51.0,
+   51.0,
+   9.5
+  ]
+ },
+ "hub_upper": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 4840.6,
+  "material": "alu",
+  "mass_g": 13.07,
+  "size": [
+   51.0,
+   51.0,
+   2.5
+  ]
+ },
+ "cage": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 10759.9,
+  "material": "pacf",
+  "mass_g": 13.45,
+  "size": [
+   46.0,
+   46.0,
+   30.0
+  ]
+ },
+ "follower": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 210.0,
+  "material": "pacf",
+  "mass_g": 0.26,
+  "size": [
+   10.3,
+   4.6,
+   8.0
+  ]
+ },
+ "heel": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 2369.6,
+  "material": "tpu",
+  "mass_g": 2.84,
+  "size": [
+   16.0,
+   16.0,
+   13.2
+  ]
+ },
+ "pack_frame": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 45886.3,
+  "material": "pacf",
+  "mass_g": 57.36,
+  "size": [
+   110.2,
+   104.8,
+   70.0
+  ]
+ },
+ "phalanx1": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1871.0,
+  "material": "pacf",
+  "mass_g": 2.34,
+  "size": [
+   37.8,
+   21.4,
+   12.7
+  ]
+ },
+ "pad1": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 154.9,
+  "material": "tpu",
+  "mass_g": 0.19,
+  "size": [
+   13.0,
+   12.7,
+   2.2
+  ]
+ },
+ "phalanx2": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1597.2,
+  "material": "pacf",
+  "mass_g": 2.0,
+  "size": [
+   38.2,
+   20.2,
+   10.4
+  ]
+ },
+ "pad2": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 170.5,
+  "material": "tpu",
+  "mass_g": 0.2,
+  "size": [
+   15.0,
+   12.0,
+   2.1
+  ]
+ },
+ "phalanx3": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1138.9,
+  "material": "pacf",
+  "mass_g": 1.42,
+  "size": [
+   31.8,
+   19.1,
+   8.7
+  ]
+ },
+ "pad3": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 204.5,
+  "material": "tpu",
+  "mass_g": 0.25,
+  "size": [
+   18.5,
+   11.3,
+   2.1
+  ]
+ },
+ "claw_F1_tip": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1645.3,
+  "material": "pacf",
+  "mass_g": 2.06,
+  "size": [
+   29.1,
+   10.9,
+   25.9
+  ]
+ },
+ "claw_F1_base": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1589.3,
+  "material": "pacf",
+  "mass_g": 1.99,
+  "size": [
+   22.6,
+   22.6,
+   25.9
+  ]
+ },
+ "claw_F1_middle": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1645.3,
+  "material": "pacf",
+  "mass_g": 2.06,
+  "size": [
+   10.9,
+   29.1,
+   25.9
+  ]
+ },
+ "claw_F2_tip": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1645.3,
+  "material": "pacf",
+  "mass_g": 2.06,
+  "size": [
+   10.9,
+   29.1,
+   25.9
+  ]
+ },
+ "claw_F2_base": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1589.3,
+  "material": "pacf",
+  "mass_g": 1.99,
+  "size": [
+   22.6,
+   22.6,
+   25.9
+  ]
+ },
+ "claw_F2_middle": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1645.3,
+  "material": "pacf",
+  "mass_g": 2.06,
+  "size": [
+   29.1,
+   10.9,
+   25.9
+  ]
+ },
+ "claw_F3_tip": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1645.3,
+  "material": "pacf",
+  "mass_g": 2.06,
+  "size": [
+   29.1,
+   10.9,
+   25.9
+  ]
+ },
+ "claw_F3_base": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1589.3,
+  "material": "pacf",
+  "mass_g": 1.99,
+  "size": [
+   22.6,
+   22.6,
+   25.9
+  ]
+ },
+ "claw_F3_middle": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1645.3,
+  "material": "pacf",
+  "mass_g": 2.06,
+  "size": [
+   10.9,
+   29.1,
+   25.9
+  ]
+ },
+ "claw_F4_tip": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1645.3,
+  "material": "pacf",
+  "mass_g": 2.06,
+  "size": [
+   10.9,
+   29.1,
+   25.9
+  ]
+ },
+ "claw_F4_base": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1589.3,
+  "material": "pacf",
+  "mass_g": 1.99,
+  "size": [
+   22.6,
+   22.6,
+   25.9
+  ]
+ },
+ "claw_F4_middle": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1645.3,
+  "material": "pacf",
+  "mass_g": 2.06,
+  "size": [
+   29.1,
+   10.9,
+   25.9
+  ]
+ },
+ "claw_spread_A": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1589.3,
+  "material": "pacf",
+  "mass_g": 1.99,
+  "size": [
+   26.6,
+   6.0,
+   25.9
+  ]
+ },
+ "claw_spread_B": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1589.3,
+  "material": "pacf",
+  "mass_g": 1.99,
+  "size": [
+   26.6,
+   6.0,
+   25.9
+  ]
+ }
+}

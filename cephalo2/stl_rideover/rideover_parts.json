@@ -1,0 +1,102 @@
+{
+ "cam_rideover_STS3215": {
+  "qty_per_arm": 6,
+  "material": "PETG",
+  "use": "j2-j7 (replaces clutch_cam_STS3215)",
+  "watertight": true,
+  "extents_mm": [
+   33.4,
+   33.4,
+   6.0
+  ],
+  "mass_g": 4.32
+ },
+ "cam_rideover_STS3250": {
+  "qty_per_arm": 2,
+  "material": "PETG",
+  "use": "j0 + j1 (replaces clutch_cam_STS3250_root; j1 new)",
+  "watertight": false,
+  "extents_mm": [
+   45.4,
+   51.4,
+   7.0
+  ],
+  "mass_g": 7.73
+ },
+ "rocker_j1_STS3250": {
+  "qty_per_arm": 1,
+  "material": "PETG",
+  "use": "j1 (new clutch)",
+  "watertight": true,
+  "extents_mm": [
+   61.5,
+   23.0,
+   9.0
+  ],
+  "mass_g": 5.95
+ },
+ "hall_clip": {
+  "qty_per_arm": 8,
+  "material": "PETG",
+  "use": "every clutched joint",
+  "watertight": true,
+  "extents_mm": [
+   12.0,
+   9.0,
+   6.0
+  ],
+  "mass_g": 0.49
+ },
+ "stop_pad_link": {
+  "qty_per_arm": 14,
+  "material": "TPU 95A",
+  "use": "j1-j7, both directions",
+  "watertight": true,
+  "extents_mm": [
+   18.0,
+   12.0,
+   5.0
+  ],
+  "mass_g": 1.23
+ },
+ "stop_pad_root": {
+  "qty_per_arm": 2,
+  "material": "TPU 95A",
+  "use": "j0 up/down stop against the mantle",
+  "watertight": true,
+  "extents_mm": [
+   28.0,
+   18.0,
+   8.0
+  ],
+  "mass_g": 4.77
+ },
+ "_cam_data": {
+  "STS3215 j2-j7": {
+   "notches": 4,
+   "pitch_deg": 90,
+   "travel_deg": 40,
+   "crest_deg": 45,
+   "R0_mm": 14,
+   "rise_mm_per_rad": 10,
+   "crest_rise_mm": 7.42
+  },
+  "STS3250 j0/j1": {
+   "notches": 6,
+   "pitch_deg": 60,
+   "travel_deg": 25,
+   "crest_deg": 30,
+   "R0_mm": 18,
+   "rise_mm_per_rad": 16,
+   "crest_rise_mm": 7.68
+  },
+  "j1 rocker (0.9 x 4.9 N m at 60 N)": {
+   "M": 4.41,
+   "k_cam_mm": 16.0,
+   "P": 275.62,
+   "ratio": 3.25,
+   "l_roller": 10.0,
+   "l_idler": 32.48
+  }
+ }
+}

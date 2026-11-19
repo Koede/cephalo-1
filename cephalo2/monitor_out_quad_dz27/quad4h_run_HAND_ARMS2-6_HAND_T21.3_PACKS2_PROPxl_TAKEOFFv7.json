@@ -1,0 +1,478 @@
+{
+ "runs": [
+  {
+   "script": "quad4r.py",
+   "argv": [
+    "run",
+    "quad4_g.json"
+   ],
+   "prop": "xl",
+   "belly": "edf",
+   "packs": 2,
+   "soc0": 1.0,
+   "hands": [],
+   "hand_arms": [
+    2,
+    6
+   ],
+   "sim_s": 12.998000000009736,
+   "min_V": 22.81328709184948,
+   "max_pack_A": 215.1825916437991,
+   "soc_end": 0.927055287617758,
+   "channels": {
+    "pack_A": {
+     "peak": 107.59129582189955,
+     "ratio": 0.6148074046965688,
+     "t": 0.013999999999999992,
+     "where": "",
+     "over_s": 0.0,
+     "unit": "A",
+     "label": "pack current per pack (35 C sustained, est.)"
+    },
+    "pack_conn_A": {
+     "peak": 107.59129582189955,
+     "ratio": 0.7172753054793304,
+     "t": 0.013999999999999992,
+     "where": "",
+     "over_s": 0.0,
+     "unit": "A",
+     "label": "pack connector XT150 (per pack)"
+    },
+    "cell_low": {
+     "peak": 0.867915260097435,
+     "ratio": 0.867915260097435,
+     "t": 11.81200000000723,
+     "where": "",
+     "over_s": 0.0,
+     "unit": "",
+     "label": "cell voltage under load (3.3 V/cell -> 1.0)"
+    },
+    "belly_A": {
+     "peak": 110.69505707579238,
+     "ratio": 0.8515004390445567,
+     "t": 0.9119999999999648,
+     "where": "",
+     "over_s": 0.0,
+     "unit": "A",
+     "label": "EDF controller"
+    },
+    "belly_lead_A": {
+     "peak": 110.69505707579238,
+     "ratio": 0.7379670471719492,
+     "t": 0.9119999999999648,
+     "where": "",
+     "over_s": 0.0,
+     "unit": "A",
+     "label": "belly lead XT150"
+    },
+    "belly_ceil": {
+     "peak": 1.0002292105820818,
+     "ratio": 1.0002292105820818,
+     "t": 4.871999999999529,
+     "where": "",
+     "over_s": 0.0,
+     "unit": "",
+     "label": "EDF thrust / its ceiling at the loaded pack voltage"
+    },
+    "esc_A": {
+     "peak": 31.694826956332786,
+     "ratio": 0.7043294879185064,
+     "t": 11.852000000007314,
+     "where": "arm3",
+     "over_s": 0.0,
+     "unit": "A",
+     "label": "claw-prop ESC (hand arms scaled to their 60 A controller)"
+    },
+    "prop_ceil": {
+     "peak": 0.971185390032859,
+     "ratio": 0.971185390032859,
+     "t": 11.85000000000731,
+     "where": "arm3",
+     "over_s": 0.0,
+     "unit": "",
+     "label": "claw-prop / hand-prop thrust / its ceiling at the loaded pack voltage"
+    },
+    "pigtail": {
+     "peak": 0.8273582414463605,
+     "ratio": 0.8273582414463605,
+     "t": 0.17600000000000093,
+     "where": "arm2 j5",
+     "over_s": 0.0,
+     "unit": "",
+     "label": "servo lead current / rating (3 A Molex 5264 pigtail; STS3250 on its own 5 A lead)"
+    },
+    "tap_A": {
+     "peak": 2.903437576972919,
+     "ratio": 0.2903437576972919,
+     "t": 0.036000000000000004,
+     "where": "arm2 j0+j1",
+     "over_s": 0.0,
+     "unit": "A",
+     "label": "2-servo power tap (JST VH)"
+    },
+    "trunk_A": {
+     "peak": 7.497149536054454,
+     "ratio": 0.37485747680272274,
+     "t": 0.1259999999999995,
+     "where": "arm2",
+     "over_s": 0.0,
+     "unit": "A",
+     "label": "arm power trunk 18 AWG, short peaks (est.)"
+    },
+    "bus_A": {
+     "peak": 9.899980335287845,
+     "ratio": 0.6599986890191897,
+     "t": 0.1259999999999995,
+     "where": "bus 1 (arms 2+3)",
+     "over_s": 0.0,
+     "unit": "A",
+     "label": "12 V buck, peak (one per arm pair, est.)"
+    },
+    "bus_V": {
+     "peak": 0.0,
+     "ratio": 0.0,
+     "t": 0.002,
+     "where": "",
+     "over_s": 0.0,
+     "unit": "V",
+     "label": "12 V bus overvoltage above 12 V (regeneration; limit 12.6 V)"
+    },
+    "rail74_A": {
+     "peak": 1.28,
+     "ratio": 0.256,
+     "t": 0.002,
+     "where": "",
+     "over_s": 0.0,
+     "unit": "A",
+     "label": "7.4 V rail buck (est.)"
+    },
+    "hand_sw_A": {
+     "peak": 0.0,
+     "ratio": 0.0,
+     "t": 0.002,
+     "where": "",
+     "over_s": 0.0,
+     "unit": "A",
+     "label": "hand 12 V switch, continuous (Pololu #2811; 7.2 A max)"
+    },
+    "pogo_A": {
+     "peak": 0.0,
+     "ratio": 0.0,
+     "t": 0.002,
+     "where": "",
+     "over_s": 0.0,
+     "unit": "A",
+     "label": "hand connector spring pin (derated)"
+    },
+    "servo": {
+     "peak": 1.0,
+     "ratio": 1.0,
+     "t": 0.013999999999999992,
+     "where": "arm2 j1",
+     "over_s": 0.0,
+     "unit": "",
+     "label": "servo torque / stall"
+    },
+    "gear": {
+     "peak": 0.4690126701774939,
+     "ratio": 0.4690126701774939,
+     "t": 0.03999999999999998,
+     "where": "arm2 j1",
+     "over_s": 0.0,
+     "unit": "",
+     "label": "gear-train load / strip limit (3 x stall, est.)"
+    },
+    "slip": {
+     "peak": 0.00938438588297324,
+     "ratio": 0.00938438588297324,
+     "t": 11.866000000007343,
+     "where": "arm3 j0",
+     "over_s": 0.0,
+     "unit": "",
+     "label": "clutch slip / travel (1 = hard stop)"
+    },
+    "joint_F": {
+     "peak": 25.46346592177538,
+     "ratio": 0.030313649906875455,
+     "t": 11.856000000007322,
+     "where": "arm3 j7",
+     "over_s": 0.0,
+     "unit": "N",
+     "label": "joint radial force (6800 C0; 623 C0 is 220 N)"
+    },
+    "link_MPa": {
+     "peak": 1.6647759217538391,
+     "ratio": 0.08323879608769195,
+     "t": 0.006000000000000002,
+     "where": "arm2 j0",
+     "over_s": 0.0,
+     "unit": "MPa",
+     "label": "link cradle bending stress (printed PETG, est.)"
+    },
+    "tip_Nm": {
+     "peak": 3.53571352438875,
+     "ratio": 0.70714270487775,
+     "t": 0.004000000000000001,
+     "where": "arm2",
+     "over_s": 0.0,
+     "unit": "N m",
+     "label": "spigot-pod coupler bending (5 N m design target for the undrawn tip bay, est.)"
+    },
+    "bus_1s_A": {
+     "peak": 4.285954765516651,
+     "ratio": 0.42859547655166513,
+     "t": 12.250000000008153,
+     "where": "",
+     "over_s": 0.0,
+     "unit": "A",
+     "label": "12 V buck, 1 s average (est.)"
+    },
+    "trunk_1s_A": {
+     "peak": 2.486968060457849,
+     "ratio": 0.2486968060457849,
+     "t": 0.5600000000000036,
+     "where": "",
+     "over_s": 0.0,
+     "unit": "A",
+     "label": "arm power trunk 18 AWG, 1 s average (est.)"
+    },
+    "thermal": {
+     "peak": 1.6993460742927038,
+     "ratio": 1.6993460742927038,
+     "t": 13.000000000009736,
+     "where": "arm3 j0",
+     "over_s": 9.040000000000001,
+     "unit": "",
+     "label": "servo rms torque over 10 s / rated (heating)"
+    }
+   }
+  }
+ ],
+ "worst": {
+  "pack_A": {
+   "peak": 107.59129582189955,
+   "ratio": 0.6148074046965688,
+   "t": 0.013999999999999992,
+   "where": "",
+   "over_s": 0.0,
+   "unit": "A",
+   "label": "pack current per pack (35 C sustained, est.)"
+  },
+  "pack_conn_A": {
+   "peak": 107.59129582189955,
+   "ratio": 0.7172753054793304,
+   "t": 0.013999999999999992,
+   "where": "",
+   "over_s": 0.0,
+   "unit": "A",
+   "label": "pack connector XT150 (per pack)"
+  },
+  "cell_low": {
+   "peak": 0.867915260097435,
+   "ratio": 0.867915260097435,
+   "t": 11.81200000000723,
+   "where": "",
+   "over_s": 0.0,
+   "unit": "",
+   "label": "cell voltage under load (3.3 V/cell -> 1.0)"
+  },
+  "belly_A": {
+   "peak": 110.69505707579238,
+   "ratio": 0.8515004390445567,
+   "t": 0.9119999999999648,
+   "where": "",
+   "over_s": 0.0,
+   "unit": "A",
+   "label": "EDF controller"
+  },
+  "belly_lead_A": {
+   "peak": 110.69505707579238,
+   "ratio": 0.7379670471719492,
+   "t": 0.9119999999999648,
+   "where": "",
+   "over_s": 0.0,
+   "unit": "A",
+   "label": "belly lead XT150"
+  },
+  "belly_ceil": {
+   "peak": 1.0002292105820818,
+   "ratio": 1.0002292105820818,
+   "t": 4.871999999999529,
+   "where": "",
+   "over_s": 0.0,
+   "unit": "",
+   "label": "EDF thrust / its ceiling at the loaded pack voltage"
+  },
+  "esc_A": {
+   "peak": 31.694826956332786,
+   "ratio": 0.7043294879185064,
+   "t": 11.852000000007314,
+   "where": "arm3",
+   "over_s": 0.0,
+   "unit": "A",
+   "label": "claw-prop ESC (hand arms scaled to their 60 A controller)"
+  },
+  "prop_ceil": {
+   "peak": 0.971185390032859,
+   "ratio": 0.971185390032859,
+   "t": 11.85000000000731,
+   "where": "arm3",
+   "over_s": 0.0,
+   "unit": "",
+   "label": "claw-prop / hand-prop thrust / its ceiling at the loaded pack voltage"
+  },
+  "pigtail": {
+   "peak": 0.8273582414463605,
+   "ratio": 0.8273582414463605,
+   "t": 0.17600000000000093,
+   "where": "arm2 j5",
+   "over_s": 0.0,
+   "unit": "",
+   "label": "servo lead current / rating (3 A Molex 5264 pigtail; STS3250 on its own 5 A lead)"
+  },
+  "tap_A": {
+   "peak": 2.903437576972919,
+   "ratio": 0.2903437576972919,
+   "t": 0.036000000000000004,
+   "where": "arm2 j0+j1",
+   "over_s": 0.0,
+   "unit": "A",
+   "label": "2-servo power tap (JST VH)"
+  },
+  "trunk_A": {
+   "peak": 7.497149536054454,
+   "ratio": 0.37485747680272274,
+   "t": 0.1259999999999995,
+   "where": "arm2",
+   "over_s": 0.0,
+   "unit": "A",
+   "label": "arm power trunk 18 AWG, short peaks (est.)"
+  },
+  "bus_A": {
+   "peak": 9.899980335287845,
+   "ratio": 0.6599986890191897,
+   "t": 0.1259999999999995,
+   "where": "bus 1 (arms 2+3)",
+   "over_s": 0.0,
+   "unit": "A",
+   "label": "12 V buck, peak (one per arm pair, est.)"
+  },
+  "bus_V": {
+   "peak": 0.0,
+   "ratio": 0.0,
+   "t": 0.002,
+   "where": "",
+   "over_s": 0.0,
+   "unit": "V",
+   "label": "12 V bus overvoltage above 12 V (regeneration; limit 12.6 V)"
+  },
+  "rail74_A": {
+   "peak": 1.28,
+   "ratio": 0.256,
+   "t": 0.002,
+   "where": "",
+   "over_s": 0.0,
+   "unit": "A",
+   "label": "7.4 V rail buck (est.)"
+  },
+  "hand_sw_A": {
+   "peak": 0.0,
+   "ratio": 0.0,
+   "t": 0.002,
+   "where": "",
+   "over_s": 0.0,
+   "unit": "A",
+   "label": "hand 12 V switch, continuous (Pololu #2811; 7.2 A max)"
+  },
+  "pogo_A": {
+   "peak": 0.0,
+   "ratio": 0.0,
+   "t": 0.002,
+   "where": "",
+   "over_s": 0.0,
+   "unit": "A",
+   "label": "hand connector spring pin (derated)"
+  },
+  "servo": {
+   "peak": 1.0,
+   "ratio": 1.0,
+   "t": 0.013999999999999992,
+   "where": "arm2 j1",
+   "over_s": 0.0,
+   "unit": "",
+   "label": "servo torque / stall"
+  },
+  "gear": {
+   "peak": 0.4690126701774939,
+   "ratio": 0.4690126701774939,
+   "t": 0.03999999999999998,
+   "where": "arm2 j1",
+   "over_s": 0.0,
+   "unit": "",
+   "label": "gear-train load / strip limit (3 x stall, est.)"
+  },
+  "slip": {
+   "peak": 0.00938438588297324,
+   "ratio": 0.00938438588297324,
+   "t": 11.866000000007343,
+   "where": "arm3 j0",
+   "over_s": 0.0,
+   "unit": "",
+   "label": "clutch slip / travel (1 = hard stop)"
+  },
+  "joint_F": {
+   "peak": 25.46346592177538,
+   "ratio": 0.030313649906875455,
+   "t": 11.856000000007322,
+   "where": "arm3 j7",
+   "over_s": 0.0,
+   "unit": "N",
+   "label": "joint radial force (6800 C0; 623 C0 is 220 N)"
+  },
+  "link_MPa": {
+   "peak": 1.6647759217538391,
+   "ratio": 0.08323879608769195,
+   "t": 0.006000000000000002,
+   "where": "arm2 j0",
+   "over_s": 0.0,
+   "unit": "MPa",
+   "label": "link cradle bending stress (printed PETG, est.)"
+  },
+  "tip_Nm": {
+   "peak": 3.53571352438875,
+   "ratio": 0.70714270487775,
+   "t": 0.004000000000000001,
+   "where": "arm2",
+   "over_s": 0.0,
+   "unit": "N m",
+   "label": "spigot-pod coupler bending (5 N m design target for the undrawn tip bay, est.)"
+  },
+  "bus_1s_A": {
+   "peak": 4.285954765516651,
+   "ratio": 0.42859547655166513,
+   "t": 12.250000000008153,
+   "where": "",
+   "over_s": 0.0,
+   "unit": "A",
+   "label": "12 V buck, 1 s average (est.)"
+  },
+  "trunk_1s_A": {
+   "peak": 2.486968060457849,
+   "ratio": 0.2486968060457849,
+   "t": 0.5600000000000036,
+   "where": "",
+   "over_s": 0.0,
+   "unit": "A",
+   "label": "arm power trunk 18 AWG, 1 s average (est.)"
+  },
+  "thermal": {
+   "peak": 1.6993460742927038,
+   "ratio": 1.6993460742927038,
+   "t": 13.000000000009736,
+   "where": "arm3 j0",
+   "over_s": 9.040000000000001,
+   "unit": "",
+   "label": "servo rms torque over 10 s / rated (heating)"
+  }
+ }
+}

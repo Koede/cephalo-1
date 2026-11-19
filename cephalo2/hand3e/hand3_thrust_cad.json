@@ -1,0 +1,4 @@
+{"note": "copy of claude/code/hand3e/hand3_thrust_cad.json (hub C2, measured knuckle drag)",
+ "low": {"T_max": 21.48, "rpm": 12472, "P_shaft": 814, "qT": 0.029, "I_A": 54.4},
+ "high": {"T_max": 24.76, "rpm": 11292, "P_shaft": 749, "qT": 0.0256, "I_A": 55.2},
+ "K_W_per_N15": 10.22}

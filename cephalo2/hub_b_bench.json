@@ -1,0 +1,170 @@
+{
+ "D20": {
+  "pull_off_heel": {
+   "limit": 7.299199999998837,
+   "rated": null,
+   "fold": [
+    92,
+    41,
+    60
+   ]
+  },
+  "across": {
+   "limit": 5.388799999999048,
+   "rated": null,
+   "fold": [
+    92,
+    42,
+    58
+   ]
+  },
+  "slide_along_bar": {
+   "limit": 10.639999999998649,
+   "rated": null,
+   "fold": [
+    92,
+    42,
+    60
+   ]
+  },
+  "cantilever": {
+   "limit": 0.1948799999999718,
+   "rated": null,
+   "fold": [
+    92,
+    41,
+    60
+   ]
+  },
+  "roll_about_bar": {
+   "limit": 0.04449999999999286,
+   "rated": null,
+   "fold": [
+    92,
+    42,
+    58
+   ]
+  },
+  "twist_about_axis": {
+   "limit": 0.08639999999998375,
+   "rated": null,
+   "fold": [
+    91,
+    41,
+    61
+   ]
+  }
+ },
+ "D28": {
+  "pull_off_heel": {
+   "limit": 12.918399999998218,
+   "rated": null,
+   "fold": [
+    92,
+    25,
+    51
+   ]
+  },
+  "across": {
+   "limit": 5.887999999998993,
+   "rated": null,
+   "fold": [
+    91,
+    29,
+    50
+   ]
+  },
+  "slide_along_bar": {
+   "limit": 11.295999999998577,
+   "rated": null,
+   "fold": [
+    91,
+    30,
+    49
+   ]
+  },
+  "cantilever": {
+   "limit": 0.27305999999996317,
+   "rated": null,
+   "fold": [
+    91,
+    28,
+    50
+   ]
+  },
+  "roll_about_bar": {
+   "limit": 0.06071999999999107,
+   "rated": null,
+   "fold": [
+    91,
+    29,
+    50
+   ]
+  },
+  "twist_about_axis": {
+   "limit": 0.12737999999997923,
+   "rated": null,
+   "fold": [
+    91,
+    26,
+    56
+   ]
+  }
+ },
+ "D38": {
+  "pull_off_heel": {
+   "limit": 6.700799999998903,
+   "rated": null,
+   "fold": [
+    91,
+    19,
+    39
+   ]
+  },
+  "across": {
+   "limit": 5.897599999998992,
+   "rated": null,
+   "fold": [
+    91,
+    16,
+    43
+   ]
+  },
+  "slide_along_bar": {
+   "limit": 4.841599999999287,
+   "rated": null,
+   "fold": [
+    91,
+    19,
+    39
+   ]
+  },
+  "cantilever": {
+   "limit": 0.16913999999997464,
+   "rated": null,
+   "fold": [
+    91,
+    18,
+    40
+   ]
+  },
+  "roll_about_bar": {
+   "limit": 0.05291999999999193,
+   "rated": null,
+   "fold": [
+    91,
+    18,
+    40
+   ]
+  },
+  "twist_about_axis": {
+   "limit": 0.1913399999999722,
+   "rated": null,
+   "fold": [
+    90,
+    11,
+    51
+   ]
+  }
+ }
+}

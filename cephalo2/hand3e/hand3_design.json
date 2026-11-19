@@ -1,0 +1,494 @@
+{
+ "rpm_max": 12400,
+ "rpm_proof": 14260,
+ "blade": {
+  "R_tip": 114.3,
+  "knuckles": [
+   36.0,
+   62.0,
+   89.5
+  ],
+  "coupled_tip": true,
+  "chord": [
+   22.0,
+   18.0
+  ],
+  "thick": [
+   3.4,
+   2.4
+  ],
+  "pad": 1.0,
+  "camber": 0.03,
+  "pitch": 16.0,
+  "tc": [
+   0.198,
+   0.189
+  ],
+  "fairing": "printed teardrop over each saddle bridge; bullet ends on each hinge barrel",
+  "chord_at_knuckles": [
+   21.3,
+   20.2,
+   19.1
+  ],
+  "thick_at_knuckles": [
+   3.23,
+   2.95,
+   2.66
+  ]
+ },
+ "spread": {
+  "max_deg": 47.0,
+  "toe_in_deg": 2.0,
+  "pair_gap_mm": 3.7,
+  "pair_gap_parallel_mm": 6.3
+ },
+ "sizing": {
+  "base": {
+   "lever": 6.0,
+   "servo": "STS3032",
+   "spool_r": 2.5,
+   "F_peak_need": 54.9,
+   "F_hold_need": 22.0,
+   "F_stall": 91.7,
+   "F_rated": 30.6,
+   "margin": 1.67,
+   "travel": 12.4,
+   "spool_deg": 285,
+   "t_full_s": 0.47,
+   "m": 20.0,
+   "tpu_k": 18.3,
+   "tpu_side": 2.7,
+   "tpu_len": 12.0
+  },
+  "middle": {
+   "lever": 4.0,
+   "servo": "STS3032",
+   "spool_r": 2.5,
+   "F_peak_need": 49.9,
+   "F_hold_need": 19.9,
+   "F_stall": 91.7,
+   "F_rated": 30.6,
+   "margin": 1.84,
+   "travel": 13.7,
+   "spool_deg": 213,
+   "t_full_s": 0.35,
+   "m": 20.0,
+   "drives": "K2 + K3",
+   "tpu_k": 16.6,
+   "tpu_side": 2.6,
+   "tpu_len": 12.0
+  },
+  "tip": {
+   "lever": 3.0,
+   "servo": null,
+   "spool_r": 2.5,
+   "F_peak_need": 20.7,
+   "F_hold_need": 8.3,
+   "F_stall": 46.9,
+   "F_rated": 14.3,
+   "margin": 2.27,
+   "travel": 7.5,
+   "spool_deg": 171,
+   "t_full_s": 0.28,
+   "m": 0.0,
+   "note": "driven by the middle cord: tension x 3.5 mm",
+   "tpu_k": 6.9,
+   "tpu_side": 1.7,
+   "tpu_len": 12.0
+  },
+  "spread": {
+   "servo": "STS3032",
+   "spool_r": 3.5,
+   "F_stall": 65.5,
+   "eye_r": 9.0,
+   "m": 20.0,
+   "torque_per_blade_Nm": 0.29,
+   "travel": 7.4
+  }
+ },
+ "lever_scan": {
+  "base": {
+   "4.5": {
+    "servo": "STS3032",
+    "spool_r": 2.5,
+    "F_peak_need": 73.2,
+    "F_hold_need": 29.3,
+    "F_stall": 91.7,
+    "F_rated": 30.6,
+    "margin": 1.25,
+    "travel": 10.1,
+    "spool_deg": 231,
+    "t_full_s": 0.38,
+    "m": 20.0
+   },
+   "5.0": {
+    "servo": "STS3032",
+    "spool_r": 2.5,
+    "F_peak_need": 65.9,
+    "F_hold_need": 26.4,
+    "F_stall": 91.7,
+    "F_rated": 30.6,
+    "margin": 1.39,
+    "travel": 10.9,
+    "spool_deg": 249,
+    "t_full_s": 0.41,
+    "m": 20.0
+   },
+   "5.5": {
+    "servo": "STS3032",
+    "spool_r": 2.5,
+    "F_peak_need": 59.9,
+    "F_hold_need": 24.0,
+    "F_stall": 91.7,
+    "F_rated": 30.6,
+    "margin": 1.53,
+    "travel": 11.6,
+    "spool_deg": 267,
+    "t_full_s": 0.44,
+    "m": 20.0
+   },
+   "6.0": {
+    "servo": "STS3032",
+    "spool_r": 2.5,
+    "F_peak_need": 54.9,
+    "F_hold_need": 22.0,
+    "F_stall": 91.7,
+    "F_rated": 30.6,
+    "margin": 1.67,
+    "travel": 12.4,
+    "spool_deg": 285,
+    "t_full_s": 0.47,
+    "m": 20.0
+   }
+  },
+  "middle": {
+   "3.5": {
+    "servo": "STS3032",
+    "spool_r": 2.5,
+    "F_peak_need": 57.0,
+    "F_hold_need": 22.8,
+    "F_stall": 91.7,
+    "F_rated": 30.6,
+    "margin": 1.61,
+    "travel": 8.5,
+    "spool_deg": 195,
+    "t_full_s": 0.32,
+    "m": 20.0
+   },
+   "4.0": {
+    "servo": "STS3032",
+    "spool_r": 2.5,
+    "F_peak_need": 49.9,
+    "F_hold_need": 19.9,
+    "F_stall": 91.7,
+    "F_rated": 30.6,
+    "margin": 1.84,
+    "travel": 9.3,
+    "spool_deg": 213,
+    "t_full_s": 0.35,
+    "m": 20.0
+   },
+   "4.5": {
+    "servo": "STS3032",
+    "spool_r": 2.5,
+    "F_peak_need": 44.3,
+    "F_hold_need": 17.7,
+    "F_stall": 91.7,
+    "F_rated": 30.6,
+    "margin": 2.07,
+    "travel": 10.1,
+    "spool_deg": 231,
+    "t_full_s": 0.38,
+    "m": 20.0
+   }
+  },
+  "tip": {
+   "3.0": {
+    "servo": "SCS0009",
+    "spool_r": 2.5,
+    "F_peak_need": 20.7,
+    "F_hold_need": 8.3,
+    "F_stall": 46.9,
+    "F_rated": 14.3,
+    "margin": 2.27,
+    "travel": 7.5,
+    "spool_deg": 171,
+    "t_full_s": 0.28,
+    "m": 13.2
+   },
+   "3.5": {
+    "servo": "SCS0009",
+    "spool_r": 2.5,
+    "F_peak_need": 17.7,
+    "F_hold_need": 7.1,
+    "F_stall": 46.9,
+    "F_rated": 14.3,
+    "margin": 2.65,
+    "travel": 8.2,
+    "spool_deg": 188,
+    "t_full_s": 0.31,
+    "m": 13.2
+   }
+  }
+ },
+ "knuckles": [
+  {
+   "name": "lag pin",
+   "m_out_g": 7.72,
+   "rc": 63.4,
+   "F_proof": 1092,
+   "bearing_eye_MPa": 43.7,
+   "tube_shear_MPa": 43.5
+  },
+  {
+   "name": "K1",
+   "m_out_g": 5.79,
+   "rc": 72.6,
+   "F_proof": 937,
+   "bearing_cheek_MPa": 36.6,
+   "bearing_lug_MPa": 25.5,
+   "pin_shear_MPa": 66.3,
+   "lock_ratio": 2.77
+  },
+  {
+   "name": "K2",
+   "m_out_g": 3.63,
+   "rc": 87.0,
+   "F_proof": 705,
+   "bearing_cheek_MPa": 24.5,
+   "bearing_lug_MPa": 22.0,
+   "pin_shear_MPa": 49.8,
+   "lock_ratio": 2.74
+  },
+  {
+   "name": "K3",
+   "m_out_g": 1.62,
+   "rc": 101.6,
+   "F_proof": 368,
+   "bearing_cheek_MPa": 23.6,
+   "bearing_lug_MPa": 20.4,
+   "pin_shear_MPa": 58.5,
+   "lock_ratio": 2.65
+  }
+ ],
+ "W_knuckle": [
+  19.0,
+  18.6,
+  14.0
+ ],
+ "wrap": {
+  "D16": [
+   104,
+   103
+  ],
+  "D32": [
+   72,
+   71
+  ],
+  "D38": [
+   64,
+   63
+  ],
+  "D70": [
+   39,
+   39
+  ]
+ },
+ "Z": {
+  "pack0": 0.0,
+  "pack1": 58.0,
+  "motor_top": 89.0,
+  "hub_lo": 91.0,
+  "blade": 96.0,
+  "hub_hi": 101.0,
+  "shaft_tip": 104.2,
+  "fin_top": 84.5,
+  "claw_lo": 85.5,
+  "claw_hi": 87.5,
+  "cage_lo": 61.0,
+  "heel": 114.2
+ },
+ "channels": [
+  {
+   "name": "F1 base",
+   "az": 34.0,
+   "role": "base",
+   "finger": 0,
+   "tier": 2
+  },
+  {
+   "name": "F1 middle",
+   "az": 56.0,
+   "role": "middle",
+   "finger": 0,
+   "tier": 1
+  },
+  {
+   "name": "F2 base",
+   "az": 124.0,
+   "role": "base",
+   "finger": 1,
+   "tier": 2
+  },
+  {
+   "name": "F2 middle",
+   "az": 146.0,
+   "role": "middle",
+   "finger": 1,
+   "tier": 1
+  },
+  {
+   "name": "F3 base",
+   "az": 214.0,
+   "role": "base",
+   "finger": 2,
+   "tier": 1
+  },
+  {
+   "name": "F3 middle",
+   "az": 236.0,
+   "role": "middle",
+   "finger": 2,
+   "tier": 2
+  },
+  {
+   "name": "F4 base",
+   "az": 304.0,
+   "role": "base",
+   "finger": 3,
+   "tier": 1
+  },
+  {
+   "name": "F4 middle",
+   "az": 326.0,
+   "role": "middle",
+   "finger": 3,
+   "tier": 2
+  },
+  {
+   "name": "spread A",
+   "az": 0.0,
+   "role": "spread",
+   "finger": null,
+   "tier": 1
+  },
+  {
+   "name": "spread B",
+   "az": 180.0,
+   "role": "spread",
+   "finger": null,
+   "tier": 2
+  }
+ ],
+ "pack": {
+  "tier_gap": 1.0,
+  "cord_gap": 8.1,
+  "od": 94.0,
+  "height": 58.0
+ },
+ "plans": [
+  {
+   "plan": "A drum under the motor, 2 tiers, shafts radial",
+   "servos": 14,
+   "mass": 496,
+   "added_vs_xl": 340,
+   "pack_od": 102.0,
+   "pack_h": 54.0,
+   "hub_z": 92,
+   "com_z": 48,
+   "blocked_disc_pct": 16,
+   "gap_to_rotor": 38,
+   "note": "all 12 joints + 2 spread at once",
+   "ok": true
+  },
+  {
+   "plan": "B flat pancake tiers, shafts tangential",
+   "servos": 14,
+   "mass": 505,
+   "added_vs_xl": 349,
+   "pack_od": 119.0,
+   "pack_h": 57.0,
+   "hub_z": 95,
+   "com_z": 50,
+   "blocked_disc_pct": 22,
+   "gap_to_rotor": 38,
+   "note": "does not pack: needs 4 tiers and \u00d8119",
+   "ok": false
+  },
+  {
+   "plan": "C ring round the motor, 1 tier",
+   "servos": 14,
+   "mass": 500,
+   "added_vs_xl": 344,
+   "pack_od": 137.0,
+   "pack_h": 26.0,
+   "hub_z": 42,
+   "com_z": 22,
+   "blocked_disc_pct": 29,
+   "gap_to_rotor": 12,
+   "note": "shortest, but a \u00d8137 ring 12 mm under the rotor",
+   "ok": false
+  },
+  {
+   "plan": "D drum, 2 servos per finger (middle + tip coupled)",
+   "servos": 10,
+   "mass": 456,
+   "added_vs_xl": 300,
+   "pack_od": 102.0,
+   "pack_h": 54.0,
+   "hub_z": 92,
+   "com_z": 50,
+   "blocked_disc_pct": 16,
+   "gap_to_rotor": 38,
+   "note": "not joint by joint",
+   "ok": false
+  },
+  {
+   "plan": "E key hub, one pusher (no servo pack)",
+   "servos": 1,
+   "mass": 245,
+   "added_vs_xl": 89,
+   "pack_od": 60.0,
+   "pack_h": 0.0,
+   "hub_z": 42,
+   "com_z": 25,
+   "blocked_disc_pct": 6,
+   "gap_to_rotor": 38,
+   "note": "one joint at a time, about 20 s",
+   "ok": false
+  }
+ ],
+ "mass": {
+  "servos": 200.0,
+  "pack_frame": 60.0,
+  "claw_bars": 30.0,
+  "spools_springs_screws": 16.0,
+  "wiring_hall_magnets": 12.0,
+  "motor": 98.5,
+  "fingers": 51.0,
+  "hub_plates_lag_tubes": 29.4,
+  "cage_followers_links": 19.6,
+  "nut_heel": 4.8,
+  "total": 521.3
+ },
+ "com_from_spigot": 50.0,
+ "xl_pod": {
+  "m": 156.0,
+  "hub": 43.0
+ },
+ "electrical": {
+  "servo_stall_A": 12.0,
+  "rail": "6 V (STS3032: 4.8-6 V)"
+ },
+ "motor": {
+  "name": "BrotherHobby SE 2816 810KV",
+  "d": 34.0,
+  "L": 46.2,
+  "m": 98.5,
+  "mount": "19 x 19 mm, 4 x M3",
+  "I_max": 55.2,
+  "P_max": 1303.0,
+  "test": "HQ 10x5x3, 6S: 22.4 N at 10,163 rpm / 633 W; 28.3 N at 10,935 rpm / 895 W; 34.7 N at 12,368 rpm / 1303 W",
+  "can_L": 31.0
+ }
+}

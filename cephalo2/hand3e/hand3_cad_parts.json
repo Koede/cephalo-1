@@ -1,0 +1,70 @@
+{
+ "root_grip": {
+  "mass_g": 2.96,
+  "bodies": 1
+ },
+ "lag_tube": {
+  "mass_g": 1.11,
+  "bodies": 1
+ },
+ "hub_lower": {
+  "mass_g": 16.5,
+  "bodies": 1
+ },
+ "hub_upper": {
+  "mass_g": 13.02,
+  "bodies": 1
+ },
+ "heel": {
+  "mass_g": 2.44,
+  "bodies": 1
+ },
+ "phalanx1": {
+  "mass_g": 2.27,
+  "bodies": 1
+ },
+ "pad1": {
+  "mass_g": 0.13,
+  "bodies": 1
+ },
+ "phalanx2": {
+  "mass_g": 1.79,
+  "bodies": 1
+ },
+ "pad2": {
+  "mass_g": 0.14,
+  "bodies": 1
+ },
+ "phalanx3": {
+  "mass_g": 1.25,
+  "bodies": 1
+ },
+ "pad3": {
+  "mass_g": 0.19,
+  "bodies": 1
+ },
+ "spring_tray1_L": {
+  "mass_g": 0.5,
+  "bodies": 1
+ },
+ "spring_tray2_L": {
+  "mass_g": 0.34,
+  "bodies": 1
+ },
+ "spring_lid_L": {
+  "mass_g": 0.1,
+  "bodies": 1
+ },
+ "spring_tray1_R": {
+  "mass_g": 0.5,
+  "bodies": 1
+ },
+ "spring_tray2_R": {
+  "mass_g": 0.34,
+  "bodies": 1
+ },
+ "spring_lid_R": {
+  "mass_g": 0.1,
+  "bodies": 1
+ }
+}

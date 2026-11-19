@@ -1,0 +1,160 @@
+{
+ "stance": {
+  "plate_height_m": 0.44999999999999996,
+  "wheel_x_m": 0.17500000000000004,
+  "wheel_y_m": 0.17500000000000004,
+  "ik_error_m": 3.2903683843479814e-06,
+  "arm_floor_gap_m": 0.08500079198796485,
+  "track_m": 0.3500000000000001,
+  "wheelbase_m": 0.3500000000000001
+ },
+ "robot_mass_kg": 14.5272,
+ "wheel_hand_kg": 0.3257,
+ "standing still": {
+  "worst_load_vs_rated": 2.07,
+  "at": "arm 2 joint 1 (STS3215)",
+  "vs_stall": 0.69,
+  "per_joint_worst": [
+   1.18,
+   2.07,
+   0.47,
+   1.92,
+   0.12,
+   0.89,
+   0.0,
+   0.0
+  ]
+ },
+ "driving: 15 deg slope + 1 m/s^2 (design)": {
+  "worst_load_vs_rated": 6.49,
+  "at": "arm 6 joint 1 (STS3215)",
+  "vs_stall": 2.16,
+  "per_joint_worst": [
+   5.11,
+   6.49,
+   5.45,
+   6.1,
+   3.65,
+   3.8,
+   2.25,
+   1.65
+  ]
+ },
+ "full traction (mu 0.8), forward": {
+  "worst_load_vs_rated": 11.13,
+  "at": "arm 6 joint 1 (STS3215)",
+  "vs_stall": 3.71,
+  "per_joint_worst": [
+   9.24,
+   11.13,
+   10.68,
+   10.5,
+   7.36,
+   6.87,
+   4.63,
+   3.39
+  ]
+ },
+ "full braking": {
+  "worst_load_vs_rated": 11.13,
+  "at": "arm 2 joint 1 (STS3215)",
+  "vs_stall": 3.71,
+  "per_joint_worst": [
+   9.24,
+   11.13,
+   10.68,
+   10.5,
+   7.36,
+   6.87,
+   4.63,
+   3.39
+  ]
+ },
+ "0.3 g sideways (turning)": {
+  "worst_load_vs_rated": 5.41,
+  "at": "arm 0 joint 1 (STS3215)",
+  "vs_stall": 1.8,
+  "per_joint_worst": [
+   4.15,
+   5.41,
+   4.23,
+   5.07,
+   2.78,
+   3.09,
+   1.7,
+   1.25
+  ]
+ },
+ "0.3 g sideways, other way": {
+  "worst_load_vs_rated": 5.41,
+  "at": "arm 4 joint 1 (STS3215)",
+  "vs_stall": 1.8,
+  "per_joint_worst": [
+   4.15,
+   5.41,
+   4.23,
+   5.07,
+   2.78,
+   3.09,
+   1.7,
+   1.25
+  ]
+ },
+ "bump 2 g": {
+  "worst_load_vs_rated": 4.63,
+  "at": "arm 2 joint 1 (STS3215)",
+  "vs_stall": 1.54,
+  "per_joint_worst": [
+   2.82,
+   4.63,
+   1.08,
+   4.21,
+   0.27,
+   1.92,
+   0.0,
+   0.0
+  ]
+ },
+ "q_deg": {
+  "0": [
+   48.0,
+   17.2,
+   31.7,
+   6.3,
+   14.1,
+   -4.1,
+   -2.1,
+   -14.7
+  ],
+  "2": [
+   48.0,
+   17.2,
+   31.7,
+   6.3,
+   14.1,
+   -4.1,
+   -2.1,
+   -14.7
+  ],
+  "4": [
+   48.0,
+   17.2,
+   31.7,
+   6.3,
+   14.1,
+   -4.1,
+   -2.1,
+   -14.7
+  ],
+  "6": [
+   48.0,
+   17.2,
+   31.7,
+   6.3,
+   14.1,
+   -4.1,
+   -2.1,
+   -14.7
+  ]
+ }
+}

@@ -1,0 +1,290 @@
+{
+ "root_grip": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1164.0,
+  "material": "alu",
+  "mass_g": 3.14,
+  "size": [
+   25.8,
+   18.7,
+   12.9
+  ]
+ },
+ "lag_tube": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 136.6,
+  "material": "steel",
+  "mass_g": 1.07,
+  "size": [
+   5.0,
+   5.0,
+   12.5
+  ]
+ },
+ "hub_lower": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 6049.1,
+  "material": "alu",
+  "mass_g": 16.33,
+  "size": [
+   51.0,
+   51.0,
+   9.5
+  ]
+ },
+ "hub_upper": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 4840.6,
+  "material": "alu",
+  "mass_g": 13.07,
+  "size": [
+   51.0,
+   51.0,
+   2.5
+  ]
+ },
+ "cage": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 11444.0,
+  "material": "pacf",
+  "mass_g": 14.31,
+  "size": [
+   46.0,
+   46.0,
+   30.0
+  ]
+ },
+ "follower": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 210.0,
+  "material": "pacf",
+  "mass_g": 0.26,
+  "size": [
+   10.3,
+   4.6,
+   8.0
+  ]
+ },
+ "heel": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 2369.6,
+  "material": "tpu",
+  "mass_g": 2.84,
+  "size": [
+   16.0,
+   16.0,
+   13.2
+  ]
+ },
+ "pack_frame": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 38045.7,
+  "material": "pacf",
+  "mass_g": 47.56,
+  "size": [
+   102.2,
+   94.0,
+   70.0
+  ]
+ },
+ "phalanx1": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1685.1,
+  "material": "pacf",
+  "mass_g": 2.11,
+  "size": [
+   33.8,
+   21.3,
+   12.7
+  ]
+ },
+ "pad1": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 104.5,
+  "material": "tpu",
+  "mass_g": 0.13,
+  "size": [
+   9.0,
+   12.6,
+   2.2
+  ]
+ },
+ "phalanx2": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1417.0,
+  "material": "pacf",
+  "mass_g": 1.77,
+  "size": [
+   33.8,
+   20.1,
+   10.4
+  ]
+ },
+ "pad2": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 117.1,
+  "material": "tpu",
+  "mass_g": 0.14,
+  "size": [
+   10.5,
+   11.9,
+   2.1
+  ]
+ },
+ "phalanx3": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 995.5,
+  "material": "pacf",
+  "mass_g": 1.24,
+  "size": [
+   27.6,
+   19.1,
+   8.7
+  ]
+ },
+ "pad3": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 157.8,
+  "material": "tpu",
+  "mass_g": 0.19,
+  "size": [
+   14.3,
+   11.2,
+   2.1
+  ]
+ },
+ "claw_F1_base": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1439.6,
+  "material": "pacf",
+  "mass_g": 1.8,
+  "size": [
+   23.3,
+   15.0,
+   25.9
+  ]
+ },
+ "claw_F1_middle": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1439.6,
+  "material": "pacf",
+  "mass_g": 1.8,
+  "size": [
+   15.0,
+   23.3,
+   25.9
+  ]
+ },
+ "claw_F2_base": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1439.6,
+  "material": "pacf",
+  "mass_g": 1.8,
+  "size": [
+   15.0,
+   23.3,
+   25.9
+  ]
+ },
+ "claw_F2_middle": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1439.6,
+  "material": "pacf",
+  "mass_g": 1.8,
+  "size": [
+   23.3,
+   15.0,
+   25.9
+  ]
+ },
+ "claw_F3_base": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1439.6,
+  "material": "pacf",
+  "mass_g": 1.8,
+  "size": [
+   23.3,
+   15.0,
+   25.9
+  ]
+ },
+ "claw_F3_middle": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1439.6,
+  "material": "pacf",
+  "mass_g": 1.8,
+  "size": [
+   15.0,
+   23.3,
+   25.9
+  ]
+ },
+ "claw_F4_base": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1439.6,
+  "material": "pacf",
+  "mass_g": 1.8,
+  "size": [
+   15.0,
+   23.3,
+   25.9
+  ]
+ },
+ "claw_F4_middle": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1439.6,
+  "material": "pacf",
+  "mass_g": 1.8,
+  "size": [
+   23.3,
+   15.0,
+   25.9
+  ]
+ },
+ "claw_spread_A": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1416.7,
+  "material": "pacf",
+  "mass_g": 1.77,
+  "size": [
+   22.6,
+   6.0,
+   25.9
+  ]
+ },
+ "claw_spread_B": {
+  "watertight": true,
+  "bodies": 1,
+  "vol_mm3": 1416.7,
+  "material": "pacf",
+  "mass_g": 1.77,
+  "size": [
+   22.6,
+   6.0,
+   25.9
+  ]
+ }
+}

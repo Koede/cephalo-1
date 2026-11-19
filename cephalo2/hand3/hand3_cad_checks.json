@@ -1,0 +1,518 @@
+{
+ "parts": {
+  "root_grip": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 1164.0,
+   "material": "alu",
+   "mass_g": 3.14,
+   "size": [
+    25.8,
+    18.7,
+    12.9
+   ]
+  },
+  "lag_tube": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 136.6,
+   "material": "steel",
+   "mass_g": 1.07,
+   "size": [
+    5.0,
+    5.0,
+    12.5
+   ]
+  },
+  "hub_lower": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 6049.1,
+   "material": "alu",
+   "mass_g": 16.33,
+   "size": [
+    51.0,
+    51.0,
+    9.5
+   ]
+  },
+  "hub_upper": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 4840.6,
+   "material": "alu",
+   "mass_g": 13.07,
+   "size": [
+    51.0,
+    51.0,
+    2.5
+   ]
+  },
+  "cage": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 11444.0,
+   "material": "pacf",
+   "mass_g": 14.31,
+   "size": [
+    46.0,
+    46.0,
+    30.0
+   ]
+  },
+  "follower": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 210.0,
+   "material": "pacf",
+   "mass_g": 0.26,
+   "size": [
+    10.3,
+    4.6,
+    8.0
+   ]
+  },
+  "heel": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 2369.6,
+   "material": "tpu",
+   "mass_g": 2.84,
+   "size": [
+    16.0,
+    16.0,
+    13.2
+   ]
+  },
+  "pack_frame": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 38045.7,
+   "material": "pacf",
+   "mass_g": 47.56,
+   "size": [
+    102.2,
+    94.0,
+    70.0
+   ]
+  },
+  "phalanx1": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 1685.1,
+   "material": "pacf",
+   "mass_g": 2.11,
+   "size": [
+    33.8,
+    21.3,
+    12.7
+   ]
+  },
+  "pad1": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 104.5,
+   "material": "tpu",
+   "mass_g": 0.13,
+   "size": [
+    9.0,
+    12.6,
+    2.2
+   ]
+  },
+  "phalanx2": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 1417.0,
+   "material": "pacf",
+   "mass_g": 1.77,
+   "size": [
+    33.8,
+    20.1,
+    10.4
+   ]
+  },
+  "pad2": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 117.1,
+   "material": "tpu",
+   "mass_g": 0.14,
+   "size": [
+    10.5,
+    11.9,
+    2.1
+   ]
+  },
+  "phalanx3": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 995.5,
+   "material": "pacf",
+   "mass_g": 1.24,
+   "size": [
+    27.6,
+    19.1,
+    8.7
+   ]
+  },
+  "pad3": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 157.8,
+   "material": "tpu",
+   "mass_g": 0.19,
+   "size": [
+    14.3,
+    11.2,
+    2.1
+   ]
+  },
+  "claw_F1_base": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 1439.6,
+   "material": "pacf",
+   "mass_g": 1.8,
+   "size": [
+    23.3,
+    15.0,
+    25.9
+   ]
+  },
+  "claw_F1_middle": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 1439.6,
+   "material": "pacf",
+   "mass_g": 1.8,
+   "size": [
+    15.0,
+    23.3,
+    25.9
+   ]
+  },
+  "claw_F2_base": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 1439.6,
+   "material": "pacf",
+   "mass_g": 1.8,
+   "size": [
+    15.0,
+    23.3,
+    25.9
+   ]
+  },
+  "claw_F2_middle": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 1439.6,
+   "material": "pacf",
+   "mass_g": 1.8,
+   "size": [
+    23.3,
+    15.0,
+    25.9
+   ]
+  },
+  "claw_F3_base": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 1439.6,
+   "material": "pacf",
+   "mass_g": 1.8,
+   "size": [
+    23.3,
+    15.0,
+    25.9
+   ]
+  },
+  "claw_F3_middle": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 1439.6,
+   "material": "pacf",
+   "mass_g": 1.8,
+   "size": [
+    15.0,
+    23.3,
+    25.9
+   ]
+  },
+  "claw_F4_base": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 1439.6,
+   "material": "pacf",
+   "mass_g": 1.8,
+   "size": [
+    15.0,
+    23.3,
+    25.9
+   ]
+  },
+  "claw_F4_middle": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 1439.6,
+   "material": "pacf",
+   "mass_g": 1.8,
+   "size": [
+    23.3,
+    15.0,
+    25.9
+   ]
+  },
+  "claw_spread_A": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 1416.7,
+   "material": "pacf",
+   "mass_g": 1.77,
+   "size": [
+    22.6,
+    6.0,
+    25.9
+   ]
+  },
+  "claw_spread_B": {
+   "watertight": true,
+   "bodies": 1,
+   "vol_mm3": 1416.7,
+   "material": "pacf",
+   "mass_g": 1.77,
+   "size": [
+    22.6,
+    6.0,
+    25.9
+   ]
+  }
+ },
+ "straight_overlaps": {},
+ "straight_gaps": {
+  "grip0|ph0_1": 0.1,
+  "ph0_1|ph0_2": 0.1,
+  "ph0_2|ph0_3": 0.04,
+  "grip0|hub_lower": 0.05,
+  "grip0|hub_upper": 0.1,
+  "grip0|tube0": 0.03
+ },
+ "fold": {
+  "K1": {
+   "stop_back": -2.0,
+   "stop_fold": 93.0,
+   "want": [
+    -2.0,
+    90.0
+   ],
+   "continuous": true
+  },
+  "K2": {
+   "stop_back": -2.0,
+   "stop_fold": 93.0,
+   "want": [
+    -2.0,
+    90.0
+   ],
+   "continuous": true
+  },
+  "K3": {
+   "stop_back": -2.0,
+   "stop_fold": 89.0,
+   "want": [
+    -2.0,
+    85.0
+   ],
+   "continuous": true
+  }
+ },
+ "full_curl_overlaps": {
+  "hub_lower|ph0_3": 14.34,
+  "hub_lower|ph1_3": 14.34,
+  "hub_lower|ph2_3": 14.34,
+  "hub_lower|ph3_3": 14.34,
+  "hub_upper|ph0_3": 85.84,
+  "hub_upper|pad0_3": 18.22,
+  "hub_upper|ph1_3": 85.84,
+  "hub_upper|pad1_3": 18.22,
+  "hub_upper|ph2_3": 85.84,
+  "hub_upper|pad2_3": 18.22,
+  "hub_upper|ph3_3": 85.84,
+  "hub_upper|pad3_3": 18.22,
+  "heel|ph0_3": 243.91,
+  "heel|pad0_3": 10.06,
+  "heel|ph1_3": 243.91,
+  "heel|pad1_3": 10.06,
+  "heel|ph2_3": 243.91,
+  "heel|pad2_3": 10.06,
+  "heel|ph3_3": 243.91,
+  "heel|pad3_3": 10.06,
+  "ph0_3|ph1_3": 16.71,
+  "ph0_3|pad1_3": 3.83,
+  "ph0_3|ph3_3": 16.71,
+  "pad0_3|ph3_3": 3.83,
+  "ph1_3|ph2_3": 16.71,
+  "ph1_3|pad2_3": 3.83,
+  "ph2_3|ph3_3": 16.71,
+  "ph2_3|pad3_3": 3.83
+ },
+ "grasp_pose_overlaps": {
+  "hub_lower|grip0": 0.02,
+  "hub_lower|grip2": 0.02
+ },
+ "spread": {
+  "0.0": {
+   "grip_hub_overlap": 0.0,
+   "grip_hub_gap": 0.05,
+   "chain_hub_gap": 6.0,
+   "pair_gap": 12.0,
+   "pair_overlap": 0.0
+  },
+  "11.8": {
+   "grip_hub_overlap": 0.0,
+   "grip_hub_gap": 0.1,
+   "chain_hub_gap": 5.94,
+   "pair_gap": 12.0,
+   "pair_overlap": 0.0
+  },
+  "23.5": {
+   "grip_hub_overlap": 0.0,
+   "grip_hub_gap": 0.1,
+   "chain_hub_gap": 4.88,
+   "pair_gap": 12.0,
+   "pair_overlap": 0.0
+  },
+  "35.2": {
+   "grip_hub_overlap": 0.0,
+   "grip_hub_gap": 0.1,
+   "chain_hub_gap": 3.49,
+   "pair_gap": 12.0,
+   "pair_overlap": 0.0
+  },
+  "47.0": {
+   "grip_hub_overlap": 0.021,
+   "grip_hub_gap": 0.0,
+   "chain_hub_gap": 1.92,
+   "pair_gap": 5.71,
+   "pair_overlap": 0.0
+  }
+ },
+ "flight_spin": {
+  "min_gap": 0.5,
+  "at_deg": 0.0,
+  "overlap_mm3": 0.0,
+  "closest_rotating_parts_at_0": {
+   "hw_motor_bell": 0.5,
+   "ph0_1": 0.88,
+   "ph1_1": 0.88,
+   "ph2_1": 0.88,
+   "ph3_1": 0.88,
+   "fol0": 1.0
+  }
+ },
+ "claw_stroke": {
+  "0.0": {
+   "claw_fin_gap": 1.0,
+   "claw_fin_overlap": 0.0,
+   "claw_rotor_gap": 0.88,
+   "claw_pack_overlap": 0.0,
+   "claw_pack_gap": 6.0,
+   "follower_cage_overlap": 0.0,
+   "follower_rotor_gap": 3.7
+  },
+  "1.0": {
+   "claw_fin_gap": 0.0,
+   "claw_fin_overlap": -0.0,
+   "claw_rotor_gap": 1.88,
+   "claw_pack_overlap": 0.0,
+   "claw_pack_gap": 6.0,
+   "follower_cage_overlap": 0.0,
+   "follower_rotor_gap": 3.7
+  },
+  "7.0": {
+   "claw_fin_gap": 0.0,
+   "claw_fin_overlap": -0.0,
+   "claw_rotor_gap": 4.23,
+   "claw_pack_overlap": 0.0,
+   "claw_pack_gap": 0.36,
+   "follower_cage_overlap": 0.0,
+   "follower_rotor_gap": 3.7
+  },
+  "13.5": {
+   "claw_fin_gap": 0.0,
+   "claw_fin_overlap": -0.0,
+   "claw_rotor_gap": 4.23,
+   "claw_pack_overlap": 0.0,
+   "claw_pack_gap": 0.3,
+   "follower_cage_overlap": 0.0,
+   "follower_rotor_gap": 3.7
+  }
+ },
+ "claw_to_claw_gap": 1.11,
+ "pack": {
+  "servo_servo_gap": 1.4,
+  "servo_frame_overlap": 0.0,
+  "spool_frame_overlap": 0.0,
+  "servo_frame_gap": 0.2,
+  "spool_to_other_servo_gap": 6.0,
+  "outer_diameter": 102.6
+ },
+ "loads": {
+  "proof_rpm": 14260,
+  "knuckles": [
+   {
+    "knuckle": "K1",
+    "m_out_g": 7.73,
+    "pull_N": 1142,
+    "design_file_N": 937,
+    "bearing_cheek_MPa": 44.6,
+    "bearing_lug_MPa": 39.7,
+    "ring_cheek_MPa": 39.7,
+    "ring_lug_MPa": 35.3
+   },
+   {
+    "knuckle": "K2",
+    "m_out_g": 4.6,
+    "pull_N": 834,
+    "design_file_N": 705,
+    "bearing_cheek_MPa": 29.0,
+    "bearing_lug_MPa": 26.1,
+    "ring_cheek_MPa": 38.6,
+    "ring_lug_MPa": 34.7
+   },
+   {
+    "knuckle": "K3",
+    "m_out_g": 1.78,
+    "pull_N": 393,
+    "design_file_N": 368,
+    "bearing_cheek_MPa": 25.2,
+    "bearing_lug_MPa": 21.8,
+    "ring_cheek_MPa": 30.2,
+    "ring_lug_MPa": 26.2
+   }
+  ],
+  "lag_pin_N": 1329,
+  "lag_eye_MPa": 55.4,
+  "tube_shear_MPa": 52.9,
+  "hub_plate_shearout_MPa": 44.3
+ },
+ "mass": {
+  "fingers": 47.8,
+  "hub_plates": 29.4,
+  "cage_followers": 17.9,
+  "heel_nut": 4.8,
+  "claw_bars": 17.9,
+  "pack_frame": 47.56,
+  "servos": 200.0,
+  "motor": 98.5,
+  "spools_springs_links_screws_wiring": 28.0,
+  "total": 491.9
+ },
+ "design_file_mass": 494.9,
+ "knuckle_frontal_area_mm2": [
+  76.4,
+  39.0,
+  24.6
+ ]
+}
