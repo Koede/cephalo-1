@@ -1,4 +1,4 @@
-"""Writes coupler_site/: a three.js viewer of connector rev B.3 (hand/arm coupler) with the insert-and-lock sequence,
+"""Writes coupler_site/: a three.js viewer of connector rev B.4 (hand/arm coupler) with the insert-and-lock sequence,
 a section cut, an explode slider and three hands (bare base, hand3 base, wheel hand).  Meshes come straight from the
 CAD (handmount_b.py, coupler_hand3_fit.py, wheelhand.py) and are packed as base64 Float32/Uint32 in coupler_data.js.
 python3 coupler_viewer.py"""

@@ -1,0 +1,229 @@
+{
+ "maxvol": 1.0,
+ "dofs": 253860,
+ "tets": {
+  "hand": 26351,
+  "collar": 13762,
+  "nose": 10058
+ },
+ "cases": {
+  "force along az 90": {
+   "regions": {
+    "hand base: lugs (incl. root at the flange rim)": {
+     "vm_elem_max": 46.88,
+     "s1_elem_max": 39.32,
+     "szz_elem_max": 31.81,
+     "at_s1_elem_max": [
+      -2.3,
+      -20.7,
+      -2.5
+     ],
+     "vm_p999": 40.14,
+     "s1_p999": 32.25,
+     "vm_max": 93.96,
+     "vm_p99": 19.9,
+     "s1_max": 75.82,
+     "s1_p99": 12.73,
+     "szz_max": 55.5,
+     "szz_p99": 6.02,
+     "at_vm_max": [
+      -2.3,
+      -21.4,
+      -2.5
+     ],
+     "at_s1_max": [
+      -2.2,
+      -20.5,
+      -2.6
+     ]
+    },
+    "hand base: flange / spigot (rest)": {
+     "vm_elem_max": 25.76,
+     "s1_elem_max": 29.66,
+     "szz_elem_max": 23.48,
+     "at_s1_elem_max": [
+      -2.7,
+      -20.3,
+      -2.9
+     ],
+     "vm_p999": 12.29,
+     "s1_p999": 11.42,
+     "vm_max": 30.21,
+     "vm_p99": 6.15,
+     "s1_max": 33.57,
+     "s1_p99": 4.7,
+     "szz_max": 28.45,
+     "szz_p99": 3.0,
+     "at_vm_max": [
+      -2.8,
+      -20.4,
+      -3.4
+     ],
+     "at_s1_max": [
+      -3.1,
+      -20.2,
+      -3.1
+     ]
+    },
+    "collar: lip": {
+     "vm_elem_max": 20.05,
+     "s1_elem_max": 10.07,
+     "szz_elem_max": 4.64,
+     "at_s1_elem_max": [
+      -2.6,
+      -22.0,
+      -3.0
+     ],
+     "vm_p999": 28.12,
+     "s1_p999": 15.16,
+     "vm_max": 44.92,
+     "vm_p99": 12.48,
+     "s1_max": 23.83,
+     "s1_p99": 8.83,
+     "szz_max": 23.05,
+     "szz_p99": 5.77,
+     "at_vm_max": [
+      -3.2,
+      -20.8,
+      -2.8
+     ],
+     "at_s1_max": [
+      -4.2,
+      -22.2,
+      -2.8
+     ]
+    },
+    "collar: wall (below the step)": {
+     "vm_elem_max": 14.65,
+     "s1_elem_max": 17.07,
+     "szz_elem_max": 16.43,
+     "at_s1_elem_max": [
+      -7.4,
+      -21.9,
+      -2.2
+     ],
+     "vm_p999": 12.41,
+     "s1_p999": 15.62,
+     "vm_max": 23.85,
+     "vm_p99": 7.82,
+     "s1_max": 28.73,
+     "s1_p99": 8.88,
+     "szz_max": 26.78,
+     "szz_p99": 8.52,
+     "at_vm_max": [
+      -4.4,
+      -22.6,
+      -2.4
+     ],
+     "at_s1_max": [
+      -4.4,
+      -22.6,
+      -2.4
+     ]
+    },
+    "collar: step / wall corner": {
+     "vm_elem_max": 7.49,
+     "s1_elem_max": 6.15,
+     "szz_elem_max": 4.04,
+     "at_s1_elem_max": [
+      -9.7,
+      -20.5,
+      3.8
+     ],
+     "vm_p999": 8.38,
+     "s1_p999": 7.19,
+     "vm_max": 18.33,
+     "vm_p99": 4.93,
+     "s1_max": 11.45,
+     "s1_p99": 4.05,
+     "szz_max": 8.07,
+     "szz_p99": 2.85,
+     "at_vm_max": [
+      -2.0,
+      -20.6,
+      3.6
+     ],
+     "at_s1_max": [
+      -3.0,
+      -21.2,
+      3.7
+     ]
+    },
+    "collar: sleeve": {
+     "vm_elem_max": 2.46,
+     "s1_elem_max": 2.43,
+     "szz_elem_max": 0.23,
+     "at_s1_elem_max": [
+      5.6,
+      -20.3,
+      7.5
+     ],
+     "vm_p999": 2.61,
+     "s1_p999": 2.7,
+     "vm_max": 2.78,
+     "vm_p99": 2.25,
+     "s1_max": 2.97,
+     "s1_p99": 2.27,
+     "szz_max": 0.76,
+     "szz_p99": 0.3,
+     "at_vm_max": [
+      7.1,
+      -19.4,
+      7.7
+     ],
+     "at_s1_max": [
+      3.2,
+      -20.4,
+      7.7
+     ]
+    },
+    "nose ring: nose ring": {
+     "vm_elem_max": 10.56,
+     "s1_elem_max": 7.74,
+     "szz_elem_max": 4.37,
+     "at_s1_elem_max": [
+      -10.0,
+      -18.7,
+      3.0
+     ],
+     "vm_p999": 9.24,
+     "s1_p999": 6.99,
+     "vm_max": 25.69,
+     "vm_p99": 4.27,
+     "s1_max": 14.37,
+     "s1_p99": 2.52,
+     "szz_max": 10.86,
+     "szz_p99": 1.54,
+     "at_vm_max": [
+      -10.3,
+      -19.7,
+      3.3
+     ],
+     "at_s1_max": [
+      -10.5,
+      -18.2,
+      3.4
+     ]
+    }
+   },
+   "rim_uz_max_mm": 0.1297,
+   "tilt_deg": 0.1664,
+   "rot_stiffness_Nm_per_deg": 47.3,
+   "rim_shift_along_force_mm": 0.03,
+   "lever_mm": 72.2,
+   "active": {
+    "c1": 404,
+    "c2": 61,
+    "c3": 132,
+    "rs": 149,
+    "rc": 205
+   },
+   "contact_force_N": {
+    "c1": 237.0,
+    "c2": 236.9,
+    "c3": 236.8
+   },
+   "s": 902.7
+  }
+ }
+}

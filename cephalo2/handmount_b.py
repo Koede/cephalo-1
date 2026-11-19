@@ -33,7 +33,9 @@ P = dict(
     # hand base
     R_flange=20.6, r_spigot=10.35, z_spigot_top=10.4, lug_az=(0.0, 120.0, 240.0), lug_r0=20.4,
     # rev B.2 primaries (set by coupler_opt.py): lugs at the TOP of the flange, clamped between the nose ring and the lip
-    lug_w=48.0, lug_r1=22.4, t_lug=2.6, t_lip=2.7, t_wall=3.3, t_step=2.4, ax_clr=0.1,
+    lug_w=56.0, lug_r1=23.3,      # B.2 48 / 22.4; B.4 56 / 23.3 (FEA: lug root + lip-wall fillet bands; bearing room for the fillet)
+    t_lug=3.6, t_lip=3.2, t_wall=4.0,   # B.2 2.6 / 2.7 / 3.3
+    t_step=2.4, ax_clr=0.1,
     lip_r0=20.9, collar_bore=20.5, twist=60.0, ramp=0.4, ramp_deg=8.0, flute=0.5,
     retain_r=23.0,
     # nose ring: separate ring at the mouth, clamped by the 3 socket screws; the collar's -z stop and the hand's seat
@@ -52,6 +54,14 @@ P = dict(
     # (12-80 N for +-0.1 mm), so the groove is printed DEEP (0.85) and set with 0.05 mm PET shim washers under the ring after
     # measuring the printed stack: target squeeze 0.17 mm, +-0.025 after tuning.
     oring_id=21.0, oring_cs=1.0, og_r=(11.0, 12.4), og_depth=0.85, shim_step=0.05, sq_target=0.17, oring_E=5.5, mu=0.30,
+    # rev B.4 (2026-11-19, coupler_fea.py): the FEA put the lug ROOT at factor 0.8-0.9 (z-tension at the sharp re-entrant
+    # corner under the lug, worst at the lug's side edge where the 66 deg lip ran past the 48 deg lug).  Fixes: a root fillet
+    # (gusset) under each lug, a matching chamfer on the lip's inner top edge, lips stopped lip_inset inside the lug edges,
+    # a fillet where the lip meets the collar wall, a chamfer on the lug's bottom outer edge to clear it, lugs 1 mm longer.
+    lug_fillet=1.0, lip_chamfer=0.9, wall_fillet=0.8, arc_n=8, lug_chamfer=0.5, lip_inset=0.0,
+    # B.4 FEA pass 2: a square lip end acts as a punch edge (flange z-tension 37-47 MPa at the lip end): the trailing end of each
+    # lip is relieved lip_relief over lip_relief_deg (the leading end already has the 0.4 mm lead-in ramp), lips as wide as the lugs
+    lip_relief=0.12, lip_relief_deg=8.0,
     # rev B.3.1 optimisation: six lightening pockets in the socket body from its back face, between the bullets and the screws
     pocket_r=(12.0, 19.0), pocket_z=8.0, pocket_az=(0.0, 60.0, 120.0, 180.0, 240.0, 300.0), pocket_half=(17.0, 17.0), pocket_wall=1.0,
 )
@@ -59,7 +69,8 @@ P = dict(
 
 def derive():
     """Everything that follows from the primaries."""
-    P["gap_w"] = P["lug_w"] + 6.0
+    P["gap_w"] = P["lug_w"] + 6.0                                  # only the insertion gap minimum; lips are lip_w wide
+    P["lip_w"] = P["lug_w"] - 2 * P["lip_inset"]
     P["lug_r"] = (P["lug_r0"], P["lug_r1"]); P["lug_z"] = (-P["t_lug"], 0.0)
     P["R_nose"] = P["lug_r1"] + 0.1; P["collar_cb"] = P["lug_r1"] + 0.5
     zl = -P["t_lug"] - P["ax_clr"]; P["lip_z"] = (zl - P["t_lip"], zl); P["lip_r"] = (P["lip_r0"], P["collar_cb"])
@@ -86,6 +97,49 @@ def rev(profile, a0, a1, n=N):
 
 def sector(r0, r1, a0, a1, z0, z1):
     return rev([(r0, z0), (r1, z0), (r1, z1), (r0, z1)], a0, a1)
+
+
+def lug(az):
+    """One hand-base lug, revolved: r lug_r0..lug_r1, z -t_lug..0, with a root fillet (45 deg gusset, lug_fillet) down onto the
+    flange cylinder and a lug_chamfer on the bottom outer edge."""
+    t, R, f, c = P["t_lug"], P["R_flange"], P["lug_fillet"], P["lug_chamfer"]
+    e = 0.3                                                       # the fillet runs on e into the flange: clean boolean, no slivers
+    # true arc fillet radius f, centre (R + f, -t - f), from the lug underside (R + f, -t) round to 80 deg (10 deg short of tangent
+    # to the flange cylinder, so the union does not make slivers), then straight on into the flange
+    arc = [(R + f - f * np.sin(np.radians(q)), -t - f + f * np.cos(np.radians(q))) for q in np.linspace(0, 80, P["arc_n"] + 1)]
+    xe, ze = arc[-1]
+    prof = [(P["lug_r0"], ze - e), (xe - e * np.tan(np.radians(10)) - e, ze - e)] + arc[::-1] + [(P["lug_r1"] - c, -t), (P["lug_r1"], -t + c), (P["lug_r1"], 0.0), (P["lug_r0"], 0.0)]
+    return rev(prof, az - P["lug_w"] / 2, az + P["lug_w"] / 2)
+
+
+def lip_seg(a0, a1, ztop, n=N):
+    """One collar lip step, revolved: lip_r0..(collar_cb + 0.25 into the wall), z collar bottom..ztop, with a lip_chamfer on the
+    inner top edge (clears the lug's root fillet) and a wall_fillet (45 deg) in the corner where the lip top meets the wall."""
+    z0 = P["collar_z"][0]; cb = P["collar_cb"]; c, w = P["lip_chamfer"], P["wall_fillet"]
+    e = 0.3                                                       # the fillet runs on e into the wall: clean boolean, no slivers
+    # true arc fillet radius w, centre (cb - w, ztop + w), from the lip top round to 80 deg (10 deg short of tangent to the wall)
+    arc = [(cb - w + w * np.sin(np.radians(q)), ztop + w - w * np.cos(np.radians(q))) for q in np.linspace(0, 80, P["arc_n"] + 1)]
+    xe, ze = arc[-1]
+    prof = [(P["lip_r0"], z0), (cb + e, z0), (cb + e, ze + e)] + arc[::-1] + [(P["lip_r0"] + c, ztop), (P["lip_r0"], ztop - c)]
+    return rev(prof, a0, a1, n)
+
+
+def lip_drop(m):
+    """Drop of the lip top (mm) at m deg from its leading end: lead-in ramp + trailing relief."""
+    seg = P["lip_w"]
+    return P["ramp"] * np.clip(1 - m / P["ramp_deg"], 0, 1) + P["lip_relief"] * np.clip(1 - (seg - m) / P["lip_relief_deg"], 0, 1)
+
+
+def lip(az, nst=48):
+    """One lip centred on az: the flat lip_seg revolved in nst steps, its top warped down by lip_drop (blended linearly to 0 at
+    the collar bottom), so the ramp and relief are smooth and the solid stays one clean manifold."""
+    seg = P["lip_w"]; z0 = P["collar_z"][0]; zl = P["lip_z"][1]
+    m = lip_seg(az - seg / 2, az + seg / 2, zl, n=int(round(nst * 360 / seg)))
+    def w(v):
+        v = np.array(v, float); a = (np.degrees(np.arctan2(v[:, 1], v[:, 0])) - (az - seg / 2) + 180) % 360 - 180
+        v[:, 2] -= lip_drop(a) * np.clip((v[:, 2] - z0) / (zl - z0), 0, None)
+        return v
+    return m.warp_batch(w)
 
 
 def at(r, az):
@@ -201,14 +255,8 @@ def collar(theta=0.0):
     body = cyl(P["R_collar"], z0, zt) + cyl(P["sleeve_r"], zt - 0.01, z1) - cyl(P["collar_bore"], zs - 0.01, z1 + 1) - cyl(cb, z0 - 1, zs)
     for k in range(12):
         x, y = at(P["R_collar"] + 1.4 - P["flute"], 30 * k); body -= cyl(1.4, z0 + 1, zt - 1, 16).translate([x, y, 0])
-    seg = 120 - P["gap_w"]; nst = 20
     for k in range(3):
-        a0 = P["lug_az"][k] - seg / 2                                        # at theta 0 the segment is centred on lug k
-        for i in range(nst):
-            aa = a0 + i * seg / nst; bb = a0 + (i + 1) * seg / nst
-            frac = min((i + 0.5) * (seg / nst) / P["ramp_deg"], 1.0)
-            ztop = zl - P["ramp"] * (1 - frac)                                # leading edge (low angle side) lower
-            body += sector(P["lip_r0"], cb + 0.25, aa - 0.01, bb + 0.01, z0, ztop)
+        body += lip(P["lug_az"][k])
     for a in (P["det_az"], P["det_az"] + P["twist"]):                         # detent dimples: locked, open
         body -= mf.Manifold.sphere(P["ball_d"] / 2 + 0.05, 24).translate([*at(P["ball_rc"], a), P["det_z"]])
     return body.rotate([0, 0, float(theta)])
@@ -227,7 +275,7 @@ def hand_base():
     fz0, fz1 = P["z_flange"]
     m = cyl(P["R_flange"], fz0, fz1) + cyl(P["r_spigot"], fz1 - 0.5, P["z_spigot_top"])
     for az in P["lug_az"]:
-        m += sector(P["lug_r"][0], P["lug_r"][1], az - P["lug_w"] / 2, az + P["lug_w"] / 2, P["lug_z"][0], P["lug_z"][1])
+        m += lug(az)
     m += sector(P["r_spigot"] - 0.5, P["r_bore"] + P["key_h"], P["az_key"] - P["key_w"] / 2 / P["r_bore"] * 57.3, P["az_key"] + P["key_w"] / 2 / P["r_bore"] * 57.3, fz1 - 0.5, P["z_bore"] - 1.0)
     cut = cyl(P["r_pad"] + 0.15, P["z_pad"] - P["pad_t"], P["z_spigot_top"] + 1) + cyl(3.5, fz0 - 1, P["z_pad"])        # pad board well + wire bore
     cut += cyl(P["r_wire_cb"], fz0 - 1, fz0 + P["groove_h"])                                                    # wire turn pocket under the bore
@@ -275,13 +323,15 @@ def stresses(M, Fr, sig_allow=30.0):
     pre = preload()["F_band_N"][1]                    # rev B.3: O-ring + pins at the stiff end of the print band
     F = M / (rc * 1.5e-3) + pre / 3.0                 # one lug's share of the preload on top of the couple (was a flat 30 N)
     root = w * P["R_flange"]; arm = rc - P["R_flange"]
-    tau = F / (root * P["t_lug"]); s_lug = 6 * F * arm / (root * P["t_lug"] ** 2)
+    tau = F / (root * P["t_lug"])
+    f = P["lug_fillet"]; toe = w * (P["R_flange"] + f)               # B.4: root section (t + fillet deep) and the fillet toe (t deep)
+    s_lug = max(6 * F * arm / (root * (P["t_lug"] + f) ** 2), 6 * F * max(rc - P["R_flange"] - f, 0.1) / (toe * P["t_lug"] ** 2))
     s_lip = 6 * F * (cb - rc) / (w * cb * P["t_lip"] ** 2)
     t = P["t_wall"]; Rm = cb + t / 2; b = min(w * Rm + 1.56 * np.sqrt(Rm * t), 2 * np.pi * Rm / 3)
     s_wall = F / (b * t) + 6 * F * (Rm - rc) / (b * t ** 2)
     rn = (P["collar_bore"] + P["R_nose"]) / 2
     s_step = 6 * F * (cb - rn) / (b * P["t_step"] ** 2)
-    bear_lug = F / (w * rc * (P["lug_r1"] - P["lip_r0"] - 0.3))               # 0.3 = radial float of the collar
+    bear_lug = F / (np.radians(P["lip_w"] - P["ramp_deg"] - 0.5 * P["lip_relief_deg"]) * rc * (P["lug_r1"] - P["lug_chamfer"] - P["lip_r0"] - P["lip_chamfer"] - 0.3))   # B.4: flat lip x flat lug, 0.3 radial float
     bear_sp = Fr / (2 * P["r_spigot"] * (P["z_bore"] - P["z_nose"]) * 0.5)
     step_face = F / (0.5 * np.pi * (P["R_nose"] ** 2 - P["collar_bore"] ** 2))
     F_scr = 0.0

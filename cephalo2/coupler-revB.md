@@ -126,7 +126,7 @@ Supersedes B.2 only in the nose ring. The lugs, lips, ramp, collar and hand base
 - **Stress model:** the old flat 30 N preload on a lug is replaced by one lug's share of the O-ring preload at the stiff end of the band (80 N / 3). 3 g landing: lug 14.5, lip 14.4, wall 14.8, step 11.3 MPa, **factor 2.03**. Screws 186 N (factor 5.4, est.).
 - **Mass:** nose ring 4.3 g (was 4.4 g), plus a 0.1 g O-ring.
 - **Tuning on the bench:** the force is tolerance-sensitive (12-80 N for ±0.1 mm). Print the nose ring, measure the gap, and reprint it at the right groove depth (4 g, 0.05 mm steps). The 0.4 mm groove walls are one extrusion line: check they print.
-- **STLs:** `coupler_revB3_stl.zip` (socket, nose ring with groove, collar, hand base, hand3 pack frame).
+- **STLs:** `coupler_revB4_stl.zip` (rev B.4) (socket, nose ring with groove, collar, hand base, hand3 pack frame).
 - **Viewer:** https://claude.ai/artifact/Cp2PWLZZN2RphhcBBLhQCe (now with the O-ring).
 - **Buy, per arm:** 1 × O-ring 22 × 1.0 NBR 70A, plus spares.
 
@@ -153,3 +153,47 @@ Supersedes B.2 only in the nose ring. The lugs, lips, ramp, collar and hand base
 All the interference and clearance checks pass (`handmount_b_check.json`).
 
 **Buy list change:** O-ring 21 × 1.0 NBR 70A (was 22 × 1.0), plus 0.05 mm PET film for the shims.
+
+## Rev B.4 — FEA-driven lug and lip fixes (2026-11-19)
+
+**What the FEA found on B.2/B.3** (`coupler_fea.py`, results in `fea_B2/`):
+- Setup: P2 tets, PA-CF E 3.5 GPa, frictionless compression-only contacts, socket rigid, 3 g wheel landing (109 N radial + 7.87 N·m).
+- The hand formulas missed the **lug root**. The lip pushes each lug up like a cantilever, and its root (a sharp corner) carried about 32 MPa of layer-normal tension. That is a factor of 0.8–0.9 against 30 MPa interlayer strength.
+- The 66° lip also ran past the 48° lug, so the lug's free corner carried load.
+- Collar wall: factor 1.75–1.9. Lip, step and nose ring: fine.
+
+**Changes**
+
+| | B.3.1 | B.4 |
+|---|---|---|
+| Lug width / length (lug_w, lug_r1) | 48°, 22.4 | **56°, 23.3** |
+| Lug thickness (t_lug) | 2.6 | **3.6** |
+| Lip / wall thickness | 2.7 / 3.3 | **3.2 / 4.0** |
+| Lug root | sharp | **R1.0 arc fillet** + 0.5 chamfer on the bottom outer edge |
+| Lip | 66° wide, sharp ends | **as wide as the lug (56°)**, 0.9 chamfer on the inner top edge (clears the root fillet), **R0.8 arc fillet** to the wall, trailing end relieved 0.12 mm over 8° (the leading end keeps the 0.4 mm lead-in ramp) |
+| Hand-formula factor, 3 g landing | 2.11 | **2.52** (lug-root formula now counts the fillet) |
+| Mass: socket / nose ring / collar / hand base | 9.3 / 4.3 / 9.5 / 12.2 g | 9.3 / 4.8 / 13.3 / 14.2 g (**+6.3 g**) |
+
+All the clearance and interference checks pass (`handmount_b_check.json`). That covers the push-in path, the 60° collar sweep, the ramp capture, the detent, O-ring seating and the locked/preloaded state.
+
+**FEA on B.4** (coarse mesh about 390k DOF; `coupler_fea_B4coarse.json`; sections in `coupler_fea_B4_section_az90.png` / `_az180.png`):
+
+The peak numbers in the JSON are **artefacts**:
+- isolated single quadrature points at the 10° kink where each arc fillet ends (kept so the booleans mesh cleanly);
+- one point at the top-face edge.
+
+They grow as the mesh is refined, and the sections show the material around them at 0–5 MPa. The engineering values are the stress **bands along the fillets**, read off the sections:
+
+| Location | B.2 (sharp) | B.4 band | Factor vs 30 MPa interlayer |
+|---|---|---|---|
+| Hand-base lug-root fillet, σzz / σ1 | ≈ 32 | ≈ 15–22 | ≈ 1.4–2.0 |
+| Collar lip-to-wall fillet, σzz / σ1 | 15–17 | ≈ 20–28 | ≈ 1.1–1.5 |
+| Collar lip, step, nose ring | ≤ 15 | ≤ 15 | ≥ 2 |
+
+**Open item: the collar is the weak link in a 3 g landing.**
+- In B.2 its wall corner looked better only because the 66° lip spread the load over more arc. With the lip now as wide as the lug, the wall carries the same force over a shorter arc.
+- Options, not yet chosen:
+  1. Thicker wall and a larger wall fillet. About +2 g; the collar OD grows.
+  2. Print the collar in an isotropic process (SLS/MJF PA12, about 48 MPa, no layer-normal weakness).
+  3. Go back to a 66° lip with a relief at **both** ends, so the extra length beyond the lug carries no load but still spreads the wall stress.
+- The 30 MPa interlayer figure for PA-CF is an estimate. A pull test on a printed lug/collar pair is the real check.
