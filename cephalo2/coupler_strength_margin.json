@@ -1,0 +1,50 @@
+{
+ "Bambu PAHT-CF (PA12-CF), TDS V2.0": {
+  "dry": {
+   "allowable_MPa": 51.2,
+   "SF_single_3g": 2.33,
+   "SF_repeated_3g": 1.16,
+   "breaks_at_g_single": 7.0,
+   "unlimited_landings_up_to_g": 3.5
+  },
+  "wet": {
+   "allowable_MPa": 43.5,
+   "SF_single_3g": 1.98,
+   "SF_repeated_3g": 0.99,
+   "breaks_at_g_single": 5.9,
+   "unlimited_landings_up_to_g": 3.0
+  }
+ },
+ "Bambu PAHT-CF, older TDS value": {
+  "dry": {
+   "allowable_MPa": 37.6,
+   "SF_single_3g": 1.71,
+   "SF_repeated_3g": 0.85,
+   "breaks_at_g_single": 5.1,
+   "unlimited_landings_up_to_g": 2.6
+  },
+  "wet": {
+   "allowable_MPa": 32.0,
+   "SF_single_3g": 1.45,
+   "SF_repeated_3g": 0.73,
+   "breaks_at_g_single": 4.4,
+   "unlimited_landings_up_to_g": 2.2
+  }
+ },
+ "Polymaker Fiberon PA6-CF20": {
+  "dry": {
+   "allowable_MPa": 43.2,
+   "SF_single_3g": 1.96,
+   "SF_repeated_3g": 0.98,
+   "breaks_at_g_single": 5.9,
+   "unlimited_landings_up_to_g": 2.9
+  },
+  "wet": {
+   "allowable_MPa": 20.4,
+   "SF_single_3g": 0.93,
+   "SF_repeated_3g": 0.46,
+   "breaks_at_g_single": 2.8,
+   "unlimited_landings_up_to_g": 1.4
+  }
+ }
+}

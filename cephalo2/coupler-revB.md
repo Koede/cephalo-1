@@ -249,3 +249,29 @@ Fillet bands read off the sections, as engineering values:
 - They carry the 36 A hover current with well under 1 W of loss. Six spring pins in parallel per phase (up to 20 mΩ contact resistance each) would waste up to about 13 W per hand inside the coupler.
 
 **Next:** print a lug and collar pair for the pull test (bench).
+
+## Will B.5 hold? Datasheet check instead of a pull test (2026-11-19)
+
+The B.5 FEA stress bands in the 3 g wheel landing (est.) are compared against published Z (layer-bond) tensile strengths. Worst band: 22 MPa at the hand-base lug-root fillet. Script and output: `coupler_strength_margin.py` / `.json`.
+
+**Knock-downs** (estimates):
+- Real prints reach 0.8 of the datasheet bar strength.
+- Repeated landings (10³–10⁴): fatigue allows 0.5 of the static strength.
+
+| Material (Z tensile, datasheet) | Condition | One 3 g landing, SF | Breaks at (single landing) | Landings it takes indefinitely |
+|---|---|---|---|---|
+| Bambu PAHT-CF (PA12-CF), 64 MPa | dry | 2.3 | 7.0 g | ≤ 3.5 g |
+| | humid (−15 %) | 2.0 | 5.9 g | ≤ 3.0 g |
+| Bambu PAHT-CF, older TDS 47 MPa | dry | 1.7 | 5.1 g | ≤ 2.6 g |
+| | humid | 1.45 | 4.4 g | ≤ 2.2 g |
+| Polymaker Fiberon PA6-CF20, 54 / 25.5 MPa | dry | 2.0 | 5.9 g | ≤ 2.9 g |
+| | **humid** | **0.93** | **2.8 g** | **≤ 1.4 g** |
+
+**Verdict**
+- **In Bambu PAHT-CF, B.5 holds.**
+  - A single 3 g landing has a safety factor of 1.5–2.3.
+  - It only breaks in a 4.4–7 g crash.
+  - It survives unlimited repeated landings up to roughly 2.2–3.5 g.
+- **In PA6-CF it does not hold once the nylon has taken up moisture**: it breaks at about 2.8 g.
+- **Material spec:** collar and hand base in **Bambu PAHT-CF** (PA12 base, low water uptake), printed axis-vertical as modelled. Not PA6-CF.
+- The fatigue margin is about 1 at 3 g, so treat a 3 g landing as a hard landing and not the routine case. Routine landings are softer and have proportionally more margin.
