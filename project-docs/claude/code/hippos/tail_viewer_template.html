@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hippos-1 tail (SFF mount, layout C, 400 mm)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --ink:#1d2127; --mute:#5c6470; --line:#e2e5ea; --ok:#1f8a4c; --warn:#b26a00; --bad:#c0392b; --acc:#2f6db3; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--ink); }
+  header { padding:12px 16px 4px; } h1 { font-size:18px; margin:0 0 2px; }
+  .sub { color:var(--mute); font-size:13px; line-height:1.4; }
+  .wrap { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:12px; padding:8px 12px 12px; }
+  @media (max-width:900px) { .wrap { grid-template-columns:1fr; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px; }
+  #view { height:62vh; min-height:360px; border-radius:8px; overflow:hidden; background:linear-gradient(#eef1f5,#dde3ea); touch-action:none; }
+  .row { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-top:8px; }
+  button { border:1px solid var(--line); background:#fff; border-radius:6px; padding:6px 10px; font-size:13px; cursor:pointer; }
+  button.on { background:var(--acc); color:#fff; border-color:var(--acc); }
+  .sl { display:grid; grid-template-columns:150px 1fr 48px; gap:8px; align-items:center; font-size:13px; margin-top:6px; }
+  .sl output { text-align:right; color:var(--mute); }
+  table { border-collapse:collapse; width:100%; font-size:12.5px; }
+  td, th { padding:4px 6px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+  th { color:var(--mute); font-weight:600; font-size:12px; }
+  .ok { color:var(--ok); font-weight:600; } .warn { color:var(--warn); font-weight:600; } .bad { color:var(--bad); font-weight:600; }
+  h3 { font-size:15px; margin:4px 0 6px; } .note { color:var(--mute); font-size:12.5px; line-height:1.45; margin-top:8px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Hippos-1 tail: pitch–yaw–pitch–yaw, 400 mm, on the SFF mount</h1>
+  <div class="sub">Root STS3095 pitch, STS3250 yaw, STS3215 pitch, STS3215 yaw; standard SFF socket at the tip. Drag to orbit; sliders move each joint within its checked free range. Up is up, the rump is on the left.</div>
+</header>
+<div class="wrap">
+  <div class="card">
+    <div id="view"></div>
+    <div class="row" id="presets"></div>
+    <div id="sliders"></div>
+    <div class="row"><button id="spin">Auto-rotate</button><button id="ghost">See-through links</button></div>
+  </div>
+  <div class="card">
+    <h3>Poses: servo load (% of rated), bending through the rump socket</h3>
+    <table id="poses"></table>
+    <h3 style="margin-top:12px">Joint free range (checked on the solids)</h3>
+    <table id="ranges"></table>
+    <h3 style="margin-top:12px">Mass and current</h3>
+    <table id="mass"></table>
+    <div class="note">Hand statics on the CAD masses (PETG at 70 % of solid). Servo shaft positions, horn bolt circles and rear shafts are estimates: measure the servos before printing. No FEA, no dynamics yet.</div>
+  </div>
+</div>
+<script>
+const D = /*DATA*/;
+const view = document.getElementById('view');
+const renderer = new THREE.WebGLRenderer({antialias:true}); renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); view.appendChild(renderer.domElement);
+const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(35, 1, 1, 8000);
+const controls = new THREE.OrbitControls(camera, renderer.domElement); controls.enableDamping = true;
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8899aa, 0.75));
+const L1 = new THREE.DirectionalLight(0xffffff, 0.75); L1.position.set(300, 500, 400); scene.add(L1);
+const L2 = new THREE.DirectionalLight(0xffffff, 0.3); L2.position.set(-400, -200, -300); scene.add(L2);
+const root = new THREE.Group(); root.rotation.z = Math.PI / 2; scene.add(root);       // connector x (= up) -> screen up
+function b64(s, T) { const b = atob(s), u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return new T(u.buffer); }
+// nested joint groups: level k sits inside pivot k-1
+const levels = [], pivots = [];
+let parent = root;
+const fixed = new THREE.Group(); root.add(fixed); levels[-1] = fixed;
+const lvl0 = new THREE.Group(); root.add(lvl0); levels[0] = lvl0; parent = lvl0;
+D.joints.forEach((j, k) => {
+  const pv = new THREE.Group(); pv.position.set(0, j.z, 0); parent.add(pv);
+  const inner = new THREE.Group(); inner.position.set(0, -j.z, 0); pv.add(inner);
+  pv.userData.axis = j.axis === 'y' ? new THREE.Vector3(0, 0, -1) : new THREE.Vector3(1, 0, 0);
+  pivots.push(pv); levels[k + 1] = inner; parent = inner;
+});
+const linkMats = [];
+D.parts.forEach(p => {
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(b64(p.v, Float32Array), 3));
+  g.setIndex(new THREE.BufferAttribute(b64(p.f, Uint32Array), 1)); g.computeVertexNormals();
+  const m = new THREE.MeshStandardMaterial({color:p.color, roughness:0.6, metalness:0.05, side:THREE.DoubleSide});
+  if (p.name.startsWith('link')) linkMats.push(m);
+  levels[p.level].add(new THREE.Mesh(g, m));
+});
+// sliders
+const q = [0, 0, 0, 0], sl = document.getElementById('sliders'), inputs = [];
+const names = ['j0 pitch (STS3095)', 'j1 yaw (STS3250)', 'j2 pitch (STS3215)', 'j3 yaw (STS3215)'];
+D.joints.forEach((j, k) => {
+  const d = document.createElement('div'); d.className = 'sl';
+  d.innerHTML = `<span>${names[k]}</span><input type="range" min="${-j.lim}" max="${j.lim}" value="0"><output>0°</output>`;
+  const inp = d.querySelector('input'), out = d.querySelector('output');
+  inp.oninput = () => { q[k] = +inp.value; out.textContent = inp.value + '°'; apply(); };
+  inputs.push([inp, out]); sl.appendChild(d);
+});
+function apply() { pivots.forEach((pv, k) => pv.setRotationFromAxisAngle(pv.userData.axis, THREE.MathUtils.degToRad(q[k]))); }
+const PRE = {'Rest (straight back)': [0,0,0,0], 'Held out, to the side': [0,90,0,0], 'Curled over the croup': [-60,0,-70,0],
+             'Kickstand (crouched)': [90,0,0,0], 'Kickstand (reared)': [108,0,27,0], 'Wag': [0,40,0,-40]};
+const pre = document.getElementById('presets');
+Object.entries(PRE).forEach(([n, v]) => { const b = document.createElement('button'); b.textContent = n;
+  b.onclick = () => { v.forEach((a, k) => { q[k] = a; inputs[k][0].value = a; inputs[k][1].textContent = a + '°'; }); apply(); }; pre.appendChild(b); });
+let spin = false; document.getElementById('spin').onclick = e => { spin = !spin; e.target.classList.toggle('on', spin); controls.autoRotate = spin; };
+let gh = false; document.getElementById('ghost').onclick = e => { gh = !gh; e.target.classList.toggle('on', gh);
+  linkMats.forEach(m => { m.transparent = gh; m.opacity = gh ? 0.35 : 1; m.depthWrite = !gh; m.needsUpdate = true; }); };
+camera.position.set(220, 160, 620); controls.target.set(250, -20, 0); controls.update();
+function resize() { const w = view.clientWidth, h = view.clientHeight; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+(function loop() { requestAnimationFrame(loop); controls.update(); renderer.render(scene, camera); })();
+// tables
+const C = D.ck, pc = x => (x * 100).toFixed(0) + ' %', cls = x => x > 1 ? 'bad' : x > 0.9 ? 'warn' : 'ok';
+document.getElementById('poses').innerHTML = '<tr><th>Pose</th><th>j0 / j2 pitch</th><th>Seat</th><th>Tip</th></tr>' +
+  Object.entries(C.poses).map(([n, r]) => { const f = r.frac_rated, tz = r.tip_height_above_ground_mm;
+    const tip = n.startsWith('kickstand') ? (tz <= 0 ? '<span class="ok">plants</span>' : `<span class="bad">${tz.toFixed(0)} mm up</span>`) : '';
+    return `<tr><td>${n}</td><td><span class="${cls(f[0])}">${pc(f[0])}</span> / <span class="${cls(f[2])}">${pc(f[2])}</span></td><td>${r.M_seat.toFixed(2)} N·m (lugs ×${r.lug_factor.toFixed(1)})</td><td>${tip}</td></tr>`; }).join('');
+document.getElementById('ranges').innerHTML = '<tr><th>Joint</th><th>Free range</th></tr>' +
+  Object.entries(C.free_range_deg).map(([n, r]) => `<tr><td>${n}</td><td>±${r['+']}°</td></tr>`).join('');
+const m = C.mass_g, c = C.current;
+document.getElementById('mass').innerHTML = [
+  ['Printed links + root cradle + tip socket', `${(m.root_cradle + m.link0 + m.link1 + m.link2 + m.link3 + m.tip_socket).toFixed(0)} g`],
+  ['Servos (STS3095 + STS3250 + 2 × STS3215)', `${m.servos.toFixed(0)} g`],
+  ['Whole detachable tail incl. mount', `${m['total detachable tail'].toFixed(0)} g`],
+  ['Current limits (STS protection)', Object.entries(c.limits_A).map(([k, v]) => `${k.split(' ')[0]} ${v} A`).join(', ') + ` = ${c.limits_total_A} A`],
+  ['SFF 12 V pin (derated)', `${c.one_pin_derated_A} A`],
+  ['Torque at the limit vs needed (held out, 0.3 kg)', `j0 ${c.torque_at_limit_Nm.j0} / ${c.needed_held_out_Nm[0].toFixed(2)} N·m, j2 ${c.torque_at_limit_Nm.j2} / ${c.needed_held_out_Nm[2].toFixed(2)} N·m`],
+].map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');
+</script>
+</body>
+</html>
