@@ -158,10 +158,13 @@ def frame():
     for k in range(4):
         a = np.radians(45 + 90 * k); p = 19.0 / 2 * np.sqrt(2) * np.array([np.cos(a), np.sin(a)])
         m -= cyl(1.7, Z_SERVO_TOP - 1, Z["pack1"] + 1, c=(p[0], p[1], 0), n=24) + cyl(3.0, Z_SERVO_TOP - 1, Z_SERVO_TOP + 1.8, c=(p[0], p[1], 0), n=32)
-    for a in (90.0, 210.0, 330.0):
-        p = 9.5 * np.array([np.cos(np.radians(a)), np.sin(np.radians(a))])
+    # coupler rev B.6 (2026-11-19): the plate bolts to the coupler hand base's 3 M3 inserts at r 13, az 30/150/270 (midway
+    # between the bullet leads; the old r 9.5 az 90/210/330 holes sat on the lead lines), M3 x 8 DIN 7991 countersunk from
+    # inside; centre hole r 8 (was 4) passes the 3 x 14 AWG phase leads (bent R 3 to r 2.4) and the 5 signal wires.
+    for a in (30.0, 150.0, 270.0):
+        p = 13.0 * np.array([np.cos(np.radians(a)), np.sin(np.radians(a))])
         m -= cyl(1.7, -1, 3, c=(p[0], p[1], 0), n=24) + M_.cylinder(1.7, 1.6, 3.2, 32).translate([p[0], p[1], 0.31])
-    m -= cyl(4.0, -1, 3, n=32)
+    m -= cyl(8.0, -1, 3, n=48)
     for (which, side), (az, _, _, _) in HALVES.items():
         for k in (-1, 1):
             q = rod_xy(az, k); u = q / np.linalg.norm(q)

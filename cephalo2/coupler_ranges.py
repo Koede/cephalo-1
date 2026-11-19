@@ -217,13 +217,14 @@ def wire_paths():
         arm.append(Cyl(f"ESC lead {az:.0f}", "arm", P["r_bullet"], az, rw, P["fem_recess"] + P["bul_len"], P["fem_recess"] + P["bul_len"] + 8.0))
     for az in P["hand_screw_az"]:          # M3 heat-set insert (OD 4.0, 6 long) + M3 x 8 DIN 7991 countersunk from the pack side
         hand_hw.append(Cyl(f"hand insert {az:.0f}", "hand", P["hand_screw_r"], az, 2.0, fz0, fz0 + 6.0))
-        hand_hw.append(Cyl(f"hand screw head {az:.0f}", "hand", P["hand_screw_r"], az, 3.0, fz0 - 2.5, fz0 - 1.0))
+        hand_hw.append(Cyl(f"hand screw head {az:.0f}", "hand", P["hand_screw_r"], az, 3.2, fz0 - 3.5, fz0 - 0.31))
     # hand3 pack frame below the hand base: hub disc r 7 .. 17.5, 2.5 thick, then the frame; centre channel r < 7 open
-    ch = P["pf_chamfer"]                                                # B.6: 45 deg chamfer on the tube's inner top edge (lead bend)
-    top = lambda rr: fz0 - np.clip(ch - (rr - 7.0), 0, None)
-    hand_hw.append(Rev("hand3 pack-frame disc", "hand3", FULL, 7.0, 17.5, fz0 - 2.5, top))
-    hand_hw.append(Rev("hand3 servos (r >= 15.3)", "hand3", FULL, 15.3, 42.9, fz0 - 50.8, fz0 - 3.0))
-    hand_hw.append(Rev("hand3 pack-frame centre tube (r 7-10)", "hand3", FULL, 7.0, 10.0, fz0 - 50.0, top))
+    # hand3 hub E (the final hand3): its static parts as 2 mm height bands (coupler_hubE_ranges.json), turned end for end
+    # about y onto the hand base's bottom face.  Its frame plate has the centre hole r 8 and the 3 screw holes at r 13.
+    import os
+    jf = os.path.join(os.path.dirname(os.path.abspath(__file__)), "coupler_hubE_ranges.json")
+    for b in json.load(open(jf)):
+        hand_hw.append(Rev(b["name"], "hand3", FULL, b["r0"], b["r1"], fz0 - b["z_h3"][1], fz0 - b["z_h3"][0]))
     # tip bay end face (arm side, behind the socket): plate z_back .. +2.5 with 3 x M3 insert bosses at the screw positions,
     # and a hole for each female tail (B.6: three Ø6.0 at r_bullet; the old spec had only a centre Ø21 opening)
     for r, az in P["screws"]:
@@ -231,7 +232,7 @@ def wire_paths():
     fits = {"male body in its bore (radial)": (P["male_bore"] - P["bul_od"]) / 2, "female body in its bore (radial)": (P["fem_bore"] - P["bul_od"]) / 2,
             "pin in the mouth lead-in (radial)": P["mouth_r"] - P["pin_d"] / 2, "lead in its groove (each side)": (P["groove_w"] - P["wire_od"]) / 2,
             "lead in its groove (depth, closed by the pack-frame disc)": P["groove_h"] - P["wire_od"] - 0.15,
-            "3 leads going down hand3's r 7 channel (7 - r_v - wire r)": 7.0 - P["lead_rv"] - P["wire_od"] / 2,
+            "3 leads through hub E's plate hole r 8 (8 - r_v - wire r)": 8.0 - P["lead_rv"] - P["wire_od"] / 2,
             "leads side by side at r_v (gap between leads)": round(float(2 * P["lead_rv"] * np.sin(np.radians(60)) - P["wire_od"]), 3),
             "lead bend radius / wire OD": round(P["lead_bend_r"] / P["wire_od"], 2),
             "bullet engagement (mm)": P["pin_len"] - P["fem_recess"],

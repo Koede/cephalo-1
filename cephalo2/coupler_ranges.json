@@ -1,5 +1,5 @@
 {
- "pairs_checked": 25826,
+ "pairs_checked": 91148,
  "collisions": [],
  "fits_mm": {
   "spigot in bore (radial)": 0.25,
@@ -14,7 +14,7 @@
   "pin in the mouth lead-in (radial)": 0.3999999999999999,
   "lead in its groove (each side)": 0.1499999999999999,
   "lead in its groove (depth, closed by the pack-frame disc)": 0.14999999999999983,
-  "3 leads going down hand3's r 7 channel (7 - r_v - wire r)": 2.8499999999999996,
+  "3 leads through hub E's plate hole r 8 (8 - r_v - wire r)": 3.8499999999999996,
   "leads side by side at r_v (gap between leads)": 0.657,
   "lead bend radius / wire OD": 0.86,
   "bullet engagement (mm)": 8.5,
@@ -89,9 +89,9 @@
   },
   {
    "state": "wiring, hand side",
-   "a": "hand lead 90 bend @7",
-   "b": "hand3 pack-frame disc",
-   "clearance_mm": 0.148,
+   "a": "hand lead 90 @0",
+   "b": "hub E frame",
+   "clearance_mm": 0.15,
    "separated_by": "height",
    "ok": true
   },

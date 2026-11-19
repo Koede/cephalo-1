@@ -360,3 +360,42 @@ The three bullets carry the motor phases from the arm's tip-bay ESC to the hand'
 - The viewer shows the phase leads (red) and the tip-bay holes.
 
 **Buy list:** 3 × Castle 4 mm CC bullet pairs per arm; 14 AWG silicone (about 0.1 m per hand3, plus ESC leads); 3 M3 heat-set inserts and 3 M3 × 8 DIN 7991 per hand; epoxy for the bullet bodies.
+
+## Motion sim: coupler + hand3 hub E (2026-11-19)
+
+`coupler_hand_sim.py` builds an interactive three.js page from the real CAD solids, with a 30 s loop:
+1. approach
+2. push in (the bullets engage)
+3. collar turns 60° to lock
+4. rotor spin-up
+5. hover (the four fingers are the rotor fins)
+6. spin-down
+7. spread (finger lag)
+8. curl (K1/K2/K3)
+9. hold
+10. open
+11. unlock
+12. pull out
+
+**How it is built**
+- Every rigid part is exported once.
+- Each frame stores only the part poses, computed with `hand3_hubc.assembly()`'s own transforms: spin, `finger_frames(lag, fold)`, and ring strokes (base = e_lag × spread + lever × K1, curl = levers × K2, K3).
+- hand3 is mounted turned end for end about y (a rotation, not a mirror).
+- Cords, TPU links and trim screws change shape with the pull, so they are not drawn.
+- The page shows a load readout (est.):
+  - rpm (hover about 10,900; full throttle 12,472);
+  - phase current per bullet (36 A hover);
+  - thrust through the coupler (16.3 N hover);
+  - ring strokes against their travel;
+  - servo state and finger pull (34.6 N rated / 103.7 N stall).
+- Page: `coupler_sim_site/`. Key frames: `coupler_hand_sim_keyframes.png`.
+
+**Fingers:** fully curled, they close to r 45.5 mm, about 97 mm below the coupler, and curl away from the arm. Nothing reaches back toward the coupler.
+
+**hand3 hub E brought onto the coupler**
+- hub E (the final hand3) had its frame-plate screws at r 9.5, az 90/210/330, right on the bullet/lead lines, and only a Ø8 centre hole.
+- The plate now bolts to the coupler's 3 inserts at **r 13, az 30/150/270**. That set maps onto itself under the end-for-end turn (az → 180 − az).
+- The centre hole is now **r 8**.
+- Range check against hub E's real geometry (`coupler_hubE_ranges.py` cuts each static part into 2 mm bands): **91,148 pairs, 0 collisions**. The leads clear the plate-hole edge by 3.85 mm.
+- The hub E change is in the workspace copy `hand3e/hand3_hubc.py`.
+- The older rev D pack-frame chamfer in `coupler_hand3_fit.py` only applies to rev D.
