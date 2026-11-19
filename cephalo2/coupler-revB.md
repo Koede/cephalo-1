@@ -544,3 +544,5 @@ separate K1) works but is tight; C hanger arm, D Bowden, F rod through the shaft
 **GPU FEA on Saturn (2026-11-19):** `coupler_fea.py` has an optional CuPy solve (FEA_GPU=1): pyamg hierarchy built on the CPU,
 Jacobi-smoothed V-cycle PCG on the RTX 3060. Test run (206k + 99k + 41k dofs, one load case): about 300 to 350 CG iterations per
 contact step, whole case in about 4 minutes on Saturn.
+
+Decision (2026-11-19): **cord route B** (one base pull ring, wire hoop, C-clip bead per finger; K1 to K3 curl together; inner ring and one STS3215 removed; yoke lip inner edge to r 27.7). Next: hub v3 CAD (discs, root blocks, latch pins, hoop, beads) and range checks.
