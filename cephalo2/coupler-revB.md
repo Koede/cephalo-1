@@ -275,3 +275,42 @@ The B.5 FEA stress bands in the 3 g wheel landing (est.) are compared against pu
 - **In PA6-CF it does not hold once the nylon has taken up moisture**: it breaks at about 2.8 g.
 - **Material spec:** collar and hand base in **Bambu PAHT-CF** (PA12 base, low water uptake), printed axis-vertical as modelled. Not PA6-CF.
 - The fatigue margin is about 1 at 3 g, so treat a 3 g landing as a hard landing and not the routine case. Routine landings are softer and have proportionally more margin.
+
+## Collision checks by range math (2026-11-19, standing rule)
+
+Collisions are now checked with math, not mesh booleans (`coupler_ranges.py` → `coupler_ranges.json`, runs in 0.2 s).
+
+**Method**
+- Every solid feature is a range box: angle × radius × height. Height is an exact z(r) formula where there's a chamfer or an arc fillet.
+- Two parts collide only if all three ranges overlap. Touching (overlap 0) is a seat.
+- Off-axis round parts (bullets, screws, detent ball) are checked against each other by centre-distance math. Against revolved parts they use their bounding ranges.
+- A part that sits in a hole (key in the keyway, male bullet in its mouth/bore, ball in a dimple) must fit inside that hole's range. The margin is reported.
+
+**States checked**
+- Locked, hand seated and pushed onto the lips.
+- Collar turning −60° → 0° in 5° steps.
+- Hand pushed in from 25 mm out with the collar open.
+- Collar against the arm at both detent stops, and at mid-turn with the ball retracted.
+- Inside the arm.
+
+**B.5 result:** 3365 pairs, **0 collisions**.
+
+| Tightest | Clearance |
+|---|---|
+| Lug on lip (seat at preload) | 0 |
+| Key entering the nose ring | touches the face, then enters the keyway with 0.3 |
+| Ball in its dimples | 0.05 |
+| Lug tip to socket body | 0.1 (radius) |
+| Hand flange to screw heads | 0.2 |
+| Collar on socket body | 0.2 |
+| Sleeve to retaining flange | 0.2 |
+| Male bullets in their bores | 0.6 |
+
+**Fits (mm):**
+- spigot 0.25
+- flange inside lips 0.3
+- lug tips inside the wall 0.5
+- collar bore 0.2
+- wall outside nose ring 0.4
+- lug above lip, seated 0.1
+- lugs pass the open lips: 3° each side

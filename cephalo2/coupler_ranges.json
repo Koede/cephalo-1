@@ -1,0 +1,135 @@
+{
+ "pairs_checked": 3365,
+ "collisions": [],
+ "fits_mm": {
+  "spigot in bore (radial)": 0.25,
+  "hand flange inside the lips (radial)": 0.29999999999999716,
+  "lug tips inside the collar wall (radial)": 0.5,
+  "collar bore on the socket body (radial)": 0.1999999999999993,
+  "collar wall outside the nose ring (radial)": 0.3999999999999986,
+  "lug underside above the lip top (axial, seated)": 0.10000000000000009,
+  "lugs pass the open lips (deg each side)": 3.0
+ },
+ "tightest": [
+  {
+   "state": "inserting, hand dz -10",
+   "a": "hand key",
+   "b": "nose ring",
+   "clearance_mm": 0.0,
+   "separated_by": "height",
+   "ok": true
+  },
+  {
+   "state": "locked, hand dz -0.1",
+   "a": "lug 0",
+   "b": "lip 0",
+   "clearance_mm": 0.0,
+   "separated_by": "height",
+   "ok": true
+  },
+  {
+   "state": "locked, hand dz -0.1",
+   "a": "lug 120",
+   "b": "lip 120",
+   "clearance_mm": 0.0,
+   "separated_by": "height",
+   "ok": true
+  },
+  {
+   "state": "locked, hand dz -0.1",
+   "a": "lug 240",
+   "b": "lip 240",
+   "clearance_mm": 0.0,
+   "separated_by": "height",
+   "ok": true
+  },
+  {
+   "state": "arm internals",
+   "a": "screw head 30",
+   "b": "screw shank 30",
+   "clearance_mm": 0.0,
+   "separated_by": "z",
+   "ok": true
+  },
+  {
+   "state": "arm internals",
+   "a": "screw shank 30",
+   "b": "screw head 30",
+   "clearance_mm": 0.0,
+   "separated_by": "z",
+   "ok": true
+  },
+  {
+   "state": "collar vs arm, theta -60",
+   "a": "collar step",
+   "b": "detent ball",
+   "clearance_mm": 0.05,
+   "separated_by": "fit in hole",
+   "ok": true
+  },
+  {
+   "state": "collar vs arm, theta -60",
+   "a": "collar sleeve",
+   "b": "detent ball",
+   "clearance_mm": 0.05,
+   "separated_by": "fit in hole",
+   "ok": true
+  },
+  {
+   "state": "locked, hand dz 0.0",
+   "a": "lug 0",
+   "b": "socket body",
+   "clearance_mm": 0.1,
+   "separated_by": "radius",
+   "ok": true
+  },
+  {
+   "state": "locked, hand dz 0.0",
+   "a": "lug 120",
+   "b": "socket body",
+   "clearance_mm": 0.1,
+   "separated_by": "radius",
+   "ok": true
+  },
+  {
+   "state": "locked, hand dz 0.0",
+   "a": "lug 240",
+   "b": "socket body",
+   "clearance_mm": 0.1,
+   "separated_by": "radius",
+   "ok": true
+  },
+  {
+   "state": "locked, hand dz 0.0",
+   "a": "hand flange",
+   "b": "screw head 30",
+   "clearance_mm": 0.2,
+   "separated_by": "height",
+   "ok": true
+  },
+  {
+   "state": "collar vs arm, theta -60",
+   "a": "collar step",
+   "b": "socket body",
+   "clearance_mm": 0.2,
+   "separated_by": "radius",
+   "ok": true
+  },
+  {
+   "state": "collar vs arm, theta -60",
+   "a": "collar sleeve",
+   "b": "socket body",
+   "clearance_mm": 0.2,
+   "separated_by": "radius",
+   "ok": true
+  },
+  {
+   "state": "collar vs arm, theta -60",
+   "a": "collar sleeve",
+   "b": "retaining flange",
+   "clearance_mm": 0.2,
+   "separated_by": "height",
+   "ok": true
+  }
+ ]
+}
