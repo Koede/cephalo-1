@@ -499,3 +499,11 @@ web 1.7 mm, 9.3 mm apart, 1.3 mm clear of the dia 5 swing pin). If the pair took
 shear), 34 MPa hole bearing in 2 mm leaves. Under spin the pull loads the pins sideways, so about 124 N of friction (mu 0.15) resists
 withdrawal against under 1 N of axial load; a spring holds them at rest. Open: positive keeper for the spinning state, and how the
 pins are withdrawn and the root indexed while parked. Not drawn yet.
+
+**Axial root lock, to-scale layout (2026-11-19):** `hand3_root_lock_axial.py/.png/.json`. Each root sits on a shoe (two arc leaves,
+46 deg wide) between a base disc and a top disc; the finger's 826 N pull goes from the shoe edges into rim lips on both discs
+(14 MPa); two dia 3 axial pins at +-15 deg on r 17.7 (24 holes, web 1.58 mm) stop it moving round; a bridge with a tab joins the pin
+pair; a parked fork lifts the tab 2.9 mm and holds the shoe while a roller turns the hub in 15 deg steps. Roots no closer than 60 deg.
+Open: (1) spinning keeper: the pull is on the lips so the pins are not jammed, only a 3 N spring holds them; (2) stack 13 mm leaves
+0.2 mm of shaft for the nut; (3) 3 + 1 and one-sided poses must never spin (826 / 1430 N); 2 + 2 is balanced; (4) cords to a root
+that has moved; (5) roller and fork parts not chosen.
