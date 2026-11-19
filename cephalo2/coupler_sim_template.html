@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cephalo-2 coupler + hand3 motion sim</title>
+<link rel="icon" href="data:,"><title>Cephalo-2 coupler + hand3 motion sim</title>
 <style>
 html,body{margin:0;height:100%;background:#15171b;color:#e6e6e6;font:13px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;overflow:hidden}
 #c{position:fixed;inset:0}
@@ -18,11 +18,11 @@ table{width:100%;border-collapse:collapse}
 td{padding:2px 0}td:last-child{text-align:right;font-variant-numeric:tabular-nums;color:#fff}
 .meter{height:5px;background:#2a2e35;border-radius:3px;margin:1px 0 4px}.meter i{display:block;height:100%;border-radius:3px;background:#39a0e0}
 .note{color:#999;margin:8px 0 0;font-size:12px}
-@media (max-width:760px){#hud{top:auto;bottom:58px;right:10px;width:calc(100vw - 20px);max-height:32vh;overflow:auto}#ui{max-height:38vh;overflow:auto}}
+@media (max-width:760px){#hud{top:auto;bottom:58px;right:10px;left:10px;width:auto;max-height:34vh;overflow:auto;padding:6px 10px}#ui{width:auto;right:10px;max-height:40vh;overflow:auto;padding:6px 10px}#bar{padding:6px}.collapsed #tab{display:none}}
 </style></head>
 <body>
 <canvas id="c"></canvas>
-<div id="ui" class="pane"><h1>Coupler rev B.6 + hand3 (hub E)</h1>
+<div id="ui" class="pane"><h1><button id="uit" style="float:right;padding:1px 8px">–</button>Coupler rev B.6 + hand3 (hub E)</h1><div id="uib">
 <div class="row" id="jumps"></div>
 <div class="row" style="margin-top:10px">
  <button data-g="arm" class="on g">arm + socket</button><button data-g="collar" class="on g">collar</button><button data-g="hand" class="on g">hand base + leads</button>
@@ -30,8 +30,8 @@ td{padding:2px 0}td:last-child{text-align:right;font-variant-numeric:tabular-num
 </div>
 <div class="row"><button id="cut">section cut</button><button id="follow">camera: wide</button></div>
 <p class="note">Real CAD solids from handmount_b.py and hand3e/. Spin is shown at 1/600 of the real rpm. Cords, TPU links and trim screws are not drawn. Loads are estimates.</p>
-</div>
-<div id="hud" class="pane"><div id="phase"></div><table id="tab"></table></div>
+</div></div>
+<div id="hud" class="pane"><div id="phase" style="cursor:pointer">…</div><table id="tab"></table></div>
 <div id="bar" class="pane"><button id="play">❚❚</button><button id="spd">1×</button><input id="t" type="range" min="0" max="1000" value="0"><span id="tt" style="width:48px;text-align:right">0.0 s</span></div>
 <script src="sim_data.js"></script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
@@ -42,8 +42,8 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 const D = window.SIM, cv = document.getElementById('c');
 const R = new THREE.WebGLRenderer({canvas:cv, antialias:true}); R.setPixelRatio(Math.min(devicePixelRatio, 2)); R.localClippingEnabled = true;
 const S = new THREE.Scene(); S.background = new THREE.Color('#15171b');
-const cam = new THREE.PerspectiveCamera(35, 1, 1, 8000); cam.position.set(260, 60, 300);
-const ctl = new OrbitControls(cam, cv); ctl.target.set(0, -45, 0); ctl.enableDamping = true;
+const cam = new THREE.PerspectiveCamera(35, 1, 1, 8000);
+const ctl = new OrbitControls(cam, cv); ctl.enableDamping = true;
 S.add(new THREE.HemisphereLight(0xffffff, 0x303038, 1.1));
 const d1 = new THREE.DirectionalLight(0xffffff, 1.7); d1.position.set(200, 260, 160); S.add(d1);
 const d2 = new THREE.DirectionalLight(0xbcd0ff, 0.6); d2.position.set(-200, -80, -140); S.add(d2);
@@ -84,25 +84,38 @@ function hud(f) {
     `<tr><td>STS3215 servos</td><td>${h.servo}</td></tr>` +
     `<tr><td>finger pull rated / stall</td><td>${M.F_rated} / ${M.F_stall} N</td></tr>`;
 }
+const narrow = innerWidth < 760, uib = document.getElementById('uib'), hudEl = document.getElementById('hud');
+const setUi = open => { uib.style.display = open ? '' : 'none'; document.getElementById('uit').textContent = open ? '–' : '+'; };
+setUi(!narrow); if (narrow) hudEl.classList.add('collapsed');
+document.getElementById('uit').onclick = () => setUi(uib.style.display === 'none');
+document.getElementById('phase').onclick = () => hudEl.classList.toggle('collapsed');
 const jumps = [['approach', 0], ['push in', 3], ['lock', 5], ['spin', 8], ['hover', 11], ['spread', 15.5], ['curl', 18], ['hold', 21.5], ['unlock', 26]];
 const J = document.getElementById('jumps');
-for (const [n, t] of jumps) { const b = document.createElement('button'); b.textContent = n; b.onclick = () => { T = t; }; J.appendChild(b); }
+for (const [n, t] of jumps) { const b = document.createElement('button'); b.textContent = n; b.onclick = () => { T = t + 0.01; }; J.appendChild(b); }
 document.querySelectorAll('button.g').forEach(b => b.onclick = () => { b.classList.toggle('on'); for (const o of groups[b.dataset.g] || []) o.visible = b.classList.contains('on'); });
 document.getElementById('cut').onclick = e => { clipOn = !clipOn; e.target.classList.toggle('on', clipOn); for (const o of objs) o.material.clippingPlanes = clipOn ? [clip] : []; for (const o of objs) o.material.needsUpdate = true; };
-let wide = true; document.getElementById('follow').onclick = e => { wide = !wide; e.target.textContent = wide ? 'camera: wide' : 'camera: coupler close-up';
-  if (wide) { cam.position.set(260, 60, 300); ctl.target.set(0, -45, 0); } else { cam.position.set(95, 25, 110); ctl.target.set(0, -2, 0); } };
+// fit the view to a box (half-width hw, half-height hh mm around screen-y cy) for the current screen shape
+const DIR = new THREE.Vector3(0.62, 0.22, 0.75).normalize();
+function fit(hw, hh, cy) {
+  const t = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2));
+  const d = 1.15 * Math.max(hh / t, hw / (t * cam.aspect)) + hw;
+  ctl.target.set(0, cy, 0); cam.position.copy(DIR).multiplyScalar(d).add(ctl.target); cam.updateProjectionMatrix();
+}
+let wide = true; const view = () => wide ? fit(120, 110, -60) : fit(32, 30, -4);
+document.getElementById('follow').onclick = e => { wide = !wide; e.target.textContent = wide ? 'camera: wide' : 'camera: coupler close-up'; view(); };
 let T = 0, playing = true, spd = 1, last = performance.now();
 const tin = document.getElementById('t'), tt = document.getElementById('tt'), TEND = D.nf / D.fps;
 document.getElementById('play').onclick = e => { playing = !playing; e.target.textContent = playing ? '❚❚' : '▶'; };
 document.getElementById('spd').onclick = e => { spd = spd === 1 ? 0.5 : spd === 0.5 ? 0.25 : 1; e.target.textContent = spd + '×'; };
 tin.oninput = () => { T = tin.value / 1000 * TEND; };
 function size() { const w = innerWidth, h = innerHeight; R.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); }
-addEventListener('resize', size); size();
+addEventListener('resize', () => { size(); view(); }); size(); view();
 let lastF = -1;
 (function loop(now) {
-  const dt = (now - last) / 1000; last = now;
-  if (playing) { T += dt * spd; if (T >= TEND) T -= TEND; }
-  const f = Math.min(D.nf - 1, Math.floor(T * D.fps));
+  const dt = Math.min(Math.max((now - last) / 1000, 0), 0.1); last = now;     // rAF time can start before performance.now()
+  if (playing) T += dt * spd;
+  T = ((T % TEND) + TEND) % TEND;
+  const f = Math.max(0, Math.min(D.nf - 1, Math.floor(T * D.fps)));
   if (f !== lastF) { pose(f); hud(f); lastF = f; }
   if (playing || document.activeElement !== tin) tin.value = Math.round(T / TEND * 1000);
   tt.textContent = T.toFixed(1) + ' s';

@@ -1,6 +1,991 @@
 {
  "pairs_checked": 91148,
- "collisions": [],
+ "collisions": [
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 bend @19",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.134,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 bend @20",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.264,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 bend @21",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.382,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 bend @22",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.489,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 bend @23",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.585,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 bend @24",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.668,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 bend @25",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.738,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 bend @26",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.796,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 bend @27",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.842,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 bend @28",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.874,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 bend @29",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.893,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 bend @30",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E frame",
+   "clearance_mm": -8.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E frame",
+   "clearance_mm": -6.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E frame",
+   "clearance_mm": -4.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -2.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -4.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -6.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -8.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -10.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -12.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -14.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -16.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -18.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -20.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -22.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -24.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -26.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -28.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -30.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -28.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -26.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -24.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -22.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -20.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -18.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -16.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -14.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -12.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -10.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_motor_base",
+   "clearance_mm": -2.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 bend @19",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.134,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 bend @20",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.264,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 bend @21",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.382,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 bend @22",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.489,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 bend @23",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.585,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 bend @24",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.668,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 bend @25",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.738,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 bend @26",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.796,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 bend @27",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.842,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 bend @28",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.874,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 bend @29",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.893,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 bend @30",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E frame",
+   "clearance_mm": -8.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E frame",
+   "clearance_mm": -6.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E frame",
+   "clearance_mm": -4.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -2.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -4.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -6.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -8.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -10.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -12.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -14.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -16.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -18.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -20.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -22.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -24.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -26.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -28.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -30.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -28.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -26.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -24.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -22.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -20.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -18.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -16.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -14.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -12.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -10.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 210 down @0",
+   "b": "hub E hw_motor_base",
+   "clearance_mm": -2.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 bend @19",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.134,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 bend @20",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.264,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 bend @21",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.382,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 bend @22",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.489,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 bend @23",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.585,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 bend @24",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.668,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 bend @25",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.738,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 bend @26",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.796,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 bend @27",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.842,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 bend @28",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.874,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 bend @29",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.893,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 bend @30",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -0.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E frame",
+   "clearance_mm": -8.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E frame",
+   "clearance_mm": -6.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E frame",
+   "clearance_mm": -4.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -2.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -4.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -6.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -8.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -10.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -12.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -14.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -16.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -18.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -20.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -22.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_curl",
+   "clearance_mm": -24.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -26.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -28.9,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -30.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -28.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -26.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -24.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -22.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -20.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -18.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -16.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -14.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -12.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -10.0,
+   "separated_by": "height",
+   "ok": false
+  },
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 330 down @0",
+   "b": "hub E hw_motor_base",
+   "clearance_mm": -2.0,
+   "separated_by": "height",
+   "ok": false
+  }
+ ],
  "fits_mm": {
   "spigot in bore (radial)": 0.25,
   "hand flange inside the lips (radial)": 0.29999999999999716,
@@ -23,6 +1008,14 @@
   "wheel hand: 3 x 20 AWG F60 Pro V leads (OD 1.8, bundle dia 3.9) through its dia 6.8 back-plate hole (radial)": 1.46
  },
  "tightest": [
+  {
+   "state": "wiring, hand side",
+   "a": "hand lead 90 down @0",
+   "b": "hub E hw_servo_base",
+   "clearance_mm": -30.0,
+   "separated_by": "height",
+   "ok": false
+  },
   {
    "state": "inserting, hand dz -10",
    "a": "hand key",
@@ -85,14 +1078,6 @@
    "b": "detent ball",
    "clearance_mm": 0.05,
    "separated_by": "fit in hole",
-   "ok": true
-  },
-  {
-   "state": "wiring, hand side",
-   "a": "hand lead 90 @0",
-   "b": "hub E frame",
-   "clearance_mm": 0.15,
-   "separated_by": "height",
    "ok": true
   },
   {

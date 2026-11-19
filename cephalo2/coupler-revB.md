@@ -399,3 +399,26 @@ The three bullets carry the motor phases from the arm's tip-bay ESC to the hand'
 - Range check against hub E's real geometry (`coupler_hubE_ranges.py` cuts each static part into 2 mm bands): **91,148 pairs, 0 collisions**. The leads clear the plate-hole edge by 3.85 mm.
 - The hub E change is in the workspace copy `hand3e/hand3_hubc.py`.
 - The older rev D pack-frame chamfer in `coupler_hand3_fit.py` only applies to rev D.
+
+## Correction and open item: motor leads through hand3 hub E (2026-11-19)
+
+**Correction.** The "0 collisions vs hub E" result above was wrong.
+- `coupler_hubE_ranges.py` took each band's inner radius from polygon vertices. That misses parts that span the axis, and hub E's two STS3215 servos lie across the centre (±22.6 × ±17.5 mm, z 2–51). It is fixed: a band that encloses the axis now starts at r = 0.
+- With the fix, `coupler_ranges.py` reports the leads running into the curl servo.
+- **There is no centre channel in hub E.**
+
+**Whole-sim overlap check** (`coupler_sim_overlap.py`: occupancy grids, 0.5 mm cells, every 1.5 s plus the key states) also found:
+- **Leads × servos:** the item above.
+- **Empty-hand curl:** at full spread + full curl (90/90/85°) the opposite fingertips pass through each other (64 mm³) and into the hub and heel. Those limits are for wrapping an object; an empty hand must stop where the tips meet.
+- **Detent ball:** it does not retract while the collar turns.
+- **Tip-bay sketch:** it has no insert bores for the 3 screws.
+- **Leads in their solder cups:** drawn inside the cups.
+- **O-ring:** shows its intended 0.17 mm squeeze.
+
+**Where the leads can go** (`coupler_lead_route.py`: 1 mm free-space grid; rotor, cage and rings swept through a turn and their full stroke; Dijkstra; frame cells allowed at a cost):
+- **14 AWG (3.5 OD):** no path even through the frame.
+- **18 AWG:** a path exists with 0.3 mm clearance. The SE 2816 ships with 18 AWG × 25 cm leads.
+- Phase 90 runs down the +y corridor; phases 210 and 330 run down the −y corridor (x ±8.5). The corridors are at y ±23.5, beside the servo faces and below the rings' lowest point (z 47).
+- Hub E would need two 5–6 mm tunnels in its frame top block (z 51.4–55) into the centre hole under the motor, plus two plate notches.
+- The hand-base grooves would run outward to the corridors.
+- Study: `hubE_lead_route_study.png`. **Awaiting Forest's go-ahead before building it.**
