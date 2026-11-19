@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hippos-1 tail mount (SFF connector)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --ink:#1d2127; --mute:#5c6470; --line:#e2e5ea; --ok:#1f8a4c; --warn:#b26a00; --acc:#2f6db3; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--ink); }
+  header { padding:12px 16px 4px; }
+  h1 { font-size:18px; margin:0 0 2px; }
+  .sub { color:var(--mute); font-size:13px; line-height:1.4; }
+  .wrap { display:grid; grid-template-columns:minmax(0,1.4fr) minmax(0,1fr); gap:12px; padding:8px 12px 12px; }
+  @media (max-width:900px) { .wrap { grid-template-columns:1fr; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:10px; }
+  #view { position:relative; height:64vh; min-height:360px; border-radius:8px; overflow:hidden; background:linear-gradient(#eef1f5,#dde3ea); touch-action:none; }
+  .row { display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-top:8px; }
+  button { border:1px solid var(--line); background:#fff; border-radius:6px; padding:6px 10px; font-size:13px; cursor:pointer; }
+  button.on { background:var(--acc); color:#fff; border-color:var(--acc); }
+  input[type=range] { flex:1; min-width:160px; }
+  #phase { font-size:13px; color:var(--mute); min-width:190px; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .chip { border:1px solid var(--line); border-radius:14px; padding:3px 9px; font-size:12px; cursor:pointer; user-select:none; background:#fff; }
+  .chip.off { opacity:.4; text-decoration:line-through; }
+  .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; vertical-align:-1px; }
+  table { border-collapse:collapse; width:100%; font-size:13px; }
+  td, th { padding:5px 6px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+  th { color:var(--mute); font-weight:600; font-size:12px; }
+  .ok { color:var(--ok); font-weight:600; } .warn { color:var(--warn); font-weight:600; }
+  h3 { font-size:15px; margin:4px 0 6px; }
+  .note { color:var(--mute); font-size:12.5px; line-height:1.45; margin-top:8px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Hippos-1 tail mount: the tail on the SFF connector</h1>
+  <div class="sub">Push the tail in, twist 60°, it clicks. The standard SFF lock (same as every hand) plus a skirt-in-sleeve that stops the tail rocking. Drag to orbit, pinch or scroll to zoom. Grey parts are context, not CAD.</div>
+</header>
+<div class="wrap">
+  <div class="card">
+    <div id="view"></div>
+    <div class="row">
+      <button id="play">Play push + twist</button>
+      <input type="range" id="t" min="0" max="1000" value="1000">
+      <span id="phase"></span>
+    </div>
+    <div class="row">
+      <button id="cut">Section cut</button>
+      <button id="spin">Auto-rotate</button>
+      <button data-v="iso" class="vw on">3/4</button><button data-v="side" class="vw">Side</button><button data-v="bottom" class="vw">From below</button>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="card">
+    <h3>Checks on the true solids</h3>
+    <table id="checks"></table>
+    <h3 style="margin-top:12px">Loads through the socket</h3>
+    <table id="loads"></table>
+    <h3 style="margin-top:12px">Parts</h3>
+    <table id="bom"></table>
+    <div class="note">Hand calculations and geometry checks: no FEA, not printed. PETG strengths, O-ring force and the latch tooth gap are estimates to confirm on the first print.</div>
+  </div>
+</div>
+<script>
+const D = /*DATA*/;
+const view = document.getElementById('view');
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.localClippingEnabled = true;
+view.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(35, 1, 1, 5000);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8899aa, 0.75));
+const d1 = new THREE.DirectionalLight(0xffffff, 0.75); d1.position.set(200, 300, 250); scene.add(d1);
+const d2 = new THREE.DirectionalLight(0xffffff, 0.35); d2.position.set(-250, -100, -200); scene.add(d2);
+
+const clip = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0);
+const fixed = new THREE.Group(), tail = new THREE.Group();
+scene.add(fixed); scene.add(tail);
+const mats = [], meshes = [];
+function b64(s, T) { const b = atob(s); const u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return new T(u.buffer); }
+D.parts.forEach(p => {
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(b64(p.v, Float32Array), 3));
+  g.setIndex(new THREE.BufferAttribute(b64(p.f, Uint32Array), 1));
+  g.computeVertexNormals();
+  const m = new THREE.MeshStandardMaterial({color:p.color, roughness:0.6, metalness:0.05, side:THREE.DoubleSide, flatShading:false,
+    transparent:p.ghost, opacity:p.ghost ? 0.35 : 1.0, depthWrite:!p.ghost});
+  mats.push(m);
+  const mesh = new THREE.Mesh(g, m);
+  (p.group === 'fixed' ? fixed : tail).add(mesh);
+  meshes.push(mesh);
+});
+
+// chips
+const chips = document.getElementById('chips');
+D.parts.forEach((p, i) => {
+  const c = document.createElement('span'); c.className = 'chip';
+  c.innerHTML = `<span class="dot" style="background:${p.color}"></span>${p.name}`;
+  c.onclick = () => { meshes[i].visible = !meshes[i].visible; c.classList.toggle('off', !meshes[i].visible); };
+  chips.appendChild(c);
+});
+
+// motion: 0..0.5 push in at the entry angle, 0.5..1 twist -60 -> 0 riding the draw-in ramp
+function rampDz(th) { const r = D.ramp; let i = Math.min(r.length - 2, Math.max(0, Math.floor(th + 60))); const f = (th - r[i][0]) / (r[i+1][0] - r[i][0]); return r[i][1] + (r[i+1][1] - r[i][1]) * Math.max(0, Math.min(1, f)); }
+const slider = document.getElementById('t'), phase = document.getElementById('phase');
+function setT(s) {
+  let th, dz;
+  if (s < 0.5) { th = -60; const a = s / 0.5; dz = 60 * (1 - a) + rampDz(-60) * a; phase.textContent = `pushing in: ${dz.toFixed(1)} mm to go`; }
+  else { th = -60 + 60 * (s - 0.5) / 0.5; dz = rampDz(th); phase.textContent = th > -0.5 ? 'locked (latch clicked)' : `twisting: ${(th + 60).toFixed(0)}° of 60°`; }
+  tail.rotation.set(0, THREE.MathUtils.degToRad(th), 0);   // about model +z (three +y)
+  tail.position.set(0, -dz, 0);
+}
+slider.oninput = () => setT(slider.value / 1000);
+setT(1);
+let playing = false, t0 = 0;
+document.getElementById('play').onclick = () => { playing = true; t0 = performance.now(); };
+
+let cutOn = false;
+document.getElementById('cut').onclick = e => { cutOn = !cutOn; e.target.classList.toggle('on', cutOn); mats.forEach(m => m.clippingPlanes = cutOn ? [clip] : []); };
+let spin = false;
+document.getElementById('spin').onclick = e => { spin = !spin; e.target.classList.toggle('on', spin); controls.autoRotate = spin; };
+const VIEWS = {iso:[150, 70, 170], side:[0, 0, 230], bottom:[60, -220, 80]};
+function setView(k) { const p = VIEWS[k]; camera.position.set(p[0], p[1], p[2]); controls.target.set(0, -25, 0); controls.update(); }
+document.querySelectorAll('.vw').forEach(b => b.onclick = () => { document.querySelectorAll('.vw').forEach(x => x.classList.remove('on')); b.classList.add('on'); setView(b.dataset.v); });
+setView('iso');
+
+function resize() { const w = view.clientWidth, h = view.clientHeight; renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+window.addEventListener('resize', resize); resize();
+(function loop(now) {
+  requestAnimationFrame(loop);
+  if (playing) { const s = Math.min(1, (now - t0) / 5000); slider.value = s * 1000; setT(s); if (s >= 1) playing = false; }
+  controls.update(); renderer.render(scene, camera);
+})(0);
+
+// tables
+const C = D.ck, f1 = x => x.toFixed(1), f2 = x => x.toFixed(2);
+const rows = [
+  ['Locked: parts overlap', 'none', true],
+  ['Push in (60 mm travel)', 'no contact; skirt guided for the last 35 mm', true],
+  ['60° twist, latch riding the keeper', `no contact; latch flexes ${f2(C.defl)} mm`, true],
+  ['Latch pulled 1.6 mm (release)', 'clears skirt and sleeve', true],
+  ['Release tab reachable', 'through a 10.8 mm window, 5.3 mm deep', true],
+  ['Rocking (tilt before skirt touches sleeve)', `±${f2(C.rock)}° = ±${f1(C.tip)} mm at the tail tip (plain SFF ±${f1(C.plain_tip)} mm)`, true],
+  ['Print: flat overhangs', 'only 4 × Ø4 insert roofs and 4 × Ø6.2 counterbore roofs (short bridges)', true],
+];
+document.getElementById('checks').innerHTML = '<tr><th>Check</th><th>Result</th><th></th></tr>' +
+  rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td class="${r[2] ? 'ok' : 'warn'}">${r[2] ? 'pass' : 'check'}</td></tr>`).join('');
+document.getElementById('loads').innerHTML = '<tr><th>Case</th><th>Bending</th><th>Lug margin</th></tr>' +
+  Object.entries(C.loads).map(([k, v]) => `<tr><td>${k}</td><td>${f2(v.M)} N·m</td><td class="${v.lug_factor >= 2 ? 'ok' : 'warn'}">×${f1(v.lug_factor)}</td></tr>`).join('');
+const bom = [
+  ['rump_socket.stl (PETG, flange face on the bed)', `${f1(C.mass.rump_socket)} g`],
+  ['tail_adapter.stl (PETG, servo flange on the bed)', `${f1(C.mass.tail_adapter)} g`],
+  ['standard SFF base (hand_base.stl, unchanged)', `${f1(C.mass.hand_base)} g`],
+  ['5 × Mill-Max 0906-2-15-20-75-14-11-0, pin board, pad board, O-ring 27 × 1.5', 'as the hand kit'],
+  ['4 × M3 × 10 button head (adapter → base inserts)', ''],
+  ['4 × M3 into rump bulkhead inserts (flange, r 29.5)', ''],
+  ['4 × M3 heat-set inserts in the adapter (root servo bracket)', ''],
+  ['ID resistor 100 kΩ (tail); 5 A PTC on the 12 V feed', ''],
+];
+document.getElementById('bom').innerHTML = bom.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');
+</script>
+</body>
+</html>
