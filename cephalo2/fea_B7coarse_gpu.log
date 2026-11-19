@@ -1,0 +1,146 @@
+mesh maxvol 2.0 mm3
+parsing switches
+success
+Transforming over 1000 vertices to C_CONTIGUOUS.
+Transforming over 1000 elements to C_CONTIGUOUS.
+  hand base: 47808 tets, 234174 dofs (111.7 s)
+parsing switches
+success
+Transforming over 1000 vertices to C_CONTIGUOUS.
+Transforming over 1000 elements to C_CONTIGUOUS.
+  collar: 24572 tets, 122715 dofs (54.6 s)
+parsing switches
+success
+Transforming over 1000 vertices to C_CONTIGUOUS.
+Transforming over 1000 elements to C_CONTIGUOUS.
+  nose ring: 8814 tets, 50397 dofs (8.8 s)
+  contact pairs (found/slaves, both ways): hand-nose (1045, 1196, 705, 813), lip-lug (98, 490, 68, 187), step-nose (128, 197, 132, 463), spigot 418, collar bore 192
+C:\Users\admin\workspace\cephalo-1\.venv\Lib\site-packages\cupy\_environment.py:286: UserWarning: CUDA path could not be detected. Set CUDA_PATH environment variable if CuPy fails to load.
+  warnings.warn(
+      gpu hierarchy: 3 levels, coarse 450
+      gpu cg 236 it, rel. residual 1.0e-09
+    contact iteration 0: 1237 changes; active c1 827 c2 126 c3 119 rs 346 rc 131
+      gpu cg 284 it, rel. residual 9.4e-10
+    contact iteration 1: 618 changes; active c1 767 c2 57 c3 141 rs 227 rc 135
+      gpu cg 302 it, rel. residual 9.3e-10
+    contact iteration 2: 341 changes; active c1 609 c2 59 c3 132 rs 187 rc 119
+      gpu cg 303 it, rel. residual 9.3e-10
+    contact iteration 3: 210 changes; active c1 503 c2 59 c3 110 rs 174 rc 140
+      gpu cg 287 it, rel. residual 9.8e-10
+    contact iteration 4: 110 changes; active c1 430 c2 63 c3 108 rs 173 rc 140
+      gpu cg 285 it, rel. residual 9.8e-10
+    contact iteration 5: 119 changes; active c1 352 c2 65 c3 124 rs 174 rc 136
+      gpu cg 276 it, rel. residual 9.4e-10
+    contact iteration 6: 72 changes; active c1 298 c2 70 c3 120 rs 176 rc 133
+      gpu cg 269 it, rel. residual 9.5e-10
+    contact iteration 7: 48 changes; active c1 260 c2 70 c3 126 rs 176 rc 131
+      gpu cg 244 it, rel. residual 9.3e-10
+    contact iteration 8: 13 changes; active c1 251 c2 72 c3 124 rs 176 rc 131
+      gpu cg 220 it, rel. residual 9.5e-10
+    contact iteration 9: 8 changes; active c1 243 c2 72 c3 124 rs 176 rc 131
+      gpu cg 205 it, rel. residual 9.8e-10
+    contact iteration 10: 5 changes; active c1 238 c2 72 c3 124 rs 176 rc 131
+      gpu cg 117 it, rel. residual 9.5e-10
+    contact iteration 11: 0 changes; active c1 238 c2 72 c3 124 rs 176 rc 131
+  contact resultants (N): hand->nose ring 231.6, lips<-lugs 231.3, collar step->nose ring 231.3
+  az 60: 100 s, tilt 0.1455 deg
+     hand base: lugs (incl. root at the flange rim) vM max  55.69 elem  23.72 p99.9  26.03 | s1 max  35.15 elem  19.49 p99.9  21.92 | szz elem  10.34  at [-4.2, -22.4, -3.5]
+     hand base: flange / spigot (rest)          vM max  39.88 elem  27.89 p99.9  26.55 | s1 max  54.23 elem  34.03 p99.9  33.04 | szz elem  31.87  at [-11.5, -17.1, -4.4]
+     collar: lip                                vM max  89.62 elem  33.34 p99.9  37.10 | s1 max  65.68 elem  18.16 p99.9  22.11 | szz elem   8.77  at [-4.3, -22.5, -3.7]
+     collar: wall (below the step)              vM max  27.32 elem  22.82 p99.9  19.45 | s1 max  34.10 elem  26.99 p99.9  23.53 | szz elem  26.32  at [-9.1, -22.0, -3.0]
+     collar: step / wall corner                 vM max   9.21 elem   4.21 p99.9   5.81 | s1 max   8.62 elem   4.85 p99.9   6.26 | szz elem   3.22  at [-16.0, -13.1, 3.7]
+     collar: sleeve                             vM max   2.99 elem   2.39 p99.9   2.67 | s1 max   3.02 elem   2.36 p99.9   2.59 | szz elem   0.22  at [0.2, -21.0, 7.7]
+     nose ring: nose ring                       vM max  18.08 elem   7.49 p99.9   7.81 | s1 max  15.68 elem   6.46 p99.9   6.43 | szz elem   4.00  at [-11.2, -20.4, 3.4]
+      gpu cg 236 it, rel. residual 9.8e-10
+    contact iteration 0: 1209 changes; active c1 855 c2 125 c3 118 rs 350 rc 129
+      gpu cg 285 it, rel. residual 9.7e-10
+    contact iteration 1: 651 changes; active c1 789 c2 71 c3 143 rs 216 rc 137
+      gpu cg 303 it, rel. residual 9.5e-10
+    contact iteration 2: 401 changes; active c1 639 c2 54 c3 129 rs 161 rc 120
+      gpu cg 303 it, rel. residual 9.9e-10
+    contact iteration 3: 184 changes; active c1 561 c2 57 c3 111 rs 139 rc 123
+      gpu cg 284 it, rel. residual 9.4e-10
+    contact iteration 4: 96 changes; active c1 509 c2 60 c3 98 rs 139 rc 125
+      gpu cg 285 it, rel. residual 9.6e-10
+    contact iteration 5: 93 changes; active c1 461 c2 74 c3 101 rs 141 rc 119
+      gpu cg 288 it, rel. residual 9.9e-10
+    contact iteration 6: 85 changes; active c1 434 c2 117 c3 91 rs 142 rc 115
+      gpu cg 276 it, rel. residual 9.3e-10
+    contact iteration 7: 19 changes; active c1 418 c2 117 c3 90 rs 142 rc 113
+      gpu cg 250 it, rel. residual 9.5e-10
+    contact iteration 8: 7 changes; active c1 413 c2 117 c3 90 rs 142 rc 111
+      gpu cg 238 it, rel. residual 9.8e-10
+    contact iteration 9: 2 changes; active c1 411 c2 117 c3 90 rs 142 rc 111
+      gpu cg 187 it, rel. residual 9.1e-10
+    contact iteration 10: 1 changes; active c1 410 c2 117 c3 90 rs 142 rc 111
+      gpu cg 140 it, rel. residual 9.7e-10
+    contact iteration 11: 0 changes; active c1 410 c2 117 c3 90 rs 142 rc 111
+  contact resultants (N): hand->nose ring 237.8, lips<-lugs 237.6, collar step->nose ring 237.6
+  az 90: 78 s, tilt 0.1581 deg
+     hand base: lugs (incl. root at the flange rim) vM max  69.85 elem  29.20 p99.9  27.33 | s1 max  40.36 elem  23.10 p99.9  25.10 | szz elem  12.26  at [-4.2, -22.4, -3.5]
+     hand base: flange / spigot (rest)          vM max  38.22 elem  27.71 p99.9  27.08 | s1 max  49.72 elem  34.43 p99.9  33.79 | szz elem  30.22  at [-6.0, -19.7, -4.4]
+     collar: lip                                vM max 112.43 elem  41.70 p99.9  43.50 | s1 max  81.93 elem  21.81 p99.9  23.85 | szz elem   9.66  at [-4.3, -22.5, -3.7]
+     collar: wall (below the step)              vM max  27.35 elem  22.92 p99.9  19.28 | s1 max  34.15 elem  27.08 p99.9  23.13 | szz elem  26.47  at [-9.1, -22.0, -3.0]
+     collar: step / wall corner                 vM max   7.20 elem   3.79 p99.9   5.45 | s1 max   8.26 elem   4.59 p99.9   5.68 | szz elem   3.09  at [-16.0, -13.1, 3.7]
+     collar: sleeve                             vM max   2.95 elem   2.38 p99.9   2.65 | s1 max   2.99 elem   2.36 p99.9   2.62 | szz elem   0.20  at [0.2, -21.0, 7.7]
+     nose ring: nose ring                       vM max  16.27 elem   6.82 p99.9   7.27 | s1 max  14.61 elem   5.72 p99.9   5.89 | szz elem   3.74  at [-11.2, -20.4, 3.4]
+      gpu cg 236 it, rel. residual 9.7e-10
+    contact iteration 0: 1239 changes; active c1 817 c2 125 c3 117 rs 360 rc 128
+      gpu cg 285 it, rel. residual 9.8e-10
+    contact iteration 1: 720 changes; active c1 705 c2 76 c3 155 rs 198 rc 137
+      gpu cg 309 it, rel. residual 9.8e-10
+    contact iteration 2: 384 changes; active c1 567 c2 57 c3 134 rs 146 rc 109
+      gpu cg 302 it, rel. residual 9.3e-10
+    contact iteration 3: 178 changes; active c1 507 c2 78 c3 123 rs 132 rc 117
+      gpu cg 285 it, rel. residual 9.3e-10
+    contact iteration 4: 76 changes; active c1 472 c2 83 c3 101 rs 132 rc 117
+      gpu cg 280 it, rel. residual 9.8e-10
+    contact iteration 5: 79 changes; active c1 446 c2 123 c3 96 rs 133 rc 114
+      gpu cg 275 it, rel. residual 9.7e-10
+    contact iteration 6: 23 changes; active c1 434 c2 121 c3 94 rs 134 rc 110
+      gpu cg 261 it, rel. residual 9.2e-10
+    contact iteration 7: 8 changes; active c1 428 c2 120 c3 93 rs 134 rc 110
+      gpu cg 226 it, rel. residual 9.2e-10
+    contact iteration 8: 2 changes; active c1 426 c2 120 c3 93 rs 134 rc 110
+      gpu cg 206 it, rel. residual 1.0e-09
+    contact iteration 9: 0 changes; active c1 426 c2 120 c3 93 rs 134 rc 110
+  contact resultants (N): hand->nose ring 245.0, lips<-lugs 244.8, collar step->nose ring 244.7
+  az 110: 73 s, tilt 0.1701 deg
+     hand base: lugs (incl. root at the flange rim) vM max  70.57 elem  30.48 p99.9  29.74 | s1 max  43.93 elem  22.85 p99.9  24.98 | szz elem  12.11  at [-13.0, 15.6, -0.0]
+     hand base: flange / spigot (rest)          vM max  36.74 elem  26.25 p99.9  25.45 | s1 max  47.07 elem  32.60 p99.9  31.22 | szz elem  28.58  at [-1.8, -20.5, -4.4]
+     collar: lip                                vM max 112.89 elem  42.03 p99.9  47.46 | s1 max  82.18 elem  21.59 p99.9  23.84 | szz elem   9.28  at [-4.3, -22.5, -3.7]
+     collar: wall (below the step)              vM max  24.55 elem  20.63 p99.9  17.66 | s1 max  32.18 elem  24.31 p99.9  20.98 | szz elem  23.70  at [-9.1, -22.0, -3.0]
+     collar: step / wall corner                 vM max   7.57 elem   3.33 p99.9   5.04 | s1 max   7.14 elem   3.91 p99.9   5.06 | szz elem   2.67  at [19.8, -6.0, 3.7]
+     collar: sleeve                             vM max   2.62 elem   2.15 p99.9   2.40 | s1 max   2.66 elem   2.15 p99.9   2.37 | szz elem   0.18  at [0.2, -21.0, 7.7]
+     nose ring: nose ring                       vM max  13.24 elem   5.67 p99.9   6.51 | s1 max  12.21 elem   4.61 p99.9   5.49 | szz elem   3.13  at [-11.2, -20.4, 3.4]
+      gpu cg 236 it, rel. residual 9.7e-10
+    contact iteration 0: 1224 changes; active c1 819 c2 125 c3 122 rs 366 rc 130
+      gpu cg 285 it, rel. residual 9.6e-10
+    contact iteration 1: 653 changes; active c1 754 c2 61 c3 149 rs 220 rc 137
+      gpu cg 302 it, rel. residual 9.9e-10
+    contact iteration 2: 359 changes; active c1 582 c2 58 c3 131 rs 195 rc 114
+      gpu cg 306 it, rel. residual 9.3e-10
+    contact iteration 3: 231 changes; active c1 463 c2 59 c3 104 rs 192 rc 141
+      gpu cg 285 it, rel. residual 9.6e-10
+    contact iteration 4: 111 changes; active c1 391 c2 64 c3 102 rs 190 rc 139
+      gpu cg 275 it, rel. residual 9.9e-10
+    contact iteration 5: 84 changes; active c1 331 c2 65 c3 106 rs 192 rc 136
+      gpu cg 273 it, rel. residual 9.4e-10
+    contact iteration 6: 92 changes; active c1 265 c2 71 c3 117 rs 195 rc 134
+      gpu cg 258 it, rel. residual 9.9e-10
+    contact iteration 7: 25 changes; active c1 249 c2 71 c3 114 rs 195 rc 132
+      gpu cg 242 it, rel. residual 9.9e-10
+    contact iteration 8: 7 changes; active c1 246 c2 72 c3 114 rs 195 rc 129
+      gpu cg 232 it, rel. residual 9.2e-10
+    contact iteration 9: 0 changes; active c1 246 c2 72 c3 114 rs 195 rc 129
+  contact resultants (N): hand->nose ring 231.1, lips<-lugs 230.9, collar step->nose ring 230.8
+  az 300: 72 s, tilt 0.1452 deg
+     hand base: lugs (incl. root at the flange rim) vM max  71.25 elem  31.03 p99.9  26.52 | s1 max  41.65 elem  20.04 p99.9  22.22 | szz elem  10.21  at [-17.3, 14.9, -3.5]
+     hand base: flange / spigot (rest)          vM max  34.88 elem  24.29 p99.9  24.66 | s1 max  43.17 elem  28.03 p99.9  30.78 | szz elem  27.58  at [-14.5, 14.6, -4.4]
+     collar: lip                                vM max  94.77 elem  35.67 p99.9  37.44 | s1 max  80.87 elem  20.20 p99.9  22.55 | szz elem   8.78  at [-4.3, 22.6, -3.8]
+     collar: wall (below the step)              vM max  24.95 elem  21.51 p99.9  19.56 | s1 max  30.69 elem  26.07 p99.9  23.96 | szz elem  25.04  at [-8.9, 22.1, -3.0]
+     collar: step / wall corner                 vM max   8.07 elem   4.60 p99.9   6.52 | s1 max   9.10 elem   5.18 p99.9   6.50 | szz elem   3.24  at [-15.0, 16.7, 3.8]
+     collar: sleeve                             vM max   2.54 elem   2.14 p99.9   2.46 | s1 max   2.59 elem   2.13 p99.9   2.45 | szz elem   0.22  at [-19.8, 6.5, 7.7]
+     nose ring: nose ring                       vM max  15.95 elem   7.32 p99.9   7.68 | s1 max  16.01 elem   7.75 p99.9   6.44 | szz elem   5.37  at [-11.2, 20.4, 3.4]
+figure coupler_fea_B7_section
+EXIT 

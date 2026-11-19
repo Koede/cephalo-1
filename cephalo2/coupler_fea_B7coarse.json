@@ -1,0 +1,883 @@
+{
+ "maxvol": 2.0,
+ "dofs": 407286,
+ "tets": {
+  "hand": 47808,
+  "collar": 24572,
+  "nose": 8814
+ },
+ "cases": {
+  "force along az 60": {
+   "regions": {
+    "hand base: lugs (incl. root at the flange rim)": {
+     "vm_elem_max": 23.72,
+     "s1_elem_max": 19.49,
+     "szz_elem_max": 10.34,
+     "at_s1_elem_max": [
+      -16.4,
+      -13.1,
+      -3.7
+     ],
+     "vm_p999": 26.03,
+     "s1_p999": 21.92,
+     "vm_max": 55.69,
+     "vm_p99": 15.43,
+     "s1_max": 35.15,
+     "s1_p99": 15.93,
+     "szz_max": 27.45,
+     "szz_p99": 7.55,
+     "at_vm_max": [
+      -4.2,
+      -22.4,
+      -3.5
+     ],
+     "at_s1_max": [
+      -16.9,
+      -15.2,
+      -3.6
+     ]
+    },
+    "hand base: flange / spigot (rest)": {
+     "vm_elem_max": 27.89,
+     "s1_elem_max": 34.03,
+     "szz_elem_max": 31.87,
+     "at_s1_elem_max": [
+      -11.4,
+      -17.1,
+      -4.4
+     ],
+     "vm_p999": 26.55,
+     "s1_p999": 33.04,
+     "vm_max": 39.88,
+     "vm_p99": 19.0,
+     "s1_max": 54.23,
+     "s1_p99": 22.73,
+     "szz_max": 44.44,
+     "szz_p99": 20.35,
+     "at_vm_max": [
+      -11.5,
+      -17.1,
+      -4.4
+     ],
+     "at_s1_max": [
+      -11.4,
+      -17.1,
+      -4.4
+     ]
+    },
+    "collar: lip": {
+     "vm_elem_max": 33.34,
+     "s1_elem_max": 18.16,
+     "szz_elem_max": 8.77,
+     "at_s1_elem_max": [
+      -4.5,
+      -22.7,
+      -3.7
+     ],
+     "vm_p999": 37.1,
+     "s1_p999": 22.11,
+     "vm_max": 89.62,
+     "vm_p99": 17.53,
+     "s1_max": 65.68,
+     "s1_p99": 13.92,
+     "szz_max": 42.6,
+     "szz_p99": 7.87,
+     "at_vm_max": [
+      -4.3,
+      -22.5,
+      -3.7
+     ],
+     "at_s1_max": [
+      -4.3,
+      -22.5,
+      -3.7
+     ]
+    },
+    "collar: wall (below the step)": {
+     "vm_elem_max": 22.82,
+     "s1_elem_max": 26.99,
+     "szz_elem_max": 26.32,
+     "at_s1_elem_max": [
+      -9.0,
+      -22.0,
+      -3.0
+     ],
+     "vm_p999": 19.45,
+     "s1_p999": 23.53,
+     "vm_max": 27.32,
+     "vm_p99": 16.76,
+     "s1_max": 34.1,
+     "s1_p99": 20.05,
+     "szz_max": 32.6,
+     "szz_p99": 18.89,
+     "at_vm_max": [
+      -9.1,
+      -22.0,
+      -3.0
+     ],
+     "at_s1_max": [
+      -9.1,
+      -22.0,
+      -3.0
+     ]
+    },
+    "collar: step / wall corner": {
+     "vm_elem_max": 4.21,
+     "s1_elem_max": 4.85,
+     "szz_elem_max": 3.22,
+     "at_s1_elem_max": [
+      -8.0,
+      -22.1,
+      3.8
+     ],
+     "vm_p999": 5.81,
+     "s1_p999": 6.26,
+     "vm_max": 9.21,
+     "vm_p99": 3.86,
+     "s1_max": 8.62,
+     "s1_p99": 3.2,
+     "szz_max": 6.39,
+     "szz_p99": 1.87,
+     "at_vm_max": [
+      -16.0,
+      -13.1,
+      3.7
+     ],
+     "at_s1_max": [
+      -7.2,
+      -22.6,
+      3.6
+     ]
+    },
+    "collar: sleeve": {
+     "vm_elem_max": 2.39,
+     "s1_elem_max": 2.36,
+     "szz_elem_max": 0.22,
+     "at_s1_elem_max": [
+      -0.8,
+      -22.1,
+      7.3
+     ],
+     "vm_p999": 2.67,
+     "s1_p999": 2.59,
+     "vm_max": 2.99,
+     "vm_p99": 2.31,
+     "s1_max": 3.02,
+     "s1_p99": 2.27,
+     "szz_max": 0.57,
+     "szz_p99": 0.35,
+     "at_vm_max": [
+      0.2,
+      -21.0,
+      7.7
+     ],
+     "at_s1_max": [
+      0.2,
+      -21.0,
+      7.7
+     ]
+    },
+    "nose ring: nose ring": {
+     "vm_elem_max": 7.49,
+     "s1_elem_max": 6.46,
+     "szz_elem_max": 4.0,
+     "at_s1_elem_max": [
+      -11.0,
+      -17.8,
+      3.1
+     ],
+     "vm_p999": 7.81,
+     "s1_p999": 6.43,
+     "vm_max": 18.08,
+     "vm_p99": 3.91,
+     "s1_max": 15.68,
+     "s1_p99": 2.32,
+     "szz_max": 12.49,
+     "szz_p99": 1.27,
+     "at_vm_max": [
+      -11.2,
+      -20.4,
+      3.4
+     ],
+     "at_s1_max": [
+      -8.3,
+      -19.2,
+      3.4
+     ]
+    }
+   },
+   "rim_uz_max_mm": 0.0852,
+   "tilt_deg": 0.1455,
+   "rot_stiffness_Nm_per_deg": 54.1,
+   "rim_shift_along_force_mm": 0.0291,
+   "lever_mm": 72.2,
+   "active": {
+    "c1": 238,
+    "c2": 72,
+    "c3": 124,
+    "rs": 176,
+    "rc": 131
+   },
+   "contact_force_N": {
+    "c1": 231.6,
+    "c2": 231.3,
+    "c3": 231.3
+   },
+   "s": 99.9
+  },
+  "force along az 90": {
+   "regions": {
+    "hand base: lugs (incl. root at the flange rim)": {
+     "vm_elem_max": 29.2,
+     "s1_elem_max": 23.1,
+     "szz_elem_max": 12.26,
+     "at_s1_elem_max": [
+      -3.5,
+      -20.6,
+      -3.7
+     ],
+     "vm_p999": 27.33,
+     "s1_p999": 25.1,
+     "vm_max": 69.85,
+     "vm_p99": 15.38,
+     "s1_max": 40.36,
+     "s1_p99": 14.7,
+     "szz_max": 31.9,
+     "szz_p99": 7.16,
+     "at_vm_max": [
+      -4.2,
+      -22.4,
+      -3.5
+     ],
+     "at_s1_max": [
+      -1.8,
+      -20.5,
+      -3.9
+     ]
+    },
+    "hand base: flange / spigot (rest)": {
+     "vm_elem_max": 27.71,
+     "s1_elem_max": 34.43,
+     "szz_elem_max": 30.22,
+     "at_s1_elem_max": [
+      -6.0,
+      -19.7,
+      -4.4
+     ],
+     "vm_p999": 27.08,
+     "s1_p999": 33.79,
+     "vm_max": 38.22,
+     "vm_p99": 19.06,
+     "s1_max": 49.72,
+     "s1_p99": 22.53,
+     "szz_max": 42.2,
+     "szz_p99": 19.99,
+     "at_vm_max": [
+      -6.0,
+      -19.7,
+      -4.4
+     ],
+     "at_s1_max": [
+      -6.0,
+      -19.7,
+      -4.4
+     ]
+    },
+    "collar: lip": {
+     "vm_elem_max": 41.7,
+     "s1_elem_max": 21.81,
+     "szz_elem_max": 9.66,
+     "at_s1_elem_max": [
+      -4.5,
+      -22.7,
+      -3.7
+     ],
+     "vm_p999": 43.5,
+     "s1_p999": 23.85,
+     "vm_max": 112.43,
+     "vm_p99": 18.59,
+     "s1_max": 81.93,
+     "s1_p99": 13.95,
+     "szz_max": 53.85,
+     "szz_p99": 7.76,
+     "at_vm_max": [
+      -4.3,
+      -22.5,
+      -3.7
+     ],
+     "at_s1_max": [
+      -4.3,
+      -22.5,
+      -3.7
+     ]
+    },
+    "collar: wall (below the step)": {
+     "vm_elem_max": 22.92,
+     "s1_elem_max": 27.08,
+     "szz_elem_max": 26.47,
+     "at_s1_elem_max": [
+      -9.0,
+      -22.0,
+      -3.0
+     ],
+     "vm_p999": 19.28,
+     "s1_p999": 23.13,
+     "vm_max": 27.35,
+     "vm_p99": 15.96,
+     "s1_max": 34.15,
+     "s1_p99": 19.25,
+     "szz_max": 32.72,
+     "szz_p99": 18.2,
+     "at_vm_max": [
+      -9.1,
+      -22.0,
+      -3.0
+     ],
+     "at_s1_max": [
+      -9.1,
+      -22.0,
+      -3.0
+     ]
+    },
+    "collar: step / wall corner": {
+     "vm_elem_max": 3.79,
+     "s1_elem_max": 4.59,
+     "szz_elem_max": 3.09,
+     "at_s1_elem_max": [
+      -8.0,
+      -22.1,
+      3.8
+     ],
+     "vm_p999": 5.45,
+     "s1_p999": 5.68,
+     "vm_max": 7.2,
+     "vm_p99": 3.59,
+     "s1_max": 8.26,
+     "s1_p99": 2.94,
+     "szz_max": 6.18,
+     "szz_p99": 1.81,
+     "at_vm_max": [
+      -16.0,
+      -13.1,
+      3.7
+     ],
+     "at_s1_max": [
+      -7.2,
+      -22.6,
+      3.6
+     ]
+    },
+    "collar: sleeve": {
+     "vm_elem_max": 2.38,
+     "s1_elem_max": 2.36,
+     "szz_elem_max": 0.2,
+     "at_s1_elem_max": [
+      0.8,
+      -22.1,
+      7.3
+     ],
+     "vm_p999": 2.65,
+     "s1_p999": 2.62,
+     "vm_max": 2.95,
+     "vm_p99": 2.26,
+     "s1_max": 2.99,
+     "s1_p99": 2.26,
+     "szz_max": 0.6,
+     "szz_p99": 0.35,
+     "at_vm_max": [
+      0.2,
+      -21.0,
+      7.7
+     ],
+     "at_s1_max": [
+      0.2,
+      -21.0,
+      7.7
+     ]
+    },
+    "nose ring: nose ring": {
+     "vm_elem_max": 6.82,
+     "s1_elem_max": 5.72,
+     "szz_elem_max": 3.74,
+     "at_s1_elem_max": [
+      -11.0,
+      -17.8,
+      3.1
+     ],
+     "vm_p999": 7.27,
+     "s1_p999": 5.89,
+     "vm_max": 16.27,
+     "vm_p99": 3.84,
+     "s1_max": 14.61,
+     "s1_p99": 2.32,
+     "szz_max": 11.61,
+     "szz_p99": 1.29,
+     "at_vm_max": [
+      -11.2,
+      -20.4,
+      3.4
+     ],
+     "at_s1_max": [
+      -8.3,
+      -19.2,
+      3.4
+     ]
+    }
+   },
+   "rim_uz_max_mm": 0.1182,
+   "tilt_deg": 0.1581,
+   "rot_stiffness_Nm_per_deg": 49.8,
+   "rim_shift_along_force_mm": 0.0307,
+   "lever_mm": 72.2,
+   "active": {
+    "c1": 410,
+    "c2": 117,
+    "c3": 90,
+    "rs": 142,
+    "rc": 111
+   },
+   "contact_force_N": {
+    "c1": 237.8,
+    "c2": 237.6,
+    "c3": 237.6
+   },
+   "s": 77.9
+  },
+  "force along az 110": {
+   "regions": {
+    "hand base: lugs (incl. root at the flange rim)": {
+     "vm_elem_max": 30.48,
+     "s1_elem_max": 22.85,
+     "szz_elem_max": 12.11,
+     "at_s1_elem_max": [
+      -3.5,
+      -20.6,
+      -3.7
+     ],
+     "vm_p999": 29.74,
+     "s1_p999": 24.98,
+     "vm_max": 70.57,
+     "vm_p99": 15.93,
+     "s1_max": 43.93,
+     "s1_p99": 15.33,
+     "szz_max": 39.08,
+     "szz_p99": 7.33,
+     "at_vm_max": [
+      -13.0,
+      15.6,
+      -0.0
+     ],
+     "at_s1_max": [
+      20.5,
+      -7.1,
+      -3.6
+     ]
+    },
+    "hand base: flange / spigot (rest)": {
+     "vm_elem_max": 26.25,
+     "s1_elem_max": 32.6,
+     "szz_elem_max": 28.58,
+     "at_s1_elem_max": [
+      -6.0,
+      -19.7,
+      -4.4
+     ],
+     "vm_p999": 25.45,
+     "s1_p999": 31.22,
+     "vm_max": 36.74,
+     "vm_p99": 17.94,
+     "s1_max": 47.07,
+     "s1_p99": 20.96,
+     "szz_max": 39.96,
+     "szz_p99": 18.47,
+     "at_vm_max": [
+      -1.8,
+      -20.5,
+      -4.4
+     ],
+     "at_s1_max": [
+      -6.0,
+      -19.7,
+      -4.4
+     ]
+    },
+    "collar: lip": {
+     "vm_elem_max": 42.03,
+     "s1_elem_max": 21.59,
+     "szz_elem_max": 9.28,
+     "at_s1_elem_max": [
+      -4.5,
+      -22.7,
+      -3.7
+     ],
+     "vm_p999": 47.46,
+     "s1_p999": 23.84,
+     "vm_max": 112.89,
+     "vm_p99": 18.78,
+     "s1_max": 82.18,
+     "s1_p99": 13.83,
+     "szz_max": 54.52,
+     "szz_p99": 7.6,
+     "at_vm_max": [
+      -4.3,
+      -22.5,
+      -3.7
+     ],
+     "at_s1_max": [
+      -4.3,
+      -22.5,
+      -3.7
+     ]
+    },
+    "collar: wall (below the step)": {
+     "vm_elem_max": 20.63,
+     "s1_elem_max": 24.31,
+     "szz_elem_max": 23.7,
+     "at_s1_elem_max": [
+      -9.0,
+      -22.0,
+      -3.0
+     ],
+     "vm_p999": 17.66,
+     "s1_p999": 20.98,
+     "vm_max": 24.55,
+     "vm_p99": 14.87,
+     "s1_max": 32.18,
+     "s1_p99": 17.71,
+     "szz_max": 30.45,
+     "szz_p99": 16.68,
+     "at_vm_max": [
+      -9.1,
+      -22.0,
+      -3.0
+     ],
+     "at_s1_max": [
+      -4.6,
+      -23.4,
+      -3.0
+     ]
+    },
+    "collar: step / wall corner": {
+     "vm_elem_max": 3.33,
+     "s1_elem_max": 3.91,
+     "szz_elem_max": 2.67,
+     "at_s1_elem_max": [
+      -8.0,
+      -22.1,
+      3.8
+     ],
+     "vm_p999": 5.04,
+     "s1_p999": 5.06,
+     "vm_max": 7.57,
+     "vm_p99": 3.37,
+     "s1_max": 7.14,
+     "s1_p99": 2.79,
+     "szz_max": 5.39,
+     "szz_p99": 1.75,
+     "at_vm_max": [
+      19.8,
+      -6.0,
+      3.7
+     ],
+     "at_s1_max": [
+      -7.2,
+      -22.6,
+      3.6
+     ]
+    },
+    "collar: sleeve": {
+     "vm_elem_max": 2.15,
+     "s1_elem_max": 2.15,
+     "szz_elem_max": 0.18,
+     "at_s1_elem_max": [
+      0.8,
+      -22.1,
+      7.3
+     ],
+     "vm_p999": 2.4,
+     "s1_p999": 2.37,
+     "vm_max": 2.62,
+     "vm_p99": 2.17,
+     "s1_max": 2.66,
+     "s1_p99": 2.16,
+     "szz_max": 0.55,
+     "szz_p99": 0.33,
+     "at_vm_max": [
+      0.2,
+      -21.0,
+      7.7
+     ],
+     "at_s1_max": [
+      0.2,
+      -21.0,
+      7.7
+     ]
+    },
+    "nose ring: nose ring": {
+     "vm_elem_max": 5.67,
+     "s1_elem_max": 4.61,
+     "szz_elem_max": 3.13,
+     "at_s1_elem_max": [
+      -7.4,
+      -19.1,
+      3.0
+     ],
+     "vm_p999": 6.51,
+     "s1_p999": 5.49,
+     "vm_max": 13.24,
+     "vm_p99": 3.71,
+     "s1_max": 12.21,
+     "s1_p99": 2.38,
+     "szz_max": 9.69,
+     "szz_p99": 1.38,
+     "at_vm_max": [
+      -11.2,
+      -20.4,
+      3.4
+     ],
+     "at_s1_max": [
+      -8.3,
+      -19.2,
+      3.4
+     ]
+    }
+   },
+   "rim_uz_max_mm": 0.1295,
+   "tilt_deg": 0.1701,
+   "rot_stiffness_Nm_per_deg": 46.3,
+   "rim_shift_along_force_mm": 0.0324,
+   "lever_mm": 72.2,
+   "active": {
+    "c1": 426,
+    "c2": 120,
+    "c3": 93,
+    "rs": 134,
+    "rc": 110
+   },
+   "contact_force_N": {
+    "c1": 245.0,
+    "c2": 244.8,
+    "c3": 244.7
+   },
+   "s": 73.0
+  },
+  "force along az 300": {
+   "regions": {
+    "hand base: lugs (incl. root at the flange rim)": {
+     "vm_elem_max": 31.03,
+     "s1_elem_max": 20.04,
+     "szz_elem_max": 10.21,
+     "at_s1_elem_max": [
+      -16.2,
+      13.0,
+      -3.9
+     ],
+     "vm_p999": 26.52,
+     "s1_p999": 22.22,
+     "vm_max": 71.25,
+     "vm_p99": 15.73,
+     "s1_max": 41.65,
+     "s1_p99": 15.94,
+     "szz_max": 37.11,
+     "szz_p99": 7.55,
+     "at_vm_max": [
+      -17.3,
+      14.9,
+      -3.5
+     ],
+     "at_s1_max": [
+      -17.2,
+      14.8,
+      -3.6
+     ]
+    },
+    "hand base: flange / spigot (rest)": {
+     "vm_elem_max": 24.29,
+     "s1_elem_max": 28.03,
+     "szz_elem_max": 27.58,
+     "at_s1_elem_max": [
+      -9.7,
+      18.2,
+      -4.4
+     ],
+     "vm_p999": 24.66,
+     "s1_p999": 30.78,
+     "vm_max": 34.88,
+     "vm_p99": 18.03,
+     "s1_max": 43.17,
+     "s1_p99": 21.38,
+     "szz_max": 38.33,
+     "szz_p99": 19.05,
+     "at_vm_max": [
+      -14.5,
+      14.6,
+      -4.4
+     ],
+     "at_s1_max": [
+      -6.0,
+      19.7,
+      -4.4
+     ]
+    },
+    "collar: lip": {
+     "vm_elem_max": 35.67,
+     "s1_elem_max": 20.2,
+     "szz_elem_max": 8.78,
+     "at_s1_elem_max": [
+      -4.3,
+      23.0,
+      -3.7
+     ],
+     "vm_p999": 37.44,
+     "s1_p999": 22.55,
+     "vm_max": 94.77,
+     "vm_p99": 17.4,
+     "s1_max": 80.87,
+     "s1_p99": 13.85,
+     "szz_max": 61.94,
+     "szz_p99": 7.69,
+     "at_vm_max": [
+      -4.3,
+      22.6,
+      -3.8
+     ],
+     "at_s1_max": [
+      -4.2,
+      22.6,
+      -3.7
+     ]
+    },
+    "collar: wall (below the step)": {
+     "vm_elem_max": 21.51,
+     "s1_elem_max": 26.07,
+     "szz_elem_max": 25.04,
+     "at_s1_elem_max": [
+      -9.0,
+      22.0,
+      -3.0
+     ],
+     "vm_p999": 19.56,
+     "s1_p999": 23.96,
+     "vm_max": 24.95,
+     "vm_p99": 16.56,
+     "s1_max": 30.69,
+     "s1_p99": 19.73,
+     "szz_max": 27.76,
+     "szz_p99": 18.52,
+     "at_vm_max": [
+      -8.9,
+      22.1,
+      -3.0
+     ],
+     "at_s1_max": [
+      -4.7,
+      23.3,
+      -3.0
+     ]
+    },
+    "collar: step / wall corner": {
+     "vm_elem_max": 4.6,
+     "s1_elem_max": 5.18,
+     "szz_elem_max": 3.24,
+     "at_s1_elem_max": [
+      -12.1,
+      20.2,
+      3.8
+     ],
+     "vm_p999": 6.52,
+     "s1_p999": 6.5,
+     "vm_max": 8.07,
+     "vm_p99": 4.0,
+     "s1_max": 9.1,
+     "s1_p99": 3.3,
+     "szz_max": 6.38,
+     "szz_p99": 1.87,
+     "at_vm_max": [
+      -15.0,
+      16.7,
+      3.8
+     ],
+     "at_s1_max": [
+      -11.5,
+      20.8,
+      3.6
+     ]
+    },
+    "collar: sleeve": {
+     "vm_elem_max": 2.14,
+     "s1_elem_max": 2.13,
+     "szz_elem_max": 0.22,
+     "at_s1_elem_max": [
+      -15.0,
+      16.2,
+      7.3
+     ],
+     "vm_p999": 2.46,
+     "s1_p999": 2.45,
+     "vm_max": 2.54,
+     "vm_p99": 2.21,
+     "s1_max": 2.59,
+     "s1_p99": 2.17,
+     "szz_max": 0.7,
+     "szz_p99": 0.33,
+     "at_vm_max": [
+      -19.8,
+      6.5,
+      7.7
+     ],
+     "at_s1_max": [
+      -15.8,
+      16.1,
+      7.7
+     ]
+    },
+    "nose ring: nose ring": {
+     "vm_elem_max": 7.32,
+     "s1_elem_max": 7.75,
+     "szz_elem_max": 5.37,
+     "at_s1_elem_max": [
+      -10.7,
+      17.6,
+      3.1
+     ],
+     "vm_p999": 7.68,
+     "s1_p999": 6.44,
+     "vm_max": 15.95,
+     "vm_p99": 3.85,
+     "s1_max": 16.01,
+     "s1_p99": 2.29,
+     "szz_max": 12.74,
+     "szz_p99": 1.26,
+     "at_vm_max": [
+      -11.2,
+      20.4,
+      3.4
+     ],
+     "at_s1_max": [
+      -11.7,
+      17.2,
+      3.4
+     ]
+    }
+   },
+   "rim_uz_max_mm": 0.0857,
+   "tilt_deg": 0.1452,
+   "rot_stiffness_Nm_per_deg": 54.2,
+   "rim_shift_along_force_mm": 0.0287,
+   "lever_mm": 72.2,
+   "active": {
+    "c1": 246,
+    "c2": 72,
+    "c3": 114,
+    "rs": 195,
+    "rc": 129
+   },
+   "contact_force_N": {
+    "c1": 231.1,
+    "c2": 230.9,
+    "c3": 230.8
+   },
+   "s": 71.9
+  }
+ }
+}
