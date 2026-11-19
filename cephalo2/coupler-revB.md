@@ -552,3 +552,29 @@ Decision (2026-11-19): **cord route B** (one base pull ring, wire hoop, C-clip b
 hand-base lugs 31.0 MPa (B.5: 27.8), flange 27.9 (B.5: 26.2, same spot, not at the slot), collar wall 22.9 (B.5: 22.1); collar lip
 peaks remain fillet-end artefacts (section bands as in B.5). No hot spot at the exit slot. Against PAHT-CF Z 64 MPa dry, about 54 wet:
 safety factor 1.7 or more on the worst element, about as in B.5. Rev B.7 strength: OK.
+
+## hand3 hub v3 CAD (2026-11-19)
+
+Files: `hand3e/hand3_hub_v3.py` (parts, poses, assembly), `hand3e/hand3_v3_stl/`, `hand3_hub_v3_check.py/.json`, `hand3_hub_v3_figure.py`,
+`hand3_hub_v3.png`. Agreed design: roots travel (F), axial two-pin lock, swing dropped, cord route B.
+
+**Corrections the CAD forced (applied):**
+1. The cage (r 19.5-21.5) is joined to the base disc's underside where the pins came out, so the pins no longer pass through the
+   disc: each hole is a 2.1 mm slot through a 1 mm top lip with a pocket under it (closed by the cage top); the foot catches under
+   the lip with 0.35 mm when the spin throws the pin out 0.5 mm.
+2. The root grip is 12 mm wide, so the pins sit at +-22 deg (7.5 mm off the centre line; 0.49 mm to the grip), block +-28 deg.
+3. Lift 2.1 mm (leg bottom 0.2 above the disc top), arm slot 4.1 deep, 1.9 mm of block under it.
+4. hub E's return-spring boxes now ride on a post on each root block (screwed, est.); all four use the same hand: an L box 60 deg
+   clockwise of an R box overlaps it, same-hand boxes clear by 1.6 mm.
+5. Bead rail raised 1 mm so the beads clear the ring's hangers (0.5 mm).
+
+**Parts (PA-CF 1.25 g/cm3):** base disc 5.3 g, top disc 4.3 g, root block 2.8 g each, latch pin (dia 2 music wire) 0.36 g each,
+bead 0.02 g each.
+
+**Checks:** range math between all roots in all four poses: no overlaps (tightest 0.61 mm, block corners at r 8.5; pins to a
+neighbour block 2.6 mm; spring boxes 1.6 mm). Empty-hand curl clear to 80 % (cross) and 75 % (60 deg poses), then fingertips touch.
+Note: the 0.5 mm occupancy grid misses walls under 1.5 mm (erosion), so the range check is the one that found the spring-box clash.
+
+**Open decision: ring stroke.** One cord over K1 to K3 needs 22.2 mm of cord travel; today's rings move 13.7 / 12.7 mm.
+Recommended S1: a 2:1 tackle at each bead and both servos pulling the one ring (11.1 mm ring stroke, 83 / 28 N per finger,
+margins 1.51 / 1.26; no servo saved). See `hand3_hub_v3.png`.

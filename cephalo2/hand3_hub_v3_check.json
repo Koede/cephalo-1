@@ -1,0 +1,567 @@
+{
+ "bands": {
+  "root block + grip": {
+   "r": [
+    8.5,
+    41.0
+   ],
+   "half_angle_at_r20": [
+    -28.000000645799865,
+    28.000000645799865,
+    93.0,
+    99.0
+   ]
+  },
+  "latch pins": {
+   "r": [
+    19.0,
+    29.5
+   ],
+   "half_angle_at_r20": [
+    -24.566032536311848,
+    24.566032536311848,
+    91.0999984741211,
+    96.9000015258789
+   ]
+  },
+  "spring box L (hub E)": {
+   "r": [
+    10.5,
+    34.0
+   ],
+   "half_angle_at_r20": [
+    -12.406832559281792,
+    37.68664274741346,
+    102.80000305175781,
+    111.0
+   ]
+  },
+  "spring box R (hub E)": {
+   "r": [
+    10.5,
+    34.0
+   ],
+   "half_angle_at_r20": [
+    -12.406832559281792,
+    37.68664274741346,
+    102.80000305175781,
+    111.0
+   ]
+  },
+  "finger (straight)": {
+   "r": [
+    31.5,
+    114.5
+   ],
+   "half_angle_at_r20": null
+  },
+  "bead": {
+   "r": [
+    23.5,
+    26.5
+   ],
+   "half_angle_at_r20": null
+  }
+ },
+ "pairs": [
+  {
+   "pose": "2 + 2 pinch",
+   "roots": [
+    0,
+    3
+   ],
+   "a": "root block + grip",
+   "b": "root block + grip",
+   "gap_mm": 0.61,
+   "at_r": 8.5,
+   "ok": true
+  },
+  {
+   "pose": "2 + 2 pinch",
+   "roots": [
+    0,
+    3
+   ],
+   "a": "latch pins",
+   "b": "root block + grip",
+   "gap_mm": 2.61,
+   "at_r": 19.5,
+   "ok": true
+  },
+  {
+   "pose": "2 + 2 pinch",
+   "roots": [
+    0,
+    3
+   ],
+   "a": "spring box L (hub E)",
+   "b": "spring box L (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "2 + 2 pinch",
+   "roots": [
+    0,
+    3
+   ],
+   "a": "spring box L (hub E)",
+   "b": "spring box R (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "2 + 2 pinch",
+   "roots": [
+    0,
+    3
+   ],
+   "a": "spring box R (hub E)",
+   "b": "spring box R (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "2 + 2 pinch",
+   "roots": [
+    1,
+    2
+   ],
+   "a": "root block + grip",
+   "b": "root block + grip",
+   "gap_mm": 0.61,
+   "at_r": 8.5,
+   "ok": true
+  },
+  {
+   "pose": "2 + 2 pinch",
+   "roots": [
+    1,
+    2
+   ],
+   "a": "latch pins",
+   "b": "root block + grip",
+   "gap_mm": 2.61,
+   "at_r": 19.5,
+   "ok": true
+  },
+  {
+   "pose": "2 + 2 pinch",
+   "roots": [
+    1,
+    2
+   ],
+   "a": "spring box L (hub E)",
+   "b": "spring box L (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "2 + 2 pinch",
+   "roots": [
+    1,
+    2
+   ],
+   "a": "spring box L (hub E)",
+   "b": "spring box R (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "2 + 2 pinch",
+   "roots": [
+    1,
+    2
+   ],
+   "a": "spring box R (hub E)",
+   "b": "spring box R (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "3 + 1 thumb",
+   "roots": [
+    0,
+    1
+   ],
+   "a": "root block + grip",
+   "b": "root block + grip",
+   "gap_mm": 0.61,
+   "at_r": 8.5,
+   "ok": true
+  },
+  {
+   "pose": "3 + 1 thumb",
+   "roots": [
+    0,
+    1
+   ],
+   "a": "latch pins",
+   "b": "root block + grip",
+   "gap_mm": 2.61,
+   "at_r": 19.5,
+   "ok": true
+  },
+  {
+   "pose": "3 + 1 thumb",
+   "roots": [
+    0,
+    1
+   ],
+   "a": "spring box L (hub E)",
+   "b": "spring box L (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "3 + 1 thumb",
+   "roots": [
+    0,
+    1
+   ],
+   "a": "spring box L (hub E)",
+   "b": "spring box R (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "3 + 1 thumb",
+   "roots": [
+    0,
+    1
+   ],
+   "a": "spring box R (hub E)",
+   "b": "spring box R (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "3 + 1 thumb",
+   "roots": [
+    1,
+    2
+   ],
+   "a": "root block + grip",
+   "b": "root block + grip",
+   "gap_mm": 0.61,
+   "at_r": 8.5,
+   "ok": true
+  },
+  {
+   "pose": "3 + 1 thumb",
+   "roots": [
+    1,
+    2
+   ],
+   "a": "latch pins",
+   "b": "root block + grip",
+   "gap_mm": 2.61,
+   "at_r": 19.5,
+   "ok": true
+  },
+  {
+   "pose": "3 + 1 thumb",
+   "roots": [
+    1,
+    2
+   ],
+   "a": "spring box L (hub E)",
+   "b": "spring box L (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "3 + 1 thumb",
+   "roots": [
+    1,
+    2
+   ],
+   "a": "spring box L (hub E)",
+   "b": "spring box R (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "3 + 1 thumb",
+   "roots": [
+    1,
+    2
+   ],
+   "a": "spring box R (hub E)",
+   "b": "spring box R (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "all four on one side",
+   "roots": [
+    0,
+    1
+   ],
+   "a": "root block + grip",
+   "b": "root block + grip",
+   "gap_mm": 0.61,
+   "at_r": 8.5,
+   "ok": true
+  },
+  {
+   "pose": "all four on one side",
+   "roots": [
+    0,
+    1
+   ],
+   "a": "latch pins",
+   "b": "root block + grip",
+   "gap_mm": 2.61,
+   "at_r": 19.5,
+   "ok": true
+  },
+  {
+   "pose": "all four on one side",
+   "roots": [
+    0,
+    1
+   ],
+   "a": "spring box L (hub E)",
+   "b": "spring box L (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "all four on one side",
+   "roots": [
+    0,
+    1
+   ],
+   "a": "spring box L (hub E)",
+   "b": "spring box R (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "all four on one side",
+   "roots": [
+    0,
+    1
+   ],
+   "a": "spring box R (hub E)",
+   "b": "spring box R (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "all four on one side",
+   "roots": [
+    1,
+    2
+   ],
+   "a": "root block + grip",
+   "b": "root block + grip",
+   "gap_mm": 0.61,
+   "at_r": 8.5,
+   "ok": true
+  },
+  {
+   "pose": "all four on one side",
+   "roots": [
+    1,
+    2
+   ],
+   "a": "latch pins",
+   "b": "root block + grip",
+   "gap_mm": 2.61,
+   "at_r": 19.5,
+   "ok": true
+  },
+  {
+   "pose": "all four on one side",
+   "roots": [
+    1,
+    2
+   ],
+   "a": "spring box L (hub E)",
+   "b": "spring box L (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "all four on one side",
+   "roots": [
+    1,
+    2
+   ],
+   "a": "spring box L (hub E)",
+   "b": "spring box R (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "all four on one side",
+   "roots": [
+    1,
+    2
+   ],
+   "a": "spring box R (hub E)",
+   "b": "spring box R (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "all four on one side",
+   "roots": [
+    2,
+    3
+   ],
+   "a": "root block + grip",
+   "b": "root block + grip",
+   "gap_mm": 0.61,
+   "at_r": 8.5,
+   "ok": true
+  },
+  {
+   "pose": "all four on one side",
+   "roots": [
+    2,
+    3
+   ],
+   "a": "latch pins",
+   "b": "root block + grip",
+   "gap_mm": 2.61,
+   "at_r": 19.5,
+   "ok": true
+  },
+  {
+   "pose": "all four on one side",
+   "roots": [
+    2,
+    3
+   ],
+   "a": "spring box L (hub E)",
+   "b": "spring box L (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "all four on one side",
+   "roots": [
+    2,
+    3
+   ],
+   "a": "spring box L (hub E)",
+   "b": "spring box R (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  },
+  {
+   "pose": "all four on one side",
+   "roots": [
+    2,
+    3
+   ],
+   "a": "spring box R (hub E)",
+   "b": "spring box R (hub E)",
+   "gap_mm": 1.58,
+   "at_r": 21.0,
+   "ok": true
+  }
+ ],
+ "fits": {
+  "pin leg in the lip slot (each side)": 0.05,
+  "foot catch under the lip when spinning (radial)": 0.35,
+  "foot passes the lip slot at the inner position (radial)": 0.15,
+  "lifted leg bottom above the disc top (axial)": 0.2,
+  "block left under the arm slot (axial)": 1.9,
+  "lifted arm still inside its slot, below the block top": 0.0,
+  "lifted tab below the spring box floor (z 101)": 2.0,
+  "pin wire to the grip side (lateral)": 0.492,
+  "block wall outside the pin slot (tangential)": 1.044,
+  "web between lip holes (closest pair 14 deg)": 2.487,
+  "bead bottom above the ring hangers (z 87)": 0.5,
+  "bead top below the base disc (z 91)": 1.2,
+  "bead inner edge outside the cage (r 21.5)": 2.5,
+  "bead outer edge inside the yoke lip (moved to r 27.7)": 1.0,
+  "cord to the disc rim (r 25.5)": 0.45,
+  "cord to the yoke lip": 1.05,
+  "yoke lip still over the ring flange (r 30)": 2.3,
+  "bead inner edge to the inner pull ring band (r 23.9; ring removed in B)": 0.1
+ },
+ "curl": {
+  "flight cross": {
+   "max_clear_curl": 0.8,
+   "max_curl_ignoring_spring_boxes": 0.8,
+   "at_zero": {},
+   "first_hit": {
+    "0.85": {
+     "0:ph2 x 1:ph2": 13.12,
+     "0:ph2 x 2:ph2": 2.25,
+     "0:ph2 x 3:ph2": 10.25,
+     "1:ph2 x 2:ph2": 13.12,
+     "1:ph2 x 3:ph2": 2.25,
+     "2:ph2 x 3:ph2": 13.12
+    }
+   }
+  },
+  "2 + 2 pinch": {
+   "max_clear_curl": 0.75,
+   "max_curl_ignoring_spring_boxes": 0.75,
+   "at_zero": {},
+   "first_hit": {
+    "0.8": {
+     "0:ph2 x 3:ph2": 2.25,
+     "1:ph2 x 2:ph2": 1.12
+    }
+   }
+  },
+  "3 + 1 thumb": {
+   "max_clear_curl": 0.75,
+   "max_curl_ignoring_spring_boxes": 0.75,
+   "at_zero": {},
+   "first_hit": {
+    "0.8": {
+     "0:ph2 x 1:ph2": 1.12,
+     "1:ph2 x 2:ph2": 1.12
+    }
+   }
+  },
+  "all four on one side": {
+   "max_clear_curl": 0.75,
+   "max_curl_ignoring_spring_boxes": 0.75,
+   "at_zero": {},
+   "first_hit": {
+    "0.8": {
+     "0:ph2 x 1:ph2": 1.12,
+     "1:ph2 x 2:ph2": 1.12,
+     "2:ph2 x 3:ph2": 1.12
+    }
+   }
+  }
+ },
+ "stroke": {
+  "K1": 9.42,
+  "K2_K3": 10.73,
+  "stretch": 2.0,
+  "one_cord": 22.16,
+  "today_base_ring": 13.72,
+  "today_curl_ring": 12.73
+ }
+}

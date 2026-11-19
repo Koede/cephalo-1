@@ -1,0 +1,185 @@
+"""hand3 hub v3 (2026-11-19): finger roots that travel round the hub, locked by two axial latch pins each.
+Agreed design: option F (roots travel), axial two-pin lock beside the neck, sideways swing dropped, cord route B (one pull ring,
+rail + bead per finger).  Built from hand3_root_lock_bolt.json's layout with the corrections the CAD forced (see FIX below).
+
+Frame: hand3's own (rotor axis z, hub plates at z 91..101).  A root at azimuth `az` is the finger of hand3_cad turned to az with
+lag 0.  Units mm.  Estimates are marked est.
+
+FIX (found while modelling, 2026-11-19):
+ 1. The cage (r 19.5-21.5) is joined to the base disc's underside exactly where the pins would come out at r 20, so the pins no
+    longer pass through the disc: each hole is a slot through a 1 mm top lip with a pocket under it (closed below by the cage
+    top); the pin's foot catches under the lip.
+ 2. The root grip is 12 mm wide (not 10), so the pins sit at +-22 deg (7.5 mm off the centre line), the block is +-28 deg wide.
+ 3. The pin must lift until its leg clears the disc top: lift 2.1 mm (the layout's 2.3 assumed a through hole; with the lip
+    pocket it is 2.1); arm slot 4.1 deep, 1.9 mm of block left under it.
+"""
+import os, json
+import numpy as np
+import manifold3d as mf
+import hand3_design as H
+import hand3_cad as C
+import hand3_hubc as HC
+from hand3_cad import cyl, box, app, T, rot
+
+M_ = mf.Manifold
+Z = H.Z
+V = dict(disc_r=25.5, z0=Z["hub_lo"], disc_t=2.0, lip_t=1.0, gap=6.0, boss_r=7.0, boss_z0=Z["motor_top"], shaft_r=2.6,
+         block_r=(9.0, 24.3), block_half=28.0, ribs=((13.5, 15.5), (22.3, 24.0)), rib_h=1.0, groove_clr=0.1,
+         pin_r=20.0, pin_daz=22.0, wire_d=2.0, float_=0.5, foot=0.4, lift=2.1, tab_x=28.5, step=30.0,
+         slot_w=2.1, arm_slot_w=2.2, top_screw_r=4.9, top_screw_n=3,
+         rail=dict(stem=(25.0, 25.6), head=(24.6, 26.0), z_stem=1.0, z_head=1.0), bead=dict(r=(24.0, 26.7), dz=(0.5, 2.8), half_w=2.0, eye_r=26.3),
+         cord_r=0.35, post=(26.2, 30.0, 3.5, 102.7))
+Z_GAP = (V["z0"] + V["disc_t"], V["z0"] + V["disc_t"] + V["gap"])            # 93 .. 99
+Z_TOP = (Z_GAP[1], Z_GAP[1] + V["disc_t"])                                  # 99 .. 101
+Z_RING_TOP = HC.Z_OUT[1]                                                    # 87: top of the base pull ring band
+PIN_LAT = V["pin_r"] * np.sin(np.radians(V["pin_daz"]))
+PIN_X = V["pin_r"] * np.cos(np.radians(V["pin_daz"]))
+Z_LEG0 = V["z0"] + 0.1                                                      # leg bottom when locked (foot in the pocket)
+Z_ARM = (Z_GAP[1] - V["lift"] - V["wire_d"], Z_GAP[1] - V["lift"])          # arm when locked: 94.9 .. 96.9
+
+
+def wedge(r0, r1, z0, z1, a0, a1, n=96):
+    """Annular sector between azimuths a0..a1 (deg)."""
+    w = cyl(r1, z0, z1, n=n) - cyl(r0, z0 - 1, z1 + 1, n=n)
+    return C.half(C.half(w, [-np.sin(np.radians(a0)), np.cos(np.radians(a0)), 0], [0, 0, 0]),
+                  [np.sin(np.radians(a1)), -np.cos(np.radians(a1)), 0], [0, 0, 0])
+
+
+def hole_azimuths():
+    """(azimuth of the hole, azimuth of the root it serves, side) for every hole: roots on the 30 deg grid, pins at +-22 deg."""
+    return [((a + s * V["pin_daz"]) % 360, a, s) for a in np.arange(0, 360, V["step"]) for s in (-1, 1)]
+
+
+def slot_xy(root_az, side, x0, x1, w):
+    """A slot along the root's centre line direction at the pin's lateral offset (pins move along the centre line)."""
+    return app(box([x0, side * PIN_LAT - w / 2, 0.0], [x1, side * PIN_LAT + w / 2, 200.0]), T(rot("z", root_az)))
+
+
+def base_disc():
+    zt = V["z0"] + V["disc_t"]
+    m = cyl(V["disc_r"], V["z0"], zt, n=128) + cyl(V["boss_r"], V["boss_z0"], Z_GAP[1], n=64)
+    for r0, r1 in V["ribs"]:
+        m -= cyl(r1 + V["groove_clr"], zt - V["rib_h"] - V["groove_clr"], zt + 1, n=128) - cyl(r0 - V["groove_clr"], zt - 2, zt + 2, n=128)
+    m -= cyl(V["shaft_r"], V["boss_z0"] - 1, Z_GAP[1] + 1, n=32)
+    r_in, r_out = PIN_X - 0.25 - 1.05, PIN_X - 0.25 + V["float_"] + 1.0 + 0.05    # lip slot: leg at the inner .. outer position (pin centre at PIN_X - 0.25 + out)
+    for ha, ra, s in hole_azimuths():
+        lip = slot_xy(ra, s, r_in, max(r_out, PIN_X - 0.25 + 1.0 + V["foot"] + 0.15), V["slot_w"]) ^ box([-60, -60, zt - V["lip_t"]], [60, 60, zt + 0.5])
+        pocket = slot_xy(ra, s, r_in - 0.1, PIN_X + V["float_"] + 1.0 + V["foot"] + 0.25, V["slot_w"] + 0.3) ^ box([-60, -60, V["z0"] - 0.5], [60, 60, zt - V["lip_t"] + 0.01])
+        m -= lip + pocket
+    for k in range(V["top_screw_n"]):                                            # M2 thread-forming screws from the top disc
+        a = np.radians(90 + 360 / V["top_screw_n"] * k); m -= cyl(0.8, Z_GAP[1] - 5, Z_GAP[1] + 1, c=(V["top_screw_r"] * np.cos(a), V["top_screw_r"] * np.sin(a), 0), n=16)
+    return m
+
+
+def top_disc():
+    z0 = Z_TOP[0]
+    m = cyl(V["disc_r"], *Z_TOP, n=128)
+    for r0, r1 in V["ribs"]:
+        m -= cyl(r1 + V["groove_clr"], z0 - 1, z0 + V["rib_h"] + V["groove_clr"], n=128) - cyl(r0 - V["groove_clr"], z0 - 2, z0 + 2, n=128)
+    m -= cyl(V["shaft_r"], z0 - 1, Z_TOP[1] + 1, n=32)
+    for k in range(V["top_screw_n"]):
+        a = np.radians(90 + 360 / V["top_screw_n"] * k); c = (V["top_screw_r"] * np.cos(a), V["top_screw_r"] * np.sin(a), 0)
+        m -= cyl(1.1, z0 - 1, Z_TOP[1] + 1, c=c, n=16) + cyl(1.9, Z_TOP[1] - 1.3, Z_TOP[1] + 1, c=c, n=16)
+    return m
+
+
+_RG = {}
+
+
+def root_block(az=0.0):
+    """Root block = the finger's own root grip (hand3_cad, lag 0) merged with a wedge that rides between the discs on two ribs top
+    and bottom; two radial-slot bores and two arm slots for the latch pins.  Built at az 0 and turned."""
+    if "m" not in _RG:
+        R = C.parts(); zb = H.Z["blade"]
+        grip = app(R["root_grip"], T(t=[0, 0, zb]))
+        b = wedge(V["block_r"][0], V["block_r"][1], *Z_GAP, -V["block_half"], V["block_half"])
+        for r0, r1 in V["ribs"]:
+            b += wedge(r0, r1, Z_GAP[0] - V["rib_h"], Z_GAP[0] + 0.01, -V["block_half"], V["block_half"])
+            b += wedge(r0, r1, Z_GAP[1] - 0.01, Z_GAP[1] + V["rib_h"], -V["block_half"], V["block_half"])
+        post = box([V["post"][0], -V["post"][2], H.Z["blade"] + 2.0], [V["post"][1], V["post"][2], V["post"][3]])   # carries the spring box
+        m = b + grip + post
+        for s in (-1, 1):
+            m -= slot_xy(0.0, s, PIN_X - 1.05 - 0.25, PIN_X + V["float_"] + 1.05, V["slot_w"]) ^ box([-60, -60, Z_GAP[0] - 2], [60, 60, Z_GAP[1] + 2])   # leg bore
+            m -= slot_xy(0.0, s, PIN_X - 1.1 - 0.25, 40.0, V["arm_slot_w"]) ^ box([-60, -60, Z_ARM[0] - 0.05], [60, 60, Z_GAP[1] + 2])            # arm slot
+        # curl cord: from the bead under the disc rim straight up into the grip's underside at r = bead eye (channel dia 1.2)
+        m -= cyl(0.6, Z_GAP[0] - 3, H.Z["blade"] + 1.0, c=(V["bead"]["eye_r"], 0, 0), n=16)
+        _RG["m"] = m
+    return _RG["m"].rotate([0, 0, float(az)])
+
+
+def latch_pin(az=0.0, side=1, lifted=0.0, out=V["float_"]):
+    """Bent dia 2 music wire: leg down through the block into the disc's lip slot, arm along the root out to a lift tab, a 0.4 mm
+    foot at the leg's bottom pointing outward.  `out`: how far the spin has thrown it outward (0..float_); `lifted`: fork lift."""
+    r = V["wire_d"] / 2; x = PIN_X + out - 0.25; y = side * PIN_LAT; zl = Z_LEG0 + lifted; za = (Z_ARM[0] + Z_ARM[1]) / 2 + lifted
+    leg = cyl(r, zl, za + r, c=(x, y, 0), n=16)
+    arm = cyl(r, x, V["tab_x"], "x", c=(0, y, za), n=16)
+    foot = box([x, y - r * 0.8, zl], [x + r + V["foot"], y + r * 0.8, zl + 0.8])
+    return (leg + arm + foot).rotate([0, 0, float(az)])
+
+
+def ring_rail():
+    """T-rail on top of the base pull ring's band (printed with the ring): the beads slide round it."""
+    z = Z_RING_TOP; rl = V["rail"]
+    return (cyl(rl["stem"][1], z - 0.01, z + rl["z_stem"], n=128) - cyl(rl["stem"][0], z - 1, z + 2, n=128)) + \
+           (cyl(rl["head"][1], z + rl["z_stem"], z + rl["z_stem"] + rl["z_head"], n=128) - cyl(rl["head"][0], z, z + 3, n=128))
+
+
+def bead(az=0.0, pull=0.0):
+    """C-slider round the rail head (est. brass or printed PA-CF): open only along the stem; the curl cord is tied to an eye on its
+    outer top edge at r eye_r, outside the disc rim.  Moves down with the ring."""
+    bd = V["bead"]; z = Z_RING_TOP - pull; hw = np.degrees(bd["half_w"] / 25.3); rl = V["rail"]
+    m = wedge(bd["r"][0], bd["r"][1], z + bd["dz"][0], z + bd["dz"][1], -hw, hw, n=64)
+    zh = (z + rl["z_stem"] - 0.1, z + rl["z_stem"] + rl["z_head"] + 0.1)
+    m -= cyl(rl["head"][1] + 0.1, *zh, n=128) - cyl(rl["head"][0] - 0.1, zh[0] - 1, zh[1] + 1, n=128)
+    m -= cyl(rl["stem"][1] + 0.15, z - 1, zh[0] + 0.01, n=128) - cyl(rl["stem"][0] - 0.15, z - 2, zh[1], n=128)
+    return m.rotate([0, 0, float(az)])
+
+
+def cord_pts(az=0.0, pull=0.0):
+    """Curl cord from the bead eye straight up into the root block (centre line, r = eye)."""
+    a = np.radians(az); r = V["bead"]["eye_r"]
+    return np.array([[r * np.cos(a), r * np.sin(a), Z_RING_TOP - pull + V["bead"]["dz"][1]], [r * np.cos(a), r * np.sin(a), H.Z["blade"]]])
+
+
+def finger(az, fold=(0.0, 0.0, 0.0)):
+    """Phalanges + pads of a finger whose root sits at az (hand3_cad.finger_frames with lag 0, turned)."""
+    R = C.parts(); fr = C.finger_frames(0, 0.0, fold); A = T(rot("z", az - C.FAZ[0])); out = {}
+    for j in range(3):
+        out[f"phalanx{j + 1}"] = app(R[f"phalanx{j + 1}"], A @ fr[j + 1]); out[f"pad{j + 1}"] = app(R[f"pad{j + 1}"], A @ fr[j + 1])
+    return out
+
+
+def spring_box(az, k=0):
+    """hub E's return-spring box, carried by the root at az on the root block's post (screwed to it, est.).  v3 has no swing, so all
+    four fingers use the same ("R") box: an L box 60 deg clockwise of an R box overlaps it (35 mm3, range check), same-hand boxes
+    clear by 1.6 mm at 60 deg."""
+    R = C.parts(); hand = "R"
+    m = R[f"spring_tray1_{hand}"] + R[f"spring_tray2_{hand}"] + R[f"spring_lid_{hand}"]
+    return m.rotate([0, 0, float(az)])
+
+
+POSES = {"flight cross": (0, 90, 180, 270), "2 + 2 pinch": (30, 150, 210, 330), "3 + 1 thumb": (30, 90, 150, 270), "all four on one side": (0, 60, 120, 180)}
+
+
+def assembly(pose=POSES["flight cross"], fold=(0.0, 0.0, 0.0), pull=0.0, lifted=None, springs=True):
+    """name -> manifold (hand3 frame).  lifted: index of the root whose pins the fork holds up."""
+    out = {"base disc": base_disc(), "top disc": top_disc(), "base ring rail": ring_rail().translate([0, 0, -pull])}
+    for k, az in enumerate(pose):
+        out[f"root block {k}"] = root_block(az)
+        for s in (-1, 1): out[f"latch pin {k}{'ab'[s > 0]}"] = latch_pin(az, s, V["lift"] if lifted == k else 0.0, 0.0 if lifted == k else V["float_"])
+        out[f"bead {k}"] = bead(az, pull)
+        for n, m in finger(az, fold).items(): out[f"finger {k} {n}"] = m
+        if springs: out[f"spring box {k}"] = spring_box(az, k)
+    return out
+
+
+def export(d="hand3_v3_stl"):
+    os.makedirs(d, exist_ok=True)
+    for n, m in (("base_disc_PA-CF", base_disc()), ("top_disc_PA-CF", top_disc()), ("root_block_PA-CF", root_block(0)), ("bead_PA-CF", bead(0)),
+                 ("latch_pin_music-wire", latch_pin(0, 1))):
+        rho = 7.85e-3 if "wire" in n else 1.25e-3
+        C.to_trimesh(m).export(f"{d}/{n}.stl"); print(f"  {n:24s} {m.volume() * rho:6.2f} g  bbox {np.round(np.asarray(m.bounding_box()), 1)}")
+
+
+if __name__ == "__main__":
+    export()
