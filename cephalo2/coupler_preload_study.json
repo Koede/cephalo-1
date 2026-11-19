@@ -1,0 +1,175 @@
+{
+ "rows": {
+  "0 spring pins only": {
+   "F": 2.9,
+   "F_lo": 2.9,
+   "F_hi": 2.9,
+   "parts": 0,
+   "mass_g": 0.0,
+   "per": "-",
+   "creep": "none",
+   "note": "already there",
+   "F_total": 2.9,
+   "rattle_free_g": {
+    "hand3": 0.7,
+    "wheel": 1.0
+   },
+   "rattle_free_g_lo": {
+    "hand3": 0.7,
+    "wheel": 1.0
+   },
+   "lock_torque_Nm": 0.11,
+   "hold_torque_Nm": 0.019
+  },
+  "A O-ring in the nose ring (NBR 70A)": {
+   "F": 35.3,
+   "F_lo": 9.2,
+   "F_hi": 77.4,
+   "parts": 1,
+   "mass_g": 0.1,
+   "per": "arm",
+   "creep": "NBR compression set ~15-25 %/yr (est.); replace on service",
+   "note": "O-ring 22 x 1.0, off the shelf; seals the pin well",
+   "F_total": 38.2,
+   "rattle_free_g": {
+    "hand3": 9.8,
+    "wheel": 13.0
+   },
+   "rattle_free_g_lo": {
+    "hand3": 3.1,
+    "wheel": 4.1
+   },
+   "lock_torque_Nm": 0.45,
+   "hold_torque_Nm": 0.248
+  },
+  "A' same, silicone 50A": {
+   "F": 12.8,
+   "F_lo": 3.3,
+   "F_hi": 28.1,
+   "parts": 1,
+   "mass_g": 0.1,
+   "per": "arm",
+   "creep": "low",
+   "note": "softer: less tolerance-sensitive, less preload",
+   "F_total": 15.7,
+   "rattle_free_g": {
+    "hand3": 4.0,
+    "wheel": 5.3
+   },
+   "rattle_free_g_lo": {
+    "hand3": 1.6,
+    "wheel": 2.1
+   },
+   "lock_torque_Nm": 0.23,
+   "hold_torque_Nm": 0.102
+  },
+  "B wave spring under the lugs": {
+   "F": 18.1,
+   "F_lo": 13.5,
+   "F_hi": 22.6,
+   "parts": 1,
+   "mass_g": 0.6,
+   "per": "arm",
+   "creep": "none (steel)",
+   "note": "custom size (no catalogue part found at 40.8 x 44.8; est.)",
+   "F_total": 21.0,
+   "rattle_free_g": {
+    "hand3": 5.4,
+    "wheel": 7.1
+   },
+   "rattle_free_g_lo": {
+    "hand3": 4.2,
+    "wheel": 5.6
+   },
+   "lock_torque_Nm": 0.29,
+   "hold_torque_Nm": 0.137
+  },
+  "C printed flexure lips": {
+   "F": 75.6,
+   "F_lo": 50.4,
+   "F_hi": 100.8,
+   "parts": 0,
+   "mass_g": 0.0,
+   "per": "-",
+   "creep": "PA-CF under a steady 40-50 % of its yield: relaxes noticeably over weeks (est.)",
+   "note": "root stress 52.5 MPa",
+   "F_total": 78.5,
+   "rattle_free_g": {
+    "hand3": 20.2,
+    "wheel": 26.6
+   },
+   "rattle_free_g_lo": {
+    "hand3": 13.7,
+    "wheel": 18.1
+   },
+   "lock_torque_Nm": 0.85,
+   "hold_torque_Nm": 0.51
+  },
+  "D TPU pads on the lips": {
+   "F": 56.1,
+   "F_lo": 0.0,
+   "F_hi": 617.2,
+   "parts": 3,
+   "mass_g": 0.1,
+   "per": "arm",
+   "creep": "TPU set + wear",
+   "note": "pads slide 60 deg under the lugs on every lock, under load; 5611 N/mm: 0.01 mm sets the force",
+   "F_total": 59.0,
+   "rattle_free_g": {
+    "hand3": 15.2,
+    "wheel": 20.0
+   },
+   "rattle_free_g_lo": {
+    "hand3": 0.8,
+    "wheel": 1.0
+   },
+   "lock_torque_Nm": 0.66,
+   "hold_torque_Nm": 0.383
+  }
+ },
+ "A_detail": {
+  "squeeze_mm": 0.17,
+  "squeeze_pct": 17,
+  "squeeze_full_in_pct": 27,
+  "silicone_50A": {
+   "F": 12.8,
+   "F_lo": 3.3,
+   "F_hi": 28.1
+  },
+  "NBR_70A": {
+   "F": 35.3,
+   "F_lo": 9.2,
+   "F_hi": 77.4
+  },
+  "lug_vs_ramp_capture_mm": 0.23,
+  "groove_wall_to_bore_mm": 0.4,
+  "groove_wall_to_bullet_mm": 0.4
+ },
+ "B_detail": {
+  "rate_N_per_mm": 45.2,
+  "stress_MPa": 281,
+  "F": 18.1,
+  "F_lo": 13.5,
+  "F_hi": 22.6,
+  "nose_ring_recess_mm": 0.5,
+  "source": "custom size (no catalogue part found at 40.8 x 44.8; est.)"
+ },
+ "C_detail": {
+  "F": 75.6,
+  "F_lo": 50.4,
+  "F_hi": 100.8,
+  "root_stress_MPa": 52.5,
+  "creep": "PA-CF under a steady 40-50 % of its yield: relaxes noticeably over weeks (est.)"
+ },
+ "D_detail": {
+  "F": 56.1,
+  "F_lo": 0.0,
+  "F_hi": 617.2,
+  "rate_N_per_mm": 5611,
+  "wear": "pads slide 60 deg under the lugs on every lock, under load"
+ },
+ "pogo_N": 2.94,
+ "tan_ramp": 0.132,
+ "mu": 0.3,
+ "tol_mm": 0.1
+}

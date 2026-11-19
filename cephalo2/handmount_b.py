@@ -45,6 +45,9 @@ P = dict(
     screws=((17.0, 30.0), (17.0, 150.0), (17.0, 270.0)), screw_d=3.4,      # 3 screws, each midway between two bullets
     hand_screw_r=13.0, hand_screw_az=(45.0, 135.0, 225.0, 315.0),   # 4 x M3 heat-set inserts (dia 4.0 x 6) for the hand's own body
     groove_w=3.2, groove_h=2.6, r_wire_cb=6.5,                       # motor-lead grooves in the hand base's bottom face
+    # rev B.3 (2026-11-18, coupler_preload_study.py, option A): face O-ring in the nose-ring face, inside the bullets.  It pushes
+    # the hand out until its lugs bear on the collar lips, so the 0.1 mm play cannot rattle.  NBR 70A 22 x 1.0, groove 11.0-12.4
+    oring_id=22.0, oring_cs=1.0, og_r=(11.0, 12.4), og_depth=0.73, oring_E=5.5, mu=0.30,
 )
 
 
@@ -112,8 +115,35 @@ def arm_socket():
 
 def nose_ring():
     """Mouth ring (PA-CF), clamped between the 3 screw heads and the socket body.  Fitted after the collar: it is what
-    keeps the collar on, and the hand's flange seats on its face (z = 0)."""
-    return cyl(P["R_nose"], 0.0, P["z_nose"]) - _socket_cuts()
+    keeps the collar on, and the hand's flange seats on its face (z = 0).  Rev B.3: O-ring face groove inside the bullets."""
+    g = cyl(P["og_r"][1], -0.01, P["og_depth"]) - cyl(P["og_r"][0], -1.0, P["og_depth"] + 1.0)
+    return cyl(P["R_nose"], 0.0, P["z_nose"]) - _socket_cuts() - g
+
+
+def oring(free=False):
+    """The 22 x 1.0 O-ring seated on its groove floor, drawn round (uncompressed): where it overlaps the hand base's flange top
+    is the squeeze.  free=True: the same ring, with the hand pushed out by it before the collar turns."""
+    rc = P["oring_id"] / 2 + P["oring_cs"] / 2; r = P["oring_cs"] / 2; zc = P["og_depth"] - r
+    cs = mf.CrossSection.circle(r, 32).translate([rc, zc])
+    return mf.Manifold.revolve(cs, N)
+
+
+def oring_force(squeeze):
+    """Face-compressed O-ring (Lindley): N, for a squeeze in mm."""
+    e = max(squeeze, 0.0) / P["oring_cs"]; rc = P["oring_id"] / 2 + P["oring_cs"] / 2
+    return P["oring_E"] * P["oring_cs"] * (1.25 * e ** 1.5 + 50 * e ** 6) * 2 * np.pi * rc
+
+
+def preload():
+    """Axial preload on the lugs at lock (O-ring + 5 spring pins), its print-tolerance band, and what it means."""
+    sq = P["oring_cs"] - P["og_depth"] - P["ax_clr"]; pogo = 5 * 0.060 * 9.81
+    F = oring_force(sq) + pogo; Flo = oring_force(sq - 0.1) + pogo; Fhi = oring_force(sq + 0.1) + pogo
+    rl = (P["lip_r0"] + P["lug_r1"]) / 2; tr = P["ramp"] / (rl * np.radians(P["ramp_deg"])); mu = P["mu"]
+    lock = F * rl * 1e-3 * (tr + mu) / (1 - mu * tr) + 0.08
+    return dict(squeeze_mm=round(sq, 2), squeeze_pct=round(100 * sq / P["oring_cs"]), F_N=round(F, 1), F_band_N=[round(Flo, 1), round(Fhi, 1)],
+                hand3_still_to_g=round(F / (0.3964 * 9.81), 1), hand3_still_to_g_low=round(Flo / (0.3964 * 9.81), 1),
+                collar_lock_torque_Nm=round(lock, 2), collar_hold_friction_Nm=round(F * rl * 1e-3 * mu, 3),
+                free_ring_standoff_mm=round(P["oring_cs"] - P["og_depth"], 2), ramp_capture_margin_mm=round(P["ramp"] - (P["oring_cs"] - P["og_depth"] - P["ax_clr"]), 2))
 
 
 def detent_ball(theta=0.0):
@@ -196,12 +226,13 @@ def screws():
 
 
 def stresses(M, Fr, sig_allow=30.0):
-    """Hand formulas (no FEA).  The hand's bending moment M is carried as a couple by the lugs (1.5 effective) + 30 N
-    preload.  One lug's force F then runs lug -> lip -> collar wall -> step -> nose ring -> screws.  The collar is a
+    """Hand formulas (no FEA).  The hand's bending moment M is carried as a couple by the lugs (1.5 effective) + one lug's
+    share of the axial preload (rev B.3: O-ring + spring pins at the stiff end of the print band; was a flat 30 N).  One lug's force F then runs lug -> lip -> collar wall -> step -> nose ring -> screws.  The collar is a
     C-clamp: lug and nose-ring reactions both act inside the wall, so the wall sees tension + bending F * e.
     Load spreads in the wall over the lug arc + 0.78 sqrt(R t) each side (shell decay length), at most one 120 deg sector."""
     w = np.radians(P["lug_w"]); rc = (P["lip_r0"] + P["lug_r1"]) / 2; cb = P["collar_cb"]
-    F = M / (rc * 1.5e-3) + 30.0
+    pre = preload()["F_band_N"][1]                    # rev B.3: O-ring + pins at the stiff end of the print band
+    F = M / (rc * 1.5e-3) + pre / 3.0                 # one lug's share of the preload on top of the couple (was a flat 30 N)
     root = w * P["R_flange"]; arm = rc - P["R_flange"]
     tau = F / (root * P["t_lug"]); s_lug = 6 * F * arm / (root * P["t_lug"] ** 2)
     s_lip = 6 * F * (cb - rc) / (w * cb * P["t_lip"] ** 2)
@@ -216,7 +247,7 @@ def stresses(M, Fr, sig_allow=30.0):
     for phi in np.radians(np.arange(0, 360, 5)):
         d = np.array([P["R_nose"] + r * np.cos(np.radians(az) - phi) for r, az in P["screws"]])
         F_scr = max(F_scr, M * 1e3 * d.max() / (d ** 2).sum())
-    F_scr += 30.0 / len(P["screws"])
+    F_scr += pre / len(P["screws"])
     worst = max(tau, s_lug, s_lip, s_wall, s_step)
     return dict(lug_force_N=round(F, 1), lug_shear_MPa=round(tau, 1), lug_bending_MPa=round(s_lug, 1), lip_bending_MPa=round(s_lip, 1),
                 collar_wall_MPa=round(s_wall, 1), collar_step_MPa=round(s_step, 1), lug_on_lip_bearing_MPa=round(bear_lug, 1),
@@ -273,6 +304,15 @@ def checks():
     res["locked hand pulled 1 mm: lug x collar overlap (expected > 0)"] = vol(place(Hb, 1.0 + P["ramp"]), C0)
     # engagement depth of each bullet
     res["bullet engagement depth (mm)"] = round(P["z_flange"][1] + P["fem_recess"] + P["pin_len"] - 0.5 - P["fem_recess"], 2)
+    # rev B.3 O-ring: seated in its groove, squeezed by the hand at lock (hand pushed out onto the lips: dz = ax_clr)
+    Ro = oring()
+    res["O-ring x nose ring (seated in the groove, expected 0)"] = vol(Ro, Nr)
+    res["O-ring x socket / collar / male bullets / screws (expected 0)"] = [vol(Ro, S), vol(Ro, C0), vol(Ro, Mb), vol(Ro, Sc)]
+    res["O-ring squeeze volume at lock, hand on the lips (expected > 0)"] = round(vol(Ro, place(Hb, P["ax_clr"])), 3)
+    res["locked + preloaded (hand on the lips): base x collar / nose ring (expected 0)"] = [vol(place(Hb, P["ax_clr"]), C0), vol(place(Hb, P["ax_clr"]), Nr)]
+    res["O-ring groove walls: to the socket bore / to the female-bullet mouth / to the screw counterbore (mm)"] = [
+        round(P["og_r"][0] - P["r_bore"], 2), round(P["r_bullet"] - (P["pin_d"] / 2 + 0.6) - P["og_r"][1], 2), round(17.0 - P["cbore_d"] / 2 - P["og_r"][1], 2)]
+    res["preload"] = preload()
     # stresses at the wheel-hand design cases
     cases = json.load(open("wheelhand_sizing.json"))["connector"] if os.path.exists("wheelhand_sizing.json") else {}
     for case, v in cases.items():

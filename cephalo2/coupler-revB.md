@@ -92,3 +92,40 @@ Supersedes the B.1 dimensions above. Sweep over lug width and lug outer radius, 
 - Mass: socket 12.8, nose ring 4.4, collar 9.6, hand base 12.2 g = 39.0 g (B.1: 51.3 g, -24 %).
 - All fit checks pass (locked, push-in, sweep, key, pull-out, assembly, hand3, wheel hand; wheel lever 70.2 mm).
 - Open: 0.1 mm nominal axial play of a locked hand (no spring element; rev A had an O-ring) - tune on prints or add one; lug-on-lip radial overlap is 1.5 mm; stresses are hand formulas, no FEA; socket body itself (12.8 g) not optimised (set by bullet length and pin board).
+
+## Rev B.3 — O-ring preload against rattle (2026-11-18, `coupler_preload_study.py`, Forest picked option A)
+Supersedes B.2 only in the nose ring. The lugs, lips, ramp, collar and hand base are unchanged.
+- **Problem:** a locked hand had 0.1 mm of axial play, and only the 5 spring pins (about 2.9 N) pushed it one way. That keeps a hand3 seated only up to about 0.7 g, so it would rattle on every load reversal.
+- **Study (`coupler_preload_study.png`):**
+  - 0: spring pins only. 3 N.
+  - **A: O-ring in the nose-ring face. 38 N.**
+  - B: steel wave spring under the lugs. 21 N, insensitive to print error, but a custom size.
+  - C: printed flexure lips. 78 N, but PA-CF creeps and it weakens the lip hot spot.
+  - D: TPU pads on the lips. 5.6 kN/mm stiff, so print error decides everything, and the pads slide under load.
+- **Built (A):**
+  - NBR 70A O-ring 22 × 1.0, in a face groove r 11.0-12.4 × 0.73 deep in the nose ring (inside the bullets, outside the socket bore).
+  - It presses on the hand base's flange top and pushes the hand out until the lugs bear on the collar lips.
+  - One ring per arm. Nothing changes on the hands. It also dust-seals the spring-pin well.
+- **Numbers** (Lindley face-seal formula; 2.9 N of spring pins included; estimates):
+
+| | value |
+|---|---|
+| squeeze at lock / hand pushed fully in | 0.17 mm (17 %) / 27 % |
+| preload, nominal (±0.1 mm print error) | 38 N (12-80 N) |
+| hand3 stays seated up to | 9.8 g (3.1 g at the soft end) |
+| collar torque to lock (ramp + detent) | 0.45 N·m by hand |
+| friction then holding the collar (on top of the detent) | 0.25 N·m |
+| free ring stand-off before the turn / ramp still catches the lug | 0.27 mm / 0.23 mm margin |
+| groove walls to socket bore / bullet mouth / screw counterbore | 0.4 / 0.4 / 1.5 mm |
+
+- **Checks (`handmount_b.py`):**
+  - The O-ring clears the nose ring, socket, collar, bullets and screws.
+  - Squeeze volume at lock is 8.6 mm³.
+  - The preloaded locked hand clears the collar and nose ring.
+  - All B.2 checks still pass.
+- **Stress model:** the old flat 30 N preload on a lug is replaced by one lug's share of the O-ring preload at the stiff end of the band (80 N / 3). 3 g landing: lug 14.5, lip 14.4, wall 14.8, step 11.3 MPa, **factor 2.03**. Screws 186 N (factor 5.4, est.).
+- **Mass:** nose ring 4.3 g (was 4.4 g), plus a 0.1 g O-ring.
+- **Tuning on the bench:** the force is tolerance-sensitive (12-80 N for ±0.1 mm). Print the nose ring, measure the gap, and reprint it at the right groove depth (4 g, 0.05 mm steps). The 0.4 mm groove walls are one extrusion line: check they print.
+- **STLs:** `coupler_revB3_stl.zip` (socket, nose ring with groove, collar, hand base, hand3 pack frame).
+- **Viewer:** https://claude.ai/artifact/Cp2PWLZZN2RphhcBBLhQCe (now with the O-ring).
+- **Buy, per arm:** 1 × O-ring 22 × 1.0 NBR 70A, plus spares.

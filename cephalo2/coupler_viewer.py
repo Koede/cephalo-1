@@ -1,4 +1,4 @@
-"""Writes coupler_site/: a three.js viewer of connector rev B.1 (hand/arm coupler) with the insert-and-lock sequence,
+"""Writes coupler_site/: a three.js viewer of connector rev B.3 (hand/arm coupler) with the insert-and-lock sequence,
 a section cut, an explode slider and three hands (bare base, hand3 base, wheel hand).  Meshes come straight from the
 CAD (handmount_b.py, coupler_hand3_fit.py, wheelhand.py) and are packed as base64 Float32/Uint32 in coupler_data.js.
 python3 coupler_viewer.py"""
@@ -24,6 +24,7 @@ parts["nose ring"] = dict(m=HB.nose_ring(), g="arm", c="#3d4046")
 parts["female bullets (Castle 4 mm)"] = dict(m=U(HB.female_bullets()), g="arm", c="#c9a227")
 parts["3 x M3x20 DIN 7984"] = dict(m=U(HB.screws()), g="arm", c="#b8bcc4")
 parts["detent ball 3 mm"] = dict(m=HB.detent_ball(), g="arm", c="#e8e8f0")
+parts["O-ring 22 x 1.0 NBR 70A"] = dict(m=HB.oring(), g="arm", c="#1a7f37")
 parts["locking collar"] = dict(m=HB.collar(0), g="collar", c="#d2542d")
 # hands
 parts["hand base"] = dict(m=HB.hand_base(), g="hand", c="#30343a", h="all")
