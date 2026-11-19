@@ -1,0 +1,15 @@
+pess: sim 59.0 s in 73 s wall
+01 rest     0.0-  1.0 s | servo 0.51 x stall | tilt  0.0 | slip  0.1 | fan max  0.0 N, sat 0 | governor min 1.00 | arm4 j0 t0.07
+02 get up   1.0-  7.5 s | servo 0.57 x stall | tilt  0.3 | slip  0.2 | fan max  0.0 N, sat 0 | governor min 1.00 | arm7 j2 t1.97
+03 idle     7.6-  8.7 s | servo 0.19 x stall | tilt  0.0 | slip  0.0 | fan max  0.0 N, sat 0 | governor min 1.00 | arm2 j0 t8.73
+04 walk     8.8- 20.3 s | servo 0.82 x stall | tilt  0.7 | slip  0.1 | fan max  0.0 N, sat 0 | governor min 1.00 | arm0 j4 t12.10
+05 wave    20.3- 26.5 s | servo 0.76 x stall | tilt  0.4 | slip  0.1 | fan max  0.0 N, sat 0 | governor min 1.00 | arm1 j4 t25.97
+06 idle    26.5- 27.1 s | servo 0.30 x stall | tilt  0.0 | slip  0.0 | fan max  0.0 N, sat 0 | governor min 1.00 | arm1 j4 t26.50
+07 take off  27.1- 35.0 s | servo 1.00 x stall | tilt 122.3 | slip 42.2 | fan max 10.1 N, sat 1 | governor min 0.45 | arm1 j0 t32.27
+08 fly     35.0- 37.9 s | servo 1.00 x stall | tilt 105.0 | slip 41.0 | fan max  2.2 N, sat 0 | governor min 0.45 | arm3 j4 t35.17
+09 fly     37.9- 41.5 s | servo 1.00 x stall | tilt 104.2 | slip 42.0 | fan max 10.1 N, sat 1 | governor min 0.45 | arm4 j2 t37.93
+10 idle    41.5- 42.3 s | servo 1.00 x stall | tilt 102.4 | slip 40.9 | fan max  2.7 N, sat 0 | governor min 0.45 | arm3 j4 t41.53
+11 land    42.4- 49.9 s | servo 1.00 x stall | tilt 104.1 | slip 43.2 | fan max  9.3 N, sat 0 | governor min 0.45 | arm4 j2 t42.37
+12 idle    49.9- 50.9 s | servo 0.21 x stall | tilt  0.0 | slip  0.0 | fan max  0.0 N, sat 0 | governor min 1.00 | arm1 j0 t49.97
+13 lie down  50.9- 57.9 s | servo 0.71 x stall | tilt  0.7 | slip  0.4 | fan max  0.0 N, sat 0 | governor min 1.00 | arm7 j0 t56.90
+14 rest    58.0- 59.0 s | servo 0.16 x stall | tilt  0.0 | slip  0.1 | fan max  0.0 N, sat 0 | governor min 1.00 | arm0 j0 t57.97
