@@ -28,7 +28,8 @@ WORM = dict(name="E-S Motor 1220WG-N20VA 6 V 94 rpm (self-locking worm)", m=13.0
             shaft_h=5.0, shaft_L=8.0, rpm=94, stall_kgcm=2.4, stall_A=0.65)    # m: Chihai CHF-GW12T-N20VA 'approx. 13 g' (same body)
 GB_X = (21.5, 21.5 + WORM["gb"][0])                                            # gearbox radial span (outer face 31.5)
 GB_Z0 = Z_SHAFT - WORM["shaft_h"]                                              # 102.05: 1.05 above the top disc
-CRADLE = dict(x=(20.5, 33.0), y=7.5, z1=GB_Z0 + 18.0, wall=1.0)                # printed tube round the gearbox only (the can sits above)
+CRADLE = dict(x=(20.5, 33.0), y=9.0, z1=GB_Z0 + 26.0, wall=1.0)                # tube round the gearbox + a collar on the can's lower 8 mm
+NECK_Y = 11.0
 TRACK_R = (10.2, 11.4, 12.6, 16.4, 17.6, 18.8, 20.0, 21.2)                     # copper-tape tracks under the top disc (ribs at 13.5-15.5, 22.3-24)
 TRACK_W = 0.8
 PADS = dict(az_off=24.0, z=(61.2, 64.0), pitch_deg=360 * 2.54 / (2 * np.pi * HC.R_CAGE[1]))   # 2 rows of 4 pads, 0.1" pitch, on the cage
@@ -84,22 +85,30 @@ def base_disc_c():
 
 
 def cradle():
-    """Printed tube round the gearbox, on the root's outer end.  Over the top disc (x < 25.8) it stops 0.3 above the disc; from
-    25.8 out it runs down into the grip.  Inner wall has the shaft hole; the flexor channel is cut through it (see root_block_c)."""
-    x0, x1 = CRADLE["x"]; y = CRADLE["y"]; z1 = CRADLE["z1"]; w = CRADLE["wall"]
-    outer = box([x0, -y, Z_TOP[1] + 0.3], [x1, y, z1]) + box([25.8, -y, H.Z["blade"]], [x1, y, z1])
-    inner = box([GB_X[0] - 0.2, -WORM["gb"][1] / 2 - 0.2, GB_Z0 - 0.01], [GB_X[1] + 0.2, WORM["gb"][1] / 2 + 0.2, z1 + 1])
-    m = outer - inner - cyl(1.9, x0 - 1, GB_X[0] + 0.5, "x", (0, 0, Z_SHAFT), n=20)
-    g2 = H.GAP[0] / 2                                                            # K1's clearance for the flexor sector (as the grip's)
+    """Motor cradle on the root's outer end (AlSi10Mg, with the root).
+    - neck: x 25.8..31.6 (outside the discs' rim, inside the K1 barrel), y +-11, from the gap floor (z 93.2) up to the tube; it
+      carries the tower's ~700 N spin pull into the root block;
+    - tube: round the gearbox only, x 20.5..33 (over the top disc it stays 0.3 above it), y +-7.5, up to the gearbox top.
+    K1's flexor-sector clearance (r 7, |y| < 2.3), the flexor channel, tackle holes and the K1 band channel are cut afterwards."""
+    x0, x1 = CRADLE["x"]; y = CRADLE["y"]; z1 = CRADLE["z1"]
+    neck = box([25.8, -NECK_Y, Z_GAP[0] + 0.2], [31.6, NECK_Y, Z_TOP[1] + 0.3])
+    tube = box([x0, -y, Z_TOP[1] + 0.3], [x1, y, z1])
+    inner = box([GB_X[0] - 0.2, -WORM["gb"][1] / 2 - 0.2, GB_Z0 - 0.01], [GB_X[1] + 0.2, WORM["gb"][1] / 2 + 0.2, GB_Z0 + WORM["gb"][2] + 0.01])
+    inner += cyl(WORM["can_r"] + 0.15, GB_Z0 + WORM["gb"][2] - 0.01, z1 + 1, c=((GB_X[0] + GB_X[1]) / 2, 0, 0), n=48)
+    m = neck + tube - inner - cyl(1.9, x0 - 1, GB_X[0] + 0.5, "x", (0, 0, Z_SHAFT), n=20)
+    m -= box([x0 - 1, -y - 1, GB_Z0 + 6], [GB_X[0] - 0.1, y + 1, GB_Z0 + WORM["gb"][2]])   # inner wall only up to the shaft (pinion room)
+    m -= box([x0 - 1, -y - 1, Z_TOP[1] + 0.29], [25.8, y + 1, GB_Z0 - 0.7])        # floor over the disc: 0.7 under the gearbox
+    g2 = H.GAP[0] / 2
     m -= app(cyl(H.LEVER[0] + 1.0, -(g2 + 0.8), g2 + 0.8, "y", (H.KN[0], 0, 0), n=48), T(rot("x", H.PITCH))).translate([0, 0, H.Z["blade"]])
-    return m - box([x0 - 1, -y - 1, GB_Z0 + 6], [GB_X[0] - 0.1, y + 1, z1 + 1])    # inner wall only up to the shaft (pinion side open above)
+    m -= app(cyl(H.BARREL[0] / 2 + 0.3, -20, 20, "y", (H.KN[0], 0, 0), n=48), T(rot("x", H.PITCH))).translate([0, 0, H.Z["blade"]])
+    return m
 
 
 _RB = {}
 
 
 def root_block_c(az=0.0):
-    """v3 root block without latch-pin bores, arm slots or crank cuts; plus the motor cradle and two brush bores."""
+    """v3 root block without latch-pin bores, arm slots or crank cuts; plus the motor cradle (AlSi10Mg root)."""
     if "m" not in _RB:
         zb = H.Z["blade"]
         grip = app(V3.grip_clean(), T(t=[0, 0, zb]))
@@ -111,7 +120,9 @@ def root_block_c(az=0.0):
         for s in (-1, 1):                                                       # 2:1 tackle strands (as v3)
             m -= cyl(0.6, Z_GAP[0] - 3, zb + (1.0 if s > 0 else 6.0), c=(V["bead"]["eye_r"], s * 0.7, 0), n=16)
         m -= cyl(1.1, zb + 1.4, zb + 6.0, c=(V["bead"]["eye_r"], -0.7, 0), n=20)
-        m -= V3.flexor_channel_world() if hasattr(V3, "flexor_channel_world") else _flexor_world()
+        m -= _flexor_world()
+        import hand3_bands as B
+        m -= app(B.channel(0, B.hooks(0)[0], H.KN[0]) - box([0, -5, -50], [B.hooks(0)[0] - 1.3, 5, 50]), T(rot("x", H.PITCH))).translate([0, 0, zb])
         _RB["m"] = m
     return _RB["m"].rotate([0, 0, float(az)])
 
@@ -169,17 +180,54 @@ def station_c():
     return dict(tyre=sp["tyre"], motor=sp["motor"], servo=sp["servo"], sensor=sp["sensor"].translate([-10.0, 0, -22.0]), dock=dock_head())
 
 
+def section_S(m, z, x_min=20.0):
+    """Section modulus (mm3) of the horizontal section of m at height z, x > x_min, for bending by a radial (x) load."""
+    from shapely.geometry import Polygon, box as sbox
+    from shapely import contains_xy
+    g = None
+    for p in m.slice(z).to_polygons():
+        q = Polygon(np.asarray(p)); g = q if g is None else g.symmetric_difference(q)
+    g = g.intersection(sbox(x_min, -40, 80, 40))
+    xs = np.linspace(x_min, 45, 700); ys = np.linspace(-15, 15, 500); X, Y = np.meshgrid(xs, ys)
+    ins = contains_xy(g, X, Y); dA = (xs[1] - xs[0]) * (ys[1] - ys[0]); cx = X[ins].mean()
+    I = ((X[ins] - cx) ** 2).sum() * dA; c = max(X[ins].max() - cx, cx - X[ins].min())
+    return float(I / c), float(g.area)
+
+
 def drive_numbers():
     v = WORM["rpm"] / 60 * 2 * np.pi * PIN["r_p"]                              # pinion pitch speed mm/s
-    degs = np.degrees(v / (2 * np.pi * 18.5) * 2 * np.pi)                      # root angular speed (deg/s): pitch radius 18.5
+    degs = np.degrees(v / 18.5)                                                 # root angular speed: crown pitch radius 18.5
     T_st = WORM["stall_kgcm"] * 9.81e-2; F_st = T_st / (PIN["r_p"] * 1e-3)
-    W = 1309.0; m_tow = WORM["m"] + 2.6                                          # + pinion (1.1 g brass, est.) + cradle share (est.)
-    r_cm = 26.5; F_c = m_tow * 1e-3 * r_cm * 1e-3 * W ** 2
-    h = (GB_Z0 + 13.0) - H.Z["blade"]                                           # tower CoM above the grip mid-plane (est.)
-    Mb = F_c * h * 1e-3
-    d, b = CRADLE["x"][1] - 25.8, 2 * CRADLE["y"]; S = b * d * d / 6
-    return dict(root_speed_deg_s=round(degs, 1), pinion_force_stall_N=round(F_st), hold_needed_N=6.0,
-                tower_g=m_tow, tower_pull_N=round(F_c), root_radial_N=round(826 + F_c), cradle_base_moment_Nm=round(Mb, 2),
-                cradle_base_section=f"{d:.1f} x {b:.0f} mm", cradle_base_stress_MPa=round(Mb * 1e3 / S, 1),
-                cradle_SF_PAHT_CF_wet54=round(54 / (Mb * 1e3 / S), 2), cradle_SF_AlSi10Mg_200=round(200 / (Mb * 1e3 / S), 2),
-                rib_bearing_MPa=round((826 + F_c) / 77.0, 1), motor_g_load=round(r_cm * 1e-3 * W ** 2 / 9.81))
+    W = 1309.0
+    parts = [(8.0, (GB_X[0] + GB_X[1]) / 2, GB_Z0 + 9.0), (5.0, (GB_X[0] + GB_X[1]) / 2, GB_Z0 + 18 + 7.5), (1.1, 18.3, Z_SHAFT)]   # gearbox, can, pinion (est. split)
+    m_t = sum(p[0] for p in parts); r_cm = sum(p[0] * p[1] for p in parts) / m_t; z_cm = sum(p[0] * p[2] for p in parts) / m_t
+    F_c = m_t * 1e-3 * r_cm * 1e-3 * W ** 2
+    root = root_c(0)
+    out = dict(root_speed_deg_s=round(degs, 1), pinion_force_stall_N=round(F_st), hold_needed_N=6.0,
+               motor_set_g=m_t, motor_set_r_mm=round(r_cm, 1), tower_pull_N=round(F_c), root_radial_N=round(826 + F_c),
+               motor_g_load=round(r_cm * 1e-3 * W ** 2 / 9.81), root_AlSi10Mg_g=round(root.volume() * 2.68e-3, 2))
+    for z in (99.5, 101.2, 104.0, 110.0):
+        S, A = section_S(root, z, 20.0 if z > 101.3 else 25.6)
+        Mz = F_c * max(z_cm - z, 0) * 1e-3 if z < GB_Z0 else F_c * 0.5 * max(z_cm - z, 0) * 1e-3 * 2   # above the floor the load rides the walls
+        out[f"z{z}: S mm3 / M N m / MPa / SF AlSi10Mg 230"] = (round(S, 1), round(Mz, 2), round(Mz * 1e3 / S, 1), round(230 / (Mz * 1e3 / S), 2))
+    # centroid of the solid (tetra decomposition from the surface mesh)
+    mm = root.to_mesh(); P = np.asarray(mm.vert_properties)[:, :3]; Tr = np.asarray(mm.tri_verts)
+    a, b, c = P[Tr[:, 0]], P[Tr[:, 1]], P[Tr[:, 2]]; vol = np.einsum("ij,ij->i", a, np.cross(b, c)) / 6.0
+    cen = ((a + b + c) / 4.0 * vol[:, None]).sum(0) / vol.sum()
+    F_root = root.volume() * 2.68e-3 * 1e-3 * cen[0] * 1e-3 * W ** 2
+    out["root_cm_r_mm"] = round(float(cen[0]), 1); out["root_pull_N"] = round(F_root)
+    out["rib_load_N"] = round(826 + F_c + F_root); out["rib_bearing_MPa"] = round((826 + F_c + F_root) / 77.0, 1)
+    return out
+
+
+def assembly_c(pose=V3.POSES["flight cross"], fold=(0.0, 0.0, 0.0), pull=0.0):
+    """Whole hub for decision C at one pose (world frame, rotor at 0): discs, crown, tracks, roots with motors and pinions,
+    fingers with bands, beads, heel.  Station not included."""
+    import hand3_cad as C
+    out = {"base disc": base_disc_c(), "top disc": top_disc_c(), "tracks": tracks(), "heel": C.parts()["heel"], "rail": V3.ring_rail()}
+    for k, az in enumerate(pose):
+        out[f"root {k}"] = root_c(k, az); out[f"motor {k}"] = gearbox_and_can().rotate([0, 0, float(az)])
+        out[f"pinion {k}"] = pinion().rotate([0, 0, float(az)]); out[f"brushes {k}"] = brushes(k).rotate([0, 0, float(az)])
+        out[f"bead {k}"] = V3.bead(az, pull)
+        for n, m in V3.finger(az, fold).items(): out[f"{n} {k}"] = m
+    return out
