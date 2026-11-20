@@ -15,7 +15,7 @@
   {
    "part": "root block (grip merged, cleaned)",
    "qty": 4,
-   "g_each": 2.75,
+   "g_each": 2.62,
    "material": "PA-CF"
   },
   {
@@ -91,9 +91,9 @@
    "material": "PA-CF"
   },
   {
-   "part": "phalanx 1",
+   "part": "phalanx 1 (v3: band sector + clevises)",
    "qty": 4,
-   "g_each": 2.27,
+   "g_each": 2.36,
    "material": "PA-CF"
   },
   {
@@ -103,9 +103,9 @@
    "material": "TPU 95A"
   },
   {
-   "part": "phalanx 2",
+   "part": "phalanx 2 (v3: band sector + clevises)",
    "qty": 4,
-   "g_each": 1.79,
+   "g_each": 1.86,
    "material": "PA-CF"
   },
   {
@@ -115,9 +115,9 @@
    "material": "TPU 95A"
   },
   {
-   "part": "phalanx 3",
+   "part": "phalanx 3 (v3: band sector + clevises)",
    "qty": 4,
-   "g_each": 1.25,
+   "g_each": 1.26,
    "material": "PA-CF"
   },
   {
@@ -201,6 +201,30 @@
    "note": "spin interlock"
   },
   {
+   "part": "silicone O-ring 6.07 x 1.78 (AS568-010)",
+   "qty": 4,
+   "g_each": 0.07,
+   "note": "K1 return band"
+  },
+  {
+   "part": "silicone O-ring 9 x 1",
+   "qty": 4,
+   "g_each": 0.03,
+   "note": "K2 return band"
+  },
+  {
+   "part": "silicone O-ring 8 x 1.5",
+   "qty": 4,
+   "g_each": 0.06,
+   "note": "K3 return band"
+  },
+  {
+   "part": "steel dowel pin dia 1.5 x 5",
+   "qty": 24,
+   "g_each": 0.07,
+   "note": "band hooks, press fit"
+  },
+  {
    "part": "M2 x 6 thread-forming screw",
    "qty": 2,
    "g_each": 0.2,
@@ -223,11 +247,10 @@
   "ring link lugs and cage 61 deg link slots",
   "root-grip lag bore, k=1/k=2 cord lanes and spring-cord paths",
   "K1 cord knot (one cord now runs K1..K3)",
-  "latch-pin tab ends past the crank (tab now ends at r 21.5)"
+  "latch-pin tab ends past the crank (tab now ends at r 21.5)",
+  "hub E return-spring boxes: 2 trays + lid per finger (0.94 g), their screw, the root post, knuckle saddles, extensor cords and bores"
  ],
- "pending": [
-  "return springs: hub E's spring boxes (3 O-ring lanes per finger) can't be reached by their cords in v3 (top disc in the way); options study hand3_return_spring_study"
- ],
- "total_printed_g": 100.8,
- "total_bought_g": 141.4
+ "pending": [],
+ "total_printed_g": 101.0,
+ "total_bought_g": 143.7
 }

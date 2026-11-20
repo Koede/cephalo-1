@@ -38,11 +38,11 @@ def gap_deg(A, B, da):
 
 
 R = C.parts()
-blk = V3.root_block(0); box_ = V3.spring_box(0, 0); box_r = V3.spring_box(0, 1); pins = V3.latch_pin(0, 1) + V3.latch_pin(0, -1)
+blk = V3.root_block(0); pins = V3.latch_pin(0, 1) + V3.latch_pin(0, -1)
 straight = V3.finger(0)
 fing = None
 for m in straight.values(): fing = m if fing is None else fing + m
-B = {"root block + grip": bands(blk), "latch pins": bands(pins), "spring box L (hub E)": bands(box_), "spring box R (hub E)": bands(box_r), "finger (straight)": bands(fing), "bead": bands(V3.bead(0))}
+B = {"root block + grip": bands(blk), "latch pins": bands(pins), "finger (straight)": bands(fing), "bead": bands(V3.bead(0))}
 res["bands"] = {k: dict(r=(min(b), max(b)), half_angle_at_r20=b.get(20.0)) for k, b in B.items()}
 for pose, azs in V3.POSES.items():
     for i in range(4):
@@ -64,7 +64,7 @@ F = {
  "lifted leg bottom above the disc top (axial)": Zl + V["lift"] - zt,
  "block left under the arm slot (axial)": za0 - V3.Z_GAP[0],
  "lifted arm still inside its slot, below the block top": V3.Z_GAP[1] - (za1 + V["lift"]),
- "lifted tab below the spring box floor (z 101)": 101.0 - (za1 + V["lift"]),
+ "lifted tab below the top disc top (z 101)": 101.0 - (za1 + V["lift"]),
  "pin wire to the grip side (lateral)": V3.PIN_LAT - V["wire_d"] / 2 - 6.0,
  "block wall outside the pin slot (tangential)": np.radians(V["block_half"] - V["pin_daz"]) * V["pin_r"] - V["slot_w"] / 2,
  "web between lip holes (closest pair 14 deg)": np.radians(14.0) * V["pin_r"] - V["slot_w"] - 0.3,
@@ -87,8 +87,8 @@ def G(name, m): return OV.grid(name, SIM.mesh(m, tol=0.02))
 I4 = np.eye(4)
 static = {"base disc": V3.base_disc(), "top disc": V3.top_disc(), "heel": R["heel"]}
 gs = {n: G(n, m) for n, m in static.items()}
-g_blk = G("block", blk); g_box = {k: G(f"box{k}", V3.spring_box(0, k)) for k in range(4)}; g_pin = G("pin", pins); g_bead = G("bead", V3.bead(0)); g_rail = G("rail", V3.ring_rail())
-g_ph = {j: G(f"ph{j}", R[f"phalanx{j + 1}"] + R[f"pad{j + 1}"]) for j in range(3)}
+g_blk = G("block", blk); g_pin = G("pin", pins); g_bead = G("bead", V3.bead(0)); g_rail = G("rail", V3.ring_rail())
+g_ph = {j: G(f"ph{j}", V3.B.phalanx_v3(j) + R[f"pad{j + 1}"]) for j in range(3)}
 def Rz(d): return np.asarray(T_(d))
 def T_(d): return C.T(C.rot("z", d))
 def hits(items):
@@ -105,6 +105,8 @@ def hits(items):
             ii = idx[okm]; n_in = int(gb["er"][ii[:, 0], ii[:, 1], ii[:, 2]].sum())
             if n_in: out[f"{na} x {nb}"] = round(n_in * OV.CELL ** 3, 2)
     return out
+g_band = {(j, round(float(c), 2)): G(f"band{j}_{c:.2f}", V3.B.band_solid(j, H.FOLD_MAX[j] * c) + V3.B.dowels(j, H.FOLD_MAX[j] * c))
+          for j in range(3) for c in np.arange(0, 1.0001, 0.05)}
 for pose, azs in V3.POSES.items():
     rows = []
     for c in np.arange(0, 1.0001, 0.05):
@@ -112,16 +114,17 @@ for pose, azs in V3.POSES.items():
         items = [(f"hub:{n}", g, I4) for n, g in gs.items()] + [("hub:rail", g_rail, I4)]
         for k, az in enumerate(azs):
             A = np.asarray(T_(az), float)
-            items += [(f"{k}:block", g_blk, A), (f"{k}:pins", g_pin, A), (f"{k}:bead", g_bead, A), (f"{k}:box", g_box[k], np.asarray(T_(az), float))]
+            items += [(f"{k}:block", g_blk, A), (f"{k}:pins", g_pin, A), (f"{k}:bead", g_bead, A)]
             Af = np.asarray(T_(az - C.FAZ[0]), float)
             items += [(f"{k}:ph{j}", g_ph[j], Af @ fr[j + 1]) for j in range(3)]
+            items += [(f"{k}:band{j}", g_band[(j, round(float(c), 2))], Af @ (fr[0] @ np.asarray(C.T(C.rot("x", H.PITCH)), float) if j == 0 else fr[j])) for j in range(3)]
         h = hits(items); rows.append(dict(curl=round(float(c), 2), hits=h))
         print(pose, round(c, 2), len(h), list(h.items())[:4], flush=True)
     noboxes = [r for r in rows if not any("box" in k for k in r["hits"])]
     free = [r["curl"] for r in rows if not r["hits"]]; free_nb = [r["curl"] for r in rows if not any("box" not in k for k in r["hits"])]
-    res["curl"][pose] = dict(max_clear_curl=(max(free) if free and free[0] == 0 else None), max_curl_ignoring_spring_boxes=max(free_nb) if free_nb else None,
+    res["curl"][pose] = dict(max_clear_curl=(max(free) if free and free[0] == 0 else None), 
                              at_zero=rows[0]["hits"], first_hit={r["curl"]: r["hits"] for r in rows if r["hits"]} and next(iter([{r["curl"]: r["hits"]} for r in rows if r["hits"]]), None))
 json.dump(res, open("hand3_hub_v3_check.json", "w"), indent=1, default=float)
 print(json.dumps(res["fits"], indent=1)); print(res["stroke"])
 for p in res["pairs"]: print(p) if not p["ok"] else None
-for k, v in res["curl"].items(): print(k, v["max_clear_curl"], v["max_curl_ignoring_spring_boxes"], v["at_zero"])
+for k, v in res["curl"].items(): print(k, v["max_clear_curl"], v["at_zero"])

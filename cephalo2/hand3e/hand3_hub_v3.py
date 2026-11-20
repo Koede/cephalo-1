@@ -20,6 +20,7 @@ import hand3_design as H
 import hand3_cad as C
 import hand3_hubc as HC
 import hand3_finger as F
+import hand3_bands as B
 from hand3_cad import cyl, box, app, T, rot
 
 M_ = mf.Manifold
@@ -95,7 +96,27 @@ def grip_clean():
     fork = M_.batch_hull([box([31.0, -6, -2.6], [32.0, 6, 2.6]), box([34.0, -W2, -3.0], [H.KN[0] + 0.5, W2, 3.0])])
     m = app(flat, T(rot("x", -H.PITCH))) + fork
     m = F.end_trim(m, H.KN[0], -1, H.FOLD_MAX[0])
-    return app(F.proximal_end(m, 0, fairlead=False), T(rot("x", H.PITCH))) - F.rim_relief()
+    m = B.grip_band(F.proximal_end(m, 0, fairlead=False)) - flexor_channel()
+    return app(m, T(rot("x", H.PITCH))) - F.rim_relief()
+
+
+def flexor_entry():
+    """Where the tackle's running strand turns (grip frame, before pitch): the top of its vertical hole, world (26.3, +0.7, zb+1)."""
+    w = np.array([0.0, 0.7, 1.0]); c, s = np.cos(np.radians(H.PITCH)), np.sin(np.radians(H.PITCH))
+    return np.array([V["bead"]["eye_r"], c * w[1] + s * w[2], -s * w[1] + c * w[2]])
+
+
+def flexor_tangent():
+    """Tangent point of the running strand on K1's sector (lever 6) from the entry, grip frame."""
+    A = flexor_entry(); Cc = np.array([H.KN[0], 0.0]); R = H.LEVER[0]
+    v = Cc - A[[0, 2]]; D = np.linalg.norm(v); ang = np.arctan2(v[1], v[0]) + np.arcsin(R / D); L = np.sqrt(D * D - R * R)
+    return np.array([A[0] + L * np.cos(ang), H.CORD_Y[0], A[2] + L * np.sin(ang)])
+
+
+def flexor_channel():
+    """Running strand: from the vertical hole's top straight up to K1's sector top (dia 1.1 channel, opens through the grip top)."""
+    A = flexor_entry(); Tt = flexor_tangent()
+    return M_.batch_hull([M_.sphere(0.55, 16).translate(list(A)), M_.sphere(0.55, 16).translate(list(A + 1.05 * (Tt - A)))])
 
 
 def root_block(az=0.0):
@@ -108,14 +129,15 @@ def root_block(az=0.0):
         for r0, r1 in V["ribs"]:
             b += wedge(r0, r1, Z_GAP[0] - V["rib_h"], Z_GAP[0] + 0.01, -V["block_half"], V["block_half"])
             b += wedge(r0, r1, Z_GAP[1] - 0.01, Z_GAP[1] + V["rib_h"], -V["block_half"], V["block_half"])
-        post = box([V["post"][0], -V["post"][2], H.Z["blade"] + 2.0], [V["post"][1], V["post"][2], V["post"][3]])   # carries the spring box
-        m = b + grip + post
+        m = b + grip                                                         # (hub E's spring-box post: gone, decision D)
         for s in (-1, 1):
             m -= slot_xy(0.0, s, PIN_X - 1.05 - 0.25, PIN_X + V["float_"] + 1.05, V["slot_w"]) ^ box([-60, -60, Z_GAP[0] - 2], [60, 60, Z_GAP[1] + 2])   # leg bore
             m -= slot_xy(0.0, s, PIN_X - 1.1 - 0.25, 40.0, V["arm_slot_w"]) ^ box([-60, -60, Z_ARM[0] - 0.05], [60, 60, Z_GAP[1] + 2])            # arm slot
         # curl cord: from the bead under the disc rim straight up into the grip's underside at r = bead eye (channel dia 1.2)
         for s in (-1, 1):                                                    # 2:1 tackle: anchor strand and running strand
-            m -= cyl(0.6, Z_GAP[0] - 3, H.Z["blade"] + 1.0, c=(V["bead"]["eye_r"], s * 0.7, 0), n=16)
+            m -= cyl(0.6, Z_GAP[0] - 3, H.Z["blade"] + (1.0 if s > 0 else 6.0), c=(V["bead"]["eye_r"], s * 0.7, 0), n=16)
+        # anchor strand (y -0.7): through the grip top, counterbore for the stop knot / crimp
+        m -= cyl(1.1, H.Z["blade"] + 1.4, H.Z["blade"] + 6.0, c=(V["bead"]["eye_r"], -0.7, 0), n=20)
         _RG["m"] = m
     return _RG["m"].rotate([0, 0, float(az)])
 
@@ -155,27 +177,29 @@ def cord_pts(az=0.0, pull=0.0):
     return np.array([[r * np.cos(a), r * np.sin(a), Z_RING_TOP - pull + V["bead"]["dz"][1]], [r * np.cos(a), r * np.sin(a), H.Z["blade"]]])
 
 
-def finger(az, fold=(0.0, 0.0, 0.0)):
-    """Phalanges + pads of a finger whose root sits at az (hand3_cad.finger_frames with lag 0, turned)."""
+_PH = {}
+
+
+def finger(az, fold=(0.0, 0.0, 0.0), bands=True):
+    """Phalanges (v3: no spring patches; band sectors and clevises), pads, and the three return bands with their dowels, for a
+    finger whose root sits at az (hand3_cad.finger_frames with lag 0, turned)."""
     R = C.parts(); fr = C.finger_frames(0, 0.0, fold); A = T(rot("z", az - C.FAZ[0])); out = {}
+    if not _PH:
+        for j in range(3): _PH[j] = B.phalanx_v3(j)
     for j in range(3):
-        out[f"phalanx{j + 1}"] = app(R[f"phalanx{j + 1}"], A @ fr[j + 1]); out[f"pad{j + 1}"] = app(R[f"pad{j + 1}"], A @ fr[j + 1])
+        out[f"phalanx{j + 1}"] = app(_PH[j], A @ fr[j + 1]); out[f"pad{j + 1}"] = app(R[f"pad{j + 1}"], A @ fr[j + 1])
+    if bands:
+        P0 = fr[0] @ T(rot("x", H.PITCH))                                   # grip frame (pitched), K1's proximal member
+        for j in range(3):
+            Fp = P0 if j == 0 else fr[j]
+            out[f"band{j + 1}"] = app(B.band_solid(j, fold[j]), A @ Fp); out[f"dowels{j + 1}"] = app(B.dowels(j, fold[j]), A @ Fp)
     return out
-
-
-def spring_box(az, k=0):
-    """hub E's return-spring box, carried by the root at az on the root block's post (screwed to it, est.).  v3 has no swing, so all
-    four fingers use the same ("R") box: an L box 60 deg clockwise of an R box overlaps it (35 mm3, range check), same-hand boxes
-    clear by 1.6 mm at 60 deg."""
-    R = C.parts(); hand = "R"
-    m = R[f"spring_tray1_{hand}"] + R[f"spring_tray2_{hand}"] + R[f"spring_lid_{hand}"]
-    return m.rotate([0, 0, float(az)])
 
 
 POSES = {"flight cross": (0, 90, 180, 270), "2 + 2 pinch": (30, 150, 210, 330), "3 + 1 thumb": (30, 90, 150, 270), "all four on one side": (0, 60, 120, 180)}
 
 
-def assembly(pose=POSES["flight cross"], fold=(0.0, 0.0, 0.0), pull=0.0, lifted=None, springs=True):
+def assembly(pose=POSES["flight cross"], fold=(0.0, 0.0, 0.0), pull=0.0, lifted=None, springs=False):
     """name -> manifold (hand3 frame).  lifted: index of the root whose pins the fork holds up."""
     out = {"base disc": base_disc(), "top disc": top_disc(), "base ring rail": ring_rail().translate([0, 0, -pull])}
     for k, az in enumerate(pose):
@@ -183,7 +207,6 @@ def assembly(pose=POSES["flight cross"], fold=(0.0, 0.0, 0.0), pull=0.0, lifted=
         for s in (-1, 1): out[f"latch pin {k}{'ab'[s > 0]}"] = latch_pin(az, s, V["lift"] if lifted == k else 0.0, 0.0 if lifted == k else V["float_"])
         out[f"bead {k}"] = bead(az, pull)
         for n, m in finger(az, fold).items(): out[f"finger {k} {n}"] = m
-        if springs: out[f"spring box {k}"] = spring_box(az, k)
     return out
 
 

@@ -126,6 +126,13 @@ def spins():
 Tz, Rz = SIM.Tz, SIM.Rz
 def Tx(x): A = np.eye(4); A[0, 3] = x; return A
 def Sz(z0, L): A = np.eye(4); A[2, 2] = L; A[2, 3] = z0; return A
+
+
+def seg(a, b):
+    """4x4 taking the unit z cylinder (0..1) onto the segment a -> b."""
+    d = np.asarray(b, float) - np.asarray(a, float); L = max(np.linalg.norm(d), 1e-4); z = d / L
+    x = np.cross([0, 1.0, 0], z); x = x / np.linalg.norm(x) if np.linalg.norm(x) > 1e-9 else np.array([1.0, 0, 0]); y = np.cross(z, x)
+    A = np.eye(4); A[:3, 0] = x; A[:3, 1] = y; A[:3, 2] = z * L; A[:3, 3] = a; return A
 M = lambda m: np.asarray(m, float)
 
 
@@ -160,6 +167,7 @@ def build():
     add_("heel nut", C.parts()["heel"], "#2f2f2f", "hub", lambda s, sp: SP(sp))
     COL = ["#2f6fbf", "#c0392b", "#16a085", "#8e44ad"]; R = C.parts()
     strand = mf.Manifold.cylinder(1.0, V3.V["cord_r"], V3.V["cord_r"], 10)
+    bandu = {j: mf.Manifold.cylinder(1.0, V3.B.picks()[j]["cs"] / 2 + 0.2, V3.B.picks()[j]["cs"] / 2 + 0.2, 12) for j in range(3)}
     for k in range(4):
         RA = lambda s, sp, k=k: SP(sp) @ Rz(s["az"][k])
         add_(f"root block {k}", V3.root_block(0), COL[k], "roots", RA, tol=0.02)
@@ -171,7 +179,6 @@ def build():
             add_(f"crank {k}{'ab'[sd > 0]}", V3.crank(sd), "#7a3db8", "roots",
                  (lambda s, sp, k=k, sd=sd: SP(sp) @ Rz(s["az"][k]) @ V3.crank_pose(sd, s["turn"] if s["held"] == k else 0.0)), tol=0.01)
             add_(f"crank pin {k}{'ab'[sd > 0]}", V3.crank_pin(sd), "#b8bcc4", "roots", RA, metal=True, tol=0.01)
-        add_(f"spring box {k}", V3.spring_box(0, k), "#e6c229", "roots", RA)
         for sd in (-1, 1):
             r = V3.V["bead"]["eye_r"]; zt = V3.Z_GAP[0] - 1.0
             def cp(s, sp, k=k, sd=sd, r=r, zt=zt):
@@ -180,7 +187,19 @@ def build():
             add_(f"tackle cord {k}{'ab'[sd > 0]}", strand, "#f2f2f2", "roots", cp, tol=0.0)
         for j in range(3):
             fp = lambda s, sp, k=k, j=j: SP(sp) @ Rz(s["az"][k] - C.FAZ[0]) @ M(C.finger_frames(0, 0.0, tuple(f * s["c"] for f in H.FOLD_MAX))[j + 1])
-            add_(f"finger {k} phalanx {j + 1}", R[f"phalanx{j + 1}"], "#2b2b30", "fingers", fp)
+            add_(f"finger {k} phalanx {j + 1}", V3.B.phalanx_v3(j), "#2b2b30", "fingers", fp)
+            # return band j: dowels ride their members; the band is drawn as 5 straight pieces along its centreline (wrap included)
+            def fpx(s, sp, k=k, j=j):
+                fr = C.finger_frames(0, 0.0, tuple(f * s["c"] for f in H.FOLD_MAX))
+                return SP(sp) @ Rz(s["az"][k] - C.FAZ[0]) @ M(fr[0] @ C.T(C.rot("x", H.PITCH)) if j == 0 else fr[j])
+            add_(f"finger {k} dowel {j + 1}p", V3.B.dowel_prox(j), "#b8bcc4", "fingers", fpx, metal=True, tol=0.01)
+            add_(f"finger {k} dowel {j + 1}d", V3.B.dowel_dist(j), "#b8bcc4", "fingers", fp, metal=True, tol=0.01)
+            cs = V3.B.picks()[j]["cs"]
+            for q in range(5):
+                def bp(s, sp, k=k, j=j, q=q):
+                    pts = V3.B.band_points(j, H.FOLD_MAX[j] * s["c"]); a, b = pts[q], pts[q + 1]
+                    return fpx(s, sp, k, j) @ seg(a, b)
+                add_(f"band {k}.{j + 1}.{q}", bandu[j], "#3fae5a", "fingers", bp, tol=0.0)
             add_(f"finger {k} pad {j + 1}", R[f"pad{j + 1}"], "#c23b22", "fingers", fp)
     return parts, poses
 
@@ -245,7 +264,7 @@ def overlap(parts, poses, ts, sp, step=10):
     range check in hand3_hub_v3_check covers those)."""
     sys.argv = sys.argv[:1]
     import coupler_sim_overlap as OV
-    names = list(parts); G = {n: OV.grid(n, parts[n]) for n in names if not n.startswith("tackle cord")}
+    names = list(parts); G = {n: OV.grid(n, parts[n]) for n in names if not n.startswith("tackle cord") and not n.startswith("band ")}
     hits = {}
     for fi in sorted(set(list(range(0, len(ts), step)) + [int(t0 * FPS) + 1 for t0, _, k, _ in SEG] + [int(t1 * FPS) - 1 for _, t1, _, _ in SEG])):
         fi = min(fi, len(ts) - 1); s = state(ts[fi]); A = {n: poses[n](s, sp[fi] + s["psi"]) for n in G}

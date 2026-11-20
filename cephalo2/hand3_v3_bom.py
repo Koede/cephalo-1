@@ -23,7 +23,7 @@ def printed():
     rows += [("spool", 2, g(P["spool"][0]), "PA-CF"), ("tie ring", 1, g(P["tie_ring"][0]), "PA-CF"), ("frame", 1, g(P["frame"][0]), "PA-CF"),
              ("heel", 1, g(R["heel"]), "PA-CF")]
     for j in (1, 2, 3):
-        rows += [(f"phalanx {j}", 4, g(R[f"phalanx{j}"]), "PA-CF"), (f"pad {j}", 4, g(R[f"pad{j}"], "tpu"), "TPU 95A")]
+        rows += [(f"phalanx {j} (v3: band sector + clevises)", 4, g(V3.B.phalanx_v3(j - 1)), "PA-CF"), (f"pad {j}", 4, g(R[f"pad{j}"], "tpu"), "TPU 95A")]
     rows += [("station blade + spine", 1, g(sp["blade"]), "PA-CF")]
     return rows
 
@@ -36,15 +36,17 @@ BOUGHT = [("Feetech STS3215 servo (12 V)", 2, 55.0, "both pull the one base ring
           ("Pololu 298:1 Micro Metal Gearmotor HPCB 12 V (N20)", 1, 9.5, "station roller drive"),
           ("dia 20 rubber tyre / O-ring on hub", 1, 1.0, "est."), ("TowerPro SG92R micro servo", 1, 9.0, "station carriage"),
           ("Pololu QTR-1A reflectance sensor", 1, 0.3, "spin interlock"),
+          ("silicone O-ring 6.07 x 1.78 (AS568-010)", 4, 0.07, "K1 return band"), ("silicone O-ring 9 x 1", 4, 0.03, "K2 return band"),
+          ("silicone O-ring 8 x 1.5", 4, 0.06, "K3 return band"), ("steel dowel pin dia 1.5 x 5", 24, 0.07, "band hooks, press fit"),
           ("M2 x 6 thread-forming screw", 2, 0.2, "B.7 lead rail"), ("M3 x 8 screw", 4, 0.5, "frame to coupler hand base")]
 
 REMOVED = ["inner (curl) pull ring", "TPU series links (base and curl, 4 each)", "lag tubes (4)", "lag-spring peg, post and O-rings (4)",
            "hub stop posts", "hub_lower / hub_upper plates (now base and top discs)", "ring link lugs and cage 61 deg link slots",
            "root-grip lag bore, k=1/k=2 cord lanes and spring-cord paths", "K1 cord knot (one cord now runs K1..K3)",
-           "latch-pin tab ends past the crank (tab now ends at r 21.5)"]
+           "latch-pin tab ends past the crank (tab now ends at r 21.5)",
+           "hub E return-spring boxes: 2 trays + lid per finger (0.94 g), their screw, the root post, knuckle saddles, extensor cords and bores"]
 
-PENDING = ["return springs: hub E's spring boxes (3 O-ring lanes per finger) can't be reached by their cords in v3 (top disc in the "
-           "way); options study hand3_return_spring_study"]
+PENDING = []
 
 
 if __name__ == "__main__":

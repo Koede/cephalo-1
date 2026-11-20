@@ -17,7 +17,7 @@ def draw(ax, m, fc, ec="black", lw=0.5, alpha=1.0, z=1):
 fig = plt.figure(figsize=(20, 13.0), facecolor="white")
 fig.suptitle("hand3 hub v3 (CAD): finger roots that travel round the hub, each locked by two axial latch pins", fontsize=17, fontweight="bold", y=0.995)
 fig.text(0.5, 0.952, "Top views from above, to scale (mm), fingers straight.  Grey = discs, colours = root blocks (finger fixed in its block), red = latch pins, "
-         "yellow = return-spring boxes (all same hand), black = beads on the ring rail (orange).", ha="center", fontsize=10.5)
+         "green = return bands (one O-ring per knuckle), black = beads on the ring rail (orange).", ha="center", fontsize=10.5)
 for i, (pose, azs) in enumerate(V3.POSES.items()):
     ax = fig.add_axes([0.005 + i * 0.165, 0.50, 0.16, 0.42]); ax.set_aspect("equal"); ax.set_xlim(-62, 62); ax.set_ylim(-62, 62); ax.set_xticks([]); ax.set_yticks([])
     draw(ax, V3.ring_rail(), COL["rail"], z=1); draw(ax, V3.base_disc(), COL["disc"], z=2)
@@ -26,7 +26,6 @@ for i, (pose, azs) in enumerate(V3.POSES.items()):
         draw(ax, V3.root_block(az), COL["block"][k], z=4); draw(ax, V3.bead(az), COL["bead"], z=4)
     draw(ax, V3.top_disc(), COL["disc"], alpha=0.55, z=5)
     for k, az in enumerate(azs):
-        draw(ax, V3.spring_box(az, k), COL["box"], alpha=0.9, z=6)
         for s in (-1, 1): draw(ax, V3.latch_pin(az, s), COL["pin"], z=7)
     draw(ax, C.parts()["heel"], "#2f2f2f", z=8)
     c = CK["curl"][pose]
@@ -47,14 +46,15 @@ def sec_off(m, y, fc, z=1):
 HP = HC._parts(); hw = HC.hardware()
 sec(HP["cage"][0], "#c9cfd6"); sec(HP["ring_out"][0], "#e07b39", 0.85); sec(V3.ring_rail(), "#e07b39"); sec(hw["motor_base"], "#555a63")
 sec(V3.base_disc(), COL["disc"], z=2); sec(V3.top_disc(), COL["disc"], z=2); sec(V3.root_block(0), COL["block"][0], 0.8, z=3); sec(V3.bead(0), COL["bead"], z=4)
-sec_off(V3.latch_pin(0, 1), V3.PIN_LAT, COL["pin"], z=5); sec(V3.spring_box(0, 0), COL["box"], 0.9, z=3)
+sec_off(V3.latch_pin(0, 1), V3.PIN_LAT, COL["pin"], z=5);
+for n_, m_ in V3.finger(0).items(): sec(m_, "#3fae5a" if n_.startswith("band") else ("#b8bcc4" if n_.startswith("dowel") else (COL["finger"] if "phalanx" in n_ else "#c23b22")), z=3)
 sec(C.parts()["heel"], "#2f2f2f", z=3)
 lip = HC.R_LIP_OUT[0] + 0.6
 ax.add_patch(Rectangle((lip, HC.Z_LIP_OUT[0]), HC.R_LIP_OUT[1] - lip, 2.0, fc="#f0a030", ec="black", zorder=3))
 ax.plot([V3.V["bead"]["eye_r"]] * 2, [V3.Z_RING_TOP + V3.V["bead"]["dz"][1], 94.0], color=COL["pin"], lw=1.5, zorder=6)
 for txt, xy, xt in (("top disc", (12, 100.5), (2, 117)), ("root block (finger fixed in it)", (14, 96), (2, 121)), ("latch pin (its own plane, 7.5 mm off the cut)", (24, 95.9), (30, 119)),
                     ("base disc: lip + pocket for the pin's foot", (20, 92), (30, 82)), ("bead on the ring rail; curl cord up into the root", (25.4, 88.6), (30, 78)),
-                    ("base pull ring", (27, 85), (34, 74)), ("yoke lip (static), moved out 0.6 mm", (28.5, 88), (36, 88)), ("spring box on the root's post", (25, 104), (30, 112))):
+                    ("base pull ring", (27, 85), (34, 74)), ("yoke lip (static), moved out 0.6 mm", (28.5, 88), (36, 88)), ("return band under K1 (O-ring on 2 dowels)", (33, 90), (40, 106))):
     ax.annotate(txt, xy, xt, fontsize=8.5, arrowprops=dict(arrowstyle="-", lw=0.6), va="center")
 ax.set_xlim(0, 62); ax.set_ylim(70, 124); ax.set_xticks([]); ax.set_yticks([]); ax.set_title("Section through one root (radius across, height up)", fontsize=11.5, fontweight="bold")
 # stroke decision
@@ -82,7 +82,7 @@ bad = [p for p in CK["pairs"] if not p["ok"]]
 lines = [f"Range math between roots (all 4 poses): {'no overlaps' if not bad else str(len(bad)) + ' overlaps'}; tightest {mn['gap_mm']} mm ({mn['a']} vs {mn['b']}, r {mn['at_r']}).",
          "Tightest fits (mm): " + "; ".join(f"{k} {v}" for k, v in worst) + ".",
          "Empty-hand curl: " + "; ".join(f"{p} {int(round(100 * v['max_clear_curl']))} %" for p, v in CK["curl"].items()) + " (then opposite or neighbouring fingertips touch; hub E with spread: 70 %).",
-         "Not yet modelled: the parked fork + roller station and its sensor, the spring box's foot on the post, cord channels inside the grip, the drive changes of the stroke option."]
+         "Station, cranks and the drive are in hand3_v3_sim; this sheet shows the hub, roots and fingers."]
 fig.text(0.005, 0.115, "\n".join("\n".join(textwrap.wrap(l, 205)) for l in lines), fontsize=10, va="top")
 fig.savefig("hand3_hub_v3.png", dpi=85)
 print("ok")

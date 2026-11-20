@@ -24,7 +24,7 @@ def swept(parts):
     for m in parts: s |= cells(m)
     return s
 rot = [V3.base_disc(), V3.top_disc(), V3.cage_v3(), C.parts()["heel"], V3.root_block(0), V3.bead(0)] + [V3.crank(sd) for sd in (-1, 1)] + \
-      [V3.latch_pin(0, sd) for sd in (-1, 1)] + list(V3.finger(0).values()) + [V3.spring_box(0, 0)]
+      [V3.latch_pin(0, sd) for sd in (-1, 1)] + list(V3.finger(0).values())
 ring = V3.ring_v3(); rot_ring = [ring.translate([0, 0, -p]) for p in np.linspace(0, V3.RING_STROKE, 12)] + [V3.bead(0, p) for p in np.linspace(0, V3.RING_STROKE, 12)]
 res = {}
 def station_at(s):
