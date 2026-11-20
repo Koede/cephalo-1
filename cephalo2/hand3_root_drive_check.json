@@ -1,0 +1,184 @@
+{
+ "pairs": [
+  {
+   "spacing_deg": 58.0,
+   "gap_mm": 0.31,
+   "at_r": 8.5
+  },
+  {
+   "spacing_deg": 60.0,
+   "gap_mm": 0.61,
+   "at_r": 8.5
+  },
+  {
+   "spacing_deg": 90.0,
+   "gap_mm": 5.19,
+   "at_r": 8.5
+  },
+  {
+   "spacing_deg": 120.0,
+   "gap_mm": 9.77,
+   "at_r": 8.5
+  },
+  {
+   "spacing_deg": 180.0,
+   "gap_mm": 18.94,
+   "at_r": 8.5
+  }
+ ],
+ "moves": {
+  "flight cross -> 3 + 1 thumb": {
+   "largest_move_deg": 30.0,
+   "pattern_turn_deg": 0.0,
+   "moves": [
+    30.0,
+    0.0,
+    -30.0,
+    0.0
+   ],
+   "min_spacing_deg": 60.0,
+   "ok": true
+  },
+  "3 + 1 thumb -> 2 + 2 pinch": {
+   "largest_move_deg": 30.0,
+   "pattern_turn_deg": -30.0,
+   "moves": [
+    -30.0,
+    30.0,
+    30.0,
+    30.0
+   ],
+   "min_spacing_deg": 60.0,
+   "ok": true
+  },
+  "2 + 2 pinch -> all four on one side": {
+   "largest_move_deg": 60.0,
+   "pattern_turn_deg": 90.0,
+   "moves": [
+    60.0,
+    0.0,
+    0.0,
+    -60.0
+   ],
+   "min_spacing_deg": 60.0,
+   "ok": true
+  },
+  "all four on one side -> flight cross": {
+   "largest_move_deg": 45.0,
+   "pattern_turn_deg": -45.0,
+   "moves": [
+    -45.0,
+    -15.0,
+    15.0,
+    45.0
+   ],
+   "min_spacing_deg": 60.0,
+   "ok": true
+  }
+ },
+ "curl": {
+  "flight cross": {
+   "max_clear_curl": 0.7,
+   "at_zero": {},
+   "first_hit": {
+    "0.75": {
+     "0:motor x 0f:ph1": 1.12,
+     "1:motor x 1f:ph1": 1.12,
+     "2:motor x 2f:ph1": 1.12,
+     "3:motor x 3f:ph1": 1.12
+    }
+   }
+  },
+  "2 + 2 pinch": {
+   "max_clear_curl": 0.7,
+   "at_zero": {},
+   "first_hit": {
+    "0.75": {
+     "0:motor x 0f:ph1": 1.12,
+     "0f:ph2 x 3:motor": 9.12,
+     "1:motor x 1f:ph1": 1.12,
+     "2:motor x 2f:ph1": 1.12,
+     "3:motor x 3f:ph1": 1.12
+    }
+   }
+  },
+  "3 + 1 thumb": {
+   "max_clear_curl": 0.7,
+   "at_zero": {},
+   "first_hit": {
+    "0.75": {
+     "0:motor x 0f:ph1": 1.12,
+     "1:motor x 1f:ph1": 1.12,
+     "2:motor x 2f:ph1": 1.12,
+     "3:motor x 3f:ph1": 1.12
+    }
+   }
+  },
+  "all four on one side": {
+   "max_clear_curl": 0.7,
+   "at_zero": {},
+   "first_hit": {
+    "0.75": {
+     "0:motor x 0f:ph1": 1.12,
+     "1:motor x 1f:ph1": 1.12,
+     "2:motor x 2f:ph1": 1.12,
+     "3:motor x 3f:ph1": 1.12
+    }
+   }
+  }
+ },
+ "station": {
+  "tyre (carriage 0.0 mm): min r-z gap to swept roots": 22.2,
+  "tyre (carriage 1.5 mm): min r-z gap to swept roots": 22.2,
+  "motor (carriage 0.0 mm): min r-z gap to swept roots": 21.74,
+  "motor (carriage 1.5 mm): min r-z gap to swept roots": 21.46,
+  "servo (carriage 0.0 mm): min r-z gap to swept roots": 6.17,
+  "servo (carriage 1.5 mm): min r-z gap to swept roots": 6.17,
+  "sensor (carriage 0.0 mm): min r-z gap to swept roots": 21.9,
+  "sensor (carriage 1.5 mm): min r-z gap to swept roots": 21.9,
+  "dock (carriage 0.0 mm): min r-z gap to swept roots": 21.1,
+  "dock (carriage 1.5 mm): min r-z gap to swept roots": 21.1,
+  "carriage (carriage 0.0 mm): min r-z gap to swept roots": 23.34,
+  "carriage (carriage 1.5 mm): min r-z gap to swept roots": 22.98,
+  "dock body face to pad face when in (mm); pogo pins must stand >= 1.0 proud of the body (est.)": 0.52
+ },
+ "loads": {
+  "root_speed_deg_s": 167.7,
+  "pinion_force_stall_N": 43,
+  "hold_needed_N": 6.0,
+  "motor_set_g": 14.1,
+  "motor_set_r_mm": 25.9,
+  "tower_pull_N": 625,
+  "root_radial_N": 1451,
+  "motor_g_load": 4517,
+  "root_AlSi10Mg_g": 14.93,
+  "z99.5: S mm3 / M N m / MPa / SF AlSi10Mg 230": [
+   123.2,
+   10.68,
+   86.7,
+   2.65
+  ],
+  "z101.2: S mm3 / M N m / MPa / SF AlSi10Mg 230": [
+   133.6,
+   9.61,
+   72.0,
+   3.2
+  ],
+  "z104.0: S mm3 / M N m / MPa / SF AlSi10Mg 230": [
+   270.0,
+   7.87,
+   29.1,
+   7.89
+  ],
+  "z110.0: S mm3 / M N m / MPa / SF AlSi10Mg 230": [
+   158.5,
+   4.12,
+   26.0,
+   8.85
+  ],
+  "root_cm_r_mm": 25.2,
+  "root_pull_N": 644,
+  "rib_load_N": 2095,
+  "rib_bearing_MPa": 27.200000762939453
+ }
+}

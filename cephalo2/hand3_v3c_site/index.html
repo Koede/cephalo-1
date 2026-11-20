@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:,"><title>hand3 hub v3 C motion sim</title>
+<style>
+html,body{margin:0;height:100%;background:#15171b;color:#e6e6e6;font:13px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;overflow:hidden}
+#c{position:fixed;inset:0}
+.pane{position:fixed;background:rgba(20,22,26,.9);border:1px solid #333;border-radius:10px;padding:10px 12px;box-sizing:border-box}
+#ui{left:10px;top:10px;width:310px;max-width:calc(100vw - 20px)}
+#hud{right:10px;top:10px;width:270px}
+#bar{left:10px;right:10px;bottom:10px;display:flex;gap:8px;align-items:center}
+#bar input{flex:1}
+h1{font-size:15px;margin:0 0 6px}
+button{background:#2a2e35;color:#eee;border:1px solid #444;border-radius:6px;padding:5px 9px;font:inherit;cursor:pointer}
+button.on{background:#d2542d;border-color:#d2542d}
+.row{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+#phase{font-size:15px;color:#f0c27a;font-weight:600;margin-bottom:6px}
+table{width:100%;border-collapse:collapse}
+td{padding:2px 0}td:last-child{text-align:right;font-variant-numeric:tabular-nums;color:#fff}
+.meter{height:5px;background:#2a2e35;border-radius:3px;margin:1px 0 4px}.meter i{display:block;height:100%;border-radius:3px;background:#39a0e0}
+.note{color:#999;margin:8px 0 0;font-size:12px}
+@media (max-width:760px){#hud{top:auto;bottom:58px;right:10px;left:10px;width:auto;max-height:34vh;overflow:auto;padding:6px 10px}#ui{width:auto;right:10px;max-height:40vh;overflow:auto;padding:6px 10px}#bar{padding:6px}.collapsed #tab{display:none}}
+</style></head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui" class="pane"><h1><button id="uit" style="float:right;padding:1px 8px">–</button><span id="ttl"></span></h1><div id="uib">
+<div class="row" id="jumps"></div>
+<div class="row" style="margin-top:10px" id="grps"></div>
+<div class="row"><button id="cut">section cut</button><button id="follow">camera: wide</button></div>
+<p class="note" id="note"></p>
+</div></div>
+<div id="hud" class="pane"><div id="phase" style="cursor:pointer">…</div><table id="tab"></table></div>
+<div id="bar" class="pane"><button id="play">❚❚</button><button id="spd">1×</button><input id="t" type="range" min="0" max="1000" value="0"><span id="tt" style="width:48px;text-align:right">0.0 s</span></div>
+<script src="sim_data.js"></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+"three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+const D = window.SIM, cv = document.getElementById('c');
+const R = new THREE.WebGLRenderer({canvas:cv, antialias:true}); R.setPixelRatio(Math.min(devicePixelRatio, 2)); R.localClippingEnabled = true;
+const S = new THREE.Scene(); S.background = new THREE.Color('#15171b');
+const cam = new THREE.PerspectiveCamera(35, 1, 1, 8000);
+const ctl = new OrbitControls(cam, cv); ctl.enableDamping = true;
+S.add(new THREE.HemisphereLight(0xffffff, 0x303038, 1.1));
+const d1 = new THREE.DirectionalLight(0xffffff, 1.7); d1.position.set(200, 260, 160); S.add(d1);
+const d2 = new THREE.DirectionalLight(0xbcd0ff, 0.6); d2.position.set(-200, -80, -140); S.add(d2);
+const root = new THREE.Group(); root.rotation.x = -Math.PI / 2; S.add(root);      // connector z -> screen up (arm above, hand below)
+const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 0); let clipOn = false;
+const b64 = (s, T) => { const b = atob(s), u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return new T(u.buffer); };
+const F = b64(D.frames, Float32Array), NP = D.names.length;
+const objs = [], groups = {};
+D.parts.forEach((p, i) => {
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(b64(p.v, Float32Array), 3)); g.setIndex(new THREE.BufferAttribute(b64(p.t, Uint32Array), 1));
+  g.computeVertexNormals();
+  const m = new THREE.MeshStandardMaterial({color:p.c, metalness:p.metal ? 0.75 : 0.1, roughness:p.metal ? 0.3 : 0.65, transparent:p.o < 1, opacity:p.o, side:THREE.DoubleSide, clippingPlanes:[]});
+  const o = new THREE.Mesh(g, m); o.matrixAutoUpdate = false; root.add(o); objs.push(o); (groups[p.g] ||= []).push(o);
+});
+const mat = new THREE.Matrix4();
+function pose(f) {
+  for (let j = 0; j < NP; j++) {
+    const k = (f * NP + j) * 12;
+    mat.set(F[k], F[k + 1], F[k + 2], F[k + 3], F[k + 4], F[k + 5], F[k + 6], F[k + 7], F[k + 8], F[k + 9], F[k + 10], F[k + 11], 0, 0, 0, 1);
+    objs[j].matrix.copy(mat); objs[j].matrixWorldNeedsUpdate = true;
+  }
+}
+const M = D.meta, tab = document.getElementById('tab'), ph = document.getElementById('phase');
+function meter(v, max, col) { return `<div class="meter"><i style="width:${Math.min(100, 100 * v / max)}%;background:${col}"></i></div>`; }
+function hud(f) {
+  const h = D.hud[f]; ph.textContent = h.ph;
+  tab.innerHTML = h.rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>` + (r.length > 2 ? `<tr><td colspan=2>${meter(r[2], r[3], r[4])}</td></tr>` : '')).join('');
+}
+document.getElementById('ttl').textContent = D.title; document.getElementById('note').textContent = D.note; document.title = D.title;
+const GB = document.getElementById('grps');
+for (const [g, label] of D.groups) { const b = document.createElement('button'); b.className = 'on g'; b.dataset.g = g; b.textContent = label; GB.appendChild(b); }
+const narrow = innerWidth < 760, uib = document.getElementById('uib'), hudEl = document.getElementById('hud');
+const setUi = open => { uib.style.display = open ? '' : 'none'; document.getElementById('uit').textContent = open ? '–' : '+'; };
+setUi(!narrow); if (narrow) hudEl.classList.add('collapsed');
+document.getElementById('uit').onclick = () => setUi(uib.style.display === 'none');
+document.getElementById('phase').onclick = () => hudEl.classList.toggle('collapsed');
+const jumps = D.jumps;
+const J = document.getElementById('jumps');
+for (const [n, t] of jumps) { const b = document.createElement('button'); b.textContent = n; b.onclick = () => { T = t + 0.01; }; J.appendChild(b); }
+document.querySelectorAll('button.g').forEach(b => b.onclick = () => { b.classList.toggle('on'); for (const o of groups[b.dataset.g] || []) o.visible = b.classList.contains('on'); });
+document.getElementById('cut').onclick = e => { clipOn = !clipOn; e.target.classList.toggle('on', clipOn); for (const o of objs) o.material.clippingPlanes = clipOn ? [clip] : []; for (const o of objs) o.material.needsUpdate = true; };
+// fit the view to a box (half-width hw, half-height hh mm around screen-y cy) for the current screen shape
+const DIR = new THREE.Vector3(0.62, 0.22, 0.75).normalize();
+function fit(hw, hh, cy) {
+  const t = Math.tan(THREE.MathUtils.degToRad(cam.fov / 2));
+  const d = 1.15 * Math.max(hh / t, hw / (t * cam.aspect)) + hw;
+  ctl.target.set(0, cy, 0); cam.position.copy(DIR).multiplyScalar(d).add(ctl.target); cam.updateProjectionMatrix();
+}
+let wide = true; const view = () => wide ? fit(...D.view.wide) : fit(...D.view.close);
+document.getElementById('follow').onclick = e => { wide = !wide; e.target.textContent = wide ? 'camera: wide' : 'camera: close-up'; view(); };
+let T = 0, playing = true, spd = 1, last = performance.now();
+const tin = document.getElementById('t'), tt = document.getElementById('tt'), TEND = D.nf / D.fps;
+document.getElementById('play').onclick = e => { playing = !playing; e.target.textContent = playing ? '❚❚' : '▶'; };
+document.getElementById('spd').onclick = e => { spd = spd === 1 ? 0.5 : spd === 0.5 ? 0.25 : 1; e.target.textContent = spd + '×'; };
+tin.oninput = () => { T = tin.value / 1000 * TEND; };
+function size() { const w = innerWidth, h = innerHeight; R.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); }
+addEventListener('resize', () => { size(); view(); }); size(); view();
+let lastF = -1;
+(function loop(now) {
+  const dt = Math.min(Math.max((now - last) / 1000, 0), 0.1); last = now;     // rAF time can start before performance.now()
+  if (playing) T += dt * spd;
+  T = ((T % TEND) + TEND) % TEND;
+  const f = Math.max(0, Math.min(D.nf - 1, Math.floor(T * D.fps)));
+  if (f !== lastF) { pose(f); hud(f); lastF = f; }
+  if (playing || document.activeElement !== tin) tin.value = Math.round(T / TEND * 1000);
+  tt.textContent = T.toFixed(1) + ' s';
+  ctl.update(); R.render(S, cam); requestAnimationFrame(loop);
+})(performance.now());
+</script>
+</body></html>
