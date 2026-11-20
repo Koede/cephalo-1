@@ -655,3 +655,7 @@ crank pivot pin retention; the crank's 0.15 mm gap to its own block at rest.
 - **Single flexor** (item 1): the tackle's running strand turns at world (26.3, +0.7, 97) into a dia 1.1 channel straight up to
   K1's sector top (tangent at x 32.7, lever 6), over K1, through K1's anchor hole into the axis passage and on along the middle
   lane to K2 and K3 (no K1 knot).  Anchor strand (y -0.7) goes through the grip top into a dia 2.2 counterbore for its stop knot.
+- Checks with the bands (Saturn): `hand3_hub_v3_check` empty-hand curl clear to 75 % in all four poses (cross: fingertips
+  touch 0.12 mm3 at 80 %, as before); station clearances back to the pre-band values (blade 0.66, sensor 0.9, engaged 0.40 mm;
+  lift 2.23 mm at 17.19 deg); motion sim 170 parts / 1053 frames, only the known 0.25 mm3 frame / idler overlap (band strands
+  are drawn as 5 straight pieces and left out of the grid check; the boolean check covers them).  Sim artifact republished.
