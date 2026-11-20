@@ -1,0 +1,83 @@
+{
+ "flight (carriage retracted): blade (mm in r-z)": 0.66,
+ "flight (carriage retracted): tyre (mm in r-z)": 1.5,
+ "flight (carriage retracted): motor (mm in r-z)": 5.82,
+ "flight (carriage retracted): servo (mm in r-z)": 6.17,
+ "flight (carriage retracted): sensor (mm in r-z)": 0.9,
+ "parked, roller on, rotor turning: blade (mm in r-z)": 0.66,
+ "parked, roller on, rotor turning: motor (mm in r-z)": 5.0,
+ "parked, roller on, rotor turning: servo (mm in r-z)": 6.17,
+ "parked, roller on, rotor turning: sensor (mm in r-z)": 0.9,
+ "engaged, hub turning: blade vs discs, cage, ring + rail (mm in r-z)": 0.4,
+ "engaged, hub turning: sensor vs discs, cage, ring + rail (mm in r-z)": 3.26,
+ "station blade (s 0) vs drive + frame (mm)": [
+  2.6,
+  "tie ring"
+ ],
+ "station tyre (s 0) vs drive + frame (mm)": [
+  ">2",
+  "nothing within 2 mm"
+ ],
+ "station motor (s 0) vs drive + frame (mm)": [
+  8.0,
+  "frame"
+ ],
+ "station servo (s 0) vs drive + frame (mm)": [
+  ">2",
+  "nothing within 2 mm"
+ ],
+ "station sensor (s 0) vs drive + frame (mm)": [
+  ">2",
+  "nothing within 2 mm"
+ ],
+ "station blade (s 5.185) vs drive + frame (mm)": [
+  0.52,
+  "tie ring"
+ ],
+ "station tyre (s 5.185) vs drive + frame (mm)": [
+  ">2",
+  "nothing within 2 mm"
+ ],
+ "station motor (s 5.185) vs drive + frame (mm)": [
+  6.5,
+  "frame"
+ ],
+ "station servo (s 5.185) vs drive + frame (mm)": [
+  ">2",
+  "nothing within 2 mm"
+ ],
+ "station sensor (s 5.185) vs drive + frame (mm)": [
+  ">2",
+  "nothing within 2 mm"
+ ],
+ "lift": {
+  "crank_turn_full": 17.19,
+  "needed": 16.19,
+  "lift_mm": 2.23,
+  "tip_travel_mm": 4.28
+ },
+ "crank -1 at 0 deg: gap to block / base disc / ring+rail / bead (mm)": [
+  0.15,
+  0.85,
+  1.6,
+  2.33
+ ],
+ "crank -1 at 17 deg: gap to block / base disc / ring+rail / bead (mm)": [
+  0.29,
+  1.45,
+  0.26,
+  1.69
+ ],
+ "crank +1 at 0 deg: gap to block / base disc / ring+rail / bead (mm)": [
+  0.16,
+  0.85,
+  1.6,
+  2.33
+ ],
+ "crank +1 at 17 deg: gap to block / base disc / ring+rail / bead (mm)": [
+  0.29,
+  1.48,
+  0.28,
+  1.69
+ ]
+}
