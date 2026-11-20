@@ -704,3 +704,17 @@ crank pivot pin retention; the crank's 0.15 mm gap to its own block at rest.
   - Metal roots +49 (4 x 14.9 vs 2.6 g PA-CF), worm motors +52, pinions +4.4, tracks/brushes/dock/drivers +6.
   - Removed blade, cranks and pins -3.9.
   - My earlier "+66 g" underestimated the roots.  Pocketing the Al roots after an FEA could cut ~30 % of their mass (est.).
+
+## Room to grab (2026-11-20)
+- User: "reduce size of hubs so the hand has room to grab stuff".  Study `hand3_grasp_room_study.py/.png/.json`.
+- Measure: balls set on the palm on the hub axis, cross pose; fingers curl until they touch.  A ball counts as held when the
+  touch is at or above its centre, before the curl limit.
+- Results:
+  - A now: Ø30-60 (N20 towers to z 135).
+  - B low heel: Ø35-60.
+  - C motors hanging below: KILL (the pull ring has no way to key to the rotor across the towers' annulus).
+  - D N20 lying flat: KILL (33 mm motor in a 26 mm chord at 58 deg).
+  - E Pololu 2359 6 x 21 mm 700:1 sub-micro gearmotor per root, pinion on a gear rim of the top disc, PA-CF roots again: Ø30-95.
+    Spin pull 108 N per set.  Flight hold by spin-loaded rib friction (est.); held powered while docked.  -89 g vs A.
+  - G no towers in the palm (reference): Ø30-110.
+- Recommended E.  Asked the user.
