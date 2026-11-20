@@ -641,3 +641,17 @@ crank pivot pin retention; the crank's 0.15 mm gap to its own block at rest.
   0.020/0.004/0.018 N m open, 0.045/0.009/0.033 folded, under the 40 % flexor limits; spin pull on hooks 4..15 N; K1's
   proximal hook at r >= 27.5 to clear the tackle strands), E printed TPU strap (creep unknown), F one extensor cord (torque ratio
   set by saddle radii: kill), G no springs (hand can't open on the ground: kill).  Recommended D.  Asked the user.
+- **Decision D** (user): return springs are one stock silicone O-ring band per knuckle (`hand3e/hand3_bands.py`).
+  - Band stretched between two dia 1 x 5 hardened steel dowels (ISO 8734) pressed into printed clevises under the members' backs; strands one over
+    the other, running in the knuckle's centre gap over a back sector on the distal member (r_w 2.3 / 2.5 / 2.2, distal-frame
+    p 178..278).  Exact wrap model: arm = r_w + cs once wrapped.
+  - Picks (stock): K1 NBR 9 x 1.5, dowels x 30.6 / 47.1; K2 silicone 8 x 1, x 54.25 / 69.75; K3 silicone 8 x 1.5, x 79.5 / 99.5.
+    K1 is held to cs 1.5 and r_w 2.3 so its band clears the station blade (first try with 1.78 / 2.6 / dowel 1.5: -0.34 mm).
+  - Torque open / full fold: 0.020 / 0.045, 0.004 / 0.008, 0.018 / 0.025 N m (limits 0.077 / 0.051 / 0.038); strain <= 0.97.
+  - Spin pull of the band on its dowels at 12,500 rpm: 5 / 3 / 10 N.  Dowel bending <= 152 MPa (hardened); clevis fins 3 x 1.4,
+    root bending ~16 MPa (est.).
+  - Removed: spring trays and lids (0.94 g per finger), their screw, the root post, saddles, extensor cords and bores; phalanx 1's
+    unused tip-cord lane.  Bands vs own members: only the dowel press fits and band-on-sector contact (boolean, folds 0..90).
+- **Single flexor** (item 1): the tackle's running strand turns at world (26.3, +0.7, 97) into a dia 1.1 channel straight up to
+  K1's sector top (tangent at x 32.7, lever 6), over K1, through K1's anchor hole into the axis passage and on along the middle
+  lane to K2 and K3 (no K1 knot).  Anchor strand (y -0.7) goes through the grip top into a dia 2.2 counterbore for its stop knot.

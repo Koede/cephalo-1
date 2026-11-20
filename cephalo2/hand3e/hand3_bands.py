@@ -1,6 +1,6 @@
 """hand3 hub v3 return springs, decision D (2026-11-20): one stock O-ring band across the back of each knuckle.
 
-Each band is stretched between two steel dowels (dia 1.5 x 5, pressed into a printed clevis under the member's back), one on the
+Each band is stretched between two steel dowels (dia 1 x 5, pressed into a printed clevis under the member's back), one on the
 proximal member and one on the distal member, and runs in the knuckle's centre gap (|y| < 0.89) over a small back sector printed on
 the distal member (radius r_w, distal-frame angles 180..275, the old saddle's place).  The O-ring's two strands lie one over the
 other (dowels along y), so the band is cs wide and its mean radius on the sector is r_w + cs.  The sector keeps the arm at
@@ -19,13 +19,13 @@ from hand3_finger import cyl, box, app, T, rot
 
 M_ = mf.Manifold
 KN = H.KN
-R_D = 0.75                                    # steel dowel dia 1.5 (x 5 long), press fit in PA-CF
+R_D = 0.5                                     # hardened steel dowel dia 1 x 5 (ISO 8734), press fit in PA-CF; bending <= 152 MPa
 FIN_Y = (1.05, 2.45)                           # clevis fins either side of the band
 FIN_X = 1.5                                    # fin half length along x (fin root bending 16 MPa at full fold + spin, est.)
 W = 1309.0                                     # rad/s, 12,500 rpm
 LIMIT = [0.40 * 31.9 * H.LEVER[j] * 1e-3 for j in range(3)]       # 40 % of the flexor's rated torque per knuckle
 TGT = [0.020, 0.004, 0.018]
-R_W = [2.6, 2.5, 2.2]                          # back sector radius (axis passage is r 1.7)
+R_W = [2.3, 2.5, 2.2]                          # back sector radius (axis passage is r 1.7)
 X_P0 = 30.6                                    # K1's proximal dowel: outboard of the crank tips (x <= 29.2) and tackle strands (26.3)
 SPAN_MAX = [18.0, 20.0, 20.0]
 
@@ -71,7 +71,7 @@ def pick(j):
     """For every stock ring, solve the hook span for the target open torque, keep the ones under the 40 % limit and 100 % strain."""
     lo, hi = SP.WINDOW[f"K{j + 1}"]; best = None
     for ID, cs, mat in SP.STOCK:
-        if cs > 1.78 or (j == 2 and cs > 2 * (H.GAP[2] / 2 - 0.1)): continue
+        if cs > (1.5 if j == 0 else 1.78) or (j == 2 and cs > 2 * (H.GAP[2] / 2 - 0.1)): continue   # K1: keep the band above the station blade
         for span in np.arange(9.0, SPAN_MAX[j] + 1e-9, 0.25):
             dp = (X_P0 if j == 0 else None)
             if j == 0: dp = KN[0] - X_P0; dd = span - dp

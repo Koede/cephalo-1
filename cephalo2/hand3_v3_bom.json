@@ -15,7 +15,7 @@
   {
    "part": "root block (grip merged, cleaned)",
    "qty": 4,
-   "g_each": 2.62,
+   "g_each": 2.63,
    "material": "PA-CF"
   },
   {
@@ -93,7 +93,7 @@
   {
    "part": "phalanx 1 (v3: band sector + clevises)",
    "qty": 4,
-   "g_each": 2.36,
+   "g_each": 2.38,
    "material": "PA-CF"
   },
   {
@@ -105,7 +105,7 @@
   {
    "part": "phalanx 2 (v3: band sector + clevises)",
    "qty": 4,
-   "g_each": 1.86,
+   "g_each": 1.89,
    "material": "PA-CF"
   },
   {
@@ -117,7 +117,7 @@
   {
    "part": "phalanx 3 (v3: band sector + clevises)",
    "qty": 4,
-   "g_each": 1.26,
+   "g_each": 1.28,
    "material": "PA-CF"
   },
   {
@@ -201,13 +201,13 @@
    "note": "spin interlock"
   },
   {
-   "part": "silicone O-ring 6.07 x 1.78 (AS568-010)",
+   "part": "NBR O-ring 9 x 1.5",
    "qty": 4,
    "g_each": 0.07,
    "note": "K1 return band"
   },
   {
-   "part": "silicone O-ring 9 x 1",
+   "part": "silicone O-ring 8 x 1",
    "qty": 4,
    "g_each": 0.03,
    "note": "K2 return band"
@@ -219,9 +219,9 @@
    "note": "K3 return band"
   },
   {
-   "part": "steel dowel pin dia 1.5 x 5",
+   "part": "hardened steel dowel pin dia 1 x 5 (ISO 8734)",
    "qty": 24,
-   "g_each": 0.07,
+   "g_each": 0.03,
    "note": "band hooks, press fit"
   },
   {
@@ -251,6 +251,6 @@
   "hub E return-spring boxes: 2 trays + lid per finger (0.94 g), their screw, the root post, knuckle saddles, extensor cords and bores"
  ],
  "pending": [],
- "total_printed_g": 101.0,
- "total_bought_g": 143.7
+ "total_printed_g": 101.3,
+ "total_bought_g": 142.7
 }

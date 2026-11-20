@@ -36,8 +36,8 @@ BOUGHT = [("Feetech STS3215 servo (12 V)", 2, 55.0, "both pull the one base ring
           ("Pololu 298:1 Micro Metal Gearmotor HPCB 12 V (N20)", 1, 9.5, "station roller drive"),
           ("dia 20 rubber tyre / O-ring on hub", 1, 1.0, "est."), ("TowerPro SG92R micro servo", 1, 9.0, "station carriage"),
           ("Pololu QTR-1A reflectance sensor", 1, 0.3, "spin interlock"),
-          ("silicone O-ring 6.07 x 1.78 (AS568-010)", 4, 0.07, "K1 return band"), ("silicone O-ring 9 x 1", 4, 0.03, "K2 return band"),
-          ("silicone O-ring 8 x 1.5", 4, 0.06, "K3 return band"), ("steel dowel pin dia 1.5 x 5", 24, 0.07, "band hooks, press fit"),
+          ("NBR O-ring 9 x 1.5", 4, 0.07, "K1 return band"), ("silicone O-ring 8 x 1", 4, 0.03, "K2 return band"),
+          ("silicone O-ring 8 x 1.5", 4, 0.06, "K3 return band"), ("hardened steel dowel pin dia 1 x 5 (ISO 8734)", 24, 0.03, "band hooks, press fit"),
           ("M2 x 6 thread-forming screw", 2, 0.2, "B.7 lead rail"), ("M3 x 8 screw", 4, 0.5, "frame to coupler hand base")]
 
 REMOVED = ["inner (curl) pull ring", "TPU series links (base and curl, 4 each)", "lag tubes (4)", "lag-spring peg, post and O-rings (4)",
