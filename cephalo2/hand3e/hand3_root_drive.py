@@ -32,7 +32,7 @@ CRADLE = dict(x=(20.5, 33.0), y=9.0, z1=GB_Z0 + 26.0, wall=1.0)                #
 NECK_Y = 11.0
 TRACK_R = (10.2, 11.4, 12.6, 16.4, 17.6, 18.8, 20.0, 21.2)                     # copper-tape tracks under the top disc (ribs at 13.5-15.5, 22.3-24)
 TRACK_W = 0.8
-PADS = dict(az_off=24.0, z=(61.2, 64.0), pitch_deg=360 * 2.54 / (2 * np.pi * HC.R_CAGE[1]))   # 2 rows of 4 pads, 0.1" pitch, on the cage
+PADS = dict(az_off=32.0, z=(61.2, 64.0), pitch_deg=360 * 2.54 / (2 * np.pi * HC.R_CAGE[1]))   # 2 rows of 4 pads, 0.1" pitch, on the cage
 
 
 def gearbox_and_can():
@@ -165,19 +165,26 @@ def pads():
 
 
 def dock_head():
-    """Static: two Adafruit 5358 pogo halves on an arm of the station carriage, retracted 1.5 mm (the carriage's roll gap).
-    In the station frame (x = radial at STATION_AZ)."""
-    r = HC.R_CAGE[1]; a = np.radians(PADS["az_off"]); c, s = np.cos(a), np.sin(a)
-    head = box([r + 0.6 + V3.ST["roll_gap"], -4.6, PADS["z"][0] - 1.6], [r + 6.0 + V3.ST["roll_gap"], 4.6, PADS["z"][1] + 1.6])    # 2 x (10.2 x 5) connector bodies (est.)
-    head = head.rotate([0, 0, float(PADS["az_off"])])
-    arm = box([r + 5.5 + V3.ST["roll_gap"], 2.0, 58.0], [40.0, 7.0, 60.0])    # under the tyre band to the carriage spine (est.)
-    return head + arm
+    """Static: two Adafruit 5358 pogo halves (est. 10.2 x 5 each, stacked) on an arm of the station carriage, retracted 1.5 mm (the
+    carriage's roll gap).  Station frame (x = radial at STATION_AZ).  The arm runs beside the tyre and roller motor (y 10.5..14.5,
+    z 64.4..66.4, under the pull ring's lowest position 66.9) to the carriage block."""
+    r = HC.R_CAGE[1]; g = V3.ST["roll_gap"]
+    head = box([r + 0.6 + g, -4.6, PADS["z"][0] - 1.6], [r + 6.0 + g, 4.6, PADS["z"][1] + 1.6]).rotate([0, 0, float(PADS["az_off"])])
+    a = np.radians(PADS["az_off"]); hc = np.array([(r + 3.3 + g) * np.cos(a), (r + 3.3 + g) * np.sin(a)])
+    stub = box([hc[0] - 1.5, hc[1] - 1.5, PADS["z"][1] + 1.0], [hc[0] + 1.5, hc[1] + 1.5, 66.4])
+    arm = box([hc[0] - 1.5, 10.5, 64.4], [44.0, 14.5, 66.4])                     # under the pull ring at full stroke (bottom 66.9)
+    return head + stub + arm
+
+
+def carriage():
+    """The carriage block the roller arm and the dock arm hang from (slides 1.5 mm radially, pushed by the SG92R)."""
+    return box([44.0, -3.0, 58.0], [48.0, 14.5, 66.4])
 
 
 def station_c():
     """Station for decision C: roller (tyre + N20), SG92R carriage, QTR-1A, dock head.  Blade gone."""
     sp = V3.station_parts()
-    return dict(tyre=sp["tyre"], motor=sp["motor"], servo=sp["servo"], sensor=sp["sensor"].translate([-10.0, 0, -22.0]), dock=dock_head())
+    return dict(tyre=sp["tyre"], motor=sp["motor"], servo=sp["servo"], sensor=sp["sensor"].translate([-10.0, 0, -22.0]), dock=dock_head(), carriage=carriage())
 
 
 def section_S(m, z, x_min=20.0):

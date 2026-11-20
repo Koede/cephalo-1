@@ -142,12 +142,12 @@ sweep = rz(root_set + fing + V3.bead(0)); tree = cKDTree(sweep)
 st = RD.station_c()
 for name, m in st.items():
     for s in (0.0, V3.ST["roll_gap"]):
-        if name in ("tyre", "motor", "dock") and s > 0: mm = m.translate([-s, 0, 0])
+        if name in ("tyre", "motor", "dock", "carriage") and s > 0: mm = m.translate([-s, 0, 0])
         else: mm = m
         d, _ = tree.query(rz(mm)); res["station"][f"{name} (carriage {s} mm): min r-z gap to swept roots"] = round(float(d.min()), 2)
 # dock contacts on the pads when the carriage is in
 pads = RD.pads(); dock_in = st["dock"].translate([-V3.ST["roll_gap"], 0, 0]).rotate([0, 0, -0.0])
-res["station"]["dock face to pad face when in (mm, pogo travel ~1)"] = round(float(RD.HC.R_CAGE[1] + 0.08 - (RD.HC.R_CAGE[1] + 0.6)), 2)
+res["station"]["dock body face to pad face when in (mm); pogo pins must stand >= 1.0 proud of the body (est.)"] = round(float((RD.HC.R_CAGE[1] + 0.6) - (RD.HC.R_CAGE[1] + 0.08)), 2)
 print("station", res["station"], flush=True)
 
 # ---- 5) loads

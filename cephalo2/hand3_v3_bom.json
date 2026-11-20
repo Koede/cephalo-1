@@ -1,33 +1,27 @@
 {
  "printed": [
   {
-   "part": "base disc",
+   "part": "base disc (no pin slots)",
    "qty": 1,
-   "g_each": 5.27,
+   "g_each": 5.69,
    "material": "PA-CF"
   },
   {
-   "part": "top disc",
+   "part": "top disc + 74-tooth crown ring, track grooves",
    "qty": 1,
-   "g_each": 4.33,
+   "g_each": 4.52,
    "material": "PA-CF"
   },
   {
-   "part": "root block (grip merged, cleaned)",
+   "part": "root block + motor cradle (C)",
    "qty": 4,
-   "g_each": 2.63,
-   "material": "PA-CF"
+   "g_each": 14.93,
+   "material": "AlSi10Mg (ordered metal print)"
   },
   {
    "part": "bead (C-slider)",
    "qty": 4,
    "g_each": 0.02,
-   "material": "PA-CF"
-  },
-  {
-   "part": "bell crank",
-   "qty": 8,
-   "g_each": 0.04,
    "material": "PA-CF"
   },
   {
@@ -127,9 +121,9 @@
    "material": "TPU 95A"
   },
   {
-   "part": "station blade + spine",
+   "part": "station dock arm + head",
    "qty": 1,
-   "g_each": 2.0,
+   "g_each": 0.52,
    "material": "PA-CF"
   }
  ],
@@ -153,16 +147,40 @@
    "note": "yoke guides, est. length 45 mm"
   },
   {
-   "part": "music wire dia 2 (latch pin, bent)",
-   "qty": 8,
-   "g_each": 0.19,
-   "note": "mass from CAD"
+   "part": "E-S Motor 1220WG-N20VA 6 V 94 rpm worm gearmotor (self-locking)",
+   "qty": 4,
+   "g_each": 13.0,
+   "note": "one per root; mass from the Chihai N20 worm page (approx.)"
   },
   {
-   "part": "steel pin dia 1 x 5 (crank pivot)",
+   "part": "brass spur gear m0.5 z22, 3 mm D bore, 4 wide",
+   "qty": 4,
+   "g_each": 1.1,
+   "note": "pinion on the crown ring (est. mass)"
+  },
+  {
+   "part": "spring pogo pin dia 1, ~1 mm travel",
    "qty": 8,
-   "g_each": 0.03,
-   "note": "est."
+   "g_each": 0.05,
+   "note": "root brushes on the tracks (est.)"
+  },
+  {
+   "part": "copper foil tape with conductive adhesive (Adafruit)",
+   "qty": 1,
+   "g_each": 0.5,
+   "note": "8 tracks under the top disc + 8 pads on the cage (est.)"
+  },
+  {
+   "part": "Adafruit 5358 magnetic connector, 4 pogo contacts (pogo half only)",
+   "qty": 2,
+   "g_each": 1.0,
+   "note": "dock on the station carriage (est. mass)"
+  },
+  {
+   "part": "Adafruit 3297 DRV8833 dual motor driver",
+   "qty": 2,
+   "g_each": 1.5,
+   "note": "static side, drives the 4 root motors"
   },
   {
    "part": "knuckle pins and bushings (hand3)",
@@ -198,7 +216,7 @@
    "part": "Pololu QTR-1A reflectance sensor",
    "qty": 1,
    "g_each": 0.3,
-   "note": "spin interlock"
+   "note": "park index + spin interlock"
   },
   {
    "part": "NBR O-ring 9 x 1.5",
@@ -248,9 +266,10 @@
   "root-grip lag bore, k=1/k=2 cord lanes and spring-cord paths",
   "K1 cord knot (one cord now runs K1..K3)",
   "latch-pin tab ends past the crank (tab now ends at r 21.5)",
+  "latch pins (8), bell cranks (8), crank pins (8), station blade; disc pin slots and pockets (decision C)",
   "hub E return-spring boxes: 2 trays + lid per finger (0.94 g), their screw, the root post, knuckle saddles, extensor cords and bores"
  ],
  "pending": [],
- "total_printed_g": 101.3,
- "total_bought_g": 142.7
+ "total_printed_g": 149.3,
+ "total_bought_g": 203.3
 }

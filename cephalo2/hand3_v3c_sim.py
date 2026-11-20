@@ -137,9 +137,9 @@ def build():
     add_("base pull ring + rail (3 mm flange)", V3.ring_v3(), "#e07b39", "ring", lambda s, sp: SP(sp) @ Tz(-s["pull"]))
     add_("cage (key slots only)", V3.cage_v3(), "#c9cfd6", "hub", lambda s, sp: SP(sp))
     SA = Rz(V3.STATION_AZ); STP = RD.station_c()
-    cols = dict(tyre="#222222", motor="#9aa1aa", servo="#1f4e8c", sensor="#2e8b57", dock="#d4a017")
+    cols = dict(tyre="#222222", motor="#9aa1aa", servo="#1f4e8c", sensor="#2e8b57", dock="#d4a017", carriage="#f0a030")
     for n, m in STP.items():
-        add_(f"station {n}", m, cols[n], "station", (lambda s, sp, n=n: SA @ Tx(-min(s["s"], V3.ST["roll_gap"]) if n in ("tyre", "motor", "dock") else 0.0)), metal=(n == "motor"))
+        add_(f"station {n}", m, cols[n], "station", (lambda s, sp, n=n: SA @ Tx(-min(s["s"], V3.ST["roll_gap"]) if n in ("tyre", "motor", "dock", "carriage") else 0.0)), metal=(n == "motor"))
     add_("cage pads (8, copper)", RD.pads(), "#c87533", "hub", lambda s, sp: SP(sp), metal=True, tol=0.01)
     bell = C.cyl(17, H.Z["pack1"] + 8.5, H.Z["motor_top"]) + C.cyl(2.5, H.Z["motor_top"], H.Z["shaft_tip"])
     add_("motor bell", bell, "#3a3f47", "hub", lambda s, sp: SP(sp), metal=True)
