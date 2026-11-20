@@ -619,3 +619,10 @@ Decision (2026-11-19): **station A** (blade in the free band + bell crank on eac
 Checks (distances in the r-z plane against everything that spins, and to the static drive): retracted station: blade 0.64 mm,
 sensor 0.9, tyre 1.5, motor 5.8; roller on (rotor turning under it): blade 0.64; engaged blade to the tie ring 0.52; motor to the
 frame 6.5. Crank at rest / full turn: to its block 0.15 / 0.29, base disc 0.85 / 1.45, ring + rail 1.6 / 0.26, bead 2.3 / 1.7.
+Rerun after the body fix (blade body kept outside the flange even when engaged, r >= 33.6 retracted), run on Saturn because this
+environment kept restarting: retracted blade 0.66 mm from everything that spins; engaged with the hub turning under the held root:
+blade 0.40 mm from the discs / cage / ring + rail; engaged blade 0.52 mm from the tie ring. Motion sim (`hand3_v3_sim.py`, now with
+the station: align, engage, index, release, retract for every root move; 90 parts, 1053 frames): the whole-timeline overlap check
+finds only the existing 0.25 mm3 hub E frame / idler bracket cells. Artifact "hand3 hub v3 motion sim" updated.
+Open: SG92R mount and slide guides on the tie ring (placeholder box), carriage springs, the N20 bracket, crank return spring,
+crank pivot pin retention; the crank's 0.15 mm gap to its own block at rest.
