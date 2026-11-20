@@ -681,3 +681,26 @@ crank pivot pin retention; the crank's 0.15 mm gap to its own block at rest.
   - Mass: +57 g (motors, pinions, tracks) - 14 g (pins, cranks, blade, roller) + ~23 g (metal roots) = ~ +66 g.
   - Each N20 sits at ~4,600 g in flight: needs a bench spin test.
   Asked the user before building further.
+- **Built C with metal roots** (user).  `hand3e/hand3_root_drive.py`:
+  - Root block + cradle in AlSi10Mg, 14.9 g each.  The cradle has a neck at x 25.8..31.6 (y +-11) and a tube round the gearbox
+    with a collar on the can, staying clear of the K1 barrel and the flexor sector.
+  - Worm N20 gearbox at r 21.5..31.5, z 102..120.  Brass m0.5 z22 pinion on a 74-tooth crown ring (top disc).
+  - 8 copper-tape tracks under the top disc, 2 pogo brushes per root.  Dock: 2 x Adafruit 5358 pogo halves at +32 deg on an arm
+    beside the tyre and under the pull ring's lowest point, onto 8 copper pads on the cage.  Carriage block carries roller + dock.
+  - Gone: latch pins, cranks, crank pins, blade, disc pin slots and pockets.
+- Checks (`hand3_root_drive_check.json`, Saturn):
+  - Root-to-root gap at the 58 deg minimum spacing 0.31 mm (block corners at r 8.5, as before); towers never closest.
+  - All four sim transitions keep 60 deg.  Largest move 60 deg, about 0.36 s at 168 deg/s; the sim shows each move over 0.8 s.
+  - Empty-hand curl clear to 70 % in all poses; at 75 % each motor clips its own phalanx 2 (1.1 mm3).
+  - Station parts at least 6.2 mm from the swept roots.  Dock body 0.52 mm from the pads when in; pogo pins must stand at least
+    1 mm proud (est.).
+  - Motion sim `hand3_v3c_sim.py`: 157 parts, only the known 0.25 mm3 frame / idler overlap.
+- Loads (est.):
+  - Spin pull per root 2,095 N (finger 826 + motor set 625 + Al root 644); rib bearing 27 MPa on the PA-CF discs.  Next: FEA,
+    and AlSi10Mg discs if needed.
+  - Cradle bending: z 99.5: 87 MPa (SF 2.65 vs 230 MPa); z 101.2: 72 MPa (SF 3.2); tube 26..29 MPa.
+  - N20 at ~4,500 g: needs a bench spin test.
+- Mass: printed 149.3 g + bought 203.3 g = 352.6 g in the list (was 244.0 g), +108.6 g.
+  - Metal roots +49 (4 x 14.9 vs 2.6 g PA-CF), worm motors +52, pinions +4.4, tracks/brushes/dock/drivers +6.
+  - Removed blade, cranks and pins -3.9.
+  - My earlier "+66 g" underestimated the roots.  Pocketing the Al roots after an FEA could cut ~30 % of their mass (est.).
