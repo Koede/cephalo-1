@@ -667,3 +667,17 @@ crank pivot pin retention; the crank's 0.15 mm gap to its own block at rest.
   -14 g removed; 624 N spin load per motor, root 1450 N; worm holds 78 N vs ~6 N spin-up; +~6 % rotor drag est.), D one drive +
   per-root Adafruit 2776 solenoid choosing hold/ride (+55 g, 0.8 N solenoids), E four drive rings under the hub (no room),
   F motor inside a taller block (33 mm motor in 15 mm; full hub redo).  Recommended C.  Asked the user.
+- **Decision C** (user).  Layout work (`hand3e/hand3_root_drive.py`, WIP): worm N20 standing in a cradle on the root's outer end
+  (gearbox r 21.5..31.5, z 102..120, can to z 135), shaft pointing at the axis, brass m0.5 z22 pinion on a 74-tooth crown ring on
+  the top disc (pitch r 18.5); 8 copper-tape tracks under the top disc, 2 pogo brushes per root; dock = 2 x Adafruit 5358 pogo
+  halves on the carriage onto 8 pads on the cage.  Root speed ~168 deg/s; worm stall gives 43 N at the pinion vs ~6 N needed.
+- Kill checks found after the choice:
+  - The tower must sit inside x 31.6 at the K1 barrel and below the phalanx-1 sweep, so it stands 19 mm proud of the grip.  At
+    12,500 rpm the motor + pinion + cradle (15.6 g at r 26.5) pull 708 N -> ~12 N m on the cradle neck and the grip flat.
+    PA-CF: ~98 MPa in the neck, ~260 MPa in the present grip flat (SF < 1).  With an AlSi10Mg root (ordered metal print, as the
+    old hand3 root grips) and the grip flat thickened to the full 5.8 mm gap height and 22 mm wide: ~98 MPa, SF ~2.3 (est.).
+  - Root radial load 826 -> 1534 N; rib bearing ~20 MPa.
+  - Curl: the tower clips phalanx 2 from 75 % curl -> empty-hand curl limit 70 %.
+  - Mass: +57 g (motors, pinions, tracks) - 14 g (pins, cranks, blade, roller) + ~23 g (metal roots) = ~ +66 g.
+  - Each N20 sits at ~4,600 g in flight: needs a bench spin test.
+  Asked the user before building further.
