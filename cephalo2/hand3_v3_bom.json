@@ -1,0 +1,233 @@
+{
+ "printed": [
+  {
+   "part": "base disc",
+   "qty": 1,
+   "g_each": 5.27,
+   "material": "PA-CF"
+  },
+  {
+   "part": "top disc",
+   "qty": 1,
+   "g_each": 4.33,
+   "material": "PA-CF"
+  },
+  {
+   "part": "root block (grip merged, cleaned)",
+   "qty": 4,
+   "g_each": 2.75,
+   "material": "PA-CF"
+  },
+  {
+   "part": "bead (C-slider)",
+   "qty": 4,
+   "g_each": 0.02,
+   "material": "PA-CF"
+  },
+  {
+   "part": "bell crank",
+   "qty": 8,
+   "g_each": 0.04,
+   "material": "PA-CF"
+  },
+  {
+   "part": "base ring v3 (3 mm flange, rail)",
+   "qty": 1,
+   "g_each": 4.98,
+   "material": "PA-CF"
+  },
+  {
+   "part": "cage v3",
+   "qty": 1,
+   "g_each": 9.49,
+   "material": "PA-CF"
+  },
+  {
+   "part": "yoke half out/near",
+   "qty": 1,
+   "g_each": 1.77,
+   "material": "PA-CF"
+  },
+  {
+   "part": "yoke half out/far",
+   "qty": 1,
+   "g_each": 1.76,
+   "material": "PA-CF"
+  },
+  {
+   "part": "yoke half in/near",
+   "qty": 1,
+   "g_each": 1.77,
+   "material": "PA-CF"
+  },
+  {
+   "part": "yoke half in/far",
+   "qty": 1,
+   "g_each": 1.76,
+   "material": "PA-CF"
+  },
+  {
+   "part": "spool",
+   "qty": 2,
+   "g_each": 0.3,
+   "material": "PA-CF"
+  },
+  {
+   "part": "tie ring",
+   "qty": 1,
+   "g_each": 2.3,
+   "material": "PA-CF"
+  },
+  {
+   "part": "frame",
+   "qty": 1,
+   "g_each": 27.74,
+   "material": "PA-CF"
+  },
+  {
+   "part": "heel",
+   "qty": 1,
+   "g_each": 2.54,
+   "material": "PA-CF"
+  },
+  {
+   "part": "phalanx 1",
+   "qty": 4,
+   "g_each": 2.27,
+   "material": "PA-CF"
+  },
+  {
+   "part": "pad 1",
+   "qty": 4,
+   "g_each": 0.13,
+   "material": "TPU 95A"
+  },
+  {
+   "part": "phalanx 2",
+   "qty": 4,
+   "g_each": 1.79,
+   "material": "PA-CF"
+  },
+  {
+   "part": "pad 2",
+   "qty": 4,
+   "g_each": 0.14,
+   "material": "TPU 95A"
+  },
+  {
+   "part": "phalanx 3",
+   "qty": 4,
+   "g_each": 1.25,
+   "material": "PA-CF"
+  },
+  {
+   "part": "pad 3",
+   "qty": 4,
+   "g_each": 0.19,
+   "material": "TPU 95A"
+  },
+  {
+   "part": "station blade + spine",
+   "qty": 1,
+   "g_each": 2.0,
+   "material": "PA-CF"
+  }
+ ],
+ "bought": [
+  {
+   "part": "Feetech STS3215 servo (12 V)",
+   "qty": 2,
+   "g_each": 55.0,
+   "note": "both pull the one base ring (2:1 tackle)"
+  },
+  {
+   "part": "MR63ZZ bearing (idler)",
+   "qty": 7,
+   "g_each": 0.3,
+   "note": "est. mass"
+  },
+  {
+   "part": "carbon rod dia 3",
+   "qty": 8,
+   "g_each": 0.6,
+   "note": "yoke guides, est. length 45 mm"
+  },
+  {
+   "part": "music wire dia 2 (latch pin, bent)",
+   "qty": 8,
+   "g_each": 0.19,
+   "note": "mass from CAD"
+  },
+  {
+   "part": "steel pin dia 1 x 5 (crank pivot)",
+   "qty": 8,
+   "g_each": 0.03,
+   "note": "est."
+  },
+  {
+   "part": "knuckle pins and bushings (hand3)",
+   "qty": 12,
+   "g_each": null,
+   "note": "unchanged from hand3"
+  },
+  {
+   "part": "Dyneema 0.5 mm braid",
+   "qty": 1,
+   "g_each": 0.5,
+   "note": "est. 3 m: four single flexor cords + tackles + servo cords"
+  },
+  {
+   "part": "Pololu 298:1 Micro Metal Gearmotor HPCB 12 V (N20)",
+   "qty": 1,
+   "g_each": 9.5,
+   "note": "station roller drive"
+  },
+  {
+   "part": "dia 20 rubber tyre / O-ring on hub",
+   "qty": 1,
+   "g_each": 1.0,
+   "note": "est."
+  },
+  {
+   "part": "TowerPro SG92R micro servo",
+   "qty": 1,
+   "g_each": 9.0,
+   "note": "station carriage"
+  },
+  {
+   "part": "Pololu QTR-1A reflectance sensor",
+   "qty": 1,
+   "g_each": 0.3,
+   "note": "spin interlock"
+  },
+  {
+   "part": "M2 x 6 thread-forming screw",
+   "qty": 2,
+   "g_each": 0.2,
+   "note": "B.7 lead rail"
+  },
+  {
+   "part": "M3 x 8 screw",
+   "qty": 4,
+   "g_each": 0.5,
+   "note": "frame to coupler hand base"
+  }
+ ],
+ "removed_vs_hubE": [
+  "inner (curl) pull ring",
+  "TPU series links (base and curl, 4 each)",
+  "lag tubes (4)",
+  "lag-spring peg, post and O-rings (4)",
+  "hub stop posts",
+  "hub_lower / hub_upper plates (now base and top discs)",
+  "ring link lugs and cage 61 deg link slots",
+  "root-grip lag bore, k=1/k=2 cord lanes and spring-cord paths",
+  "K1 cord knot (one cord now runs K1..K3)",
+  "latch-pin tab ends past the crank (tab now ends at r 21.5)"
+ ],
+ "pending": [
+  "return springs: hub E's spring boxes (3 O-ring lanes per finger) can't be reached by their cords in v3 (top disc in the way); options study hand3_return_spring_study"
+ ],
+ "total_printed_g": 100.8,
+ "total_bought_g": 141.4
+}

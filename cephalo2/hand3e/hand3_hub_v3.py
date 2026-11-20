@@ -19,13 +19,14 @@ import manifold3d as mf
 import hand3_design as H
 import hand3_cad as C
 import hand3_hubc as HC
+import hand3_finger as F
 from hand3_cad import cyl, box, app, T, rot
 
 M_ = mf.Manifold
 Z = H.Z
 V = dict(disc_r=25.5, z0=Z["hub_lo"], disc_t=2.0, lip_t=1.0, gap=6.0, boss_r=7.0, boss_z0=Z["motor_top"], shaft_r=2.6,
          block_r=(9.0, 24.3), block_half=28.0, ribs=((13.5, 15.5), (22.3, 24.0)), rib_h=1.0, groove_clr=0.1,
-         pin_r=20.0, pin_daz=22.0, wire_d=2.0, float_=0.5, foot=0.4, lift=2.1, tab_x=28.5, step=30.0,
+         pin_r=20.0, pin_daz=22.0, wire_d=2.0, float_=0.5, foot=0.4, lift=2.1, tab_x=21.5, step=30.0,
          slot_w=2.1, arm_slot_w=2.2, top_screw_r=4.9, top_screw_n=3,
          rail=dict(stem=(25.0, 25.6), head=(24.6, 26.0), z_stem=1.0, z_head=1.0), bead=dict(r=(24.0, 26.7), dz=(0.5, 2.8), half_w=2.0, eye_r=26.3),
          cord_r=0.35, post=(26.2, 30.0, 3.5, 102.7))
@@ -86,12 +87,23 @@ def top_disc():
 _RG = {}
 
 
+def grip_clean():
+    """hand3's root grip without hub E leftovers: no lag-tube bore or its side hole, no k=1/k=2 cord lanes (one cord now runs over
+    K1..K3), no spring-cord paths, lag-spring recess or post (the hand3_springs patch is not applied).  Outline unchanged."""
+    flat = box([14.5, -6, -2.4], [31.6, 6, 2.4])
+    W2 = H.W_KN[0] / 2
+    fork = M_.batch_hull([box([31.0, -6, -2.6], [32.0, 6, 2.6]), box([34.0, -W2, -3.0], [H.KN[0] + 0.5, W2, 3.0])])
+    m = app(flat, T(rot("x", -H.PITCH))) + fork
+    m = F.end_trim(m, H.KN[0], -1, H.FOLD_MAX[0])
+    return app(F.proximal_end(m, 0, fairlead=False), T(rot("x", H.PITCH))) - F.rim_relief()
+
+
 def root_block(az=0.0):
     """Root block = the finger's own root grip (hand3_cad, lag 0) merged with a wedge that rides between the discs on two ribs top
     and bottom; two radial-slot bores and two arm slots for the latch pins.  Built at az 0 and turned."""
     if "m" not in _RG:
-        R = C.parts(); zb = H.Z["blade"]
-        grip = app(R["root_grip"], T(t=[0, 0, zb]))
+        zb = H.Z["blade"]
+        grip = app(grip_clean(), T(t=[0, 0, zb]))
         b = wedge(V["block_r"][0], V["block_r"][1], *Z_GAP, -V["block_half"], V["block_half"])
         for r0, r1 in V["ribs"]:
             b += wedge(r0, r1, Z_GAP[0] - V["rib_h"], Z_GAP[0] + 0.01, -V["block_half"], V["block_half"])
