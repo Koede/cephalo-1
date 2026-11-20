@@ -58,12 +58,18 @@ def plan(a, b):
 
 
 def moves(a, b, order=None):
+    """Each root move at the station: align (rotor turns the root to the station), engage (blade lifts its pins), index (hub turns
+    under the held root), release (pins drop), retract."""
     order = plan(a, b) if order is None else order
     cur = list(a)
     for k in order:
         d = (b[k] - cur[k] + 180) % 360 - 180
-        add(2.0, "move", k=k, az=tuple(cur), a0=cur[k], a1=cur[k] + d); cur[k] = b[k]
+        for ph, dur in (("align", 1.2), ("engage", 0.6), ("index", 1.2), ("release", 0.5), ("retract", 0.4)):
+            add(dur, ph, k=k, az=tuple(cur), a0=cur[k], a1=cur[k] + d)
+        cur[k] = b[k]
     return tuple(cur)
+
+
 cur = moves(CROSS, THUMB)
 add(2.0, "curl", az=cur, c0=0.0, c1=CURL_LIM["3 + 1 thumb"]["max_clear_curl"], pose="3 + 1 thumb"); add(1.0, "hold", az=cur, c=CURL_LIM["3 + 1 thumb"]["max_clear_curl"], pose="3 + 1 thumb")
 add(1.5, "curl", az=cur, c0=CURL_LIM["3 + 1 thumb"]["max_clear_curl"], c1=0.0, pose="3 + 1 thumb")
@@ -75,30 +81,45 @@ add(1.0, "park", az=CROSS)
 T_END = SEG[-1][1]
 
 
-def state(t):
+def _psi_end():
+    """Rotor angle (world) at the end of every segment, so align / index know where they start."""
+    psi = 0.0; out = []
     for t0, t1, kind, d in SEG:
-        if t < t1 or (t0, t1) == SEG[-1][:2]:
-            break
-    f = np.clip((t - t0) / (t1 - t0), 0, 1); az = list(d["az"]); lift = [0.0] * 4; out = [V3.V["float_"]] * 4; c = 0.0; w = 0.0; held = None
-    if kind == "spinup": w = ease(f)
+        if kind == "align": psi = psi + ((V3.STATION_AZ - (d["a0"] + psi)) + 180) % 360 - 180
+        elif kind == "index": psi = psi - (d["a1"] - d["a0"])
+        out.append(psi)
+    return out
+PSI_END = _psi_end()
+
+
+def state(t):
+    i = next((j for j, (t0, t1, _, _) in enumerate(SEG) if t < t1), len(SEG) - 1)
+    t0, t1, kind, d = SEG[i]; psi0 = PSI_END[i - 1] if i > 0 else 0.0; psi1 = PSI_END[i]
+    f = np.clip((t - t0) / (t1 - t0), 0, 1); g = ease(f); az = list(d["az"]); c = 0.0; w = 0.0; held = None; s = 0.0
+    psi = psi0 + (psi1 - psi0) * g
+    if kind == "spinup": w = g
     elif kind == "hover": w = 1.0
-    elif kind == "spindown": w = 1 - ease(f)
-    elif kind == "move":
-        k = d["k"]; held = k
-        if f < 0.25: g = ease(f / 0.25); out[k] = V3.V["float_"] * (1 - g); lift[k] = V3.V["lift"] * g
-        elif f < 0.75: out[k] = 0.0; lift[k] = V3.V["lift"]; az[k] = d["a0"] + (d["a1"] - d["a0"]) * ease((f - 0.25) / 0.5)
-        else: g = ease((f - 0.75) / 0.25); az[k] = d["a1"]; lift[k] = V3.V["lift"] * (1 - g); out[k] = V3.V["float_"] * g if g > 0.9 else 0.0
-    elif kind == "curl": c = d["c0"] + (d["c1"] - d["c0"]) * ease(f)
+    elif kind == "spindown": w = 1 - g
+    elif kind in ("align", "engage", "index", "release", "retract"):
+        k = d["k"]; held = k; S1, S2 = V3.ST["roll_gap"] + 0.2, V3.ST["stroke"]
+        s = {"align": S1 * min(1.0, 3 * f), "engage": S1 + (S2 - S1) * g, "index": S2, "release": S2 - (S2 - S1) * g, "retract": S1 * (1 - g)}[kind]
+        if kind == "index": az[k] = V3.STATION_AZ - psi                              # the held root stays at the station
+        elif kind in ("release", "retract"): az[k] = d["a1"]
+    elif kind == "curl": c = d["c0"] + (d["c1"] - d["c0"]) * g
     elif kind == "hold": c = d["c"]
-    if kind in ("park", "move", "curl", "hold"): out = [0.0 if (kind == "move" and i == d.get("k")) else o for i, o in enumerate(out)]
-    if w == 0 and kind != "move": out = [0.0] * 4                                    # at rest the pins sit at their inner position
+    turn = V3.crank_turn(s) if held is not None else 0.0
+    lift = [0.0] * 4
+    if held is not None:
+        Lf = np.hypot(V3.CR["pivot"][0] - V3.CR["finger"][0], V3.CR["pivot"][1] - V3.CR["finger"][2])
+        lift[held] = min(V3.V["lift"], max(0.0, Lf * np.sin(np.radians(turn)) - 0.05))
     cord = c * (V3.K_STROKE["K1"] + V3.K_STROKE["K23"]); pull = cord / V3.TACKLE
-    return dict(kind=kind, f=f, az=az, lift=lift, out=out, c=c, w=w, cord=cord, pull=pull, held=held, pose=d.get("pose"))
+    return dict(kind=kind, f=f, az=az, psi=psi, s=s, turn=turn, lift=lift, out=[0.0] * 4, c=c, w=w, cord=cord, pull=pull, held=held, pose=d.get("pose"))
 
 
 def spins():
     ts = np.arange(0, T_END, 1 / FPS); a = 0.0; out = []
-    for t in ts: out.append(a); a += state(t)["w"] * RPM_HOVER / 600 * 360 / FPS
+    for t in ts:
+        out.append(a); a += state(t)["w"] * RPM_HOVER / 600 * 360 / FPS
     return ts, np.array(out)
 
 
@@ -126,8 +147,12 @@ def build():
         for sd in ("near", "far"):
             add_(f"yoke {w} {sd}", V3.yoke(w, sd, 0.0), "#f0a030", "ring", (lambda s, sp: Tz(-(s["pull"] + HC.GAP)) if s["pull"] > 0 else np.eye(4)))
     P = HC._parts()
-    add_("base pull ring + rail", P["ring_out"][0] + V3.ring_rail(), "#e07b39", "ring", lambda s, sp: SP(sp) @ Tz(-s["pull"]))
-    add_("cage", P["cage"][0], "#c9cfd6", "hub", lambda s, sp: SP(sp))
+    add_("base pull ring + rail (3 mm flange)", V3.ring_v3(), "#e07b39", "ring", lambda s, sp: SP(sp) @ Tz(-s["pull"]))
+    add_("cage (key slots only)", V3.cage_v3(), "#c9cfd6", "hub", lambda s, sp: SP(sp))
+    SA = Rz(V3.STATION_AZ); STP = V3.station_parts()
+    cols = dict(blade="#f0a030", tyre="#222222", motor="#9aa1aa", servo="#1f4e8c", sensor="#2e8b57")
+    for n, m in STP.items():
+        add_(f"station {n}", m, cols[n], "station", (lambda s, sp, n=n: SA @ Tx(V3.station_pose(s["s"])[n])), metal=(n == "motor"))
     bell = C.cyl(17, H.Z["pack1"] + 8.5, H.Z["motor_top"]) + C.cyl(2.5, H.Z["motor_top"], H.Z["shaft_tip"])
     add_("motor bell", bell, "#3a3f47", "hub", lambda s, sp: SP(sp), metal=True)
     add_("base disc", V3.base_disc(), "#b8bec6", "hub", lambda s, sp: SP(sp), tol=0.02)
@@ -142,6 +167,10 @@ def build():
             add_(f"latch pin {k}{'ab'[sd > 0]}", V3.latch_pin(0, sd, 0.0, 0.0), "#d62728", "roots",
                  (lambda s, sp, k=k: SP(sp) @ Rz(s["az"][k]) @ Tx(s["out"][k]) @ Tz(s["lift"][k])), metal=True, tol=0.01)
         add_(f"bead {k}", V3.bead(0, 0.0), "#111111", "roots", (lambda s, sp, k=k: SP(sp) @ Rz(s["az"][k]) @ Tz(-s["pull"])), tol=0.01)
+        for sd in (-1, 1):
+            add_(f"crank {k}{'ab'[sd > 0]}", V3.crank(sd), "#7a3db8", "roots",
+                 (lambda s, sp, k=k, sd=sd: SP(sp) @ Rz(s["az"][k]) @ V3.crank_pose(sd, s["turn"] if s["held"] == k else 0.0)), tol=0.01)
+            add_(f"crank pin {k}{'ab'[sd > 0]}", V3.crank_pin(sd), "#b8bcc4", "roots", RA, metal=True, tol=0.01)
         add_(f"spring box {k}", V3.spring_box(0, k), "#e6c229", "roots", RA)
         for sd in (-1, 1):
             r = V3.V["bead"]["eye_r"]; zt = V3.Z_GAP[0] - 1.0
@@ -164,11 +193,14 @@ def hud_rows(s, t):
     imb = imbalance(s["az"]); ok = imb < 5
     rpm = s["w"] * RPM_HOVER
     names = {"park": "parked", "spinup": "rotor spin-up (flight cross only)", "hover": "hover: fingers are the rotor blades", "spindown": "spin-down",
-             "move": f"fork lifts root {s['held']}'s pins, root slides round, pins drop", "curl": f"curl ({s['pose']})", "hold": f"hold ({s['pose']})"}
+             "align": f"roller turns the rotor: root {s['held']} to the station", "engage": f"blade pushes root {s['held']}'s cranks: pins lift",
+             "index": f"roller turns the hub under the held root {s['held']}", "release": "blade backs off: pins drop into the new holes", "retract": "station retracts",
+             "curl": f"curl ({s['pose']})", "hold": f"hold ({s['pose']})"}
     ph = names[s["kind"]]
-    pins = "all 8 down" if s["held"] is None else f"root {s['held']}: lifted {max(s['lift']):.1f} mm"
+    pins = "all 8 down" if max(s["lift"]) < 0.05 else f"root {s['held']}: lifted {max(s['lift']):.1f} mm"
     rows = [["root azimuths", " / ".join(f"{a:.0f}°" for a in s["az"])],
             ["latch pins", pins],
+            ["station carriage", f"{s['s']:.1f} / {V3.ST['stroke']:.1f} mm" + (" (roller on)" if s['s'] >= V3.ST['roll_gap'] else ""), s["s"], V3.ST["stroke"], "#f0a030"],
             ["imbalance if spun at 12,500 rpm", f"{imb:.0f} N", imb, 1500, "#e04b39" if not ok else "#39a0e0"],
             ["spin allowed (interlock)", "yes" if ok else "NO: roots not balanced"],
             ["rotor speed", f"{int(rpm):,} rpm", rpm, THR["rpm"], "#39a0e0"],
@@ -185,21 +217,22 @@ def main(check=False):
     frames = np.zeros((len(ts), len(names), 12), np.float32); hud = []
     for i, (t, a) in enumerate(zip(ts, sp)):
         s = state(t)
-        for j, n in enumerate(names): frames[i, j] = poses[n](s, a)[:3, :4].reshape(-1)
+        for j, n in enumerate(names): frames[i, j] = poses[n](s, a + s["psi"])[:3, :4].reshape(-1)
         ph, rows = hud_rows(s, t); hud.append(dict(t=round(float(t), 2), ph=ph, rows=rows))
     jumps = []; nxt = {}
     for i, (t0, t1, kind, d) in enumerate(SEG):
         if kind == "spinup": jumps.append(["spin", round(t0, 2)])
-        if kind == "move" and (i == 0 or SEG[i - 1][2] != "move"):
+        MV = ("align", "engage", "index", "release", "retract")
+        if kind == "align" and (i == 0 or SEG[i - 1][2] not in MV):
             j = i
-            while SEG[j][2] == "move": j += 1
+            while SEG[j][2] in MV: j += 1
             tgt = next((p for p, a in V3.POSES.items() if tuple(a) == tuple(SEG[j][3]["az"])), "pose")
             jumps.append([f"to {tgt}".replace("flight cross", "cross"), round(t0, 2)])
         if kind == "curl" and d["c1"] > 0: jumps.append([f"curl {d['pose']}", round(t0, 2)])
     data = dict(names=names, parts=[parts[n] for n in names], nf=len(ts), fps=FPS, frames=base64.b64encode(frames.tobytes()).decode(), hud=hud,
-                title="hand3 hub v3: travelling finger roots", groups=[["drive", "frame + servos"], ["ring", "pull ring + yokes"], ["hub", "hub + cage"], ["roots", "roots + pins + cords"], ["fingers", "fingers"]],
+                title="hand3 hub v3: travelling finger roots", groups=[["drive", "frame + servos"], ["station", "station"], ["ring", "pull ring + yokes"], ["hub", "hub + cage"], ["roots", "roots + pins + cranks"], ["fingers", "fingers"]],
                 jumps=[["start", 0]] + jumps, view=dict(wide=[85, 75, 60], close=[34, 26, 92]),
-                note="Real CAD solids from hand3e/hand3_hub_v3.py and hub E's drive. Roots are shown sliding round the hub; on the real hand a parked fork holds the root and a roller turns the hub under it (not modelled yet). Spin shown at 1/600 of real rpm. Loads are estimates.")
+                note="Real CAD solids from hand3e/hand3_hub_v3.py and hub E's drive. To move a root: the roller turns the rotor until the root faces the station, the blade pushes the root's two cranks (pins lift), the roller turns the hub under the held root, the pins drop. Spin shown at 1/600 of real rpm. Loads are estimates.")
     os.makedirs("hand3_v3_site", exist_ok=True)
     open("hand3_v3_site/sim_data.js", "w").write("window.SIM=" + json.dumps(data) + ";")
     open("hand3_v3_site/index.html", "w").write(open("hand3_v3_sim_template.html").read().replace("<title>Cephalo-2 coupler + hand3 motion sim</title>", "<title>hand3 hub v3 motion sim</title>"))
@@ -215,7 +248,7 @@ def overlap(parts, poses, ts, sp, step=10):
     names = list(parts); G = {n: OV.grid(n, parts[n]) for n in names if not n.startswith("tackle cord")}
     hits = {}
     for fi in sorted(set(list(range(0, len(ts), step)) + [int(t0 * FPS) + 1 for t0, _, k, _ in SEG] + [int(t1 * FPS) - 1 for _, t1, _, _ in SEG])):
-        fi = min(fi, len(ts) - 1); s = state(ts[fi]); A = {n: poses[n](s, sp[fi]) for n in G}
+        fi = min(fi, len(ts) - 1); s = state(ts[fi]); A = {n: poses[n](s, sp[fi] + s["psi"]) for n in G}
         bx = {n: OV.world_box(G[n], A[n]) for n in G}; nn = list(G)
         for i, a in enumerate(nn):
             for b in nn[i + 1:]:

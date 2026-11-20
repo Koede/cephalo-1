@@ -231,3 +231,139 @@ def export(d="hand3_v3_stl"):
 
 if __name__ == "__main__":
     export()
+
+
+# ---------------------------------------------------------------- base ring and cage for v3 (S1 strength, station roller)
+FLANGE_T = 3.0                                                                 # was 2: both servos pull this flange (bending 43.8 -> 19.5 MPa at stall)
+Z_FL = (HC.Z_OUT[1] - 1.0 - FLANGE_T, HC.Z_OUT[1] - 1.0)                       # 83 .. 86 (top unchanged)
+HANGER_Z0 = HC.lug_z()[0]                                                      # 78: hanger leg bottom (keys the ring to the cage)
+CAGE_TRACK = (HC.HL - 31.5, HANGER_Z0 - RING_STROKE - 1.0)                     # continuous cage band for the roller: 59.5 .. 65.9
+
+
+def ring_v3():
+    """Base pull ring for v3: band, a 3 mm flange, the four hanger keys (no TPU-link lugs), and the bead rail."""
+    m = cyl(HC.R_OUT[1], HC.Z_OUT[0], HC.Z_OUT[1], n=128) - cyl(HC.R_OUT[0], HC.Z_OUT[0] - 1, HC.Z_OUT[1] + 1, n=128)
+    m += cyl(HC.R_FL_OUT, *Z_FL, n=128) - cyl(HC.R_OUT[0], Z_FL[0] - 1, Z_FL[1] + 1, n=128)
+    for a in C.FAZ:
+        ab = HC._hanger_az(a); hw = HC.adeg(HC.HANGER_W / 2, 22.0)
+        m += HC._wedge_az(HC.LUG["r"][0], HC.R_OUT[0] + 0.3, HANGER_Z0, HC.Z_OUT[1], ab - hw, ab + hw)
+    return m + ring_rail()
+
+
+def cage_v3():
+    """Cage tube with only narrow key slots for the ring's hangers (hub E's 61 deg link slots are gone): continuous below z 65.9."""
+    m = cyl(HC.R_CAGE[1], HC.HL - 31.5, HC.HL, n=128) - cyl(HC.R_CAGE[0], HC.HL - 40, HC.HL + 3, n=128)
+    for a in C.FAZ:
+        ab = HC._hanger_az(a); hw = HC.adeg(HC.HANGER_W / 2 + 0.3, 20.5)
+        m -= HC._wedge_az(HC.R_CAGE[0] - 1, HC.R_CAGE[1] + 1, CAGE_TRACK[1], HC.HL + 3, ab - hw, ab + hw)
+    return m
+
+
+# ---------------------------------------------------------------- bell crank on each root (station A)
+# In the root's frame (x out along the root, y sideways, z up).  Pivot on a dia 1 steel pin through the grip neck; the upper finger
+# lies under the latch pin's arm, the lower tip hangs outside the disc rim just under the disc, above the bead rail.
+CR = dict(pivot=(27.0, 95.5), finger=(19.5, 93.85, 94.8), tip=(28.7, 87.6, 88.6), tip_y=(3.8, 5.3), jog_z=(92.3, 93.3), plate_y=(8.6, 10.0), finger_y=(6.7, 8.3), t=1.0, pin_d=1.0)
+CR_ANGLE = float(np.degrees(np.arcsin(V["lift"] / np.hypot(CR["pivot"][0] - CR["finger"][0], CR["pivot"][1] - CR["finger"][2]))))   # turn for 2.1 mm lift
+
+
+def crank(side=1):
+    """One bell crank (PA-CF, est. 0.15 g), at rest, for the pin on `side` (+1 / -1 in y).  Built in the root frame at az 0."""
+    px, pz = CR["pivot"]; y0, y1 = CR["plate_y"]; f0, f1 = CR["finger_y"]
+    t0, t1 = CR["tip_y"]; j0, j1 = CR["jog_z"]
+    lo = box([CR["tip"][0] - 0.5, t0, CR["tip"][1]], [CR["tip"][0] + 0.5, t1, j1])          # lower tip, close to the centre line
+    lo += box([CR["tip"][0] - 0.5, t0, j0], [CR["tip"][0] + 0.5, y1, j1])                    # jog under the neck, out to the plate
+    lo += box([CR["tip"][0] - 0.5, y0, j0], [CR["tip"][0] + 0.5, y1, pz - 1.0])
+    piv = cyl(1.3, y0, y1, "y", c=(px, 0, pz), n=24)
+    xo = 25.4                                                                  # outside the block (r 24.3 even at y 10)
+    up = box([xo, y0, CR["finger"][1]], [px, y1, CR["finger"][2]])
+    fing = box([CR["finger"][0], f0, CR["finger"][1]], [xo + 1.0, f1, CR["finger"][2]]) + box([xo, f0, CR["finger"][1]], [xo + 1.0, y1, CR["finger"][2]])
+    m = lo + M_.batch_hull([box([CR["tip"][0] - 0.5, y0, pz - 1.2], [CR["tip"][0] + 0.5, y1, pz - 1.0]), piv]) + M_.batch_hull([piv, up]) + fing
+    m -= cyl(CR["pin_d"] / 2 + 0.05, y0 - 1, y1 + 1, "y", c=(px, 0, pz), n=16)
+    return m if side > 0 else m.mirror([0, 1, 0])
+
+
+def crank_pose(side, turn):
+    """4x4 (root frame): the crank turned by `turn` deg about its pivot (positive = tip inward, finger up)."""
+    px, pz = CR["pivot"]; a = np.radians(turn); c, s = np.cos(a), np.sin(a)
+    Ry = np.array([[c, 0, s, 0], [0, 1, 0, 0], [-s, 0, c, 0], [0, 0, 0, 1.0]])      # tip (below the pivot) moves -x, finger (inside) moves +z
+    Tp = np.eye(4); Tp[0, 3], Tp[2, 3] = px, pz; Tm = np.eye(4); Tm[0, 3], Tm[2, 3] = -px, -pz
+    return Tp @ Ry @ Tm
+
+
+def crank_pin(side=1):
+    y0 = 5.0; y1 = CR["plate_y"][1] + 0.3
+    m = cyl(CR["pin_d"] / 2, y0, y1, "y", c=(CR["pivot"][0], 0, CR["pivot"][1]), n=12)
+    return m if side > 0 else m.mirror([0, 1, 0])
+
+
+def root_cuts_for_crank():
+    """Deepen each arm slot where the crank finger lies under the pin arm, and a dia 1.05 pivot hole through the neck."""
+    m = None
+    for s in (-1, 1):
+        c = box([CR["finger"][0] - 1.0, s * 7.5 - 1.15, CR["finger"][1] - 0.15], [V["block_r"][1] + 0.5, s * 7.5 + 1.15, V3_Z_ARM0 + 0.1])
+        c += cyl(CR["pin_d"] / 2 + 0.03, -12, 12, "y", c=(CR["pivot"][0], 0, CR["pivot"][1]), n=12)
+        m = c if m is None else m + c
+    return m
+
+
+V3_Z_ARM0 = Z_ARM[0]
+_RG_OLD = root_block
+
+
+def root_block(az=0.0):
+    if "v3s" not in _RG:
+        _RG["v3s"] = _RG_OLD(0.0) - root_cuts_for_crank()
+    return _RG["v3s"].rotate([0, 0, float(az)])
+
+
+# ---------------------------------------------------------------- station (static, at STATION_AZ)
+STATION_AZ = 90.0
+ST = dict(roll_gap=1.5, lost=2.0, tip_r0=30.1, push_y=(3.8, 5.3), push_z=(87.7, 88.5), push_r1=31.0, stem_z0=86.4,
+          body_r0=33.6, body_z=(84.6, 87.6), width=11.0, prong_y=(2.3, 3.4), prong_z=(86.4, 88.3), prong_r0=29.2,
+          tyre_d=20.0, tyre_z=(CAGE_TRACK[0] + 0.8, CAGE_TRACK[0] + 5.8), n20=dict(w=12.0, d=10.0, L=24.0))
+ST["contact"] = ST["tip_r0"] - (CR["tip"][0] + 0.5)                                # blade travel before it meets the crank tips
+
+
+def _tip_x(turn):
+    """x of the crank tip's outer face (mid height) after a turn (deg)."""
+    p = crank_pose(1, turn) @ np.array([CR["tip"][0] + 0.5, 0, (CR["tip"][1] + CR["tip"][2]) / 2, 1.0]); return p[0]
+
+
+def crank_turn(s):
+    """Crank turn (deg) for carriage travel s: solves tip x = tip x at rest - push."""
+    push = max(0.0, s - ST["lost"] - ST["contact"]); x0 = _tip_x(0.0); lo, hi = 0.0, 60.0
+    for _ in range(50):
+        mid = (lo + hi) / 2
+        if x0 - _tip_x(mid) < push: lo = mid
+        else: hi = mid
+    return float(lo)
+
+
+def station_parts():
+    """Static station at az 0 (turned to STATION_AZ by the caller), retracted.  x = radial.  Carriage = blade (on a lost-motion slot)
+    + roller (on a spring).  The bead is not held: its two tackle strands are anchored in the held root and drag it round the rail.  Returns name -> manifold in their retracted places."""
+    r0 = ST["tip_r0"]; w = ST["width"]; b0, b1 = ST["body_z"]
+    blade = box([ST["body_r0"], -w, b0], [48.0, w, b1])                               # body under the finger, outside the ring flange
+    for sgn in (-1, 1):
+        y0, y1 = sorted((sgn * ST["push_y"][0], sgn * ST["push_y"][1]))
+        blade += box([r0, y0, ST["push_z"][0]], [ST["push_r1"], y1, ST["push_z"][1]])                        # push finger, below z 89
+        blade += box([r0 + 0.5, y0, ST["stem_z0"]], [ST["body_r0"] + 0.5, y1, ST["push_z"][0] + 0.1])     # its stem, over the flange
+    spine = box([44.0, -3.0, 58.0], [48.0, 3.0, b1])
+    tc = HC.R_CAGE[1] + ST["roll_gap"] + ST["tyre_d"] / 2
+    tyre = cyl(ST["tyre_d"] / 2, *ST["tyre_z"], c=(tc, 0, 0), n=64) - cyl(1.5, ST["tyre_z"][0] - 1, ST["tyre_z"][1] + 1, c=(tc, 0, 0), n=16)
+    n = ST["n20"]; zf = ST["tyre_z"][0] - 1.0
+    motor = box([tc - n["d"] / 2, -n["w"] / 2, zf - n["L"]], [tc + n["d"] / 2, n["w"] / 2, zf]) + cyl(1.5, zf, ST["tyre_z"][1] + 1, c=(tc, 0, 0), n=16)
+    motor += box([tc + n["d"] / 2, -3.0, zf - 8.0], [44.0, 3.0, zf - 2.0])               # motor arm to the carriage spine (sprung)
+    servo = box([48.5, -6.0, 60.0], [60.5, 6.0, 83.0])                                    # SG92R 23 x 12 x 29 standing (est. placement)
+    sensor = box([ST["body_r0"] + 0.6, -14.5, b0], [ST["body_r0"] + 3.6, -12.0, b1])        # QTR-1A on the blade, looks inward at the crank tips
+    return dict(blade=blade + spine, tyre=tyre, motor=motor, servo=servo, sensor=sensor)
+
+
+def station_pose(s):
+    """Carriage travel s -> radial offset of each part: the roller moves first and stops on the cage (spring), the blade waits
+    on its lost-motion slot until s > lost, then pushes the crank tips."""
+    rb = -max(0.0, s - ST["lost"]); rr = -min(s, ST["roll_gap"])
+    return dict(blade=rb, sensor=rb, servo=0.0, tyre=rr, motor=rr)
+
+
+ST["stroke"] = ST["lost"] + ST["contact"] + float(_tip_x(0.0) - _tip_x(CR_ANGLE + 1.0))   # push until 1 deg past a full lift

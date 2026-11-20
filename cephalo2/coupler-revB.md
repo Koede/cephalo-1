@@ -603,3 +603,19 @@ pins; the blade's notch holds root and bead; Pololu 298:1 HPCB N20 roller on the
 bending; C (contacts + SMA wire) needs the same access plus wiring; D (another hand) and E (by hand) need no station; F (flight
 motor creeps the rotor) rejected. Side finding: S1 puts both servos on one ring: flange bending 43.8 MPa at stall with 2 mm,
 19.5 MPa with a 3 mm flange (to apply).
+
+Decision (2026-11-19): **station A** (blade in the free band + bell crank on each root, roller on the cage, reflectance sensor). Layout found while detailing: the crank's tip must ride above the full ring rail (z 89.9-90.8, under the disc), the carriage carries both the blade and the roller (one SG92R: flight / roller-only / roller + lift), roller at the station azimuth with a dia 20 tyre on the cage below the hanger slots; flange 3 mm (S1 strength).
+
+**Station A built (2026-11-19):** `hand3e/hand3_hub_v3.py` (crank, crank_pose, ring_v3, cage_v3, station_parts, station_pose, crank_turn),
+`hand3_station_check.py/.json`.
+- Bell crank on each side of each root (PA-CF, est. 0.04 g, dia 1 steel pivot through the grip neck): its finger lies under the
+  latch pin's arm in the deepened arm slot; its tip hangs outside the disc rim at z 87.6-88.6, lateral 3.8-5.3, below the finger's
+  sweep. 17.2 deg of turn lifts the pins 2.23 mm (2.1 needed). In flight the spin swings the tip outward, which lowers the finger:
+  it can never lift the pins.
+- Carriage at az 90 on one SG92R: travel 0 = flight; 1.5 mm = roller tyre (dia 20, Pololu 298:1 HPCB N20) on the cage, below the
+  key slots; the blade waits on a 2 mm lost-motion slot, meets the crank tips after 0.9 mm more, and pushes them until 1 deg past
+  a full lift (total 5.2 mm). The bead is not held: its two tackle strands, anchored in the held root, drag it round the rail.
+- Ring flange 3 mm (S1 strength); cage with only narrow key slots (continuous track z 59.5-65.9 for the roller).
+Checks (distances in the r-z plane against everything that spins, and to the static drive): retracted station: blade 0.64 mm,
+sensor 0.9, tyre 1.5, motor 5.8; roller on (rotor turning under it): blade 0.64; engaged blade to the tie ring 0.52; motor to the
+frame 6.5. Crank at rest / full turn: to its block 0.15 / 0.29, base disc 0.85 / 1.45, ring + rail 1.6 / 0.26, bead 2.3 / 1.7.
