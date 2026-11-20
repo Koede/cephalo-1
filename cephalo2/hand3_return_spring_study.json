@@ -1,0 +1,132 @@
+{
+ "box_g_per_finger": 0.94,
+ "box_pull_N_at_r22": 35.5,
+ "hubE_rings": {
+  "K1": {
+   "ID": 3.0,
+   "cs": 2.0,
+   "mat": "NBR",
+   "tau0": 0.02,
+   "tau_max": 0.0559
+  },
+  "K2": {
+   "ID": 3.0,
+   "cs": 2.0,
+   "mat": "silicone",
+   "tau0": 0.004,
+   "tau_max": 0.0214
+  },
+  "K3": {
+   "ID": 3.5,
+   "cs": 1.5,
+   "mat": "NBR",
+   "tau0": 0.016,
+   "tau_max": 0.0342
+  }
+ },
+ "D": {
+  "K1": {
+   "ID": 9.25,
+   "cs": 1.78,
+   "mat": "silicone",
+   "e0": 0.42,
+   "e1": 0.89,
+   "span0": 20.0,
+   "tau0": 0.02,
+   "tau1": 0.0455,
+   "mass_g": 0.112,
+   "limit": 0.077,
+   "ok": true,
+   "pull_N_at_r": 7.7
+  },
+  "K2": {
+   "ID": 10.0,
+   "cs": 1.0,
+   "mat": "silicone",
+   "e0": 0.3,
+   "e1": 0.69,
+   "span0": 18.9,
+   "tau0": 0.004,
+   "tau1": 0.0093,
+   "mass_g": 0.035,
+   "limit": 0.051,
+   "ok": true,
+   "pull_N_at_r": 4.0
+  },
+  "K3": {
+   "ID": 7.65,
+   "cs": 1.78,
+   "mat": "silicone",
+   "e0": 0.56,
+   "e1": 0.92,
+   "span0": 18.4,
+   "tau0": 0.018,
+   "tau1": 0.0334,
+   "mass_g": 0.096,
+   "limit": 0.038,
+   "ok": true,
+   "pull_N_at_r": 15.4
+  }
+ },
+ "C": {
+  "K1": {
+   "OD_mm": 5.18,
+   "shaft_mm": 3.3,
+   "max_Nm": 0.0316,
+   "preload_deg": 57.0,
+   "total_deg": 147.0,
+   "ok": false,
+   "room_mm": 4.6,
+   "pin_mm": 3.0
+  },
+  "K2": {
+   "OD_mm": 5.18,
+   "shaft_mm": 3.3,
+   "max_Nm": 0.0316,
+   "preload_deg": 11.0,
+   "total_deg": 101.0,
+   "ok": false,
+   "room_mm": 4.0,
+   "pin_mm": 3.0
+  },
+  "K3": {
+   "OD_mm": 3.15,
+   "shaft_mm": 2.03,
+   "max_Nm": 0.0081,
+   "preload_deg": 199.0,
+   "total_deg": 284.0,
+   "ok": false,
+   "room_mm": 3.0,
+   "pin_mm": 2.0
+  }
+ },
+ "B": {
+  "lane_w": [
+   6.2,
+   6.2,
+   5.2
+  ],
+  "need": 19.2,
+  "free": 11.3,
+  "levels": 1,
+  "radial_room": 14.4,
+  "lane_len_needed": 15.0
+ },
+ "F": {
+  "saddle_r": [
+   2.0,
+   2.8,
+   2.0
+  ],
+  "ratio": [
+   1.0,
+   1.4,
+   1.0
+  ],
+  "wanted": [
+   1.0,
+   0.2,
+   0.9
+  ]
+ }
+}

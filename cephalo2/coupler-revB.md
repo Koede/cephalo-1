@@ -626,3 +626,18 @@ the station: align, engage, index, release, retract for every root move; 90 part
 finds only the existing 0.25 mm3 hub E frame / idler bracket cells. Artifact "hand3 hub v3 motion sim" updated.
 Open: SG92R mount and slide guides on the tie ring (placeholder box), carriage springs, the N20 bracket, crank return spring,
 crank pivot pin retention; the crank's 0.15 mm gap to its own block at rest.
+
+## hand3 hub v3 cleanup and return springs (2026-11-20)
+- Done (user: "1,2,3,4"): root block now merges a clean grip (`grip_clean`): no lag-tube bore or side hole, no k=1/k=2 lanes,
+  no spring-cord paths, lag recess or post.  Latch-pin tab ends cut from r 28.5 to 21.5 (crank still lifts at r 19.5..21.5;
+  0.19 g per pin).  Parts list: `hand3_v3_bom.py/.json` (printed 100.8 g solid, bought 141.4 g; removed vs hub E listed).
+  `hand3_hub_v3_check` rerun: unchanged apart from the shorter pin range.
+- Found: hub E's spring boxes can't work in v3.  Their extensor cords ran down the lag tube at r 20, which the top disc now covers,
+  and the boxes' post (r 26.2..30, z 98..102.7) sits where the single flexor cord must rise from the block (r 26.3, z 97) to
+  K1's sector (z 102).  So item 1 (single-cord routing) waits on where the return springs go.
+- Study `hand3_return_spring_study.py/.png/.json`: A boxes outboard on the post (column crosses the flexor), B O-ring lanes in the
+  block (19.2 mm of lanes in 11.3 mm: no fit), C McMaster 90 deg torsion springs (preload + fold exceeds the rating, K3 no room),
+  D one stock silicone O-ring band across each knuckle's back on two hooks (K1 9.25x1.78, K2 10x1, K3 7.65x1.78; torque
+  0.020/0.004/0.018 N m open, 0.045/0.009/0.033 folded, under the 40 % flexor limits; spin pull on hooks 4..15 N; K1's
+  proximal hook at r >= 27.5 to clear the tackle strands), E printed TPU strap (creep unknown), F one extensor cord (torque ratio
+  set by saddle radii: kill), G no springs (hand can't open on the ground: kill).  Recommended D.  Asked the user.
