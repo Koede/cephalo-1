@@ -1,0 +1,50 @@
+{
+ "C": {
+  "root_speed_deg_s": 70.5,
+  "cross_to_2p2_s": 1.2,
+  "largest_move_deg": 15.0,
+  "thumb_to_2p2_s": 1.4,
+  "pull_N_per_motor": 624,
+  "root_total_N": 1450,
+  "worm_hold_N": 78,
+  "spinup_N": 6,
+  "added_rotor_g": 57.0,
+  "removed_g": 14.3,
+  "tower_drag_Nm": 0.036,
+  "net_g": 42.7
+ },
+ "D": {
+  "pull_N_per_solenoid": 475,
+  "added_rotor_g": 55.4,
+  "solenoid_force_N": 0.78,
+  "needed_lift_N": "pins + crank spring ~1 N (est.)",
+  "cross_to_2p2_s": 2.2
+ },
+ "E": {
+  "ring_g_each": "~5 (est.)",
+  "rings_r": [
+   32,
+   36,
+   40,
+   44
+  ],
+  "static_g": 50.0,
+  "rotor_g": 24,
+  "clash": "ring stack z 76..90 is where the pull ring (z 83..86), yoke lips and station live"
+ },
+ "F": {
+  "radial_room_mm": 15.3,
+  "worm_L": 33.0,
+  "gap_now": 6.0,
+  "gap_needed": 13.0,
+  "pull_N_per_motor": 356
+ },
+ "B": {
+  "cross_to_2p2_s": 7.8,
+  "added_g": 11.3
+ },
+ "A": {
+  "cross_to_2p2_s": 15.6,
+  "thumb_to_2p2_s": 11.7
+ }
+}

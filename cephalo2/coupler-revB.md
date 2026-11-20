@@ -659,3 +659,11 @@ crank pivot pin retention; the crank's 0.15 mm gap to its own block at rest.
   touch 0.12 mm3 at 80 %, as before); station clearances back to the pre-band values (blade 0.66, sensor 0.9, engaged 0.40 mm;
   lift 2.23 mm at 17.19 deg); motion sim 170 parts / 1053 frames, only the known 0.25 mm3 frame / idler overlap (band strands
   are drawn as 5 straight pieces and left out of the grid check; the boolean check covers them).  Sim artifact republished.
+
+## Roots moving on their own, all at once (2026-11-20)
+- User: "each hand [finger root] able to move on its own but not one by one".  Study `hand3_root_drive_study.py/.png/.json`:
+  A keep (cross -> 2+2 15.6 s), B two stations (pairs, 7.8 s), C self-locking N20 worm gearmotor on each root with a pinion on a
+  crown ring, power over copper tracks under the top disc and an Adafruit 8-pogo magnetic dock while parked (~1.2 s; +57 g rotor,
+  -14 g removed; 624 N spin load per motor, root 1450 N; worm holds 78 N vs ~6 N spin-up; +~6 % rotor drag est.), D one drive +
+  per-root Adafruit 2776 solenoid choosing hold/ride (+55 g, 0.8 N solenoids), E four drive rings under the hub (no room),
+  F motor inside a taller block (33 mm motor in 15 mm; full hub redo).  Recommended C.  Asked the user.
