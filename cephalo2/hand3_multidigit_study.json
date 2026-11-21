@@ -1,0 +1,53 @@
+{
+ "ring_per_finger": {
+  "force_N": 27.5,
+  "STS3215_N": 735,
+  "SG92R_N": 61,
+  "ring_stroke_mm": 11.079276430267253
+ },
+ "B_stack_height_mm": 64.31710572106901,
+ "B_room_mm": 24.6,
+ "C_rail_r": [
+  26.5,
+  29.5,
+  32.5,
+  35.5
+ ],
+ "C_blade_band": "station blade slides in at z 86..89.7 from r 26.9 out: rails at r >= 26.5 sit in it",
+ "D": {
+  "drum_r": 2.5,
+  "worm_ratio": 20,
+  "T_in_Nm": 0.0172,
+  "N20_30_stall_Nm": 0.059,
+  "cord_mm_s": 13.1,
+  "curl_s": 1.7,
+  "positions": [
+   0,
+   60,
+   90,
+   120,
+   180,
+   240,
+   270,
+   300
+  ],
+  "covers": "cross (0/90/180/270), 3+1 (0/60/120/240 = 30/90/150/270 turned), 2+2 (0/120/180/300), one side (0/60/120/180)",
+  "removed": [
+   "base ring + rail",
+   "4 yoke halves",
+   "8 carbon rods",
+   "tie ring",
+   "7 MR63 idlers",
+   "2 STS3215 + spools",
+   "beads, 2:1 tackles"
+  ],
+  "removed_g": 132.0,
+  "added": [
+   "8 x Pololu 30:1 micro metal gearmotor (drivers)",
+   "lift ring + 1 SG92R (engages all drivers)",
+   "4 root winches: brass m0.5 worm + printed wheel + drum (est. 2.5 g)"
+  ],
+  "added_g": 98.0,
+  "net_g": -34.0
+ }
+}

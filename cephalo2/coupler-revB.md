@@ -729,3 +729,17 @@ crank pivot pin retention; the crank's 0.15 mm gap to its own block at rest.
     - 4 at 90 deg 15.5 s
     - 4 (90, 240-300) 14.9 s and 6 stations 10.8 s; both need a new servo layout (SG92Rs 30 deg apart clash)
   - Each extra station: SG92R + blade, about +11 g static; one roller turns the hub for all.  Recommended 3 (0, 90, 270).  Asked.
+
+## Multi-digit control (2026-11-20)
+- User: "nononono remember this need multidigit control simultaneously": every finger curls on its own, all at the same time,
+  actuators under the hub, palm free.  The earlier root-drive and station studies answered the wrong question (moving roots).
+- Study `hand3_multidigit_study.py/.png/.json`:
+  - A now: one ring, all fingers together (fails).
+  - B 4 stacked rings: 64 mm of stack in 24.6 mm.
+  - C 4 nested rings: KILL (rails fill the station blade band).
+  - D self-locking worm winch in every root + 8 static driver gearmotors under the parked positions
+    (0/60/90/120/180/240/270/300 cover all four poses), one lift ring.  Removes ring, yokes, rods, tie ring, idlers and both
+    STS3215: about -34 g; curl ~1.7 s (est.).
+  - E 2 rings (pairs only).
+  - F push rods up the shaft: KILL (solid shaft).
+- Recommended D.  Asked.
