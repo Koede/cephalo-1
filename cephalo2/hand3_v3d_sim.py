@@ -13,7 +13,7 @@ V3.STATION_AZ = MD.STATION_AZ
 os.chdir(HERE)
 import coupler_hand_sim as SIM
 
-FPS = 20; ST = json.load(open("hand3_indep_fingers_study.json"))["common"]; HUB = json.load(open("hand3e/hand3_hubc.json"))
+FPS = 15; ST = json.load(open("hand3_indep_fingers_study.json"))["common"]; HUB = json.load(open("hand3e/hand3_hubc.json"))
 THR = json.load(open("hand3e/hand3_thrust_cad.json"))["low"]; RPM_HOVER = SIM.RPM_HOVER
 M_F, R_COM = ST["finger_g"] * 1e-3, ST["finger_com_r"] * 1e-3; W2 = (12500 * 2 * np.pi / 60) ** 2
 CURL_LIM = json.load(open("hand3_hub_v3_check.json"))["curl"]
