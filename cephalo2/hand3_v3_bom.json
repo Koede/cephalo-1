@@ -1,33 +1,33 @@
 {
  "printed": [
   {
-   "part": "base disc (no pin slots)",
+   "part": "base disc",
    "qty": 1,
-   "g_each": 5.69,
+   "g_each": 5.27,
    "material": "PA-CF"
   },
   {
-   "part": "top disc + 74-tooth crown ring, track grooves",
+   "part": "top disc",
    "qty": 1,
-   "g_each": 4.52,
+   "g_each": 4.33,
    "material": "PA-CF"
   },
   {
-   "part": "root block + motor cradle (C)",
+   "part": "root block + winch leg",
    "qty": 4,
-   "g_each": 14.93,
+   "g_each": 7.25,
    "material": "AlSi10Mg (ordered metal print)"
   },
   {
-   "part": "bead (C-slider)",
+   "part": "nut slider",
    "qty": 4,
-   "g_each": 0.02,
+   "g_each": 0.13,
    "material": "PA-CF"
   },
   {
-   "part": "base ring v3 (3 mm flange, rail)",
-   "qty": 1,
-   "g_each": 4.98,
+   "part": "bell crank",
+   "qty": 8,
+   "g_each": 0.04,
    "material": "PA-CF"
   },
   {
@@ -37,45 +37,15 @@
    "material": "PA-CF"
   },
   {
-   "part": "yoke half out/near",
+   "part": "frame (driver pockets)",
    "qty": 1,
-   "g_each": 1.77,
+   "g_each": 25.33,
    "material": "PA-CF"
   },
   {
-   "part": "yoke half out/far",
+   "part": "driver lift ring",
    "qty": 1,
-   "g_each": 1.76,
-   "material": "PA-CF"
-  },
-  {
-   "part": "yoke half in/near",
-   "qty": 1,
-   "g_each": 1.77,
-   "material": "PA-CF"
-  },
-  {
-   "part": "yoke half in/far",
-   "qty": 1,
-   "g_each": 1.76,
-   "material": "PA-CF"
-  },
-  {
-   "part": "spool",
-   "qty": 2,
-   "g_each": 0.3,
-   "material": "PA-CF"
-  },
-  {
-   "part": "tie ring",
-   "qty": 1,
-   "g_each": 2.3,
-   "material": "PA-CF"
-  },
-  {
-   "part": "frame",
-   "qty": 1,
-   "g_each": 27.74,
+   "g_each": 6.26,
    "material": "PA-CF"
   },
   {
@@ -85,7 +55,7 @@
    "material": "PA-CF"
   },
   {
-   "part": "phalanx 1 (v3: band sector + clevises)",
+   "part": "phalanx 1 (band sector + clevises)",
    "qty": 4,
    "g_each": 2.38,
    "material": "PA-CF"
@@ -97,7 +67,7 @@
    "material": "TPU 95A"
   },
   {
-   "part": "phalanx 2 (v3: band sector + clevises)",
+   "part": "phalanx 2 (band sector + clevises)",
    "qty": 4,
    "g_each": 1.89,
    "material": "PA-CF"
@@ -109,7 +79,7 @@
    "material": "TPU 95A"
   },
   {
-   "part": "phalanx 3 (v3: band sector + clevises)",
+   "part": "phalanx 3 (band sector + clevises)",
    "qty": 4,
    "g_each": 1.28,
    "material": "PA-CF"
@@ -121,66 +91,60 @@
    "material": "TPU 95A"
   },
   {
-   "part": "station dock arm + head",
+   "part": "station blade + spine (notched)",
    "qty": 1,
-   "g_each": 0.52,
+   "g_each": 1.84,
    "material": "PA-CF"
   }
  ],
  "bought": [
   {
-   "part": "Feetech STS3215 servo (12 V)",
-   "qty": 2,
-   "g_each": 55.0,
-   "note": "both pull the one base ring (2:1 tackle)"
-  },
-  {
-   "part": "MR63ZZ bearing (idler)",
-   "qty": 7,
-   "g_each": 0.3,
-   "note": "est. mass"
-  },
-  {
-   "part": "carbon rod dia 3",
+   "part": "Pololu 30:1 Micro Metal Gearmotor HPCB 6V",
    "qty": 8,
+   "g_each": 9.5,
+   "note": "static drivers under the parked roots"
+  },
+  {
+   "part": "M2 threaded rod, cut to 24.5 mm, slotted end",
+   "qty": 4,
    "g_each": 0.6,
-   "note": "yoke guides, est. length 45 mm"
+   "note": "root lead screws (est. mass)"
   },
   {
-   "part": "E-S Motor 1220WG-N20VA 6 V 94 rpm worm gearmotor (self-locking)",
+   "part": "M2 brass hex nut",
    "qty": 4,
-   "g_each": 13.0,
-   "note": "one per root; mass from the Chihai N20 worm page (approx.)"
+   "g_each": 0.2,
+   "note": "in the sliders (est.)"
   },
   {
-   "part": "brass spur gear m0.5 z22, 3 mm D bore, 4 wide",
-   "qty": 4,
-   "g_each": 1.1,
-   "note": "pinion on the crown ring (est. mass)"
-  },
-  {
-   "part": "spring pogo pin dia 1, ~1 mm travel",
+   "part": "driver coupler with blade key, 3 mm D bore",
    "qty": 8,
-   "g_each": 0.05,
-   "note": "root brushes on the tracks (est.)"
+   "g_each": 0.4,
+   "note": "brass or printed (est.)"
   },
   {
-   "part": "copper foil tape with conductive adhesive (Adafruit)",
-   "qty": 1,
-   "g_each": 0.5,
-   "note": "8 tracks under the top disc + 8 pads on the cage (est.)"
-  },
-  {
-   "part": "Adafruit 5358 magnetic connector, 4 pogo contacts (pogo half only)",
+   "part": "TowerPro SG92R micro servo",
    "qty": 2,
-   "g_each": 1.0,
-   "note": "dock on the station carriage (est. mass)"
+   "g_each": 9.0,
+   "note": "station carriage + driver lift ring"
   },
   {
    "part": "Adafruit 3297 DRV8833 dual motor driver",
-   "qty": 2,
+   "qty": 4,
    "g_each": 1.5,
-   "note": "static side, drives the 4 root motors"
+   "note": "static side: 8 drivers"
+  },
+  {
+   "part": "music wire dia 2 (latch pin, bent)",
+   "qty": 8,
+   "g_each": 0.19,
+   "note": "travel latches"
+  },
+  {
+   "part": "steel pin dia 1 x 5 (crank pivot)",
+   "qty": 8,
+   "g_each": 0.03,
+   "note": "est."
   },
   {
    "part": "knuckle pins and bushings (hand3)",
@@ -191,8 +155,8 @@
   {
    "part": "Dyneema 0.5 mm braid",
    "qty": 1,
-   "g_each": 0.5,
-   "note": "est. 3 m: four single flexor cords + tackles + servo cords"
+   "g_each": 0.4,
+   "note": "est. 2 m: four single flexor cords + tackles"
   },
   {
    "part": "Pololu 298:1 Micro Metal Gearmotor HPCB 12 V (N20)",
@@ -205,12 +169,6 @@
    "qty": 1,
    "g_each": 1.0,
    "note": "est."
-  },
-  {
-   "part": "TowerPro SG92R micro servo",
-   "qty": 1,
-   "g_each": 9.0,
-   "note": "station carriage"
   },
   {
    "part": "Pololu QTR-1A reflectance sensor",
@@ -266,10 +224,10 @@
   "root-grip lag bore, k=1/k=2 cord lanes and spring-cord paths",
   "K1 cord knot (one cord now runs K1..K3)",
   "latch-pin tab ends past the crank (tab now ends at r 21.5)",
-  "latch pins (8), bell cranks (8), crank pins (8), station blade; disc pin slots and pockets (decision C)",
+  "the shared pull drive (decision D): base pull ring + rail, beads, 4 yoke halves, 8 carbon rods, tie ring, 7 MR63 idlers, 2 STS3215 + spools",
   "hub E return-spring boxes: 2 trays + lid per finger (0.94 g), their screw, the root post, knuckle saddles, extensor cords and bores"
  ],
  "pending": [],
- "total_printed_g": 149.3,
- "total_bought_g": 203.3
+ "total_printed_g": 108.9,
+ "total_bought_g": 123.1
 }

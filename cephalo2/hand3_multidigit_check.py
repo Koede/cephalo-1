@@ -59,6 +59,12 @@ for n, m in st.items():
         v = (mm ^ (MD.drivers(False) + MD.drivers(True))).volume()
         if v > 0.01: nb[f"{n} @ {s_:.1f}"] = round(v, 2)
 res["station_x_drivers_mm3"] = nb
+fr = {}
+for n, m in st.items():
+    for s_ in (0.0, V3.ST["stroke"]):
+        v = (m.translate([V3.station_pose(s_)[n], 0, 0]).rotate([0, 0, MD.STATION_AZ]) ^ MD.frame_d()).volume()
+        if v > 0.01: fr[f"{n} @ {s_:.1f}"] = round(v, 2)
+res["station_x_frame_mm3"] = fr
 print("2-4", res["blade_engaged_x_held_root_mm3"], res["tyre_on_x_held_root_mm3"], hits, res["drivers_up_x_frame_mm3"], nb, flush=True)
 
 # 5) one finger curling alone

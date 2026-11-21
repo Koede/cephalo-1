@@ -20,8 +20,8 @@ M_ = mf.Manifold
 V = V3.V
 STATION_AZ = 150.0
 DRIVER_AZ = (0, 60, 90, 120, 180, 240, 270, 300)
-SCREW = dict(d=2.0, lead=0.4, x=28.4, y=-1.2, z=(67.5, 92.0), slot=(0.6, 1.5))        # M2 x 24.5 (cut from M2 threaded rod), slot 0.6 x 1.5 deep
-LEG = dict(x_in=23.0, x_rim=25.8, x_out=29.9, y=3.5, z0=66.0, z_rim=90.5, cheek=1.0)
+SCREW = dict(d=2.0, lead=0.4, x=28.2, y=-1.2, z=(67.5, 92.0), slot=(0.6, 1.5))        # M2 x 24.5 (cut from M2 threaded rod), slot 0.6 x 1.5 deep
+LEG = dict(x_in=23.0, x_rim=25.8, x_out=29.6, y=3.3, z0=66.0, z_rim=90.5, cheek=0.85)
 SLIDER = dict(x=(24.4, 29.6), y=2.4, h=5.0, z_top0=86.0, eye_x=26.3)          # carries an M2 nut (4 AF, 1.6 thick)
 STROKE = V3.CORD_STROKE / 2                                                     # 2:1 tackle: 11.1 mm of slider for 22.2 mm of cord
 N20 = dict(name="Pololu 30:1 Micro Metal Gearmotor HPCB 6V", gx=10.0, gy=12.0, L=24.7, shaft=9.0, rpm=1000, stall_kgcm=0.6, m=9.5)
@@ -102,6 +102,9 @@ def frame_d():
         p = box([SCREW["x"] - N20["gx"] / 2 - 0.3, SCREW["y"] - N20["gy"] / 2 - 0.3, LIFT["z"][0] - 0.3], [SCREW["x"] + N20["gx"] / 2 + 0.3, SCREW["y"] + N20["gy"] / 2 + 0.3, 60.0]).rotate([0, 0, float(a)])
         cut = p if cut is None else cut + p
     cut += cyl(LIFT["r"][1] + 0.3, LIFT["z"][0] - 0.3, LIFT["z"][1] + KEY["lift"] + 0.3, n=96) - cyl(LIFT["r"][0] - 0.3, 0, 60, n=96)
+    sp = V3.station_parts()                                                      # the station's roller motor stands in the frame at az 150
+    mb = np.asarray(sp["motor"].bounding_box())
+    cut += box([mb[0] - V3.ST["roll_gap"] - 0.5, mb[1] - 0.5, mb[2] - 0.5], [mb[3] + 0.5, mb[4] + 0.5, 60.0]).rotate([0, 0, STATION_AZ])
     return f - cut
 
 
