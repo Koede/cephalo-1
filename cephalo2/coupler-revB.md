@@ -774,3 +774,17 @@ crank pivot pin retention; the crank's 0.15 mm gap to its own block at rest.
     Leg spin load 111 + 97 N: foot must bear on the flange (est.).
   - 2359 usable torque taken as min(gearbox limit 250 g cm, 25 % of stall) = 21 mN m -> 11.8 N at the pinion vs ~3 N (est.).
 - Recommended F.  Asked.
+- User chose F, then asked for placement / implementation tweaks first.  Study `hand3_rotation_f_variants.py/.png/.json`:
+  - F1 (as proposed: shaft down, gear flange on the cage z 66-68): leg 111 + 96 N spin -> 196 MPa, SF 1.17; flange forces the leg
+    foot back to x 25.7.
+  - F2 shaft UP, pinion z 88.5-90.5 on a gear skirt under the base disc (z166 m0.3, pitch r 24.9; same printed part): no new rotor
+    part, but SF 1.06 (motor lower, longer lever).
+  - F3 = F2 + leg deepened to x_out 30.8 (station gone, so room) -> 126 MPa SF 1.83; V-notch on each leg foot + chamfered driver
+    key self-centres the root +-3 deg for the curl keys; latch pins, cranks, station removed.  Recommended.
+  - F4 = F3 with 136:1: worst pose change (60 deg) 0.37 s vs 2.05 s, 7.8 N push, weaker flight hold (rib friction, est.).
+  - F5 = F3 with rotor tracks on the cage + pogo block: more parts, pogo needs a radial retract.
+  - F6 = F3 with the motor tucked to r 25: 0.5 mm from the cage.  Rejected.
+  - Power (F1-F4, F6): printed track ring r 34.6-40.5 with 5 copper tracks rides the lift ring on springs and stops on a frame
+    ledge; keys lowered 1.5 mm (retracted top 63.5, lift 5.5): stage 1 (1.5) = tracks touch, rotation; stage 2 = keys engage,
+    curl.  2 phosphor-bronze wipers per root on a foot plate.  TB6612 (Adafruit 2448): own tracks 0/12 V, common at 6 V.
+  - Stall torque is 3.5x the 2359 gearbox limit: current-limit each motor to ~0.11 A.

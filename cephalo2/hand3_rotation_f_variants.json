@@ -1,0 +1,174 @@
+{
+ "moves_deg": {
+  "cross -> one side": 45,
+  "2+2 -> cross": 15,
+  "2+2 -> 3+1": 30,
+  "2+2 -> one side": 60,
+  "3+1 -> cross": 30,
+  "3+1 -> one side": 30
+ },
+ "worst_move_deg": 60,
+ "F1": {
+  "motor_axis_r": 26.7,
+  "gear_pitch_r": 24.9,
+  "gear_teeth": 166,
+  "pinion_z": [
+   66.0,
+   68.0
+  ],
+  "motor_z": [
+   69.5,
+   90.5
+  ],
+  "clear_over_keys_mm": 1.0,
+  "push_N": 11.8,
+  "push_margin": 3.9,
+  "root_deg_s": 29.3,
+  "worst_move_s": 2.05,
+  "motor_spin_N": 96,
+  "leg_MPa": 196,
+  "leg_SF": 1.17,
+  "new_rotor_part": "gear flange round the cage, z 66-68",
+  "flange_vs_leg": "leg bottom (x 23-25.6, z 66-69) must be cut back to x 25.7 to clear the flange teeth",
+  "power_parts": "printed ring r 34.6-40.5 with 5 copper-tape tracks, 3 springs on the lift ring, frame stop; 2 phosphor-bronze wipers per root",
+  "mass_g": -11.3,
+  "flight_hold": "700:1 + rib friction under spin (est.)",
+  "motor_to_cage_mm": 2.2
+ },
+ "F2": {
+  "motor_axis_r": 26.7,
+  "gear_pitch_r": 24.9,
+  "gear_teeth": 166,
+  "pinion_z": [
+   88.5,
+   90.5
+  ],
+  "motor_z": [
+   66.0,
+   87.0
+  ],
+  "clear_over_keys_mm": 1.0,
+  "push_N": 11.8,
+  "push_margin": 3.9,
+  "root_deg_s": 29.3,
+  "worst_move_s": 2.05,
+  "motor_spin_N": 96,
+  "leg_MPa": 218,
+  "leg_SF": 1.06,
+  "new_rotor_part": "gear skirt on the base disc's underside, z 88.5-91 (same printed part)",
+  "power_parts": "printed ring r 34.6-40.5 with 5 copper-tape tracks, 3 springs on the lift ring, frame stop; 2 phosphor-bronze wipers per root",
+  "mass_g": -11.3,
+  "flight_hold": "700:1 + rib friction under spin (est.)",
+  "motor_to_cage_mm": 2.2
+ },
+ "F3": {
+  "motor_axis_r": 26.7,
+  "gear_pitch_r": 24.9,
+  "gear_teeth": 166,
+  "pinion_z": [
+   88.5,
+   90.5
+  ],
+  "motor_z": [
+   66.0,
+   87.0
+  ],
+  "clear_over_keys_mm": 1.0,
+  "push_N": 11.8,
+  "push_margin": 3.9,
+  "root_deg_s": 29.3,
+  "worst_move_s": 2.05,
+  "motor_spin_N": 96,
+  "leg_MPa": 126,
+  "leg_SF": 1.83,
+  "new_rotor_part": "gear skirt on the base disc's underside, z 88.5-91 (same printed part)",
+  "power_parts": "printed ring r 34.6-40.5 with 5 copper-tape tracks, 3 springs on the lift ring, frame stop; 2 phosphor-bronze wipers per root",
+  "mass_g": -12.3,
+  "flight_hold": "700:1 + rib friction under spin (est.)",
+  "motor_to_cage_mm": 2.2
+ },
+ "F4": {
+  "motor_axis_r": 26.7,
+  "gear_pitch_r": 24.9,
+  "gear_teeth": 166,
+  "pinion_z": [
+   88.5,
+   90.5
+  ],
+  "motor_z": [
+   66.0,
+   87.0
+  ],
+  "clear_over_keys_mm": 1.0,
+  "push_N": 7.8,
+  "push_margin": 2.6,
+  "root_deg_s": 162.7,
+  "worst_move_s": 0.37,
+  "motor_spin_N": 96,
+  "leg_MPa": 126,
+  "leg_SF": 1.83,
+  "new_rotor_part": "gear skirt on the base disc's underside, z 88.5-91 (same printed part)",
+  "power_parts": "printed ring r 34.6-40.5 with 5 copper-tape tracks, 3 springs on the lift ring, frame stop; 2 phosphor-bronze wipers per root",
+  "mass_g": -12.3,
+  "flight_hold": "136:1 back-drives easier; relies on rib friction under spin (est. 300 N vs 6 N)",
+  "motor_to_cage_mm": 2.2
+ },
+ "F5": {
+  "motor_axis_r": 26.7,
+  "gear_pitch_r": 24.9,
+  "gear_teeth": 166,
+  "pinion_z": [
+   88.5,
+   90.5
+  ],
+  "motor_z": [
+   66.0,
+   87.0
+  ],
+  "clear_over_keys_mm": 1.0,
+  "push_N": 11.8,
+  "push_margin": 3.9,
+  "root_deg_s": 29.3,
+  "worst_move_s": 2.05,
+  "motor_spin_N": 96,
+  "leg_MPa": 126,
+  "leg_SF": 1.83,
+  "new_rotor_part": "gear skirt on the base disc's underside, z 88.5-91 (same printed part)",
+  "power_parts": "5 copper bands on the cage (z 70-80) + 5 bands z 60-65 joined through the cage, pogo block that must retract radially (est.)",
+  "mass_g": -10.8,
+  "flight_hold": "700:1 + rib friction under spin (est.)",
+  "motor_to_cage_mm": 2.2
+ },
+ "F6": {
+  "motor_axis_r": 25.0,
+  "gear_pitch_r": 23.19,
+  "gear_teeth": 155,
+  "pinion_z": [
+   88.5,
+   90.5
+  ],
+  "motor_z": [
+   66.0,
+   87.0
+  ],
+  "clear_over_keys_mm": 1.0,
+  "push_N": 11.8,
+  "push_margin": 3.9,
+  "root_deg_s": 31.4,
+  "worst_move_s": 1.91,
+  "motor_spin_N": 90,
+  "leg_MPa": 122,
+  "leg_SF": 1.89,
+  "new_rotor_part": "gear skirt on the base disc's underside, z 88.5-91 (same printed part)",
+  "power_parts": "printed ring r 34.6-40.5 with 5 copper-tape tracks, 3 springs on the lift ring, frame stop; 2 phosphor-bronze wipers per root",
+  "mass_g": -12.3,
+  "flight_hold": "700:1 + rib friction under spin (est.)",
+  "motor_to_cage_mm": 0.49
+ },
+ "electrics": {
+  "driver": "Adafruit 2448 TB6612 (4 outputs, 15 V): each own-track 0 / 12 V, common track held at 6 V -> +-6 V per motor",
+  "current_limit_A": 0.12,
+  "note": "stall torque (85 mN m) is 3.5x the gearbox limit (24.5 mN m): limit each motor to ~0.11 A or it strips"
+ },
+ "park": "V-notch on each leg foot + chamfered driver key: key rising into the notch centres the root +-1.5 mm (+-3 deg) -> ripple count only needs +-3 deg"
+}
