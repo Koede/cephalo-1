@@ -1,0 +1,815 @@
+{
+ "free_blade_az": [
+  0,
+  5,
+  65,
+  70,
+  75,
+  80,
+  85,
+  90,
+  95,
+  100,
+  105,
+  110,
+  115,
+  175,
+  180,
+  240,
+  245,
+  250,
+  255,
+  260,
+  265,
+  270,
+  275,
+  280,
+  285,
+  290,
+  295,
+  300
+ ],
+ "free_roller_az": [
+  0,
+  65,
+  70,
+  75,
+  80,
+  85,
+  90,
+  95,
+  100,
+  105,
+  110,
+  180,
+  245,
+  250,
+  255,
+  260,
+  265,
+  270,
+  275,
+  280,
+  285,
+  290,
+  295
+ ],
+ "sets": {
+  "1 station (now)": {
+   "stations": [
+    90
+   ],
+   "not_free": [],
+   "clash": [],
+   "extra_g": 0.0,
+   "trans": {
+    "flight cross -> 3 + 1 thumb": {
+     "s": 5.28,
+     "rounds": 2,
+     "plan": [
+      {
+       "psi": 0,
+       "held": [
+        1
+       ],
+       "moves": [
+        0.0,
+        -30,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "psi": 180,
+       "held": [
+        3
+       ],
+       "moves": [
+        0.0,
+        0.0,
+        0.0,
+        30
+       ]
+      }
+     ]
+    },
+    "3 + 1 thumb -> 2 + 2 pinch": {
+     "s": 2.76,
+     "rounds": 1,
+     "plan": [
+      {
+       "psi": 300,
+       "held": [
+        2
+       ],
+       "moves": [
+        0.0,
+        0.0,
+        60,
+        0.0
+       ]
+      }
+     ]
+    },
+    "2 + 2 pinch -> all four on one side": {
+     "s": 6.0,
+     "rounds": 2,
+     "plan": [
+      {
+       "psi": 60,
+       "held": [
+        0
+       ],
+       "moves": [
+        60,
+        0.0,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "psi": 120,
+       "held": [
+        3
+       ],
+       "moves": [
+        0.0,
+        0.0,
+        0.0,
+        60
+       ]
+      }
+     ]
+    },
+    "all four on one side -> flight cross": {
+     "s": 9.24,
+     "rounds": 3,
+     "plan": [
+      {
+       "psi": 90,
+       "held": [
+        0
+       ],
+       "moves": [
+        -60,
+        0.0,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "psi": 270,
+       "held": [
+        2
+       ],
+       "moves": [
+        0.0,
+        0.0,
+        30,
+        0.0
+       ]
+      },
+      {
+       "psi": 30,
+       "held": [
+        0
+       ],
+       "moves": [
+        -30,
+        0.0,
+        0.0,
+        0.0
+       ]
+      }
+     ]
+    }
+   },
+   "sim_sequence_s": 23.3,
+   "worst_change_s": 9.24,
+   "mean_change_s": 5.36
+  },
+  "2 opposite": {
+   "stations": [
+    90,
+    270
+   ],
+   "not_free": [],
+   "clash": [],
+   "extra_g": 11.0,
+   "trans": {
+    "flight cross -> 3 + 1 thumb": {
+     "s": 4.32,
+     "rounds": 2,
+     "plan": [
+      {
+       "psi": 0,
+       "held": [
+        3
+       ],
+       "moves": [
+        0.0,
+        0.0,
+        0.0,
+        30
+       ]
+      },
+      {
+       "psi": 0,
+       "held": [
+        1
+       ],
+       "moves": [
+        0.0,
+        -30,
+        0.0,
+        0.0
+       ]
+      }
+     ]
+    },
+    "3 + 1 thumb -> 2 + 2 pinch": {
+     "s": 2.76,
+     "rounds": 1,
+     "plan": [
+      {
+       "psi": 300,
+       "held": [
+        2
+       ],
+       "moves": [
+        0.0,
+        0.0,
+        60,
+        0.0
+       ]
+      }
+     ]
+    },
+    "2 + 2 pinch -> all four on one side": {
+     "s": 5.52,
+     "rounds": 2,
+     "plan": [
+      {
+       "psi": 60,
+       "held": [
+        0
+       ],
+       "moves": [
+        60,
+        0.0,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "psi": 300,
+       "held": [
+        3
+       ],
+       "moves": [
+        0.0,
+        0.0,
+        0.0,
+        60
+       ]
+      }
+     ]
+    },
+    "all four on one side -> flight cross": {
+     "s": 7.8,
+     "rounds": 3,
+     "plan": [
+      {
+       "psi": 270,
+       "held": [
+        0
+       ],
+       "moves": [
+        -60,
+        0.0,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "psi": 30,
+       "held": [
+        0
+       ],
+       "moves": [
+        -30,
+        0.0,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "psi": 90,
+       "held": [
+        2
+       ],
+       "moves": [
+        0.0,
+        0.0,
+        30,
+        0.0
+       ]
+      }
+     ]
+    }
+   },
+   "sim_sequence_s": 20.4,
+   "worst_change_s": 7.8,
+   "mean_change_s": 4.22
+  },
+  "3 (0, 90, 270)": {
+   "stations": [
+    0,
+    90,
+    270
+   ],
+   "not_free": [],
+   "clash": [],
+   "extra_g": 22.0,
+   "trans": {
+    "flight cross -> 3 + 1 thumb": {
+     "s": 2.28,
+     "rounds": 1,
+     "plan": [
+      {
+       "psi": 0,
+       "held": [
+        0,
+        1,
+        3
+       ],
+       "moves": [
+        60,
+        30,
+        0.0,
+        30
+       ]
+      }
+     ]
+    },
+    "3 + 1 thumb -> 2 + 2 pinch": {
+     "s": 2.52,
+     "rounds": 1,
+     "plan": [
+      {
+       "psi": 330,
+       "held": [
+        0
+       ],
+       "moves": [
+        -60,
+        0.0,
+        0.0,
+        0.0
+       ]
+      }
+     ]
+    },
+    "2 + 2 pinch -> all four on one side": {
+     "s": 4.56,
+     "rounds": 2,
+     "plan": [
+      {
+       "psi": 330,
+       "held": [
+        0
+       ],
+       "moves": [
+        30,
+        0.0,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "psi": 300,
+       "held": [
+        0,
+        3
+       ],
+       "moves": [
+        30,
+        0.0,
+        0.0,
+        60
+       ]
+      }
+     ]
+    },
+    "all four on one side -> flight cross": {
+     "s": 6.36,
+     "rounds": 3,
+     "plan": [
+      {
+       "psi": 0,
+       "held": [
+        0
+       ],
+       "moves": [
+        -30,
+        0.0,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "psi": 30,
+       "held": [
+        0,
+        3
+       ],
+       "moves": [
+        -30,
+        0.0,
+        0.0,
+        -30
+       ]
+      },
+      {
+       "psi": 90,
+       "held": [
+        2
+       ],
+       "moves": [
+        0.0,
+        0.0,
+        30,
+        0.0
+       ]
+      }
+     ]
+    }
+   },
+   "sim_sequence_s": 15.7,
+   "worst_change_s": 6.36,
+   "mean_change_s": 3.21
+  },
+  "4 at 90 deg": {
+   "stations": [
+    0,
+    90,
+    180,
+    270
+   ],
+   "not_free": [],
+   "clash": [],
+   "extra_g": 33.0,
+   "trans": {
+    "flight cross -> 3 + 1 thumb": {
+     "s": 2.28,
+     "rounds": 1,
+     "plan": [
+      {
+       "psi": 0,
+       "held": [
+        1,
+        2,
+        3
+       ],
+       "moves": [
+        0.0,
+        -30,
+        -60,
+        -30
+       ]
+      }
+     ]
+    },
+    "3 + 1 thumb -> 2 + 2 pinch": {
+     "s": 2.52,
+     "rounds": 1,
+     "plan": [
+      {
+       "psi": 30,
+       "held": [
+        2
+       ],
+       "moves": [
+        0.0,
+        0.0,
+        60,
+        0.0
+       ]
+      }
+     ]
+    },
+    "2 + 2 pinch -> all four on one side": {
+     "s": 4.56,
+     "rounds": 2,
+     "plan": [
+      {
+       "psi": 330,
+       "held": [
+        0
+       ],
+       "moves": [
+        30,
+        0.0,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "psi": 300,
+       "held": [
+        0,
+        3
+       ],
+       "moves": [
+        30,
+        0.0,
+        0.0,
+        60
+       ]
+      }
+     ]
+    },
+    "all four on one side -> flight cross": {
+     "s": 6.12,
+     "rounds": 3,
+     "plan": [
+      {
+       "psi": 0,
+       "held": [
+        0
+       ],
+       "moves": [
+        -30,
+        0.0,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "psi": 30,
+       "held": [
+        0,
+        3
+       ],
+       "moves": [
+        -30,
+        0.0,
+        0.0,
+        -30
+       ]
+      },
+      {
+       "psi": 60,
+       "held": [
+        0,
+        1,
+        3
+       ],
+       "moves": [
+        -30,
+        -30,
+        0.0,
+        -30
+       ]
+      }
+     ]
+    }
+   },
+   "sim_sequence_s": 15.5,
+   "worst_change_s": 6.12,
+   "mean_change_s": 3.17
+  },
+  "4 (90, 240, 270, 300)": {
+   "stations": [
+    90,
+    240,
+    270,
+    300
+   ],
+   "not_free": [],
+   "clash": [
+    [
+     240,
+     270,
+     67.1
+    ],
+    [
+     270,
+     300,
+     67.1
+    ]
+   ],
+   "extra_g": 33.0,
+   "trans": {
+    "flight cross -> 3 + 1 thumb": {
+     "s": 4.08,
+     "rounds": 2,
+     "plan": [
+      {
+       "psi": 0,
+       "held": [
+        1
+       ],
+       "moves": [
+        0.0,
+        -30,
+        0.0,
+        0.0
+       ]
+      },
+      {
+       "psi": 30,
+       "held": [
+        3
+       ],
+       "moves": [
+        0.0,
+        0.0,
+        0.0,
+        30
+       ]
+      }
+     ]
+    },
+    "3 + 1 thumb -> 2 + 2 pinch": {
+     "s": 2.76,
+     "rounds": 1,
+     "plan": [
+      {
+       "psi": 300,
+       "held": [
+        2
+       ],
+       "moves": [
+        0.0,
+        0.0,
+        60,
+        0.0
+       ]
+      }
+     ]
+    },
+    "2 + 2 pinch -> all four on one side": {
+     "s": 3.0,
+     "rounds": 1,
+     "plan": [
+      {
+       "psi": 270,
+       "held": [
+        0,
+        3
+       ],
+       "moves": [
+        60,
+        0.0,
+        0.0,
+        60
+       ]
+      }
+     ]
+    },
+    "all four on one side -> flight cross": {
+     "s": 5.04,
+     "rounds": 2,
+     "plan": [
+      {
+       "psi": 270,
+       "held": [
+        3
+       ],
+       "moves": [
+        0.0,
+        0.0,
+        0.0,
+        30
+       ]
+      },
+      {
+       "psi": 240,
+       "held": [
+        0,
+        1
+       ],
+       "moves": [
+        -60,
+        -30,
+        0.0,
+        0.0
+       ]
+      }
+     ]
+    }
+   },
+   "sim_sequence_s": 14.9,
+   "worst_change_s": 5.04,
+   "mean_change_s": 3.28
+  },
+  "6 (0, 90, 180, 240, 270, 300)": {
+   "stations": [
+    0,
+    90,
+    180,
+    240,
+    270,
+    300
+   ],
+   "not_free": [],
+   "clash": [
+    [
+     240,
+     270,
+     67.1
+    ],
+    [
+     270,
+     300,
+     67.1
+    ]
+   ],
+   "extra_g": 55.0,
+   "trans": {
+    "flight cross -> 3 + 1 thumb": {
+     "s": 2.28,
+     "rounds": 1,
+     "plan": [
+      {
+       "psi": 0,
+       "held": [
+        1,
+        2,
+        3
+       ],
+       "moves": [
+        0.0,
+        -30,
+        -60,
+        -30
+       ]
+      }
+     ]
+    },
+    "3 + 1 thumb -> 2 + 2 pinch": {
+     "s": 2.52,
+     "rounds": 1,
+     "plan": [
+      {
+       "psi": 30,
+       "held": [
+        2
+       ],
+       "moves": [
+        0.0,
+        0.0,
+        60,
+        0.0
+       ]
+      }
+     ]
+    },
+    "2 + 2 pinch -> all four on one side": {
+     "s": 2.52,
+     "rounds": 1,
+     "plan": [
+      {
+       "psi": 330,
+       "held": [
+        0,
+        3
+       ],
+       "moves": [
+        60,
+        0.0,
+        0.0,
+        60
+       ]
+      }
+     ]
+    },
+    "all four on one side -> flight cross": {
+     "s": 3.48,
+     "rounds": 1,
+     "plan": [
+      {
+       "psi": 120,
+       "held": [
+        1,
+        2,
+        3
+       ],
+       "moves": [
+        0.0,
+        30,
+        60,
+        90
+       ]
+      }
+     ]
+    }
+   },
+   "sim_sequence_s": 10.8,
+   "worst_change_s": 3.48,
+   "mean_change_s": 2.54
+  }
+ },
+ "recommended": "3 (0, 90, 270)"
+}

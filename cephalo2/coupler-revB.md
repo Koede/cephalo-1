@@ -718,3 +718,14 @@ crank pivot pin retention; the crank's 0.15 mm gap to its own block at rest.
     Spin pull 108 N per set.  Flight hold by spin-loaded rib friction (est.); held powered while docked.  -89 g vs A.
   - G no towers in the palm (reference): Ø30-110.
 - Recommended E.  Asked the user.
+- User: "multiple stations underneath" (keeps the palm free; roots go back to latch pins + cranks).  Study
+  `hand3_multi_station_study.py/.png/.json`.
+  - Where a blade clears the drive (exact booleans every 5 deg, both ring positions): 0-5, 65-115, 175-180, 240-300.
+  - Planner (Dijkstra over hub-frame poses on the 30 deg grid; rounds of align -> engage -> turn -> each blade releases on its
+    own; 0.24 s per 30 deg) gives the four sim pose changes:
+    - 1 station 23.3 s
+    - 2 opposite 20.4 s
+    - 3 (0, 90, 270) 15.7 s
+    - 4 at 90 deg 15.5 s
+    - 4 (90, 240-300) 14.9 s and 6 stations 10.8 s; both need a new servo layout (SG92Rs 30 deg apart clash)
+  - Each extra station: SG92R + blade, about +11 g static; one roller turns the hub for all.  Recommended 3 (0, 90, 270).  Asked.
