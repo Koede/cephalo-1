@@ -1,0 +1,39 @@
+{
+ "sweep_gap_mm": {
+  "drivers (down)": 1.0,
+  "lift ring (down)": 40.0,
+  "frame": 8.54,
+  "motor base": 6.0,
+  "station blade (retracted)": 0.56,
+  "station tyre (retracted)": 0.7,
+  "station motor (retracted)": 1.74,
+  "station servo (retracted)": 6.17,
+  "station sensor (retracted)": 0.9
+ },
+ "blade_engaged_x_held_root_mm3": 0.0,
+ "tyre_on_x_held_root_mm3": 0.0,
+ "drivers_up_x_parked_roots_mm3": {},
+ "drivers_up_x_frame_mm3": 0.0,
+ "station_x_drivers_mm3": {},
+ "station_x_frame_mm3": {},
+ "solo_curl": {
+  "first_touch_curl": 0.9,
+  "with_": {
+   "hub": 73.56
+  }
+ },
+ "winch": {
+  "nut_load_N": 110.0,
+  "screw_torque_Nm": 0.0265,
+  "N20_stall_Nm": 0.059,
+  "torque_margin": 2.2,
+  "self_locking": true,
+  "lead_angle_deg": 4.2,
+  "curl_time_s": 2.2,
+  "leg_set_g": 2.4,
+  "leg_pull_N": 111,
+  "leg_root_MPa": 111.8,
+  "leg_SF_AlSi10Mg_230": 2.06,
+  "root_AlSi10Mg_g": 7.02
+ }
+}
