@@ -1,0 +1,164 @@
+{
+ "static_sweep_gap_mm": {
+  "lift 0.0": {
+   "drivers": {
+    "gap": 2.5,
+    "nearest": "root"
+   },
+   "lift ring": {
+    "gap": 40.1,
+    "nearest": "wipers"
+   },
+   "frame": {
+    "gap": 8.54,
+    "nearest": "root"
+   },
+   "motor base": {
+    "gap": 5.89,
+    "nearest": "root"
+   },
+   "track ring + copper": {
+    "gap": 1.03,
+    "nearest": "wipers"
+   },
+   "posts": {
+    "gap": 2.1,
+    "nearest": "wipers"
+   }
+  },
+  "lift 1.5": {
+   "drivers": {
+    "gap": 1.0,
+    "nearest": "root"
+   },
+   "lift ring": {
+    "gap": 38.6,
+    "nearest": "wipers"
+   },
+   "frame": {
+    "gap": 8.54,
+    "nearest": "root"
+   },
+   "motor base": {
+    "gap": 5.89,
+    "nearest": "root"
+   },
+   "track ring + copper": {
+    "gap": 0.93,
+    "nearest": "root"
+   },
+   "posts": {
+    "gap": 0.6,
+    "nearest": "wipers"
+   }
+  }
+ },
+ "wiper": {
+  "flight_gap_mm": 1.03,
+  "preload_mm_at_stage1": 0.47
+ },
+ "rotor_sweep_gap_mm": {
+  "base disc (no skirt)": {
+   "gap": 0.0,
+   "nearest": "root"
+  },
+  "gear skirt": {
+   "gap": 0.51,
+   "nearest": "motor"
+  },
+  "top disc": {
+   "gap": 0.0,
+   "nearest": "root"
+  },
+  "cage": {
+   "gap": 1.27,
+   "nearest": "root"
+  },
+  "motor bell": {
+   "gap": 3.0,
+   "nearest": "root"
+  }
+ },
+ "mesh": {
+  "centre_distance": 26.7,
+  "pitch_sum": 26.7,
+  "tip_clearance_pinion": 0.075,
+  "tip_clearance_skirt": 0.075,
+  "pinion_top_to_disc": 0.5,
+  "face_overlap_mm": 2.0
+ },
+ "neighbours_mm3": {
+  "58 deg, both curled 0 %": 0.0,
+  "58 deg, both curled 30 %": 0.0,
+  "58 deg, both curled 50 %": 0.0,
+  "58 deg, both curled 70 %": 0.0,
+  "60 deg, both curled 0 %": 0.0,
+  "60 deg, both curled 30 %": 0.0,
+  "60 deg, both curled 50 %": 0.0,
+  "60 deg, both curled 70 %": 0.0
+ },
+ "solo_curl_touch": {
+  "curl": 0.9,
+  "mm3": 73.562
+ },
+ "stage2_hits": {},
+ "stage2_key": {
+  "key_top": 69.0,
+  "slot": [
+   67.5,
+   69.0
+  ],
+  "funnel_capture_mm": 1.1,
+  "capture_deg": 2.2
+ },
+ "static_static_mm3": {
+  "lift 0.0": {
+   "ring x drivers": 0.0,
+   "posts x drivers": 0.0,
+   "posts x frame": 0.0,
+   "posts x lift ring": 0.0,
+   "drivers x frame": 0.0,
+   "lift ring x frame": 0.0
+  },
+  "lift 1.5": {
+   "ring x drivers": 0.0,
+   "posts x drivers": 0.0,
+   "posts x frame": 0.0,
+   "posts x lift ring": 0.0,
+   "drivers x frame": 0.0,
+   "lift ring x frame": 0.0
+  },
+  "lift 5.5": {
+   "ring x drivers": 0.0,
+   "posts x drivers": 0.0,
+   "posts x frame": 0.0,
+   "posts x lift ring": 0.0,
+   "drivers x frame": 0.0,
+   "lift ring x frame": 0.0
+  }
+ },
+ "numbers": {
+  "motor": "Pololu 2359 700:1 sub-micro plastic planetary gearmotor 6D x 21L, 6 V",
+  "pinion": "brass m0.3 z12, 2 mm bore",
+  "skirt": "z166 m0.3, pitch r 24.9",
+  "axis_r": 26.7,
+  "axis_xy": [
+   25.87,
+   6.6
+  ],
+  "usable_torque_Nm": 0.0212,
+  "push_N": 11.8,
+  "need_N_est": 3.0,
+  "root_deg_s": 29.3,
+  "motor_spin_N": 71,
+  "leg_set_g": 2.8,
+  "leg_spin_N": 132,
+  "leg_root_MPa": 120,
+  "leg_SF_AlSi10Mg_230": 1.92,
+  "current_limit_A": 0.116,
+  "root_AlSi10Mg_g": 8.09,
+  "stage1_lift": 1.5,
+  "key_top_retracted": 63.5,
+  "lift": 5.5
+ }
+}

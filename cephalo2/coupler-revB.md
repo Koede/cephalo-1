@@ -788,3 +788,20 @@ crank pivot pin retention; the crank's 0.15 mm gap to its own block at rest.
     ledge; keys lowered 1.5 mm (retracted top 63.5, lift 5.5): stage 1 (1.5) = tracks touch, rotation; stage 2 = keys engage,
     curl.  2 phosphor-bronze wipers per root on a foot plate.  TB6612 (Adafruit 2448): own tracks 0/12 V, common at 6 V.
   - Stall torque is 3.5x the 2359 gearbox limit: current-limit each motor to ~0.11 A.
+- User chose F3.  Built: `hand3e/hand3_rotation_f3.py`, `hand3_rotation_f3_check.py/.json`, `hand3_v3f_sim.py` -> `hand3_v3f_site/`.
+  - Per root: Pololu 2359 (700:1) shaft up in two collars on the +y side of the winch leg, axis (25.87, 6.6), body z 66.8-87.8;
+    brass m0.3 z12 pinion z 88.5-90.5 on a z166 m0.3 gear skirt under the base disc (pitch r 24.9, one printed part with the disc).
+  - Leg deepened to x 30.8, stepped clear of the skirt above z 87.5; V-funnel round the key way (captures +-1.1 mm = +-2.2 deg);
+    foot plate to r 40.6 with two phosphor-bronze wipers (common r 35.2 + own track).
+  - Static track ring (PA-CF, r 34.6-40.6, 5 copper tracks) on 4 dia 2 posts through the frame, sprung on the lift ring, stops
+    at lift 1.5.  Keys lowered to 63.5, lift 5.5, lift ring z 22.5-24.5.  Stage 0 flight, stage 1 rotation, stage 2 curl.
+  - Removed: latch pins, cranks, crank pins, station, base disc pin slots/pockets, root pin bores and arm slots.
+  - Numbers: 11.8 N at the pinion (gearbox-limited torque 21 mN m) vs ~3 N needed (est.); 29.3 deg/s; motor spin 71 N; leg
+    132 + 71 N -> 120 MPa, SF 1.92 (AlSi10Mg); root 8.09 g; current limit 0.12 A per motor.
+  - Checks: static sweep gaps (flight / rotation stage) drivers 2.5 / 1.0, frame 8.54, track ring 1.03 (wipers) / 0.93, posts 2.6 / 1.1;
+    wiper preload 0.47 mm at stage 1; rotor parts the roots slide past: skirt 0.51 (motor), cage 1.27, leg to base disc rim 0.3
+    (sliding clearance, as D); mesh tip clearances 0.075; neighbours at 58 and 60 deg, straight and both curled to 70 %: no
+    contact; solo curl clear to 85 % (90 % touches the heel, as before); stage 2 keys in slots: no hits; static parts: none.
+  - Sim: 152 parts, 593 frames (39.5 s), 0 overlaps, incl. a regrip where all four roots walk round with the fingers held at 30 %.
+  - BOM: printed 114.0 + bought 116.0 = 230.0 g (D 232.0, v3 station design 244.0).
+  - Open: FEA of the Al root/leg; wiper life; ripple-count firmware; mid-rail supply.

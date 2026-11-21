@@ -1,10 +1,10 @@
 {
  "printed": [
   {
-   "part": "base disc",
+   "part": "base disc + z166 gear skirt",
    "qty": 1,
-   "g_each": 5.27,
-   "material": "PA-CF"
+   "g_each": 7.0,
+   "material": "PA-CF resin"
   },
   {
    "part": "top disc",
@@ -13,9 +13,9 @@
    "material": "PA-CF"
   },
   {
-   "part": "root block + winch leg",
+   "part": "root block + winch leg + motor collars + foot",
    "qty": 4,
-   "g_each": 7.25,
+   "g_each": 8.09,
    "material": "AlSi10Mg (ordered metal print)"
   },
   {
@@ -25,27 +25,27 @@
    "material": "PA-CF"
   },
   {
-   "part": "bell crank",
-   "qty": 8,
-   "g_each": 0.04,
-   "material": "PA-CF"
-  },
-  {
    "part": "cage v3",
    "qty": 1,
    "g_each": 9.49,
    "material": "PA-CF"
   },
   {
-   "part": "frame (driver pockets)",
+   "part": "frame (driver pockets, post holes)",
    "qty": 1,
-   "g_each": 25.33,
+   "g_each": 24.76,
    "material": "PA-CF"
   },
   {
-   "part": "driver lift ring",
+   "part": "lift ring (2 stages)",
    "qty": 1,
-   "g_each": 6.26,
+   "g_each": 6.23,
+   "material": "PA-CF"
+  },
+  {
+   "part": "track ring",
+   "qty": 1,
+   "g_each": 2.68,
    "material": "PA-CF"
   },
   {
@@ -89,20 +89,26 @@
    "qty": 4,
    "g_each": 0.19,
    "material": "TPU 95A"
-  },
-  {
-   "part": "station blade + spine (notched)",
-   "qty": 1,
-   "g_each": 1.84,
-   "material": "PA-CF"
   }
  ],
  "bought": [
   {
+   "part": "Pololu 2359 700:1 sub-micro plastic planetary gearmotor 6Dx21L",
+   "qty": 4,
+   "g_each": 1.3,
+   "note": "root rotation, one per root"
+  },
+  {
+   "part": "brass spur pinion m0.3 z12, 2 mm bore",
+   "qty": 4,
+   "g_each": 0.25,
+   "note": "on the 2359 shafts (est. mass)"
+  },
+  {
    "part": "Pololu 30:1 Micro Metal Gearmotor HPCB 6V",
    "qty": 8,
    "g_each": 9.5,
-   "note": "static drivers under the parked roots"
+   "note": "static curl drivers under the parked roots"
   },
   {
    "part": "M2 threaded rod, cut to 24.5 mm, slotted end",
@@ -117,34 +123,64 @@
    "note": "in the sliders (est.)"
   },
   {
-   "part": "driver coupler with blade key, 3 mm D bore",
+   "part": "driver coupler with blade key (chamfered tip), 3 mm D bore",
    "qty": 8,
    "g_each": 0.4,
    "note": "brass or printed (est.)"
   },
   {
    "part": "TowerPro SG92R micro servo",
-   "qty": 2,
+   "qty": 1,
    "g_each": 9.0,
-   "note": "station carriage + driver lift ring"
+   "note": "two-stage lift ring"
+  },
+  {
+   "part": "phosphor-bronze leaf 0.15 x 0.8, cut and bent",
+   "qty": 8,
+   "g_each": 0.02,
+   "note": "wipers, 2 per root (est.)"
+  },
+  {
+   "part": "M1 rivet / screw",
+   "qty": 8,
+   "g_each": 0.01,
+   "note": "wiper mounts (est.)"
+  },
+  {
+   "part": "copper foil tape 0.8 mm strip",
+   "qty": 1,
+   "g_each": 0.3,
+   "note": "5 tracks on the track ring (est.)"
+  },
+  {
+   "part": "steel rod dia 2 x 44.5",
+   "qty": 4,
+   "g_each": 1.09,
+   "note": "track ring posts"
+  },
+  {
+   "part": "compression spring 2.5 OD x 10",
+   "qty": 4,
+   "g_each": 0.1,
+   "note": "track ring on the lift ring (est.)"
+  },
+  {
+   "part": "Adafruit 2448 TB6612 motor driver",
+   "qty": 1,
+   "g_each": 2.0,
+   "note": "static side: 4 rotation tracks 0 / 12 V (est. mass)"
+  },
+  {
+   "part": "6 V regulator for the common track (e.g. Pololu D24V10F6)",
+   "qty": 1,
+   "g_each": 1.0,
+   "note": "static side (est.)"
   },
   {
    "part": "Adafruit 3297 DRV8833 dual motor driver",
    "qty": 4,
    "g_each": 1.5,
-   "note": "static side: 8 drivers"
-  },
-  {
-   "part": "music wire dia 2 (latch pin, bent)",
-   "qty": 8,
-   "g_each": 0.19,
-   "note": "travel latches"
-  },
-  {
-   "part": "steel pin dia 1 x 5 (crank pivot)",
-   "qty": 8,
-   "g_each": 0.03,
-   "note": "est."
+   "note": "static side: 8 curl drivers"
   },
   {
    "part": "knuckle pins and bushings (hand3)",
@@ -157,24 +193,6 @@
    "qty": 1,
    "g_each": 0.4,
    "note": "est. 2 m: four single flexor cords + tackles"
-  },
-  {
-   "part": "Pololu 298:1 Micro Metal Gearmotor HPCB 12 V (N20)",
-   "qty": 1,
-   "g_each": 9.5,
-   "note": "station roller drive"
-  },
-  {
-   "part": "dia 20 rubber tyre / O-ring on hub",
-   "qty": 1,
-   "g_each": 1.0,
-   "note": "est."
-  },
-  {
-   "part": "Pololu QTR-1A reflectance sensor",
-   "qty": 1,
-   "g_each": 0.3,
-   "note": "park index + spin interlock"
   },
   {
    "part": "NBR O-ring 9 x 1.5",
@@ -225,9 +243,10 @@
   "K1 cord knot (one cord now runs K1..K3)",
   "latch-pin tab ends past the crank (tab now ends at r 21.5)",
   "the shared pull drive (decision D): base pull ring + rail, beads, 4 yoke halves, 8 carbon rods, tie ring, 7 MR63 idlers, 2 STS3215 + spools",
-  "hub E return-spring boxes: 2 trays + lid per finger (0.94 g), their screw, the root post, knuckle saddles, extensor cords and bores"
+  "hub E return-spring boxes: 2 trays + lid per finger (0.94 g), their screw, the root post, knuckle saddles, extensor cords and bores",
+  "decision F3: 8 latch pins, 8 bell cranks + pivots, the station (roller N20 298:1, tyre, blade + spine, SG92R, QTR-1A), base disc pin slots and pockets"
  ],
  "pending": [],
- "total_printed_g": 108.9,
- "total_bought_g": 123.1
+ "total_printed_g": 114.0,
+ "total_bought_g": 116.1
 }
