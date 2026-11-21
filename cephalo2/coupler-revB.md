@@ -805,3 +805,12 @@ crank pivot pin retention; the crank's 0.15 mm gap to its own block at rest.
   - Sim: 152 parts, 593 frames (39.5 s), 0 overlaps, incl. a regrip where all four roots walk round with the fingers held at 30 %.
   - BOM: printed 114.0 + bought 116.0 = 230.0 g (D 232.0, v3 station design 244.0).
   - Open: FEA of the Al root/leg; wiper life; ripple-count firmware; mid-rail supply.
+
+## Simplification study (2026-11-20)
+- User on F3: "this seems very convoluted".  Cause: fingers are the rotor, so every per-finger function must ride the spinning hub
+  or dock from the static side when parked; F3 does both (8 docking curl drivers + 4 on-root rotation motors + track ring + 2-stage lift).
+- `hand3_simplify_study.py/.png/.json`: S0 F3; S1 every motor on its root (KILL as is: +38 g on the rotor, ~611 N more per leg);
+  S2 S1 + rotor board + 3-pin dock (fewest parts, electronics at 12,500 rpm); S3 cam sleeve: one screw moves all four roots
+  at once along preset paths (cross / 3+1 / 2+2 / one side), D curl kept, no rotation motors, no tracks, 1-stage lift;
+  S4 cam sleeve + v3 single curl (simplest, gives up independent curl); S5 v3 curl + on-root rotation (KILL, yokes).
+- Recommended S3 if 4 grip layouts are enough, otherwise F3 stays.  Asked.
