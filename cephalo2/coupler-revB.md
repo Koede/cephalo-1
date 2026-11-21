@@ -814,3 +814,18 @@ crank pivot pin retention; the crank's 0.15 mm gap to its own block at rest.
   at once along preset paths (cross / 3+1 / 2+2 / one side), D curl kept, no rotation motors, no tracks, 1-stage lift;
   S4 cam sleeve + v3 single curl (simplest, gives up independent curl); S5 v3 curl + on-root rotation (KILL, yokes).
 - Recommended S3 if 4 grip layouts are enough, otherwise F3 stays.  Asked.
+- User chose S3.  Built: `hand3e/hand3_cam_s3.py`, `hand3_cam_s3_check.py/.json`, `hand3_v3s_sim.py` -> `hand3_v3s_site/`.
+  - Cam sleeve (PA-CF resin, r 21.6-23.0, 17.7 long, 4.1 g) slides on the cage, one through-slot per root: axial dwells at each
+    layout (roots locked by the slot walls) joined by 80 deg ramps.  Layout order 2+2 -> cross -> 3+1 -> one side (root 0 fixed);
+    stroke 12.1 mm, steps 0.53 / 0.94 / 0.94 s.  Pins dia 1.5 in bosses on the legs (z 72), leg inner face trimmed to x 23.6.
+  - Sleeve moved by an M2 lead screw (lead 0.4) in an AlSi10Mg bracket under the base disc at az 30 (no root ever goes there),
+    slotted brass coupler; 9th Pololu 30:1 (+ encoder) at az 30 with a 7 mm key, sitting 4 mm lower in a lift-ring pocket.
+    Brass counterweight arc in the base disc at az 210 (3.4 g, residual 5.5 N est.).
+  - Two-stage lift: keys top 63.0, lift 6.0; stage 1 (2.0) = sleeve key in, curl keys 1 mm under the legs; stage 2 = curl keys in.
+  - Removed vs F3: 4 rotation motors + pinions, gear skirt, track ring, copper tracks, posts, springs, wipers, TB6612, 6 V rail.
+  - Numbers: 97 N on the sleeve (3 roots x 32 N, slot efficiency 0.53), screw torque 0.021 vs stall 0.059 N m (2.9x); pin
+    bearing 15 MPa; root 7.65 g.
+  - Checks: flight sweep gaps curl drivers / sleeve driver 1.0 (screw coupler), frame 1.71 (sleeve), motor base 4.6; rotation stage
+    drivers 1.0; whole stroke at 0.1 mm steps, straight and 30 % curled: no root x sleeve / pin x sleeve / root x bracket /
+    root x root contact; cage-sleeve 0.1 sliding fit; solo curl 85 % clear; stage 2 at all 4 layouts: no hits, every root on a driver.
+  - Sim: 147 parts, 537 frames, 0 overlaps.  BOM printed 111.0 + bought 118.1 = 229.1 g.

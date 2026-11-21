@@ -1,0 +1,181 @@
+{
+ "static_sweep_gap_mm": {
+  "lift 0.0": {
+   "curl drivers": {
+    "gap": 1.0,
+    "nearest": "screw9"
+   },
+   "sleeve driver": {
+    "gap": 1.0,
+    "nearest": "screw9"
+   },
+   "lift ring": {
+    "gap": 34.6,
+    "nearest": "sleeve_low"
+   },
+   "frame": {
+    "gap": 1.71,
+    "nearest": "sleeve_low"
+   },
+   "motor base": {
+    "gap": 4.6,
+    "nearest": "sleeve_low"
+   }
+  },
+  "lift 2.0": {
+   "curl drivers": {
+    "gap": 1.0,
+    "nearest": "root"
+   },
+   "sleeve driver": {
+    "gap": 1.0,
+    "nearest": "root"
+   },
+   "lift ring": {
+    "gap": 40.0,
+    "nearest": "root"
+   },
+   "frame": {
+    "gap": 8.77,
+    "nearest": "root"
+   },
+   "motor base": {
+    "gap": 6.6,
+    "nearest": "root"
+   }
+  }
+ },
+ "stroke": {
+  "curl 0 %": "no contact",
+  "curl 30 %": "no contact"
+ },
+ "rotor_sweep_gap_mm": {
+  "base disc": {
+   "gap": 0.0,
+   "nearest": "root"
+  },
+  "top disc": {
+   "gap": 0.0,
+   "nearest": "root"
+  },
+  "cage": {
+   "gap": 0.25,
+   "nearest": "pin"
+  },
+  "cage x sleeve_low": 0.1,
+  "cage x sleeve_high": 0.1
+ },
+ "solo_curl_touch": {
+  "curl": 0.9,
+  "mm3": 73.562
+ },
+ "stage2": {
+  "2 + 2": {
+   "drivers_x_roots": -0.0,
+   "sleeve_driver_x_screw": 0.0,
+   "roots_off_drivers": []
+  },
+  "cross": {
+   "drivers_x_roots": 0.0,
+   "sleeve_driver_x_screw": 0.0,
+   "roots_off_drivers": []
+  },
+  "3 + 1": {
+   "drivers_x_roots": -0.0,
+   "sleeve_driver_x_screw": 0.0,
+   "roots_off_drivers": []
+  },
+  "one side": {
+   "drivers_x_roots": -0.0,
+   "sleeve_driver_x_screw": 0.0,
+   "roots_off_drivers": []
+  }
+ },
+ "stage1_key9": {
+  "key_top": 65.0,
+  "slot": [
+   64.0,
+   65.5
+  ],
+  "flight_gap": 1.0,
+  "curl_key_top_stage1": 65.0,
+  "leg_bottom": 66.0
+ },
+ "static_static_mm3": {
+  "lift 0.0": {
+   "drivers x frame": 0.0,
+   "sleeve driver x frame": 0.0,
+   "sleeve driver x drivers": 0.0,
+   "lift ring x frame": 0.0,
+   "sleeve driver x lift ring": -0.0
+  },
+  "lift 2.0": {
+   "drivers x frame": 0.0,
+   "sleeve driver x frame": 0.0,
+   "sleeve driver x drivers": 0.0,
+   "lift ring x frame": 0.0,
+   "sleeve driver x lift ring": -0.0
+  },
+  "lift 6.0": {
+   "drivers x frame": 0.0,
+   "sleeve driver x frame": 0.0,
+   "sleeve driver x drivers": 0.0,
+   "lift ring x frame": 0.0,
+   "sleeve driver x lift ring": -0.0
+  }
+ },
+ "numbers": {
+  "layouts": [
+   "2 + 2",
+   "cross",
+   "3 + 1",
+   "one side"
+  ],
+  "slot_len": 12.69,
+  "stroke": 12.09,
+  "sleeve_len": 17.69,
+  "sleeve_z": [
+   58.6,
+   88.39
+  ],
+  "pin_z": 71.99,
+  "beta": 80.0,
+  "slot_efficiency": 0.53,
+  "axial_per_root_N": 32.3,
+  "axial_total_N": 97.0,
+  "screw_torque_Nm": 0.0206,
+  "driver_stall_Nm": 0.0589,
+  "torque_margin": 2.86,
+  "sleeve_mm_s": 5.0,
+  "steps": [
+   {
+    "frm": "2 + 2",
+    "to": "cross",
+    "mm": 2.66,
+    "s": 0.53
+   },
+   {
+    "frm": "cross",
+    "to": "3 + 1",
+    "mm": 4.72,
+    "s": 0.94
+   },
+   {
+    "frm": "3 + 1",
+    "to": "one side",
+    "mm": 4.72,
+    "s": 0.94
+   }
+  ],
+  "pin_bearing_MPa": 15.4,
+  "bracket_g": 0.81,
+  "bracket_set_g": 1.74,
+  "bracket_spin_N": 83,
+  "counterweight_need_g": 2.78,
+  "counterweight_g": 3.39,
+  "residual_unbalance_N": 5.5,
+  "sleeve_g": 4.09,
+  "root_AlSi10Mg_g": 7.65,
+  "hold": "at a layout the pin sits in an axial dwell: root torque goes into the slot wall, not the screw"
+ }
+}
