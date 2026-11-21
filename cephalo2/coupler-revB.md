@@ -743,3 +743,18 @@ crank pivot pin retention; the crank's 0.15 mm gap to its own block at rest.
   - E 2 rings (pairs only).
   - F push rods up the shaft: KILL (solid shaft).
 - Recommended D.  Asked.
+- User chose D.  Built: `hand3e/hand3_multidigit.py` (module), `hand3_multidigit_check.py/.json`, `hand3_v3d_sim.py` -> `hand3_v3d_site/`.
+  - Each root (now AlSi10Mg, 7.02 g) carries a winch leg under the grip: self-locking M2 lead screw (lead 0.4, lead angle
+    4.2 deg) at (28.2, -1.2), z 67.5-92, slot drive at the bottom; M2 nut slider with an eye at x 26.3 pulls the 2:1 tackle.
+    Stroke 11.1 mm = 22.2 mm cord.
+  - 8 static Pololu 30:1 Micro Metal Gearmotor HPCB 6V under the parked positions (0/60/90/120/180/240/270/300), blade key on a
+    coupler, lifted 3.5 mm into the slots by one lift ring + SG92R.  Station moved to az 150, blade notched for the legs.
+  - Removed: pull ring + rail, beads, yokes, rods, tie ring, idlers, both STS3215, spools.
+  - Numbers: nut load 110 N; screw torque 0.0265 N m vs N20 stall 0.059 (margin 2.2); curl ~2.2 s; leg pull 111 N,
+    leg root 112 MPa, SF 2.06 vs 230 MPa AlSi10Mg.
+  - Checks (range + sweep): drivers 1.0, frame 8.54, blade 0.56, tyre 0.7, station motor 1.74, sensor 0.9 mm gaps; blade
+    engaged / drivers up / station: no hits.  Solo curl clear to 85 % (heel touch at 90 %).
+  - Sim: 166 parts, 1006 frames (15 fps), 0 overlaps.  Artifact "hand3 hub v3 D motion sim".
+  - BOM: printed 108.9 g + bought 123.1 g = 232.0 g (v3 station 244.0 g, C 352.6 g).
+  - Open: FEA of the Al root/leg and disc ribs; lift-ring guides in the frame (est.); wiring for 8 drivers; key alignment
+    +-1 deg on parking; frame redesign now the servo bays are empty.
