@@ -758,3 +758,19 @@ crank pivot pin retention; the crank's 0.15 mm gap to its own block at rest.
   - BOM: printed 108.9 g + bought 123.1 g = 232.0 g (v3 station 244.0 g, C 352.6 g).
   - Open: FEA of the Al root/leg and disc ribs; lift-ring guides in the frame (est.); wiring for 8 drivers; key alignment
     +-1 deg on parking; frame redesign now the servo bays are empty.
+
+## Finger rotation, clarified (2026-11-20)
+- User: "I meant individual control of the fingers rotating on the hub, not an overhaul on the grippers".  So the ask was always
+  root rotation: each root turns round the hub on its own, all at once, actuators underneath, palm free.  D (per-finger winch
+  curl) answered a question that wasn't asked; it stays built and checked but is not adopted unless the user picks it.
+- Study `hand3_root_rotation_study.py/.png/.json`.  Key finding: under the v3 rim sit the rotor-side pull ring (r 18.3-30,
+  z 78-89) and 4 static yokes (r 27.7-40.8, z 69-89, 36 deg each), so with the v3 curl drive nothing per-root can live under the hub:
+  - D travelling stations: only cross fits one station per gap; 2+2, 3+1, one side need re-grabs.  KILL.
+  - E micro motor hanging under the root: leg cuts the pull ring, sweeps the yokes.  KILL.
+  - G micro motor low beside the grip: 2 mm under the disc, pinion needs 4.2.  KILL.
+  - C micro motor (Pololu 2359, 1.3 g) standing on each root, pinion on a top-disc gear rim: works, 0.6 s, but stands 16 mm proud.
+  - F (with D's winch curl, no yokes): Pololu 2359 on each winch leg, pinion on a gear flange round the cage at z 66-68, power by
+    rotor tracks + pogo pins on the lift ring while parked; 0.5 s cross -> 2+2, palm free, station removed (-10 g est.).
+    Leg spin load 111 + 97 N: foot must bear on the flange (est.).
+  - 2359 usable torque taken as min(gearbox limit 250 g cm, 25 % of stall) = 21 mN m -> 11.8 N at the pinion vs ~3 N (est.).
+- Recommended F.  Asked.

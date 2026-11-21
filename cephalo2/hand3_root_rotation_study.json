@@ -1,0 +1,88 @@
+{
+ "micro": {
+  "name": "Pololu 2359 700:1 sub-micro plastic planetary gearmotor 6D x 21L",
+  "usable_Nm": 0.0212,
+  "push_N": 11.8,
+  "need_N": 3.0,
+  "margin": 3.9
+ },
+ "B": {
+  "mass_g": 109,
+  "move_s": 1.2,
+  "spin_N": 624
+ },
+ "C": {
+  "deg_s": 27.0,
+  "cross_to_2p2_s": 0.6,
+  "spin_N": 108,
+  "mass_g": -10.1,
+  "height_above_palm": 16
+ },
+ "D": {
+  "one_move": {
+   "cross": 0,
+   "2+2": null,
+   "3+1": null,
+   "one side": null
+  },
+  "mass_g": 21.7,
+  "note": "with one station per gap between the yokes only the cross pose fits; 2+2, 3+1 and one side need re-grabs"
+ },
+ "E": {
+  "leg_r": [
+   23.0,
+   29.6
+  ],
+  "leg_z": [
+   66,
+   91
+  ],
+  "yoke_r": [
+   27.7,
+   40.8
+  ],
+  "yoke_z": [
+   69,
+   89
+  ],
+  "pull_ring_r": [
+   18.3,
+   30.0
+  ],
+  "pull_ring_z": [
+   78,
+   89
+  ],
+  "verdict": "leg passes through the rotor-side pull ring and sweeps through the static yokes in flight"
+ },
+ "F": {
+  "motor_xy": [
+   26.0,
+   6.6
+  ],
+  "motor_r": 26.8,
+  "gear_pitch_r": 25.0,
+  "pinion_z": [
+   66.0,
+   68.0
+  ],
+  "key_top_retracted": 65.0,
+  "pinion_over_keys_mm": 1.0,
+  "deg_s": 29.1,
+  "cross_to_2p2_s": 0.5,
+  "leg_extra_spin_N": 97,
+  "leg_now_N": 111,
+  "mass_g": -10.1,
+  "power": "5 rotor-side copper tracks under the cage flange (common + 1 per motor), phosphor-bronze wiper on each leg; 5 spring pogo pins on the lift ring touch the tracks only while parked (est.)"
+ },
+ "G": {
+  "room_mm": 2.0,
+  "pinion_d_min": 4.2,
+  "verdict": "2 mm between the pull-ring rail top (z 89) and the base disc (z 91)"
+ },
+ "A": {
+  "cross_to_2p2_s": 15.6,
+  "mass_g": 0
+ },
+ "move_deg_cross_to_2p2": 15
+}
