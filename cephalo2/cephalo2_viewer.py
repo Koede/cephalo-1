@@ -29,8 +29,8 @@ HTML = r"""<!DOCTYPE html>
  <h1>Cephalo-2</h1>
  <button id="b-stand" class="on">Standing</button>
  <button id="b-flight">Flying</button>
- <button id="b-all" class="on">hand3 on all 8</button>
- <button id="b-mixed">old: hand3 on 2</button>
+ <button id="b-all" class="on">hand3 S3 (now)</button>
+ <button id="b-mixed">older hand3 (Nov 15)</button>
  <button id="b-xray">X-ray turret</button>
  <button id="b-spin">Auto-rotate</button>
  <button id="b-reset">Reset view</button>
@@ -41,7 +41,7 @@ HTML = r"""<!DOCTYPE html>
  <details><summary>What is in Cephalo-2</summary>
  <ul style="padding-left:16px;margin:4px 0">
   <li><b>Arms</b>: rev 4 tentacles, 8 servo joints each, clutches, winch line, a camera in every tip bay.</li>
-  <li><b>Hands</b>: hand3 on all eight arms (four fingers that are also a 9 in rotor). The "old" button shows the earlier mix: hand3 on arms 2 and 6, XL claw-props on the other six.</li>
+  <li><b>Hands</b>: hand3 on all eight arms (four fingers that are also a 9 in rotor), with the current hub: hub v3, a self-locking winch per finger (each finger curls on its own, wound by static drivers under the hub) and the S3 cam sleeve that turns all four fingers between four grip layouts. Shown in the flight cross. The "older hand3" button shows the Nov 15 hub.</li>
   <li><b>Bayonet connector</b> on every tip (orange: arm socket, dark: the shared hand base). Quarter-turn, 3 lugs, 5 spring pins. Drawn on the tip axis; every hand sits 9.9 mm further out than before.</li>
   <li><b>Belly rotor</b>: 4-blade, 22 in Scabbard rotor in place of the EDF. Standing, the blades are stowed upright in the turret; flying, they are out.</li>
   <li><b>Turret</b> ("bucket"): scabbard cage, elevator, fold rods, dock latch pins, and 5 cameras (4 side, 1 up) behind clear windows. No eyestalks.</li>
@@ -73,8 +73,8 @@ const fill = new THREE.DirectionalLight(0xffffff, 0.6); fill.position.set(-1.5, 
 const ground = new THREE.Mesh(new THREE.PlaneGeometry(6, 6), new THREE.ShadowMaterial({opacity:0.18}));
 ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
 const grid = new THREE.GridHelper(6, 24, 0xb9c0c8, 0xd3d8de); scene.add(grid);
-const loader = new GLTFLoader(); const models = {mixed:{}, all:{}}; const groups = {};
-let hands = 'all';
+const loader = new GLTFLoader(); const models = {all:{}, s3:{}}; const groups = {};
+let hands = 's3';
 async function loadSet(h){
   if (models[h].stand) return;
   document.getElementById('load').style.display = 'flex';
@@ -115,11 +115,11 @@ function reset(){ if (pose === 'stand'){ cam.position.set(0.95, 0.55, 1.05); con
 const hidden = {};
 function applyGroups(){ for (const g in groups) for (const o of groups[g]) o.visible = !hidden[g]; }
 async function setHands(h){
-  hands = h; document.getElementById('b-mixed').classList.toggle('on', h === 'mixed'); document.getElementById('b-all').classList.toggle('on', h === 'all');
+  hands = h; document.getElementById('b-mixed').classList.toggle('on', h === 'all'); document.getElementById('b-all').classList.toggle('on', h === 's3');
   await loadSet(h); show(pose);
 }
 async function main(){
-  await loadSet('all');
+  await loadSet('s3');
   const box = document.getElementById('groups');
   for (const g of Object.keys(SW)) if (groups[g]){
     const l = document.createElement('label');
@@ -129,8 +129,8 @@ async function main(){
   }
   show('stand'); reset();
 }
-document.getElementById('b-mixed').onclick = () => setHands('mixed').catch(err);
-document.getElementById('b-all').onclick = () => setHands('all').catch(err);
+document.getElementById('b-mixed').onclick = () => setHands('all').catch(err);
+document.getElementById('b-all').onclick = () => setHands('s3').catch(err);
 function err(e){ document.getElementById('load').style.display = 'flex'; document.getElementById('load').textContent = 'Could not load the model: ' + e; }
 document.getElementById('b-stand').onclick = () => { show('stand'); reset(); };
 document.getElementById('b-flight').onclick = () => { show('flight'); reset(); };
@@ -146,7 +146,7 @@ import os
 os.makedirs("cephalo2_site", exist_ok=True)
 open("cephalo2_site/index.html", "w").write(HTML)
 import base64
-for h in ("mixed", "all"):
+for h in ("all", "s3"):
     for p in ("stand", "flight"):
         src = f"cephalo2_site/cephalo2_{h}_{p}.glb" if os.path.exists(f"cephalo2_site/cephalo2_{h}_{p}.glb") else f"cephalo2_{h}_{p}.glb"
         data = base64.b64encode(open(src, "rb").read()).decode()

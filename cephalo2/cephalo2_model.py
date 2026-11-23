@@ -13,7 +13,10 @@ import cephalo4 as C
 import xlpod4; xlpod4.install()
 import viz4 as V
 HANDS = os.environ.get("C2_HANDS", "mixed")          # mixed: hand3 on arms 2 + 6, XL claw-props elsewhere; all: hand3 on all eight
-import hand3_draw as H3; H3.install(tuple(range(8)) if HANDS == "all" else (2, 6))
+if HANDS == "s3":                                     # hand3 hub v3 + D winches + S3 cam sleeve on all eight (2026-11-20)
+    import hand3_draw_s3 as H3; H3.install(tuple(range(8)))
+else:
+    import hand3_draw as H3; H3.install(tuple(range(8)) if HANDS == "all" else (2, 6))
 import scabbard as S
 import turretcams as TC
 import handmount as HM
@@ -149,7 +152,7 @@ def build(pose):
         parts[name] = len(m.faces)
     groups, q = arms(pose)
     for k, (c, m) in enumerate(groups.items()):
-        m = finish(m, c, budget=5000)
+        m = finish(m, c, budget=16000 if HANDS == "s3" else 5000)
         gl.add_geometry(m, node_name=f"arms and hands|c{k}", geom_name=f"arms and hands|c{k}")
     s, b = bayonets(q)
     for name, m, ck in (("sockets", s, "socket"), ("hand bases", b, "hbase")):
