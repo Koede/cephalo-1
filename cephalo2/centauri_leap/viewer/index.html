@@ -1,0 +1,286 @@
+<title>Centauri-1 Extended Leap</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600&display=swap">
+<style>
+/* Layout: a test-bench readout. Big live 3D stage on the left, instrument panel on the right; stacks on a phone. */
+:root {
+  --bg: #eef0ee; --panel: #ffffff; --ink: #1b1f1d; --ink2: #56605b; --rule: #d3d8d4;
+  --accent: #c4541f; --steel: #3c6e8f; --ok: #2f7d4f; --warn: #b7791f; --bad: #b3362b; --stage: #e2e6e3;
+  --f-display: "IBM Plex Sans Condensed", "Arial Narrow", sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #131614; --panel: #1b1f1d; --ink: #e4e8e5; --ink2: #99a39d; --rule: #2e3531;
+  --accent: #e8743c; --steel: #6ea4c7; --ok: #5cb784; --warn: #e0a64a; --bad: #e0675b; --stage: #191d1b; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #131614; --panel: #1b1f1d; --ink: #e4e8e5; --ink2: #99a39d; --rule: #2e3531;
+  --accent: #e8743c; --steel: #6ea4c7; --ok: #5cb784; --warn: #e0a64a; --bad: #e0675b; --stage: #191d1b; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 14px; line-height: 1.45; }
+.wrap { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 18px 28px; max-width: 1400px; margin: 0 auto; display: grid; gap: 14px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; }
+h1 { font-family: var(--f-display); font-weight: 600; font-size: 1.9rem; letter-spacing: .01em; margin: 0; text-wrap: balance; }
+.sub { color: var(--ink2); margin: 0; max-width: 70ch; }
+.grid { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 14px; align-items: start; }
+@media (max-width: 900px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+.stage { background: var(--stage); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; display: grid; min-width: 0; }
+#view { width: 100%; aspect-ratio: 16 / 10; max-width: 100%; display: block; touch-action: none; }
+@media (max-width: 600px) { #view { aspect-ratio: 4 / 5; } }
+.hud { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; padding: 10px 12px; border-top: 1px solid var(--rule); background: var(--panel); }
+button { font: 500 13px var(--f-body); color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 4px; padding: 6px 10px; cursor: pointer; }
+button:hover { border-color: var(--ink2); }
+button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#play { min-width: 64px; }
+#scrub { flex: 1 1 220px; min-width: 0; accent-color: var(--accent); }
+.grp { display: flex; gap: 4px; flex-wrap: wrap; }
+.clock { font-family: var(--f-mono); font-variant-numeric: tabular-nums; font-size: 13px; min-width: 7.5ch; }
+.phase { font-family: var(--f-mono); font-size: 12px; color: var(--ink2); display: flex; gap: 10px; flex-wrap: wrap; }
+.phase b { color: var(--ink); font-weight: 500; }
+aside { display: grid; gap: 12px; min-width: 0; }
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 12px 14px; display: grid; gap: 8px; min-width: 0; }
+.card h2 { font: 600 11px var(--f-body); letter-spacing: .09em; text-transform: uppercase; color: var(--ink2); margin: 0; }
+.big { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.big div { display: grid; gap: 2px; }
+.big .v { font-family: var(--f-display); font-size: 1.7rem; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.05; }
+.big .v small { font-size: .9rem; color: var(--ink2); font-weight: 500; }
+.big .k { font-size: 12px; color: var(--ink2); }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+td, th { padding: 4px 0; text-align: left; vertical-align: middle; font-size: 13px; }
+th { font: 500 11px var(--f-body); color: var(--ink2); letter-spacing: .04em; }
+td.n { font-family: var(--f-mono); font-size: 12.5px; text-align: right; white-space: nowrap; padding-left: 8px; }
+tr + tr td { border-top: 1px solid var(--rule); }
+.bar { height: 7px; background: var(--rule); border-radius: 4px; position: relative; overflow: hidden; min-width: 60px; }
+.bar i { position: absolute; inset: 0 auto 0 0; background: var(--steel); border-radius: 4px; }
+.bar i.hot { background: var(--warn); } .bar i.max { background: var(--bad); }
+.live .bar i { transition: width .05s linear; }
+.note { color: var(--ink2); font-size: 12.5px; margin: 0; }
+.pill { display: inline-block; font: 500 11px var(--f-mono); padding: 2px 7px; border-radius: 10px; border: 1px solid currentColor; }
+.pill.ok { color: var(--ok); } .pill.warn { color: var(--warn); }
+ul.est { margin: 0; padding-left: 18px; color: var(--ink2); font-size: 12.5px; display: grid; gap: 3px; }
+.err { color: var(--bad); padding: 16px; }
+@media (prefers-reduced-motion: reduce) { .live .bar i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Centauri-1 Extended Leap</h1>
+    <p class="sub">Physics replay on the Hippos-1 rev C legs: fores reach fully forward and hinds fully back in the air, fores land first, then it comes to rest. Drag to turn, pinch or scroll to zoom.</p>
+  </header>
+  <div class="grid">
+    <section class="stage" aria-label="3D replay">
+      <canvas id="view"></canvas>
+      <div class="hud">
+        <button id="play" type="button">Pause</button>
+        <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="Time">
+        <span class="clock" id="clock">0.000 s</span>
+        <div class="grp" role="group" aria-label="Speed">
+          <button type="button" data-speed="0.1">0.1x</button><button type="button" data-speed="0.25" aria-pressed="true">0.25x</button><button type="button" data-speed="1">1x</button>
+        </div>
+        <div class="grp" role="group" aria-label="View">
+          <button type="button" data-cam="side">Side</button><button type="button" data-cam="quarter">3/4</button><button type="button" data-cam="follow" aria-pressed="true">Follow</button>
+        </div>
+        <div class="phase" id="phase"></div>
+      </div>
+    </section>
+    <aside>
+      <div class="card">
+        <h2>The leap</h2>
+        <div class="big" id="big"></div>
+        <p class="note" id="bignote"></p>
+      </div>
+      <div class="card live">
+        <h2>Joint torque now, against motor peak</h2>
+        <table id="live"></table>
+      </div>
+      <div class="card">
+        <h2>Peaks over the whole run</h2>
+        <table id="peaks"></table>
+      </div>
+      <div class="card">
+        <h2>Landing and structure</h2>
+        <table id="loads"></table>
+      </div>
+      <div class="card">
+        <h2>Estimated, not measured</h2>
+        <ul class="est" id="est"></ul>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(async function () {
+  const $ = (id) => document.getElementById(id);
+  let M, R;
+  try {
+    [M, R] = await Promise.all([fetch("leg_meshes.json").then(r => r.json()), fetch("leap_replay.json").then(r => r.json())]);
+  } catch (e) { document.querySelector(".stage").innerHTML = '<p class="err">The replay data did not load. Reload the page to try again.</p>'; return; }
+  const res = R.res, frames = R.frames, names = R.bodies;
+  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+  // ---------- numbers
+  const fmt = (v, d = 0) => (v == null ? "-" : Number(v).toFixed(d));
+  $("big").innerHTML = `
+    <div><span class="v">${fmt(res.leap_length_m * 1000)}<small> mm</small></span><span class="k">hind take-off to fore landing</span></div>
+    <div><span class="v">${fmt(res.air_travel_m * 1000)}<small> mm</small></span><span class="k">body travel in the air</span></div>
+    <div><span class="v">${fmt(res.flight_time_s * 1000)}<small> ms</small></span><span class="k">all four hooves off</span></div>
+    <div><span class="v">${fmt(res.com_rise_m * 1000)}<small> mm</small></span><span class="k">centre of mass rise</span></div>`;
+  const ext = res.extension;
+  $("bignote").innerHTML = `Full extension in the air: ${ext.err_min_deg <= ext.tol_deg ? '<span class="pill ok">reached</span>' : '<span class="pill warn">' + fmt(ext.err_min_deg, 1) + ' deg short</span>'}
+    (fores ${ext.target.fore[0]}/${ext.target.fore[1]} deg, hinds ${ext.target.hind[0]}/${ext.target.hind[1]} deg pivot/flex). Body ends ${fmt(res.ground_travel_m * 1000)} mm ahead of where it started, at rest. Bus ${res.V_bus} V.`;
+  const JN = { fore_q0: "Fore pivot", fore_q1: "Fore flex (shoulder)", hind_q0: "Hind pivot", hind_q1: "Hind flex (stifle)" };
+  const keys = Object.keys(JN);
+  const barCls = (f) => (f >= 0.99 ? "max" : f >= 0.8 ? "hot" : "");
+  $("peaks").innerHTML = `<tr><th>Joint, motor</th><th></th><th class="n">N m / peak</th><th class="n">deg/s</th></tr>` + keys.map(k => {
+    const j = res.joints[k];
+    return `<tr><td>${JN[k]}<br><span class="note">${j.motor}${k === "fore_q1" ? " + belt" : ""}, phase ${fmt(j.phase_A_peak)} A</span></td>
+      <td style="width:30%"><div class="bar"><i class="${barCls(j.peak_frac)}" style="width:${Math.min(100, j.peak_frac * 100)}%"></i></div></td>
+      <td class="n">${fmt(j.peak_Nm, 1)} / ${fmt(j.peak_joint_Nm, 1)}</td><td class="n">${fmt(j.peak_speed_deg_s)}</td></tr>`;
+  }).join("");
+  const L = [
+    ["Fore pair landing force", `${fmt(res.landing_force_peak_N.fore)} N (${fmt(res.landing_force_peak_bw.fore, 2)} x weight)`],
+    ["Hind pair landing force", `${fmt(res.landing_force_peak_N.hind)} N (${fmt(res.landing_force_peak_bw.hind, 2)} x weight)`],
+    ["Elbow / hock tendon peak", `${fmt(res.tendon_peak_N)} N, SF ${fmt(res.tendon_SF, 1)}`],
+    ["Bus current peak", `${fmt(res.bus_A_peak)} A (regen ${fmt(res.bus_A_regen_peak)} A)`],
+    ["Grip used (friction 0.7)", `${fmt(res.grip_max, 2)}`],
+    ["Hoof slip peak", `${fmt(res.slip_peak_m_s * 1000)} mm/s`],
+    ["Hoof skid under load (left fore + hind)", `${fmt(res.slide_mm)} mm`],
+    ["Hardest hit on a joint stop", (() => { const e = Object.entries(res.joints).sort((a, b) => b[1].stop_load_Nm - a[1].stop_load_Nm)[0]; return e[1].stop_load_Nm > 0 ? `${fmt(e[1].stop_load_Nm)} N m, ${JN[e[0]].toLowerCase()}` : "none"; })()],
+    ["Gas strut shortest", `${fmt(res.gas_min_len_mm, 1)} mm (bottoms at ${res.gas_bottom_mm})`],
+    ["Fore to hind leg gap", `${fmt(res.leg_leg_min_mm)} mm`],
+    ["Lowest hoof in the air", `${fmt(res.hoof_clearance_flight_min_mm)} mm`],
+    ["Body touches the floor", res.body_floor_contact ? "yes" : "never"],
+  ];
+  $("loads").innerHTML = L.map(([a, b]) => `<tr><td>${a}</td><td class="n">${b}</td></tr>`).join("");
+  $("est").innerHTML = [
+    "Body: 24.18 kg with Cephalo-2 docked; centre of mass from the Nov 20 study, pitch inertia 1.4 kg m2.",
+    "Motors: peak torque to half the no-load speed, then linear to zero, at 39.6 V.",
+    "RobStride 04 torque constant and resistance (phase current, bus current).",
+    "Dyneema tendon break load about 8 kN per 3 mm line.",
+    "Body and octopus are drawn as plain shapes; legs are the rev C CAD.",
+    "Not checked: legs against the body shell, neck and octopus (that chassis code is not in the repo). Leg to leg and every body to floor contact are checked.",
+  ].map(s => `<li>${s}</li>`).join("");
+  $("live").innerHTML = keys.map((k, i) => `<tr><td style="width:44%">${JN[k]}</td><td><div class="bar"><i id="lb${i}"></i></div></td><td class="n" id="lv${i}">0</td></tr>`).join("") +
+    `<tr><td>Ground force, fore / hind</td><td></td><td class="n" id="gf">0 / 0 N</td></tr>`;
+
+  // ---------- scene (z up, metres)
+  const canvas = $("view");
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+  const scene = new THREE.Scene();
+  const cam = new THREE.PerspectiveCamera(32, 1.6, 0.05, 50); cam.up.set(0, 0, 1);
+  const ctl = new THREE.OrbitControls(cam, canvas); ctl.enableDamping = true;
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x888888, 0.75));
+  const sun = new THREE.DirectionalLight(0xffffff, 0.75); sun.position.set(2, -3, 4); scene.add(sun);
+  const back = new THREE.DirectionalLight(0xffffff, 0.3); back.position.set(-3, 2, 2); scene.add(back);
+
+  // floor with 10 cm marks
+  const floorG = new THREE.Group(); scene.add(floorG);
+  function buildFloor() {
+    floorG.clear();
+    const ink = new THREE.Color(css("--rule")), ink2 = new THREE.Color(css("--ink2"));
+    const plane = new THREE.Mesh(new THREE.PlaneGeometry(8, 3), new THREE.MeshBasicMaterial({ color: new THREE.Color(css("--stage")) }));
+    plane.position.set(1.5, 0, -0.0005); floorG.add(plane);
+    const pts = [], pts2 = [];
+    for (let x = -2.5; x <= 5.51; x += 0.1) { const major = Math.abs(Math.round(x * 10) % 5) === 0; (major ? pts2 : pts).push(x, -0.6, 0, x, 0.6, 0); }
+    for (let y = -0.6; y <= 0.61; y += 0.3) pts.push(-2.5, y, 0, 5.5, y, 0);
+    const mk = (p, c) => { const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(p, 3)); return new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color: c })); };
+    floorG.add(mk(pts, ink)); floorG.add(mk(pts2, ink2));
+    // take-off and landing marks
+    const acc = new THREE.Color(css("--accent"));
+    const ev = res.events;
+    [[ev.mark_hind_lo, "hind take-off"], [ev.mark_fore_td, "fore landing"]].forEach(([x]) => {
+      if (x == null) return; const m = new THREE.Mesh(new THREE.BoxGeometry(0.008, 1.0, 0.002), new THREE.MeshBasicMaterial({ color: acc })); m.position.set(x, 0, 0.001); floorG.add(m);
+    });
+    if (ev.mark_hind_lo != null && ev.mark_fore_td != null) {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(ev.mark_fore_td - ev.mark_hind_lo, 0.006, 0.002), new THREE.MeshBasicMaterial({ color: acc }));
+      m.position.set((ev.mark_fore_td + ev.mark_hind_lo) / 2, -0.5, 0.001); floorG.add(m);
+    }
+  }
+  buildFloor();
+
+  const matCache = {};
+  const mat = (hex) => matCache[hex] || (matCache[hex] = new THREE.MeshStandardMaterial({ color: new THREE.Color(hex), roughness: 0.6, metalness: 0.15, side: THREE.DoubleSide }));
+  function meshGroup(list) {
+    const g = new THREE.Group();
+    list.forEach(p => {
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute("position", new THREE.Float32BufferAttribute(p.v, 3)); geo.setIndex(p.t); geo.computeVertexNormals();
+      g.add(new THREE.Mesh(geo, mat(p.col)));
+    });
+    g.scale.set(0.001, 0.001, 0.001); return g;
+  }
+  const PIV = { fore: [236.0, 178.5, 467.5], hind: [-135.3, 178.5, 378.0] };
+  const objs = {};
+  // torso: plain body block + docked octopus stand-in + the body-side leg hardware (yoke, cradle, rocker) at each pivot
+  const torso = new THREE.Group(); scene.add(torso); objs.torso = torso;
+  const shell = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.26, 0.18), new THREE.MeshStandardMaterial({ color: new THREE.Color(css("--steel")), transparent: true, opacity: 0.28, roughness: 0.8 }));
+  shell.position.set(0.05, 0, 0.52); torso.add(shell);
+  const octo = new THREE.Mesh(new THREE.SphereGeometry(0.16, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2), new THREE.MeshStandardMaterial({ color: new THREE.Color(css("--accent")), transparent: true, opacity: 0.35, roughness: 0.7 }));
+  octo.rotation.x = Math.PI / 2; octo.position.set(0.12, 0, 0.61); torso.add(octo);
+  ["fore", "hind"].forEach(k => [1, -1].forEach(s => {
+    const g = meshGroup(M[k].torso); g.scale.set(0.001, 0.001 * s, 0.001); g.position.set(PIV[k][0] / 1000, s * PIV[k][1] / 1000, PIV[k][2] / 1000); torso.add(g);
+  }));
+  names.slice(1).forEach(n => {
+    const [tag, part] = n.split("_"); const k = tag.slice(0, 4), s = tag.endsWith("L") ? 1 : -1;
+    const g = new THREE.Group(); const inner = meshGroup(M[k][part]); inner.scale.set(0.001, 0.001 * s, 0.001); g.add(inner);
+    scene.add(g); objs[n] = g;
+  });
+
+  // ---------- playback
+  const T0 = frames[0].f[0], T1 = frames[frames.length - 1].f[0];
+  let t = T0, speed = 0.25, playing = true, camMode = "follow";
+  function frameAt(tt) { const i = Math.min(frames.length - 1, Math.max(0, Math.round((tt - T0) / (frames[1].f[0] - T0)))); return frames[i]; }
+  const q = new THREE.Quaternion();
+  function apply(fr) {
+    const f = fr.f;
+    names.forEach((n, i) => { const o = 1 + i * 7; const ob = objs[n]; ob.position.set(f[o], f[o + 1], f[o + 2]); q.set(f[o + 4], f[o + 5], f[o + 6], f[o + 3]); ob.quaternion.copy(q); });
+    $("clock").textContent = f[0].toFixed(3) + " s";
+    $("phase").innerHTML = `fore <b>${fr.ph[0]}</b> hind <b>${fr.ph[1]}</b> pitch <b>${fr.pitch.toFixed(1)}&deg;</b>`;
+    keys.forEach((k, i) => {
+      const j = res.joints[k]; const fx = Math.abs(fr.tq[i]) / j.peak_joint_Nm;
+      const b = $("lb" + i); b.style.width = Math.min(100, fx * 100) + "%"; b.className = barCls(fx); $("lv" + i).textContent = fr.tq[i].toFixed(1);
+    });
+    $("gf").textContent = `${fr.gf} / ${fr.gh} N`;
+    $("scrub").value = Math.round((f[0] - T0) / (T1 - T0) * 1000);
+  }
+  function setCam(mode, init) {
+    camMode = mode;
+    document.querySelectorAll("[data-cam]").forEach(b => b.setAttribute("aria-pressed", b.dataset.cam === mode));
+    const cx = objs.torso.position.x + 0.1;
+    if (mode === "side") { cam.position.set(cx, -3.2, 0.45); ctl.target.set(cx, 0, 0.35); }
+    else { cam.position.set(cx + 1.6, -2.2, 1.2); ctl.target.set(cx, 0, 0.3); }
+    ctl.update();
+  }
+  document.querySelectorAll("[data-cam]").forEach(b => b.addEventListener("click", () => setCam(b.dataset.cam)));
+  document.querySelectorAll("[data-speed]").forEach(b => b.addEventListener("click", () => {
+    speed = +b.dataset.speed; document.querySelectorAll("[data-speed]").forEach(x => x.setAttribute("aria-pressed", x === b));
+  }));
+  $("play").addEventListener("click", () => { playing = !playing; $("play").textContent = playing ? "Pause" : "Play"; if (playing && t >= T1) t = T0; });
+  $("scrub").addEventListener("input", (e) => { t = T0 + (T1 - T0) * e.target.value / 1000; playing = false; $("play").textContent = "Play"; apply(frameAt(t)); });
+
+  function resize() {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    if (canvas.width !== Math.round(w * renderer.getPixelRatio()) || canvas.height !== Math.round(h * renderer.getPixelRatio())) { renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); }
+  }
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+  const retheme = () => { buildFloor(); shell.material.color.set(css("--steel")); octo.material.color.set(css("--accent")); };
+  mq.addEventListener && mq.addEventListener("change", retheme);
+  new MutationObserver(retheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+  apply(frameAt(t)); setCam("quarter"); camMode = "follow"; document.querySelectorAll("[data-cam]").forEach(b => b.setAttribute("aria-pressed", b.dataset.cam === "follow"));
+  let last = performance.now(); let prevX = objs.torso.position.x;
+  function loop(now) {
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    if (playing) { t += dt * speed; if (t > T1 + 0.6) t = T0; apply(frameAt(Math.min(t, T1))); }
+    if (camMode === "follow") { const dx = objs.torso.position.x - prevX; cam.position.x += dx; ctl.target.x += dx; }
+    prevX = objs.torso.position.x;
+    resize(); ctl.update(); renderer.render(scene, cam); requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>

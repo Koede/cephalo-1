@@ -1,0 +1,197 @@
+{
+ "V_bus": 39.6,
+ "params": {
+  "Tg": 0.5329,
+  "fg0": 14.7215,
+  "fg1": 74.7088,
+  "hg0": 16.57,
+  "hg1": 112.0567,
+  "fp0": 11.2774,
+  "fp1": 75.8444,
+  "dh": 0.0227,
+  "hp0": 4.3721,
+  "hp1": 55.5892,
+  "tlp": 0.017,
+  "fl0": 46.1292,
+  "fl1": 72.7621,
+  "ths": 0.3754,
+  "hl0": 57.9353,
+  "hl1": 103.0481,
+  "kl_f": 0.4135,
+  "dl_f": 2.7684,
+  "kl_h": 0.8537,
+  "dl_h": 3.8716,
+  "fa0": 31.047,
+  "fa1": 121.4253,
+  "ha0": 0.631,
+  "ha1": 78.1079,
+  "kth": 1.0371,
+  "kthd": 0.0607,
+  "tst": 0.682
+ },
+ "leap_length_m": 0.651,
+ "air_travel_m": 0.131,
+ "flight_time_s": 0.227,
+ "com_rise_m": 0.114,
+ "com_apex_m": 0.564,
+ "com_stand_m": 0.451,
+ "ground_travel_m": 0.232,
+ "final": {
+  "x": 0.23156590269668714,
+  "z": -0.0017899605912627958,
+  "pitch": -0.04124196241723355,
+  "vx": 0.000850545931634739,
+  "vz": 2.4997179634518857e-05,
+  "w": 0.10545567829246753
+ },
+ "pitch_range_deg": [
+  -12.6,
+  14.8
+ ],
+ "extension": {
+  "target": {
+   "fore": [
+    57.0,
+    52.0
+   ],
+   "hind": [
+    -6.0,
+    52.0
+   ]
+  },
+  "err_min_deg": 2.57,
+  "reached_at_s": 0.927,
+  "tol_deg": 3.0
+ },
+ "events": {
+  "t_air": 0.909,
+  "td": {
+   "fore": 1.1360000000000001,
+   "hind": 1.2510000000000001
+  },
+  "lo": {
+   "fore": 0.8270000000000001,
+   "hind": 0.909
+  },
+  "mark_hind_lo": -0.18559967293128948,
+  "mark_fore_td": 0.4655531381250323,
+  "in_air_both": false,
+  "t_push_fore": 0.783,
+  "t_push_hind": 0.806,
+  "x_air": 0.14481407289399553,
+  "x_td": 0.2760122744520121
+ },
+ "joints": {
+  "fore_q0": {
+   "motor": "RobStride 03",
+   "peak_joint_Nm": 60.0,
+   "rated_joint_Nm": 20.0,
+   "free_speed_deg_s": 965,
+   "peak_Nm": 60.0,
+   "peak_frac": 1.0,
+   "rms_Nm": 15.1,
+   "peak_speed_deg_s": 990,
+   "speed_frac": 1.03,
+   "phase_A_peak": 25.4,
+   "range_used_deg": [
+    7.5,
+    58.6
+   ],
+   "stop_load_Nm": 0.0,
+   "range_deg": [
+    0,
+    60
+   ]
+  },
+  "fore_q1": {
+   "motor": "RobStride 04",
+   "peak_joint_Nm": 54.5,
+   "rated_joint_Nm": 18.2,
+   "free_speed_deg_s": 2070,
+   "peak_Nm": 54.5,
+   "peak_frac": 1.0,
+   "rms_Nm": 13.1,
+   "peak_speed_deg_s": 1525,
+   "speed_frac": 0.74,
+   "phase_A_peak": 50.0,
+   "range_used_deg": [
+    50.9,
+    123.0
+   ],
+   "stop_load_Nm": 0.0,
+   "range_deg": [
+    50,
+    140
+   ]
+  },
+  "hind_q0": {
+   "motor": "RobStride 06",
+   "peak_joint_Nm": 36.0,
+   "rated_joint_Nm": 11.0,
+   "free_speed_deg_s": 2376,
+   "peak_Nm": 36.0,
+   "peak_frac": 1.0,
+   "rms_Nm": 14.0,
+   "peak_speed_deg_s": 446,
+   "speed_frac": 0.19,
+   "phase_A_peak": 33.0,
+   "range_used_deg": [
+    -8.6,
+    35.1
+   ],
+   "stop_load_Nm": 0.0,
+   "range_deg": [
+    -9,
+    67
+   ]
+  },
+  "hind_q1": {
+   "motor": "RobStride 06",
+   "peak_joint_Nm": 36.0,
+   "rated_joint_Nm": 11.0,
+   "free_speed_deg_s": 2376,
+   "peak_Nm": 36.0,
+   "peak_frac": 1.0,
+   "rms_Nm": 16.7,
+   "peak_speed_deg_s": 1261,
+   "speed_frac": 0.53,
+   "phase_A_peak": 33.0,
+   "range_used_deg": [
+    51.5,
+    113.2
+   ],
+   "stop_load_Nm": 0.0,
+   "range_deg": [
+    50,
+    146
+   ]
+  }
+ },
+ "bus_A_peak": 144.1,
+ "bus_A_regen_peak": -24.1,
+ "energy_J": 1768.0,
+ "ground_force_peak_N": {
+  "fore": 2205,
+  "hind": 976
+ },
+ "landing_force_peak_N": {
+  "fore": 1921,
+  "hind": 820
+ },
+ "landing_force_peak_bw": {
+  "fore": 4.7,
+  "hind": 2.01
+ },
+ "grip_max": 0.7,
+ "slip_peak_m_s": 0.987,
+ "slide_mm": 130.5,
+ "tendon_peak_N": 742,
+ "tendon_SF": 21.6,
+ "gas_min_len_mm": 91.4,
+ "gas_bottom_mm": 84.0,
+ "leg_leg_min_mm": 308.0,
+ "body_floor_contact": null,
+ "cost": -0.0985,
+ "hoof_clearance_flight_min_mm": 10.0,
+ "hoof_clearance_flight_max_mm": 112.0
+}

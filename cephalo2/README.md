@@ -18,6 +18,8 @@ PNG renders and caches are left out.
 - `cephalo4.py`, `sim4.py`, `body4.py`, `viz4.py`: the MuJoCo robot model, controller and renderer used by the
   movement studies (`*4.py` scripts and their `*.md` notes).
 - `environment-and-conventions.md`: units, frames and the Python environment.
+- `centauri_leap/`: Centauri-1 (Cephalo-2 on the Hippos-1 rev C legs) extended bounding leap and landing,
+  with loads, currents and a 3D replay. See `centauri_leap/README.md`.
 
 ## Running
 

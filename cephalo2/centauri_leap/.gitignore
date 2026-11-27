@@ -1,0 +1,8 @@
+__pycache__/
+sens_*.xml
+sens_*_info.json
+search*.log
+best_params_v0.json
+best_params_v1.json
+best_params_v2.json
+best_params_v3.json
