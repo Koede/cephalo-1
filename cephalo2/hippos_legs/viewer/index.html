@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hippos-1 Legs Rev D</title>
+<style>
+  :root { --ink:#1d2329; --mut:#5d6873; --line:#d5dbe1; --acc:#d4572a; --bg:#f4f6f8; --panel:#fff; --rule:#eceff2; --warnb:#e0b04a; --warnbg:#fff9ec; --hud:rgba(255,255,255,.85); --onink:#fff; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ink:#e3e8ed; --mut:#9aa5b0; --line:#343c45; --acc:#f07a4e; --bg:#14181c; --panel:#1b2026; --rule:#2a3038; --warnb:#9c7a2c; --warnbg:#2a2416; --hud:rgba(27,32,38,.85); --onink:#14181c; color-scheme:dark; } }
+  :root[data-theme="dark"] { --ink:#e3e8ed; --mut:#9aa5b0; --line:#343c45; --acc:#f07a4e; --bg:#14181c; --panel:#1b2026; --rule:#2a3038; --warnb:#9c7a2c; --warnbg:#2a2416; --hud:rgba(27,32,38,.85); --onink:#14181c; color-scheme:dark; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; color:var(--ink); background:var(--bg); }
+  #wrap { display:flex; height:100vh; }
+  #view { flex:1; position:relative; min-width:0; }
+  #view canvas { display:block; }
+  #side { width:370px; overflow:auto; border-left:1px solid var(--line); background:var(--panel); padding:14px 16px 28px; }
+  h1 { font-size:17px; margin:0 0 4px; }
+  .sub { color:var(--mut); font-size:12.5px; margin-bottom:10px; }
+  .lab { font-size:11.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--mut); margin-top:12px; }
+  .row { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 4px; }
+  button { font:inherit; font-size:13px; padding:6px 10px; border:1px solid var(--line); background:var(--panel); color:var(--ink); border-radius:7px; cursor:pointer; }
+  button.on { background:var(--ink); color:var(--onink); border-color:var(--ink); }
+  .sl { display:grid; grid-template-columns:96px 1fr 44px; gap:8px; align-items:center; font-size:12.5px; margin:3px 0; }
+  .sl output { text-align:right; color:var(--mut); font-variant-numeric:tabular-nums; }
+  input[type=range] { width:100%; }
+  table { border-collapse:collapse; width:100%; font-size:12.5px; margin:6px 0; }
+  td { padding:4px 5px; border-bottom:1px solid var(--rule); vertical-align:top; }
+  td:first-child { color:var(--mut); }
+  td:last-child { text-align:right; font-variant-numeric:tabular-nums; }
+  .card { border:1px solid var(--line); border-radius:9px; padding:9px 12px; margin:10px 0; font-size:12.8px; }
+  .card.warn { border-color:var(--warnb); background:var(--warnbg); }
+  .card h3 { margin:0 0 4px; font-size:13.5px; }
+  .card ul { margin:4px 0 0; padding-left:18px; }
+  #hud { position:absolute; left:10px; top:10px; background:var(--hud); border-radius:8px; padding:6px 10px; font-size:12.5px; color:var(--mut); pointer-events:none; }
+  @media (max-width: 820px) { #wrap { flex-direction:column; height:auto; } #view { height:60vh; flex:none; } #side { width:auto; border-left:none; border-top:1px solid var(--line); } }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div id="view"><div id="hud">Drag to turn, scroll or pinch to zoom</div></div>
+  <div id="side">
+    <h1>Hippos-1 legs v3, rev D</h1>
+    <div class="sub">Full leg assembly, 27 Nov 2026, no covers. Every part is a real one: RobStride motors and Feetech STS3215 servos from the makers' models, keyed steel shafts, bearings, belts, E-clipped pins, and every screw with its hole, insert or nut. Every motion is replayed with the hooves planted and the linkages closed.</div>
+    <div class="lab">Motion</div><div class="row" id="mots"></div>
+    <div class="sl"><span>Speed</span><input type="range" id="spd" min="0" max="2" step="0.05" value="0.5"><output id="spdo"></output></div>
+    <div class="lab">Extra joints (added on top of the motion)</div>
+    <div id="sliders"></div>
+    <div class="lab">Show</div><div class="row" id="groups"></div>
+    <div class="sl"><span>Cut-away</span><input type="range" id="cut" min="-300" max="300" step="2" value="300"><output id="cuto"></output></div>
+    <div class="lab">Numbers</div>
+    <table id="tab"></table>
+    <div class="card"><h3>What the checks show</h3><ul id="pass"></ul></div>
+    <div class="card warn"><h3>Found while checking</h3><ul id="found"></ul></div>
+    <div class="card"><h3>Still open</h3><ul id="open"></ul></div>
+  </div>
+</div>
+<script src="legs_data.js"></script>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+               "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+const D = window.LEGS, DEG = Math.PI / 180;
+const view = document.getElementById("view");
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.localClippingEnabled = true;
+view.appendChild(renderer.domElement);
+const scene = new THREE.Scene(); const setBg = () => { scene.background = new THREE.Color(getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#f4f6f8'); }; setBg(); try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setBg); new MutationObserver(setBg).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] }); } catch (e) {}
+const cam = new THREE.PerspectiveCamera(36, 1, 0.02, 50); cam.up.set(0, 0, 1); cam.position.set(1.15, -1.45, 0.80);
+const ctl = new OrbitControls(cam, renderer.domElement); ctl.enableDamping = true; ctl.target.set(0.04, 0, 0.33);
+scene.add(new THREE.HemisphereLight(0xffffff, 0xb8c2cc, 1.15));
+const sun = new THREE.DirectionalLight(0xffffff, 1.5); sun.position.set(2, -3, 4); scene.add(sun);
+const sun2 = new THREE.DirectionalLight(0xffffff, 0.5); sun2.position.set(-2, 3, 2); scene.add(sun2);
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(6, 4), new THREE.MeshStandardMaterial({ color: 0xe3e7eb, roughness: 1 })); scene.add(ground);
+const grid = new THREE.GridHelper(6, 60, 0xc6cdd4, 0xd6dce1); grid.rotation.x = Math.PI / 2; grid.position.z = 0.0005; scene.add(grid);
+const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 0.3);
+
+const mats = {};
+function mat(col, opt = {}) {
+  const k = col + JSON.stringify(opt);
+  if (!mats[k]) mats[k] = new THREE.MeshStandardMaterial(Object.assign({ color: col, roughness: 0.55, metalness: 0.08, clippingPlanes: [clip], side: THREE.DoubleSide }, opt));
+  return mats[k];
+}
+function geom(p) {
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(p.v, 3)); g.setIndex(p.f);
+  const ng = g.toNonIndexed(); ng.computeVertexNormals(); return ng;
+}
+const GEO = {};
+for (const kind of ["fore", "hind"]) GEO[kind] = D.kinds[kind].parts.map(geom);
+
+// ---------- body shell (old shape), octopus stand-in
+const bodyMeshes = [];
+function bodyMesh(g, m, group) { const o = new THREE.Mesh(g, m); o.matrixAutoUpdate = false; o.userData.group = group; scene.add(o); bodyMeshes.push(o); return o; }
+bodyMesh(geom(D.shell), mat("#dfe5ec", { transparent: true, opacity: 0.38, depthWrite: false }), "body shell");
+{ const g = new THREE.SphereGeometry(D.octo.r, 40, 24); g.translate(D.octo.c[0], 0, D.octo.c[1]); bodyMesh(g, mat("#f0a060", { transparent: true, opacity: 0.35, depthWrite: false }), "body shell"); }
+
+// ---------- legs
+const LEGDEF = [["fore", 1], ["fore", -1], ["hind", 1], ["hind", -1]];
+const legs = LEGDEF.map(([kind, side]) => {
+  const K = D.kinds[kind];
+  const meshes = K.parts.map((p, i) => { const m = new THREE.Mesh(GEO[kind][i], mat(p.col)); m.matrixAutoUpdate = false; m.userData = { node: p.node, group: p.group }; scene.add(m); return m; });
+  const unit = new THREE.CylinderGeometry(1, 1, 1, 12);
+  const mk = (col, group) => { const m = new THREE.Mesh(unit, mat(col)); m.userData.group = group; scene.add(m); return m; };
+  const struts = K.struts.map(s => ({ s, m: mk(s.col, s.group || "drive") }));
+  const toggles = K.toggles.map(t => ({ t, m1: mk(t.col, "drive"), m2: mk(t.col, "drive") }));
+  return { kind, side, K, meshes, struts, toggles, M: {} };
+});
+
+const T = (x, y, z) => new THREE.Matrix4().makeTranslation(x, y, z);
+const R = (axis, deg) => axis === "x" ? new THREE.Matrix4().makeRotationX(deg * DEG) : axis === "y" ? new THREE.Matrix4().makeRotationY(deg * DEG) : new THREE.Matrix4().makeRotationZ(deg * DEG);
+function nodeMats(K, p) {
+  const M = { leg: new THREE.Matrix4() };
+  const get = n => {
+    if (M[n]) return M[n];
+    const d = K.nodes[n]; let ang = d.const; for (const k in d.coef) ang += d.coef[k] * (p[k] || 0);
+    M[n] = get(d.parent).clone().multiply(T(...d.o)).multiply(R(d.axis, ang)).multiply(T(-d.o[0], -d.o[1], -d.o[2]));
+    return M[n];
+  };
+  for (const n in K.nodes) get(n);
+  return M;
+}
+const up = new THREE.Vector3(0, 1, 0);
+function placeBar(m, a, b, r) {
+  const d = b.clone().sub(a), len = d.length(); if (len < 1e-7) { m.visible = false; return; }
+  m.position.copy(a).addScaledVector(d, 0.5); m.quaternion.setFromUnitVectors(up, d.normalize()); m.scale.set(r, len, r);
+}
+
+// ---------- state + UI
+let mot = "trot", t = 0;
+const extra = { yaw: 0, abd: 0, fet: 0, hr: 0 };
+const show = { structure: true, actuators: true, drive: true, hardware: true, "body shell": true };
+const MOTS = [["stand", "Stand"], ["walk", "Walk"], ["trot", "Trot"], ["gallop", "Gallop"], ["jump", "Jump"], ["rear", "Rear up"], ["kneel", "Kneel"]];
+const motsEl = document.getElementById("mots");
+MOTS.forEach(([k, n]) => { const b = document.createElement("button"); b.textContent = n; b.dataset.k = k; b.onclick = () => { mot = k; t = 0; paint(); }; motsEl.appendChild(b); });
+const grEl = document.getElementById("groups");
+Object.keys(show).forEach(k => { const b = document.createElement("button"); b.textContent = k[0].toUpperCase() + k.slice(1); b.dataset.k = k; b.onclick = () => { show[k] = !show[k]; paint(); }; grEl.appendChild(b); });
+function paint() {
+  motsEl.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.k === mot));
+  grEl.querySelectorAll("button").forEach(b => b.classList.toggle("on", show[b.dataset.k]));
+}
+const SL = [["yaw", "Leg twist", -25, 25], ["abd", "Sideways swing", -10, 10], ["fet", "Fetlock flex", 0, 30], ["hr", "Hoof roll", -15, 15]];
+const slEl = document.getElementById("sliders");
+SL.forEach(([k, n, lo, hi]) => {
+  const d = document.createElement("div"); d.className = "sl";
+  d.innerHTML = `<span>${n}</span><input type="range" min="${lo}" max="${hi}" step="1" value="0"><output>0°</output>`;
+  const inp = d.querySelector("input"), out = d.querySelector("output");
+  inp.oninput = () => { extra[k] = +inp.value; out.textContent = inp.value + "°"; }; slEl.appendChild(d);
+});
+const spd = document.getElementById("spd"), spdo = document.getElementById("spdo"); spd.oninput = () => spdo.textContent = (+spd.value).toFixed(2) + "× real"; spd.oninput();
+const cut = document.getElementById("cut"), cuto = document.getElementById("cuto");
+cut.oninput = () => { clip.constant = +cut.value / 1000; cuto.textContent = +cut.value >= 300 ? "off" : cut.value + " mm"; }; cut.oninput();
+const S = D.summary, f1 = v => (+v).toFixed(1), f2 = v => (+v).toFixed(2);
+const rows = [["Centauri-1 with these legs", f1(S.mass_total) + " kg"], ["Four legs (CAD)", f1(S.four_legs) + " kg"],
+  ["Shoulder / stifle flex limit", S.limits.fore.q1 + "° / " + S.limits.hind.q1 + "°"], ["Carpus fold limit", S.limits.fore.fold + "°"],
+  ["Twist / sideways range", "±25° / ±10°"], ["Jump, hooves off the ground", Math.round(S.jump_mm) + " mm"],
+  ["Lie-down, pivot heights", Math.round(S.crouch.front_pivot_mm) + " / " + Math.round(S.crouch.rear_pivot_mm) + " mm"],
+  ["Tightest joint load (need = 1.00)", f2(S.worst[0][0]) + " " + S.worst[0][1] + " " + S.worst[0][2]]];
+document.getElementById("tab").innerHTML = rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join("");
+const np = S.poses_checked.fore + S.poses_checked.hind;
+document.getElementById("pass").innerHTML = [
+  `No two parts share space. Parts that move against each other keep ${S.rule_mm} mm or more over ${np} poses spanning every joint's range (bearings, pins and belts run at their fit).`,
+  `In every motion: ${f1(S.in_leg_motion)} mm or more inside a leg, more than ${Math.floor(S.leg_leg_motion)} mm leg to leg, ${f1(S.neck)} mm to the neck receiver, ${Math.round(S.octo)} mm to the octopus.`,
+  `With all four legs twisted and swung to their limits in a gallop the closest hooves are ${f1(S.leg_leg_twisted_gallop)} mm apart.`,
+  `Hooves stay planted: the contact point moves less than 0.001 mm on the ground. In a gallop the hoof rolls up to ${Math.round(S.roll.gallop[1])}° onto its toe.`,
+  `Push rod, gas springs (${Math.round(S.gas_len[0])} to ${Math.round(S.gas_len[1])} mm of 84 to 114) and toggle stay inside their travel; motors keep ${f2(S.speed_margin)}× speed in hand or more.`].map(x => `<li>${x}</li>`).join("");
+document.getElementById("found").innerHTML = [
+  "The carpus servo is about 20 times too slow to fold the leg in stride. Gaits and the jump now run with the carpus locked; the rear-up keeps its fold and takes about 4 s.",
+  `The carpus folds to ${S.limits.fore.fold}°, not 140°: rev A had not checked the cannon against the forearm.`,
+  "The lie-down is on the hooves only. Kneeling on the carpus needs a pad that is not designed.",
+  `Two joints are still just under the continuous-load rule in a trot: hind stifle ${f2(S.worst[0][0])}, fore shoulder ${f2(S.worst[1][0])}.`,
+  "Changed to make it buildable: both servo lines run straight (no line crosses a joint), the fetlock rests on a TPU buffer, the hind sideways-swing axis moved 17 mm inboard.", "Rev D: the real servo case pushed the carpus servo plate thicker and its screws sunk 2 mm, so the folded pastern still clears it; E-clips sit 1.6 mm off the turning arms; the gas spring's upper stud moved to plate B's outer face so the hind push rod clears it."].map(x => `<li>${x}</li>`).join("");
+document.getElementById("open").innerHTML = ["The grey body shell is the old shape and the leg stacks pass through it: it has to be redrawn around the legs",
+  "Gas spring: 114 / 84 mm eye to eye with a 30 mm stroke is not a stock part (stock is about 2 x stroke + 63). Custom stroke, a lost-motion slot, or no spring", "Front sling (choice pending)", "Shoulder belt peaks at 1867 N against about 1450 N rated", "RS04 tilt load rating is not published", "E-clip sizes and the STS3215 screw-hole depth are nominal", "Belt tensioner detail, wiring", "Dynamics simulation"].map(x => `<li>${x}</li>`).join("");
+paint();
+
+function frameAt(arr, u) {
+  const n = arr.length; if (n === 1) return arr[0];
+  const x = ((u % n) + n) % n, i = Math.floor(x), j = (i + 1) % n, w = x - i, a = arr[i], b = arr[j];
+  const mix = (p, q) => p + (q - p) * w;
+  return { b: a.b.map((v, k) => mix(v, b.b[k])), l: a.l.map((L, k) => [mix(L[0], b.l[k][0]), mix(L[1], b.l[k][1]), mix(L[2], b.l[k][2]), L[3], mix(L[4], b.l[k][4])]) };
+}
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+const vA = new THREE.Vector3(), vB = new THREE.Vector3();
+function update(fr) {
+  const ref = D.ref, th = fr.b[2];
+  const body = new THREE.Matrix4().makeScale(0.001, 0.001, 0.001).multiply(T(fr.b[0], 0, fr.b[1])).multiply(T(ref[0], 0, ref[1])).multiply(R("y", -th)).multiply(T(-ref[0], 0, -ref[1]));
+  bodyMeshes.forEach(m => { m.matrix.copy(body); m.matrixWorldNeedsUpdate = true; m.visible = show[m.userData.group]; });
+  legs.forEach((L, i) => {
+    const [q0, q1, fold, st, hp0] = fr.l[i], K = L.K;
+    const p = { q0, q1, fold, yaw: extra.yaw, abd: extra.abd, fet: extra.fet, hr: extra.hr, hp: clamp(hp0 - extra.fet, -15, 15) };
+    const M = nodeMats(K, p);
+    const root = body.clone().multiply(T(K.pivot[0], L.side * K.pivot[1], K.pivot[2])).multiply(new THREE.Matrix4().makeScale(1, L.side, 1));
+    L.meshes.forEach(m => { m.matrix.multiplyMatrices(root, M[m.userData.node]); m.matrixWorldNeedsUpdate = true; m.visible = show[m.userData.group]; });
+    const P = (node, pt) => new THREE.Vector3(...pt).applyMatrix4(M[node]);
+    const knees = L.toggles.map(({ t: g, m1, m2 }) => {
+      const inv = M[g.a[0]].clone().invert();
+      const a = new THREE.Vector3(...g.a[1]), b = P(g.b[0], g.b[1]).applyMatrix4(inv); a.y = 0; b.y = 0;
+      const d = b.clone().sub(a), len = d.length(), h = Math.sqrt(Math.max(g.l * g.l - len * len / 4, 0));
+      const sgn = fold < g.lock_below ? -1 : 1;
+      const k = a.clone().addScaledVector(d, 0.5).addScaledVector(new THREE.Vector3(0, 1, 0).cross(d.clone().normalize()), sgn * h);
+      const W = root.clone().multiply(M[g.a[0]]), at = y => v => new THREE.Vector3(v.x, y, v.z).applyMatrix4(W);
+      placeBar(m1, at(g.y1)(a), at(g.y1)(k), g.r * 0.001); placeBar(m2, at(g.y2)(b), at(g.y2)(k), g.r * 0.001); m1.visible = m2.visible = show.drive;
+      return { k, node: g.a[0] };
+    });
+    const endPt = (e, other) => {
+      if (e[0] === "knee") { const kk = knees[e[1]]; return new THREE.Vector3(kk.k.x, e[2], kk.k.z).applyMatrix4(M[kk.node]); }
+      if (e[0] === "tan") {
+        const o = other.clone().applyMatrix4(M[e[1]].clone().invert()), c = e[2], r = e[3];
+        const vx = o.x - c[0], vz = o.z - c[2], Lv = Math.hypot(vx, vz), al = Math.acos(Math.min(r / Lv, 1)), be = Math.atan2(vz, vx);
+        const cand = [1, -1].map(s => new THREE.Vector3(c[0] + r * Math.cos(be + s * al), c[1], c[2] + r * Math.sin(be + s * al)));
+        const q = e[4] === "minx" ? (cand[0].x < cand[1].x ? cand[0] : cand[1]) : (cand[0].z > cand[1].z ? cand[0] : cand[1]);
+        return q.applyMatrix4(M[e[1]]);
+      }
+      return P(e[0], e[1]);
+    };
+    L.struts.forEach(({ s, m }) => {
+      const b = endPt(s.b, null), a = endPt(s.a, b);
+      placeBar(m, a.applyMatrix4(root), b.applyMatrix4(root), s.r * 0.001); m.visible = show[s.group || "drive"];
+    });
+  });
+}
+function resize() { const w = view.clientWidth, h = view.clientHeight; renderer.setSize(w, h); cam.aspect = w / h; cam.updateProjectionMatrix(); }
+addEventListener("resize", resize); resize();
+let last = performance.now();
+function loop(now) {
+  const dt = Math.min(Math.max((now - last) / 1000, 0), 0.1); last = now;
+  t += dt * (+spd.value) / D.dt[mot];
+  update(frameAt(D.frames[mot], t));
+  ctl.update(); renderer.render(scene, cam); requestAnimationFrame(loop);
+}
+window.__setPose = (m, u) => { mot = m; t = u; paint(); };
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>

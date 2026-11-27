@@ -1,0 +1,158 @@
+{
+ "rule_mm": 1.5,
+ "running_fit_mm": 0.02,
+ "range": {
+  "fore": {
+   "q0": [
+    0,
+    60
+   ],
+   "q1": [
+    50,
+    140
+   ],
+   "fold": [
+    0,
+    120
+   ],
+   "yaw": [
+    -25,
+    25
+   ],
+   "abd": [
+    -10,
+    10
+   ],
+   "fet": [
+    0,
+    30
+   ],
+   "hp": [
+    -15,
+    15
+   ],
+   "hr": [
+    -15,
+    15
+   ]
+  },
+  "hind": {
+   "q0": [
+    -9,
+    67
+   ],
+   "q1": [
+    50,
+    146
+   ],
+   "yaw": [
+    -25,
+    25
+   ],
+   "abd": [
+    -10,
+    10
+   ],
+   "fet": [
+    0,
+    30
+   ],
+   "hp": [
+    -15,
+    15
+   ],
+   "hr": [
+    -15,
+    15
+   ]
+  }
+ },
+ "result": {
+  "fore": {
+   "poses": 1741,
+   "tightest": 1.5,
+   "tightest_pair": [
+    "abduction cradle (deck, yaw spindle, lugs)",
+    "hip bracket, rear (abduction motor ring)"
+   ],
+   "tightest_at": {
+    "q0": 0.0,
+    "q1": 50.0,
+    "yaw": -25.0,
+    "abd": -10.0,
+    "fold": 0.0
+   },
+   "under_rule": [],
+   "elastic": [
+    {
+     "gap": 0.05,
+     "a": "fore fetlock buffer (TPU 95A)",
+     "b": "fore pastern (flexor horn, buffer horn)",
+     "at": {
+      "q0": 29.99999999999998,
+      "q1": 140,
+      "fold": 120,
+      "fet": 0.0,
+      "hp": 15.0,
+      "hr": 15.0
+     }
+    },
+    {
+     "gap": 0.0,
+     "a": "fore pastern (flexor horn, buffer horn)",
+     "b": "fore hoof centring ring (TPU)",
+     "at": {
+      "q0": 29.99999999999998,
+      "q1": 50,
+      "fold": 0.0,
+      "fet": 0.0,
+      "hp": 15.0,
+      "hr": -15.0
+     }
+    }
+   ]
+  },
+  "hind": {
+   "poses": 580,
+   "tightest": 1.5,
+   "tightest_pair": [
+    "femur (plates A + B, drum A)",
+    "stifle driven crank 40 mm (6061, keyed)"
+   ],
+   "tightest_at": {
+    "q0": 34.99999999999997,
+    "q1": 50.0,
+    "fold": 0.0
+   },
+   "under_rule": [],
+   "elastic": [
+    {
+     "gap": 0.05,
+     "a": "hind fetlock buffer (TPU 95A)",
+     "b": "hind pastern (flexor horn, buffer horn)",
+     "at": {
+      "q0": 34.99999999999997,
+      "q1": 146,
+      "fold": 0.0,
+      "fet": 0.0,
+      "hp": 15.0,
+      "hr": 15.0
+     }
+    },
+    {
+     "gap": 0.0,
+     "a": "hind pastern (flexor horn, buffer horn)",
+     "b": "hind hoof centring ring (TPU)",
+     "at": {
+      "q0": 34.99999999999997,
+      "q1": 50,
+      "fold": 0.0,
+      "fet": 0.0,
+      "hp": 15.0,
+      "hr": -15.0
+     }
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,1067 @@
+{
+ "fore": {
+  "parts": [
+   [
+    "yaw yoke + 56T hub",
+    "yoke",
+    true,
+    181.6,
+    0.12
+   ],
+   [
+    "pivot motor RS03",
+    "yoke",
+    false,
+    362.2,
+    0.774
+   ],
+   [
+    "pivot motor RS03 output rotor",
+    "upper",
+    false,
+    18.3,
+    0.106
+   ],
+   [
+    "pivot output adapter (2 mm steel, dowelled)",
+    "upper",
+    false,
+    3.6,
+    0.03
+   ],
+   [
+    "yaw bearings 2 x 61810",
+    "cradle",
+    false,
+    18.6,
+    0.104
+   ],
+   [
+    "yaw yoke circlip DIN 472 65 mm",
+    "yoke",
+    false,
+    2.4,
+    0.008
+   ],
+   [
+    "stub bearing 6805",
+    "yoke",
+    false,
+    4.0,
+    0.021
+   ],
+   [
+    "joint motor RS04 (rides on the upper segment)",
+    "upper",
+    false,
+    513.8,
+    1.25
+   ],
+   [
+    "joint motor RS04 output rotor",
+    "drive",
+    false,
+    16.9,
+    0.17
+   ],
+   [
+    "joint motor back cup + 25 mm stub (6061)",
+    "upper",
+    false,
+    42.6,
+    0.117
+   ],
+   [
+    "abduction cradle (deck, yaw spindle, lugs)",
+    "cradle",
+    true,
+    263.8,
+    0.174
+   ],
+   [
+    "yaw bearing clamp washer (2 mm steel)",
+    "cradle",
+    false,
+    3.2,
+    0.02
+   ],
+   [
+    "yaw motor RS02 (hung, output up)",
+    "cradle",
+    false,
+    175.7,
+    0.356
+   ],
+   [
+    "yaw motor RS02 output rotor",
+    "cradle",
+    false,
+    7.8,
+    0.049
+   ],
+   [
+    "yaw pulley 28T-5M (steel, on the RS02 output)",
+    "cradle",
+    false,
+    27.2,
+    0.03
+   ],
+   [
+    "yaw belt 490-5M-15 (28T : 56T)",
+    "cradle",
+    false,
+    12.7,
+    0.03
+   ],
+   [
+    "abduction output flange (4 mm steel)",
+    "cradle",
+    false,
+    2.8,
+    0.03
+   ],
+   [
+    "abduction front stub 15 mm (in a 6802)",
+    "cradle",
+    false,
+    3.3,
+    0.025
+   ],
+   [
+    "hip bracket, rear (abduction motor ring)",
+    "rocker",
+    true,
+    18.3,
+    0.012
+   ],
+   [
+    "hip bracket, front (journal)",
+    "rocker",
+    true,
+    15.4,
+    0.01
+   ],
+   [
+    "abduction motor RS06",
+    "rocker",
+    false,
+    252.4,
+    0.546
+   ],
+   [
+    "abduction motor RS06 output rotor",
+    "cradle",
+    false,
+    6.5,
+    0.075
+   ],
+   [
+    "abduction bearing 6802",
+    "rocker",
+    false,
+    1.4,
+    0.007
+   ],
+   [
+    "shoulder drive pulley 46T-8M (aluminium, on the RS04 output)",
+    "drive",
+    false,
+    260.8,
+    0.728
+   ],
+   [
+    "shoulder belt 576-8M-20 (46T : 22T)",
+    "upper",
+    false,
+    30.6,
+    0.09
+   ],
+   [
+    "belt idler 22T-8M on a slotted pin",
+    "upper",
+    false,
+    58.6,
+    0.07
+   ],
+   [
+    "scapula (plates A + B, drum A)",
+    "upper",
+    true,
+    288.5,
+    0.19
+   ],
+   [
+    "shoulder bearings 2 x 6805",
+    "upper",
+    false,
+    6.9,
+    0.042
+   ],
+   [
+    "shoulder pulley 22T-8M, flanged, keyed (6061)",
+    "middle",
+    false,
+    46.7,
+    0.126
+   ],
+   [
+    "humerus shaft 25 / 12 mm 4140 tube (3 keyways)",
+    "middle",
+    false,
+    28.8,
+    0.226
+   ],
+   [
+    "humerus keys DIN 6885 A 8 x 7 (3)",
+    "middle",
+    false,
+    2.4,
+    0.012
+   ],
+   [
+    "humerus shaft spacers (4 sleeves, steel)",
+    "middle",
+    false,
+    1.6,
+    0.012
+   ],
+   [
+    "humerus arm, outer (6061 plate, keyed)",
+    "middle",
+    false,
+    42.3,
+    0.115
+   ],
+   [
+    "humerus arm, inner (6061 plate, keyed)",
+    "middle",
+    false,
+    42.6,
+    0.115
+   ],
+   [
+    "humerus arm set screws 2 x M5 x 6 cup point",
+    "middle",
+    false,
+    0.2,
+    0.002
+   ],
+   [
+    "humerus pin bearings 2 x 6800",
+    "middle",
+    false,
+    2.0,
+    0.01
+   ],
+   [
+    "elbow tendons Dyneema 3 mm (parallel pair)",
+    "middle",
+    false,
+    1.5,
+    0.004
+   ],
+   [
+    "gas spring upper stud, ISO 7379 8 x 16 M6 shoulder screw",
+    "upper",
+    false,
+    1.8,
+    0.014
+   ],
+   [
+    "gas spring upper stud spacer sleeves (2, steel)",
+    "upper",
+    false,
+    0.5,
+    0.004
+   ],
+   [
+    "gas spring upper stud heat-set insert M6 x 12.7",
+    "upper",
+    false,
+    0.2,
+    0.002
+   ],
+   [
+    "gas spring middle stud, ISO 7379 8 x 16 M6 shoulder screw",
+    "middle",
+    false,
+    1.8,
+    0.014
+   ],
+   [
+    "gas spring middle stud spacer sleeves (2, steel)",
+    "middle",
+    false,
+    0.5,
+    0.004
+   ],
+   [
+    "forearm (elbow head, drum B, carpus fork)",
+    "lower",
+    true,
+    117.5,
+    0.078
+   ],
+   [
+    "elbow pin 10 mm",
+    "lower",
+    false,
+    6.7,
+    0.05
+   ],
+   [
+    "elbow pin 10 mm E-clips DIN 6799 (2)",
+    "lower",
+    false,
+    0.2,
+    0.001
+   ],
+   [
+    "carpus pin 10 mm (its +y end is the toggle's stop)",
+    "lower",
+    false,
+    3.9,
+    0.03
+   ],
+   [
+    "carpus pin 10 mm E-clips DIN 6799 (1)",
+    "lower",
+    false,
+    0.1,
+    0.001
+   ],
+   [
+    "carpus return spring (torsion, on the pin)",
+    "lower",
+    false,
+    1.0,
+    0.006
+   ],
+   [
+    "toggle pin A 8 mm",
+    "lower",
+    false,
+    0.5,
+    0.004
+   ],
+   [
+    "carpus servo STS3215 (on the forearm)",
+    "lower",
+    false,
+    35.6,
+    0.055
+   ],
+   [
+    "carpus release spool (on the servo spline)",
+    "lower",
+    false,
+    2.6,
+    0.006
+   ],
+   [
+    "fore fetlock pin 6 mm",
+    "cannon",
+    false,
+    0.8,
+    0.006
+   ],
+   [
+    "fore fetlock pin 6 mm E-clips DIN 6799 (2)",
+    "cannon",
+    false,
+    0.1,
+    0.001
+   ],
+   [
+    "fore fetlock buffer (TPU 95A)",
+    "cannon",
+    true,
+    1.5,
+    0.001
+   ],
+   [
+    "fore pastern (flexor horn, buffer horn)",
+    "pastern",
+    true,
+    8.1,
+    0.005
+   ],
+   [
+    "fore hoof ball joint SKF GE 8 E",
+    "pastern",
+    false,
+    2.1,
+    0.008
+   ],
+   [
+    "fore hoof core",
+    "hoof",
+    true,
+    22.5,
+    0.015
+   ],
+   [
+    "fore hoof shoe (TPU 95A)",
+    "hoof",
+    true,
+    12.2,
+    0.008
+   ],
+   [
+    "fore hoof centring ring (TPU)",
+    "hoof",
+    true,
+    2.5,
+    0.002
+   ],
+   [
+    "fore cannon (carpus eye, fetlock fork, toggle tab B)",
+    "cannon",
+    true,
+    36.1,
+    0.024
+   ],
+   [
+    "carpus bearings 2 x 6800",
+    "cannon",
+    false,
+    2.0,
+    0.01
+   ],
+   [
+    "toggle pin B 8 mm",
+    "cannon",
+    false,
+    0.8,
+    0.006
+   ],
+   [
+    "fetlock servo STS3215 (on the fore cannon)",
+    "cannon",
+    false,
+    35.6,
+    0.055
+   ],
+   [
+    "fore cannon flexor spool (on the servo spline)",
+    "cannon",
+    false,
+    2.0,
+    0.006
+   ],
+   [
+    "pivot motor to yoke screws 4 x M4 x 14",
+    "yoke",
+    false,
+    1.1,
+    0.01
+   ],
+   [
+    "plate A to pivot output screws 6 x M4 x 16",
+    "upper",
+    false,
+    1.7,
+    0.017
+   ],
+   [
+    "joint motor to plate B screws 10 x M4 x 10",
+    "upper",
+    false,
+    2.2,
+    0.022
+   ],
+   [
+    "joint motor back cup screws 10 x M4 x 8",
+    "upper",
+    false,
+    1.9,
+    0.02
+   ],
+   [
+    "yaw clamp washer screws 3 x M3 x 10",
+    "cradle",
+    false,
+    0.4,
+    0.003
+   ],
+   [
+    "yaw clamp washer heat-set inserts 3 x M3",
+    "cradle",
+    false,
+    0.1,
+    0.001
+   ],
+   [
+    "yaw motor ring screws 9 x M3 x 6",
+    "cradle",
+    false,
+    0.7,
+    0.008
+   ],
+   [
+    "yaw pulley screws 6 x M4 x 25",
+    "cradle",
+    false,
+    2.7,
+    0.022
+   ],
+   [
+    "abduction lug to output screws 6 x M4 x 16",
+    "cradle",
+    false,
+    2.0,
+    0.017
+   ],
+   [
+    "abduction motor ring screws 8 x M3 x 8",
+    "rocker",
+    false,
+    0.8,
+    0.008
+   ],
+   [
+    "drive pulley to RS04 output screws 9 x M5 x 30",
+    "drive",
+    false,
+    7.6,
+    0.062
+   ],
+   [
+    "carpus servo to plate screws 4 x M2 x 6",
+    "lower",
+    false,
+    0.2,
+    0.001
+   ],
+   [
+    "carpus spool to spline screws 1 x M3 x 10",
+    "lower",
+    false,
+    0.1,
+    0.001
+   ],
+   [
+    "fore hoof shoe to core screws 3 x M3 x 8",
+    "hoof",
+    false,
+    0.4,
+    0.003
+   ],
+   [
+    "fore hoof shoe to core heat-set inserts 3 x M3",
+    "hoof",
+    false,
+    0.1,
+    0.001
+   ],
+   [
+    "fore cannon servo to plate screws 4 x M2 x 6",
+    "cannon",
+    false,
+    0.2,
+    0.001
+   ],
+   [
+    "fore cannon spool to spline screws 1 x M3 x 8",
+    "cannon",
+    false,
+    0.1,
+    0.001
+   ]
+  ],
+  "total": 6.52,
+  "swinging": 3.96,
+  "not_single_body": []
+ },
+ "hind": {
+  "parts": [
+   [
+    "yaw yoke + 56T hub",
+    "yoke",
+    true,
+    167.7,
+    0.111
+   ],
+   [
+    "pivot motor RS06",
+    "yoke",
+    false,
+    252.4,
+    0.546
+   ],
+   [
+    "pivot motor RS06 output rotor",
+    "upper",
+    false,
+    6.5,
+    0.075
+   ],
+   [
+    "pivot output adapter (2 mm steel, dowelled)",
+    "upper",
+    false,
+    3.6,
+    0.03
+   ],
+   [
+    "yaw bearings 2 x 61810",
+    "cradle",
+    false,
+    18.6,
+    0.104
+   ],
+   [
+    "yaw yoke circlip DIN 472 65 mm",
+    "yoke",
+    false,
+    2.4,
+    0.008
+   ],
+   [
+    "stub bearing 6805",
+    "yoke",
+    false,
+    4.0,
+    0.021
+   ],
+   [
+    "joint motor RS06 (rides on the upper segment)",
+    "upper",
+    false,
+    252.4,
+    0.546
+   ],
+   [
+    "joint motor RS06 output rotor",
+    "drive",
+    false,
+    6.5,
+    0.075
+   ],
+   [
+    "joint motor back cup + 25 mm stub (6061)",
+    "upper",
+    false,
+    34.1,
+    0.092
+   ],
+   [
+    "abduction cradle (deck, yaw spindle, lugs)",
+    "cradle",
+    true,
+    269.3,
+    0.178
+   ],
+   [
+    "yaw bearing clamp washer (2 mm steel)",
+    "cradle",
+    false,
+    3.2,
+    0.02
+   ],
+   [
+    "yaw motor RS02 (hung, output up)",
+    "cradle",
+    false,
+    175.7,
+    0.356
+   ],
+   [
+    "yaw motor RS02 output rotor",
+    "cradle",
+    false,
+    7.8,
+    0.049
+   ],
+   [
+    "yaw pulley 28T-5M (steel, on the RS02 output)",
+    "cradle",
+    false,
+    27.2,
+    0.03
+   ],
+   [
+    "yaw belt 490-5M-15 (28T : 56T)",
+    "cradle",
+    false,
+    12.7,
+    0.03
+   ],
+   [
+    "abduction output flange (4 mm steel)",
+    "cradle",
+    false,
+    2.5,
+    0.03
+   ],
+   [
+    "abduction front stub 15 mm (in a 6802)",
+    "cradle",
+    false,
+    3.3,
+    0.025
+   ],
+   [
+    "hip bracket, rear (abduction motor ring)",
+    "rocker",
+    true,
+    19.7,
+    0.013
+   ],
+   [
+    "hip bracket, front (journal)",
+    "rocker",
+    true,
+    15.4,
+    0.01
+   ],
+   [
+    "abduction motor RS02",
+    "rocker",
+    false,
+    175.7,
+    0.356
+   ],
+   [
+    "abduction motor RS02 output rotor",
+    "cradle",
+    false,
+    7.8,
+    0.049
+   ],
+   [
+    "abduction bearing 6802",
+    "rocker",
+    false,
+    1.4,
+    0.007
+   ],
+   [
+    "stifle drive crank 40 mm (6061, on the RS06 output)",
+    "drive",
+    false,
+    27.6,
+    0.086
+   ],
+   [
+    "stifle push rod 10 x 8 carbon, rod ends",
+    "rodn",
+    false,
+    13.2,
+    0.03
+   ],
+   [
+    "femur (plates A + B, drum A)",
+    "upper",
+    true,
+    277.2,
+    0.183
+   ],
+   [
+    "stifle bearings 2 x 6805",
+    "upper",
+    false,
+    6.9,
+    0.042
+   ],
+   [
+    "stifle driven crank 40 mm (6061, keyed)",
+    "middle",
+    false,
+    12.0,
+    0.032
+   ],
+   [
+    "tibia shaft 25 / 12 mm 4140 tube (3 keyways)",
+    "middle",
+    false,
+    29.2,
+    0.23
+   ],
+   [
+    "tibia keys DIN 6885 A 8 x 7 (3)",
+    "middle",
+    false,
+    1.5,
+    0.012
+   ],
+   [
+    "tibia shaft spacers (4 sleeves, steel)",
+    "middle",
+    false,
+    4.1,
+    0.032
+   ],
+   [
+    "tibia arm, outer (6061 plate, keyed)",
+    "middle",
+    false,
+    50.3,
+    0.137
+   ],
+   [
+    "tibia arm, inner (6061 plate, keyed)",
+    "middle",
+    false,
+    50.6,
+    0.137
+   ],
+   [
+    "tibia arm set screws 2 x M5 x 6 cup point",
+    "middle",
+    false,
+    0.2,
+    0.002
+   ],
+   [
+    "tibia pin bearings 2 x 6800",
+    "middle",
+    false,
+    2.0,
+    0.01
+   ],
+   [
+    "hock tendons Dyneema 3 mm (parallel pair)",
+    "middle",
+    false,
+    1.9,
+    0.004
+   ],
+   [
+    "gas spring upper stud, ISO 7379 8 x 16 M6 shoulder screw",
+    "upper",
+    false,
+    1.8,
+    0.014
+   ],
+   [
+    "gas spring upper stud spacer sleeves (2, steel)",
+    "upper",
+    false,
+    0.5,
+    0.004
+   ],
+   [
+    "gas spring upper stud heat-set insert M6 x 12.7",
+    "upper",
+    false,
+    0.2,
+    0.002
+   ],
+   [
+    "gas spring middle stud, ISO 7379 8 x 16 M6 shoulder screw",
+    "middle",
+    false,
+    1.8,
+    0.014
+   ],
+   [
+    "gas spring middle stud spacer sleeves (2, steel)",
+    "middle",
+    false,
+    0.5,
+    0.004
+   ],
+   [
+    "hind fetlock pin 6 mm",
+    "lower",
+    false,
+    0.8,
+    0.006
+   ],
+   [
+    "hind fetlock pin 6 mm E-clips DIN 6799 (2)",
+    "lower",
+    false,
+    0.1,
+    0.001
+   ],
+   [
+    "hind fetlock buffer (TPU 95A)",
+    "lower",
+    true,
+    1.5,
+    0.001
+   ],
+   [
+    "hind pastern (flexor horn, buffer horn)",
+    "pastern",
+    true,
+    8.1,
+    0.005
+   ],
+   [
+    "hind hoof ball joint SKF GE 8 E",
+    "pastern",
+    false,
+    2.1,
+    0.008
+   ],
+   [
+    "hind hoof core",
+    "hoof",
+    true,
+    22.5,
+    0.015
+   ],
+   [
+    "hind hoof shoe (TPU 95A)",
+    "hoof",
+    true,
+    12.2,
+    0.008
+   ],
+   [
+    "hind hoof centring ring (TPU)",
+    "hoof",
+    true,
+    2.5,
+    0.002
+   ],
+   [
+    "hind cannon (hock head, drum B, fetlock fork)",
+    "lower",
+    true,
+    116.0,
+    0.077
+   ],
+   [
+    "hock pin 10 mm",
+    "lower",
+    false,
+    6.7,
+    0.04
+   ],
+   [
+    "hock pin 10 mm E-clips DIN 6799 (2)",
+    "lower",
+    false,
+    0.2,
+    0.001
+   ],
+   [
+    "fetlock servo STS3215 (on the hind cannon)",
+    "lower",
+    false,
+    35.6,
+    0.055
+   ],
+   [
+    "hind cannon flexor spool (on the servo spline)",
+    "lower",
+    false,
+    2.0,
+    0.006
+   ],
+   [
+    "pivot motor to yoke screws 4 x M3 x 12",
+    "yoke",
+    false,
+    0.5,
+    0.005
+   ],
+   [
+    "plate A to pivot output screws 6 x M4 x 12",
+    "upper",
+    false,
+    1.4,
+    0.014
+   ],
+   [
+    "joint motor to plate B screws 8 x M3 x 12",
+    "upper",
+    false,
+    1.0,
+    0.01
+   ],
+   [
+    "joint motor back cup screws 4 x M3 x 10",
+    "upper",
+    false,
+    0.4,
+    0.004
+   ],
+   [
+    "yaw clamp washer screws 3 x M3 x 10",
+    "cradle",
+    false,
+    0.4,
+    0.003
+   ],
+   [
+    "yaw clamp washer heat-set inserts 3 x M3",
+    "cradle",
+    false,
+    0.1,
+    0.001
+   ],
+   [
+    "yaw motor ring screws 9 x M3 x 6",
+    "cradle",
+    false,
+    0.7,
+    0.008
+   ],
+   [
+    "yaw pulley screws 6 x M4 x 25",
+    "cradle",
+    false,
+    2.7,
+    0.022
+   ],
+   [
+    "abduction lug to output screws 6 x M4 x 16",
+    "cradle",
+    false,
+    2.0,
+    0.017
+   ],
+   [
+    "abduction motor ring screws 9 x M3 x 8",
+    "rocker",
+    false,
+    0.8,
+    0.009
+   ],
+   [
+    "drive crank to RS06 output screws 6 x M4 x 25",
+    "drive",
+    false,
+    2.7,
+    0.022
+   ],
+   [
+    "hind hoof shoe to core screws 3 x M3 x 8",
+    "hoof",
+    false,
+    0.4,
+    0.003
+   ],
+   [
+    "hind hoof shoe to core heat-set inserts 3 x M3",
+    "hoof",
+    false,
+    0.1,
+    0.001
+   ],
+   [
+    "hind cannon servo to plate screws 4 x M2 x 6",
+    "lower",
+    false,
+    0.2,
+    0.001
+   ],
+   [
+    "hind cannon spool to spline screws 1 x M3 x 8",
+    "lower",
+    false,
+    0.1,
+    0.001
+   ]
+  ],
+  "total": 4.182,
+  "swinging": 2.074,
+  "not_single_body": []
+ },
+ "four_legs": 21.4
+}

@@ -1,0 +1,1049 @@
+{
+ "mass": 45.58,
+ "jump_mm": 153.04222409438177,
+ "loads": [
+  [
+   0.83,
+   "rear",
+   "trot",
+   "joint",
+   11.0,
+   21.3
+  ],
+  [
+   0.87,
+   "rear",
+   "gallop",
+   "joint",
+   15.6,
+   37.7
+  ],
+  [
+   0.93,
+   "rear",
+   "rear up 40 deg",
+   "pivot",
+   35.3,
+   35.3
+  ],
+  [
+   0.95,
+   "front",
+   "gallop",
+   "joint",
+   21.7,
+   52.3
+  ],
+  [
+   0.99,
+   "front",
+   "trot",
+   "joint",
+   15.3,
+   29.6
+  ],
+  [
+   1.13,
+   "rear",
+   "walk",
+   "joint",
+   8.1,
+   13.2
+  ]
+ ],
+ "load_fails": [
+  [
+   0.83,
+   "rear",
+   "trot",
+   "joint",
+   11.0,
+   21.3
+  ],
+  [
+   0.87,
+   "rear",
+   "gallop",
+   "joint",
+   15.6,
+   37.7
+  ],
+  [
+   0.93,
+   "rear",
+   "rear up 40 deg",
+   "pivot",
+   35.3,
+   35.3
+  ],
+  [
+   0.95,
+   "front",
+   "gallop",
+   "joint",
+   21.7,
+   52.3
+  ],
+  [
+   0.99,
+   "front",
+   "trot",
+   "joint",
+   15.3,
+   29.6
+  ]
+ ],
+ "crouch": {
+  "front_pivot_mm": 371.50000000000006,
+  "rear_pivot_mm": 254.0
+ },
+ "speed_limit_deg_s": {
+  "fore": {
+   "pivot": 965.25,
+   "joint": 2070.0
+  },
+  "hind": {
+   "pivot": 2376.0,
+   "joint": 2376.0
+  }
+ },
+ "motions": {
+  "stand": {
+   "frames": 1,
+   "dt": 0.05,
+   "slip_mm": 1.4210854715202004e-12,
+   "height_err_mm": 3.865352482534945e-12,
+   "ik_err_mm": 3.865352482534945e-12,
+   "joint": {
+    "fore q0": [
+     29.996639826392524,
+     29.996639826392524
+    ],
+    "fore q1": [
+     84.99937404739256,
+     84.99937404739256
+    ],
+    "fore fold": [
+     0.0,
+     0.0
+    ],
+    "hind q0": [
+     34.99545860749511,
+     34.99545860749511
+    ],
+    "hind q1": [
+     79.9993259989272,
+     79.9993259989272
+    ]
+   },
+   "limit_violations": [],
+   "max_step_deg": {},
+   "max_speed_deg_s": {},
+   "speed_margin": {},
+   "mechanism": {
+    "gas": [
+     102.95008856216788,
+     105.78498158049376
+    ],
+    "rod_dev": 0.0,
+    "rod_angle": 59.99932599892719,
+    "toggle_reach": 0.10554763678034362,
+    "unlocked_in_stance": 0
+   },
+   "distance": {
+    "in_leg": [
+     1.5,
+     "fore 0 f0: abduction cradle (deck, yaw sp | hip bracket, rear (abduction m"
+    ],
+    "in_leg_bad": [],
+    "leg_leg": [
+     12.0,
+     "f0 "
+    ],
+    "neck": [
+     12.0,
+     "f0 "
+    ],
+    "shell": [
+     0.0,
+     "f0 fore 0: yaw yoke + 56T hub"
+    ],
+    "ground": [
+     6.000000000000284,
+     "f0 fore 0: fore hoof core"
+    ],
+    "octo": [
+     99.0,
+     ""
+    ],
+    "roll_deg": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "walk": {
+   "frames": 72,
+   "dt": 0.009259259259259262,
+   "slip_mm": 8.594207656642538e-08,
+   "height_err_mm": 9.021550795296207e-08,
+   "ik_err_mm": 9.021545110954321e-08,
+   "joint": {
+    "fore q0": [
+     19.89240911914501,
+     40.43471166848502
+    ],
+    "fore q1": [
+     79.55541920909364,
+     110.84033403902663
+    ],
+    "fore fold": [
+     0.0,
+     0.0
+    ],
+    "hind q0": [
+     21.728650097460466,
+     48.90325531399547
+    ],
+    "hind q1": [
+     73.88308411975892,
+     103.66153642695365
+    ]
+   },
+   "limit_violations": [],
+   "max_step_deg": {
+    "fore pivot": 2.0910615641885,
+    "fore joint": 4.457011121075311,
+    "fore fold": 0,
+    "fore hoof": 2.0910615641885,
+    "hind pivot": 2.893372206058096,
+    "hind joint": 4.324384261124564,
+    "hind fold": 0,
+    "hind hoof": 2.893372206058096
+   },
+   "max_speed_deg_s": {
+    "fore pivot": 225.83464893235794,
+    "fore joint": 481.35720107613344,
+    "fore fold": 0,
+    "fore hoof": 225.83464893235794,
+    "hind pivot": 312.4841982542743,
+    "hind joint": 467.03350020145274,
+    "hind fold": 0,
+    "hind hoof": 312.4841982542743
+   },
+   "speed_margin": {
+    "fore pivot": 4.274144842535265,
+    "fore joint": 4.300340776812437,
+    "hind pivot": 7.603584479707367,
+    "hind joint": 5.0874294862683795
+   },
+   "mechanism": {
+    "gas": [
+     95.19714668249638,
+     107.18439734431722
+    ],
+    "rod_dev": 2.842170943040401e-14,
+    "rod_angle": 53.883084119758905,
+    "toggle_reach": 0.10554763678022994,
+    "unlocked_in_stance": 0
+   },
+   "distance": {
+    "in_leg": [
+     1.5,
+     "fore 0 f0: abduction cradle (deck, yaw sp | hip bracket, rear (abduction m"
+    ],
+    "in_leg_bad": [],
+    "leg_leg": [
+     12.0,
+     "f0 "
+    ],
+    "neck": [
+     12.0,
+     "f0 "
+    ],
+    "shell": [
+     0.0,
+     "f0 fore 0: yaw yoke + 56T hub"
+    ],
+    "ground": [
+     5.999999999999943,
+     "f18 hind 3: hind hoof core"
+    ],
+    "octo": [
+     99.0,
+     ""
+    ],
+    "roll_deg": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "trot": {
+   "frames": 72,
+   "dt": 0.008333333333333333,
+   "slip_mm": 1.6343228423920664e-06,
+   "height_err_mm": 1.69512588854559e-06,
+   "ik_err_mm": 9.850487003859598e-08,
+   "joint": {
+    "fore q0": [
+     15.395876290256837,
+     44.9197064996523
+    ],
+    "fore q1": [
+     75.97681674671486,
+     116.19362766191495
+    ],
+    "fore fold": [
+     0.0,
+     0.0
+    ],
+    "hind q0": [
+     16.04664430007412,
+     54.85844638556489
+    ],
+    "hind q1": [
+     70.58820859437562,
+     108.33709874765815
+    ]
+   },
+   "limit_violations": [],
+   "max_step_deg": {
+    "fore pivot": 2.044899327157662,
+    "fore joint": 3.690642147526461,
+    "fore fold": 0,
+    "fore hoof": 2.044899327157662,
+    "hind pivot": 2.81102479409995,
+    "hind joint": 3.6416715342523958,
+    "hind fold": 0,
+    "hind hoof": 2.81102479409995
+   },
+   "max_speed_deg_s": {
+    "fore pivot": 245.38791925891942,
+    "fore joint": 442.8770577031753,
+    "fore fold": 0,
+    "fore hoof": 245.38791925891942,
+    "hind pivot": 337.322975291994,
+    "hind joint": 437.0005841102875,
+    "hind fold": 0,
+    "hind hoof": 337.322975291994
+   },
+   "speed_margin": {
+    "fore pivot": 3.933567727845326,
+    "fore joint": 4.6739833639956885,
+    "hind pivot": 7.043694542132161,
+    "hind joint": 5.437063670835643
+   },
+   "mechanism": {
+    "gas": [
+     93.51607957666332,
+     107.88526008435333
+    ],
+    "rod_dev": 2.842170943040401e-14,
+    "rod_angle": 50.5882085943756,
+    "toggle_reach": 0.10554763678017309,
+    "unlocked_in_stance": 0
+   },
+   "distance": {
+    "in_leg": [
+     1.5,
+     "fore 0 f0: abduction cradle (deck, yaw sp | hip bracket, rear (abduction m"
+    ],
+    "in_leg_bad": [],
+    "leg_leg": [
+     12.0,
+     "f0 "
+    ],
+    "neck": [
+     12.0,
+     "f0 "
+    ],
+    "shell": [
+     0.0,
+     "f0 fore 0: yaw yoke + 56T hub"
+    ],
+    "ground": [
+     6.000000000000057,
+     "f10 hind 3: hind hoof core"
+    ],
+    "octo": [
+     99.0,
+     ""
+    ],
+    "roll_deg": [
+     0.0,
+     0.3358173330222236
+    ]
+   }
+  },
+  "gallop": {
+   "frames": 72,
+   "dt": 0.007052951388888889,
+   "slip_mm": 2.289477862404965e-05,
+   "height_err_mm": 1.866761044766463e-05,
+   "ik_err_mm": 9.927427413458645e-08,
+   "joint": {
+    "fore q0": [
+     2.4852301881684986,
+     55.25709574137131
+    ],
+    "fore q1": [
+     62.38222162466208,
+     123.89537538736033
+    ],
+    "fore fold": [
+     0.0,
+     0.0
+    ],
+    "hind q0": [
+     -1.8409444842943812,
+     66.40799432813462
+    ],
+    "hind q1": [
+     54.26241706211554,
+     114.69031485647348
+    ]
+   },
+   "limit_violations": [],
+   "max_step_deg": {
+    "fore pivot": 3.068189798781269,
+    "fore joint": 4.6826974119642415,
+    "fore fold": 0,
+    "fore hoof": 3.068189798781269,
+    "hind pivot": 4.081158667649277,
+    "hind joint": 4.753921449943945,
+    "hind fold": 0,
+    "hind hoof": 4.081158667649277
+   },
+   "max_speed_deg_s": {
+    "fore pivot": 435.02211054720266,
+    "fore joint": 663.9344515178839,
+    "fore fold": 0,
+    "fore hoof": 435.02211054720266,
+    "hind pivot": 578.645512016242,
+    "hind joint": 674.0329243489754,
+    "hind fold": 0,
+    "hind hoof": 578.645512016242
+   },
+   "speed_margin": {
+    "fore pivot": 2.218852735521507,
+    "fore joint": 3.11777765902579,
+    "hind pivot": 4.10614089396637,
+    "hind joint": 3.5250503561007713
+   },
+   "mechanism": {
+    "gas": [
+     91.11134805591594,
+     110.75337309489144
+    ],
+    "rod_dev": 2.842170943040401e-14,
+    "rod_angle": 34.26241706211553,
+    "toggle_reach": 0.10554763678022994,
+    "unlocked_in_stance": 0
+   },
+   "distance": {
+    "in_leg": [
+     1.5,
+     "fore 0 f0: abduction cradle (deck, yaw sp | hip bracket, rear (abduction m"
+    ],
+    "in_leg_bad": [],
+    "leg_leg": [
+     12.0,
+     "f0 "
+    ],
+    "neck": [
+     12.0,
+     "f0 "
+    ],
+    "shell": [
+     0.0,
+     "f0 fore 0: yaw yoke + 56T hub"
+    ],
+    "ground": [
+     6.0,
+     "f62 fore 0: fore hoof core"
+    ],
+    "octo": [
+     99.0,
+     ""
+    ],
+    "roll_deg": [
+     -1.5268315778749084,
+     8.098073042377766
+    ]
+   }
+  },
+  "jump": {
+   "frames": 72,
+   "dt": 0.01766388092365837,
+   "slip_mm": 8.277473284579173e-08,
+   "height_err_mm": 6.124616902525304e-08,
+   "ik_err_mm": 8.277471508222334e-08,
+   "joint": {
+    "fore q0": [
+     24.504190486206838,
+     33.07254510331088
+    ],
+    "fore q1": [
+     53.789538032951896,
+     128.43605393064556
+    ],
+    "fore fold": [
+     0.0,
+     0.0
+    ],
+    "hind q0": [
+     25.957107020886586,
+     43.47231370914603
+    ],
+    "hind q1": [
+     50.41435882626568,
+     118.7728897419171
+    ]
+   },
+   "limit_violations": [],
+   "max_step_deg": {
+    "fore pivot": 2.657566119082073,
+    "fore joint": 13.933231462937385,
+    "fore fold": 0,
+    "fore hoof": 2.657566119082073,
+    "hind pivot": 4.226762083639969,
+    "hind joint": 13.301603726371937,
+    "hind fold": 0,
+    "hind hoof": 4.226762083639969
+   },
+   "max_speed_deg_s": {
+    "fore pivot": 150.45199469855032,
+    "fore joint": 788.7978594939301,
+    "fore fold": 0,
+    "fore hoof": 150.45199469855032,
+    "hind pivot": 239.28841583045292,
+    "hind joint": 753.0397076305154,
+    "hind fold": 0,
+    "hind hoof": 239.28841583045292
+   },
+   "speed_margin": {
+    "fore pivot": 6.415667681468769,
+    "fore joint": 2.6242464721291867,
+    "hind pivot": 9.929440135052369,
+    "hind joint": 3.155212103590429
+   },
+   "mechanism": {
+    "gas": [
+     89.71766681567036,
+     111.27236657475017
+    ],
+    "rod_dev": 5.684341886080802e-14,
+    "rod_angle": 30.414358826265683,
+    "toggle_reach": 0.10554763678022994,
+    "unlocked_in_stance": 0
+   },
+   "distance": {
+    "in_leg": [
+     1.5,
+     "fore 0 f0: abduction cradle (deck, yaw sp | hip bracket, rear (abduction m"
+    ],
+    "in_leg_bad": [],
+    "leg_leg": [
+     12.0,
+     "f0 "
+    ],
+    "neck": [
+     12.0,
+     "f0 "
+    ],
+    "shell": [
+     0.0,
+     "f0 fore 0: yaw yoke + 56T hub"
+    ],
+    "ground": [
+     5.9999999984010515,
+     "f14 fore 0: fore hoof core"
+    ],
+    "octo": [
+     99.0,
+     ""
+    ],
+    "roll_deg": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "rear": {
+   "frames": 72,
+   "dt": 0.16152516030263153,
+   "slip_mm": 2.483631078575854e-09,
+   "height_err_mm": 4.6613877202617005e-09,
+   "ik_err_mm": 9.899680009084477e-08,
+   "joint": {
+    "fore q0": [
+     27.21176864042038,
+     45.651637733427975
+    ],
+    "fore q1": [
+     76.54322730147632,
+     122.12044178479391
+    ],
+    "fore fold": [
+     0.0,
+     115.02920643635261
+    ],
+    "hind q0": [
+     -7.094198723379587,
+     34.99545860749511
+    ],
+    "hind q1": [
+     72.72393169867016,
+     79.9993259989272
+    ]
+   },
+   "limit_violations": [],
+   "max_step_deg": {
+    "fore pivot": 3.9461268811454424,
+    "fore joint": 11.433539195361007,
+    "fore fold": 9.222689565257312,
+    "fore hoof": 3.9319419887884592,
+    "hind pivot": 2.7577250662007184,
+    "hind joint": 0.4759870299526199,
+    "hind fold": 0,
+    "hind hoof": 0.17039869158084286
+   },
+   "max_speed_deg_s": {
+    "fore pivot": 24.430416126825246,
+    "fore joint": 70.78488065846379,
+    "fore fold": 57.09754163362411,
+    "fore hoof": 24.34259765736571,
+    "hind pivot": 17.07303717287065,
+    "hind joint": 2.946829020697559,
+    "hind fold": 0,
+    "hind hoof": 1.054935907579884
+   },
+   "speed_margin": {
+    "fore pivot": 39.51017432487078,
+    "fore joint": 29.243533092719694,
+    "hind pivot": 139.16680295029786,
+    "hind joint": 806.2904170251334
+   },
+   "mechanism": {
+    "gas": [
+     91.66212765125134,
+     107.43533409703656
+    ],
+    "rod_dev": 2.842170943040401e-14,
+    "rod_angle": 52.72393169867016,
+    "toggle_reach": 0.10554763678034362,
+    "unlocked_in_stance": 0
+   },
+   "distance": {
+    "in_leg": [
+     1.5,
+     "fore 0 f0: abduction cradle (deck, yaw sp | hip bracket, rear (abduction m"
+    ],
+    "in_leg_bad": [],
+    "leg_leg": [
+     12.0,
+     "f0 "
+    ],
+    "neck": [
+     12.0,
+     "f0 "
+    ],
+    "shell": [
+     0.0,
+     "f0 fore 0: yaw yoke + 56T hub"
+    ],
+    "ground": [
+     6.000000000000114,
+     "f70 fore 0: fore hoof core"
+    ],
+    "octo": [
+     99.0,
+     ""
+    ],
+    "roll_deg": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "kneel": {
+   "frames": 72,
+   "dt": 0.05,
+   "slip_mm": 9.56266319462884e-08,
+   "height_err_mm": 6.420458475986379e-08,
+   "ik_err_mm": 9.525250277420128e-08,
+   "joint": {
+    "fore q0": [
+     29.98415597631043,
+     31.57889369210955
+    ],
+    "fore q1": [
+     84.99937404739256,
+     137.77911391090836
+    ],
+    "fore fold": [
+     0.0,
+     0.0
+    ],
+    "hind q0": [
+     34.99545860749511,
+     41.86191515319536
+    ],
+    "hind q1": [
+     79.9993259989272,
+     137.65394052845593
+    ]
+   },
+   "limit_violations": [],
+   "max_step_deg": {
+    "fore pivot": 0.19681989759682494,
+    "fore joint": 2.652630029419541,
+    "fore fold": 0,
+    "fore hoof": 0.36347749059025247,
+    "hind pivot": 0.5442898678046717,
+    "hind joint": 2.922998902690196,
+    "hind fold": 0,
+    "hind hoof": 0.731154814301604
+   },
+   "max_speed_deg_s": {
+    "fore pivot": 3.936397951936499,
+    "fore joint": 53.05260058839082,
+    "fore fold": 0,
+    "fore hoof": 7.269549811805049,
+    "hind pivot": 10.885797356093434,
+    "hind joint": 58.45997805380392,
+    "hind fold": 0,
+    "hind hoof": 14.62309628603208
+   },
+   "speed_margin": {
+    "fore pivot": 245.21148821478994,
+    "fore joint": 39.017879935050075,
+    "hind pivot": 218.26605091725415,
+    "hind joint": 40.643190078060535
+   },
+   "mechanism": {
+    "gas": [
+     86.95557651528158,
+     105.78498158049376
+    ],
+    "rod_dev": 2.842170943040401e-14,
+    "rod_angle": 59.99932599892719,
+    "toggle_reach": 0.10554763678017309,
+    "unlocked_in_stance": 0
+   },
+   "distance": {
+    "in_leg": [
+     1.5,
+     "fore 0 f0: abduction cradle (deck, yaw sp | hip bracket, rear (abduction m"
+    ],
+    "in_leg_bad": [],
+    "leg_leg": [
+     12.0,
+     "f0 "
+    ],
+    "neck": [
+     12.0,
+     "f0 "
+    ],
+    "shell": [
+     0.0,
+     "f0 fore 0: yaw yoke + 56T hub"
+    ],
+    "ground": [
+     5.999999999999943,
+     "f24 fore 0: fore hoof core"
+    ],
+    "octo": [
+     99.0,
+     ""
+    ],
+    "roll_deg": [
+     0.0,
+     0.0
+    ]
+   }
+  }
+ },
+ "forces": {
+  "walk": {
+   "grf_peak_N": {
+    "fore": 287.4470142857143,
+    "hind": 191.63134285714287
+   },
+   "toggle_N": 451.0859584475167,
+   "toggle_tension_N": 404.65593597394576,
+   "tendon_N": {
+    "fore": 399.0400439035805,
+    "hind": 186.5524676289318
+   },
+   "buffer_N": {
+    "fore": 396.19357944602456,
+    "hind": 272.6733880478072
+   },
+   "fetlock_deg": {
+    "fore": 1.6815802667965958,
+    "hind": 1.1573185745788446
+   },
+   "buffer_MPa": {
+    "fore": 2.021395813500125,
+    "hind": 1.391190755345955
+   }
+  },
+  "trot": {
+   "grf_peak_N": {
+    "fore": 402.42582,
+    "hind": 268.28388
+   },
+   "toggle_N": 815.1323702889146,
+   "toggle_tension_N": 706.297009852735,
+   "tendon_N": {
+    "fore": 721.0830901205286,
+    "hind": 298.1622844741769
+   },
+   "buffer_N": {
+    "fore": 576.0154911260973,
+    "hind": 396.80368712537177
+   },
+   "fetlock_deg": {
+    "fore": 2.4448056038695967,
+    "hind": 1.6841697712394643
+   },
+   "buffer_MPa": {
+    "fore": 2.9388545465617213,
+    "hind": 2.024508607782509
+   }
+  },
+  "gallop": {
+   "grf_peak_N": {
+    "fore": 628.7903437499999,
+    "hind": 419.1935625
+   },
+   "toggle_N": 1489.2900878853989,
+   "toggle_tension_N": 1480.2760063706962,
+   "tendon_N": {
+    "fore": 1317.4570631732217,
+    "hind": 475.5685864125507
+   },
+   "buffer_N": {
+    "fore": 955.1189752176695,
+    "hind": 656.3729399817798
+   },
+   "fetlock_deg": {
+    "fore": 4.053849694926286,
+    "hind": 2.785869940335558
+   },
+   "buffer_MPa": {
+    "fore": 4.873055996008517,
+    "hind": 3.3488415305192847
+   }
+  },
+  "shoulder_belt_peak_N": 1867.1056338948429,
+  "stifle_rod_peak_N": 1885.0000000000005,
+  "fore_gas_spring": {
+   "stand_len_mm": 102.94991478367008,
+   "lever_mm": 15.906637059951006,
+   "force_N": 444.2003408653196,
+   "torque_Nm": 7.065733604051163,
+   "stand_joint_Nm": 12.245727386052302,
+   "offload": 0.5769958273037277
+  },
+  "hind_gas_spring": {
+   "stand_len_mm": 105.78482062542177,
+   "lever_mm": 13.682600708549403,
+   "force_N": 432.8607174983129,
+   "torque_Nm": 5.92266035994562,
+   "stand_joint_Nm": 8.878511385696427,
+   "offload": 0.6670780835498189
+  }
+ },
+ "gallop_twisted_leg_leg": [
+  3.569612310106153,
+  "f0 yaw 25 abd -10: fore 0: fore hoof core | fore 1: fore hoof shoe (TPU 95A)"
+ ],
+ "stand_twist": {
+  "leg_leg": [
+   12.0,
+   "yaw -25 abd -10: "
+  ],
+  "neck": [
+   11.113139342700668,
+   "yaw -25 abd 10: fore 0: abduction cradle (deck, yaw spindle, lug"
+  ],
+  "octo": [
+   99.0,
+   ""
+  ],
+  "shell": [
+   0.0,
+   "yaw -25 abd -10: fore 0: yaw yoke + 56T hub"
+  ]
+ },
+ "shell_overlaps": [
+  {
+   "kind": "fore",
+   "part": "yaw yoke + 56T hub",
+   "cases": 92
+  },
+  {
+   "kind": "fore",
+   "part": "pivot motor RS03",
+   "cases": 92
+  },
+  {
+   "kind": "fore",
+   "part": "abduction cradle (deck, yaw spindle, lugs)",
+   "cases": 92
+  },
+  {
+   "kind": "fore",
+   "part": "abduction output flange (4 mm steel)",
+   "cases": 92
+  },
+  {
+   "kind": "fore",
+   "part": "abduction motor RS06 output rotor",
+   "cases": 92
+  },
+  {
+   "kind": "fore",
+   "part": "humerus arm, inner (6061 plate, keyed)",
+   "cases": 78
+  },
+  {
+   "kind": "fore",
+   "part": "pivot motor to yoke screws 4 x M4 x 14",
+   "cases": 92
+  },
+  {
+   "kind": "fore",
+   "part": "abduction lug to output screws 6 x M4 x 16",
+   "cases": 92
+  },
+  {
+   "kind": "hind",
+   "part": "yaw yoke + 56T hub",
+   "cases": 92
+  },
+  {
+   "kind": "hind",
+   "part": "pivot motor RS06",
+   "cases": 92
+  },
+  {
+   "kind": "hind",
+   "part": "abduction cradle (deck, yaw spindle, lugs)",
+   "cases": 92
+  },
+  {
+   "kind": "hind",
+   "part": "yaw belt 490-5M-15 (28T : 56T)",
+   "cases": 86
+  },
+  {
+   "kind": "hind",
+   "part": "abduction front stub 15 mm (in a 6802)",
+   "cases": 92
+  },
+  {
+   "kind": "hind",
+   "part": "pivot motor to yoke screws 4 x M3 x 12",
+   "cases": 92
+  },
+  {
+   "kind": "fore",
+   "part": "elbow pin 10 mm",
+   "cases": 34
+  },
+  {
+   "kind": "fore",
+   "part": "elbow pin 10 mm E-clips DIN 6799 (2)",
+   "cases": 34
+  },
+  {
+   "kind": "fore",
+   "part": "humerus shaft 25 / 12 mm 4140 tube (3 keyways)",
+   "cases": 12
+  },
+  {
+   "kind": "fore",
+   "part": "humerus keys DIN 6885 A 8 x 7 (3)",
+   "cases": 7
+  },
+  {
+   "kind": "fore",
+   "part": "humerus arm set screws 2 x M5 x 6 cup point",
+   "cases": 1
+  },
+  {
+   "kind": "fore",
+   "part": "shoulder belt 576-8M-20 (46T : 22T)",
+   "cases": 2
+  },
+  {
+   "kind": "fore",
+   "part": "belt idler 22T-8M on a slotted pin",
+   "cases": 2
+  },
+  {
+   "kind": "fore",
+   "part": "scapula (plates A + B, drum A)",
+   "cases": 8
+  },
+  {
+   "kind": "fore",
+   "part": "shoulder bearings 2 x 6805",
+   "cases": 2
+  },
+  {
+   "kind": "fore",
+   "part": "shoulder pulley 22T-8M, flanged, keyed (6061)",
+   "cases": 2
+  },
+  {
+   "kind": "fore",
+   "part": "humerus shaft spacers (4 sleeves, steel)",
+   "cases": 4
+  },
+  {
+   "kind": "fore",
+   "part": "elbow tendons Dyneema 3 mm (parallel pair)",
+   "cases": 8
+  },
+  {
+   "kind": "fore",
+   "part": "forearm (elbow head, drum B, carpus fork)",
+   "cases": 6
+  },
+  {
+   "kind": "hind",
+   "part": "femur (plates A + B, drum A)",
+   "cases": 8
+  },
+  {
+   "kind": "fore",
+   "part": "yaw motor RS02 (hung, output up)",
+   "cases": 6
+  },
+  {
+   "kind": "fore",
+   "part": "yaw motor ring screws 9 x M3 x 6",
+   "cases": 6
+  },
+  {
+   "kind": "hind",
+   "part": "yaw motor RS02 (hung, output up)",
+   "cases": 6
+  },
+  {
+   "kind": "hind",
+   "part": "yaw motor ring screws 9 x M3 x 6",
+   "cases": 6
+  },
+  {
+   "kind": "fore",
+   "part": "shoulder drive pulley 46T-8M (aluminium, on the RS04 output)",
+   "cases": 2
+  }
+ ]
+}
