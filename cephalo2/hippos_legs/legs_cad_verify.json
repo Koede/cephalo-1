@@ -117,7 +117,7 @@
    "tightest": 1.5,
    "tightest_pair": [
     "femur (plates A + B, drum A)",
-    "stifle driven crank 40 mm"
+    "stifle driven crank 40 mm (6061, keyed)"
    ],
    "tightest_at": {
     "q0": 34.99999999999997,

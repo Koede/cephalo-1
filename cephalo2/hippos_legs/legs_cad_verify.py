@@ -14,7 +14,7 @@ import hippos_legs_cad as C
 HERE = os.path.dirname(os.path.abspath(__file__)); CLR = 1.5; RUN_MIN = 0.02
 RUN = [("output rotor", " RS0"), ("abduction front stub", "abduction bearing"), ("pivot motor", "pivot output adapter"), ("yaw bearings", "yaw yoke"), ("stub bearing", "joint motor"), ("yaw belt", "yaw yoke"),
        ("abduction stubs", "abduction motor"), ("abduction stubs", "abduction bearing"), ("drive pulley", "joint motor"), ("drive crank", "joint motor"),
-       ("shoulder belt", "drive pulley"), ("shoulder belt", "shoulder pulley"), ("shoulder belt", "belt idler"), ("bearings 2 x 6805", "shaft 25"),
+       ("shoulder belt", "drive pulley"), ("shoulder belt", "shoulder pulley"), ("shoulder belt", "belt idler"), ("bearings 2 x 6805", "shaft 25"), ("bearings 2 x 6805", "shaft spacers"),
        ("tendons", "scapula"), ("tendons", "femur"), ("tendons", "forearm"), ("tendons", "hind cannon"),
        ("pin bearings 2 x 6800", "elbow pin"), ("pin bearings 2 x 6800", "hock pin"), ("carpus bearings", "carpus pin"), ("fetlock pin", "pastern"),
        ("ball joint", "hoof core"), ("push rod", "drive crank"), ("push rod", "driven crank"),

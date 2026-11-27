@@ -5,8 +5,8 @@
     "yaw yoke + 56T hub",
     "yoke",
     true,
-    201.1,
-    0.133
+    181.6,
+    0.12
    ],
    [
     "pivot motor RS03",
@@ -35,6 +35,13 @@
     false,
     18.6,
     0.104
+   ],
+   [
+    "yaw yoke circlip DIN 472 65 mm",
+    "yoke",
+    false,
+    2.4,
+    0.008
    ],
    [
     "stub bearing 6805",
@@ -68,8 +75,15 @@
     "abduction cradle (deck, yaw spindle, lugs)",
     "cradle",
     true,
-    262.4,
-    0.173
+    263.8,
+    0.174
+   ],
+   [
+    "yaw bearing clamp washer (2 mm steel)",
+    "cradle",
+    false,
+    3.2,
+    0.02
    ],
    [
     "yaw motor RS02 (hung, output up)",
@@ -184,32 +198,53 @@
     0.042
    ],
    [
-    "shoulder pulley 22T-8M",
+    "shoulder pulley 22T-8M, flanged, keyed (6061)",
     "middle",
     false,
-    46.0,
-    0.08
+    46.7,
+    0.126
    ],
    [
-    "humerus shaft 25 mm",
+    "humerus shaft 25 / 12 mm 4140 tube (3 keyways)",
     "middle",
     false,
-    39.1,
-    0.09
+    28.8,
+    0.226
    ],
    [
-    "humerus arm, outer",
+    "humerus keys DIN 6885 A 8 x 7 (3)",
     "middle",
-    true,
-    44.1,
-    0.029
+    false,
+    2.4,
+    0.012
    ],
    [
-    "humerus arm, inner",
+    "humerus shaft spacers (4 sleeves, steel)",
     "middle",
-    true,
-    44.1,
-    0.029
+    false,
+    1.6,
+    0.012
+   ],
+   [
+    "humerus arm, outer (6061 plate, keyed)",
+    "middle",
+    false,
+    42.6,
+    0.115
+   ],
+   [
+    "humerus arm, inner (6061 plate, keyed)",
+    "middle",
+    false,
+    42.6,
+    0.115
+   ],
+   [
+    "humerus arm set screws 2 x M5 x 6 cup point",
+    "middle",
+    false,
+    0.2,
+    0.002
    ],
    [
     "humerus pin bearings 2 x 6800",
@@ -401,6 +436,20 @@
     0.02
    ],
    [
+    "yaw clamp washer screws 3 x M3 x 10",
+    "cradle",
+    false,
+    0.4,
+    0.003
+   ],
+   [
+    "yaw clamp washer heat-set inserts 3 x M3",
+    "cradle",
+    false,
+    0.1,
+    0.001
+   ],
+   [
     "yaw motor ring screws 9 x M3 x 6",
     "cradle",
     false,
@@ -436,8 +485,8 @@
     0.062
    ]
   ],
-  "total": 6.082,
-  "swinging": 3.542,
+  "total": 6.482,
+  "swinging": 3.922,
   "not_single_body": []
  },
  "hind": {
@@ -446,8 +495,8 @@
     "yaw yoke + 56T hub",
     "yoke",
     true,
-    187.2,
-    0.124
+    167.7,
+    0.111
    ],
    [
     "pivot motor RS06",
@@ -476,6 +525,13 @@
     false,
     18.6,
     0.104
+   ],
+   [
+    "yaw yoke circlip DIN 472 65 mm",
+    "yoke",
+    false,
+    2.4,
+    0.008
    ],
    [
     "stub bearing 6805",
@@ -509,8 +565,15 @@
     "abduction cradle (deck, yaw spindle, lugs)",
     "cradle",
     true,
-    267.9,
-    0.177
+    269.3,
+    0.178
+   ],
+   [
+    "yaw bearing clamp washer (2 mm steel)",
+    "cradle",
+    false,
+    3.2,
+    0.02
    ],
    [
     "yaw motor RS02 (hung, output up)",
@@ -618,32 +681,53 @@
     0.042
    ],
    [
-    "stifle driven crank 40 mm",
+    "stifle driven crank 40 mm (6061, keyed)",
     "middle",
     false,
-    7.7,
-    0.04
+    12.0,
+    0.032
    ],
    [
-    "tibia shaft 25 mm",
+    "tibia shaft 25 / 12 mm 4140 tube (3 keyways)",
     "middle",
     false,
-    39.1,
-    0.09
+    29.2,
+    0.23
    ],
    [
-    "tibia arm, outer",
+    "tibia keys DIN 6885 A 8 x 7 (3)",
     "middle",
-    true,
-    55.2,
-    0.036
+    false,
+    1.5,
+    0.012
    ],
    [
-    "tibia arm, inner",
+    "tibia shaft spacers (4 sleeves, steel)",
     "middle",
-    true,
-    55.2,
-    0.036
+    false,
+    4.1,
+    0.032
+   ],
+   [
+    "tibia arm, outer (6061 plate, keyed)",
+    "middle",
+    false,
+    50.6,
+    0.137
+   ],
+   [
+    "tibia arm, inner (6061 plate, keyed)",
+    "middle",
+    false,
+    50.6,
+    0.137
+   ],
+   [
+    "tibia arm set screws 2 x M5 x 6 cup point",
+    "middle",
+    false,
+    0.2,
+    0.002
    ],
    [
     "tibia pin bearings 2 x 6800",
@@ -779,6 +863,20 @@
     0.004
    ],
    [
+    "yaw clamp washer screws 3 x M3 x 10",
+    "cradle",
+    false,
+    0.4,
+    0.003
+   ],
+   [
+    "yaw clamp washer heat-set inserts 3 x M3",
+    "cradle",
+    false,
+    0.1,
+    0.001
+   ],
+   [
     "yaw motor ring screws 9 x M3 x 6",
     "cradle",
     false,
@@ -814,9 +912,9 @@
     0.022
    ]
   ],
-  "total": 3.751,
-  "swinging": 1.663,
+  "total": 4.151,
+  "swinging": 2.043,
   "not_single_body": []
  },
- "four_legs": 19.67
+ "four_legs": 21.27
 }
