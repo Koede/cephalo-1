@@ -72,12 +72,14 @@
    "poses": 1741,
    "tightest": 1.5,
    "tightest_pair": [
-    "shoulder drive pulley 46T-8M (printed, on the RS04)",
-    "scapula (plates A + B, drum A)"
+    "abduction cradle (deck, yaw spindle, lugs)",
+    "hip bracket, rear (abduction motor ring)"
    ],
    "tightest_at": {
-    "q0": 29.99999999999998,
+    "q0": 0.0,
     "q1": 50.0,
+    "yaw": -25.0,
+    "abd": -10.0,
     "fold": 0.0
    },
    "under_rule": [],
@@ -114,8 +116,8 @@
    "poses": 580,
    "tightest": 1.5,
    "tightest_pair": [
-    "stifle drive crank 40 mm",
-    "femur (plates A + B, drum A)"
+    "femur (plates A + B, drum A)",
+    "stifle driven crank 40 mm"
    ],
    "tightest_at": {
     "q0": 34.99999999999997,

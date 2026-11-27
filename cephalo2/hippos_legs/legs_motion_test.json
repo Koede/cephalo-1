@@ -1,72 +1,88 @@
 {
- "mass": 41.65,
- "jump_mm": 165.997233592891,
+ "mass": 43.85,
+ "jump_mm": 158.71539924024287,
  "loads": [
   [
-   0.91,
+   0.86,
    "rear",
    "trot",
    "joint",
-   10.1,
-   19.4
+   10.6,
+   20.5
   ],
   [
-   0.95,
+   0.9,
    "rear",
    "gallop",
    "joint",
-   14.3,
-   34.5
+   15.0,
+   36.3
   ],
   [
-   1.02,
+   0.96,
    "rear",
    "rear up 40 deg",
    "pivot",
-   32.2,
-   32.2
+   33.9,
+   33.9
+  ],
+  [
+   0.98,
+   "front",
+   "gallop",
+   "joint",
+   21.0,
+   50.4
   ],
   [
    1.03,
    "front",
-   "gallop",
-   "joint",
-   20.0,
-   47.9
-  ],
-  [
-   1.08,
-   "front",
    "trot",
    "joint",
-   14.0,
-   27.1
+   14.8,
+   28.5
   ],
   [
-   1.23,
+   1.17,
    "rear",
    "walk",
    "joint",
-   7.4,
-   12.1
+   7.8,
+   12.7
   ]
  ],
  "load_fails": [
   [
-   0.91,
+   0.86,
    "rear",
    "trot",
    "joint",
-   10.1,
-   19.4
+   10.6,
+   20.5
   ],
   [
-   0.95,
+   0.9,
    "rear",
    "gallop",
    "joint",
-   14.3,
-   34.5
+   15.0,
+   36.3
+  ],
+  [
+   0.96,
+   "rear",
+   "rear up 40 deg",
+   "pivot",
+   33.9,
+   33.9
+  ],
+  [
+   0.98,
+   "front",
+   "gallop",
+   "joint",
+   21.0,
+   50.4
   ]
  ],
  "crouch": {
@@ -129,7 +145,7 @@
    "distance": {
     "in_leg": [
      1.5,
-     "fore 0 f0: shoulder drive pulley 46T-8M ( | scapula (plates A + B, drum A)"
+     "fore 0 f0: abduction cradle (deck, yaw sp | hip bracket, rear (abduction m"
     ],
     "in_leg_bad": [],
     "leg_leg": [
@@ -226,7 +242,7 @@
    "distance": {
     "in_leg": [
      1.5,
-     "fore 0 f0: shoulder drive pulley 46T-8M ( | scapula (plates A + B, drum A)"
+     "fore 0 f0: abduction cradle (deck, yaw sp | hip bracket, rear (abduction m"
     ],
     "in_leg_bad": [],
     "leg_leg": [
@@ -323,7 +339,7 @@
    "distance": {
     "in_leg": [
      1.5,
-     "fore 0 f0: shoulder drive pulley 46T-8M ( | scapula (plates A + B, drum A)"
+     "fore 0 f0: abduction cradle (deck, yaw sp | hip bracket, rear (abduction m"
     ],
     "in_leg_bad": [],
     "leg_leg": [
@@ -420,7 +436,7 @@
    "distance": {
     "in_leg": [
      1.5,
-     "fore 0 f0: shoulder drive pulley 46T-8M ( | scapula (plates A + B, drum A)"
+     "fore 0 f0: abduction cradle (deck, yaw sp | hip bracket, rear (abduction m"
     ],
     "in_leg_bad": [],
     "leg_leg": [
@@ -451,7 +467,7 @@
   },
   "jump": {
    "frames": 72,
-   "dt": 0.018396318471880183,
+   "dt": 0.01798829607263638,
    "slip_mm": 8.277473284579173e-08,
    "height_err_mm": 6.124616902525304e-08,
    "ik_err_mm": 8.277471508222334e-08,
@@ -489,20 +505,20 @@
     "hind hoof": 4.226762083639969
    },
    "max_speed_deg_s": {
-    "fore pivot": 144.46184562113956,
-    "fore joint": 757.3923817548126,
+    "fore pivot": 147.73862451178667,
+    "fore joint": 774.5720554451225,
     "fore fold": 0,
-    "fore hoof": 144.46184562113956,
-    "hind pivot": 229.76130197467577,
-    "hind joint": 723.0579176319541,
+    "fore hoof": 147.73862451178667,
+    "hind pivot": 234.97289941039372,
+    "hind joint": 739.4587943549699,
     "hind fold": 0,
-    "hind hoof": 229.76130197467577
+    "hind hoof": 234.97289941039372
    },
    "speed_margin": {
-    "fore pivot": 6.6816950583023145,
-    "fore joint": 2.733061554176171,
-    "hind pivot": 10.341167026734041,
-    "hind joint": 3.2860438175983226
+    "fore pivot": 6.533497947403672,
+    "fore joint": 2.6724434291790136,
+    "hind pivot": 10.111804407921014,
+    "hind joint": 3.2131607848042236
    },
    "mechanism": {
     "gas": [
@@ -517,7 +533,7 @@
    "distance": {
     "in_leg": [
      1.5,
-     "fore 0 f0: shoulder drive pulley 46T-8M ( | scapula (plates A + B, drum A)"
+     "fore 0 f0: abduction cradle (deck, yaw sp | hip bracket, rear (abduction m"
     ],
     "in_leg_bad": [],
     "leg_leg": [
@@ -614,7 +630,7 @@
    "distance": {
     "in_leg": [
      1.5,
-     "fore 0 f0: shoulder drive pulley 46T-8M ( | scapula (plates A + B, drum A)"
+     "fore 0 f0: abduction cradle (deck, yaw sp | hip bracket, rear (abduction m"
     ],
     "in_leg_bad": [],
     "leg_leg": [
@@ -711,7 +727,7 @@
    "distance": {
     "in_leg": [
      1.5,
-     "fore 0 f0: shoulder drive pulley 46T-8M ( | scapula (plates A + B, drum A)"
+     "fore 0 f0: abduction cradle (deck, yaw sp | hip bracket, rear (abduction m"
     ],
     "in_leg_bad": [],
     "leg_leg": [
@@ -744,93 +760,93 @@
  "forces": {
   "walk": {
    "grf_peak_N": {
-    "fore": 262.6627500000001,
-    "hind": 175.10850000000005
+    "fore": 276.5368928571429,
+    "hind": 184.3579285714286
    },
-   "toggle_N": 412.19241266650005,
-   "toggle_tension_N": 369.7656808537701,
+   "toggle_N": 433.9648810426417,
+   "toggle_tension_N": 389.29712137905926,
    "tendon_N": {
-    "fore": 364.6340023822758,
-    "hind": 170.46753568988615
+    "fore": 383.89438185985097,
+    "hind": 179.4718232893519
    },
    "buffer_N": {
-    "fore": 362.0329658606171,
-    "hind": 249.16293576549302
+    "fore": 381.15595565397496,
+    "hind": 262.32400320088516
    },
    "fetlock_deg": {
-    "fore": 1.536591007285613,
-    "hind": 1.0575322209567548
+    "fore": 1.6177554782586823,
+    "hind": 1.113392266241385
    },
    "buffer_MPa": {
-    "fore": 1.8471069686766177,
-    "hind": 1.2712394681912909
+    "fore": 1.9446732431325253,
+    "hind": 1.3383877714330876
    }
   },
   "trot": {
    "grf_peak_N": {
-    "fore": 367.72785000000005,
-    "hind": 245.15190000000004
+    "fore": 387.1516500000001,
+    "hind": 258.10110000000003
    },
-   "toggle_N": 744.8500048822575,
-   "toggle_tension_N": 645.3986498544629,
+   "toggle_N": 784.1938226671547,
+   "toggle_tension_N": 679.489334840773,
    "tendon_N": {
-    "fore": 658.9098443071528,
-    "hind": 272.454127870765
+    "fore": 693.71420583118,
+    "hind": 286.8454623561355
    },
    "buffer_N": {
-    "fore": 526.350267779771,
-    "hind": 362.5904688190377
+    "fore": 554.1526828845848,
+    "hind": 381.74290654777434
    },
    "fetlock_deg": {
-    "fore": 2.2340095085820257,
-    "hind": 1.538957239405961
+    "fore": 2.3520124117964425,
+    "hind": 1.620246697429805
    },
    "buffer_MPa": {
-    "fore": 2.6854605498967907,
-    "hind": 1.8499513715257025
+    "fore": 2.827309606554004,
+    "hind": 1.947667890549869
    }
   },
   "gallop": {
    "grf_peak_N": {
-    "fore": 574.574765625,
-    "hind": 383.04984375000004
+    "fore": 604.9244531250001,
+    "hind": 403.28296875000007
    },
-   "toggle_N": 1360.880477411735,
-   "toggle_tension_N": 1352.6436082786201,
+   "toggle_N": 1432.7637199160763,
+   "toggle_tension_N": 1424.0917700604443,
    "tendon_N": {
-    "fore": 1203.863244430994,
-    "hind": 434.56409881708515
+    "fore": 1267.452659502979,
+    "hind": 457.5182649010609
    },
    "buffer_N": {
-    "fore": 872.7666809525217,
-    "hind": 599.7791344941012
+    "fore": 918.8672019152,
+    "hind": 631.4601451996721
    },
    "fetlock_deg": {
-    "fore": 3.704318556245718,
-    "hind": 2.545666586550592
+    "fore": 3.8999848425300065,
+    "hind": 2.680131568313169
    },
    "buffer_MPa": {
-    "fore": 4.452891229349601,
-    "hind": 3.060097624969904
+    "fore": 4.688097968955102,
+    "hind": 3.2217354346922042
    }
   },
-  "shoulder_belt_peak_N": 1710.0260012153533,
-  "stifle_rod_peak_N": 1725.0000000000002,
+  "shoulder_belt_peak_N": 1799.2757925105177,
+  "stifle_rod_peak_N": 1815.0000000000002,
   "fore_gas_spring": {
    "stand_len_mm": 102.94991478367008,
    "lever_mm": 15.906637059951006,
    "force_N": 444.2003408653196,
    "torque_Nm": 7.065733604051163,
-   "stand_joint_Nm": 11.189875946228137,
-   "offload": 0.6314398513446315
+   "stand_joint_Nm": 11.780937820938869,
+   "offload": 0.5997598588028256
   },
   "hind_gas_spring": {
    "stand_len_mm": 105.78482062542177,
    "lever_mm": 13.682600708549403,
    "force_N": 432.8607174983129,
    "torque_Nm": 5.92266035994562,
-   "stand_joint_Nm": 8.112988135459767,
-   "offload": 0.7300220659832112
+   "stand_joint_Nm": 8.541525323887415,
+   "offload": 0.693396101441294
   }
  },
  "gallop_twisted_leg_leg": [
@@ -843,8 +859,8 @@
    "yaw -25 abd -10: "
   ],
   "neck": [
-   8.56170427094624,
-   "yaw -25 abd 10: fore 0: yaw yoke + 56T hub"
+   11.113139342700668,
+   "yaw -25 abd 10: fore 0: abduction cradle (deck, yaw spindle, lug"
   ],
   "octo": [
    99.0,
@@ -873,13 +889,28 @@
   },
   {
    "kind": "fore",
-   "part": "abduction stubs 15 mm (rear on the motor, front in a 6802)",
+   "part": "abduction output flange (4 mm steel)",
+   "cases": 92
+  },
+  {
+   "kind": "fore",
+   "part": "abduction motor RS06 output rotor",
    "cases": 92
   },
   {
    "kind": "fore",
    "part": "humerus arm, inner",
    "cases": 75
+  },
+  {
+   "kind": "fore",
+   "part": "pivot motor to yoke screws 4 x M4 x 14",
+   "cases": 92
+  },
+  {
+   "kind": "fore",
+   "part": "abduction lug to output screws 6 x M4 x 16",
+   "cases": 92
   },
   {
    "kind": "hind",
@@ -903,7 +934,12 @@
   },
   {
    "kind": "hind",
-   "part": "abduction stubs 15 mm (rear on the motor, front in a 6802)",
+   "part": "abduction front stub 15 mm (in a 6802)",
+   "cases": 92
+  },
+  {
+   "kind": "hind",
+   "part": "pivot motor to yoke screws 4 x M3 x 12",
    "cases": 92
   },
   {
@@ -962,13 +998,23 @@
    "cases": 6
   },
   {
+   "kind": "fore",
+   "part": "yaw motor ring screws 9 x M3 x 6",
+   "cases": 6
+  },
+  {
    "kind": "hind",
    "part": "yaw motor RS02 (hung, output up)",
    "cases": 6
   },
   {
+   "kind": "hind",
+   "part": "yaw motor ring screws 9 x M3 x 6",
+   "cases": 6
+  },
+  {
    "kind": "fore",
-   "part": "shoulder drive pulley 46T-8M (printed, on the RS04)",
+   "part": "shoulder drive pulley 46T-8M (aluminium, on the RS04 output)",
    "cases": 2
   }
  ]

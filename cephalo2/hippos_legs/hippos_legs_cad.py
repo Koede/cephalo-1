@@ -16,6 +16,7 @@ each side of the upper segment (23..35 and -45..-33), because the belt and push 
 import os, json, importlib.util, io, contextlib
 import numpy as np
 from manifold3d import Manifold, CrossSection, JoinType
+import hardware as H
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 spec = importlib.util.spec_from_file_location("S", os.path.join(HERE, "legs_v3_study.py")); S = importlib.util.module_from_spec(spec)
@@ -32,8 +33,8 @@ for name, key in (("fore", "front"), ("hind", "rear")):
     LEG[name] = dict(L1=m.l1 * 1e3, L2=m.l2 * 1e3, L3=m.l3 * 1e3, delta=m.delta / D2R,
                      pivot=np.array([O["pivot"][key][0] * 1e3, S.Y_TRACK * 1e3, O["pivot"][key][1] * 1e3]))
 LEG["fore"]["LC"] = S.CARPUS * LEG["fore"]["L3"]          # elbow to carpus
-RS04 = dict(r=60.0, t=56.0, m=1.420)                      # RobStride 04: dia 120 x 56, 40 / 120 N m
-RS06 = dict(r=44.0, t=49.0, m=0.621); RS03 = dict(r=53.0, t=56.0, m=0.880); RS02 = dict(r=39.25, t=45.5, m=0.405)
+RS04 = dict(name="RS04", r=60.0, t=55.7, m=1.420)        # RobStride 04: dia 120 x 55.7 (STEP), 40 / 120 N m
+RS06 = dict(name="RS06", r=43.5, t=50.5, m=0.621); RS03 = dict(name="RS03", r=49.3, t=56.6, m=0.880); RS02 = dict(name="RS02", r=39.25, t=45.5, m=0.405)
 STS = dict(a=45.2, b=24.7, c=35.0, m=0.055)               # STS3215 case
 Y_A, Y_B = (-19.0, -13.0), (15.0, 21.0)                   # the two plates of the upper segment
 Y_M2 = (21.0, 70.0)
@@ -98,7 +99,7 @@ def pd(z):
     return z * 5.0 / np.pi
 
 
-COL = dict(pacf="#2c2f34", light="#dfe3e8", act="#17181a", servo="#2a5fb0", belt="#3b3b3b", steel="#9aa3ad", carbon="#22252a", tpu="#e08a2e",
+COL = dict(brass="#b5933a", alu="#c3c9d0", pacf="#2c2f34", light="#dfe3e8", act="#17181a", servo="#2a5fb0", belt="#3b3b3b", steel="#9aa3ad", carbon="#22252a", tpu="#e08a2e",
            line="#2e9e5b", spring="#c9a227", hoof="#444a52", bearing="#b8c0c8", orange="#d4572a", gas="#7a8794", shell="#dfe5ec", pod="#c9d2dc", octo="#f0a060")
 
 
@@ -188,12 +189,18 @@ class Leg:
 
 
 def stack_dims(a1, a2=RS06, r_drive=0.0):
-    """Heights and widths that follow the pivot motor's size (RS06 r 44 / RS03 r 53), the joint motor riding on the upper
-    segment (RS06 / RS04 r 60) and whatever else turns about the pivot axis (r_drive: belt back on the motor pulley)."""
+    """Heights and widths that follow the pivot motor's size, the joint motor riding on the upper segment and whatever else turns
+    about the pivot axis (r_drive: belt back on the motor pulley).  Rev D: the motors are RobStride's own STEP envelopes."""
     zf = max(R_PLATE, a1["r"], a2["r"], r_drive, 48.0) + 2.0             # 48: the stifle crank pin + rod end swing r 48 under the flange
-    y0 = -21.0 - a1["t"]; dy = a2["t"] - RS06["t"]
-    return dict(Y_M2=(Y_M2[0], Y_M2[1] + dy), Y_CH_OUT=(Y_CH_OUT[0] + dy, Y_CH_OUT[1] + dy), DY=dy, Z_FLANGE=(zf, zf + 4), Z_HUB=(zf + 4, zf + 40), Z_BELT=(zf + 14, zf + 32), Z_DECK=(zf + 42.5, zf + 48.5),
-                Y_M1=(y0, -21.0), Y_CH_IN=(y0 - 6, y0))
+    D1, D2 = H.MOTORS[a1["name"]], H.MOTORS[a2["name"]]
+    y_back2 = Y_M2[0] + D2["length"] - D2["front_face"]                    # joint motor: housing front face on plate B (y 21)
+    dy = y_back2 + 0.5 + 3.0 + 1.5 - 75.0                                  # back cup end disk 3, then 1.5 to the 6805 seat
+    y_sh1 = -21.0 - D1["back_face"]                                         # pivot motor: back shoulder (mount face)
+    return dict(Y_M2=(Y_M2[0], y_back2), Y_CH_OUT=(Y_CH_OUT[0] + dy, Y_CH_OUT[1] + dy), DY=dy, Z_FLANGE=(zf, zf + 4), Z_HUB=(zf + 4, zf + 40), Z_BELT=(zf + 14, zf + 32), Z_DECK=(zf + 42.5, zf + 48.5),
+                Y_M1=(-21.0 - D1["length"], -21.0), Y_CH_IN=(y_sh1 - 6.0, y_sh1))
+
+
+AL_RHO = 2.70e-6
 
 
 def upper_stack(L, hip_act, joint_act=RS06, r_drive=0.0, r_plate=R_PLATE):
@@ -202,14 +209,31 @@ def upper_stack(L, hip_act, joint_act=RS06, r_drive=0.0, r_plate=R_PLATE):
     a1 = hip_act; a2 = joint_act; K = stack_dims(a1, a2, r_drive); L.K = K; L.a2 = a2; ABD_AX = ABD_AXES[kind]; Y_M2, Y_CH_OUT, dy = K["Y_M2"], K["Y_CH_OUT"], K["DY"]
     Z_FLANGE, Z_HUB, Z_BELT, Z_DECK, Y_M1, Y_CH_IN = (K[k] for k in ("Z_FLANGE", "Z_HUB", "Z_BELT", "Z_DECK", "Y_M1", "Y_CH_IN"))
     zh = Z_HUB[0]; OD56, OD28 = pd(56) / 2 - T_IN, pd(28) / 2 - T_IN
+    D1, D2 = H.MOTORS[a1["name"]], H.MOTORS[a2["name"]]
+    # ---- pivot motor, hung by its back shoulder from the yoke's inboard cheek (a ring round the back cover with four bosses).
+    # Clocked so the four back holes sit above and below the axis: the cheek stays narrow in x, clear of the front lug in yaw.
+    M1 = H.motor_frame([0.0, -21.0 + D1["out_face"], 0.0], [0, -1, 0], [0, 0, 1] if a1["name"] == "RS03" else [1, 0, 0])
+    back1, f1 = H.pattern(a1["name"], "back_pat", M1)
+    r_bc1 = D1["profile"][-1][0]
+    cheek_in = hull(box(-32, 32, Y_CH_IN[0], Y_CH_IN[1], Z_FLANGE[0], Z_FLANGE[1]), cyl_y(r_bc1 + 3.5, *Y_CH_IN),
+                    *[cyl_y(6.0, Y_CH_IN[0], Y_CH_IN[1], p[0], p[2]) for p in back1]) - hole_y(r_bc1 + 0.45, Y_CH_IN[0] - 1, Y_CH_IN[1] + 1)
     # ---- yoke (rotates in yaw): flange, hub = 56T pulley on two 61810, two cheeks
     cheek = lambda y, r: hull(box(-32, 32, y[0], y[1], Z_FLANGE[0], Z_FLANGE[1]), cyl_y(r, y[0], y[1], 0, 0))
-    yoke = union([cyl_z(44, *Z_FLANGE), box(-32, 32, Y_CH_IN[0], Y_CH_OUT[1], Z_FLANGE[0], Z_FLANGE[1]), cheek(Y_CH_IN, 30), cheek(Y_CH_OUT, 24),
+    yoke = union([cyl_z(44, *Z_FLANGE), box(-32, 32, Y_CH_IN[0], Y_CH_OUT[1], Z_FLANGE[0], Z_FLANGE[1]), cheek_in, cheek(Y_CH_OUT, 24),
                   cyl_z(OD56, *Z_HUB) - hole_z(32.5, zh + 4, Z_HUB[1] + 1)])
     yoke = yoke - hole_y(18.5, Y_CH_OUT[0] - 0.1, 82.0 + dy) - cyl_y(15, 81.9 + dy, Y_CH_OUT[1] + 0.1)           # 6805 seat with a 1 mm lip
     L.add("yaw yoke + 56T hub", "yoke", "structure", "pacf", yoke, True)
-    L.add("pivot motor " + ("RS03" if a1 is RS03 else "RS06"), "yoke", "actuators", "act", cyl_y(a1["r"], *Y_M1), mass=a1["m"])
-    L.add("pivot output adapter", "upper", "hardware", "steel", cyl_y(25, -20.9, -19.0), mass=0.03)
+    H.add_motor(L, "pivot motor " + a1["name"], a1["name"], M1, "yoke", "upper", a1["m"])
+    H.fasten(L, "pivot motor to yoke", "yoke", D1["back_pat"][3], 12.0 if D1["back_pat"][3] == 3 else 14.0, [p + np.array([0, -6.0, 0]) for p in back1], [0, 1, 0],
+             "yaw yoke", 6.0, None, kind="tapped", head="bhcs")
+    # pivot output: a 2 mm steel disc on the motor's output, plate A screwed through it (button heads inside the plates: the drive
+    # pulley / crank has a pocket for them)
+    L.add("pivot output adapter (2 mm steel, dowelled)", "upper", "hardware", "steel", cyl_y(25, -20.95, -19.0), mass=0.03)
+    out1, _ = H.pattern(a1["name"], "out_pat", M1)
+    d1 = D1["out_pat"][3]; l1 = 16.0 if D1["out_pat"][4] >= 8 else 12.0
+    H.fasten(L, "plate A to pivot output", "upper", d1, l1, [p + np.array([0, 8.0, 0]) for p in out1], [0, -1, 0],
+             ["plates A + B", "pivot output adapter"], 8.0, None, kind="tapped", head="bhcs")
+    L.pivot_screw_r = D1["out_pat"][1] / 2 + H.BHCS[d1][0] / 2                # pocket the drive pulley / crank must leave
     L.add("yaw bearings 2 x 61810", "cradle", "hardware", "bearing", cyl_z(32.5, zh + 6.5, zh + 13.5) + cyl_z(32.5, zh + 26, zh + 33) - hole_z(25, zh + 5, zh + 34), mass=0.104)
     L.add("stub bearing 6805", "yoke", "hardware", "bearing", cyl_y(18.5, 75 + dy, 82 + dy) - hole_y(12.5, 74 + dy, 83 + dy), mass=0.021)
     # ---- upper segment: plates A and B joined by edge webs, drum A, motor 2 on plate B with its stub
@@ -220,45 +244,98 @@ def upper_stack(L, hip_act, joint_act=RS06, r_drive=0.0, r_plate=R_PLATE):
             webs = [box(-52, -46, Y_A[0], Y_B[1], -L1 + 12, WEB_L), box(46, 52, Y_A[0], Y_B[1], -L1 + 12, WEB_R)]
         else: webs = [box(-52, -46, Y_A[0], Y_B[1], -L1 + 12, -52), box(46, 52, Y_A[0], Y_B[1], -L1 + 12, -100)]
     else:                   # push rod on the +x side, tibia folds to -x: one web, on the +x edge, outside the rod
-        pts = [(0, 0, R_PLATE), (0, -L1, re_), (32, -62, 24), (32, -L1 + 14, 24)]
+        pts = [(0, 0, R_PLATE), (0, -L1, re_)]
+        pts += [(32, -62, 24), (32, -L1 + 14, 24)]
         webs = [box(50, 56, Y_A[0], Y_B[1], -L1 + 14, -62)]
     lobe = [cyl_y(r_plate, *Y_B)] if r_plate > R_PLATE else []          # plate B carries the RS04's flange: full 60 mm disc at the pivot
-    up = union([plate_y(pts, *Y_A), plate_y(pts, *Y_B)] + webs + lobe) - cyl_y(14.5, Y_B[0] - 1, Y_B[1] + 1) - hole_y(18.5, Y_A[0] - 1, Y_B[1] + 1, 0, -L1)
+    r_boreB = D2["out_r"] + 1.6                                               # plate B bore: the joint motor's spinning output and the hub flange pass it
+    up = union([plate_y(pts, *Y_A), plate_y(pts, *Y_B)] + webs + lobe) - hole_y(r_boreB, Y_B[0] - 1, Y_B[1] + 1) - hole_y(18.5, Y_A[0] - 1, Y_B[1] + 1, 0, -L1)
+    up = up - hole_y(12.6, Y_A[0] - 1, Y_A[1] + 1)                          # plate A: pilot for the adapter's dowel boss / grease
     up = up + (cyl_y(R_DRUM, Y_DRUM[0], Y_DRUM[1], 0, -L1) - cyl_y(15.0, Y_DRUM[0] - 1, Y_DRUM[1] + 1, 0, -L1))     # tendon drum A, fixed to the upper segment
     L.up_name = ("scapula" if kind == "fore" else "femur") + " (plates A + B, drum A)"
     L.up_solid = up
-    L.add("joint motor " + ("RS04" if a2 is RS04 else "RS06") + " (rides on the upper segment)", "upper", "actuators", "act", cyl_y(a2["r"], *Y_M2) + cyl_y(12.5, Y_M2[1], 81 + dy), mass=a2["m"])
+    # joint motor: housing front face on plate B's outer face (y 21), 10 x M4 (RS04) / 8 x M3 (RS06) from inside the plates
+    M2 = H.motor_frame([0.0, Y_M2[0] - D2["front_face"], 0.0], [0, 1, 0], [1, 0, 0])
+    H.add_motor(L, "joint motor " + a2["name"] + " (rides on the upper segment)", a2["name"], M2, "upper", "drive", a2["m"])
+    fr2, _ = H.pattern(a2["name"], "front_pat", M2); dfr = D2["front_pat"][3]
+    if kind == "fore":      # the 46T pulley runs 1.5 mm inside plate B: button heads sunk flush
+        H.fasten(L, "joint motor to plate B", "upper", dfr, 10.0, [p - np.array([0, 6.0, 0]) for p in fr2], [0, 1, 0], "plates A + B", 6.0, None,
+                 kind="tapped", head="bhcs", cbore=2.3)
+    else:
+        H.fasten(L, "joint motor to plate B", "upper", dfr, 12.0, [p - np.array([0, 6.0, 0]) for p in fr2], [0, 1, 0], "plates A + B", 6.0, None,
+                 kind="tapped", head="bhcs")
+    L.M2 = M2
+    # back cup + 25 mm stub, one machined 6061 part: screwed to the back shoulder, round the back cover, stub into the 6805 in the yoke
+    r_bc2 = D2["profile"][-1][0]; y_sh2 = Y_M2[0] - D2["front_face"] + D2["back_face"]; bk2, _ = H.pattern(a2["name"], "back_pat", M2)
+    r_pcd = min(np.hypot(p[0], p[2]) for p in bk2); r_ring = r_pcd + 5.0
+    r_wall = min(r_bc2 + 3.0, r_pcd - H.BHCS[D2["back_pat"][3]][0] / 2 - 0.3)      # shell wall inside the back screw heads
+    cup = union([cyl_y(r_ring, y_sh2, y_sh2 + 4.0), cyl_y(r_wall, y_sh2, Y_M2[1] + 3.4), cyl_y(12.5, Y_M2[1] + 3.0, 81.9 + dy)])
+    cup = cup - hole_y(r_bc2 + 0.45, y_sh2 - 1, Y_M2[1] + 0.5)
+    L.add("joint motor back cup + 25 mm stub (6061)", "upper", "structure", "alu", cup, mass=None)
+    L.parts[-1]["mass"] = float(cup.volume() * AL_RHO)
+    dbk = D2["back_pat"][3]
+    H.fasten(L, "joint motor back cup", "upper", dbk, 8.0 if dbk == 4 else 10.0, [p + np.array([0, 4.0, 0]) for p in bk2], [0, -1, 0],
+             "joint motor back cup", 4.0, None, kind="tapped", head="bhcs")
     # ---- cradle (rotates in abduction): fixed yaw spindle, deck, RS02 clamp ring on three posts, lugs on the abduction stubs
     xr = -YAW_C; ya = ABD_AX[0]
     deck = hull(cyl_z(46, *Z_DECK), cyl_z(51, Z_DECK[0], Z_DECK[1], xr, 0))
     spindle = cyl_z(25, zh + 6.5, Z_DECK[0] + 1) - cyl_z(19, zh + 5, Z_DECK[1] + 1)
     lug = lambda xs: hull(box(xs[0], xs[1], ya - 14, ya + 14, Z_DECK[0], Z_DECK[1]), cyl_x(14, xs[0], xs[1], ya, ABD_AX[1])) - hole_x(7.5, xs[0] - 1, xs[1] + 1, ya, ABD_AX[1])
+    lugR = hull(box(X_LUG_R[0], X_LUG_R[1], ya - 14, ya + 14, Z_DECK[0], Z_DECK[1]), cyl_x(18, X_LUG_R[0], X_LUG_R[1], ya, ABD_AX[1]))
     arm_f = hull(box(X_LUG_F[0], X_LUG_F[1], ya - 14, ya + 14, *Z_DECK), box(0, 30, ya - 14, 0, *Z_DECK))
     arm_r = box(X_LUG_R[0], xr, ya - 14, 14, *Z_DECK)
-    zr = Z_BELT[0] - 2                                                     # RS02 output face (pulley above it)
+    # yaw motor RS02, hung output up: its output flange face carries the 28T pulley; a 4.5 mm ring on the housing's front face
+    # (9 x M3, heads sunk flush) hangs it from three posts under the deck
+    z_out = Z_BELT[0] - 1.0
+    DY_ = H.MOTORS["RS02"]; Myaw = H.motor_frame([xr, 0.0, z_out + DY_["out_face"]], [0, 0, -1], [1, 0, 0])
+    zr = z_out - (DY_["front_face"] - DY_["out_face"])                    # housing front face
     rr = RS02["r"]
-    ring = cyl_z(rr + 9, zr - 8, zr, xr, 0) - hole_z(rr, zr - 9, zr + 1, xr, 0)
-    posts = [box(xr + dx * (rr + 5) - 4, xr + dx * (rr + 5) + 4, dy * (rr + 5) - 4, dy * (rr + 5) + 4, zr - 8, Z_DECK[0] + 0.5) for dx, dy in ((-1, 0), (0, 1), (0, -1))]
-    cradle = union([deck, spindle, lug(X_LUG_F), lug(X_LUG_R), arm_f, arm_r, ring] + posts)
+    ring = cyl_z(rr + 9, zr, z_out + 1.0, xr, 0) - hole_z(22.4, zr - 1, z_out + 2, xr, 0)
+    posts = [box(xr + dx * (rr + 5) - 4, xr + dx * (rr + 5) + 4, dy_ * (rr + 5) - 4, dy_ * (rr + 5) + 4, zr, Z_DECK[0] + 0.5) for dx, dy_ in ((-1, 0), (0, 1), (0, -1))]
+    cradle = union([deck, spindle, lug(X_LUG_F), lugR, arm_f, arm_r, ring] + posts)
     L.add("abduction cradle (deck, yaw spindle, lugs)", "cradle", "structure", "light", cradle, True)
-    L.add("yaw motor RS02 (hung, output up)", "cradle", "actuators", "act", cyl_z(rr, zr - RS02["t"], zr, xr, 0), mass=RS02["m"])
-    L.add("yaw pulley 28T", "cradle", "drive", "steel", cyl_z(OD28, Z_BELT[0] - 1, Z_BELT[1] + 1, xr, 0), mass=0.03)
+    H.add_motor(L, "yaw motor RS02 (hung, output up)", "RS02", Myaw, "cradle", "cradle", RS02["m"])
+    fy, _ = H.pattern("RS02", "front_pat", Myaw)
+    H.fasten(L, "yaw motor ring", "cradle", 3, 6.0, [p + np.array([0, 0, 4.5]) for p in fy], [0, 0, -1], "abduction cradle", 4.5, None,
+             kind="tapped", head="bhcs", cbore=1.8)
+    p28 = cyl_z(OD28, z_out + 0.05, Z_BELT[1] + 1, xr, 0) - hole_z(14.3, z_out - 1, z_out + 0.6, xr, 0)
+    L.add("yaw pulley 28T-5M (steel, on the RS02 output)", "cradle", "drive", "steel", p28, mass=0.03)
+    oy, _ = H.pattern("RS02", "out_pat", Myaw)
+    top = Z_BELT[1] + 1
+    H.fasten(L, "yaw pulley", "cradle", 4, 25.0, [np.array([p[0], p[1], top]) for p in oy], [0, 0, -1], "yaw pulley 28T", top - z_out, None, kind="tapped", head="shcs")
     Pb = belt_path((0, 0), pd(56) / 2, (xr, 0), pd(28) / 2)[0]
     L.add("yaw belt 490-5M-15 (28T : 56T)", "cradle", "drive", "belt", belt_solid(Pb, Z_BELT[0] + 1.5, Z_BELT[1] - 1.5, "xy"), mass=0.03)
-    abd = RS06 if kind == "fore" else RS02
-    xm1 = X_LUG_R[0] - 5.0; xa0 = xm1 - abd["t"]
-    L.add("abduction stubs 15 mm (rear on the motor, front in a 6802)", "cradle", "hardware", "steel",
-          cyl_x(7.5, xm1 + 0.1, X_LUG_R[1], ya, ABD_AX[1]) + cyl_x(7.5, X_LUG_F[0], X_LUG_F[1] + 11, ya, ABD_AX[1]), mass=0.05)
-    # ---- carrier: two brackets on the body frame (abduction motor + rear journal, front journal).  No beam: anything
-    # under or beside the stack is in the leg's way when it yaws inward.  The front sling rocker is not in this build.
-    rear = hull(cyl_x(abd["r"] + 3, xa0 - 8, xa0, ya, ABD_AX[1]), box(xa0 - 8, xa0, ya - 45, ya - 20, ABD_AX[1] - 30, ABD_AX[1] + 30))
+    # ---- abduction: RS06 (fore) / RS02 (hind) on the rear bracket, hung by a 4.5 mm ring on its housing front face; its output
+    # flange is bolted through the cradle's rear lug (the lug + a 4 mm steel flange are the rear stub); front stub in a 6802
+    abd = RS06 if kind == "fore" else RS02; DA = H.MOTORS[abd["name"]]
+    xm1 = X_LUG_R[0] - 4.0                                                  # output flange face (4 mm steel flange, then the 8 mm lug)
+    MA = H.motor_frame([xm1 + DA["out_face"], ya, ABD_AX[1]], [-1, 0, 0], [0, 0, 1])
+    xf = xm1 - (DA["front_face"] - DA["out_face"])                          # housing front face
+    xa0 = xm1 + DA["out_face"] - DA["length"]
+    flange = cyl_x(16, xm1 + 0.05, X_LUG_R[0], ya, ABD_AX[1])
+    if DA["out_face"] > 0:                                                  # pilot recess for the output boss (RS02)
+        flange = flange - hole_x(DA["profile"][0][0], xm1 - 1, xm1 + DA["out_face"] + 0.1, ya, ABD_AX[1])
+    L.add("abduction output flange (4 mm steel)", "cradle", "hardware", "steel", flange, mass=0.03)
+    L.add("abduction front stub 15 mm (in a 6802)", "cradle", "hardware", "steel", cyl_x(7.5, X_LUG_F[0], X_LUG_F[1] + 11, ya, ABD_AX[1]), mass=0.025)
+    oa, _ = H.pattern(abd["name"], "out_pat", MA)
+    la = 16.0                                                               # 12 clamp + 4 thread (RS06 holes 4.7 deep)
+    H.fasten(L, "abduction lug to output", "cradle", 4, la, [np.array([X_LUG_R[1], p[1], p[2]]) for p in oa], [-1, 0, 0],
+             ["abduction cradle", "abduction output flange"], X_LUG_R[1] - xm1, None, kind="tapped", head="shcs")
+    rr_a = DA["front_pat"][1] / 2 + 6.0
+    tr = min(4.5, X_LUG_R[0] - 1.5 - xf)                                     # ring thickness: 1.5 mm off the cradle's rear lug
+    rear = hull(cyl_x(rr_a, xf, xf + tr, ya, ABD_AX[1]), box(xf, xf + tr, ya - 45, ya - 20, ABD_AX[1] - 30, ABD_AX[1] + 30))
+    rear = rear - hole_x(DA["out_r"] + 1.6, xf - 1, xf + tr + 1, ya, ABD_AX[1])
     xb = X_LUG_F[1] + 2
     front = hull(cyl_x(16, xb, xb + 10, ya, ABD_AX[1]), box(xb, xb + 10, ya - 30, ya - 14, ABD_AX[1] - 12, ABD_AX[1] + 40))
     front = front - hole_x(12, xb - 0.1, xb + 7, ya, ABD_AX[1]) - cyl_x(9.5, xb - 1, xb + 11, ya, ABD_AX[1])
-    L.add("hip bracket, rear (abduction motor mount)", "rocker", "structure", "pacf", rear, True)
+    L.add("hip bracket, rear (abduction motor ring)", "rocker", "structure", "pacf", rear, True)
     L.add("hip bracket, front (journal)", "rocker", "structure", "pacf", front, True)
-    L.add("abduction motor " + ("RS06" if abd is RS06 else "RS02"), "rocker", "actuators", "act", cyl_x(abd["r"], xa0, xm1, ya, ABD_AX[1]), mass=abd["m"])
+    H.add_motor(L, "abduction motor " + abd["name"], abd["name"], MA, "rocker", "cradle", abd["m"])
+    fa_, _ = H.pattern(abd["name"], "front_pat", MA)
+    H.fasten(L, "abduction motor ring", "rocker", DA["front_pat"][3], 8.0, [np.array([xf + tr, p[1], p[2]]) for p in fa_], [-1, 0, 0],
+             "hip bracket, rear", tr, None, kind="tapped", head="bhcs", cbore=1.8)
     L.add("abduction bearing 6802", "rocker", "hardware", "bearing", cyl_x(12, xb + 2, xb + 7, ya, ABD_AX[1]) - hole_x(7.5, xb + 1, xb + 8, ya, ABD_AX[1]), mass=0.007)
+    L.abd = dict(xa0=xa0, xm1=xm1, xf=xf)
 
 
 def middle_arms(L, zS, zJ, tag):
@@ -358,7 +435,14 @@ def build_fore():
     L.mech["belt"] = dict(teeth=SH_BELT_T, pitch=8, deflect_mm=float(dl), slack_free_len=float(path_len(belt_path((0, 0), RM, (0, zS), RJ)[0])), ratio=SH_ZJ / SH_ZM, r_joint=float(RJ), r_motor=float(RM))
     belt = belt_solid(Pb, -9.0, 11.0, "xz", T_OUT8, T_IN8)
     ic = Kk - mo * (RI + 0.1)
-    L.add("shoulder drive pulley 46T-8M (printed, on the RS04)", "drive", "drive", "steel", cyl_y(RM - T_IN8, -11.5, 13.5) + cyl_y(12, 13.5, 20.9), mass=0.11)
+    yo = L.M2[:3, 3][1] + H.MOTORS["RS04"]["out_face"]                     # RS04 output flange face (y 20.5)
+    pul = cyl_y(RM - T_IN8, -11.5, 13.5) + cyl_y(24, 13.5, yo - 0.05)
+    pul = pul - hole_y(L.pivot_screw_r + 1.5, -12, -9.2) - hole_y(14.6, 17.4, yo + 1)          # pocket for plate A's screw heads; output pilot
+    L.add("shoulder drive pulley 46T-8M (aluminium, on the RS04 output)", "drive", "drive", "alu", pul, mass=None)
+    L.parts[-1]["mass"] = float(pul.volume() * AL_RHO)
+    o2, _ = H.pattern("RS04", "out_pat", L.M2)
+    H.fasten(L, "drive pulley to RS04 output", "drive", 5, 30.0, [np.array([p[0], -9.2, p[2]]) for p in o2], [0, 1, 0],
+             "shoulder drive pulley", yo + 9.2, None, kind="tapped", head="shcs", cbore=5.0)
     L.add("shoulder belt 576-8M-20 (46T : 22T)", "upper", "drive", "belt", belt, mass=0.09)
     L.add("belt idler 22T-8M on a slotted pin", "upper", "hardware", "steel", cyl_y(RI - T_IN8, -11.5, 13.5, ic[0], ic[1]) + cyl_y(4, Y_A[1], Y_B[0], ic[0], ic[1]) - Manifold(), mass=0.07)
     L.add(L.up_name, "upper", "structure", "orange", L.up_solid, True)
@@ -395,6 +479,7 @@ def build_fore():
                           y1=(19.0, 22.4), y2=(22.8, 26.2), ypin=(19.0, 29.5), lock_below=1e-3))
     L.struts.append(dict(name="carpus release line 1.5 mm", a=("tan", "lower", [-24.0, 28.0, zs0 + 36], 9.0 + 0.75 + FIT, "minx"), b=("knee", 0, 28.0), r=0.75, col=COL["line"], trim=(0.0, 3.6), group="drive"))
     L.joints = dict(zS=zS, zE=zE, zC=zC, fet=fet, ball=ball)
+    H.finish(L, COL)
     return L
 
 
@@ -405,8 +490,19 @@ def build_hind():
     # stifle drive: 1:1 parallelogram push rod, cranks 40 mm between the plates.  Rest crank direction: perpendicular to the femur at q1 = 110 deg
     a0 = -110.0 * D2R
     c0 = 40.0 * np.array([np.cos(a0), 0.0, -np.sin(a0)])
-    crank = lambda z: hull(cyl_y(14, -11.5, -2, 0, z), cyl_y(7, -11.5, -2, c0[0], z + c0[2])) + cyl_y(4, -11.5, 11.5, c0[0], z + c0[2])
-    L.add("stifle drive crank 40 mm", "drive", "drive", "steel", crank(0.0) + cyl_y(10, -2, 20.9), mass=0.05)
+    crank = lambda z, y0=-11.5: hull(cyl_y(14, y0, -2, 0, z), cyl_y(7, y0, -2, c0[0], z + c0[2])) + cyl_y(4, y0, 11.5, c0[0], z + c0[2])
+    yo = L.M2[:3, 3][1] + H.MOTORS["RS06"]["out_face"]                     # RS06 output face (y 19.5)
+    dc = crank(0.0, -9.0) + cyl_y(18, -9.0, yo - 0.05)
+    sweep = []                                                              # the rod in the crank's frame over q1 48..148: hub cut 1.5 clear of it
+    for q in np.arange(48.0, 149.0, 2.0):
+        A = np.eye(4); A[:3, 3] = c0; B = np.eye(4); B[:3, 3] = -c0; R = (A @ rot("y", -q) @ B)[:3, :4]
+        sweep.append(rod(c0 + [0, 5, -2.0], c0 + [0, 5, -75.0], 6.5).transform(R))
+    dc = dc - union(sweep)
+    L.add("stifle drive crank 40 mm (6061, on the RS06 output)", "drive", "drive", "alu", dc, mass=None)
+    L.parts[-1]["mass"] = float(dc.volume() * AL_RHO)
+    o2, _ = H.pattern("RS06", "out_pat", L.M2)
+    H.fasten(L, "drive crank to RS06 output", "drive", 4, 25.0, [np.array([p[0], -9.0, p[2]]) for p in o2], [0, 1, 0],
+             "stifle drive crank", yo + 9.0, None, kind="tapped", head="shcs", cbore=8.0)
     eye = lambda z: cyl_y(8, 0, 10, c0[0], z + c0[2]) - hole_y(4, -1, 11, c0[0], z + c0[2])
     L.add("stifle push rod 10 x 8 carbon, rod ends", "rodn", "drive", "carbon", union([rod(c0 + [0, 5, -7.5], c0 + [0, 5, zS + 7.5], 5), eye(0.0), eye(zS)]), mass=0.03)
     L.add(L.up_name, "upper", "structure", "orange", L.up_solid, True)
@@ -422,6 +518,7 @@ def build_hind():
     L.add("hock pin 10 mm", "lower", "hardware", "steel", cyl_y(5, Y_ARM_I[0], Y_ARM_O[1], 0, zH), mass=0.04)
     fetlock_servo(L, "lower", 12.5, zH - 84.5, "hind cannon", horn)
     L.joints = dict(zS=zS, zH=zH, fet=fet, ball=ball, c0=c0)
+    H.finish(L, COL)
     return L
 
 
