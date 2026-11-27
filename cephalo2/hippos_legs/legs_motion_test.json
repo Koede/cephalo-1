@@ -1,88 +1,96 @@
 {
- "mass": 43.85,
- "jump_mm": 158.71539924024287,
+ "mass": 45.58,
+ "jump_mm": 153.04222409438177,
  "loads": [
   [
-   0.86,
+   0.83,
    "rear",
    "trot",
    "joint",
-   10.6,
-   20.5
+   11.0,
+   21.3
   ],
   [
-   0.9,
+   0.87,
    "rear",
    "gallop",
    "joint",
-   15.0,
-   36.3
+   15.6,
+   37.7
   ],
   [
-   0.96,
+   0.93,
    "rear",
    "rear up 40 deg",
    "pivot",
-   33.9,
-   33.9
+   35.3,
+   35.3
   ],
   [
-   0.98,
+   0.95,
    "front",
    "gallop",
    "joint",
-   21.0,
-   50.4
+   21.7,
+   52.3
   ],
   [
-   1.03,
+   0.99,
    "front",
    "trot",
    "joint",
-   14.8,
-   28.5
+   15.3,
+   29.6
   ],
   [
-   1.17,
+   1.13,
    "rear",
    "walk",
    "joint",
-   7.8,
-   12.7
+   8.1,
+   13.2
   ]
  ],
  "load_fails": [
   [
-   0.86,
+   0.83,
    "rear",
    "trot",
    "joint",
-   10.6,
-   20.5
+   11.0,
+   21.3
   ],
   [
-   0.9,
+   0.87,
    "rear",
    "gallop",
    "joint",
-   15.0,
-   36.3
+   15.6,
+   37.7
   ],
   [
-   0.96,
+   0.93,
    "rear",
    "rear up 40 deg",
    "pivot",
-   33.9,
-   33.9
+   35.3,
+   35.3
   ],
   [
-   0.98,
+   0.95,
    "front",
    "gallop",
    "joint",
-   21.0,
-   50.4
+   21.7,
+   52.3
+  ],
+  [
+   0.99,
+   "front",
+   "trot",
+   "joint",
+   15.3,
+   29.6
   ]
  ],
  "crouch": {
@@ -467,7 +475,7 @@
   },
   "jump": {
    "frames": 72,
-   "dt": 0.01798829607263638,
+   "dt": 0.01766388092365837,
    "slip_mm": 8.277473284579173e-08,
    "height_err_mm": 6.124616902525304e-08,
    "ik_err_mm": 8.277471508222334e-08,
@@ -505,20 +513,20 @@
     "hind hoof": 4.226762083639969
    },
    "max_speed_deg_s": {
-    "fore pivot": 147.73862451178667,
-    "fore joint": 774.5720554451225,
+    "fore pivot": 150.45199469855032,
+    "fore joint": 788.7978594939301,
     "fore fold": 0,
-    "fore hoof": 147.73862451178667,
-    "hind pivot": 234.97289941039372,
-    "hind joint": 739.4587943549699,
+    "fore hoof": 150.45199469855032,
+    "hind pivot": 239.28841583045292,
+    "hind joint": 753.0397076305154,
     "hind fold": 0,
-    "hind hoof": 234.97289941039372
+    "hind hoof": 239.28841583045292
    },
    "speed_margin": {
-    "fore pivot": 6.533497947403672,
-    "fore joint": 2.6724434291790136,
-    "hind pivot": 10.111804407921014,
-    "hind joint": 3.2131607848042236
+    "fore pivot": 6.415667681468769,
+    "fore joint": 2.6242464721291867,
+    "hind pivot": 9.929440135052369,
+    "hind joint": 3.155212103590429
    },
    "mechanism": {
     "gas": [
@@ -760,97 +768,97 @@
  "forces": {
   "walk": {
    "grf_peak_N": {
-    "fore": 276.5368928571429,
-    "hind": 184.3579285714286
+    "fore": 287.4470142857143,
+    "hind": 191.63134285714287
    },
-   "toggle_N": 433.9648810426417,
-   "toggle_tension_N": 389.29712137905926,
+   "toggle_N": 451.0859584475167,
+   "toggle_tension_N": 404.65593597394576,
    "tendon_N": {
-    "fore": 383.89438185985097,
-    "hind": 179.4718232893519
+    "fore": 399.0400439035805,
+    "hind": 186.5524676289318
    },
    "buffer_N": {
-    "fore": 381.15595565397496,
-    "hind": 262.32400320088516
+    "fore": 396.19357944602456,
+    "hind": 272.6733880478072
    },
    "fetlock_deg": {
-    "fore": 1.6177554782586823,
-    "hind": 1.113392266241385
+    "fore": 1.6815802667965958,
+    "hind": 1.1573185745788446
    },
    "buffer_MPa": {
-    "fore": 1.9446732431325253,
-    "hind": 1.3383877714330876
+    "fore": 2.021395813500125,
+    "hind": 1.391190755345955
    }
   },
   "trot": {
    "grf_peak_N": {
-    "fore": 387.1516500000001,
-    "hind": 258.10110000000003
+    "fore": 402.42582,
+    "hind": 268.28388
    },
-   "toggle_N": 784.1938226671547,
-   "toggle_tension_N": 679.489334840773,
+   "toggle_N": 815.1323702889146,
+   "toggle_tension_N": 706.297009852735,
    "tendon_N": {
-    "fore": 693.71420583118,
-    "hind": 286.8454623561355
+    "fore": 721.0830901205286,
+    "hind": 298.1622844741769
    },
    "buffer_N": {
-    "fore": 554.1526828845848,
-    "hind": 381.74290654777434
+    "fore": 576.0154911260973,
+    "hind": 396.80368712537177
    },
    "fetlock_deg": {
-    "fore": 2.3520124117964425,
-    "hind": 1.620246697429805
+    "fore": 2.4448056038695967,
+    "hind": 1.6841697712394643
    },
    "buffer_MPa": {
-    "fore": 2.827309606554004,
-    "hind": 1.947667890549869
+    "fore": 2.9388545465617213,
+    "hind": 2.024508607782509
    }
   },
   "gallop": {
    "grf_peak_N": {
-    "fore": 604.9244531250001,
-    "hind": 403.28296875000007
+    "fore": 628.7903437499999,
+    "hind": 419.1935625
    },
-   "toggle_N": 1432.7637199160763,
-   "toggle_tension_N": 1424.0917700604443,
+   "toggle_N": 1489.2900878853989,
+   "toggle_tension_N": 1480.2760063706962,
    "tendon_N": {
-    "fore": 1267.452659502979,
-    "hind": 457.5182649010609
+    "fore": 1317.4570631732217,
+    "hind": 475.5685864125507
    },
    "buffer_N": {
-    "fore": 918.8672019152,
-    "hind": 631.4601451996721
+    "fore": 955.1189752176695,
+    "hind": 656.3729399817798
    },
    "fetlock_deg": {
-    "fore": 3.8999848425300065,
-    "hind": 2.680131568313169
+    "fore": 4.053849694926286,
+    "hind": 2.785869940335558
    },
    "buffer_MPa": {
-    "fore": 4.688097968955102,
-    "hind": 3.2217354346922042
+    "fore": 4.873055996008517,
+    "hind": 3.3488415305192847
    }
   },
-  "shoulder_belt_peak_N": 1799.2757925105177,
-  "stifle_rod_peak_N": 1815.0000000000002,
+  "shoulder_belt_peak_N": 1867.1056338948429,
+  "stifle_rod_peak_N": 1885.0000000000005,
   "fore_gas_spring": {
    "stand_len_mm": 102.94991478367008,
    "lever_mm": 15.906637059951006,
    "force_N": 444.2003408653196,
    "torque_Nm": 7.065733604051163,
-   "stand_joint_Nm": 11.780937820938869,
-   "offload": 0.5997598588028256
+   "stand_joint_Nm": 12.245727386052302,
+   "offload": 0.5769958273037277
   },
   "hind_gas_spring": {
    "stand_len_mm": 105.78482062542177,
    "lever_mm": 13.682600708549403,
    "force_N": 432.8607174983129,
    "torque_Nm": 5.92266035994562,
-   "stand_joint_Nm": 8.541525323887415,
-   "offload": 0.693396101441294
+   "stand_joint_Nm": 8.878511385696427,
+   "offload": 0.6670780835498189
   }
  },
  "gallop_twisted_leg_leg": [
-  3.5696123101061383,
+  3.569612310106153,
   "f0 yaw 25 abd -10: fore 0: fore hoof core | fore 1: fore hoof shoe (TPU 95A)"
  ],
  "stand_twist": {
@@ -899,8 +907,8 @@
   },
   {
    "kind": "fore",
-   "part": "humerus arm, inner",
-   "cases": 75
+   "part": "humerus arm, inner (6061 plate, keyed)",
+   "cases": 78
   },
   {
    "kind": "fore",
@@ -949,8 +957,23 @@
   },
   {
    "kind": "fore",
-   "part": "humerus shaft 25 mm",
+   "part": "elbow pin 10 mm E-clips DIN 6799 (2)",
+   "cases": 34
+  },
+  {
+   "kind": "fore",
+   "part": "humerus shaft 25 / 12 mm 4140 tube (3 keyways)",
    "cases": 12
+  },
+  {
+   "kind": "fore",
+   "part": "humerus keys DIN 6885 A 8 x 7 (3)",
+   "cases": 7
+  },
+  {
+   "kind": "fore",
+   "part": "humerus arm set screws 2 x M5 x 6 cup point",
+   "cases": 1
   },
   {
    "kind": "fore",
@@ -974,8 +997,13 @@
   },
   {
    "kind": "fore",
-   "part": "shoulder pulley 22T-8M",
+   "part": "shoulder pulley 22T-8M, flanged, keyed (6061)",
    "cases": 2
+  },
+  {
+   "kind": "fore",
+   "part": "humerus shaft spacers (4 sleeves, steel)",
+   "cases": 4
   },
   {
    "kind": "fore",

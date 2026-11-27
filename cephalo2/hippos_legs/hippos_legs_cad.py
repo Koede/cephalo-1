@@ -378,18 +378,38 @@ def middle_arms(L, zS, zJ, tag, hub=(-11.5, 13.5)):
           union([rod([sx * xt, y, zS], [sx * xt, y, zJ], 1.5, 12) for sx, y in ((1, -28), (-1, -22))]), mass=0.004)
 
 
-def gas_spring(L, zS, q_lo, q_hi):
+ECLIP = {10: (4.0, 7.2, 0.9), 6: (2.5, 4.7, 0.7)}                 # DIN 6799 E-clip for a pin of d: (groove radius, outer radius, thickness)
+
+
+def clipped_pin(L, name, node, d, y0, y1, x, z, ends, mass, gap=0.2):
+    """Pin from y0 to y1 at (x, z), lengthened 1.6 mm at each end in `ends` (-1 / +1) for a DIN 6799 E-clip in a groove."""
+    rg, ro, t = ECLIP[d]; pin = None; clips = []
+    ext = gap + t + 0.5                                     # clip sits `gap` off the face (gap 1.6 where that face turns on the pin)
+    a = y0 - (ext if -1 in ends else 0.0); b = y1 + (ext if 1 in ends else 0.0)
+    pin = cyl_y(d / 2, a, b, x, z)
+    for e in ends:
+        g0 = (y1 + gap) if e > 0 else (y0 - gap - t)
+        pin = pin - (cyl_y(d / 2 + 1, g0, g0 + t, x, z) - cyl_y(rg, g0 - 1, g0 + t + 1, x, z))
+        clips.append(cyl_y(ro, g0, g0 + t, x, z) - hole_y(rg, g0 - 1, g0 + t + 1, x, z))
+    L.add(name, node, "hardware", "steel", pin, mass=mass)
+    L.add(name.split(" (")[0] + " E-clips DIN 6799 (%d)" % len(ends), node, "hardware", "steel", union(clips), mass=0.0005 * len(ends))
+
+
+def gas_spring(L, zS, q_lo, q_hi, Le=114.0, Lc=84.0):
     """Offload strut between a stud on plate B and a stud on the middle segment's outer arm, in the plane y = 45.
-    6/15 gas spring, 30 mm stroke: 114 mm extended / 84 mm compressed between the eye centres (est. from the series' 2 x stroke + 32 body
-    plus two 11 mm eyes).  Anchors from a grid search: inside the stroke over the joint range, most lever at the stand."""
-    Le, Lc = 114.0, 84.0; L1 = L.g["L1"]; q = np.radians(np.arange(q_lo - 3, q_hi + 3.1, 1.0)); best = None
+    Needs a 6/15 strut 114 / 84 mm between the eye centres (30 stroke).  No stock 6/15 does that: eye to eye is about 2 x stroke + 63
+    (Lesjoefors F9002 + L-E11 eyes: 103.5 / 83.5, 20 stroke; Struts Australia K128-15-30: 128 + fittings), and with 20 or 25 stroke the
+    middle stud would have to sit 10 to 12 mm from the joint, inside the 25 mm shaft.  Open: custom stroke, lost-motion slot, or no spring.
+    Middle stud at least 18 mm from the joint (shaft r 12.5 + M6 tapped hole + wall).
+    Anchors from a grid search: inside the stroke over the joint range, most lever at the stand."""
+    L1 = L.g["L1"]; q = np.radians(np.arange(q_lo - 3, q_hi + 3.1, 1.0)); best = None
     for rho in (18, 20, 22, 24, 26):
         for phi in np.radians((-20, -10, 0, 10, 20)):
             mx, mz = rho * np.sin(phi), -rho * np.cos(phi)
             Mx, Mz = mx * np.cos(q) + mz * np.sin(q), -mx * np.sin(q) + mz * np.cos(q)
             for ux in np.arange(-38, 38.1, 2):
                 for uz in np.arange(60, L1 - 56 + 0.1, 2):
-                    if np.hypot(ux, L1 - uz) < L.a2["r"] + 7.8 + 3: continue
+                    if np.hypot(ux, L1 - uz) < L.a2["r"] + 7.5 + 3: continue
                     Ls = np.hypot(Mx - ux, Mz - uz)
                     if Ls.max() > Le - 1.5 or Ls.min() < Lc + 1.5 or np.any(np.diff(Ls) > 0): continue
                     arm = np.abs((Mx * (Mz - uz) - Mz * (Mx - ux))) / Ls            # lever of the strut line about the joint
@@ -397,10 +417,25 @@ def gas_spring(L, zS, q_lo, q_hi):
                     if best is None or sc > best[0]: best = (sc, rho, phi, ux, uz, Ls.max(), Ls.min(), arm)
     sc, rho, phi, ux, uz, lmax, lmin, arm = best
     U = [float(ux), 45.0, float(zS + uz)]; M = [float(rho * np.sin(phi)), 45.0, float(zS - rho * np.cos(phi))]
-    L.add("gas spring stud, upper (8 mm)", "upper", "hardware", "steel", cyl_y(4, Y_B[1], 53.0, U[0], U[2]), mass=0.012)
-    L.add("gas spring stud, middle (6 mm)", "middle", "hardware", "steel", cyl_y(3, Y_ARM_O[1], 53.0, M[0], M[2]), mass=0.007)
-    nm = ("shoulder" if L.kind == "fore" else "stifle") + " gas spring 6/15, 30 stroke, 400 N"
-    L.struts.append(dict(name=nm, a=("upper", U), b=("middle", M), r=7.8, col=COL["gas"], trim=(9.0, 9.0), group="hardware"))
+    # studs: ISO 7379 shoulder screws, 8 mm shoulder, M6 x 9.5 thread, head 13 x 5.5.  The eye (8 mm thick, y 41..49) sits on the shoulder between
+    # steel spacer sleeves.  Upper: 8 x 16 into an M6 heat-set insert in a 20 mm boss standing on plate B's outer face (y 21..35; inside the
+    # plates the push rod / belt sweeps, so nothing pokes inward); middle: 8 x 16 into an M6 tapped 10.5 deep in the outer arm.
+    def shoulder(P, y_face, ls, nm, node):
+        sol = cyl_y(6.5, y_face + ls, y_face + ls + 5.5, P[0], P[2]) + cyl_y(4.0 - FIT, y_face, y_face + ls + 0.05, P[0], P[2]) + cyl_y(3.0 - FIT, y_face - 9.5, y_face + 0.05, P[0], P[2])
+        L.add(nm, node, "hardware", "steel", sol, mass=float(sol.volume() * H.STEEL_RHO))
+        sp = (cyl_y(6.0, y_face + 0.05, 40.95, P[0], P[2]) + cyl_y(6.0, 49.05, y_face + ls - 0.05, P[0], P[2])) - hole_y(4.0 + 0.05, y_face - 1, y_face + ls + 1, P[0], P[2])
+        L.add(nm.split(",")[0] + " spacer sleeves (2, steel)", node, "hardware", "steel", sp, mass=float(sp.volume() * H.STEEL_RHO))
+    yb = Y_ARM_O[1]                                                     # boss face, level with the outer arm's face
+    up = H.part_by(L, L.up_name)
+    up["solid"] = (up["solid"] + cyl_y(10.0, Y_B[1] - 0.5, yb, U[0], U[2])) - hole_y(4.0, yb - 12.7, yb + 1, U[0], U[2])
+    shoulder(U, yb, 16.0, "gas spring upper stud, ISO 7379 8 x 16 M6 shoulder screw", "upper")
+    ins = cyl_y(4.0 - FIT, yb - 12.7, yb, U[0], U[2]) - hole_y(3.0, yb - 13.2, yb + 1, U[0], U[2])
+    L.add("gas spring upper stud heat-set insert M6 x 12.7", "upper", "hardware", "brass", ins, mass=float(ins.volume() * H.BRASS_RHO))
+    ao = H.part_by(L, "arm, outer")
+    ao["solid"] = ao["solid"] - hole_y(3.0, Y_ARM_O[1] - 10.5, Y_ARM_O[1] + 1, M[0], M[2])
+    shoulder(M, Y_ARM_O[1], 16.0, "gas spring middle stud, ISO 7379 8 x 16 M6 shoulder screw", "middle")
+    nm = ("shoulder" if L.kind == "fore" else "stifle") + " gas spring 6/15, 30 stroke, 400 N, 8 mm eyes (114 eye to eye: no stock part yet)"
+    L.struts.append(dict(name=nm, a=("upper", U), b=("middle", M), r=7.5, col=COL["gas"], trim=(9.0, 9.0), group="hardware"))
     L.mech["gas"] = dict(U=U, M=M, rho=rho, Le=Le, Lc=Lc, len_range=[float(lmin), float(lmax)], q=[q_lo, q_hi], lever_mm=[float(arm.min()), float(arm.max())])
 
 
@@ -428,22 +463,39 @@ def distal(L, node, body, z_top, length, tag):
     crank = hull(cyl_y(3.5, -24.5, -21.5, horn[0], horn[2]), cyl_y(3.5, -24.5, -21.5, Q[0], Q[2]))
     past = union([cyl_y(8, -6.5, 6.5, fx, fz), rod(fet, ball, 6.5), rod(fet, horn, 4.5), cyl_y(2.5, -24.5, 0, horn[0], horn[2]), crank, rod(fet, bh, 4.0)])
     past = past - hole_y(3, -7, 7, fx, fz) - Manifold.sphere(8.3, 48).translate(list(ball))
-    L.add(tag + " fetlock pin 6 mm", node, "hardware", "steel", cyl_y(3, -13, 13, fx, fz), mass=0.006)
+    clipped_pin(L, tag + " fetlock pin 6 mm", node, 6, -13, 13, fx, fz, (-1, 1), 0.006)
     L.add(tag + " fetlock buffer (TPU 95A)", node, "structure", "tpu", box(fx + 13, fx + 27, -7, 7, fz + 8.45, fz + 16), True)
     L.add(tag + " pastern (flexor horn, buffer horn)", "pastern", "structure", "pacf", past, True)
     L.add(tag + " hoof ball joint SKF GE 8 E", "pastern", "hardware", "bearing", Manifold.sphere(8, 48).translate(list(ball)), mass=0.008)
     core = cyl_z(25, zF + 6, zF + 20, r1=21).translate([ball[0], 0, 0]) - Manifold.sphere(8.3, 48).translate(list(ball))
     L.add(tag + " hoof core", "hoof", "structure", "hoof", core, True)
     L.add(tag + " hoof shoe (TPU 95A)", "hoof", "structure", "tpu", cyl_z(26, zF, zF + 6).translate([ball[0], 0, 0]), True)
+    H.fasten(L, tag + " hoof shoe to core", "hoof", 3, 8.0, [[ball[0] + 15 * np.cos(a), 15 * np.sin(a), zF] for a in np.radians((90, 210, 330))], [0, 0, 1],
+             tag + " hoof shoe", 6.0, tag + " hoof core", kind="insert", head="shcs", cbore=4.0)
     L.add(tag + " hoof centring ring (TPU)", "hoof", "structure", "tpu", cyl_z(17, zF + 20, zF + 25).translate([ball[0], 0, 0]) - cyl_z(11.5, zF + 19, zF + 26).translate([ball[0], 0, 0]), True)
     return can, fet, ball, Q
 
 
-def fetlock_servo(L, node, x0, z0, tag, horn):          # horn: the crank's line point Q
-    """STS3215 on the cranial face (x0 = its back face), shaft along y, spool on the -y end; flexor line to the horn's cross pin."""
-    L.add(f"fetlock servo STS3215 (on the {tag})", node, "actuators", "servo", box(x0, x0 + STS["b"], -STS["c"] / 2, STS["c"] / 2, z0, z0 + STS["a"]), mass=STS["m"])
-    sc = [x0 + 12.0, z0 + 9.0]
-    L.add(tag + " flexor spool", node, "drive", "steel", cyl_y(9, -27.5, -17.7, sc[0], sc[1]), mass=0.006)
+def fetlock_servo(L, node, x0, z0, tag, horn, back_x):          # horn: the crank's line point Q
+    """STS3215 (real case shape) on the cranial face, x0 = its back face, shaft along -y, spool on it; the cannon grows a plate
+    under the servo's bottom face (+y) joined to its back plate (back_x .. 12.45), and 4 M2 x 6 self-tappers hold the servo."""
+    R = [[0, 1, 0], [0, 0, -1], [-1, 0, 0]]                       # model x = S.Y, y = -S.Z, z = -S.X
+    M = H.sts_place(R, [x0 + 12.41, 0.0, z0 + 21.5])
+    sname = f"fetlock servo STS3215 (on the {tag})"
+    L.add(sname, node, "actuators", "servo", H.sts_apply(M, H.sts3215()), mass=STS["m"])
+    plate, pz0 = H.sts_bottom_plate(-1, 12.41 + x0 - back_x - 12.4 + 0.0)
+    zc = z0 + 21.5
+    web = box(back_x, 12.45, 11.0, -pz0, zc - 22.7, zc + 22.7)
+    cp = H.part_by(L, tag + " (")
+    cp["solid"] = cp["solid"] + H.sts_apply(M, plate) + web
+    H.fasten(L, tag + " servo to plate", node, 2, 6.0, [H.sts_point(M, (hx, hy, pz0)) for hx, hy in H.STS_HOLES_BOTTOM], M[:3, :3] @ [0, 0, 1],
+             tag + " (", H.STS_BOTTOM_Z - pz0, sname, kind="tapped", head="shcs")
+    sc = H.sts_point(M, (12.5, 0, 0)); sc = [sc[0], sc[2]]
+    ys0, ys1 = -(H.STS_DISC_TOP + 0.1), -27.5
+    spool = cyl_y(9, ys1, ys0, sc[0], sc[1]) - hole_y(2.8, -(H.STS_SPLINE_TOP + 0.1), ys0 + 1, sc[0], sc[1])
+    L.add(tag + " flexor spool (on the servo spline)", node, "drive", "steel", spool, mass=0.006)
+    H.fasten(L, tag + " spool to spline", node, 3, 8.0, [[sc[0], ys1, sc[1]]], [0, 1, 0], tag + " flexor spool", -ys1 - H.STS_SPLINE_TOP,
+             sname, kind="tapped", head="shcs", cbore=3.5)
     L.struts.append(dict(name=tag + " fetlock flexor line 2 mm", a=("tan", node, [sc[0], -23.0, sc[1]], 9.0 + 1.0 + FIT, "maxz"), b=("pastern", [float(horn[0]), -23.0, float(horn[2])]),
                          r=1.0, col=COL["line"], trim=(0.0, 3.6), group="drive"))
 
@@ -484,14 +536,25 @@ def build_fore():
     tabA = hull(cyl_y(6, 13, 17.5, 13, zC + 30), cyl_y(6, 13, 17.5, -TOG_E, zC + TOG_A))
     fa = union([column_head(zE), rod([0, 0, zE - 28], [0, 0, zC + 52], 11), box(-11, 11, -13, 13, zC + 48, zC + 60), cheek(8, 13), cheek(-13, -8), tabA])
     fa = fa - hole_y(5, -14, 14, 0, zC) - hole_y(4, 12, 18, -TOG_E, zC + TOG_A)
+    # carpus servo: STS3215 behind the forearm tube, back face on x -11.5, shaft along +y; a plate under its bottom face (-y) and a web to the tube
+    zs0 = zC + 58
+    YC = 0.0                                    # servo frame origin y: plate under it clears the folded pastern's crank
+    Mc = H.sts_place([[0, 1, 0], [0, 0, 1], [1, 0, 0]], [-11.5 - 12.41, YC, zs0 + 23.5])          # model x = S.Y, y = S.Z, z = S.X
+    plate, pz0 = H.sts_bottom_plate(+1, 3.0, t=4.0)          # 4 thick: the M2 heads sink 2 mm, clear of the folded pastern
+    zc = zs0 + 23.5
+    fa = fa + H.sts_apply(Mc, plate) + box(-11.4, -5.0, pz0 + YC, -8.0, zc - 22.7, zc + 22.7)
     L.add("forearm (elbow head, drum B, carpus fork)", "lower", "structure", "carbon", fa, True)
-    L.add("elbow pin 10 mm", "lower", "hardware", "steel", cyl_y(5, Y_ARM_I[0], Y_ARM_O[1], 0, zE), mass=0.05)
-    L.add("carpus pin 10 mm (its +y end is the toggle's stop)", "lower", "hardware", "steel", cyl_y(5, -21.5, 26.5, 0, zC), mass=0.03)
+    clipped_pin(L, "elbow pin 10 mm", "lower", 10, Y_ARM_I[0], Y_ARM_O[1], 0, zE, (-1, 1), 0.05, gap=1.6)
+    clipped_pin(L, "carpus pin 10 mm (its +y end is the toggle's stop)", "lower", 10, -21.5, 26.5, 0, zC, (-1,), 0.03)
     L.add("carpus return spring (torsion, on the pin)", "lower", "hardware", "spring", cyl_y(8.5, -21, -14, 0, zC) - hole_y(5, -22, -13, 0, zC), mass=0.006)
     L.add("toggle pin A 8 mm", "lower", "hardware", "steel", cyl_y(4, 13, 22.6, -TOG_E, zC + TOG_A), mass=0.004)
-    zs0 = zC + 58
-    L.add("carpus servo STS3215 (on the forearm)", "lower", "actuators", "servo", box(-11.5 - STS["b"], -11.5, -20, 15, zs0, zs0 + STS["a"]), mass=STS["m"])
-    L.add("carpus release spool", "lower", "drive", "steel", cyl_y(9, 15.2, 30, -24, zs0 + 36), mass=0.006)
+    L.add("carpus servo STS3215 (on the forearm)", "lower", "actuators", "servo", H.sts_apply(Mc, H.sts3215()), mass=STS["m"])
+    H.fasten(L, "carpus servo to plate", "lower", 2, 6.0, [H.sts_point(Mc, (hx, hy, pz0)) for hx, hy in H.STS_HOLES_BOTTOM], Mc[:3, :3] @ [0, 0, 1],
+             "forearm (elbow", H.STS_BOTTOM_Z - pz0, "carpus servo STS3215", kind="tapped", head="shcs", cbore=2.0)
+    sp = H.sts_point(Mc, (12.5, 0, 0)); ys0 = YC + H.STS_DISC_TOP + 0.1; ysp = YC + H.STS_SPLINE_TOP
+    spool = cyl_y(9, ys0, 30, sp[0], sp[2]) - hole_y(2.8, ys0 - 1, ysp + 0.1, sp[0], sp[2])
+    L.add("carpus release spool (on the servo spline)", "lower", "drive", "steel", spool, mass=0.006)
+    H.fasten(L, "carpus spool to spline", "lower", 3, 10.0, [[sp[0], 30.0, sp[2]]], [0, -1, 0], "carpus release spool", 30.0 - ysp, "carpus servo STS3215", kind="tapped", head="shcs", cbore=6.0)
     # ---- cannon: eye on two 6800 between the cheeks, neck, loft to the fetlock fork, toggle tab B, fetlock servo in front
     zF = zC - (L3 - LC); fz = zF + HOOF_H + L_PAST * np.cos(A_PAST * D2R); fx = -L_PAST * np.sin(A_PAST * D2R)
     tabB = hull(cyl_y(6, 0, 17.5, -TOG_E, zC - TOG_A), cyl_y(6, 0, 17.5, -4, zC - TOG_A))
@@ -502,7 +565,7 @@ def build_fore():
     L.add("fore cannon (carpus eye, fetlock fork, toggle tab B)", "cannon", "structure", "carbon", can, True)
     L.add("carpus bearings 2 x 6800", "cannon", "hardware", "bearing", cyl_y(9.5, -6.5, -1.5, 0, zC) + cyl_y(9.5, 1.5, 6.5, 0, zC) - hole_y(5, -7, 7, 0, zC), mass=0.01)
     L.add("toggle pin B 8 mm", "cannon", "hardware", "steel", cyl_y(4, 11, 26.4, -TOG_E, zC - TOG_A), mass=0.006)
-    fetlock_servo(L, "cannon", 12.5, zC - 59.2, "fore cannon", horn)
+    fetlock_servo(L, "cannon", 12.5, zC - 59.2, "fore cannon", horn, 8.9)
     lk = float(np.hypot(TOG_A, TOG_E - (10.0 + FIT)))
     L.toggles.append(dict(name="carpus toggle", a=("lower", [-TOG_E, 0, zC + TOG_A]), b=("cannon", [-TOG_E, 0, zC - TOG_A]), l=lk, r=3.5, col="#c0392b",
                           y1=(19.0, 22.4), y2=(22.8, 26.2), ypin=(19.0, 29.5), lock_below=1e-3))
@@ -545,8 +608,8 @@ def build_hind():
                   hull(box(11.5, 12.45, -12, 12, zH - 84, zH - 40), rod([0.4 * fx, 0, zH - 48], [0.9 * fx, 0, zH - 76], 5))])
     can, fet, ball, horn = distal(L, "lower", body, z_top, L3 - 28, "hind")
     L.add("hind cannon (hock head, drum B, fetlock fork)", "lower", "structure", "carbon", can, True)
-    L.add("hock pin 10 mm", "lower", "hardware", "steel", cyl_y(5, Y_ARM_I[0], Y_ARM_O[1], 0, zH), mass=0.04)
-    fetlock_servo(L, "lower", 12.5, zH - 84.5, "hind cannon", horn)
+    clipped_pin(L, "hock pin 10 mm", "lower", 10, Y_ARM_I[0], Y_ARM_O[1], 0, zH, (-1, 1), 0.04, gap=1.6)
+    fetlock_servo(L, "lower", 12.5, zH - 84.5, "hind cannon", horn, 11.5)
     L.joints = dict(zS=zS, zH=zH, fet=fet, ball=ball, c0=c0)
     H.finish(L, COL)
     return L

@@ -1,0 +1,424 @@
+{
+ "rev": "B",
+ "mass_total": 45.58,
+ "four_legs": 21.4,
+ "acts": {
+  "hip": {
+   "front": "RobStride 03",
+   "rear": "RobStride 06"
+  },
+  "knee": {
+   "front": "RobStride 04",
+   "rear": "RobStride 06"
+  },
+  "abd": {
+   "front": "RobStride 06",
+   "rear": "RobStride 02"
+  },
+  "ratio": {
+   "front": 0.4782608695652174,
+   "rear": 1.0
+  }
+ },
+ "jump_mm": 153.04222409438177,
+ "worst": [
+  [
+   0.83,
+   "rear",
+   "trot",
+   "joint",
+   11.0,
+   21.3
+  ],
+  [
+   0.87,
+   "rear",
+   "gallop",
+   "joint",
+   15.6,
+   37.7
+  ],
+  [
+   0.93,
+   "rear",
+   "rear up 40 deg",
+   "pivot",
+   35.3,
+   35.3
+  ],
+  [
+   0.95,
+   "front",
+   "gallop",
+   "joint",
+   21.7,
+   52.3
+  ],
+  [
+   0.99,
+   "front",
+   "trot",
+   "joint",
+   15.3,
+   29.6
+  ],
+  [
+   1.13,
+   "rear",
+   "walk",
+   "joint",
+   8.1,
+   13.2
+  ]
+ ],
+ "fails": [
+  [
+   0.83,
+   "rear",
+   "trot",
+   "joint",
+   11.0,
+   21.3
+  ],
+  [
+   0.87,
+   "rear",
+   "gallop",
+   "joint",
+   15.6,
+   37.7
+  ],
+  [
+   0.93,
+   "rear",
+   "rear up 40 deg",
+   "pivot",
+   35.3,
+   35.3
+  ],
+  [
+   0.95,
+   "front",
+   "gallop",
+   "joint",
+   21.7,
+   52.3
+  ],
+  [
+   0.99,
+   "front",
+   "trot",
+   "joint",
+   15.3,
+   29.6
+  ]
+ ],
+ "limits": {
+  "fore": {
+   "q0": 60,
+   "q1": 140,
+   "fold": 120,
+   "yaw": 25,
+   "abd": 10,
+   "fet": 30,
+   "hp": 15,
+   "hr": 15
+  },
+  "hind": {
+   "q0": 67,
+   "q1": 146,
+   "yaw": 25,
+   "abd": 10,
+   "fet": 30,
+   "hp": 15,
+   "hr": 15
+  }
+ },
+ "lower": {
+  "fore": {
+   "q0": 0,
+   "q1": 50,
+   "fold": 0,
+   "yaw": -25,
+   "abd": -10,
+   "fet": 0,
+   "hp": -15,
+   "hr": -15
+  },
+  "hind": {
+   "q0": -9,
+   "q1": 50,
+   "yaw": -25,
+   "abd": -10,
+   "fet": 0,
+   "hp": -15,
+   "hr": -15
+  }
+ },
+ "crouch": {
+  "front_pivot_mm": 371.50000000000006,
+  "rear_pivot_mm": 254.0
+ },
+ "rule_mm": 1.5,
+ "poses_checked": {
+  "fore": 1741,
+  "hind": 580
+ },
+ "tightest": {
+  "fore": 1.5,
+  "hind": 1.5
+ },
+ "under_rule": {
+  "fore": [],
+  "hind": []
+ },
+ "in_leg_motion": 1.5,
+ "leg_leg_motion": 12.0,
+ "leg_leg_twisted_gallop": 3.569612310106153,
+ "neck": 11.113139342700668,
+ "octo": 99.0,
+ "slip_mm": 2.289477862404965e-05,
+ "speed_margin": 2.218852735521507,
+ "roll": {
+  "stand": [
+   0.0,
+   0.0
+  ],
+  "walk": [
+   0.0,
+   0.0
+  ],
+  "trot": [
+   0.0,
+   0.3358173330222236
+  ],
+  "gallop": [
+   -1.5268315778749084,
+   8.098073042377766
+  ],
+  "jump": [
+   0.0,
+   0.0
+  ],
+  "rear": [
+   0.0,
+   0.0
+  ],
+  "kneel": [
+   0.0,
+   0.0
+  ]
+ },
+ "gas_len": [
+  86.95557651528158,
+  111.27236657475017
+ ],
+ "rod_angle": 30.414358826265683,
+ "forces": {
+  "walk": {
+   "grf_peak_N": {
+    "fore": 287.4470142857143,
+    "hind": 191.63134285714287
+   },
+   "toggle_N": 451.0859584475167,
+   "toggle_tension_N": 404.65593597394576,
+   "tendon_N": {
+    "fore": 399.0400439035805,
+    "hind": 186.5524676289318
+   },
+   "buffer_N": {
+    "fore": 396.19357944602456,
+    "hind": 272.6733880478072
+   },
+   "fetlock_deg": {
+    "fore": 1.6815802667965958,
+    "hind": 1.1573185745788446
+   },
+   "buffer_MPa": {
+    "fore": 2.021395813500125,
+    "hind": 1.391190755345955
+   }
+  },
+  "trot": {
+   "grf_peak_N": {
+    "fore": 402.42582,
+    "hind": 268.28388
+   },
+   "toggle_N": 815.1323702889146,
+   "toggle_tension_N": 706.297009852735,
+   "tendon_N": {
+    "fore": 721.0830901205286,
+    "hind": 298.1622844741769
+   },
+   "buffer_N": {
+    "fore": 576.0154911260973,
+    "hind": 396.80368712537177
+   },
+   "fetlock_deg": {
+    "fore": 2.4448056038695967,
+    "hind": 1.6841697712394643
+   },
+   "buffer_MPa": {
+    "fore": 2.9388545465617213,
+    "hind": 2.024508607782509
+   }
+  },
+  "gallop": {
+   "grf_peak_N": {
+    "fore": 628.7903437499999,
+    "hind": 419.1935625
+   },
+   "toggle_N": 1489.2900878853989,
+   "toggle_tension_N": 1480.2760063706962,
+   "tendon_N": {
+    "fore": 1317.4570631732217,
+    "hind": 475.5685864125507
+   },
+   "buffer_N": {
+    "fore": 955.1189752176695,
+    "hind": 656.3729399817798
+   },
+   "fetlock_deg": {
+    "fore": 4.053849694926286,
+    "hind": 2.785869940335558
+   },
+   "buffer_MPa": {
+    "fore": 4.873055996008517,
+    "hind": 3.3488415305192847
+   }
+  },
+  "shoulder_belt_peak_N": 1867.1056338948429,
+  "stifle_rod_peak_N": 1885.0000000000005,
+  "fore_gas_spring": {
+   "stand_len_mm": 102.94991478367008,
+   "lever_mm": 15.906637059951006,
+   "force_N": 444.2003408653196,
+   "torque_Nm": 7.065733604051163,
+   "stand_joint_Nm": 12.245727386052302,
+   "offload": 0.5769958273037277
+  },
+  "hind_gas_spring": {
+   "stand_len_mm": 105.78482062542177,
+   "lever_mm": 13.682600708549403,
+   "force_N": 432.8607174983129,
+   "torque_Nm": 5.92266035994562,
+   "stand_joint_Nm": 8.878511385696427,
+   "offload": 0.6670780835498189
+  }
+ },
+ "carpus_servo": {
+  "servo_deg_s": 270.0,
+  "servo_deg_per_fold_deg": 3.1525000000000003,
+  "fold_rate_deg_s": 85.64631245043616
+ },
+ "dt": {
+  "stand": 0.05,
+  "walk": 0.018518518518518524,
+  "trot": 0.016666666666666666,
+  "gallop": 0.014105902777777778,
+  "jump": 0.03532776184731674,
+  "rear": 0.32305032060526306,
+  "kneel": 0.1
+ },
+ "belt": {
+  "teeth": 72,
+  "pitch": 8,
+  "deflect_mm": 6.137302654835777,
+  "slack_free_len": 575.4751388329489,
+  "ratio": 0.4782608695652174,
+  "r_joint": 28.01126998417358,
+  "r_motor": 58.569019057817485
+ },
+ "yaw_centres": 138.2055002194749,
+ "gas": {
+  "fore": {
+   "U": [
+    38.0,
+    45.0,
+    -60.59158706736673
+   ],
+   "M": [
+    -3.125667198004746,
+    45.0,
+    -166.3181266215865
+   ],
+   "rho": 18,
+   "Le": 114.0,
+   "Lc": 84.0,
+   "len_range": [
+    87.7586399656507,
+    111.28664699718895
+   ],
+   "q": [
+    50,
+    132
+   ],
+   "lever_mm": [
+    8.589719480895306,
+    17.999912072539857
+   ]
+  },
+  "hind": {
+   "U": [
+    36.0,
+    45.0,
+    -59.424997454812114
+   ],
+   "M": [
+    0.0,
+    45.0,
+    -165.42499745481211
+   ],
+   "rho": 18,
+   "Le": 114.0,
+   "Lc": 84.0,
+   "len_range": [
+    85.53352171201148,
+    111.67992300309147
+   ],
+   "q": [
+    50,
+    146
+   ],
+   "lever_mm": [
+    6.415918875807539,
+    17.999928162789306
+   ]
+  }
+ },
+ "shell_overlaps": [
+  "fore: abduction cradle (deck, yaw spindle, lugs)",
+  "fore: abduction lug to output screws 6 x M4 x 16",
+  "fore: abduction motor RS06 output rotor",
+  "fore: abduction output flange (4 mm steel)",
+  "fore: belt idler 22T-8M on a slotted pin",
+  "fore: elbow pin 10 mm",
+  "fore: elbow pin 10 mm E-clips DIN 6799 (2)",
+  "fore: elbow tendons Dyneema 3 mm (parallel pair)",
+  "fore: forearm (elbow head, drum B, carpus fork)",
+  "fore: humerus arm set screws 2 x M5 x 6 cup point",
+  "fore: humerus arm, inner (6061 plate, keyed)",
+  "fore: humerus keys DIN 6885 A 8 x 7 (3)",
+  "fore: humerus shaft 25 / 12 mm 4140 tube (3 keyways)",
+  "fore: humerus shaft spacers (4 sleeves, steel)",
+  "fore: pivot motor RS03",
+  "fore: pivot motor to yoke screws 4 x M4 x 14",
+  "fore: scapula (plates A + B, drum A)",
+  "fore: shoulder bearings 2 x 6805",
+  "fore: shoulder belt 576-8M-20 (46T : 22T)",
+  "fore: shoulder drive pulley 46T-8M (aluminium, on the RS04 output)",
+  "fore: shoulder pulley 22T-8M, flanged, keyed (6061)",
+  "fore: yaw motor RS02 (hung, output up)",
+  "fore: yaw motor ring screws 9 x M3 x 6",
+  "fore: yaw yoke + 56T hub",
+  "hind: abduction cradle (deck, yaw spindle, lugs)",
+  "hind: abduction front stub 15 mm (in a 6802)",
+  "hind: femur (plates A + B, drum A)",
+  "hind: pivot motor RS06",
+  "hind: pivot motor to yoke screws 4 x M3 x 12",
+  "hind: yaw belt 490-5M-15 (28T : 56T)",
+  "hind: yaw motor RS02 (hung, output up)",
+  "hind: yaw motor ring screws 9 x M3 x 6",
+  "hind: yaw yoke + 56T hub"
+ ]
+}

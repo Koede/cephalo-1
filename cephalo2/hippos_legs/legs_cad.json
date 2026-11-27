@@ -187,8 +187,8 @@
     "scapula (plates A + B, drum A)",
     "upper",
     true,
-    284.8,
-    0.188
+    288.5,
+    0.19
    ],
    [
     "shoulder bearings 2 x 6805",
@@ -229,7 +229,7 @@
     "humerus arm, outer (6061 plate, keyed)",
     "middle",
     false,
-    42.6,
+    42.3,
     0.115
    ],
    [
@@ -261,39 +261,74 @@
     0.004
    ],
    [
-    "gas spring stud, upper (8 mm)",
+    "gas spring upper stud, ISO 7379 8 x 16 M6 shoulder screw",
     "upper",
     false,
-    1.6,
-    0.012
+    1.8,
+    0.014
    ],
    [
-    "gas spring stud, middle (6 mm)",
+    "gas spring upper stud spacer sleeves (2, steel)",
+    "upper",
+    false,
+    0.5,
+    0.004
+   ],
+   [
+    "gas spring upper stud heat-set insert M6 x 12.7",
+    "upper",
+    false,
+    0.2,
+    0.002
+   ],
+   [
+    "gas spring middle stud, ISO 7379 8 x 16 M6 shoulder screw",
+    "middle",
+    false,
+    1.8,
+    0.014
+   ],
+   [
+    "gas spring middle stud spacer sleeves (2, steel)",
     "middle",
     false,
     0.5,
-    0.007
+    0.004
    ],
    [
     "forearm (elbow head, drum B, carpus fork)",
     "lower",
     true,
-    111.4,
-    0.074
+    117.5,
+    0.078
    ],
    [
     "elbow pin 10 mm",
     "lower",
     false,
-    6.3,
+    6.7,
     0.05
+   ],
+   [
+    "elbow pin 10 mm E-clips DIN 6799 (2)",
+    "lower",
+    false,
+    0.2,
+    0.001
    ],
    [
     "carpus pin 10 mm (its +y end is the toggle's stop)",
     "lower",
     false,
-    3.8,
+    3.9,
     0.03
+   ],
+   [
+    "carpus pin 10 mm E-clips DIN 6799 (1)",
+    "lower",
+    false,
+    0.1,
+    0.001
    ],
    [
     "carpus return spring (torsion, on the pin)",
@@ -313,22 +348,29 @@
     "carpus servo STS3215 (on the forearm)",
     "lower",
     false,
-    39.1,
+    35.6,
     0.055
    ],
    [
-    "carpus release spool",
+    "carpus release spool (on the servo spline)",
     "lower",
     false,
-    3.8,
+    2.6,
     0.006
    ],
    [
     "fore fetlock pin 6 mm",
     "cannon",
     false,
-    0.7,
+    0.8,
     0.006
+   ],
+   [
+    "fore fetlock pin 6 mm E-clips DIN 6799 (2)",
+    "cannon",
+    false,
+    0.1,
+    0.001
    ],
    [
     "fore fetlock buffer (TPU 95A)",
@@ -355,14 +397,14 @@
     "fore hoof core",
     "hoof",
     true,
-    22.8,
+    22.5,
     0.015
    ],
    [
     "fore hoof shoe (TPU 95A)",
     "hoof",
     true,
-    12.7,
+    12.2,
     0.008
    ],
    [
@@ -376,8 +418,8 @@
     "fore cannon (carpus eye, fetlock fork, toggle tab B)",
     "cannon",
     true,
-    32.7,
-    0.022
+    36.1,
+    0.024
    ],
    [
     "carpus bearings 2 x 6800",
@@ -397,14 +439,14 @@
     "fetlock servo STS3215 (on the fore cannon)",
     "cannon",
     false,
-    39.1,
+    35.6,
     0.055
    ],
    [
-    "fore cannon flexor spool",
+    "fore cannon flexor spool (on the servo spline)",
     "cannon",
     false,
-    2.5,
+    2.0,
     0.006
    ],
    [
@@ -483,10 +525,52 @@
     false,
     7.6,
     0.062
+   ],
+   [
+    "carpus servo to plate screws 4 x M2 x 6",
+    "lower",
+    false,
+    0.2,
+    0.001
+   ],
+   [
+    "carpus spool to spline screws 1 x M3 x 10",
+    "lower",
+    false,
+    0.1,
+    0.001
+   ],
+   [
+    "fore hoof shoe to core screws 3 x M3 x 8",
+    "hoof",
+    false,
+    0.4,
+    0.003
+   ],
+   [
+    "fore hoof shoe to core heat-set inserts 3 x M3",
+    "hoof",
+    false,
+    0.1,
+    0.001
+   ],
+   [
+    "fore cannon servo to plate screws 4 x M2 x 6",
+    "cannon",
+    false,
+    0.2,
+    0.001
+   ],
+   [
+    "fore cannon spool to spline screws 1 x M3 x 8",
+    "cannon",
+    false,
+    0.1,
+    0.001
    ]
   ],
-  "total": 6.482,
-  "swinging": 3.922,
+  "total": 6.52,
+  "swinging": 3.96,
   "not_single_body": []
  },
  "hind": {
@@ -670,8 +754,8 @@
     "femur (plates A + B, drum A)",
     "upper",
     true,
-    273.5,
-    0.181
+    277.2,
+    0.183
    ],
    [
     "stifle bearings 2 x 6805",
@@ -712,7 +796,7 @@
     "tibia arm, outer (6061 plate, keyed)",
     "middle",
     false,
-    50.6,
+    50.3,
     0.137
    ],
    [
@@ -744,25 +828,53 @@
     0.004
    ],
    [
-    "gas spring stud, upper (8 mm)",
+    "gas spring upper stud, ISO 7379 8 x 16 M6 shoulder screw",
     "upper",
     false,
-    1.6,
-    0.012
+    1.8,
+    0.014
    ],
    [
-    "gas spring stud, middle (6 mm)",
+    "gas spring upper stud spacer sleeves (2, steel)",
+    "upper",
+    false,
+    0.5,
+    0.004
+   ],
+   [
+    "gas spring upper stud heat-set insert M6 x 12.7",
+    "upper",
+    false,
+    0.2,
+    0.002
+   ],
+   [
+    "gas spring middle stud, ISO 7379 8 x 16 M6 shoulder screw",
+    "middle",
+    false,
+    1.8,
+    0.014
+   ],
+   [
+    "gas spring middle stud spacer sleeves (2, steel)",
     "middle",
     false,
     0.5,
-    0.007
+    0.004
    ],
    [
     "hind fetlock pin 6 mm",
     "lower",
     false,
-    0.7,
+    0.8,
     0.006
+   ],
+   [
+    "hind fetlock pin 6 mm E-clips DIN 6799 (2)",
+    "lower",
+    false,
+    0.1,
+    0.001
    ],
    [
     "hind fetlock buffer (TPU 95A)",
@@ -789,14 +901,14 @@
     "hind hoof core",
     "hoof",
     true,
-    22.8,
+    22.5,
     0.015
    ],
    [
     "hind hoof shoe (TPU 95A)",
     "hoof",
     true,
-    12.7,
+    12.2,
     0.008
    ],
    [
@@ -810,28 +922,35 @@
     "hind cannon (hock head, drum B, fetlock fork)",
     "lower",
     true,
-    113.5,
-    0.075
+    116.0,
+    0.077
    ],
    [
     "hock pin 10 mm",
     "lower",
     false,
-    6.3,
+    6.7,
     0.04
+   ],
+   [
+    "hock pin 10 mm E-clips DIN 6799 (2)",
+    "lower",
+    false,
+    0.2,
+    0.001
    ],
    [
     "fetlock servo STS3215 (on the hind cannon)",
     "lower",
     false,
-    39.1,
+    35.6,
     0.055
    ],
    [
-    "hind cannon flexor spool",
+    "hind cannon flexor spool (on the servo spline)",
     "lower",
     false,
-    2.5,
+    2.0,
     0.006
    ],
    [
@@ -910,11 +1029,39 @@
     false,
     2.7,
     0.022
+   ],
+   [
+    "hind hoof shoe to core screws 3 x M3 x 8",
+    "hoof",
+    false,
+    0.4,
+    0.003
+   ],
+   [
+    "hind hoof shoe to core heat-set inserts 3 x M3",
+    "hoof",
+    false,
+    0.1,
+    0.001
+   ],
+   [
+    "hind cannon servo to plate screws 4 x M2 x 6",
+    "lower",
+    false,
+    0.2,
+    0.001
+   ],
+   [
+    "hind cannon spool to spline screws 1 x M3 x 8",
+    "lower",
+    false,
+    0.1,
+    0.001
    ]
   ],
-  "total": 4.151,
-  "swinging": 2.043,
+  "total": 4.182,
+  "swinging": 2.074,
   "not_single_body": []
  },
- "four_legs": 21.27
+ "four_legs": 21.4
 }

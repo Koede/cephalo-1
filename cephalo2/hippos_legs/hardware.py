@@ -228,3 +228,63 @@ def pattern(name, key, M):
     """Hole centres of a motor pattern on its face, in rest coords, and the face's u."""
     D = MOTORS[name]; face = {"out_pat": D["out_face"], "front_pat": D["front_face"], "back_pat": D["back_face"]}[key]
     return [M[:, :3] @ (q + np.array([0, 0, face])) + M[:, 3] for q in pattern_local(D, key)], face
+
+
+# ---------------------------------------------------------------- Feetech STS3215 (shape from the SO-ARM100 STL)
+# Servo frame ("S"): mm, output spline along +Z at (X, Y) = (12.5, 0); long side along X (+-22.7), short side Y (+-12.4).
+# Bottom face (Z -15.9) carries 4 M2 holes at (-20.3, +-10.25) and (4.2, +-10.25); below it stand a cover block
+# (X -17.4..-6.1, chamfered out to -4.24 at the face, |Y| <= 9.2, to Z -17.7), six connector posts (X -2.6..-0.6, |Y| <= 8.6, to Z -19.4) and the rear shaft
+# boss (r 3 at the shaft, to Z -17.8).  Top: r10 disc round the output to Z 18.7, spline r2.7 to Z 20.2, M3 tapped centre.
+STS_HOLES_BOTTOM = [(-20.3, 10.25), (-20.3, -10.25), (4.2, 10.25), (4.2, -10.25)]
+STS_BOTTOM_Z = -15.9
+STS_DISC_TOP = 18.7
+STS_SPLINE_TOP = 20.2
+_STS = {}
+
+
+def sts3215():
+    """The servo case in its own frame (mm), loaded once."""
+    if "m" not in _STS:
+        import os, struct
+        p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "vendor", "so-arm100", "sts3215_03a_no_horn_v1.stl")
+        with open(p, "rb") as f:
+            f.read(80); n = struct.unpack("<I", f.read(4))[0]
+            raw = np.frombuffer(f.read(50 * n), dtype=np.dtype([("n", "<f4", 3), ("v", "<f4", 9), ("a", "<u2")]), count=n)
+        V = raw["v"].reshape(-1, 3).astype(np.float64) * 1000.0
+        uv, inv = np.unique(np.round(V, 5), axis=0, return_inverse=True)
+        from manifold3d import Mesh
+        _STS["m"] = Manifold(Mesh(vert_properties=uv.astype(np.float32), tri_verts=inv.reshape(-1, 3).astype(np.uint32)))
+        if _STS["m"].status().name != "NoError":
+            raise ValueError("STS3215 mesh did not load as a closed solid")
+    return _STS["m"]
+
+
+def sts_place(R, t):
+    """4x4 from servo frame to the part's rest frame: model = R @ S + t (R a proper rotation)."""
+    R = np.asarray(R, float)
+    if abs(np.linalg.det(R) - 1) > 1e-9:
+        raise ValueError("servo placement must be a rotation")
+    M = np.eye(4); M[:3, :3] = R; M[:3, 3] = t
+    return M
+
+
+def sts_apply(M, m):
+    return m.transform(M[:3, :4])
+
+
+def sts_point(M, p):
+    return M[:3, :3] @ np.asarray(p, float) + M[:3, 3]
+
+
+def sts_bottom_plate(back_sign, back_ext, t=3.0, fwd_ext=0.0):
+    """Printed plate under the servo's bottom face (servo frame), pocketed round the cover block, connector posts and rear boss,
+    so it sits on the face round the 4 holes.  back_sign: the Y side that joins the body, extended back_ext past the case."""
+    z1 = STS_BOTTOM_Z - 0.05; z0 = z1 - t
+    y0, y1 = -12.4, 12.4
+    if back_sign > 0: y1 += back_ext
+    else: y0 -= back_ext
+    pl = Manifold.cube([45.4 + fwd_ext, y1 - y0, t]).translate([-22.7, y0, z0])
+    cut = Manifold.cube([13.9, 19.4, t + 2]).translate([-17.9, -9.7, z0 - 1])          # block has a chamfer reaching X -4.24
+    cut = cut + Manifold.cube([3.0, 18.2, t + 2]).translate([-3.1, -9.1, z0 - 1])
+    cut = cut + _cyl(3.6, t + 2).translate([12.5, 0, z0 - 1])
+    return pl - cut, z0
