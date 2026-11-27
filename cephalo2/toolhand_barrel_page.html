@@ -1,0 +1,398 @@
+<title>Revolver Barrel Hand Study</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: control strip and option tabs over a full-width 3D view, numbers panel beside it (stacks on phones). */
+:root{
+  --bg:#f3f4f6; --panel:#ffffff; --ink:#1b222c; --muted:#5b6574; --line:#d6dbe2; --accent:#1f6f4a; --kill:#a33a2e; --grid:#c9ced6;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif; --head:"Space Grotesk","Inter",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#12161c;--panel:#1a2029;--ink:#e6e9ee;--muted:#9aa4b2;--line:#2c3541;--accent:#5cc58f;--kill:#ec7a6c;--grid:#2c3541;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12161c;--panel:#1a2029;--ink:#e6e9ee;--muted:#9aa4b2;--line:#2c3541;--accent:#5cc58f;--kill:#ec7a6c;--grid:#2c3541;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5}
+.wrap{max-width:1200px;margin:0 auto;padding-block:20px 32px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:14px}
+h1{font-family:var(--head);font-size:1.5rem;margin:0;text-wrap:balance}
+.sub{color:var(--muted);margin:0;max-width:70ch}
+.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.tabs button{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:6px;padding:6px 10px;cursor:pointer}
+.tabs button[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.tabs button.killed{color:var(--kill)}
+.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.main{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:14px}
+@media (max-width:820px){.main{grid-template-columns:1fr}}
+#view{position:relative;height:520px;max-height:70vh;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--panel);touch-action:none}
+#view canvas{display:block;width:100%;height:100%}
+.hint{position:absolute;left:10px;bottom:8px;font-size:12px;color:var(--muted);pointer-events:none}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;min-width:0;display:flex;flex-direction:column;gap:10px}
+.panel h2{font-family:var(--head);font-size:1.1rem;margin:0}
+.tag{display:inline-block;font-size:11px;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:999px;border:1px solid currentColor}
+.tag.rec{color:var(--accent)} .tag.kill{color:var(--kill)}
+dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0;font-variant-numeric:tabular-nums}
+dt{color:var(--muted)} dd{margin:0}
+ul{margin:0;padding-left:18px} li{margin:2px 0}
+.kills li{color:var(--kill)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px;background:var(--c)}
+.parts{font-size:12px;color:var(--muted)}
+.shared{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.shared h2{font-family:var(--head);font-size:1.05rem;margin:0 0 8px}
+.shared dl{grid-template-columns:minmax(0,1fr) auto}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;600&display=swap">
+<div class="wrap">
+  <h1>Revolver barrel for the Cephalo-2 multi-tool hand</h1>
+  <p class="sub">Five ways to store five tools inside the hand and bring the chosen one out through a centre barrel. Sketches drawn to one scale in mm, with z = 0 at the coupler's hand base. These are design-study blocks, not CAD. Masses marked est. are estimates.</p>
+  <div class="tabs" id="tabs" role="group" aria-label="Options"></div>
+  <div class="main">
+    <div id="view"><span class="hint">Drag to turn, scroll or pinch to zoom</span></div>
+    <div class="panel" id="panel"></div>
+  </div>
+  <div class="legend" id="legend"></div>
+  <div class="shared" id="shared"></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const SCENES = [{"key": "O1", "name": "Revolver cylinder (offset), straight push", "prims": [{"t": "cyl", "p0": [0.0, 0.0, -8.3], "p1": [0.0, 0.0, 0.0], "r": 20.6, "c": "#8a8f98", "label": "coupler hand base (rev B.7)"}, {"t": "cyl", "p0": [0.0, 0.0, 0.0], "p1": [0.0, 0.0, 4.5], "r": 20.3, "c": "#8a8f98", "label": "clearance boss under the collar"}, {"t": "box", "c": [-14.46106374198468, 0.0, 19.75], "s": [23.2, 12.1, 28.5], "col": "#2f3a4a", "label": "selector servo STS3032 (turns the cylinder)"}, {"t": "cyl", "p0": [-14.46106374198468, 0.0, 36.0], "p1": [-14.46106374198468, 0.0, 118.0], "r": 24.261063741984678, "c": "#b9c2cc", "label": "revolver cylinder, 5 chambers"}, {"t": "cyl", "p0": [-9.992349288972044, 13.753288904374106, 37.0], "p1": [-9.992349288972044, 13.753288904374106, 99.0], "r": 5.25, "c": "#d08a2c", "label": "stored tool"}, {"t": "cyl", "p0": [-26.160310065989655, 8.500000000000002, 37.0], "p1": [-26.160310065989655, 8.500000000000002, 116.0], "r": 5.25, "c": "#d08a2c", "label": "stored tool"}, {"t": "cyl", "p0": [-26.160310065989655, -8.499999999999998, 37.0], "p1": [-26.160310065989655, -8.499999999999998, 101.0], "r": 5.25, "c": "#d08a2c", "label": "stored tool"}, {"t": "cyl", "p0": [-9.992349288972047, -13.753288904374108, 37.0], "p1": [-9.992349288972047, -13.753288904374108, 83.0], "r": 5.25, "c": "#d08a2c", "label": "stored tool"}, {"t": "box", "c": [15.799999999999999, 0.0, 87.0], "s": [6.0, 14.0, 102.0], "col": "#2e9c6a", "label": "belt carriage rail (feed)"}, {"t": "box", "c": [15.799999999999999, 0.0, 19.75], "s": [12.1, 23.2, 28.5], "col": "#2f3a4a", "label": "feed servo STS3032 (2:1 to a 30T GT2 pulley)"}, {"t": "box", "c": [0.0, -24.5, 141.6], "s": [35.0, 24.7, 45.2], "col": "#2f3a4a", "label": "spin servo ST3215-HS (1:1 gear)"}, {"t": "cyl", "p0": [0.0, 0.0, 120.0], "p1": [0.0, 0.0, 150.0], "r": 10.5, "c": "#3d7fd1", "label": "spinning barrel (spindle)"}, {"t": "cyl", "p0": [0.0, 0.0, 150.0], "p1": [0.0, 0.0, 199.0], "r": 5.25, "c": "#e0522f", "label": "tool out"}]}, {"key": "O0", "name": "Keep the selector cam (as built)", "prims": [{"t": "cyl", "p0": [0.0, 0.0, -8.3], "p1": [0.0, 0.0, 0.0], "r": 20.6, "c": "#8a8f98", "label": "coupler hand base (rev B.7)"}, {"t": "cyl", "p0": [0.0, 0.0, 0.0], "p1": [0.0, 0.0, 4.5], "r": 20.3, "c": "#8a8f98", "label": "clearance boss under the collar"}, {"t": "cyl", "p0": [0.0, 0.0, 4.5], "p1": [0.0, 0.0, 108.0], "r": 25.0, "c": "#b9c2cc", "label": "spin servo + drum housing"}, {"t": "cyl", "p0": [5.1000000000000005, 0.0, 108.0], "p1": [0.0, 0.0, 194.0], "r": 5.25, "c": "#e0522f", "label": "raised finger"}, {"t": "cyl", "p0": [1.5614246689128753e-15, 25.5, 108.0], "p1": [1.951780836141094e-15, 31.875, 40.0], "r": 5.25, "c": "#d08a2c", "label": "folded finger"}, {"t": "cyl", "p0": [-25.5, 3.1228493378257506e-15, 108.0], "p1": [-31.875, 3.903561672282188e-15, 40.0], "r": 5.25, "c": "#d08a2c", "label": "folded finger"}, {"t": "cyl", "p0": [-4.684274006738626e-15, -25.5, 108.0], "p1": [-5.855342508423282e-15, -31.875, 40.0], "r": 5.25, "c": "#d08a2c", "label": "folded finger"}]}, {"key": "O2", "name": "Converging cone + funnel cam (tool angles in)", "prims": [{"t": "cyl", "p0": [0.0, 0.0, -8.3], "p1": [0.0, 0.0, 0.0], "r": 20.6, "c": "#8a8f98", "label": "coupler hand base (rev B.7)"}, {"t": "cyl", "p0": [0.0, 0.0, 0.0], "p1": [0.0, 0.0, 4.5], "r": 20.3, "c": "#8a8f98", "label": "clearance boss under the collar"}, {"t": "box", "c": [0.0, 0.0, 20.5], "s": [24.0, 24.0, 28.0], "col": "#2f3a4a", "label": "push-rod drive + turret servos"}, {"t": "cyl", "p0": [0.0, 0.0, 35.5], "p1": [0.0, 0.0, 219.59779673999464], "r": 35.673258020710044, "c": "#b9c2cc", "label": "cone magazine (envelope)"}, {"t": "cyl", "p0": [25.45573871782985, 0.0, 38.4708042062247], "p1": [14.46106374198468, 0.0, 116.70198163680875], "r": 5.25, "c": "#d08a2c", "label": "stored tool (slot at 8 deg)"}, {"t": "cyl", "p0": [7.135139361116909, 21.959700947160663, 55.30536137483139], "p1": [4.468714453012636, 13.753288904374106, 116.70198163680875], "r": 5.25, "c": "#d08a2c", "label": "stored tool (slot at 8 deg)"}, {"t": "cyl", "p0": [-20.59412522709268, 14.962507804550896, 38.4708042062247], "p1": [-11.699246324004973, 8.500000000000002, 116.70198163680875], "r": 5.25, "c": "#d08a2c", "label": "stored tool (slot at 8 deg)"}, {"t": "cyl", "p0": [-18.905224169544386, -13.735449360648822, 53.32482523734825], "p1": [-11.699246324004976, -8.499999999999998, 116.70198163680875], "r": 5.25, "c": "#d08a2c", "label": "stored tool (slot at 8 deg)"}, {"t": "cyl", "p0": [6.447029707412576, -19.84191719418349, 71.14965047469651], "p1": [4.468714453012633, -13.753288904374108, 116.70198163680875], "r": 5.25, "c": "#d08a2c", "label": "stored tool (slot at 8 deg)"}, {"t": "cyl", "p0": [0.0, 0.0, 213.59779673999464], "p1": [0.0, 0.0, 221.59779673999464], "r": 10.0, "c": "#7a4fc9", "label": "funnel mouth (the cam that straightens the tool)"}, {"t": "box", "c": [24.0, 0.0, 243.19779673999463], "s": [24.7, 35.0, 45.2], "col": "#2f3a4a", "label": "spin servo ST3215-HS"}, {"t": "cyl", "p0": [0.0, 0.0, 219.59779673999464], "p1": [0.0, 0.0, 249.59779673999464], "r": 10.5, "c": "#3d7fd1", "label": "spinning barrel (spindle)"}, {"t": "cyl", "p0": [0.0, 0.0, 249.59779673999464], "p1": [0.0, 0.0, 298.59779673999464], "r": 5.25, "c": "#e0522f", "label": "tool out"}]}, {"key": "O3", "name": "Fixed ring + turning breech (spin motor selects)", "prims": [{"t": "cyl", "p0": [0.0, 0.0, -8.3], "p1": [0.0, 0.0, 0.0], "r": 20.6, "c": "#8a8f98", "label": "coupler hand base (rev B.7)"}, {"t": "cyl", "p0": [0.0, 0.0, 0.0], "p1": [0.0, 0.0, 4.5], "r": 20.3, "c": "#8a8f98", "label": "clearance boss under the collar"}, {"t": "box", "c": [0.0, 0.0, 51.5], "s": [8.0, 8.0, 92.0], "col": "#2e9c6a", "label": "on-axis push rack (stored behind)"}, {"t": "box", "c": [14.0, 0.0, 20.0], "s": [12.1, 23.2, 28.5], "col": "#2f3a4a", "label": "feed servo STS3032"}, {"t": "cyl", "p0": [0.0, 0.0, 99.5], "p1": [0.0, 0.0, 181.5], "r": 29.3, "c": "#b9c2cc", "label": "fixed ring of slots"}, {"t": "cyl", "p0": [0.0, 0.0, 99.5], "p1": [0.0, 0.0, 181.5], "r": 9.3, "c": "#3d7fd1", "label": "turning breech with side window"}, {"t": "cyl", "p0": [19.0, 0.0, 100.5], "p1": [19.0, 0.0, 179.5], "r": 5.25, "c": "#d08a2c", "label": "stored tool (spring-fed)"}, {"t": "cyl", "p0": [5.871322893124002, 18.070073809607916, 100.5], "p1": [5.871322893124002, 18.070073809607916, 162.5], "r": 5.25, "c": "#d08a2c", "label": "stored tool (spring-fed)"}, {"t": "cyl", "p0": [-15.371322893123999, 11.167919793556992, 100.5], "p1": [-15.371322893123999, 11.167919793556992, 179.5], "r": 5.25, "c": "#d08a2c", "label": "stored tool (spring-fed)"}, {"t": "cyl", "p0": [-15.371322893124004, -11.167919793556987, 100.5], "p1": [-15.371322893124004, -11.167919793556987, 164.5], "r": 5.25, "c": "#d08a2c", "label": "stored tool (spring-fed)"}, {"t": "cyl", "p0": [5.871322893123997, -18.07007380960792, 100.5], "p1": [5.871322893123997, -18.07007380960792, 146.5], "r": 5.25, "c": "#d08a2c", "label": "stored tool (spring-fed)"}, {"t": "box", "c": [24.0, 0.0, 205.1], "s": [24.7, 35.0, 45.2], "col": "#2f3a4a", "label": "spin servo ST3215-HS (also selects)"}, {"t": "cyl", "p0": [0.0, 0.0, 181.5], "p1": [0.0, 0.0, 211.5], "r": 10.5, "c": "#3d7fd1", "label": "spinning barrel (spindle)"}, {"t": "cyl", "p0": [0.0, 0.0, 211.5], "p1": [0.0, 0.0, 260.5], "r": 5.25, "c": "#e0522f", "label": "tool out"}]}, {"key": "O4", "name": "Sliding tray (linear revolver)", "prims": [{"t": "cyl", "p0": [0.0, 0.0, -8.3], "p1": [0.0, 0.0, 0.0], "r": 20.6, "c": "#8a8f98", "label": "coupler hand base (rev B.7)"}, {"t": "cyl", "p0": [0.0, 0.0, 0.0], "p1": [0.0, 0.0, 4.5], "r": 20.3, "c": "#8a8f98", "label": "clearance boss under the collar"}, {"t": "box", "c": [0.0, 0.0, 23.5], "s": [163.0, 21.6, 4.0], "col": "#b9c2cc", "label": "tray guide rail (full travel)"}, {"t": "cyl", "p0": [-34.0, 0.0, 26.5], "p1": [-34.0, 0.0, 105.5], "r": 5.25, "c": "#d08a2c", "label": "tray chamber"}, {"t": "cyl", "p0": [-17.0, 0.0, 26.5], "p1": [-17.0, 0.0, 88.5], "r": 5.25, "c": "#d08a2c", "label": "tray chamber"}, {"t": "cyl", "p0": [0.0, 0.0, 26.5], "p1": [0.0, 0.0, 105.5], "r": 5.25, "c": "#e0522f", "label": "tray chamber"}, {"t": "cyl", "p0": [17.0, 0.0, 26.5], "p1": [17.0, 0.0, 90.5], "r": 5.25, "c": "#d08a2c", "label": "tray chamber"}, {"t": "cyl", "p0": [34.0, 0.0, 26.5], "p1": [34.0, 0.0, 72.5], "r": 5.25, "c": "#d08a2c", "label": "tray chamber"}, {"t": "box", "c": [94.5, 0.0, 39.5], "s": [23.2, 12.1, 28.5], "col": "#2f3a4a", "label": "tray servo (rack and pinion)"}, {"t": "cyl", "p0": [0.0, 0.0, 109.5], "p1": [0.0, 0.0, 139.5], "r": 10.5, "c": "#3d7fd1", "label": "spinning barrel (spindle)"}, {"t": "cyl", "p0": [0.0, 0.0, 139.5], "p1": [0.0, 0.0, 188.5], "r": 5.25, "c": "#e0522f", "label": "tool out"}]}];
+const STUDY = {
+ "question": "How is the chosen tool stored and brought onto the centre axis?",
+ "recommended": "O1",
+ "requirements": {
+  "mass_target_g": 335,
+  "mass_cap_g": 350,
+  "tool_change_target_s": 1.0,
+  "spin_torque_sustained_Nm": 1.0,
+  "spin_torque_peak_Nm": 1.96,
+  "push_on_tool_N": 8.0,
+  "pull_on_tool_N": 15.0,
+  "side_load_at_tip_N": 5.0,
+  "pin_current_A": 5.2,
+  "coupler_flange_r": 20.6,
+  "collar_r": 28.3,
+  "collar_hang": 4.5,
+  "arm_continuous_Nm": 1.0
+ },
+ "shared_front_end": {
+  "chamber_length": 82.0,
+  "chamber_bore": 15.6,
+  "ring_radius": 14.46,
+  "tools": [
+   "Bit holder + Phillips bit (Wera 893/4/1 K)",
+   "1/4 in square socket drive (Wera 870/1) + socket",
+   "Mini keyless chuck 0.3-3.2 + drill / scriber",
+   "Magnet poker with hook / pry tip",
+   "Spare bit held straight in a magnetic cartridge (1/4 in insert bit + 6x3 mm magnet)"
+  ],
+  "tools_and_cartridges_g": 107.1,
+  "sp_L": 30.0,
+  "sp_OD": 21.0,
+  "lip_bore": 12.6,
+  "brg": "6704-2RS 20x27x4 (est. 5 g)",
+  "brg_mass": 5.0,
+  "brg_n": 2,
+  "gear_mass": 6.0,
+  "tool_out": 49.0
+ },
+ "shared_checks": {
+  "cartridge key shear at 1.96 N m (MPa)": 2.43,
+  "hex shank bearing in the printed cartridge at 1.96 N m (MPa)": 6.81,
+  "printed allowable used (MPa)": 30.0,
+  "spindle bearing radial load from 5 N at the tool tip (N)": 12.3,
+  "6704 static rating C0r (N, est.)": 1800.0,
+  "12 V pin current, all three servos stalled (A)": 3.73,
+  "12 V pin rating (A, assumed as on coupler rev B)": 5.2,
+  "push load path": "work push goes into spring pawls behind the cartridge's rear collar in the barrel (not into the feed)",
+  "pull load path": "pull on the tool goes into the barrel's front lip (bore 12.6 < cartridge 15.0)"
+ },
+ "options": [
+  {
+   "key": "O1",
+   "name": "Revolver cylinder (offset), straight push",
+   "short": "Revolver cylinder",
+   "principle": "Five chambers in a cylinder whose axis sits 14.5 mm off the tool axis. Turning it brings one chamber onto the centre line behind the barrel; a belt carriage pushes that cartridge straight forward into the barrel and later pulls it back into the same chamber.",
+   "mass_g": 325.34,
+   "tool_tip_z": 199.0,
+   "env_r": 41.22,
+   "env_len": 199.0,
+   "com_z": 64.9,
+   "com_x": 7.37,
+   "change_s": [
+    1.2250270270270271,
+    1.2250270270270271
+   ],
+   "park_to_tool_s": 0.75,
+   "stroke": 90.0,
+   "feed_speed": 222.0,
+   "motors": [
+    "ST3215-HS spin (1:1 gear to the barrel)",
+    "STS3032 selector (cylinder)",
+    "STS3032 feed (2:1 to a GT2 belt)"
+   ],
+   "stored_inside": true,
+   "from_centre": true,
+   "kill": [],
+   "risk": "Body is lopsided: it reaches 41 mm on the cylinder side and 22 mm on the other.",
+   "pros": [
+    "Straight push: no bend for a long tool to jam in",
+    "Any tool to any tool in the same time, never passes another",
+    "No electronics on a turning part: no slip ring",
+    "Closest to a real revolver: proven mechanism"
+   ],
+   "cons": [
+    "No angling cam: the cylinder turns the tool onto the centre line instead",
+    "Lopsided body (centre of mass 7 mm off axis)",
+    "Three servos"
+   ],
+   "sketch_overlaps": [],
+   "moment_Nm": 0.21
+  },
+  {
+   "key": "O0",
+   "name": "Keep the selector cam (as built)",
+   "short": "Keep the selector cam",
+   "principle": "Four fingers on a spinning wrist; one drum cam swings one finger up onto the axis, the rest fold back outside.",
+   "mass_g": 322.0,
+   "tool_tip_z": 194.0,
+   "env_r": 33.0,
+   "env_len": 194.0,
+   "com_z": 88.0,
+   "com_x": 0.0,
+   "change_s": [
+    1.1,
+    6.2
+   ],
+   "park_to_tool_s": 1.1,
+   "motors": [
+    "ST3215-HS spin",
+    "STS3032 selector (on the rotor)"
+   ],
+   "stored_inside": false,
+   "from_centre": true,
+   "kill": [],
+   "risk": "Waits up to 6.2 s; tools ride outside; servo bus through a slip ring untested.",
+   "pros": [
+    "Built and checked: 322 g, $167",
+    "Works today in the desk-test replay"
+   ],
+   "cons": [
+    "Passes every tool on the way: 1.1-6.2 s",
+    "Tools are outside, not stored",
+    "Selector servo on the spinning rotor needs a slip ring"
+   ],
+   "sketch_overlaps": [],
+   "moment_Nm": 0.28
+  },
+  {
+   "key": "O2",
+   "name": "Converging cone + funnel cam (tool angles in)",
+   "short": "Cone + funnel cam",
+   "principle": "Five straight slots tilted 8 deg meet at the barrel's rear mouth. The cartridge slides down its slot, its nose enters the barrel and it straightens as it goes in (nose held by the barrel, tail by the slot). A spring-steel push rod in a PTFE liner, aimed at the chosen slot by a turret, pushes and pulls it.",
+   "mass_g": 348.7,
+   "tool_tip_z": 298.6,
+   "env_r": 35.67,
+   "env_len": 298.6,
+   "com_z": 109.8,
+   "com_x": 0.0,
+   "change_s": [
+    2.951643298722546,
+    2.951643298722546
+   ],
+   "park_to_tool_s": 1.61,
+   "stroke": 193.91,
+   "feed_speed": 150.0,
+   "beta": 8.0,
+   "gap": 103.91,
+   "motors": [
+    "ST3215-HS spin",
+    "STS3032 turret",
+    "STS3032 push-rod drive"
+   ],
+   "stored_inside": true,
+   "from_centre": true,
+   "kill": [
+    "Size: smallest cone (tilt 8 deg) is 71 mm across and puts the tool tip 299 mm out",
+    "Mass 349 g est. against the 350 g cap"
+   ],
+   "risk": "The tilted cartridge can wedge in the funnel; a push rod in compression can buckle over 194 mm.",
+   "pros": [
+    "Exactly the cam-angled entry described on Nov 21",
+    "Symmetric round body",
+    "Magazine never moves"
+   ],
+   "cons": [
+    "Neighbouring slots only separate 104 mm from the apex, so the cone is long and wide",
+    "Longest stroke (194 mm), slowest change",
+    "Push rod and funnel are the least proven parts"
+   ],
+   "sketch_overlaps": [],
+   "moment_Nm": 0.38
+  },
+  {
+   "key": "O3",
+   "name": "Fixed ring + turning breech (spin motor selects)",
+   "short": "Turning breech",
+   "principle": "Cartridges sit in a fixed ring, spring-fed toward the centre. The barrel runs back as a breech tube with a side window; the spin servo turns the window to the chosen slot, the cartridge drops in and an on-axis rack pushes it out. To put it back, a ramp must drive it sideways into its slot against the spring.",
+   "mass_g": 375.83,
+   "tool_tip_z": 260.5,
+   "env_r": 31.8,
+   "env_len": 260.5,
+   "com_z": 99.83,
+   "com_x": 0.0,
+   "change_s": [
+    1.3465466598674147,
+    1.3465466598674147
+   ],
+   "park_to_tool_s": 0.78,
+   "stroke": 90.0,
+   "feed_speed": 222.0,
+   "motors": [
+    "ST3215-HS spin + select",
+    "STS3032 feed (on-axis rack)"
+   ],
+   "stored_inside": true,
+   "from_centre": true,
+   "kill": [
+    "Length: the push rack has to sit behind the breech, so the tool tip is 260 mm out",
+    "Return path: no simple way to drive a cartridge sideways out of a turning breech back into its own slot"
+   ],
+   "risk": "Sideways spring feed and cam-back can jam or put a tool in the wrong slot.",
+   "pros": [
+    "One servo fewer: the spin servo also selects",
+    "Round, symmetric body"
+   ],
+   "cons": [
+    "Longest hand (rack behind the breech)",
+    "Putting the tool back into its own slot is the hard, unproven part",
+    "Springs push every stored tool against the breech while it spins"
+   ],
+   "sketch_overlaps": [],
+   "moment_Nm": 0.37
+  },
+  {
+   "key": "O4",
+   "name": "Sliding tray (linear revolver)",
+   "short": "Sliding tray",
+   "principle": "Five chambers side by side in a flat tray that slides sideways to line one up behind the barrel; a carriage pushes it in as in O1.",
+   "mass_g": 317.1,
+   "tool_tip_z": 188.5,
+   "env_r": 81.5,
+   "env_len": 188.5,
+   "com_z": 53.75,
+   "com_x": 0.0,
+   "change_s": [
+    1.4088108108108108,
+    1.4088108108108108
+   ],
+   "park_to_tool_s": 0.93,
+   "motors": [
+    "ST3215-HS spin",
+    "STS3032 tray",
+    "STS3032 feed"
+   ],
+   "stored_inside": true,
+   "from_centre": true,
+   "kill": [
+    "Envelope: the tray needs 157 mm of width to slide through (hand base is 41 mm)"
+   ],
+   "risk": "Sticks out 78 mm each side; snags and hits the other arms.",
+   "pros": [
+    "Simplest motions (two straight slides)",
+    "Flat: could lie along the arm"
+   ],
+   "cons": [
+    "157 mm wide sweep",
+    "Heavy guide for the full travel",
+    "Ends hit neighbouring arms in a fold"
+   ],
+   "sketch_overlaps": [],
+   "moment_Nm": 0.17
+  }
+ ]
+};
+const LEG = {"#8a8f98":"Coupler hand base","#b9c2cc":"Housing / magazine","#2f3a4a":"Servo","#d08a2c":"Stored tool","#e0522f":"Tool in use","#3d7fd1":"Spinning barrel","#7a4fc9":"Cam","#2e9c6a":"Feed"};
+const byKey = Object.fromEntries(STUDY.options.map(o=>[o.key,o]));
+const view = document.getElementById('view');
+const renderer = new THREE.WebGLRenderer({antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(2,window.devicePixelRatio||1));
+view.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(35,1,1,5000);
+camera.up.set(0,0,1); camera.position.set(260,-300,240);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.target.set(0,0,110); controls.enableDamping=true; controls.update();
+scene.add(new THREE.HemisphereLight(0xffffff,0x667080,0.9));
+const dl = new THREE.DirectionalLight(0xffffff,0.6); dl.position.set(200,-150,400); scene.add(dl);
+const grid = new THREE.GridHelper(240,12,0x8892a0,0x8892a0); grid.rotation.x=Math.PI/2; grid.material.opacity=.25; grid.material.transparent=true; scene.add(grid);
+let group = null;
+function build(key){
+  if(group){scene.remove(group); group.traverse(o=>{o.geometry&&o.geometry.dispose(); o.material&&o.material.dispose();});}
+  group = new THREE.Group();
+  const sc = SCENES.find(s=>s.key===key);
+  for(const p of sc.prims){
+    let mesh;
+    if(p.t==='cyl'){
+      const a=new THREE.Vector3(...p.p0), b=new THREE.Vector3(...p.p1), d=b.clone().sub(a), L=d.length(); if(L<1e-6) continue;
+      const g=new THREE.CylinderGeometry(p.r,p.r,L,32);
+      const glass = p.c==='#b9c2cc';
+      mesh=new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:p.c,roughness:.6,metalness:.1,transparent:glass,opacity:glass?.35:1,depthWrite:!glass}));
+      mesh.position.copy(a.clone().add(b).multiplyScalar(.5));
+      mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), d.normalize());
+    } else {
+      mesh=new THREE.Mesh(new THREE.BoxGeometry(...p.s),new THREE.MeshStandardMaterial({color:p.col,roughness:.6}));
+      mesh.position.set(...p.c);
+    }
+    mesh.userData.label=p.label; group.add(mesh);
+  }
+  scene.add(group);
+}
+function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+function panel(key){
+  const o=byKey[key], rec=key===STUDY.recommended;
+  const ch = o.change_s[0]===o.change_s[1] ? o.change_s[1].toFixed(1) : o.change_s[0].toFixed(1)+'–'+o.change_s[1].toFixed(1);
+  document.getElementById('panel').innerHTML = `
+    <h2>${esc(o.key)} ${esc(o.name)}</h2>
+    <div>${rec?'<span class="tag rec">Recommended</span>':''}${o.kill.length?'<span class="tag kill">Fails a kill check</span>':''}</div>
+    <p style="margin:0">${esc(o.principle)}</p>
+    <dl>
+      <dt>Mass</dt><dd>${Math.round(o.mass_g)} g est. (cap 350)</dd>
+      <dt>Tool tip from base</dt><dd>${Math.round(o.tool_tip_z)} mm</dd>
+      <dt>Widest reach</dt><dd>${Math.round(o.env_r)} mm from the axis</dd>
+      <dt>Tool change</dt><dd>${ch} s any to any, ${o.park_to_tool_s.toFixed(2)} s from parked</dd>
+      <dt>Moment at coupler</dt><dd>${o.moment_Nm.toFixed(2)} N·m, hand held flat</dd>
+      <dt>Motors</dt><dd>${o.motors.map(esc).join('<br>')}</dd>
+    </dl>
+    ${o.kill.length?`<ul class="kills">${o.kill.map(k=>`<li>${esc(k)}</li>`).join('')}</ul>`:''}
+    <div><strong>For</strong><ul>${o.pros.map(k=>`<li>${esc(k)}</li>`).join('')}</ul></div>
+    <div><strong>Against</strong><ul>${o.cons.map(k=>`<li>${esc(k)}</li>`).join('')}</ul></div>
+    <div class="parts">Main risk: ${esc(o.risk)}</div>`;
+}
+const tabs=document.getElementById('tabs');
+function select(key){
+  for(const b of tabs.children) b.setAttribute('aria-pressed', b.dataset.key===key);
+  build(key); panel(key);
+  try{localStorage.setItem('rbh-opt',key)}catch(e){}
+}
+for(const o of STUDY.options){
+  const b=document.createElement('button'); b.type='button'; b.id='tab-'+o.key; b.dataset.key=o.key;
+  b.textContent=o.key+' '+o.short+(o.key===STUDY.recommended?' (Recommended)':'');
+  if(o.kill.length) b.classList.add('killed');
+  b.onclick=()=>select(o.key); tabs.appendChild(b);
+}
+document.getElementById('legend').innerHTML=Object.entries(LEG).map(([c,n])=>`<span style="--c:${c}">${n}</span>`).join('');
+const sc=STUDY.shared_checks, fe=STUDY.shared_front_end;
+document.getElementById('shared').innerHTML=`<h2>Shared by every option</h2>
+  <p style="margin:0 0 8px">Five printed cartridges (Ø15 × 24 mm, 1/4 in hex bore) hold the tools: ${fe.tools.map(esc).join('; ')}. The barrel is a 30 mm spindle on two 6704 bearings, driven 1:1 by the ST3215-HS.</p>
+  <dl>
+   <dt>Cartridge key shear at 1.96 N·m</dt><dd>${sc["cartridge key shear at 1.96 N m (MPa)"]} MPa of 30</dd>
+   <dt>Hex shank bearing in printed cartridge</dt><dd>${sc["hex shank bearing in the printed cartridge at 1.96 N m (MPa)"]} MPa of 30</dd>
+   <dt>Barrel bearing load, 5 N at the tool tip</dt><dd>${sc["spindle bearing radial load from 5 N at the tool tip (N)"]} N of 1800 est.</dd>
+   <dt>12 V pin, all three servos stalled</dt><dd>${sc["12 V pin current, all three servos stalled (A)"]} A of 5.2</dd>
+   <dt>Push load</dt><dd>spring pawls in the barrel</dd>
+   <dt>Pull load</dt><dd>barrel front lip</dd>
+  </dl>`;
+function resize(){const w=view.clientWidth,h=view.clientHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix();}
+new ResizeObserver(resize).observe(view); resize();
+let start = STUDY.recommended; try{const s=localStorage.getItem('rbh-opt'); if(s&&byKey[s]) start=s;}catch(e){}
+select(start);
+(function loop(){controls.update(); renderer.render(scene,camera); requestAnimationFrame(loop);})();
+</script>

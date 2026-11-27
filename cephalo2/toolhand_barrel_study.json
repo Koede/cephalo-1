@@ -1,0 +1,255 @@
+{
+ "question": "How is the chosen tool stored and brought onto the centre axis?",
+ "recommended": "O1",
+ "requirements": {
+  "mass_target_g": 335,
+  "mass_cap_g": 350,
+  "tool_change_target_s": 1.0,
+  "spin_torque_sustained_Nm": 1.0,
+  "spin_torque_peak_Nm": 1.96,
+  "push_on_tool_N": 8.0,
+  "pull_on_tool_N": 15.0,
+  "side_load_at_tip_N": 5.0,
+  "pin_current_A": 5.2,
+  "coupler_flange_r": 20.6,
+  "collar_r": 28.3,
+  "collar_hang": 4.5,
+  "arm_continuous_Nm": 1.0
+ },
+ "shared_front_end": {
+  "chamber_length": 82.0,
+  "chamber_bore": 15.6,
+  "ring_radius": 14.46,
+  "tools": [
+   "Bit holder + Phillips bit (Wera 893/4/1 K)",
+   "1/4 in square socket drive (Wera 870/1) + socket",
+   "Mini keyless chuck 0.3-3.2 + drill / scriber",
+   "Magnet poker with hook / pry tip",
+   "Spare bit held straight in a magnetic cartridge (1/4 in insert bit + 6x3 mm magnet)"
+  ],
+  "tools_and_cartridges_g": 107.1,
+  "sp_L": 30.0,
+  "sp_OD": 21.0,
+  "lip_bore": 12.6,
+  "brg": "6704-2RS 20x27x4 (est. 5 g)",
+  "brg_mass": 5.0,
+  "brg_n": 2,
+  "gear_mass": 6.0,
+  "tool_out": 49.0
+ },
+ "shared_checks": {
+  "cartridge key shear at 1.96 N m (MPa)": 2.43,
+  "hex shank bearing in the printed cartridge at 1.96 N m (MPa)": 6.81,
+  "printed allowable used (MPa)": 30.0,
+  "spindle bearing radial load from 5 N at the tool tip (N)": 12.3,
+  "6704 static rating C0r (N, est.)": 1800.0,
+  "12 V pin current, all three servos stalled (A)": 3.73,
+  "12 V pin rating (A, assumed as on coupler rev B)": 5.2,
+  "push load path": "work push goes into spring pawls behind the cartridge's rear collar in the barrel (not into the feed)",
+  "pull load path": "pull on the tool goes into the barrel's front lip (bore 12.6 < cartridge 15.0)"
+ },
+ "options": [
+  {
+   "key": "O1",
+   "name": "Revolver cylinder (offset), straight push",
+   "short": "Revolver cylinder",
+   "principle": "Five chambers in a cylinder whose axis sits 14.5 mm off the tool axis. Turning it brings one chamber onto the centre line behind the barrel; a belt carriage pushes that cartridge straight forward into the barrel and later pulls it back into the same chamber.",
+   "mass_g": 325.34,
+   "tool_tip_z": 199.0,
+   "env_r": 41.22,
+   "env_len": 199.0,
+   "com_z": 64.9,
+   "com_x": 7.37,
+   "change_s": [
+    1.2250270270270271,
+    1.2250270270270271
+   ],
+   "park_to_tool_s": 0.75,
+   "stroke": 90.0,
+   "feed_speed": 222.0,
+   "motors": [
+    "ST3215-HS spin (1:1 gear to the barrel)",
+    "STS3032 selector (cylinder)",
+    "STS3032 feed (2:1 to a GT2 belt)"
+   ],
+   "stored_inside": true,
+   "from_centre": true,
+   "kill": [],
+   "risk": "Body is lopsided: it reaches 41 mm on the cylinder side and 22 mm on the other.",
+   "pros": [
+    "Straight push: no bend for a long tool to jam in",
+    "Any tool to any tool in the same time, never passes another",
+    "No electronics on a turning part: no slip ring",
+    "Closest to a real revolver: proven mechanism"
+   ],
+   "cons": [
+    "No angling cam: the cylinder turns the tool onto the centre line instead",
+    "Lopsided body (centre of mass 7 mm off axis)",
+    "Three servos"
+   ],
+   "sketch_overlaps": [],
+   "moment_Nm": 0.21
+  },
+  {
+   "key": "O0",
+   "name": "Keep the selector cam (as built)",
+   "short": "Keep the selector cam",
+   "principle": "Four fingers on a spinning wrist; one drum cam swings one finger up onto the axis, the rest fold back outside.",
+   "mass_g": 322.0,
+   "tool_tip_z": 194.0,
+   "env_r": 33.0,
+   "env_len": 194.0,
+   "com_z": 88.0,
+   "com_x": 0.0,
+   "change_s": [
+    1.1,
+    6.2
+   ],
+   "park_to_tool_s": 1.1,
+   "motors": [
+    "ST3215-HS spin",
+    "STS3032 selector (on the rotor)"
+   ],
+   "stored_inside": false,
+   "from_centre": true,
+   "kill": [],
+   "risk": "Waits up to 6.2 s; tools ride outside; servo bus through a slip ring untested.",
+   "pros": [
+    "Built and checked: 322 g, $167",
+    "Works today in the desk-test replay"
+   ],
+   "cons": [
+    "Passes every tool on the way: 1.1-6.2 s",
+    "Tools are outside, not stored",
+    "Selector servo on the spinning rotor needs a slip ring"
+   ],
+   "sketch_overlaps": [],
+   "moment_Nm": 0.28
+  },
+  {
+   "key": "O2",
+   "name": "Converging cone + funnel cam (tool angles in)",
+   "short": "Cone + funnel cam",
+   "principle": "Five straight slots tilted 8 deg meet at the barrel's rear mouth. The cartridge slides down its slot, its nose enters the barrel and it straightens as it goes in (nose held by the barrel, tail by the slot). A spring-steel push rod in a PTFE liner, aimed at the chosen slot by a turret, pushes and pulls it.",
+   "mass_g": 348.7,
+   "tool_tip_z": 298.6,
+   "env_r": 35.67,
+   "env_len": 298.6,
+   "com_z": 109.8,
+   "com_x": 0.0,
+   "change_s": [
+    2.951643298722546,
+    2.951643298722546
+   ],
+   "park_to_tool_s": 1.61,
+   "stroke": 193.91,
+   "feed_speed": 150.0,
+   "beta": 8.0,
+   "gap": 103.91,
+   "motors": [
+    "ST3215-HS spin",
+    "STS3032 turret",
+    "STS3032 push-rod drive"
+   ],
+   "stored_inside": true,
+   "from_centre": true,
+   "kill": [
+    "Size: smallest cone (tilt 8 deg) is 71 mm across and puts the tool tip 299 mm out",
+    "Mass 349 g est. against the 350 g cap"
+   ],
+   "risk": "The tilted cartridge can wedge in the funnel; a push rod in compression can buckle over 194 mm.",
+   "pros": [
+    "Exactly the cam-angled entry described on Nov 21",
+    "Symmetric round body",
+    "Magazine never moves"
+   ],
+   "cons": [
+    "Neighbouring slots only separate 104 mm from the apex, so the cone is long and wide",
+    "Longest stroke (194 mm), slowest change",
+    "Push rod and funnel are the least proven parts"
+   ],
+   "sketch_overlaps": [],
+   "moment_Nm": 0.38
+  },
+  {
+   "key": "O3",
+   "name": "Fixed ring + turning breech (spin motor selects)",
+   "short": "Turning breech",
+   "principle": "Cartridges sit in a fixed ring, spring-fed toward the centre. The barrel runs back as a breech tube with a side window; the spin servo turns the window to the chosen slot, the cartridge drops in and an on-axis rack pushes it out. To put it back, a ramp must drive it sideways into its slot against the spring.",
+   "mass_g": 375.83,
+   "tool_tip_z": 260.5,
+   "env_r": 31.8,
+   "env_len": 260.5,
+   "com_z": 99.83,
+   "com_x": 0.0,
+   "change_s": [
+    1.3465466598674147,
+    1.3465466598674147
+   ],
+   "park_to_tool_s": 0.78,
+   "stroke": 90.0,
+   "feed_speed": 222.0,
+   "motors": [
+    "ST3215-HS spin + select",
+    "STS3032 feed (on-axis rack)"
+   ],
+   "stored_inside": true,
+   "from_centre": true,
+   "kill": [
+    "Length: the push rack has to sit behind the breech, so the tool tip is 260 mm out",
+    "Return path: no simple way to drive a cartridge sideways out of a turning breech back into its own slot"
+   ],
+   "risk": "Sideways spring feed and cam-back can jam or put a tool in the wrong slot.",
+   "pros": [
+    "One servo fewer: the spin servo also selects",
+    "Round, symmetric body"
+   ],
+   "cons": [
+    "Longest hand (rack behind the breech)",
+    "Putting the tool back into its own slot is the hard, unproven part",
+    "Springs push every stored tool against the breech while it spins"
+   ],
+   "sketch_overlaps": [],
+   "moment_Nm": 0.37
+  },
+  {
+   "key": "O4",
+   "name": "Sliding tray (linear revolver)",
+   "short": "Sliding tray",
+   "principle": "Five chambers side by side in a flat tray that slides sideways to line one up behind the barrel; a carriage pushes it in as in O1.",
+   "mass_g": 317.1,
+   "tool_tip_z": 188.5,
+   "env_r": 81.5,
+   "env_len": 188.5,
+   "com_z": 53.75,
+   "com_x": 0.0,
+   "change_s": [
+    1.4088108108108108,
+    1.4088108108108108
+   ],
+   "park_to_tool_s": 0.93,
+   "motors": [
+    "ST3215-HS spin",
+    "STS3032 tray",
+    "STS3032 feed"
+   ],
+   "stored_inside": true,
+   "from_centre": true,
+   "kill": [
+    "Envelope: the tray needs 157 mm of width to slide through (hand base is 41 mm)"
+   ],
+   "risk": "Sticks out 78 mm each side; snags and hits the other arms.",
+   "pros": [
+    "Simplest motions (two straight slides)",
+    "Flat: could lie along the arm"
+   ],
+   "cons": [
+    "157 mm wide sweep",
+    "Heavy guide for the full travel",
+    "Ends hit neighbouring arms in a fold"
+   ],
+   "sketch_overlaps": [],
+   "moment_Nm": 0.17
+  }
+ ]
+}
