@@ -1,0 +1,487 @@
+{
+ "basis": {
+  "M_TOT": 41.65,
+  "SHARE_F": 0.6,
+  "W_LEG": 122.57594999999999,
+  "M_SPRUNG": 7.2989999999999995,
+  "K_W": 23.789411348684215,
+  "PRELOAD": 3.6288932565789196,
+  "F_N": 9.0861582766965,
+  "TRAVEL": 25.0,
+  "SAG": 5.0,
+  "pivot_world": [
+   235.99353319910102,
+   178.5,
+   467.5
+  ],
+  "bracket_x": [
+   -250.0,
+   93.0
+  ],
+  "gap_to_hind": 19.0,
+  "cases": {
+   "stand": {
+    "Fz": 122.57594999999999,
+    "Fx": 0.0,
+    "x": 0.0,
+    "Fy": 0.0
+   },
+   "walk peak": {
+    "Fz": 262.6627500000001,
+    "Fx": -26.266275000000007,
+    "x": 60.0,
+    "Fy": 26.266275000000007
+   },
+   "trot peak": {
+    "Fz": 367.72785000000005,
+    "Fx": -73.54557000000001,
+    "x": 80.0,
+    "Fy": 55.159177500000006
+   },
+   "gallop peak": {
+    "Fz": 574.574765625,
+    "Fx": -201.10116796875002,
+    "x": 120.0,
+    "Fy": 86.18621484375001
+   },
+   "leap landing, fores": {
+    "Fz": 450.0,
+    "Fx": -135.0,
+    "x": 100.0,
+    "Fy": 60.0
+   },
+   "design max (grip 0.7)": {
+    "Fz": 750.0,
+    "Fx": -525.0,
+    "x": 150.0,
+    "Fy": 225.0
+   }
+  }
+ },
+ "options": {
+  "A": {
+   "name": "Twin vertical slides at the two hip brackets + one coil-over",
+   "how": "each bracket rides on a short vertical guide fixed to the body; the carrier moves straight up and down; one coil-over (vertical, inboard of the carrier) carries the load",
+   "rows": {
+    "stand": {
+     "shock": 122.57594999999999,
+     "defl": 5.0,
+     "coupling": 0.0,
+     "guide": 0.0,
+     "roll_Nm": 0.0
+    },
+    "walk peak": {
+     "shock": 262.6627500000001,
+     "defl": 10.888619854721552,
+     "coupling": 0.0,
+     "guide": 94.88021785714288,
+     "roll_Nm": 12.279483562500003
+    },
+    "trot peak": {
+     "shock": 367.72785000000005,
+     "defl": 15.305084745762713,
+     "coupling": 0.0,
+     "guide": 222.78089571428572,
+     "roll_Nm": 25.786915481250002
+    },
+    "gallop peak": {
+     "shock": 574.574765625,
+     "defl": 23.999999999999996,
+     "coupling": 0.0,
+     "guide": 575.6636099330358,
+     "roll_Nm": 40.29205543945313
+    },
+    "leap landing, fores": {
+     "shock": 450.0,
+     "defl": 18.763436396172523,
+     "coupling": 0.0,
+     "guide": 382.69679300291546,
+     "roll_Nm": 28.05
+    },
+    "design max (grip 0.7)": {
+     "shock": 750.0,
+     "defl": 25.0,
+     "coupling": 0.0,
+     "guide": 1306.0495626822158,
+     "roll_Nm": 105.1875
+    }
+   },
+   "guide_note": "pitch moment taken as a couple over the 343 mm bracket spacing",
+   "parts": "2 x MGN12H or MGN15H rail + 2 blocks per bracket (or 12 mm rod + 2 igus plain bushes), 1 coil-over, urethane bump stop",
+   "mass": 0.42,
+   "cost": 110,
+   "fits": "inside the carrier's own length; needs about 40 mm of body frame inboard of the brackets for rails"
+  },
+  "B": {
+   "name": "Parallelogram links (4-bar) over the abduction motor + coil-over on a bell crank",
+   "how": "two 100 mm links, one above the other, hang the carrier from the body; it moves on a 100 mm arc that stays level",
+   "rows": {
+    "stand": {
+     "shock": 122.57594999999999,
+     "defl": 5.0,
+     "coupling": 0.0,
+     "guide": 340.48875,
+     "roll_Nm": 0.0
+    },
+    "walk peak": {
+     "shock": 262.6627500000001,
+     "defl": 10.888619854721552,
+     "coupling": 0.0,
+     "guide": 1041.1659562500004,
+     "roll_Nm": 12.279483562500003
+    },
+    "trot peak": {
+     "shock": 367.72785000000005,
+     "defl": 15.305084745762713,
+     "coupling": 0.0,
+     "guide": 1730.3638275,
+     "roll_Nm": 25.786915481250002
+    },
+    "gallop peak": {
+     "shock": 574.574765625,
+     "defl": 23.999999999999996,
+     "coupling": 0.0,
+     "guide": 3406.7495478515625,
+     "roll_Nm": 40.29205543945313
+    },
+    "leap landing, fores": {
+     "shock": 450.0,
+     "defl": 18.763436396172523,
+     "coupling": 0.0,
+     "guide": 2451.25,
+     "roll_Nm": 28.05
+    },
+    "design max (grip 0.7)": {
+     "shock": 750.0,
+     "defl": 25.0,
+     "coupling": 0.0,
+     "guide": 6060.416666666667,
+     "roll_Nm": 105.1875
+    }
+   },
+   "guide_note": "link force = moment about the links' end / 90 mm spacing",
+   "parts": "2 carbon or aluminium links with 4 rod ends (M8), bell crank on 2 x 6800, 1 coil-over",
+   "mass": 0.48,
+   "cost": 95,
+   "fits": "needs a 100 mm x 90 mm window above the abduction motor; the yaw stack sweeps there (check)"
+  },
+  "C": {
+   "name": "Trailing rocker + coil-over (the Nov 19 assumption)",
+   "how": "the carrier is the end of an arm that swings about a pivot 310 mm behind the hip",
+   "rows": {
+    "stand": {
+     "shock": 551.591775,
+     "defl": 5.0,
+     "coupling": 1.282258064516129,
+     "guide": null,
+     "roll_Nm": 0.0
+    },
+    "walk peak": {
+     "shock": 1562.3138005040328,
+     "defl": 14.441380926345392,
+     "coupling": 1.282258064516129,
+     "guide": null,
+     "roll_Nm": 12.279483562500003
+    },
+    "trot peak": {
+     "shock": 2506.1839196370975,
+     "defl": 23.25828321487152,
+     "coupling": 1.282258064516129,
+     "guide": null,
+     "roll_Nm": 25.786915481250002
+    },
+    "gallop peak": {
+     "shock": 4746.844792543473,
+     "defl": 25.0,
+     "coupling": 1.282258064516129,
+     "guide": null,
+     "roll_Nm": 40.29205543945313
+    },
+    "leap landing, fores": {
+     "shock": 3457.197580645161,
+     "defl": 25.0,
+     "coupling": 1.282258064516129,
+     "guide": null,
+     "roll_Nm": 28.05
+    },
+    "design max (grip 0.7)": {
+     "shock": 8037.399193548386,
+     "defl": 25.0,
+     "coupling": 1.282258064516129,
+     "guide": null,
+     "roll_Nm": 105.1875
+    }
+   },
+   "guide_note": "",
+   "parts": "rocker arm on 2 x 6802, coil-over at 4.5:1",
+   "mass": 0.55,
+   "cost": 85,
+   "fits": "pivot lands inside the hind leg stack (front carrier ends 19 mm from it): would have to move inboard"
+  },
+  "D": {
+   "name": "Leading rocker hung from the chest + coil-over",
+   "how": "the arm pivots on the chest 150 mm ahead of the hip and swings back to the carrier",
+   "rows": {
+    "stand": {
+     "shock": 183.863925,
+     "defl": 5.0,
+     "coupling": 3.25,
+     "guide": null,
+     "roll_Nm": 0.0
+    },
+    "walk peak": {
+     "shock": 108.34838437500002,
+     "defl": 2.8837772397094446,
+     "coupling": 3.25,
+     "guide": null,
+     "roll_Nm": 12.279483562500003
+    },
+    "trot peak": {
+     "shock": -101.12515875000005,
+     "defl": 0.0,
+     "coupling": 3.25,
+     "guide": null,
+     "roll_Nm": 25.786915481250002
+    },
+    "gallop peak": {
+     "shock": -807.9957641601565,
+     "defl": 0.0,
+     "coupling": 3.25,
+     "guide": null,
+     "roll_Nm": 40.29205543945313
+    },
+    "leap landing, fores": {
+     "shock": -433.125,
+     "defl": 0.0,
+     "coupling": 3.25,
+     "guide": null,
+     "roll_Nm": 28.05
+    },
+    "design max (grip 0.7)": {
+     "shock": -2559.375,
+     "defl": 0.0,
+     "coupling": 3.25,
+     "guide": null,
+     "roll_Nm": 105.1875
+    }
+   },
+   "guide_note": "",
+   "parts": "rocker on 2 x 6802, coil-over at 1.5:1",
+   "mass": 0.5,
+   "cost": 85,
+   "fits": "room at the chest under the pod; short arm"
+  },
+  "E": {
+   "name": "Rubber / urethane mounts under both brackets",
+   "how": "each bracket sits on two bonded rubber mounts; no guide, the rubber carries everything",
+   "rows": {
+    "stand": {
+     "shock": 122.57594999999999,
+     "defl": 2.0,
+     "coupling": 0.4,
+     "guide": null,
+     "roll_Nm": 0.0
+    },
+    "walk peak": {
+     "shock": 262.6627500000001,
+     "defl": 4.285714285714287,
+     "coupling": 0.4,
+     "guide": null,
+     "roll_Nm": 12.279483562500003
+    },
+    "trot peak": {
+     "shock": 367.72785000000005,
+     "defl": 5.0,
+     "coupling": 0.4,
+     "guide": null,
+     "roll_Nm": 25.786915481250002
+    },
+    "gallop peak": {
+     "shock": 574.574765625,
+     "defl": 5.0,
+     "coupling": 0.4,
+     "guide": null,
+     "roll_Nm": 40.29205543945313
+    },
+    "leap landing, fores": {
+     "shock": 450.0,
+     "defl": 5.0,
+     "coupling": 0.4,
+     "guide": null,
+     "roll_Nm": 28.05
+    },
+    "design max (grip 0.7)": {
+     "shock": 750.0,
+     "defl": 5.0,
+     "coupling": 0.4,
+     "guide": null,
+     "roll_Nm": 105.1875
+    }
+   },
+   "guide_note": "",
+   "parts": "4 x M6 cylindrical rubber mounts (55 Shore A) per side",
+   "mass": 0.1,
+   "cost": 20,
+   "fits": "fits as is; about 5 mm of motion"
+  },
+  "F": {
+   "name": "Parallel spring-steel leaves (flexure)",
+   "how": "two flat spring-steel leaves, one above the other, hang each bracket: the leaves are spring and guide at once",
+   "rows": {
+    "stand": {
+     "shock": 122.57594999999999,
+     "defl": 5.0,
+     "coupling": 0.0,
+     "guide": 0.0,
+     "roll_Nm": 0.0
+    },
+    "walk peak": {
+     "shock": 262.6627500000001,
+     "defl": 10.888619854721552,
+     "coupling": 0.0,
+     "guide": 280.39248562500006,
+     "roll_Nm": 12.279483562500003
+    },
+    "trot peak": {
+     "shock": 367.72785000000005,
+     "defl": 15.0,
+     "coupling": 0.0,
+     "guide": 638.0078197500001,
+     "roll_Nm": 25.786915481250002
+    },
+    "gallop peak": {
+     "shock": 574.574765625,
+     "defl": 15.0,
+     "coupling": 0.0,
+     "guide": 1629.6376790039064,
+     "roll_Nm": 40.29205543945313
+    },
+    "leap landing, fores": {
+     "shock": 450.0,
+     "defl": 15.0,
+     "coupling": 0.0,
+     "guide": 1081.125,
+     "roll_Nm": 28.05
+    },
+    "design max (grip 0.7)": {
+     "shock": 750.0,
+     "defl": 15.0,
+     "coupling": 0.0,
+     "guide": 3579.375,
+     "roll_Nm": 105.1875
+    }
+   },
+   "guide_note": "travel cut to 15 mm: 25 mm puts 750 MPa in a 200 mm leaf",
+   "parts": "4 leaves 1095 spring steel 200 x 40 x 2 mm, clamps",
+   "mass": 0.3,
+   "cost": 40,
+   "fits": "200 mm leaves along the body: no room behind the carrier (hind stack)"
+  },
+  "G": {
+   "name": "One shared sling for both shoulders (heave only, roll held by links)",
+   "how": "left and right carriers are tied through a rocker to one shock: the chest drops between both shoulders, as in a horse; a leg loaded alone moves both",
+   "rows": {
+    "stand": {
+     "shock": 122.57594999999999,
+     "defl": 2.4237288135593227,
+     "coupling": 0.0,
+     "guide": 0.0,
+     "roll_Nm": 0.0
+    },
+    "walk peak": {
+     "shock": 262.6627500000001,
+     "defl": 5.368038740920099,
+     "coupling": 0.0,
+     "guide": 81.74708035714288,
+     "roll_Nm": 12.279483562500003
+    },
+    "trot peak": {
+     "shock": 367.72785000000005,
+     "defl": 7.576271186440678,
+     "coupling": 0.0,
+     "guide": 186.00811071428572,
+     "roll_Nm": 25.786915481250002
+    },
+    "gallop peak": {
+     "shock": 574.574765625,
+     "defl": 11.923728813559322,
+     "coupling": 0.0,
+     "guide": 475.1130259486608,
+     "roll_Nm": 40.29205543945313
+    },
+    "leap landing, fores": {
+     "shock": 450.0,
+     "defl": 9.305447011645585,
+     "coupling": 0.0,
+     "guide": 315.19679300291546,
+     "roll_Nm": 28.05
+    },
+    "design max (grip 0.7)": {
+     "shock": 750.0,
+     "defl": 15.610773267996876,
+     "coupling": 0.0,
+     "guide": 1043.5495626822158,
+     "roll_Nm": 105.1875
+    }
+   },
+   "guide_note": "as A, plus a cross rocker",
+   "parts": "A's guides + cross rocker + 1 shock",
+   "mass": 0.7,
+   "cost": 150,
+   "fits": "the cross rocker crosses the body under the neck sheath block: room not known"
+  },
+  "H": {
+   "name": "No sling: rigid brackets, give from the leg motors",
+   "how": "as built; the body bobs only as much as the leg motors are told to give",
+   "rows": {
+    "stand": {
+     "shock": 0.0,
+     "defl": 0.0,
+     "coupling": 0.0,
+     "guide": null,
+     "roll_Nm": 0.0
+    },
+    "walk peak": {
+     "shock": 0.0,
+     "defl": 0.0,
+     "coupling": 0.0,
+     "guide": null,
+     "roll_Nm": 12.279483562500003
+    },
+    "trot peak": {
+     "shock": 0.0,
+     "defl": 0.0,
+     "coupling": 0.0,
+     "guide": null,
+     "roll_Nm": 25.786915481250002
+    },
+    "gallop peak": {
+     "shock": 0.0,
+     "defl": 0.0,
+     "coupling": 0.0,
+     "guide": null,
+     "roll_Nm": 40.29205543945313
+    },
+    "leap landing, fores": {
+     "shock": 0.0,
+     "defl": 0.0,
+     "coupling": 0.0,
+     "guide": null,
+     "roll_Nm": 28.05
+    },
+    "design max (grip 0.7)": {
+     "shock": 0.0,
+     "defl": 0.0,
+     "coupling": 0.0,
+     "guide": null,
+     "roll_Nm": 105.1875
+    }
+   },
+   "guide_note": "",
+   "parts": "none",
+   "mass": 0.0,
+   "cost": 0,
+   "fits": "as built"
+  }
+ }
+}
